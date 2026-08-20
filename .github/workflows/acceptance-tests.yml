@@ -109,13 +109,8 @@ jobs:
         run: |
           go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-      - name: Set the provider version
-        id: version
-        uses: pulumi/provider-version-action@v2.0.0
-        with:
-          set-env: PROVIDER_VERSION
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # provider-version-action reads a push or pull-request context, and an issue_comment run
+      # carries neither, so the Makefile's dev default versions this non-publishing build.
       - name: Prepare the local workspace
         run: make prepare_local_workspace
       - name: Install the pinned Terraform converter plugin
