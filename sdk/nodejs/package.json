@@ -1,0 +1,29 @@
+{
+    "name": "pulumi-filescom",
+    "version": "${VERSION}",
+    "description": "A Pulumi package to create and manage Files.com resources.",
+    "keywords": [
+        "pulumi",
+        "filescom",
+        "files.com",
+        "category/cloud"
+    ],
+    "homepage": "https://www.files.com",
+    "repository": "https://github.com/jschady/pulumi-filescom",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.142.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "typescript": "^4.7.0"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "filescom",
+        "server": "github://api.github.com/jschady/pulumi-filescom"
+    }
+}

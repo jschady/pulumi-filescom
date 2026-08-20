@@ -1,0 +1,27 @@
+name: filescom-lifecycle-behavior
+runtime: yaml
+description: The program creates one file expiration behavior. Pulumi replaces the resource when the type changes to this one.
+
+config:
+  behaviorName:
+    type: string
+  behaviorPath:
+    type: string
+  behaviorType:
+    type: string
+
+resources:
+  probe:
+    type: filescom:index/behavior:Behavior
+    properties:
+      behavior: ${behaviorType}
+      path: ${behaviorPath}
+      name: ${behaviorName}
+      # The value goes to the API unchanged, so its keys are the ones each type names.
+      value:
+        days_to_retain: 30
+        delete_empty_folders: false
+
+outputs:
+  behaviorId: ${probe.id}
+  behaviorValue: ${probe.value}

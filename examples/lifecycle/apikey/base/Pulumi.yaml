@@ -1,0 +1,24 @@
+name: filescom-lifecycle-apikey
+runtime: yaml
+description: The program creates one Files.com API key with a path under a throwaway folder. The stack config gives every property.
+
+config:
+  apiKeyName:
+    type: string
+  apiKeyPath:
+    type: string
+  apiKeyPermissionSet:
+    type: string
+
+resources:
+  probe:
+    type: filescom:index/apiKey:ApiKey
+    properties:
+      name: ${apiKeyName}
+      path: ${apiKeyPath}
+      permissionSet: ${apiKeyPermissionSet}
+
+# The stack exports the id and nothing else. The `key` property holds a live credential, so
+# no output carries it.
+outputs:
+  apiKeyId: ${probe.id}

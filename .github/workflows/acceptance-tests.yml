@@ -1,0 +1,134 @@
+name: acceptance-tests
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: read
+
+env:
+  PROVIDER: filescom
+  PULUMI_VERSION: 3.258.0
+  PULUMICTL_VERSION: v0.0.50
+  PULUMI_BACKEND_URL: file://~
+  PULUMI_CONFIG_PASSPHRASE: ci-local-passphrase
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_IGNORE_AMBIENT_PLUGINS: "true"
+  PULUMI_DISABLE_AUTOMATIC_PLUGIN_ACQUISITION: "true"
+
+jobs:
+  authorize:
+    name: authorize
+    runs-on: ubuntu-latest
+    # A comment on an issue is not a command, and the three associations below are the ones GitHub
+    # reports for an account with write access to this repository.
+    if: >-
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '/run-acceptance-tests') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      head_sha: ${{ steps.pin.outputs.head_sha }}
+    steps:
+      - name: Pin the commit the command reads
+        id: pin
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          head_sha="$(gh api "repos/$REPOSITORY/pulls/$PR_NUMBER" --jq .head.sha)"
+          if [ -z "$head_sha" ]; then
+            echo "Pull request $PR_NUMBER reports no head commit. Nothing ran."
+            exit 1
+          fi
+          echo "head_sha=$head_sha" >>"$GITHUB_OUTPUT"
+      - name: Report the commit the run reads
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          HEAD_SHA: ${{ steps.pin.outputs.head_sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh pr comment "$PR_NUMBER" --repo "$REPOSITORY" \
+            --body "The acceptance tests run at commit $HEAD_SHA. Read the run at $RUN_URL."
+
+  acceptance_tests:
+    name: acceptance_tests
+    needs: authorize
+    runs-on: ubuntu-latest
+    env:
+      FILES_API_KEY: ${{ secrets.FILES_API_KEY }}
+    steps:
+      # A maintainer asked for this run, so the credentials are meant to be present. A suite that
+      # skipped itself for a missing key would report a pass nobody earned.
+      - name: Refuse a missing API key
+        run: |
+          if [ -z "$FILES_API_KEY" ]; then
+            echo "The repository holds no FILES_API_KEY secret. Add the secret, then run the command again."
+            exit 1
+          fi
+      # Authorization is judged when the authorize job reads the head SHA. Checking that commit
+      # out, rather than a branch name, keeps a later push out of this run.
+      - name: Check out the commit the command pinned
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ needs.authorize.outputs.head_sha }}
+          persist-credentials: false
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Set up Node
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - name: Install Yarn
+        run: npm install -g yarn@1.22.22
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.11"
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install the pinned Pulumi CLI
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare the local workspace
+        run: make prepare_local_workspace
+      - name: Install the pinned Terraform converter plugin
+        run: make converter_plugin
+      - name: Generate the schema
+        run: make tfgen
+      - name: Check the worktree is clean
+        run: ./scripts/check-worktree-clean.sh
+      - name: Build the provider
+        run: |
+          make provider
+          echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
+      - name: Build and install the 4 SDKs
+        run: make sdk
+      - name: Run the example programs against the API
+        run: make test_examples

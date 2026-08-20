@@ -1,0 +1,5 @@
+{
+  "resource": true,
+  "name": "filescom",
+  "server": "github://api.github.com/jschady/pulumi-filescom"
+}

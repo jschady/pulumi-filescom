@@ -1,0 +1,35 @@
+name: pull-request-commands
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+# The note is a comment, so the token needs write access to the pull request. This workflow checks
+# nothing out and runs no code from the branch. https://gh.io/securely-using-pull_request_target
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  note:
+    name: note
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post the list of commands
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          cat >"$RUNNER_TEMP/commands.md" <<'EOF'
+          The tests that call the Files.com API do not run on a pull request. A maintainer starts them with a comment.
+
+          **Warning:** If you run a command below, GitHub runs the code of this pull request with the API key this repository holds. Read the changes first.
+
+          | Command | What it runs |
+          | --- | --- |
+          | `/run-acceptance-tests` | The acceptance tests, against the current head commit of this pull request. |
+
+          A maintainer can also add the `run-live-tests` label to a pull request from this repository.
+          EOF
+          gh pr comment "$PR_URL" --body-file "$RUNNER_TEMP/commands.md"

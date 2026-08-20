@@ -1,0 +1,473 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - CHANGELOG.md
+    tags-ignore:
+      - v*
+      - sdk/**
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+env:
+  PROVIDER: filescom
+  PULUMI_VERSION: 3.258.0
+  PULUMICTL_VERSION: v0.0.50
+  GOLANGCI_LINT_VERSION: v2.12.2
+  ACTIONLINT_VERSION: 1.7.12
+  ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+  PULUMI_BACKEND_URL: file://~
+  PULUMI_CONFIG_PASSPHRASE: ci-local-passphrase
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_IGNORE_AMBIENT_PLUGINS: "true"
+  PULUMI_DISABLE_AUTOMATIC_PLUGIN_ACQUISITION: "true"
+
+jobs:
+  prerequisites:
+    name: prerequisites
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Install the pinned Pulumi CLI
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install the pinned Terraform converter plugin
+        run: make converter_plugin
+      - name: Generate the schema
+        run: make tfgen
+      - name: Check the worktree is clean
+        run: ./scripts/check-worktree-clean.sh
+      - name: Build the provider
+        run: make provider
+      - name: Package the provider binaries
+        run: tar -zcf bin/provider.tar.gz -C bin "pulumi-resource-${PROVIDER}" "pulumi-tfgen-${PROVIDER}"
+      - name: Upload the provider artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: provider.tar.gz
+          path: bin/provider.tar.gz
+          retention-days: 7
+
+  build_sdks:
+    name: build_sdks
+    needs: prerequisites
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Set up Node
+        if: matrix.language == 'nodejs'
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - name: Install Yarn
+        if: matrix.language == 'nodejs'
+        run: npm install -g yarn@1.22.22
+      - name: Set up Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.11"
+      - name: Set up .NET
+        if: matrix.language == 'dotnet'
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install the pinned Pulumi CLI
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare the local workspace
+        run: make prepare_local_workspace
+      - name: Download the provider artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: provider.tar.gz
+          path: bin
+      - name: Restore the provider binaries
+        # touch keeps make from rebuilding: a fresh checkout is newer than the artifact.
+        run: |
+          tar -zxf bin/provider.tar.gz -C bin
+          chmod +x "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+          touch "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+      - name: Check the built provider serves the committed schema
+        # The unit job installs no Pulumi CLI and builds no provider, so the check skips
+        # there. This job restored both, and a skip reads as a pass.
+        run: |
+          cd provider
+          go test -count=1 -run TestTheBuiltProviderServesTheCommittedSchema ./...
+      - name: Generate the SDK
+        run: make generate_${{ matrix.language }}
+      - name: Build the SDK
+        run: make build_${{ matrix.language }}
+      - name: Check the worktree is clean
+        run: ./scripts/check-worktree-clean.sh
+      - name: Package the SDK
+        run: tar -zcf "sdk/${{ matrix.language }}.tar.gz" -C "sdk/${{ matrix.language }}" .
+      - name: Upload the SDK artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ${{ matrix.language }}-sdk.tar.gz
+          path: sdk/${{ matrix.language }}.tar.gz
+          retention-days: 7
+
+  compile_examples:
+    name: compile_examples
+    needs: build_sdks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Set up Node
+        if: matrix.language == 'nodejs'
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - name: Install Yarn
+        if: matrix.language == 'nodejs'
+        run: npm install -g yarn@1.22.22
+      - name: Set up Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.11"
+      - name: Set up .NET
+        if: matrix.language == 'dotnet'
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install the pinned Pulumi CLI
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare the local workspace
+        run: make prepare_local_workspace
+      - name: Download the provider artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: provider.tar.gz
+          path: bin
+      - name: Restore the provider binaries
+        run: |
+          tar -zxf bin/provider.tar.gz -C bin
+          chmod +x "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+          touch "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+          echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
+      - name: Download the SDK artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: ${{ matrix.language }}-sdk.tar.gz
+          path: sdk
+      - name: Restore the SDK
+        run: |
+          mkdir -p "sdk/${{ matrix.language }}"
+          tar -zxf "sdk/${{ matrix.language }}.tar.gz" -C "sdk/${{ matrix.language }}"
+      - name: Install the SDK
+        run: make install_${{ matrix.language }}_sdk
+      - name: Compile the example program
+        run: make compile_examples LANGUAGE=${{ matrix.language }}
+
+  examples:
+    name: examples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: examples/go.mod
+          cache-dependency-path: examples/go.sum
+      # These tests read the committed SDKs and this package's own source. They need no key and
+      # no build, so a fork pull request gets them too.
+      - name: Run the example tests that read no credential
+        run: cd examples && go test -count=1 ./...
+
+  test_examples:
+    name: test_examples
+    needs: compile_examples
+    runs-on: ubuntu-latest
+    # This workflow runs on a push to main, where the first clause is already true. The fork gate
+    # stays so a workflow_dispatch from a fork cannot reach the account.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
+    env:
+      FILES_API_KEY: ${{ secrets.FILES_API_KEY }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Set up Node
+        if: matrix.language == 'nodejs'
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - name: Install Yarn
+        if: matrix.language == 'nodejs'
+        run: npm install -g yarn@1.22.22
+      - name: Set up Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.11"
+      - name: Set up .NET
+        if: matrix.language == 'dotnet'
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install the pinned Pulumi CLI
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare the local workspace
+        run: make prepare_local_workspace
+      - name: Download the provider artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: provider.tar.gz
+          path: bin
+      - name: Restore the provider binaries
+        run: |
+          tar -zxf bin/provider.tar.gz -C bin
+          chmod +x "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+          touch "bin/pulumi-resource-${PROVIDER}" "bin/pulumi-tfgen-${PROVIDER}"
+          echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
+      - name: Download the SDK artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: ${{ matrix.language }}-sdk.tar.gz
+          path: sdk
+      - name: Restore the SDK
+        run: |
+          mkdir -p "sdk/${{ matrix.language }}"
+          tar -zxf "sdk/${{ matrix.language }}.tar.gz" -C "sdk/${{ matrix.language }}"
+      - name: Install the SDK
+        run: make install_${{ matrix.language }}_sdk
+      - name: Run the example tests
+        if: env.FILES_API_KEY != ''
+        run: make test_examples TESTTAGS=${{ matrix.language }}
+      - name: Report the skipped example tests
+        if: env.FILES_API_KEY == ''
+        run: echo "FILES_API_KEY is absent. The example tests did not run."
+
+  snapshot:
+    name: snapshot
+    needs: prerequisites
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Set the provider version
+        id: version
+        uses: pulumi/provider-version-action@v2.0.0
+        with:
+          set-env: PROVIDER_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the release snapshot
+        uses: goreleaser/goreleaser-action@v7.2.3
+        with:
+          version: "~> v2"
+          args: release --snapshot --clean --timeout 60m0s
+      - name: Check the release archives
+        # The plugin loader reads the archive name, so a template change breaks every
+        # install. Nothing else exercises the names before a real release.
+        run: |
+          jq -r '.[] | select(.type == "Archive") | .name' dist/artifacts.json | sort > /tmp/archives.txt
+          cat /tmp/archives.txt
+          named=$(grep -cE '^pulumi-resource-filescom-.+-(darwin|linux|windows)-(amd64|arm64)\.tar\.gz$' /tmp/archives.txt)
+          if [ "$named" -ne 6 ]; then
+            echo "The release produced $named archives the plugin loader can read, and it needs 6."
+            exit 1
+          fi
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Install golangci-lint
+        run: |
+          go install "github.com/golangci/golangci-lint/v2/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Install actionlint
+        run: |
+          bin="$RUNNER_TEMP/actionlint-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/actionlint.tar.gz" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_SHA256}  $bin/actionlint.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/actionlint.tar.gz" -C "$bin" actionlint
+          echo "$bin" >> "$GITHUB_PATH"
+          "$bin/actionlint" --version
+      - name: Check the workflow rules
+        run: ./.github/workflows/check-workflows.sh
+      - name: Check the Makefile targets
+        run: ./scripts/check-make-targets.sh
+      - name: Check the internal references
+        run: ./scripts/check-internal-references.sh
+      - name: Lint the provider
+        run: make lint
+      - name: Check the shipped prose
+        run: make lint_prose
+
+  unit:
+    name: unit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          submodules: recursive
+      - name: Set up the Go toolchain
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Test the provider
+        run: make test_provider
+
+  sentinel:
+    name: sentinel
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - prerequisites
+      - build_sdks
+      - compile_examples
+      - examples
+      - test_examples
+      - snapshot
+      - lint
+      - unit
+    steps:
+      - name: Fail when a required job did not succeed
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: |
+          echo "A required job failed or did not finish. Read the job list on this run."
+          exit 1
+      - name: Report success
+        run: echo "Every required job succeeded."

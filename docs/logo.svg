@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="mark">
+  <title id="mark">Files.com provider for Pulumi</title>
+  <rect width="64" height="64" rx="13" fill="#243040"/>
+  <path d="M17 14h27v9H26v8h15v9H26v10h-9z" fill="#ffffff"/>
+  <rect x="35" y="41" width="9" height="9" rx="2" fill="#4f9cf9"/>
+</svg>

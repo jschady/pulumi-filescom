@@ -1,0 +1,3 @@
+name: basic-go
+runtime: go
+description: The program creates one Files.com group and one webhook behavior. The stack config gives the folder path.

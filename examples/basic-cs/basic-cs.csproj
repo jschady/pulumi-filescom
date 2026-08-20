@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- The build reads the provider package from the local feed when PULUMI_LOCAL_NUGET names one,
+       which is how the repository tests this program before the package reaches nuget.org. -->
+  <PropertyGroup Condition="'$(PULUMI_LOCAL_NUGET)' != ''">
+    <RestoreAdditionalProjectSources>$(PULUMI_LOCAL_NUGET)</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pulumi" Version="3.*" />
+    <PackageReference Include="Jschady.Filescom" Version="*-*" />
+  </ItemGroup>
+
+</Project>

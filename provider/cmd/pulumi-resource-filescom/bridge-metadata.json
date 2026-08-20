@@ -1,0 +1,2106 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "files_ai_assistant_personality": {
+                "current": "filescom:index/aiAssistantPersonality:AiAssistantPersonality"
+            },
+            "files_ai_task": {
+                "current": "filescom:index/aiTask:AiTask",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    },
+                    "trigger_actions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_api_key": {
+                "current": "filescom:index/apiKey:ApiKey"
+            },
+            "files_as2_partner": {
+                "current": "filescom:index/as2Partner:As2Partner"
+            },
+            "files_as2_station": {
+                "current": "filescom:index/as2Station:As2Station"
+            },
+            "files_automation": {
+                "current": "filescom:index/automation:Automation",
+                "fields": {
+                    "definition": {
+                        "fields": {
+                            "edges": {
+                                "maxItemsOne": false
+                            },
+                            "nodes": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "agent_compute": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "aggregate": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "as2_send": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "copy_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "create_folder": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "delete_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "document_convert": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "extract": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "filter": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "gpg_decrypt": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "gpg_encrypt": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "if": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "image_convert": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "import_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "join": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "move_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "run_automation": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "run_sync": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "legacy_sync_ids": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "sync_ids": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "send_email": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "attachments": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "bcc": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "cc": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "to": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "set_metadata": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "switch": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "cases": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_action": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "trigger_actions": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_email": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "allowed_senders": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_scheduled": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "recurring_days": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "schedule_days_of_week": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "schedule_times_of_day": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "unzip": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "wait": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "zip": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "destinations": {
+                        "maxItemsOne": false
+                    },
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "legacy_sync_ids": {
+                        "maxItemsOne": false
+                    },
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    },
+                    "sync_ids": {
+                        "maxItemsOne": false
+                    },
+                    "trigger_actions": {
+                        "maxItemsOne": false
+                    },
+                    "user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_behavior": {
+                "current": "filescom:index/behavior:Behavior"
+            },
+            "files_bundle": {
+                "current": "filescom:index/bundle:Bundle",
+                "fields": {
+                    "paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_bundle_notification": {
+                "current": "filescom:index/bundleNotification:BundleNotification"
+            },
+            "files_child_site_management_policy": {
+                "current": "filescom:index/childSiteManagementPolicy:ChildSiteManagementPolicy",
+                "fields": {
+                    "applied_child_site_ids": {
+                        "maxItemsOne": false
+                    },
+                    "child_site_ids": {
+                        "maxItemsOne": false
+                    },
+                    "skip_child_site_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_clickwrap": {
+                "current": "filescom:index/clickwrap:Clickwrap"
+            },
+            "files_custom_domain": {
+                "current": "filescom:index/customDomain:CustomDomain"
+            },
+            "files_desktop_configuration_profile": {
+                "current": "filescom:index/desktopConfigurationProfile:DesktopConfigurationProfile"
+            },
+            "files_event_channel": {
+                "current": "filescom:index/eventChannel:EventChannel"
+            },
+            "files_event_subscription": {
+                "current": "filescom:index/eventSubscription:EventSubscription",
+                "fields": {
+                    "event_target_ids": {
+                        "maxItemsOne": false
+                    },
+                    "event_types": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_event_target": {
+                "current": "filescom:index/eventTarget:EventTarget"
+            },
+            "files_expectation": {
+                "current": "filescom:index/expectation:Expectation",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_file": {
+                "current": "filescom:index/file:File"
+            },
+            "files_file_comment": {
+                "current": "filescom:index/fileComment:FileComment"
+            },
+            "files_folder": {
+                "current": "filescom:index/folder:Folder"
+            },
+            "files_form_field_set": {
+                "current": "filescom:index/formFieldSet:FormFieldSet",
+                "fields": {
+                    "form_layout": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_gpg_key": {
+                "current": "filescom:index/gpgKey:GpgKey"
+            },
+            "files_group": {
+                "current": "filescom:index/group:Group"
+            },
+            "files_group_user": {
+                "current": "filescom:index/groupUser:GroupUser"
+            },
+            "files_holiday_calendar": {
+                "current": "filescom:index/holidayCalendar:HolidayCalendar",
+                "fields": {
+                    "definition": {
+                        "fields": {
+                            "months": {
+                                "elem": {
+                                    "fields": {
+                                        "calculated_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "fixed_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "weekday_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "files_integration_centric_profile": {
+                "current": "filescom:index/integrationCentricProfile:IntegrationCentricProfile"
+            },
+            "files_key_lifecycle_rule": {
+                "current": "filescom:index/keyLifecycleRule:KeyLifecycleRule"
+            },
+            "files_lock": {
+                "current": "filescom:index/lock:Lock"
+            },
+            "files_message": {
+                "current": "filescom:index/message:Message"
+            },
+            "files_message_comment": {
+                "current": "filescom:index/messageComment:MessageComment"
+            },
+            "files_message_comment_reaction": {
+                "current": "filescom:index/messageCommentReaction:MessageCommentReaction"
+            },
+            "files_message_reaction": {
+                "current": "filescom:index/messageReaction:MessageReaction"
+            },
+            "files_metadata_category": {
+                "current": "filescom:index/metadataCategory:MetadataCategory",
+                "fields": {
+                    "default_columns": {
+                        "maxItemsOne": false
+                    },
+                    "definitions": {
+                        "elem": {
+                            "maxItemsOne": false
+                        }
+                    }
+                }
+            },
+            "files_notification": {
+                "current": "filescom:index/notification:Notification",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "group_names": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_filenames": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner": {
+                "current": "filescom:index/partner:Partner",
+                "fields": {
+                    "partner_admin_ids": {
+                        "maxItemsOne": false
+                    },
+                    "user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_channel": {
+                "current": "filescom:index/partnerChannel:PartnerChannel",
+                "fields": {
+                    "from_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    },
+                    "to_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_channel_template": {
+                "current": "filescom:index/partnerChannelTemplate:PartnerChannelTemplate",
+                "fields": {
+                    "from_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    },
+                    "to_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_site_request": {
+                "current": "filescom:index/partnerSiteRequest:PartnerSiteRequest"
+            },
+            "files_permission": {
+                "current": "filescom:index/permission:Permission",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "group_names": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_project": {
+                "current": "filescom:index/project:Project"
+            },
+            "files_public_key": {
+                "current": "filescom:index/publicKey:PublicKey"
+            },
+            "files_remote_mount_backend": {
+                "current": "filescom:index/remoteMountBackend:RemoteMountBackend"
+            },
+            "files_remote_server": {
+                "current": "filescom:index/remoteServer:RemoteServer"
+            },
+            "files_remote_server_credential": {
+                "current": "filescom:index/remoteServerCredential:RemoteServerCredential"
+            },
+            "files_request": {
+                "current": "filescom:index/request:Request"
+            },
+            "files_schedule": {
+                "current": "filescom:index/schedule:Schedule",
+                "fields": {
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_scheduled_export": {
+                "current": "filescom:index/scheduledExport:ScheduledExport",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_secret": {
+                "current": "filescom:index/secret:Secret",
+                "fields": {
+                    "value_field_names": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_sftp_host_key": {
+                "current": "filescom:index/sftpHostKey:SftpHostKey"
+            },
+            "files_share_group": {
+                "current": "filescom:index/shareGroup:ShareGroup"
+            },
+            "files_siem_http_destination": {
+                "current": "filescom:index/siemHttpDestination:SiemHttpDestination"
+            },
+            "files_site": {
+                "current": "filescom:index/site:Site",
+                "fields": {
+                    "additional_text_file_types": {
+                        "maxItemsOne": false
+                    },
+                    "bundle_recipient_blacklist_domains": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_snapshot": {
+                "current": "filescom:index/snapshot:Snapshot",
+                "fields": {
+                    "paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_style": {
+                "current": "filescom:index/style:Style"
+            },
+            "files_sync": {
+                "current": "filescom:index/sync:Sync",
+                "fields": {
+                    "exclude_patterns": {
+                        "maxItemsOne": false
+                    },
+                    "include_patterns": {
+                        "maxItemsOne": false
+                    },
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user": {
+                "current": "filescom:index/user:User",
+                "fields": {
+                    "admin_group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user_additional_email_recipient": {
+                "current": "filescom:index/userAdditionalEmailRecipient:UserAdditionalEmailRecipient"
+            },
+            "files_user_lifecycle_rule": {
+                "current": "filescom:index/userLifecycleRule:UserLifecycleRule",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user_request": {
+                "current": "filescom:index/userRequest:UserRequest"
+            },
+            "files_workspace": {
+                "current": "filescom:index/workspace:Workspace"
+            }
+        },
+        "datasources": {
+            "files_action_notification_export": {
+                "current": "filescom:index/getActionNotificationExport:getActionNotificationExport"
+            },
+            "files_ai_assistant_personality": {
+                "current": "filescom:index/getAiAssistantPersonality:getAiAssistantPersonality"
+            },
+            "files_ai_task": {
+                "current": "filescom:index/getAiTask:getAiTask",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    },
+                    "trigger_actions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_api_key": {
+                "current": "filescom:index/getApiKey:getApiKey"
+            },
+            "files_as2_partner": {
+                "current": "filescom:index/getAs2Partner:getAs2Partner"
+            },
+            "files_as2_station": {
+                "current": "filescom:index/getAs2Station:getAs2Station"
+            },
+            "files_automation": {
+                "current": "filescom:index/getAutomation:getAutomation",
+                "fields": {
+                    "definition": {
+                        "fields": {
+                            "edges": {
+                                "maxItemsOne": false
+                            },
+                            "nodes": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "agent_compute": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "aggregate": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "as2_send": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "copy_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "create_folder": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "delete_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "document_convert": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "extract": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "filter": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "gpg_decrypt": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "gpg_encrypt": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "if": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "image_convert": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "import_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "join": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "move_file": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "run_automation": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "run_sync": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "legacy_sync_ids": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "sync_ids": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "send_email": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "attachments": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "bcc": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "cc": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "to": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "set_metadata": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "switch": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "cases": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_action": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "trigger_actions": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_email": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "allowed_senders": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "trigger_scheduled": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "recurring_days": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "schedule_days_of_week": {
+                                                            "maxItemsOne": false
+                                                        },
+                                                        "schedule_times_of_day": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "unzip": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "wait": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "zip": {
+                                            "fields": {
+                                                "config": {
+                                                    "fields": {
+                                                        "on_error": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "destinations": {
+                        "maxItemsOne": false
+                    },
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "legacy_sync_ids": {
+                        "maxItemsOne": false
+                    },
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    },
+                    "sync_ids": {
+                        "maxItemsOne": false
+                    },
+                    "trigger_actions": {
+                        "maxItemsOne": false
+                    },
+                    "user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_automation_run": {
+                "current": "filescom:index/getAutomationRun:getAutomationRun"
+            },
+            "files_behavior": {
+                "current": "filescom:index/getBehavior:getBehavior"
+            },
+            "files_bundle": {
+                "current": "filescom:index/getBundle:getBundle",
+                "fields": {
+                    "paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_bundle_notification": {
+                "current": "filescom:index/getBundleNotification:getBundleNotification"
+            },
+            "files_chat_session": {
+                "current": "filescom:index/getChatSession:getChatSession"
+            },
+            "files_child_site_management_policy": {
+                "current": "filescom:index/getChildSiteManagementPolicy:getChildSiteManagementPolicy",
+                "fields": {
+                    "applied_child_site_ids": {
+                        "maxItemsOne": false
+                    },
+                    "child_site_ids": {
+                        "maxItemsOne": false
+                    },
+                    "skip_child_site_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_clickwrap": {
+                "current": "filescom:index/getClickwrap:getClickwrap"
+            },
+            "files_custom_domain": {
+                "current": "filescom:index/getCustomDomain:getCustomDomain"
+            },
+            "files_desktop_configuration_profile": {
+                "current": "filescom:index/getDesktopConfigurationProfile:getDesktopConfigurationProfile"
+            },
+            "files_event_channel": {
+                "current": "filescom:index/getEventChannel:getEventChannel"
+            },
+            "files_event_delivery_attempt": {
+                "current": "filescom:index/getEventDeliveryAttempt:getEventDeliveryAttempt"
+            },
+            "files_event_record": {
+                "current": "filescom:index/getEventRecord:getEventRecord"
+            },
+            "files_event_subscription": {
+                "current": "filescom:index/getEventSubscription:getEventSubscription",
+                "fields": {
+                    "event_target_ids": {
+                        "maxItemsOne": false
+                    },
+                    "event_types": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_event_target": {
+                "current": "filescom:index/getEventTarget:getEventTarget"
+            },
+            "files_expectation": {
+                "current": "filescom:index/getExpectation:getExpectation",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_expectation_evaluation": {
+                "current": "filescom:index/getExpectationEvaluation:getExpectationEvaluation",
+                "fields": {
+                    "criteria_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_expectation_incident": {
+                "current": "filescom:index/getExpectationIncident:getExpectationIncident"
+            },
+            "files_external_event": {
+                "current": "filescom:index/getExternalEvent:getExternalEvent"
+            },
+            "files_file": {
+                "current": "filescom:index/getFile:getFile"
+            },
+            "files_file_comment": {
+                "current": "filescom:index/getFileComment:getFileComment"
+            },
+            "files_file_migration": {
+                "current": "filescom:index/getFileMigration:getFileMigration"
+            },
+            "files_folder": {
+                "current": "filescom:index/getFolder:getFolder"
+            },
+            "files_form_field_set": {
+                "current": "filescom:index/getFormFieldSet:getFormFieldSet",
+                "fields": {
+                    "form_layout": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_gpg_key": {
+                "current": "filescom:index/getGpgKey:getGpgKey"
+            },
+            "files_group": {
+                "current": "filescom:index/getGroup:getGroup"
+            },
+            "files_group_user": {
+                "current": "filescom:index/getGroupUser:getGroupUser"
+            },
+            "files_history_export": {
+                "current": "filescom:index/getHistoryExport:getHistoryExport"
+            },
+            "files_holiday_calendar": {
+                "current": "filescom:index/getHolidayCalendar:getHolidayCalendar",
+                "fields": {
+                    "definition": {
+                        "fields": {
+                            "months": {
+                                "elem": {
+                                    "fields": {
+                                        "calculated_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "fixed_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "weekday_rules": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "year_ranges": {
+                                                        "fields": {
+                                                            "limited": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "files_integration_centric_profile": {
+                "current": "filescom:index/getIntegrationCentricProfile:getIntegrationCentricProfile"
+            },
+            "files_invoice": {
+                "current": "filescom:index/getInvoice:getInvoice"
+            },
+            "files_key_lifecycle_rule": {
+                "current": "filescom:index/getKeyLifecycleRule:getKeyLifecycleRule"
+            },
+            "files_lock": {
+                "current": "filescom:index/getLock:getLock"
+            },
+            "files_message": {
+                "current": "filescom:index/getMessage:getMessage"
+            },
+            "files_message_comment": {
+                "current": "filescom:index/getMessageComment:getMessageComment"
+            },
+            "files_message_comment_reaction": {
+                "current": "filescom:index/getMessageCommentReaction:getMessageCommentReaction"
+            },
+            "files_message_reaction": {
+                "current": "filescom:index/getMessageReaction:getMessageReaction"
+            },
+            "files_metadata_category": {
+                "current": "filescom:index/getMetadataCategory:getMetadataCategory",
+                "fields": {
+                    "default_columns": {
+                        "maxItemsOne": false
+                    },
+                    "definitions": {
+                        "elem": {
+                            "maxItemsOne": false
+                        }
+                    }
+                }
+            },
+            "files_notification": {
+                "current": "filescom:index/getNotification:getNotification",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "group_names": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_filenames": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "triggering_user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner": {
+                "current": "filescom:index/getPartner:getPartner",
+                "fields": {
+                    "partner_admin_ids": {
+                        "maxItemsOne": false
+                    },
+                    "user_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_channel": {
+                "current": "filescom:index/getPartnerChannel:getPartnerChannel",
+                "fields": {
+                    "from_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    },
+                    "to_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_channel_template": {
+                "current": "filescom:index/getPartnerChannelTemplate:getPartnerChannelTemplate",
+                "fields": {
+                    "from_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    },
+                    "to_partner_managed_folder_paths": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_partner_site_request": {
+                "current": "filescom:index/getPartnerSiteRequest:getPartnerSiteRequest"
+            },
+            "files_payment": {
+                "current": "filescom:index/getPayment:getPayment"
+            },
+            "files_pending_work_event": {
+                "current": "filescom:index/getPendingWorkEvent:getPendingWorkEvent",
+                "fields": {
+                    "event_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_permission": {
+                "current": "filescom:index/getPermission:getPermission",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    },
+                    "group_names": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_project": {
+                "current": "filescom:index/getProject:getProject"
+            },
+            "files_public_key": {
+                "current": "filescom:index/getPublicKey:getPublicKey"
+            },
+            "files_remote_mount_backend": {
+                "current": "filescom:index/getRemoteMountBackend:getRemoteMountBackend"
+            },
+            "files_remote_server": {
+                "current": "filescom:index/getRemoteServer:getRemoteServer"
+            },
+            "files_remote_server_credential": {
+                "current": "filescom:index/getRemoteServerCredential:getRemoteServerCredential"
+            },
+            "files_request": {
+                "current": "filescom:index/getRequest:getRequest"
+            },
+            "files_schedule": {
+                "current": "filescom:index/getSchedule:getSchedule",
+                "fields": {
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_scheduled_export": {
+                "current": "filescom:index/getScheduledExport:getScheduledExport",
+                "fields": {
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_scim_log": {
+                "current": "filescom:index/getScimLog:getScimLog"
+            },
+            "files_secret": {
+                "current": "filescom:index/getSecret:getSecret",
+                "fields": {
+                    "value_field_names": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_sftp_host_key": {
+                "current": "filescom:index/getSftpHostKey:getSftpHostKey"
+            },
+            "files_share_group": {
+                "current": "filescom:index/getShareGroup:getShareGroup"
+            },
+            "files_siem_http_destination": {
+                "current": "filescom:index/getSiemHttpDestination:getSiemHttpDestination"
+            },
+            "files_siem_http_destination_event": {
+                "current": "filescom:index/getSiemHttpDestinationEvent:getSiemHttpDestinationEvent",
+                "fields": {
+                    "event_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_site": {
+                "current": "filescom:index/getSite:getSite",
+                "fields": {
+                    "additional_text_file_types": {
+                        "maxItemsOne": false
+                    },
+                    "bundle_recipient_blacklist_domains": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_site_subdomain_redirect": {
+                "current": "filescom:index/getSiteSubdomainRedirect:getSiteSubdomainRedirect"
+            },
+            "files_snapshot": {
+                "current": "filescom:index/getSnapshot:getSnapshot"
+            },
+            "files_sso_event": {
+                "current": "filescom:index/getSsoEvent:getSsoEvent",
+                "fields": {
+                    "event_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_sso_strategy": {
+                "current": "filescom:index/getSsoStrategy:getSsoStrategy"
+            },
+            "files_style": {
+                "current": "filescom:index/getStyle:getStyle"
+            },
+            "files_sync": {
+                "current": "filescom:index/getSync:getSync",
+                "fields": {
+                    "exclude_patterns": {
+                        "maxItemsOne": false
+                    },
+                    "include_patterns": {
+                        "maxItemsOne": false
+                    },
+                    "recurring_days": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_days_of_week": {
+                        "maxItemsOne": false
+                    },
+                    "schedule_times_of_day": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_sync_run": {
+                "current": "filescom:index/getSyncRun:getSyncRun",
+                "fields": {
+                    "event_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user": {
+                "current": "filescom:index/getUser:getUser",
+                "fields": {
+                    "admin_group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user_additional_email_recipient": {
+                "current": "filescom:index/getUserAdditionalEmailRecipient:getUserAdditionalEmailRecipient"
+            },
+            "files_user_lifecycle_rule": {
+                "current": "filescom:index/getUserLifecycleRule:getUserLifecycleRule",
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_user_request": {
+                "current": "filescom:index/getUserRequest:getUserRequest"
+            },
+            "files_user_security_event": {
+                "current": "filescom:index/getUserSecurityEvent:getUserSecurityEvent",
+                "fields": {
+                    "event_errors": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "files_workspace": {
+                "current": "filescom:index/getWorkspace:getWorkspace"
+            }
+        }
+    },
+    "auto-settings": {},
+    "default-resource-schema-fixups": {
+        "resources": {
+            "files_ai_assistant_personality": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_ai_task": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_api_key": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_as2_partner": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_as2_station": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_automation": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_behavior": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_bundle": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_bundle_notification": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_child_site_management_policy": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_clickwrap": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_custom_domain": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_desktop_configuration_profile": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_event_channel": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_event_subscription": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_event_target": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_expectation": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_file": {
+                "computeID": {
+                    "kind": "missing"
+                }
+            },
+            "files_file_comment": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_folder": {
+                "computeID": {
+                    "kind": "missing"
+                }
+            },
+            "files_form_field_set": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_gpg_key": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_group": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_group_user": {
+                "computeID": {
+                    "kind": "missing"
+                }
+            },
+            "files_holiday_calendar": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_integration_centric_profile": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_key_lifecycle_rule": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_lock": {
+                "computeID": {
+                    "kind": "missing"
+                }
+            },
+            "files_message": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_message_comment": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_message_comment_reaction": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_message_reaction": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_metadata_category": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_notification": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_partner": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_partner_channel": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_partner_channel_template": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_partner_site_request": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_permission": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_project": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_public_key": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_remote_mount_backend": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_remote_server": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_remote_server_credential": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_request": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_schedule": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_scheduled_export": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_secret": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_sftp_host_key": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_share_group": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_siem_http_destination": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_site": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_snapshot": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_style": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_sync": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_user": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_user_additional_email_recipient": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_user_lifecycle_rule": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_user_request": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "files_workspace": {
+                "fields": {
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
