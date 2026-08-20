@@ -11,6 +11,12 @@ on:
       - sdk/**
   workflow_dispatch: {}
 
+# A newer run of the same ref makes this one's answer stale, so stop paying for it. Releases,
+# acceptance runs, and command handling carry no group: those must finish what they started.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
