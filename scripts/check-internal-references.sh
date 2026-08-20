@@ -50,7 +50,7 @@ failures=0
 while IFS= read -r hit; do
   [[ -z "${hit}" ]] && continue
   # Remove the collisions first: a line that only matched one of them is not a reference.
-  if ! sed -E "s/${ALLOWED}//g" <<<"${hit}" | grep -qE "${NOTES}"; then
+  if ! sed -E "s/${ALLOWED}//g" <<<"${hit}" | grep -E "${NOTES}" >/dev/null; then
     continue
   fi
   # One data file holds the whole vendor document on a single line. Report the head of it.

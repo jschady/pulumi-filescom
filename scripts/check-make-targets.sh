@@ -83,7 +83,7 @@ check_exports() {
   fi
   # The recipe is read here because a directory an earlier run left behind would answer for a
   # mkdir that is no longer there.
-  if ! grep -E '^_ :=.*mkdir -p' Makefile | grep -qF -- "${state_dir}"; then
+  if ! grep -E '^_ :=.*mkdir -p' Makefile | grep -F -- "${state_dir}" >/dev/null; then
     fail "the Makefile does not create ${state_dir}, the directory PULUMI_BACKEND_URL names"
   fi
   make -n help >/dev/null 2>&1
@@ -289,7 +289,7 @@ check_upstream_target() {
 check_vocabulary_covers_every_target_ci_runs() {
   local invoked
   while IFS= read -r invoked; do
-    if ! printf '%s\n' "${targets[@]}" | grep -qx "${invoked}"; then
+    if ! printf '%s\n' "${targets[@]}" | grep -x "${invoked}" >/dev/null; then
       fail "the workflows run make ${invoked} and this check never exercises it"
     fi
     # Both spellings below, because GitHub runs a workflow named .yaml as readily as one
