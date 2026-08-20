@@ -4,7 +4,7 @@ meta_desc: Provides an overview on how to configure the Pulumi Files.com provide
 layout: package
 ---
 
-## The packages
+## Packages
 
 The Files.com provider ships as one package per language.
 
@@ -15,7 +15,7 @@ The Files.com provider ships as one package per language.
 | Go | [`github.com/jschady/pulumi-filescom/sdk/go/filescom`](https://pkg.go.dev/github.com/jschady/pulumi-filescom/sdk/go/filescom) |
 | .NET | [`Jschady.Filescom`](https://www.nuget.org/packages/Jschady.Filescom) |
 
-## The installation
+## Installation
 
 Run the command for the language your program uses.
 
@@ -43,7 +43,7 @@ go get github.com/jschady/pulumi-filescom/sdk/go/filescom
 dotnet add package Jschady.Filescom
 ```
 
-## The API key
+## API key
 
 The provider authenticates with one API key. Create the key in the Files.com web application, under
 **Settings**, then **API Keys**.
@@ -65,7 +65,7 @@ pulumi config set --secret filescom:apiKey your-api-key
 
 The provider reads the environment variable when the stack configuration carries no `apiKey`.
 
-## The provider configuration
+## Provider configuration
 
 | Property | Environment variable | What it is |
 | --- | --- | --- |
@@ -74,7 +74,7 @@ The provider reads the environment variable when the stack configuration carries
 | `environment` | none | Files.com documents no text for this property. |
 | `featureFlags` | none | Files.com documents no text for this property. |
 
-## The explicit provider
+## Explicit provider
 
 The program below builds one provider from the stack configuration and creates a group with it. Use
 this shape when one stack must reach two Files.com accounts.

@@ -1,4 +1,4 @@
-# The workflows
+# Workflows
 
 These 6 workflows are hand-written. No generator owns them. If you change a workflow, run
 `./.github/workflows/check-workflows.sh` before you commit.
@@ -17,7 +17,7 @@ These 6 workflows are hand-written. No generator owns them. If you change a work
 A tag push never starts `main.yml`. The `tags-ignore` filter drops the `v*` release tags and the
 `sdk/**` tags that the `publish_go_sdk` job pushes.
 
-## The upstream pins
+## Upstream pins
 
 The upstream provider version appears in 3 places:
 
@@ -30,7 +30,7 @@ hold different versions. The job then compares the gitlink tag with the latest u
 job run therefore reports both a disagreement and a stale pin. To move to a new upstream release,
 change all 3 pins in one commit.
 
-## The job chain
+## Job chain
 
 1. The `prerequisites` job generates the schema and builds the provider. Then it uploads
    `provider.tar.gz`.
@@ -50,7 +50,7 @@ that is not committed fails the run. Keep both checks.
 In `release.yml` the `confirm_sdks` job reads the 4 SDK artifacts before `publish_provider` runs.
 A binary on the release page that no SDK can be published against is what that order prevents.
 
-## The API key gate
+## API key gate
 
 The `test_examples` job needs a Files.com API key, so 3 conditions guard it:
 
@@ -60,7 +60,7 @@ The `test_examples` job needs a Files.com API key, so 3 conditions guard it:
 
 A fork pull request still gets every check that spends no money.
 
-## The acceptance-test command
+## Acceptance-test command
 
 A fork pull request never gets the API key from `pull-request.yml`. A maintainer starts the
 acceptance tests with a comment instead.
@@ -79,7 +79,7 @@ Read the changes before you comment.
 The `acceptance_tests` job fails when `FILES_API_KEY` is empty. A maintainer asked for the run, so
 a suite that skipped itself for a missing key would report a pass nobody earned.
 
-## The secrets
+## Secrets
 
 | Secret | Consumed by | Purpose |
 | --- | --- | --- |
@@ -91,7 +91,7 @@ a suite that skipped itself for a missing key would report a pass nobody earned.
 PyPI needs no secret. The `publish_sdks` job publishes with Trusted Publishing, so it asks for the
 `id-token: write` permission instead. Configure the publisher on PyPI before the first release.
 
-## The publish rules
+## Publish rules
 
 Only `release.yml` publishes, and only a `v*.*.*` tag push starts it. The npm tag follows the
 version: a version with a prerelease part publishes under `dev`, and any other version publishes
@@ -112,7 +112,7 @@ The job installs `actionlint` from its GitHub release page and checks the archiv
 `ACTIONLINT_SHA256` digest that the workflow pins. When `actionlint` is absent and `CI` is `true`,
 the check script fails instead of skipping.
 
-## The pinned versions
+## Pinned versions
 
 Every action carries an exact version. The Pulumi CLI, `pulumictl`, and `golangci-lint` install from
 a pinned release inside a `run` step. The `ACTIONLINT_VERSION` and `ACTIONLINT_SHA256` variables pin
@@ -149,7 +149,7 @@ The `lint` job runs `check-workflows.sh`. The script asserts that:
 
 The script reads the lines YAML reads. A step behind a `#` counts as absent.
 
-## The Makefile contract
+## Makefile contract
 
 The workflows call `make` for every build step. Exactly 2 calls pass a variable, where `<language>`
 is `nodejs`, `python`, `dotnet`, or `go`.

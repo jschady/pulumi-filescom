@@ -6,17 +6,17 @@ layout: package
 
 The Files.com provider creates and manages the objects in a Files.com account:
 
-- the folders
-- the folder settings that Files.com calls behaviors
-- the remote servers
-- the groups and the users
-- the API keys
+- folders
+- folder settings that Files.com calls behaviors
+- remote servers
+- groups and the users
+- API keys
 
 This provider wraps the
 [Files.com provider for Terraform](https://github.com/Files-com/terraform-provider-files). Every
 resource and every data source that provider carries is available here, under a Pulumi name.
 
-## The example
+## Example
 
 The program below creates one group and exports the id that Files.com assigns to it.
 
@@ -105,19 +105,19 @@ func main() {
 
 {{< /chooser >}}
 
-## The API key
+## API key
 
 The provider reads the API key from the `FILES_API_KEY` environment variable. You can set the key in
 the stack configuration instead. The
 [installation and configuration page](/registry/packages/filescom/installation-configuration/)
 carries both commands and the rest of the provider configuration.
 
-## The resource id
+## Resource id
 
 Files.com assigns a decimal id to each object it stores. The provider reports that id as the Pulumi
 `id` output, and the value matches the id the account holds.
 
-## The import of an existing object
+## Import of an existing object
 
 You can adopt a Files.com object that Pulumi did not create. The provider reads the object, and
 `pulumi import` writes the properties of the answer into a generated declaration.
@@ -142,9 +142,9 @@ a property whose value is one of these, and the plan after the import stays empt
 - zero
 - null
 
-## The limitations
+## Limitations
 
-### The value of a behavior
+### Value of a behavior
 
 **Warning:** If you write the `value` property of a behavior as a JSON-encoded string, every later
 plan fails. Write the value as nested JSON.
@@ -153,7 +153,7 @@ The Files.com documentation offers both encodings. Only nested JSON works here, 
 cannot change its runtime type between two plans. Track the defect at
 [pulumi/pulumi-terraform-bridge#3122](https://github.com/pulumi/pulumi-terraform-bridge/issues/3122).
 
-### The path of an API key
+### Path of an API key
 
 Pulumi sends the `path` property to Files.com and never stores it. Pulumi holds no stored value to
 compare, so a change to `path` plans no update at all.
@@ -167,20 +167,20 @@ To restrict a different path, follow these steps.
 
 A replace that another property forces does send the current `path` again.
 
-### The order of the group members
+### Order of the group members
 
 If you change the order of `userIds` on a group, Pulumi plans an update. The set of members is the
 same, and the plan still shows the change. The plan path in the upstream framework never calls the
 semantic-equality check that treats the two orders as equal. Write `userIds` in a stable order to
 keep the plan empty.
 
-### The plan of a behavior
+### Plan of a behavior
 
 Every update plan and every replace plan for a behavior drops 3 computed outputs: `inherited`,
 `managed`, and `rootBehaviorSiteAdminOnly`. The apply returns all 3. The preview right after an
 apply is clean, so this is not drift.
 
-### The properties without a description
+### Properties without a description
 
 The registry shows 312 properties with an empty description. Files.com declares 310 of them with no
 text. The code generator adds the other 2. This provider invents no replacement.

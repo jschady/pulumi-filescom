@@ -4,7 +4,7 @@ This repository wraps the Files.com provider for Terraform and publishes it as a
 wrapper is small. The `make tfgen` target generates the schema, and `make sdk` generates the four
 SDKs. The hand-owned code lives in `provider/`, and the two registry pages live in `docs/`.
 
-## The tools
+## Tools
 
 Install these versions. The `.tool-versions` file lists every one of them. The workflows pin most
 of the same values in their setup steps. A few come from other sources, so raise a version here and
@@ -20,7 +20,7 @@ in the workflows together.
 | .NET | 8.0 |
 | jq | 1.7.1 |
 
-## The first build
+## First build
 
 1. Clone the repository.
 2. Run `make upstream` to check out the pinned upstream submodule.
@@ -28,7 +28,7 @@ in the workflows together.
 
 Run `make help` for every target this repository declares.
 
-## The generated files
+## Generated files
 
 Do not edit `provider/cmd/pulumi-resource-filescom/schema.json` by hand. The `make tfgen` target
 writes that file, and the next run overwrites every hand edit.
@@ -45,7 +45,7 @@ A committed schema that a fresh run does not reproduce is a defect. The
 To repair a defect in an upstream documentation page, add one `DocRules.EditRules` entry that names
 that page. Never edit the generated output.
 
-## The checks
+## Checks
 
 Run every check with one command:
 
@@ -65,7 +65,7 @@ make lint_prose
 ./scripts/check-make-targets.sh
 ```
 
-## The live tests
+## Live tests
 
 The example programs create real objects in a real Files.com account, and they delete them again.
 They read the API key from the `FILES_API_KEY` environment variable.
@@ -118,7 +118,7 @@ holds one user.
 make test_knownissue
 ```
 
-## The pull request
+## Pull request
 
 1. Write the failing test first.
 2. Run it.

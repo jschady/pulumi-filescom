@@ -1,4 +1,4 @@
-# The registry pull request
+# Registry pull request
 
 This page is the draft of the pull request that lists this provider on the Pulumi Registry. Nobody
 opened it. The registry lists a package only after a release exists, and the release is a human
@@ -40,7 +40,7 @@ and that key is absent from the map today. Add one pair, in alphabetical positio
 Without the pair the registry cannot build the package page. This is the one file the automation
 accepts beside the package list, because a new publisher has to arrive with its own entry.
 
-## The checklist before you open it
+## Checklist before you open it
 
 Each row is a decision a person makes. Work through the table from the top.
 
@@ -80,7 +80,7 @@ Check the download URL after the release publishes:
 pulumi plugin install resource filescom 0.1.0 --server github://api.github.com/jschady/pulumi-filescom
 ```
 
-## The pull request body
+## Pull request body
 
 > ### Add the Files.com provider
 >
@@ -93,7 +93,7 @@ pulumi plugin install resource filescom 0.1.0 --server github://api.github.com/j
 >
 > `jschady` is a new publisher, so this pull request also adds the display name.
 
-## The `/check` command
+## `/check` command
 
 The automation reads the live provider repository, not the diff in the pull request. To fix a red
 check, change this repository and comment `/check` on the pull request. Do not push a new commit to
@@ -127,9 +127,9 @@ can a maintainer of `pulumi/registry`. A maintainer review is still required to 
 The version comes from the release tag. The committed schema carries no version, and the
 automation never reads one from it.
 
-## The notes
+## Notes
 
-### The empty descriptions
+### Empty descriptions
 
 The registry shows 312 properties with no description. Upstream declares 310 of them with no text,
 and the code generator adds the other 2. The `docs/_index.md` page states the counts. This
@@ -157,7 +157,7 @@ The data source outputs repeat the same 4 resource properties, and add
 The table names the 6 top-level properties. The other 298 are nested properties under
 `files_automation.definition` and `files_holiday_calendar.definition`, and one issue covers them all.
 
-### The code samples in the Terraform language
+### Code samples in the Terraform language
 
 The schema carries 140 example blocks. Each one holds the same example in 7 languages, and one of
 those languages is the Terraform language. The registry renders it under a tab named HCL. That tab
@@ -171,7 +171,7 @@ Two facts about those blocks are worth knowing.
 - The .NET SDK repeats 240 of these blocks inside its documentation comments. The other 3 SDKs
   carry none. The generator reads the whole schema rather than the part for one language.
 
-### The dynamic path is a different process
+### Dynamic path is a different process
 
 A dynamically bridged provider, the kind you add with
 `pulumi package add terraform-provider Files-com/files`, cannot be listed by pull request. That path
