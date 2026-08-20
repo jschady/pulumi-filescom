@@ -41,6 +41,7 @@ ALLOWED_USES=(
   "actions/setup-dotnet@v6.0.0"
   "actions/upload-artifact@v7.0.1"
   "actions/download-artifact@v8.0.1"
+  "NuGet/login@v1.2.0"
   "goreleaser/goreleaser-action@v7.2.3"
   "pypa/gh-action-pypi-publish@v1.14.2"
   "pulumi/provider-version-action@v2.0.0"
