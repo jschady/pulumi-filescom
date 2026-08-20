@@ -135,6 +135,7 @@ SDK_PULUMI_VERSION = $(shell cd $(PROVIDER_PATH) && go list -m -f '{{.Version}}'
 generate_dotnet: bin/$(PROVIDER)
 	$(call gen_sdk,dotnet)
 	cp docs/logo.png sdk/dotnet/logo.png
+	cp README.md sdk/dotnet/README.md
 # The generated project declares no version, so a plain build packs the .NET default of 1.0.0.
 build_dotnet: DOTNET_VERSION := $(shell pulumictl convert-version --language dotnet --version "$(PROVIDER_VERSION)")
 build_dotnet: generate_dotnet
