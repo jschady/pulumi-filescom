@@ -383,7 +383,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v7.2.3
         with:
           version: "~> v2"
-          args: release --snapshot --clean --timeout 60m0s
+          args: release --snapshot --clean --timeout 60m0s --parallelism 1
       - name: Check the release archives
         # The plugin loader reads the archive name, so a template change breaks every
         # install. Nothing else exercises the names before a real release.
