@@ -412,6 +412,22 @@ jobs:
         with:
           go-version-file: provider/go.mod
           cache-dependency-path: provider/go.sum
+      - name: Install pulumictl
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Install actionlint
+        run: |
+          bin="$RUNNER_TEMP/actionlint-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/actionlint.tar.gz" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_SHA256}  $bin/actionlint.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/actionlint.tar.gz" -C "$bin" actionlint
+          echo "$bin" >> "$GITHUB_PATH"
+          "$bin/actionlint" --version
+      - name: Fetch the upstream tags
+        run: git -C upstream fetch --tags --depth=1 origin
       - name: Test the provider
         run: make test_provider
 
