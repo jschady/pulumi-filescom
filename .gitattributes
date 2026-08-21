@@ -1,3 +1,0 @@
-sdk/**/* linguist-generated=true
-# 2.5 MB of generated JSON. Regenerate it with `make tfgen` rather than reading the diff.
-provider/cmd/pulumi-resource-filescom/schema.json -diff
