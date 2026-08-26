@@ -79,6 +79,9 @@ The `test_examples_live` job needs a Files.com API key, so 3 conditions guard it
 - The job runs only when the pull request carries the `run-live-tests` label.
 - The test step runs only when `FILES_API_KEY` carries a value.
 
+A push to `main` skips the job: the replay job is the check a push gets. A manual run of
+`main.yml` runs the job, so a person with write access can start a live run without a pull request.
+
 The `test_examples` job replays the recorded cassettes, so it reads no API key and no gate holds it
 back. It runs on every pull request, a fork pull request included. A missing cassette fails the job
 and names the file, so an unrecorded test cannot pass unseen.

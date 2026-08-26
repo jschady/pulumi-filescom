@@ -347,9 +347,9 @@ jobs:
     name: test_examples_live
     needs: compile_examples
     runs-on: ubuntu-latest
-    # This workflow runs on a push to main, where the first clause is already true. The fork gate
-    # stays so a workflow_dispatch from a fork cannot reach the account.
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # A push to main runs the replay job alone. The live job runs on a manual start of this
+    # workflow, which only a person with write access can make, so no fork reaches the account.
+    if: github.event_name == 'workflow_dispatch'
     # The four language legs share one account and one test root, so they run in one process
     # where the root's lifecycle is managed once. Parallel runners raced each other's teardown.
     env:

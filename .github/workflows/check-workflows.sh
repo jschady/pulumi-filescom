@@ -77,6 +77,10 @@ ALLOWED_SECRETS=(
 
 CREDENTIAL_GATE="github.event.pull_request.head.repo.full_name == github.repository"
 
+# The live job of main.yml runs on a manual start alone. A push to main gets the replay job.
+DISPATCH_GATE="github.event_name == 'workflow_dispatch'"
+PUSH_CLAUSE="github.event_name != 'pull_request'"
+
 # The label a maintainer adds when a pull request is meant to spend the account.
 LIVE_TESTS_LABEL="run-live-tests"
 
@@ -245,8 +249,16 @@ check_credential_gate() {
       fail "${file}: the ${LIVE_JOB} job body read ${read_lines} lines"
       continue
     fi
-    grep -qF -- "${CREDENTIAL_GATE}" <<<"${body}" ||
-      fail "${file}: the ${LIVE_JOB} job carries no fork gate"
+    if [[ "${file}" == "main.yml" ]]; then
+      grep -qF -- "${DISPATCH_GATE}" <<<"${body}" ||
+        fail "${file}: the ${LIVE_JOB} job runs on more than a manual start"
+      if grep -qF -- "${PUSH_CLAUSE}" <<<"${body}"; then
+        fail "${file}: the ${LIVE_JOB} job runs on a push to main"
+      fi
+    else
+      grep -qF -- "${CREDENTIAL_GATE}" <<<"${body}" ||
+        fail "${file}: the ${LIVE_JOB} job carries no fork gate"
+    fi
     grep -q "env.FILES_API_KEY == ''" <<<"${body}" ||
       fail "${file}: nothing reports the skip when FILES_API_KEY is absent"
     grep -qF "secrets.FILES_API_KEY" <<<"${body}" ||
