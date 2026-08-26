@@ -10,9 +10,11 @@ const (
 	acceptanceWorkflow = "acceptance-tests.yml"
 	acceptanceCommand  = "/run-acceptance-tests"
 	liveTestsLabel     = "run-live-tests"
-	// The jobs that read the API key, plus the sentinel that only waits for the others.
-	gatedJob     = "test_examples"
-	sentinelJob  = "sentinel"
+	// The job that spends the vendor account, plus the sentinel that only waits for the others.
+	gatedJob    = "test_examples_live"
+	sentinelJob = "sentinel"
+	// The job that replays the recorded traffic. It reads no key, so nothing gates it.
+	replayJob    = "test_examples"
 	jobCondition = "\n    if:"
 )
 
@@ -151,6 +153,22 @@ func TestTheLiveJobsNeedTheLabelOnAPullRequest(t *testing.T) {
 		if !strings.Contains(condition, required) {
 			t.Errorf("the %s gate never reads %s:\n%s", gatedJob, required, condition)
 		}
+	}
+
+	// The other half of the same rule. The replay job answers every call from the recorded
+	// traffic, so neither the label nor the key belongs to it. A gate there would skip the one
+	// run that proves the example suite on a fork pull request.
+	replay := jobBlocks(body)[replayJob]
+	if strings.Count(replay, "\n") < 5 {
+		t.Fatalf("the %s job body read %d lines", replayJob, strings.Count(replay, "\n"))
+	}
+	if strings.Contains(replay, liveTestsLabel) {
+		t.Errorf("the %s job waits for the %s label, so it skips without one",
+			replayJob, liveTestsLabel)
+	}
+	if strings.Contains(replay, credentialSecret) {
+		t.Errorf("the %s job reads %s, and the recorded traffic needs none",
+			replayJob, credentialSecret)
 	}
 }
 

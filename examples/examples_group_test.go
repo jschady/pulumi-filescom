@@ -31,6 +31,7 @@ var decimalID = regexp.MustCompile(`^[0-9]+$`)
 // replace, and destroy. The userIds reorder stays in TestKnownIssueGroupUserIDsReorderPlansNoDiff.
 func TestGroupLifecycle(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	createdName := testObjectName(t, "group")
 	renamedName := createdName + "-renamed"

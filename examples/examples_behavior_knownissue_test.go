@@ -15,7 +15,11 @@ import (
 // The second `value` encoding the description promises. Held out of `make test_examples` and
 // run with `-tags all,knownissue`. Cause: pulumi/pulumi-terraform-bridge#3122, open.
 func TestKnownIssueBehaviorValueAsAJSONEncodedString(t *testing.T) {
+	// The known issue is what the account stores, so this test reads the account. No cassette
+	// records a failure nobody has fixed yet.
+	requireLiveProvider(t)
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	folder := throwawayFolder(t)
 	t.Cleanup(func() { deleteBehaviorsOn(t, folder) })

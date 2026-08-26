@@ -22,7 +22,11 @@ import (
 // The same userIds in a different order should plan no diff. Held out of `make test_examples`,
 // run with `-tags all,knownissue`: the plugin framework never runs semantic equality in a plan.
 func TestKnownIssueGroupUserIDsReorderPlansNoDiff(t *testing.T) {
+	// The known issue needs the users the account carries, so this test reads the account. No
+	// cassette records a failure nobody has fixed yet.
+	requireLiveProvider(t)
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	name := testObjectName(t, "group")
 	t.Cleanup(func() { deleteGroupsNamed(t, name) })

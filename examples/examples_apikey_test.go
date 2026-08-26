@@ -34,6 +34,7 @@ const (
 // replace, and destroy. Only the key's secret signature is asserted, never the value itself.
 func TestApiKeyLifecycle(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	createdName := testObjectName(t, "apikey")
 	renamedName := createdName + "-renamed"

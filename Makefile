@@ -105,7 +105,9 @@ help:
 	@echo "  lint_prose       Check the shipped prose."
 	@echo "  test_provider    Run the provider tests. These need no network."
 	@echo "  compile_examples Compile the example programs. This deploys nothing."
-	@echo "  test_examples    Run the example programs against the live API."
+	@echo "  test_examples    Run the example programs from the recorded cassettes."
+	@echo "  record_examples  Record the cassettes. This one needs a key."
+	@echo "  test_examples_live Run the example programs against the live API. This one needs a key."
 	@echo "  test_knownissue  Run the gated tests. Each one records a limitation and fails."
 	@echo ""
 	@echo "Per language, where [language] is dotnet, go, nodejs, or python"
@@ -268,15 +270,32 @@ test_integration:
 # cache. The retain switch keeps a failed run's checkpoint, which holds secrets, off the disk.
 example_test_env = PULUMITEST_RETAIN_FILES_ON_FAILURE=false
 example_test_flags = -count=1 -v -tags=$(1) -parallel $(TESTPARALLELISM) -timeout 2h
+# FILESCOM_TEST_MODE decides how a run reaches the vendor. The variable is unset here, and an
+# unset variable means replay, so this target reads the cassettes and needs no key.
 test_examples:
 	cd examples && $(example_test_env) $(GOTEST) $(call example_test_flags,$(EXAMPLE_TAGS)) ./... $(value GOTESTARGS)
-.PHONY: test_examples
+
+# A record run and a live run both reach the account, so each one refuses to start without the
+# key. The guard runs inside the recipe, because a guard at parse time breaks `make -n`.
+key_guard = test -n "$$FILES_API_KEY" || { echo "FILES_API_KEY is empty. Set the key, then run make $(1) again."; exit 1; }
+
+# Writes one cassette and one seed per test. A person runs this by hand, with a key.
+record_examples:
+	$(call key_guard,record_examples)
+	cd examples && FILESCOM_TEST_MODE=record $(example_test_env) $(GOTEST) $(call example_test_flags,$(EXAMPLE_TAGS)) ./... $(value GOTESTARGS)
+
+# Runs the same tests against the account and reads no cassette.
+test_examples_live:
+	$(call key_guard,test_examples_live)
+	cd examples && FILESCOM_TEST_MODE=live $(example_test_env) $(GOTEST) $(call example_test_flags,$(EXAMPLE_TAGS)) ./... $(value GOTESTARGS)
+.PHONY: test_examples record_examples test_examples_live
 
 # The gated tests record a limitation, so they fail on purpose and stay out of test_examples.
-# The `all` tag rides along because the shared helpers behind it are what they call.
+# The `all` tag rides along because the shared helpers behind it are what they call. The live
+# mode keeps each failure the one the account gives, which is the limitation the test records.
 KNOWNISSUE_TAGS := knownissue,all
 test_knownissue:
-	cd examples && $(example_test_env) $(GOTEST) $(call example_test_flags,$(KNOWNISSUE_TAGS)) -run '^TestKnownIssue' ./... $(value GOTESTARGS)
+	cd examples && FILESCOM_TEST_MODE=live $(example_test_env) $(GOTEST) $(call example_test_flags,$(KNOWNISSUE_TAGS)) -run '^TestKnownIssue' ./... $(value GOTESTARGS)
 .PHONY: test_knownissue
 
 EXAMPLE_LANGUAGES := nodejs python dotnet go

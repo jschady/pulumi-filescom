@@ -28,6 +28,10 @@ func basicExampleOptions(t *testing.T, program string) integration.ProgramTestOp
 	folder := throwawayFolder(t)
 	groupName := testObjectName(t, "group")
 	behaviorName := testObjectName(t, "behavior")
+
+	// The two sweeps below are the net under a failed destroy on the account. Every mode
+	// registers them: a record run puts their calls in the cassette, and a replay run has to
+	// issue the same calls or the cassette keeps an interaction nobody used.
 	t.Cleanup(func() { deleteGroupsNamed(t, groupName) })
 	t.Cleanup(func() { deleteBehaviorsOn(t, folder) })
 

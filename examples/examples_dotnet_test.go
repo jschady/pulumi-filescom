@@ -12,7 +12,9 @@ import (
 
 func TestBasicCs(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	opts := getCSBaseOptions(t).With(basicExampleOptions(t, "basic-cs"))
+	attachProviderToProgramTest(t, &opts)
 	integration.ProgramTest(t, &opts)
 }

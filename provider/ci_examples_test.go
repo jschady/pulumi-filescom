@@ -3,6 +3,7 @@ package filescom
 import (
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -34,6 +35,12 @@ func exampleTestRuns(job string) []string {
 	return found
 }
 
+// runsMakeTarget reports whether a job body runs `make <target>`. The name has to end where the
+// target ends, so a job that runs make test_examples_live does not answer for make test_examples.
+func runsMakeTarget(job, target string) bool {
+	return regexp.MustCompile(`(?m)make ` + regexp.QuoteMeta(target) + `( |$)`).MatchString(job)
+}
+
 // The example tests that read no credential caught a red suite once and nothing in CI ran them,
 // so a fork pull request never saw them. They need no key, so one job runs them everywhere.
 func TestOneKeylessJobRunsTheExampleTestsThatNeedNoCredential(t *testing.T) {
@@ -61,6 +68,26 @@ func TestOneKeylessJobRunsTheExampleTestsThatNeedNoCredential(t *testing.T) {
 			if strings.Contains(block, "pull_request.head.repo") {
 				t.Errorf("job %s carries a fork gate, which skips these tests on the pull requests"+
 					" that need them most", runners[0])
+			}
+
+			// The replay job runs the whole example suite through a make target, so it declares
+			// no go test line of its own and the count above stays at one. It spends nothing, so
+			// the same two rules hold for it.
+			replay := jobs[replayJob]
+			if strings.Count(replay, "\n") < 5 {
+				t.Fatalf("the %s job body read %d lines", replayJob, strings.Count(replay, "\n"))
+			}
+			if !runsMakeTarget(replay, replayJob) {
+				t.Errorf("job %s does not run make %s, so nothing replays the recorded traffic",
+					replayJob, replayJob)
+			}
+			if strings.Contains(replay, credentialSecret) {
+				t.Errorf("job %s replays the recorded traffic and reads %s; it needs none",
+					replayJob, credentialSecret)
+			}
+			if strings.Contains(replay, "pull_request.head.repo") {
+				t.Errorf("job %s carries a fork gate, which skips the replay on the pull requests"+
+					" that need it most", replayJob)
 			}
 		})
 	}

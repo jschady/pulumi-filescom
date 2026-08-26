@@ -81,6 +81,10 @@ func getCwd(t *testing.T) string {
 	return cwd
 }
 
+// liveModeName is the value of FILESCOM_TEST_MODE that runs the legs against the account. This file
+// compiles under every tag and the mode helpers do not, so it carries the one value it reads.
+const liveModeName = "live"
+
 func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	t.Helper()
 	binPath, err := filepath.Abs("../bin")
@@ -95,5 +99,18 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 				Path:    binPath,
 			},
 		},
+		// A record run and a replay run install one recorder for the whole process, so the legs
+		// run one at a time. A live run keeps the parallel legs. The variable is read here by
+		// name because this file compiles under every tag and the mode helpers do not.
+		NoParallel: os.Getenv("FILESCOM_TEST_MODE") != liveModeName,
+	}
+}
+
+// TestTheLegsRunOneAtATimeUnlessLive pins the option that keeps the recorded legs serial. Parallel
+// legs would write each other's calls into one cassette.
+func TestTheLegsRunOneAtATimeUnlessLive(t *testing.T) {
+	for mode, serial := range map[string]bool{"": true, "replay": true, "record": true, liveModeName: false} {
+		t.Setenv("FILESCOM_TEST_MODE", mode)
+		require.Equalf(t, serial, getBaseOptions(t).NoParallel, "the mode %q", mode)
 	}
 }

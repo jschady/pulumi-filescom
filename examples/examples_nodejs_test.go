@@ -12,7 +12,9 @@ import (
 
 func TestBasicTs(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	opts := getJSBaseOptions(t).With(basicExampleOptions(t, "basic-ts"))
+	attachProviderToProgramTest(t, &opts)
 	integration.ProgramTest(t, &opts)
 }

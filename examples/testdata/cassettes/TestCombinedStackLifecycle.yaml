@@ -1,0 +1,1378 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/18e6cf3c
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 808
+        body: '{"path":"pulumi-filescom-test/18e6cf3c","created_by_id":1400342,"created_by_api_key_id":5450823,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"18e6cf3c","type":"directory","size":null,"created_at":"2026-08-26T01:18:13Z","last_modified_by_id":1400342,"last_modified_by_api_key_id":5450823,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-08-26T01:18:13Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "808"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:13 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2ba22e00caba48dc76ff18f1fcdc0daf
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 345.145291ms
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 262
+        host: app.files.com
+        body: '{"behavior":"webhook","name":"pulumi-test-combined-a3fd0e86-behavior","path":"pulumi-filescom-test/18e6cf3c","value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]}}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/behaviors
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 421
+        body: '{"id":586196,"path":"pulumi-filescom-test/18e6cf3c","behavior":"webhook","name":"pulumi-test-combined-a3fd0e86-behavior","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "421"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:14 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 87a260ea2c312795b1aadd7cfd674218
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 133.178209ms
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 100
+        host: app.files.com
+        body: '{"name":"pulumi-test-combined-a3fd0e86-group","notes":"Combined coverage for the Files.com bridge."}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/groups
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 418
+        body: '{"id":99637,"name":"pulumi-test-combined-a3fd0e86-group","allowed_ips":null,"admin_ids":"","notes":"Combined coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "418"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:14 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 616069ce962e08b9af88f17848d5f838
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 209.466083ms
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 153
+        host: app.files.com
+        body: '{"description":"99637","expires_at":null,"name":"pulumi-test-combined-a3fd0e86-key","path":"pulumi-filescom-test/18e6cf3c","permission_set":"files_only"}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/api_keys
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 504
+        body: '{"aws_secret_key":null,"aws_style_credentials":false,"created_at":"2026-08-25T21:18:14-04:00","description":"99637","descriptive_label":"Site-wide API key for https://jschady.files.com (key ID #5452060)","expires_at":null,"id":5452060,"key":"REDACTED","last_use_at":null,"name":"pulumi-test-combined-a3fd0e86-key","path":"pulumi-filescom-test/18e6cf3c","permission_set":"files_only","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":null,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "504"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:14 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - c5f7ef8f159a91ad32977f4868eb1505
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 123.141542ms
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":99637,"name":"pulumi-test-combined-a3fd0e86-group","allowed_ips":null,"admin_ids":"","notes":"Combined coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:15 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 5885b6b4a2d391784fe42d04583c8a50
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 53.725667ms
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":586196,"path":"pulumi-filescom-test/18e6cf3c","behavior":"webhook","name":"pulumi-test-combined-a3fd0e86-behavior","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:15 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - c5e661ed7bbe32db233811519f0373b9
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 79.965334ms
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/api_keys?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0},{"id":5452060,"descriptive_label":"Site-wide API key for https://jschady.files.com (key ID #5452060)","description":"99637","created_at":"2026-08-25T21:18:14-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":null,"name":"pulumi-test-combined-a3fd0e86-key","path":"pulumi-filescom-test/18e6cf3c","permission_set":"files_only","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":null,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:15 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - e35d6dd94fae9c84c7cc0f473a11cda7
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 88.009834ms
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 87
+        host: app.files.com
+        body: '{"description":"99637","id":5452060,"name":"pulumi-test-combined-a3fd0e86-key-renamed"}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/api_keys/5452060
+        method: PATCH
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":5452060,"descriptive_label":"Site-wide API key for https://jschady.files.com (key ID #5452060)","description":"99637","created_at":"2026-08-25T21:18:14-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":null,"name":"pulumi-test-combined-a3fd0e86-key-renamed","path":"pulumi-filescom-test/18e6cf3c","permission_set":"files_only","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":null,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:17 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - a736e737842aabdc75417c5648a6aa73
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 91.797625ms
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/api_keys?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0},{"id":5452060,"descriptive_label":"Site-wide API key for https://jschady.files.com (key ID #5452060)","description":"99637","created_at":"2026-08-25T21:18:14-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":null,"name":"pulumi-test-combined-a3fd0e86-key-renamed","path":"pulumi-filescom-test/18e6cf3c","permission_set":"files_only","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":null,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:17 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 95ae254518c45b17aed3f1ee7994446c
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 65.178ms
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/api_keys/5452060
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:18 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 0e5f64dd34931dee36b93d5d7317e6d7
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 103.495083ms
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/groups/99637
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:18 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 8e637c90ee1e390531eabc128b98f565
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 116.522708ms
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/behaviors/586196
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:18 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2ab1dbc0e58fc9c66866e720c0af8366
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 140.796542ms
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - e996ab0927e78d0df1fd96a03cc43b7e
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 56.454458ms
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/api_keys?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - cec7a95ff39b3dd8a3f5075fdb4ad6d3
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 85.489ms
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 71a086b5e7eaf430b863cba9388fbb8e
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 62.085875ms
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/api_keys?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 9a2cbdda6d6616cf543ff4ddb1c50e88
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 59.497458ms
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/api_key
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2be6acc88ebbbd1c26270408ff1e3605
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 51.359041ms
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2ca4e3ca0928fc4ef9f32bae8600d2c2
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 56.223208ms
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 275e4129629d48af54c1f3543fce3cef
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 54.490125ms
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/api_key
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:19 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - f030e3074d3cc8a286276122f894083c
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 54.464333ms
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:20 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 19169335923eb0a699ee720ee448c65b
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 55.385083ms
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/api_keys/5452060
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"error":"Not Found.  This may be related to your permissions.","http-code":404,"instance":"2f7df65d1e5d03a13482ec38973990b5","title":"Not Found","type":"not-found"}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:20 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Files-Error-Class:
+                - not-found
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2f7df65d1e5d03a13482ec38973990b5
+            X-Xss-Protection:
+                - "0"
+        status: 404 Not Found
+        code: 404
+        duration: 66.613875ms
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/api_keys?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:20 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - b069647b8b8e4e3172fb0b88a809a084
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 74.92575ms
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/api_key
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":5450823,"descriptive_label":"joeyschady@gmail.com user-level API key for https://jschady.files.com (key ID #5450823)","description":"","created_at":"2026-08-25T15:22:44-04:00","expires_at":null,"aws_style_credentials":false,"last_use_at":"2026-08-25T21:06:53-04:00","name":"admin","path":null,"permission_set":"full","platform":null,"site_id":151632,"site_name":"jschady","url":"https://jschady.files.com","user_id":1400342,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:20 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 2327ff8d2d1d7a2b835574b4717c9236
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 65.648125ms
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:21 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 48bfa4409561c7902beba9aabfa15e07
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 69.222834ms
+    - id: 25
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            recursive:
+                - "true"
+        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/18e6cf3c?recursive=true
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:21 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 6cacfb3cca8c2f5633df70fa1bdf73b2
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 95.032667ms

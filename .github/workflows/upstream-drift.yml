@@ -8,10 +8,25 @@ on:
 permissions:
   contents: read
 
+env:
+  PROVIDER: filescom
+  PULUMI_VERSION: 3.258.0
+  PULUMICTL_VERSION: v0.0.50
+  PULUMI_IGNORE_AMBIENT_PLUGINS: "true"
+  PULUMI_DISABLE_AUTOMATIC_PLUGIN_ACQUISITION: "true"
+  UPSTREAM_MODULE: github.com/Files-com/terraform-provider-files
+  BRANCH: bot/upstream-update
+
+# Upstream cuts a release most days, so a check that demands the latest tag fails most weeks. This
+# job moves the pin instead and opens a pull request that carries the regenerated schema and SDKs.
+# The pull request's own checks then say whether the release changed anything the provider ships.
 jobs:
-  tag_check:
-    name: tag_check
+  upstream_update:
+    name: upstream_update
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7.0.1
@@ -22,22 +37,124 @@ jobs:
       - name: Check the 3 upstream pins agree
         run: ./scripts/upstream.sh check
       - name: Compare the pinned tag with the latest upstream release
+        id: upstream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           slug=$(git config --file .gitmodules submodule.upstream.url | sed -E 's#.*github\.com/##; s#\.git$##')
-          pinned=$(git -C upstream describe --tags --exact-match HEAD 2>/dev/null || true)
-          if [ -z "${pinned}" ]; then
-            echo "The upstream submodule points at a commit with no tag."
-            echo "Check out a release tag inside upstream. Commit the changed gitlink."
-            exit 1
-          fi
+          pinned=$(git -C upstream describe --tags --exact-match HEAD)
           latest=$(gh release view --repo "${slug}" --json tagName --jq .tagName)
           echo "repository=${slug} pinned=${pinned} latest=${latest}"
-          if [ "${pinned}" != "${latest}" ]; then
+          {
+            echo "slug=${slug}"
+            echo "pinned=${pinned}"
+            echo "latest=${latest}"
+          } >>"$GITHUB_OUTPUT"
+          if [ "${pinned}" = "${latest}" ]; then
+            echo "The pin matches the latest upstream release."
+            echo "stale=false" >>"$GITHUB_OUTPUT"
+          else
             echo "The pin is ${pinned}. The latest ${slug} release is ${latest}."
-            echo "Check out ${latest} inside upstream. Commit the changed gitlink."
-            exit 1
+            echo "stale=true" >>"$GITHUB_OUTPUT"
           fi
-          echo "The pin matches the latest upstream release."
+      - name: Set up the Go toolchain
+        if: steps.upstream.outputs.stale == 'true'
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Install the pinned Pulumi CLI
+        if: steps.upstream.outputs.stale == 'true'
+        run: |
+          curl -fsSL "https://github.com/pulumi/pulumi/releases/download/v${PULUMI_VERSION}/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -o /tmp/pulumi.tar.gz
+          tar -xzf /tmp/pulumi.tar.gz -C /tmp
+          echo "/tmp/pulumi" >> "$GITHUB_PATH"
+      - name: Install pulumictl
+        if: steps.upstream.outputs.stale == 'true'
+        run: |
+          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Install the pinned Terraform converter plugin
+        if: steps.upstream.outputs.stale == 'true'
+        run: make converter_plugin
+      # The gitlink moves in a commit of its own before make runs: make re-inits the submodule
+      # from the committed gitlink, and an uncommitted checkout would be reset to the old tag.
+      - name: Move the 3 upstream pins
+        if: steps.upstream.outputs.stale == 'true'
+        env:
+          LATEST: ${{ steps.upstream.outputs.latest }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git -C upstream fetch --quiet origin "refs/tags/${LATEST}:refs/tags/${LATEST}"
+          git -C upstream checkout --quiet "${LATEST}"
+          (cd provider/shim && go mod edit -require="${UPSTREAM_MODULE}@${LATEST}" && go mod tidy)
+          (cd provider && go mod edit -require="${UPSTREAM_MODULE}@${LATEST}" && go mod tidy)
+          ./scripts/upstream.sh check
+          git add upstream provider/go.mod provider/go.sum provider/shim/go.mod provider/shim/go.sum
+          git commit -m "Move the upstream pin to ${LATEST}"
+      # Each generation step commits what it changed under its own directory, then the shared
+      # worktree check runs. A file the generation changed anywhere else fails the run instead of
+      # dropping out of the pull request.
+      - name: Generate the schema
+        if: steps.upstream.outputs.stale == 'true'
+        run: make tfgen
+      - name: Commit the schema
+        if: steps.upstream.outputs.stale == 'true'
+        env:
+          LATEST: ${{ steps.upstream.outputs.latest }}
+        run: |
+          set -euo pipefail
+          git add provider
+          git diff --cached --quiet || git commit -m "Regenerate the schema for ${LATEST}"
+      - name: Check the worktree is clean
+        if: steps.upstream.outputs.stale == 'true'
+        run: ./scripts/check-worktree-clean.sh
+      - name: Generate the 4 SDKs
+        if: steps.upstream.outputs.stale == 'true'
+        run: make generate_nodejs generate_python generate_dotnet generate_go
+      - name: Commit the SDKs
+        if: steps.upstream.outputs.stale == 'true'
+        env:
+          LATEST: ${{ steps.upstream.outputs.latest }}
+        run: |
+          set -euo pipefail
+          git add sdk
+          git diff --cached --quiet || git commit -m "Regenerate the SDKs for ${LATEST}"
+      - name: Check the worktree is clean
+        if: steps.upstream.outputs.stale == 'true'
+        run: ./scripts/check-worktree-clean.sh
+      - name: Open the pull request
+        if: steps.upstream.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLUG: ${{ steps.upstream.outputs.slug }}
+          PINNED: ${{ steps.upstream.outputs.pinned }}
+          LATEST: ${{ steps.upstream.outputs.latest }}
+        run: |
+          set -euo pipefail
+          git push --force origin "$BRANCH"
+          {
+            echo "The weekly upstream check moved the pin from \`${PINNED}\` to \`${LATEST}\`."
+            echo "Upstream changes: https://github.com/${SLUG}/compare/${PINNED}...${LATEST}"
+            echo
+            if git diff --quiet origin/main -- "provider/cmd/pulumi-resource-${PROVIDER}/schema.json"; then
+              echo "The schema did not change."
+            else
+              echo "The schema changed. Read the diff of \`provider/cmd/pulumi-resource-${PROVIDER}/schema.json\`."
+            fi
+            echo
+            echo '```'
+            git diff --stat origin/main
+            echo '```'
+            echo
+            echo "GitHub starts no checks on a pull request that GITHUB_TOKEN opens. Close it and open it again to start them."
+          } >"$RUNNER_TEMP/body.md"
+          if [ "$(gh pr list --head "$BRANCH" --state open --json number --jq 'length')" = "0" ]; then
+            gh pr create --base main --head "$BRANCH" --title "Move the upstream pin to ${LATEST}" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr edit "$BRANCH" --title "Move the upstream pin to ${LATEST}" --body-file "$RUNNER_TEMP/body.md"
+          fi

@@ -1,0 +1,638 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/7c288668
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 808
+        body: '{"path":"pulumi-filescom-test/7c288668","created_by_id":1400342,"created_by_api_key_id":5450823,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"7c288668","type":"directory","size":null,"created_at":"2026-08-26T01:18:32Z","last_modified_by_id":1400342,"last_modified_by_api_key_id":5450823,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-08-26T01:18:32Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "808"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:32 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 8052fbb113c11a4eb0a4929871f1c9e2
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 127.396333ms
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 79
+        host: app.files.com
+        body: '{"name":"pulumi-test-group-d652aac8","notes":"The group of the basic example."}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/groups
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 397
+        body: '{"id":99639,"name":"pulumi-test-group-d652aac8","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "397"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:38 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 1e07682bc841222322cf484665dba64a
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 165.601458ms
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 253
+        host: app.files.com
+        body: '{"behavior":"webhook","name":"pulumi-test-behavior-382ea5f3","path":"pulumi-filescom-test/7c288668","value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]}}'
+        headers:
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/behaviors
+        method: POST
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 412
+        body: '{"id":586198,"path":"pulumi-filescom-test/7c288668","behavior":"webhook","name":"pulumi-test-behavior-382ea5f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "412"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:38 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 0e5b6e604a811f433ecadbdf9738af61
+            X-Xss-Protection:
+                - "0"
+        status: 201 Created
+        code: 201
+        duration: 231.78225ms
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":99639,"name":"pulumi-test-group-d652aac8","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:41 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - c10db7518b58a5ebe581e362708091d8
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 109.3295ms
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '[{"id":586198,"path":"pulumi-filescom-test/7c288668","behavior":"webhook","name":"pulumi-test-behavior-382ea5f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:41 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 8c670bb1ecee4faee5365dd695acd4ea
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 59.837416ms
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/groups/99639
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":99639,"name":"pulumi-test-group-d652aac8","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:42 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 1b7324d795e72a25ab4931143625f6b0
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 57.424ms
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/behaviors/586198
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: -1
+        uncompressed: true
+        body: '{"id":586198,"path":"pulumi-filescom-test/7c288668","behavior":"webhook","name":"pulumi-test-behavior-382ea5f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:42 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - c7fed2312e5704cd6ca998b8edbb9030
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 121.239542ms
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/groups/99639
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:42 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - f9618c48aec9722a1927043030b76170
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 91.259333ms
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        headers:
+            User-Agent:
+                - Files.com Terraform 0.1.0
+        url: https://app.files.com/api/rest/v1/behaviors/586198
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:42 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 9d489075e86392521479af5add88b780
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 135.623292ms
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/behaviors?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:42 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 68e27e9835766c34cecb28aecc27fca7
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 82.420709ms
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            per_page:
+                - "1000"
+        url: https://app.files.com/api/rest/v1/groups?per_page=1000
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 2
+        body: '[]'
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Length:
+                - "2"
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Wed, 26 Aug 2026 01:18:43 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 233df87f6f1f2eeef1e3e52287eadc47
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 65.736709ms
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: app.files.com
+        form:
+            recursive:
+                - "true"
+        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/7c288668?recursive=true
+        method: DELETE
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        content_length: 0
+        body: ""
+        headers:
+            Cache-Control:
+                - no-cache, no-store, max-age=0, must-revalidate
+            Content-Security-Policy:
+                - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
+            Date:
+                - Wed, 26 Aug 2026 01:18:43 GMT
+            Expires:
+                - Fri, 01 Jan 1990 00:00:00 GMT
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - same-origin
+            Server:
+                - files.com
+            Strict-Transport-Security:
+                - max-age=631139040; includeSubdomains; preload
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - c4e31dac5c83517c4a892bdd31990eba
+            X-Xss-Protection:
+                - "0"
+        status: 204 No Content
+        code: 204
+        duration: 101.257375ms

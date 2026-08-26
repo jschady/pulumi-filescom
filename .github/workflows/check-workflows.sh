@@ -77,6 +77,13 @@ ALLOWED_SECRETS=(
 
 CREDENTIAL_GATE="github.event.pull_request.head.repo.full_name == github.repository"
 
+# The label a maintainer adds when a pull request is meant to spend the account.
+LIVE_TESTS_LABEL="run-live-tests"
+
+# The job that spends the account, and the job that replays the recorded traffic instead.
+LIVE_JOB="test_examples_live"
+REPLAY_JOB="test_examples"
+
 # The one comparison every generation step runs after itself.
 WORKTREE_SCRIPT="./scripts/check-worktree-clean.sh"
 
@@ -118,6 +125,19 @@ trigger_block() {
 # lint_job prints the body of the lint job, without the jobs that follow it.
 lint_job() {
   awk '/^  lint:$/ { inside = 1; next } inside && /^  [a-z_]+:$/ { exit } inside' "$1"
+}
+
+# job_body prints the body of one named job, without the jobs that follow it. A step of another
+# job runs on another runner, so a scan of the whole file would accept a gate that sits anywhere.
+job_body() {
+  awk -v header="  $2:" '$0 == header { inside = 1; next } inside && /^  [a-z_]+:$/ { exit } inside' "$1"
+}
+
+# workflow_env prints the workflow-level env block, without the blocks that follow it. That block
+# reaches every job, so a secret written there lands in the replay job as surely as one written
+# inside it.
+workflow_env() {
+  awk '/^env:$/ { inside = 1; next } inside && /^[^[:space:]]/ { exit } inside' "$1"
 }
 
 # uncommented drops the lines YAML drops. A commented-out step is not a step, and a check that
@@ -215,13 +235,68 @@ check_publishing_only_on_release() {
 }
 
 check_credential_gate() {
-  local file
+  local file body read_lines
   for file in pull-request.yml main.yml; do
     require_file "${file}" || continue
-    grep -qF -- "${CREDENTIAL_GATE}" "${file}" ||
-      fail "${file}: the credential job carries no fork gate"
-    grep -q "env.FILES_API_KEY == ''" "${file}" ||
+    body=$(job_body "${file}" "${LIVE_JOB}" | uncommented)
+    # An awk range that matched nothing greps clean, so count the lines before trusting them.
+    read_lines=$(grep -c . <<<"${body}")
+    if ((read_lines < 5)); then
+      fail "${file}: the ${LIVE_JOB} job body read ${read_lines} lines"
+      continue
+    fi
+    grep -qF -- "${CREDENTIAL_GATE}" <<<"${body}" ||
+      fail "${file}: the ${LIVE_JOB} job carries no fork gate"
+    grep -q "env.FILES_API_KEY == ''" <<<"${body}" ||
       fail "${file}: nothing reports the skip when FILES_API_KEY is absent"
+    grep -qF "secrets.FILES_API_KEY" <<<"${body}" ||
+      fail "${file}: the ${LIVE_JOB} job reads no API key"
+    grep -qE "make ${LIVE_JOB}( |$)" <<<"${body}" ||
+      fail "${file}: the ${LIVE_JOB} job does not run make ${LIVE_JOB}"
+  done
+  # A pull request spends the account only under the label. A push to main carries no label, so
+  # this half of the gate belongs to the pull request workflow alone.
+  require_file pull-request.yml &&
+    { grep -qF -- "${LIVE_TESTS_LABEL}" <<<"$(job_body pull-request.yml "${LIVE_JOB}" | uncommented)" ||
+      fail "pull-request.yml: the ${LIVE_JOB} job waits for no ${LIVE_TESTS_LABEL} label"; }
+  # The command flow asks for the same run by hand, so it reads the key and runs the same target.
+  require_file acceptance-tests.yml || return
+  body=$(uncommented <acceptance-tests.yml)
+  grep -qF "secrets.FILES_API_KEY" <<<"${body}" ||
+    fail "acceptance-tests.yml reads no API key"
+  grep -qE "make ${LIVE_JOB}( |$)" <<<"${body}" ||
+    fail "acceptance-tests.yml does not run make ${LIVE_JOB}"
+}
+
+# The replay job answers every call from the recorded traffic. A secret there buys nothing, and a
+# gate there would hide the one run that proves the example suite on a fork pull request.
+check_replay_job_reads_no_secret() {
+  local file body read_lines hit
+  for file in pull-request.yml main.yml; do
+    require_file "${file}" || continue
+    body=$(job_body "${file}" "${REPLAY_JOB}" | uncommented)
+    read_lines=$(grep -c . <<<"${body}")
+    if ((read_lines < 5)); then
+      fail "${file}: the ${REPLAY_JOB} job body read ${read_lines} lines"
+      continue
+    fi
+    hit=$(grep -n 'secrets\.' <<<"${body}")
+    if [[ -n "${hit}" ]]; then
+      fail "${file}: the ${REPLAY_JOB} job reads a secret, and recorded traffic needs none: ${hit}"
+    fi
+    if grep -qF -- "${CREDENTIAL_GATE}" <<<"${body}"; then
+      fail "${file}: the ${REPLAY_JOB} job carries a fork gate, so a fork pull request skips it"
+    fi
+    if grep -qF -- "${LIVE_TESTS_LABEL}" <<<"${body}"; then
+      fail "${file}: the ${REPLAY_JOB} job waits for the ${LIVE_TESTS_LABEL} label"
+    fi
+    grep -qE "make ${REPLAY_JOB}( |$)" <<<"${body}" ||
+      fail "${file}: the ${REPLAY_JOB} job does not run make ${REPLAY_JOB}"
+    # An env entry at the top of the file reaches every job, so the scan above would miss it.
+    hit=$(workflow_env "${file}" | uncommented | grep -n 'secrets\.')
+    if [[ -n "${hit}" ]]; then
+      fail "${file}: a workflow-level env entry reads a secret, and it reaches the ${REPLAY_JOB} job: ${hit}"
+    fi
   done
 }
 
@@ -335,6 +410,7 @@ check "release.yml triggers only on the v*.*.* tags" check_release_triggers_on_t
 check "main.yml ignores the v* and sdk/** tags" check_main_ignores_tags
 check "only release.yml publishes" check_publishing_only_on_release
 check "the credential jobs gate on the fork and on the API key" check_credential_gate
+check "the replay job reads no secret and runs on every pull request" check_replay_job_reads_no_secret
 check "the schema job and the SDK jobs check the worktree" check_worktree_clean_steps
 check "no pull_request_target workflow checks a branch out" check_no_checkout_under_pull_request_target
 check "every secret is one the workflows may read" check_secret_names

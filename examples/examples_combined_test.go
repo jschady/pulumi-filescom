@@ -30,6 +30,7 @@ var combinedOutputNames = []string{"apiKeyDescription", "apiKeyId", "behaviorId"
 // The group id reaches the key description, and the behavior path reaches the key path.
 func TestCombinedStackLifecycle(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	baseName := testObjectName(t, "combined")
 	groupName := baseName + "-group"

@@ -6,7 +6,6 @@ package examples
 
 import (
 	"context"
-	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -23,9 +22,12 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/pulumi/providertest/providers"
 	"github.com/pulumi/providertest/pulumitest"
 	"github.com/pulumi/providertest/pulumitest/opttest"
+	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/apitype"
+	pulumirpc "github.com/pulumi/pulumi/sdk/v3/proto/go"
 )
 
 const (
@@ -48,6 +50,20 @@ const (
 )
 
 func TestMain(m *testing.M) {
+	mode, err := readTestMode(os.Getenv(testModeVariable))
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	// A replay run answers every call from a cassette, so the account holds nothing for the
+	// sweeps to find and nothing for the sandbox root to carry.
+	if mode == modeReplay {
+		fmt.Fprintf(os.Stderr, "%s is %s, so the sweeps and the sandbox root stay off\n",
+			testModeVariable, mode)
+		os.Exit(m.Run())
+	}
+
 	sweepLeakedAPIKeys()
 	sweepLeakedBehaviors()
 	sweepLeakedGroups()
@@ -60,11 +76,65 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
+// keySkipReason names why a run with no credential cannot go on. A replay run reads a cassette
+// rather than the account, so it needs no key and the reason stays empty.
+func keySkipReason(mode testMode, key string) string {
+	if mode == modeReplay || key != "" {
+		return ""
+	}
+	return "FILES_API_KEY is not set"
+}
+
 // requireFilesAPIKey skips the caller when the credential is absent. The skip names the variable.
 func requireFilesAPIKey(t *testing.T) {
 	t.Helper()
-	if os.Getenv("FILES_API_KEY") == "" {
-		t.Skip("FILES_API_KEY is not set")
+	if reason := keySkipReason(testModeFor(t), os.Getenv("FILES_API_KEY")); reason != "" {
+		t.Skip(reason)
+	}
+}
+
+// TestTheKeySkipNeverFiresInReplay covers the decision behind every skip in this package. A
+// replay run that skipped for a missing key would report a green suite that ran nothing.
+func TestTheKeySkipNeverFiresInReplay(t *testing.T) {
+	require.Empty(t, keySkipReason(modeReplay, ""), "a replay run needs no credential")
+	require.Empty(t, keySkipReason(modeReplay, "a-value"), "a replay run reads the cassette")
+
+	for _, mode := range []testMode{modeRecord, modeLive} {
+		require.Emptyf(t, keySkipReason(mode, "a-value"), "%s runs when the credential is set", mode)
+		reason := keySkipReason(mode, "")
+		require.NotEmptyf(t, reason, "%s cannot reach the account with no credential", mode)
+		require.Contains(t, reason, "FILES_API_KEY", "the skip reason should name the variable")
+	}
+}
+
+// liveOnlySkipReason names why a test that needs the released binary cannot replay. The reason
+// carries the mode and the variable that sets it, so the reader knows what to change.
+func liveOnlySkipReason(mode testMode) string {
+	if mode != modeReplay {
+		return ""
+	}
+	return fmt.Sprintf("this test runs against the provider binary, and %s is %s",
+		testModeVariable, mode)
+}
+
+// requireLiveProvider skips a test the in-process provider cannot carry.
+func requireLiveProvider(t *testing.T) {
+	t.Helper()
+	if reason := liveOnlySkipReason(testModeFor(t)); reason != "" {
+		t.Skip(reason)
+	}
+}
+
+// TestTheLiveOnlySkipFiresInReplayAndNowhereElse pins the one skip the live-only tests take. A
+// skip in record or in live would drop the coverage those tests carry.
+func TestTheLiveOnlySkipFiresInReplayAndNowhereElse(t *testing.T) {
+	reason := liveOnlySkipReason(modeReplay)
+	require.NotEmpty(t, reason, "a replay run cannot start the released binary")
+	require.Contains(t, reason, testModeVariable, "the skip reason should name the variable")
+	require.Contains(t, reason, string(modeReplay), "the skip reason should name the mode")
+
+	for _, mode := range []testMode{modeRecord, modeLive} {
+		require.Emptyf(t, liveOnlySkipReason(mode), "%s should run the test", mode)
 	}
 }
 
@@ -74,12 +144,49 @@ func listQuery() url.Values {
 	return url.Values{"per_page": []string{"1000"}}
 }
 
+// replayPlaceholder stands in for the credential in a replay run. The cassette carries the
+// response, the matcher reads no header, and the save hook drops the header a request carries.
+const replayPlaceholder = "replay-needs-no-credential"
+
+// harnessCredential returns the credential one call carries. A replay run ignores the
+// environment, so the key of the person running the tests stays unread.
+func harnessCredential() (string, error) {
+	mode, err := readTestMode(os.Getenv(testModeVariable))
+	if err != nil {
+		return "", err
+	}
+	if mode == modeReplay {
+		return replayPlaceholder, nil
+	}
+	key := os.Getenv("FILES_API_KEY")
+	if key == "" {
+		return "", errors.New("FILES_API_KEY is not set")
+	}
+	return key, nil
+}
+
+// TestTheHarnessCallsTakeAPlaceholderInReplay covers the one read of the credential. A replay
+// run that demanded a key would fail every harness call on a machine with no account.
+func TestTheHarnessCallsTakeAPlaceholderInReplay(t *testing.T) {
+	t.Setenv("FILES_API_KEY", "")
+	t.Setenv(testModeVariable, string(modeReplay))
+	key, err := harnessCredential()
+	require.NoError(t, err, "a replay run should reach the recorder with no key on the machine")
+	require.Equal(t, replayPlaceholder, key)
+
+	for _, mode := range []testMode{modeRecord, modeLive} {
+		t.Setenv(testModeVariable, string(mode))
+		_, err := harnessCredential()
+		require.ErrorContainsf(t, err, "FILES_API_KEY", "%s should name the variable it needs", mode)
+	}
+}
+
 // filesAPI issues one Files.com REST call. The key is read fresh from the environment on
 // every call, so a rotation takes effect, and it is never logged, written, or put in a message.
 func filesAPI(method, path string, query url.Values) (int, []byte, error) {
-	key := os.Getenv("FILES_API_KEY")
-	if key == "" {
-		return 0, nil, errors.New("FILES_API_KEY is not set")
+	key, err := harnessCredential()
+	if err != nil {
+		return 0, nil, err
 	}
 
 	target := filesAPIBase + path
@@ -116,12 +223,28 @@ func findResource(t *testing.T, pt *pulumitest.PulumiTest, token string) (apityp
 	return apitype.ResourceV3{}, false
 }
 
+// randomHex returns the suffix one object name carries. The bytes come from the seed of the
+// running test, so the Nth name of a replay run is the name the record run gave the vendor.
 func randomHex(t *testing.T) string {
 	t.Helper()
-	buf := make([]byte, 4)
-	_, err := rand.Read(buf)
-	require.NoError(t, err, "generating a random object suffix")
-	return hex.EncodeToString(buf)
+	return hex.EncodeToString(nameBytes(t, 4))
+}
+
+// TestTheObjectNamesComeFromTheSeedOfTheTest pins where a name's bytes come from. A name drawn
+// fresh would differ between the record run and the replay run, so no recorded call would match.
+func TestTheObjectNamesComeFromTheSeedOfTheTest(t *testing.T) {
+	replay, err := newReplayRecorder(replayConfig{mode: modeRecord, dir: t.TempDir()}, "name-probe")
+	require.NoError(t, err)
+	replay.install(t)
+
+	mirror := &seedSource{seed: replay.seed.seed}
+	first := randomHex(t)
+	second := randomHex(t)
+	require.NotEqual(t, first, second, "two names in one test should differ")
+	require.Equal(t, hex.EncodeToString(mirror.Bytes(4)), first,
+		"the first name should carry the first bytes the seed gives")
+	require.Equal(t, hex.EncodeToString(mirror.Bytes(4)), second,
+		"the second name should carry the next bytes the seed gives")
 }
 
 func testObjectName(t *testing.T, kind string) string {
@@ -129,9 +252,77 @@ func testObjectName(t *testing.T, kind string) string {
 	return testObjectPrefix + kind + "-" + randomHex(t)
 }
 
+// attachProvider points one stack at the provider the mode names. A live run starts the built
+// binary. Replay and record start the provider in this process, where the recorder sees its calls.
 func attachProvider(t *testing.T) opttest.Option {
 	t.Helper()
-	return opttest.AttachProviderBinary(providerName, providerBinDir(t))
+	if testModeFor(t) == modeLive {
+		return opttest.AttachProviderBinary(providerName, providerBinDir(t))
+	}
+
+	ctx, cancel := context.WithCancel(context.Background())
+	t.Cleanup(cancel)
+	return opttest.AttachProviderServer(providerName,
+		func(providers.PulumiTest) (pulumirpc.ResourceProviderServer, error) {
+			return inProcessProvider(ctx)
+		})
+}
+
+// attachProviderToProgramTest points one language leg at the provider the mode names. The legs
+// run through ProgramTest, which reaches a provider over a port rather than an attach option.
+// A live run keeps the local plugin the base options name.
+func attachProviderToProgramTest(t *testing.T, options *integration.ProgramTestOptions) {
+	t.Helper()
+	if testModeFor(t) == modeLive {
+		return
+	}
+	options.LocalProviders = nil
+	options.Env = append(options.Env, debugProvidersEnv(t, options.Dir))
+}
+
+// TestTheLanguageLegsReachTheProviderTheModeNames covers the swap one program test takes. A
+// local plugin would start a second provider process, and the recorder would see none of it.
+func TestTheLanguageLegsReachTheProviderTheModeNames(t *testing.T) {
+	t.Run("replay", func(t *testing.T) {
+		t.Setenv(testModeVariable, string(modeReplay))
+		options := getBaseOptions(t)
+		options.Dir = getCwd(t)
+		attachProviderToProgramTest(t, &options)
+
+		require.Empty(t, options.LocalProviders, "a replay run should install no local plugin")
+		require.Len(t, options.Env, 1, "a replay run should name one provider port")
+		require.Truef(t, strings.HasPrefix(options.Env[0], "PULUMI_DEBUG_PROVIDERS="+providerName+":"),
+			"the entry should name the provider and its port, got %q", options.Env[0])
+	})
+
+	t.Run("live", func(t *testing.T) {
+		t.Setenv(testModeVariable, string(modeLive))
+		options := getBaseOptions(t)
+		attachProviderToProgramTest(t, &options)
+
+		require.Len(t, options.LocalProviders, 1, "a live run should keep the local plugin")
+		require.Empty(t, options.Env, "a live run should name no provider port")
+	})
+}
+
+// TestTheReplayModesAttachTheProviderInsideThisProcess pins the seam the recorder needs. A
+// provider in another process makes its own calls, and the recorder in this one never sees them.
+func TestTheReplayModesAttachTheProviderInsideThisProcess(t *testing.T) {
+	for _, mode := range []testMode{modeReplay, modeRecord} {
+		t.Setenv(testModeVariable, string(mode))
+
+		options := opttest.DefaultOptions()
+		attachProvider(t).Apply(options)
+		config, found := options.Providers[providerName]
+		require.Truef(t, found, "the %s mode should attach the provider named %s", mode, providerName)
+		require.NotNilf(t, config.Factory, "the %s mode should start the provider itself", mode)
+
+		ctx, cancel := context.WithCancel(context.Background())
+		port, err := config.Factory(ctx, programSource(getCwd(t)))
+		cancel()
+		require.NoErrorf(t, err, "the %s mode should start the provider with no binary on disk", mode)
+		require.NotZerof(t, port, "the %s provider should report the port it listens on", mode)
+	}
 }
 
 // stackOption adapts a function to the option interface, which carries no exported adapter.

@@ -3,6 +3,7 @@ package examples
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -127,4 +128,136 @@ func goSDKModulePath(t *testing.T) string {
 	}
 	t.Fatal("sdk/go/filescom/go.mod declares no module path")
 	return ""
+}
+
+// The tests below run against the built provider binary. A replay run starts the provider in
+// this process instead, so each one takes the live guard and skips.
+const (
+	knownIssuePattern = "*_knownissue_test.go"
+	upgradeTestName   = "TestUpgradeFromTheReleasedProvider"
+	liveGuardCall     = "requireLiveProvider(t)"
+)
+
+// knownIssueTests is how many tests the known-issue files declare between them. The count keeps
+// a new test from joining one of those files without the guard.
+const knownIssueTests = 2
+
+// TestEveryLiveOnlyTestTakesTheLiveGuard reads this package's own source. A test that lost the
+// guard fails a replay run over a binary it cannot start, and the failure names no fix.
+func TestEveryLiveOnlyTestTakesTheLiveGuard(t *testing.T) {
+	sources, err := filepath.Glob(knownIssuePattern)
+	require.NoError(t, err)
+	require.NotEmpty(t, sources, "this package should hold at least one known-issue file")
+
+	checked := 0
+	for _, source := range sources {
+		raw, err := os.ReadFile(source)
+		require.NoErrorf(t, err, "reading %s", source)
+		for name, body := range testBodies(string(raw)) {
+			checked++
+			require.Containsf(t, body, liveGuardCall,
+				"the test %s in %s runs with no live guard", name, source)
+		}
+	}
+	require.Equal(t, knownIssueTests, checked,
+		"the known-issue files should declare this many tests")
+
+	raw, err := os.ReadFile(upgradeSourceName)
+	require.NoError(t, err)
+	body, found := testBodies(string(raw))[upgradeTestName]
+	require.Truef(t, found, "%s should declare %s", upgradeSourceName, upgradeTestName)
+	require.Containsf(t, body, liveGuardCall, "%s runs with no live guard", upgradeTestName)
+}
+
+// testBodies returns the name and the source text of every test one file declares. The text of
+// a test runs to the next declaration, which covers the calls the test opens with.
+func testBodies(source string) map[string]string {
+	const opening = "\nfunc "
+
+	bodies := map[string]string{}
+	for _, block := range strings.Split(source, opening) {
+		name, _, found := strings.Cut(block, "(")
+		if !found || !strings.HasPrefix(name, "Test") {
+			continue
+		}
+		bodies[name] = block
+	}
+	return bodies
+}
+
+// The capture seam replaces two transports the whole process shares, so two tests in flight at
+// once would write into one recorder. The call below is spelled in two pieces, so this file
+// does not hold the text the scan searches for.
+var parallelCall = "t.Parallel" + "("
+
+// parallelCalls returns one finding for every parallel call the test sources under dir make.
+// The scan takes a directory, so the proof below can read a copy of these sources.
+func parallelCalls(dir string) ([]string, error) {
+	sources, err := filepath.Glob(filepath.Join(dir, "*_test.go"))
+	if err != nil {
+		return nil, err
+	}
+
+	var findings []string
+	for _, source := range sources {
+		raw, err := os.ReadFile(source)
+		if err != nil {
+			return nil, err
+		}
+		for index, line := range strings.Split(string(raw), "\n") {
+			if strings.Contains(line, parallelCall) {
+				findings = append(findings,
+					fmt.Sprintf("%s line %d starts a parallel test", source, index+1))
+			}
+		}
+	}
+	return findings, nil
+}
+
+// TestNoTestInThisPackageRunsInParallel reads this package's own source. One process holds one
+// lib.DefaultClient and one http.DefaultTransport, and the recorder of a test owns both.
+func TestNoTestInThisPackageRunsInParallel(t *testing.T) {
+	findings, err := parallelCalls(".")
+	require.NoError(t, err)
+	require.Emptyf(t, findings, "a test in this package runs in parallel:\n%s",
+		strings.Join(findings, "\n"))
+}
+
+// TestTheParallelScanRejectsAPlantedCall copies the sources and plants the call in the copy. A
+// scan nobody watched fail reports a serial package whether or not the package is serial.
+func TestTheParallelScanRejectsAPlantedCall(t *testing.T) {
+	dir := t.TempDir()
+	sources, err := filepath.Glob("*_test.go")
+	require.NoError(t, err)
+	require.NotEmpty(t, sources, "this package should hold test sources to copy")
+	for _, source := range sources {
+		raw, err := os.ReadFile(source)
+		require.NoError(t, err)
+		copied := filepath.Join(dir, filepath.Base(source))
+		//nolint:gosec // G703: the directory is t.TempDir and the name is the base of a
+		// source this package already holds, so the write stays inside the temporary copy.
+		require.NoError(t, os.WriteFile(copied, raw, 0o600))
+	}
+
+	findings, err := parallelCalls(dir)
+	require.NoError(t, err)
+	require.Empty(t, findings, "the copied sources should carry no parallel call")
+
+	planted := filepath.Join(dir, packagesSourceName)
+	raw, err := os.ReadFile(planted)
+	require.NoError(t, err)
+	call := "\nfunc TestThePlantedLeg(t *testing.T) {\n\t" + parallelCall + ")\n}\n"
+	//nolint:gosec // G703: the path is t.TempDir joined with a constant name.
+	require.NoError(t, os.WriteFile(planted, append(raw, []byte(call)...), 0o600))
+
+	findings, err = parallelCalls(dir)
+	require.NoError(t, err)
+	require.Len(t, findings, 1, "the planted call should be the one finding")
+	require.Contains(t, findings[0], packagesSourceName)
+
+	// A directory that holds no test source reports nothing, so the scan fails on a call and
+	// never on a path.
+	empty, err := parallelCalls(filepath.Join(dir, "absent"))
+	require.NoError(t, err)
+	require.Empty(t, empty)
 }

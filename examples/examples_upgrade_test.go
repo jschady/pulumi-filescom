@@ -32,11 +32,16 @@ var upgradeProgram = filepath.Join("lifecycle", "group", "base")
 // TestUpgradeFromTheReleasedProvider deploys with the released provider, then previews the same
 // stack with this build. A property this build renamed becomes a change the user already owns.
 func TestUpgradeFromTheReleasedProvider(t *testing.T) {
+	// The released binary is the provider under test here, so the in-process provider a replay
+	// run attaches would leave this test covering nothing.
+	requireLiveProvider(t)
+
 	baseline := os.Getenv(upgradeBaselineVar)
 	if baseline == "" {
 		t.Skipf("%s names the released provider to upgrade from and is not set", upgradeBaselineVar)
 	}
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	groupName := testObjectName(t, "group")
 	t.Cleanup(func() { deleteGroupsNamed(t, groupName) })

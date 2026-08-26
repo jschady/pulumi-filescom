@@ -12,7 +12,9 @@ import (
 
 func TestBasicPy(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	opts := getPythonBaseOptions(t).With(basicExampleOptions(t, "basic-py"))
+	attachProviderToProgramTest(t, &opts)
 	integration.ProgramTest(t, &opts)
 }

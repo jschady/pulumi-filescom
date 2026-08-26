@@ -39,6 +39,7 @@ targets=(
   build_nodejs build_python build_dotnet build_go
   install_nodejs_sdk install_python_sdk install_dotnet_sdk install_go_sdk
   test_provider test_integration test_examples test_knownissue compile_examples docs
+  record_examples test_examples_live
   release_snapshot clean
   tfgen schema_embed upstream
   test_generated converter_plugin prepare_local_workspace
@@ -176,7 +177,7 @@ check_example_tags() {
 # holds the checkpoint with every created secret in it.
 check_example_run_hygiene() {
   local target out
-  for target in test_examples test_knownissue; do
+  for target in test_examples record_examples test_examples_live test_knownissue; do
     out=$(make -n "${target}" 2>&1)
     if [[ "${out}" != *"-count=1"* ]]; then
       fail "make ${target} must forbid the test cache with -count=1: ${out}"
@@ -185,6 +186,37 @@ check_example_run_hygiene() {
       fail "make ${target} must run with PULUMITEST_RETAIN_FILES_ON_FAILURE=false: ${out}"
     fi
   done
+}
+
+# A record run and a live run reach the account, so each one has to refuse an empty key before
+# it starts. The mode each recipe sets decides whether the run reads a cassette or the account.
+check_credentialed_example_targets() {
+  local pair target mode out
+  for pair in record_examples:record test_examples_live:live; do
+    target=${pair%%:*}
+    mode=${pair#*:}
+    out=$(make -n "${target}" 2>&1)
+    if [[ "${out}" != *'test -n "$FILES_API_KEY"'* ]]; then
+      fail "make ${target} must read FILES_API_KEY before it runs the tests: ${out}"
+    fi
+    if [[ "${out}" != *"exit 1"* ]]; then
+      fail "make ${target} must stop when FILES_API_KEY is empty: ${out}"
+    fi
+    if [[ "${out}" != *"FILESCOM_TEST_MODE=${mode}"* ]]; then
+      fail "make ${target} must run in the ${mode} mode: ${out}"
+    fi
+  done
+  # The gated tests record what the account does. A replay run would report a cassette nobody
+  # wrote instead of the limitation each test carries.
+  out=$(make -n test_knownissue 2>&1)
+  if [[ "${out}" != *"FILESCOM_TEST_MODE=live"* ]]; then
+    fail "make test_knownissue must run in the live mode: ${out}"
+  fi
+  # An unset mode variable is the replay mode, and replay is what the pull request runs.
+  out=$(make -n test_examples 2>&1)
+  if [[ "${out}" == *"FILESCOM_TEST_MODE"* ]]; then
+    fail "make test_examples must leave FILESCOM_TEST_MODE unset, which reads the cassettes: ${out}"
+  fi
 }
 
 # The repository ignores ambient plugins, so a provider on PATH would never be found. Both
@@ -326,6 +358,7 @@ check_ensure_reaches_every_check
 check_no_integration_tier
 check_example_tags
 check_example_run_hygiene
+check_credentialed_example_targets
 check_no_ambient_plugin_discovery
 check_knownissue_runner
 check_compile_examples_reaches_every_program

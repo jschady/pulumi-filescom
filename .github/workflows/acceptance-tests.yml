@@ -125,5 +125,5 @@ jobs:
           echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
       - name: Build and install the 4 SDKs
         run: make sdk
-      - name: Run the example programs against the API
-        run: make test_examples
+      - name: Run the example programs against the account
+        run: make test_examples_live

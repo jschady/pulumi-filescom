@@ -12,7 +12,9 @@ import (
 
 func TestBasicGo(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	opts := getGoBaseOptions(t).With(basicExampleOptions(t, "basic-go"))
+	attachProviderToProgramTest(t, &opts)
 	integration.ProgramTest(t, &opts)
 }

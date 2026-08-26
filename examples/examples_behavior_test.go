@@ -45,6 +45,7 @@ var (
 // a path replace, a behavior replace, and destroy. It is the probe for the Dynamic `value`.
 func TestBehaviorLifecycle(t *testing.T) {
 	requireFilesAPIKey(t)
+	recorderFor(t)
 
 	name := testObjectName(t, "behavior")
 	folderA := throwawayFolder(t)
