@@ -735,6 +735,9 @@
             "files_site": {
                 "current": "filescom:index/site:Site",
                 "fields": {
+                    "active_sftp_host_key_ids": {
+                        "maxItemsOne": false
+                    },
                     "additional_text_file_types": {
                         "maxItemsOne": false
                     },
@@ -1595,6 +1598,9 @@
             "files_site": {
                 "current": "filescom:index/getSite:getSite",
                 "fields": {
+                    "active_sftp_host_key_ids": {
+                        "maxItemsOne": false
+                    },
                     "additional_text_file_types": {
                         "maxItemsOne": false
                     },
