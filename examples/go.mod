@@ -3,19 +3,19 @@ module github.com/jschady/pulumi-filescom/examples
 go 1.26.0
 
 require (
-	github.com/Files-com/files-sdk-go/v3 v3.3.233
+	github.com/Files-com/files-sdk-go/v3 v3.3.240
 	github.com/jschady/pulumi-filescom/provider v0.0.0
 	github.com/pulumi/providertest v0.7.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.137.0
 	github.com/pulumi/pulumi/pkg/v3 v3.258.0
 	github.com/pulumi/pulumi/sdk/v3 v3.258.0
-	github.com/stretchr/testify v1.12.0
+	github.com/stretchr/testify v1.12.1
 	gopkg.in/dnaeon/go-vcr.v4 v4.0.7
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
-	github.com/Files-com/terraform-provider-files v0.1.882 // indirect
+	github.com/Files-com/terraform-provider-files v0.1.921 // indirect
 	github.com/Files-com/terraform-provider-files/shim v0.0.0 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
@@ -69,7 +69,7 @@ require (
 	github.com/pulumi/pulumi-java v1.36.1 // indirect
 	github.com/pulumi/pulumi-yaml v1.38.3 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
-	github.com/quic-go/quic-go v0.61.0 // indirect
+	github.com/quic-go/quic-go v0.62.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/samber/lo v1.53.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
@@ -276,6 +276,7 @@ require (
 	go.opentelemetry.io/proto/otlp v1.11.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	gocloud.dev v0.46.1-0.20260810195832-b5401c07b5f1 // indirect
 	gocloud.dev/secrets/hashivault v0.46.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
