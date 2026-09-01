@@ -93,8 +93,11 @@ jobs:
           git -C upstream checkout --quiet "${LATEST}"
           (cd provider/shim && go mod edit -require="${UPSTREAM_MODULE}@${LATEST}" && go mod tidy)
           (cd provider && go mod edit -require="${UPSTREAM_MODULE}@${LATEST}" && go mod tidy)
+          # The examples module builds the provider in process, so its go.mod follows the pin.
+          (cd examples && go mod tidy)
           ./scripts/upstream.sh check
-          git add upstream provider/go.mod provider/go.sum provider/shim/go.mod provider/shim/go.sum
+          git add upstream provider/go.mod provider/go.sum provider/shim/go.mod provider/shim/go.sum \
+            examples/go.mod examples/go.sum
           git commit -m "Move the upstream pin to ${LATEST}"
       # Each generation step commits what it changed under its own directory, then the shared
       # worktree check runs. A file the generation changed anywhere else fails the run instead of

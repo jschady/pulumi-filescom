@@ -4,10 +4,14 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"go/ast"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -29,10 +33,7 @@ func TestMain(m *testing.M) {
 
 const (
 	committedSchemaPath = "cmd/pulumi-resource-filescom/schema.json"
-	entityListPath      = "entities_expected.txt"
 	indexModule         = "filescom:index/"
-	wantResources       = 60
-	wantDataSources     = 80
 	// The bridge emits this provider method for every package it generates.
 	providerMethodToken = "pulumi:providers:filescom/terraformConfig"
 )
@@ -95,6 +96,15 @@ type entityList struct {
 	dataSources []string
 }
 
+// upstreamResourceSource is what one upstream `<name>_resource.go` declares: the Terraform type
+// name its Metadata method builds, the schema kind of every top-level attribute of its Schema
+// method, and the top-level attributes a RequiresReplace() plan modifier marks.
+type upstreamResourceSource struct {
+	typeName       string
+	attributeKinds map[string]string
+	replaceForcing map[string]bool
+}
+
 type generation struct {
 	schema []byte
 	stdout string
@@ -144,36 +154,6 @@ func schemaCommitted(t *testing.T) packageSchema {
 	return schemaParse(t, raw, committedSchemaPath)
 }
 
-func schemaReadEntityList(t *testing.T) entityList {
-	t.Helper()
-	raw, err := os.ReadFile(entityListPath)
-	if err != nil {
-		t.Fatalf("read %s: %v", entityListPath, err)
-	}
-	var list entityList
-	for _, line := range strings.Split(string(raw), "\n") {
-		line = strings.TrimSpace(line)
-		if line == "" || strings.HasPrefix(line, "#") {
-			continue
-		}
-		kind, name, ok := strings.Cut(line, " ")
-		if !ok {
-			t.Fatalf("%s: line %q is not `<kind> <name>`", entityListPath, line)
-		}
-		switch kind {
-		case "resource":
-			list.resources = append(list.resources, name)
-		case "datasource":
-			list.dataSources = append(list.dataSources, name)
-		default:
-			t.Fatalf("%s: unknown kind %q", entityListPath, kind)
-		}
-	}
-	sort.Strings(list.resources)
-	sort.Strings(list.dataSources)
-	return list
-}
-
 // schemaDocEntities reads the entity names the upstream doc pages imply. The bridge finds
 // a page by stripping the "files_" prefix, so the page name is the entity name.
 func schemaDocEntities(t *testing.T, dir string) []string {
@@ -188,6 +168,21 @@ func schemaDocEntities(t *testing.T, dir string) []string {
 	}
 	sort.Strings(names)
 	return names
+}
+
+// schemaReadEntityList answers the entities the upstream doc pages declare. The bridge maps an
+// entity only when it finds the page, so the two directories are the list.
+func schemaReadEntityList(t *testing.T) entityList {
+	t.Helper()
+	list := entityList{
+		resources:   schemaDocEntities(t, "resources"),
+		dataSources: schemaDocEntities(t, "data-sources"),
+	}
+	if len(list.resources) == 0 || len(list.dataSources) == 0 {
+		t.Fatalf("upstream/docs holds %d resource pages and %d data source pages",
+			len(list.resources), len(list.dataSources))
+	}
+	return list
 }
 
 func schemaAssertSameSet(t *testing.T, what string, got, want []string) {
@@ -230,6 +225,207 @@ func schemaSortedKeys[V any](m map[string]V) []string {
 	return keys
 }
 
+// upstreamResourceSources parses every resource file of the pinned upstream submodule. The scan
+// stays inside the Schema method, so the prior schema of a state upgrader never reaches it.
+func upstreamResourceSources(t *testing.T) []upstreamResourceSource {
+	t.Helper()
+	pattern := filepath.Join("..", "upstream", "internal", "provider", "*_resource.go")
+	files, err := filepath.Glob(pattern)
+	if err != nil {
+		t.Fatalf("glob %s: %v", pattern, err)
+	}
+	if len(files) == 0 {
+		t.Fatalf("%s matched no upstream resource file", pattern)
+	}
+
+	// literal drops the address-of a composite literal carries, and answers nil for anything else.
+	literal := func(expr ast.Expr) *ast.CompositeLit {
+		if address, ok := expr.(*ast.UnaryExpr); ok {
+			expr = address.X
+		}
+		composite, _ := expr.(*ast.CompositeLit)
+		return composite
+	}
+	// member answers the value of one keyed element of a composite literal, and never descends.
+	// A nested attribute keeps its own Attributes and PlanModifiers out of reach that way.
+	member := func(composite *ast.CompositeLit, key string) ast.Expr {
+		if composite == nil {
+			return nil
+		}
+		for _, element := range composite.Elts {
+			pair, ok := element.(*ast.KeyValueExpr)
+			if !ok {
+				continue
+			}
+			if name, ok := pair.Key.(*ast.Ident); ok && name.Name == key {
+				return pair.Value
+			}
+		}
+		return nil
+	}
+
+	sources := make([]upstreamResourceSource, 0, len(files))
+	for _, file := range files {
+		parsed, err := parser.ParseFile(token.NewFileSet(), file, nil, 0)
+		if err != nil {
+			t.Fatalf("parse %s: %v", file, err)
+		}
+		// Each file declares one resource, so the method name identifies the declaration.
+		methods := map[string]*ast.FuncDecl{}
+		for _, declaration := range parsed.Decls {
+			if method, ok := declaration.(*ast.FuncDecl); ok && method.Recv != nil {
+				methods[method.Name.Name] = method
+			}
+		}
+
+		source := upstreamResourceSource{
+			attributeKinds: map[string]string{},
+			replaceForcing: map[string]bool{},
+		}
+		metadata, found := methods["Metadata"]
+		if !found {
+			t.Fatalf("%s declares no Metadata method", file)
+		}
+		// The Metadata method writes `req.ProviderTypeName + "_<name>"`, and the provider type
+		// name is the prefix this package already strips off an entity.
+		ast.Inspect(metadata.Body, func(node ast.Node) bool {
+			sum, ok := node.(*ast.BinaryExpr)
+			if !ok || sum.Op != token.ADD {
+				return true
+			}
+			suffix, ok := sum.Y.(*ast.BasicLit)
+			if !ok || suffix.Kind != token.STRING {
+				return true
+			}
+			name, err := strconv.Unquote(suffix.Value)
+			if err != nil {
+				t.Fatalf("%s: the Metadata method holds %s: %v", file, suffix.Value, err)
+			}
+			source.typeName = upstreamPrefix + strings.TrimPrefix(name, "_")
+			return false
+		})
+		if source.typeName == "" {
+			t.Fatalf("%s: the Metadata method sets no Terraform type name", file)
+		}
+
+		declare, found := methods["Schema"]
+		if !found {
+			t.Fatalf("%s declares no Schema method", file)
+		}
+		var declared *ast.CompositeLit
+		ast.Inspect(declare.Body, func(node ast.Node) bool {
+			assign, ok := node.(*ast.AssignStmt)
+			if !ok || len(assign.Lhs) != 1 || len(assign.Rhs) != 1 {
+				return true
+			}
+			target, ok := assign.Lhs[0].(*ast.SelectorExpr)
+			if !ok || target.Sel.Name != "Schema" {
+				return true
+			}
+			declared = literal(assign.Rhs[0])
+			if declared != nil {
+				return false
+			}
+			// Two resources build the schema in a helper method and return it.
+			call, ok := assign.Rhs[0].(*ast.CallExpr)
+			if !ok {
+				return false
+			}
+			callee, ok := call.Fun.(*ast.SelectorExpr)
+			if !ok {
+				return false
+			}
+			helper, found := methods[callee.Sel.Name]
+			if !found {
+				t.Fatalf("%s: the Schema method calls %s, which the file does not declare",
+					file, callee.Sel.Name)
+			}
+			ast.Inspect(helper.Body, func(inner ast.Node) bool {
+				returned, ok := inner.(*ast.ReturnStmt)
+				if !ok || len(returned.Results) != 1 {
+					return true
+				}
+				declared = literal(returned.Results[0])
+				return false
+			})
+			return false
+		})
+
+		attributes := literal(member(declared, "Attributes"))
+		if attributes == nil {
+			t.Fatalf("%s: the Schema method declares no top-level Attributes map", file)
+		}
+		for _, element := range attributes.Elts {
+			pair, ok := element.(*ast.KeyValueExpr)
+			if !ok {
+				continue
+			}
+			key, ok := pair.Key.(*ast.BasicLit)
+			if !ok || key.Kind != token.STRING {
+				continue
+			}
+			attribute, err := strconv.Unquote(key.Value)
+			if err != nil {
+				t.Fatalf("%s: the attribute key %s: %v", file, key.Value, err)
+			}
+			declaration := literal(pair.Value)
+			if declaration == nil {
+				t.Fatalf("%s: the attribute %s is not a schema literal", file, attribute)
+			}
+			kind, ok := declaration.Type.(*ast.SelectorExpr)
+			if !ok {
+				t.Fatalf("%s: the attribute %s names no schema kind", file, attribute)
+			}
+			source.attributeKinds[attribute] = kind.Sel.Name
+			modifiers := literal(member(declaration, "PlanModifiers"))
+			if modifiers == nil {
+				continue
+			}
+			for _, modifier := range modifiers.Elts {
+				call, ok := modifier.(*ast.CallExpr)
+				if !ok {
+					continue
+				}
+				if callee, ok := call.Fun.(*ast.SelectorExpr); ok &&
+					callee.Sel.Name == "RequiresReplace" {
+					source.replaceForcing[attribute] = true
+				}
+			}
+		}
+		sources = append(sources, source)
+	}
+	return sources
+}
+
+// upstreamReplaceForcingAttributes answers the `<type> <attribute>` entries the upstream source
+// marks. `markReplaceForcingInputs` in provider/resources.go walks the same top level, so the
+// committed schema must mark exactly these inputs.
+func upstreamReplaceForcingAttributes(t *testing.T) []string {
+	t.Helper()
+	var entries []string
+	for _, source := range upstreamResourceSources(t) {
+		for _, attribute := range schemaSortedKeys(source.replaceForcing) {
+			entries = append(entries, source.typeName+" "+attribute)
+		}
+	}
+	sort.Strings(entries)
+	return entries
+}
+
+// upstreamIntegerIDResources answers the resources whose top-level `id` attribute is not a string.
+// `mapIntegerIDs` in provider/resources.go overrides the Pulumi type for exactly these.
+func upstreamIntegerIDResources(t *testing.T) []string {
+	t.Helper()
+	var names []string
+	for _, source := range upstreamResourceSources(t) {
+		if kind, found := source.attributeKinds["id"]; found && kind != "StringAttribute" {
+			names = append(names, source.typeName)
+		}
+	}
+	sort.Strings(names)
+	return names
+}
+
 // Invariant 1: the bridge accepts the mapping. An error-severity diagnostic here is the
 // unresolved-ID and unmapped-entity class of failure that stops `make tfgen`.
 func TestSchemaGenerationReportsNoErrors(t *testing.T) {
@@ -249,27 +445,14 @@ func TestSchemaGenerationReportsNoErrors(t *testing.T) {
 	}
 }
 
-// Invariant 2, first half: the committed entity list is what the upstream pages say.
-func TestEntityListMatchesUpstreamDocs(t *testing.T) {
-	list := schemaReadEntityList(t)
-
-	schemaAssertSameSet(t, "resources", list.resources, schemaDocEntities(t, "resources"))
-	schemaAssertSameSet(t, "data sources", list.dataSources, schemaDocEntities(t, "data-sources"))
-	if len(list.resources) != wantResources {
-		t.Errorf("entity list holds %d resources, want %d", len(list.resources), wantResources)
-	}
-	if len(list.dataSources) != wantDataSources {
-		t.Errorf("entity list holds %d data sources, want %d", len(list.dataSources), wantDataSources)
-	}
-}
-
-// The doc pipeline can only describe an entity whose page it can find.
+// The doc pipeline can only describe an entity whose page it can find, and an empty page
+// describes nothing.
 func TestUpstreamDocPageExistsForEveryEntity(t *testing.T) {
-	list := schemaReadEntityList(t)
-	for dir, names := range map[string][]string{
-		"resources":    list.resources,
-		"data-sources": list.dataSources,
-	} {
+	for _, dir := range []string{"resources", "data-sources"} {
+		names := schemaDocEntities(t, dir)
+		if len(names) == 0 {
+			t.Fatalf("upstream/docs/%s holds no page", dir)
+		}
 		for _, name := range names {
 			page := filepath.Join("..", "upstream", "docs", dir,
 				strings.TrimPrefix(name, upstreamPrefix)+".md")
@@ -285,26 +468,31 @@ func TestUpstreamDocPageExistsForEveryEntity(t *testing.T) {
 	}
 }
 
-// Invariant 2, second half: every documented entity carries a token in this module.
+// Invariant 2, first half: every documented entity carries a token in this module.
 func TestProviderTokenizesEveryDocumentedEntity(t *testing.T) {
-	list := schemaReadEntityList(t)
+	resources := schemaDocEntities(t, "resources")
+	dataSources := schemaDocEntities(t, "data-sources")
+	if len(resources) == 0 || len(dataSources) == 0 {
+		t.Fatalf("upstream/docs holds %d resource pages and %d data source pages",
+			len(resources), len(dataSources))
+	}
 	prov := Provider()
 
-	schemaAssertSameSet(t, "mapped resources", schemaSortedKeys(prov.Resources), list.resources)
-	schemaAssertSameSet(t, "mapped data sources", schemaSortedKeys(prov.DataSources), list.dataSources)
-	for _, name := range list.resources {
+	schemaAssertSameSet(t, "mapped resources", schemaSortedKeys(prov.Resources), resources)
+	schemaAssertSameSet(t, "mapped data sources", schemaSortedKeys(prov.DataSources), dataSources)
+	for _, name := range resources {
 		if info := prov.Resources[name]; info == nil || !strings.HasPrefix(string(info.Tok), indexModule) {
 			t.Errorf("resource %s has no %s token", name, indexModule)
 		}
 	}
-	for _, name := range list.dataSources {
+	for _, name := range dataSources {
 		if info := prov.DataSources[name]; info == nil || !strings.HasPrefix(string(info.Tok), indexModule) {
 			t.Errorf("data source %s has no %s token", name, indexModule)
 		}
 	}
 }
 
-// Invariant 2, third half: the committed schema holds exactly those tokens.
+// Invariant 2, second half: the committed schema holds exactly those tokens.
 func TestCommittedSchemaHoldsEveryToken(t *testing.T) {
 	prov := Provider()
 	committed := schemaCommitted(t)
@@ -404,108 +592,19 @@ func TestProviderApiKeyIsSecretWithEnvVarDefault(t *testing.T) {
 	}
 }
 
-// The upstream attributes carrying a RequiresReplace() plan modifier at the pinned submodule
-// revision, read out of the pinned upstream provider source.
-var replaceForcingAttributes = []string{
-	"files_api_key aws_style_credentials",
-	"files_api_key permission_set",
-	"files_api_key user_id",
-	"files_api_key workspace_id",
-	"files_api_key path",
-	"files_as2_partner as2_station_id",
-	"files_as2_station workspace_id",
-	"files_automation workspace_id",
-	"files_behavior path",
-	"files_behavior behavior",
-	"files_bundle_notification bundle_id",
-	"files_bundle_notification notify_user_id",
-	"files_bundle_notification user_id",
-	"files_bundle snapshot_id",
-	"files_event_target target_type",
-	"files_file_comment path",
-	"files_file source",
-	"files_file md5",
-	"files_file size",
-	"files_folder mkdir_parents",
-	"files_form_field_set user_id",
-	"files_gpg_key workspace_id",
-	"files_gpg_key user_id",
-	"files_gpg_key generate_expires_at",
-	"files_gpg_key generate_keypair",
-	"files_gpg_key generate_full_name",
-	"files_gpg_key generate_email",
-	"files_group workspace_id",
-	"files_group_user group_id",
-	"files_group_user user_id",
-	"files_group_user admin",
-	"files_lock path",
-	"files_lock timeout",
-	"files_lock recursive",
-	"files_lock exclusive",
-	"files_lock allow_access_by_any_user",
-	"files_message_comment_reaction emoji",
-	"files_message_comment_reaction user_id",
-	"files_message_comment user_id",
-	"files_message_reaction emoji",
-	"files_message_reaction user_id",
-	"files_message user_id",
-	"files_notification path",
-	"files_notification group_id",
-	"files_notification group_ids",
-	"files_notification user_id",
-	"files_notification username",
-	"files_partner_channel partner_id",
-	"files_partner_channel workspace_id",
-	"files_partner_channel_template workspace_id",
-	"files_partner workspace_id",
-	"files_partner_site_request host_partner_id",
-	"files_partner_site_request guest_site_url",
-	"files_permission path",
-	"files_permission user_id",
-	"files_permission username",
-	"files_permission group_id",
-	"files_permission group_name",
-	"files_permission group_ids",
-	"files_permission partner_id",
-	"files_permission permission",
-	"files_permission recursive",
-	"files_permission site_id",
-	"files_public_key user_id",
-	"files_public_key public_key",
-	"files_public_key generate_keypair",
-	"files_public_key generate_private_key_password",
-	"files_public_key generate_algorithm",
-	"files_public_key generate_length",
-	"files_remote_mount_backend remote_server_mount_id",
-	"files_remote_server_credential workspace_id",
-	"files_remote_server_credential copy_values_from_credential_id",
-	"files_remote_server workspace_id",
-	"files_remote_server user_id",
-	"files_request path",
-	"files_request destination",
-	"files_request user_ids",
-	"files_request group_ids",
-	"files_secret workspace_id",
-	"files_share_group user_id",
-	"files_snapshot workspace_id",
-	"files_sync workspace_id",
-	"files_user_additional_email_recipient user_id",
-	"files_user_request name",
-	"files_user_request email",
-	"files_user_request details",
-	"files_user_request company",
-}
-
-const wantReplaceForcingInputs = 87
-
 // Invariant 4 both ways: a missing mark and an unexpected one each fail the set comparison. The flag
 // comes only from an override (v3.137.0 pf/internal/schemashim/attr_schema.go:85, bridge #818).
 func TestReplaceForcingInputsAreMarked(t *testing.T) {
 	prov := Provider()
 	committed := schemaCommitted(t)
 
+	entries := upstreamReplaceForcingAttributes(t)
+	if len(entries) == 0 {
+		t.Fatal("the upstream source marks no attribute with RequiresReplace()")
+	}
+
 	var want []string
-	for _, entry := range replaceForcingAttributes {
+	for _, entry := range entries {
 		name, attribute, ok := strings.Cut(entry, " ")
 		if !ok {
 			t.Fatalf("%q is not `<resource> <attribute>`", entry)
@@ -538,9 +637,6 @@ func TestReplaceForcingInputsAreMarked(t *testing.T) {
 
 	sort.Strings(want)
 	schemaAssertSameSet(t, "replace-forcing inputs", got, want)
-	if len(want) != wantReplaceForcingInputs {
-		t.Errorf("the expected list holds %d properties, want %d", len(want), wantReplaceForcingInputs)
-	}
 }
 
 // The upstream page passes `token` to files_lock, which declares only `path`, and the HCL
@@ -746,7 +842,10 @@ func TestIntegerIdsAreTypedAsStrings(t *testing.T) {
 		}
 		overridden = append(overridden, name)
 	}
-	if len(overridden) != 56 {
-		t.Errorf("%d resources map an integer id, want 56", len(overridden))
+	if len(overridden) == 0 {
+		t.Fatal("the provider overrides no integer id")
 	}
+
+	sort.Strings(overridden)
+	schemaAssertSameSet(t, "integer-id resources", overridden, upstreamIntegerIDResources(t))
 }

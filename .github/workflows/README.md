@@ -33,8 +33,8 @@ When the pin is behind, the job moves it. Upstream cuts a release most days, so 
 the latest tag would fail most weeks. The job runs these steps instead:
 
 1. Check out the latest tag inside `upstream`.
-2. Set the same version in `provider/go.mod` and `provider/shim/go.mod`, then run `go mod tidy` in
-   both.
+2. Set the same version in `provider/go.mod` and `provider/shim/go.mod`. Run `go mod tidy` in
+   both, then in `examples`.
 3. Commit the 3 pins.
 4. Run `make tfgen`, commit the schema, then run the worktree check.
 5. Generate the 4 SDKs, commit them, then run the worktree check.
