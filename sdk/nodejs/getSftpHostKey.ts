@@ -44,6 +44,10 @@ export interface GetSftpHostKeyArgs {
  */
 export interface GetSftpHostKeyResult {
     /**
+     * If true, use this SFTP Host Key.
+     */
+    readonly active: boolean;
+    /**
      * MD5 Fingerprint of the public key
      */
     readonly fingerprintMd5: string;
@@ -55,6 +59,10 @@ export interface GetSftpHostKeyResult {
      * SFTP Host Key ID
      */
     readonly id: number;
+    /**
+     * SSH key type
+     */
+    readonly keyType: string;
     /**
      * The friendly name of this SFTP Host Key.
      */

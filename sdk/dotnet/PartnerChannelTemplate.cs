@@ -26,6 +26,7 @@ namespace Jschady.Filescom
     /// {
     ///     var examplePartnerChannelTemplate = new Filescom.PartnerChannelTemplate("example_partner_channel_template", new()
     ///     {
+    ///         Direction = "two_way",
     ///         FromPartnerFolderName = "incoming",
     ///         FromPartnerManagedFolderPaths = new[]
     ///         {
@@ -60,6 +61,12 @@ namespace Jschady.Filescom
     [FilescomResourceType("filescom:index/partnerChannelTemplate:PartnerChannelTemplate")]
     public partial class PartnerChannelTemplate : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Channel directions. &lt;span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`"&gt;`twoWay`&lt;/span&gt; enables both directions, &lt;span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`"&gt;`toPartner`&lt;/span&gt; enables outgoing downloads, and &lt;span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`"&gt;`fromPartner`&lt;/span&gt; enables incoming uploads.
+        /// </summary>
+        [Output("direction")]
+        public Output<string> Direction { get; private set; } = null!;
+
         /// <summary>
         /// Resolved from-Partner folder name after Template override and default.
         /// </summary>
@@ -174,6 +181,12 @@ namespace Jschady.Filescom
     public sealed class PartnerChannelTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Channel directions. &lt;span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`"&gt;`twoWay`&lt;/span&gt; enables both directions, &lt;span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`"&gt;`toPartner`&lt;/span&gt; enables outgoing downloads, and &lt;span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`"&gt;`fromPartner`&lt;/span&gt; enables incoming uploads.
+        /// </summary>
+        [Input("direction")]
+        public Input<string>? Direction { get; set; }
+
+        /// <summary>
         /// Optional Channel-level from-Partner folder name override.
         /// </summary>
         [Input("fromPartnerFolderName")]
@@ -247,6 +260,12 @@ namespace Jschady.Filescom
 
     public sealed class PartnerChannelTemplateState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Channel directions. &lt;span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`"&gt;`twoWay`&lt;/span&gt; enables both directions, &lt;span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`"&gt;`toPartner`&lt;/span&gt; enables outgoing downloads, and &lt;span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`"&gt;`fromPartner`&lt;/span&gt; enables incoming uploads.
+        /// </summary>
+        [Input("direction")]
+        public Input<string>? Direction { get; set; }
+
         /// <summary>
         /// Resolved from-Partner folder name after Template override and default.
         /// </summary>

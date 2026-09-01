@@ -19,19 +19,35 @@ __all__ = ['SftpHostKeyArgs', 'SftpHostKey']
 @pulumi.input_type
 class SftpHostKeyArgs:
     def __init__(__self__, *,
+                 active: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a SftpHostKey resource.
 
+        :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
         """
+        if active is not None:
+            pulumi.set(__self__, "active", active)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, use this SFTP Host Key.
+        """
+        return pulumi.get(self, "active")
+
+    @active.setter
+    def active(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "active", value)
 
     @_builtins.property
     @pulumi.getter
@@ -62,27 +78,47 @@ class SftpHostKeyArgs:
 @pulumi.input_type
 class _SftpHostKeyState:
     def __init__(__self__, *,
+                 active: pulumi.Input[Optional[_builtins.bool]] = None,
                  fingerprint_md5: pulumi.Input[Optional[_builtins.str]] = None,
                  fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
+                 key_type: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering SftpHostKey resources.
 
+        :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
         :param pulumi.Input[_builtins.str] fingerprint_md5: MD5 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] fingerprint_sha256: SHA256 Fingerprint of the public key
+        :param pulumi.Input[_builtins.str] key_type: SSH key type
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
         """
+        if active is not None:
+            pulumi.set(__self__, "active", active)
         if fingerprint_md5 is not None:
             pulumi.set(__self__, "fingerprint_md5", fingerprint_md5)
         if fingerprint_sha256 is not None:
             pulumi.set(__self__, "fingerprint_sha256", fingerprint_sha256)
+        if key_type is not None:
+            pulumi.set(__self__, "key_type", key_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, use this SFTP Host Key.
+        """
+        return pulumi.get(self, "active")
+
+    @active.setter
+    def active(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "active", value)
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")
@@ -107,6 +143,18 @@ class _SftpHostKeyState:
     @fingerprint_sha256.setter
     def fingerprint_sha256(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "fingerprint_sha256", value)
+
+    @_builtins.property
+    @pulumi.getter(name="keyType")
+    def key_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        SSH key type
+        """
+        return pulumi.get(self, "key_type")
+
+    @key_type.setter
+    def key_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "key_type", value)
 
     @_builtins.property
     @pulumi.getter
@@ -140,6 +188,7 @@ class SftpHostKey(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 active: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -155,7 +204,9 @@ class SftpHostKey(pulumi.CustomResource):
         import pulumi
         import pulumi_filescom as filescom
 
-        example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key", name="My Key")
+        example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key",
+            active=True,
+            name="My Key")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -172,6 +223,7 @@ class SftpHostKey(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
@@ -194,7 +246,9 @@ class SftpHostKey(pulumi.CustomResource):
         import pulumi
         import pulumi_filescom as filescom
 
-        example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key", name="My Key")
+        example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key",
+            active=True,
+            name="My Key")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -224,6 +278,7 @@ class SftpHostKey(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 active: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -235,10 +290,12 @@ class SftpHostKey(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SftpHostKeyArgs.__new__(SftpHostKeyArgs)
 
+            __props__.__dict__["active"] = active
             __props__.__dict__["name"] = name
             __props__.__dict__["private_key"] = None if private_key is None else pulumi.Output.secret(private_key)
             __props__.__dict__["fingerprint_md5"] = None
             __props__.__dict__["fingerprint_sha256"] = None
+            __props__.__dict__["key_type"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SftpHostKey, __self__).__init__(
@@ -251,8 +308,10 @@ class SftpHostKey(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            active: pulumi.Input[Optional[_builtins.bool]] = None,
             fingerprint_md5: pulumi.Input[Optional[_builtins.str]] = None,
             fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
+            key_type: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             private_key: pulumi.Input[Optional[_builtins.str]] = None) -> 'SftpHostKey':
         """
@@ -262,8 +321,10 @@ class SftpHostKey(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
         :param pulumi.Input[_builtins.str] fingerprint_md5: MD5 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] fingerprint_sha256: SHA256 Fingerprint of the public key
+        :param pulumi.Input[_builtins.str] key_type: SSH key type
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
@@ -272,11 +333,21 @@ class SftpHostKey(pulumi.CustomResource):
 
         __props__ = _SftpHostKeyState.__new__(_SftpHostKeyState)
 
+        __props__.__dict__["active"] = active
         __props__.__dict__["fingerprint_md5"] = fingerprint_md5
         __props__.__dict__["fingerprint_sha256"] = fingerprint_sha256
+        __props__.__dict__["key_type"] = key_type
         __props__.__dict__["name"] = name
         __props__.__dict__["private_key"] = private_key
         return SftpHostKey(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> pulumi.Output[_builtins.bool]:
+        """
+        If true, use this SFTP Host Key.
+        """
+        return pulumi.get(self, "active")
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")
@@ -293,6 +364,14 @@ class SftpHostKey(pulumi.CustomResource):
         SHA256 Fingerprint of the public key
         """
         return pulumi.get(self, "fingerprint_sha256")
+
+    @_builtins.property
+    @pulumi.getter(name="keyType")
+    def key_type(self) -> pulumi.Output[_builtins.str]:
+        """
+        SSH key type
+        """
+        return pulumi.get(self, "key_type")
 
     @_builtins.property
     @pulumi.getter

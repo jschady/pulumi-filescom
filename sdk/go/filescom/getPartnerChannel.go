@@ -60,6 +60,8 @@ type LookupPartnerChannelArgs struct {
 type LookupPartnerChannelResult struct {
 	// Resolved Channel folder path.
 	ChannelPath string `pulumi:"channelPath"`
+	// Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+	Direction string `pulumi:"direction"`
 	// Resolved from-Partner folder name after Channel override and default.
 	EffectiveFromPartnerFolderName string `pulumi:"effectiveFromPartnerFolderName"`
 	// Resolved to-Partner folder name after Channel override and default.
@@ -125,6 +127,11 @@ func (o LookupPartnerChannelResultOutput) ToLookupPartnerChannelResultOutputWith
 // Resolved Channel folder path.
 func (o LookupPartnerChannelResultOutput) ChannelPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.ChannelPath }).(pulumi.StringOutput)
+}
+
+// Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+func (o LookupPartnerChannelResultOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.Direction }).(pulumi.StringOutput)
 }
 
 // Resolved from-Partner folder name after Channel override and default.

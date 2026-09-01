@@ -20,6 +20,7 @@ __all__ = ['SiteArgs', 'Site']
 class SiteArgs:
     def __init__(__self__, *,
                  active_sftp_host_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 active_sftp_host_key_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  additional_text_file_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  admins_bypass_locked_subfolders: pulumi.Input[Optional[_builtins.bool]] = None,
                  ai_feature_availability: Optional[Any] = None,
@@ -190,6 +191,7 @@ class SiteArgs:
         The set of arguments for constructing a Site resource.
 
         :param pulumi.Input[_builtins.int] active_sftp_host_key_id: Id of the currently selected custom SFTP Host Key
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
         :param Any ai_feature_availability: Availability settings for AI features by user class
@@ -359,6 +361,8 @@ class SiteArgs:
         """
         if active_sftp_host_key_id is not None:
             pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
+        if active_sftp_host_key_ids is not None:
+            pulumi.set(__self__, "active_sftp_host_key_ids", active_sftp_host_key_ids)
         if additional_text_file_types is not None:
             pulumi.set(__self__, "additional_text_file_types", additional_text_file_types)
         if admins_bypass_locked_subfolders is not None:
@@ -703,6 +707,18 @@ class SiteArgs:
     @active_sftp_host_key_id.setter
     def active_sftp_host_key_id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "active_sftp_host_key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="activeSftpHostKeyIds")
+    def active_sftp_host_key_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        Ids of the selected custom SFTP Host Keys
+        """
+        return pulumi.get(self, "active_sftp_host_key_ids")
+
+    @active_sftp_host_key_ids.setter
+    def active_sftp_host_key_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "active_sftp_host_key_ids", value)
 
     @_builtins.property
     @pulumi.getter(name="additionalTextFileTypes")
@@ -2701,6 +2717,7 @@ class SiteArgs:
 class _SiteState:
     def __init__(__self__, *,
                  active_sftp_host_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 active_sftp_host_key_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  additional_text_file_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  admin_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  admins_bypass_locked_subfolders: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2897,6 +2914,7 @@ class _SiteState:
         Input properties used for looking up and filtering Site resources.
 
         :param pulumi.Input[_builtins.int] active_sftp_host_key_id: Id of the currently selected custom SFTP Host Key
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.int] admin_user_id: User ID for the main site administrator
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
@@ -3092,6 +3110,8 @@ class _SiteState:
         """
         if active_sftp_host_key_id is not None:
             pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
+        if active_sftp_host_key_ids is not None:
+            pulumi.set(__self__, "active_sftp_host_key_ids", active_sftp_host_key_ids)
         if additional_text_file_types is not None:
             pulumi.set(__self__, "additional_text_file_types", additional_text_file_types)
         if admin_user_id is not None:
@@ -3488,6 +3508,18 @@ class _SiteState:
     @active_sftp_host_key_id.setter
     def active_sftp_host_key_id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "active_sftp_host_key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="activeSftpHostKeyIds")
+    def active_sftp_host_key_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        Ids of the selected custom SFTP Host Keys
+        """
+        return pulumi.get(self, "active_sftp_host_key_ids")
+
+    @active_sftp_host_key_ids.setter
+    def active_sftp_host_key_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "active_sftp_host_key_ids", value)
 
     @_builtins.property
     @pulumi.getter(name="additionalTextFileTypes")
@@ -5801,6 +5833,7 @@ class Site(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  active_sftp_host_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 active_sftp_host_key_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  additional_text_file_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  admins_bypass_locked_subfolders: pulumi.Input[Optional[_builtins.bool]] = None,
                  ai_feature_availability: Optional[Any] = None,
@@ -6098,6 +6131,7 @@ class Site(pulumi.CustomResource):
             show_user_notifications_log_in_link=False,
             sftp_host_key_type="default",
             active_sftp_host_key_id=1,
+            active_sftp_host_key_ids=[1],
             protocol_access_groups_only=False,
             revoke_bundle_access_on_disable_or_delete=False,
             bundle_watermark_value={
@@ -6184,6 +6218,7 @@ class Site(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.int] active_sftp_host_key_id: Id of the currently selected custom SFTP Host Key
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
         :param Any ai_feature_availability: Availability settings for AI features by user class
@@ -6487,6 +6522,7 @@ class Site(pulumi.CustomResource):
             show_user_notifications_log_in_link=False,
             sftp_host_key_type="default",
             active_sftp_host_key_id=1,
+            active_sftp_host_key_ids=[1],
             protocol_access_groups_only=False,
             revoke_bundle_access_on_disable_or_delete=False,
             bundle_watermark_value={
@@ -6586,6 +6622,7 @@ class Site(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  active_sftp_host_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 active_sftp_host_key_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  additional_text_file_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  admins_bypass_locked_subfolders: pulumi.Input[Optional[_builtins.bool]] = None,
                  ai_feature_availability: Optional[Any] = None,
@@ -6762,6 +6799,7 @@ class Site(pulumi.CustomResource):
             __props__ = SiteArgs.__new__(SiteArgs)
 
             __props__.__dict__["active_sftp_host_key_id"] = active_sftp_host_key_id
+            __props__.__dict__["active_sftp_host_key_ids"] = active_sftp_host_key_ids
             __props__.__dict__["additional_text_file_types"] = additional_text_file_types
             __props__.__dict__["admins_bypass_locked_subfolders"] = admins_bypass_locked_subfolders
             __props__.__dict__["ai_feature_availability"] = ai_feature_availability
@@ -6965,6 +7003,7 @@ class Site(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             active_sftp_host_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+            active_sftp_host_key_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             additional_text_file_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             admin_user_id: pulumi.Input[Optional[_builtins.int]] = None,
             admins_bypass_locked_subfolders: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7165,6 +7204,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.int] active_sftp_host_key_id: Id of the currently selected custom SFTP Host Key
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.int] admin_user_id: User ID for the main site administrator
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
@@ -7363,6 +7403,7 @@ class Site(pulumi.CustomResource):
         __props__ = _SiteState.__new__(_SiteState)
 
         __props__.__dict__["active_sftp_host_key_id"] = active_sftp_host_key_id
+        __props__.__dict__["active_sftp_host_key_ids"] = active_sftp_host_key_ids
         __props__.__dict__["additional_text_file_types"] = additional_text_file_types
         __props__.__dict__["admin_user_id"] = admin_user_id
         __props__.__dict__["admins_bypass_locked_subfolders"] = admins_bypass_locked_subfolders
@@ -7564,6 +7605,14 @@ class Site(pulumi.CustomResource):
         Id of the currently selected custom SFTP Host Key
         """
         return pulumi.get(self, "active_sftp_host_key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="activeSftpHostKeyIds")
+    def active_sftp_host_key_ids(self) -> pulumi.Output[Sequence[_builtins.int]]:
+        """
+        Ids of the selected custom SFTP Host Keys
+        """
+        return pulumi.get(self, "active_sftp_host_key_ids")
 
     @_builtins.property
     @pulumi.getter(name="additionalTextFileTypes")

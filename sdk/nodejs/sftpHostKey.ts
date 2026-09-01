@@ -16,7 +16,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as filescom from "pulumi-filescom";
  *
- * const exampleSftpHostKey = new filescom.SftpHostKey("example_sftp_host_key", {name: "My Key"});
+ * const exampleSftpHostKey = new filescom.SftpHostKey("example_sftp_host_key", {
+ *     active: true,
+ *     name: "My Key",
+ * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
@@ -59,6 +62,10 @@ export class SftpHostKey extends pulumi.CustomResource {
     }
 
     /**
+     * If true, use this SFTP Host Key.
+     */
+    declare public readonly active: pulumi.Output<boolean>;
+    /**
      * MD5 Fingerprint of the public key
      */
     declare public /*out*/ readonly fingerprintMd5: pulumi.Output<string>;
@@ -66,6 +73,10 @@ export class SftpHostKey extends pulumi.CustomResource {
      * SHA256 Fingerprint of the public key
      */
     declare public /*out*/ readonly fingerprintSha256: pulumi.Output<string>;
+    /**
+     * SSH key type
+     */
+    declare public /*out*/ readonly keyType: pulumi.Output<string>;
     /**
      * The friendly name of this SFTP Host Key.
      */
@@ -89,16 +100,20 @@ export class SftpHostKey extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SftpHostKeyState | undefined;
+            resourceInputs["active"] = state?.active;
             resourceInputs["fingerprintMd5"] = state?.fingerprintMd5;
             resourceInputs["fingerprintSha256"] = state?.fingerprintSha256;
+            resourceInputs["keyType"] = state?.keyType;
             resourceInputs["name"] = state?.name;
             resourceInputs["privateKey"] = state?.privateKey;
         } else {
             const args = argsOrState as SftpHostKeyArgs | undefined;
+            resourceInputs["active"] = args?.active;
             resourceInputs["name"] = args?.name;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
             resourceInputs["fingerprintMd5"] = undefined /*out*/;
             resourceInputs["fingerprintSha256"] = undefined /*out*/;
+            resourceInputs["keyType"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["privateKey"] };
@@ -112,6 +127,10 @@ export class SftpHostKey extends pulumi.CustomResource {
  */
 export interface SftpHostKeyState {
     /**
+     * If true, use this SFTP Host Key.
+     */
+    active?: pulumi.Input<boolean | undefined>;
+    /**
      * MD5 Fingerprint of the public key
      */
     fingerprintMd5?: pulumi.Input<string | undefined>;
@@ -119,6 +138,10 @@ export interface SftpHostKeyState {
      * SHA256 Fingerprint of the public key
      */
     fingerprintSha256?: pulumi.Input<string | undefined>;
+    /**
+     * SSH key type
+     */
+    keyType?: pulumi.Input<string | undefined>;
     /**
      * The friendly name of this SFTP Host Key.
      */
@@ -134,6 +157,10 @@ export interface SftpHostKeyState {
  * The set of arguments for constructing a SftpHostKey resource.
  */
 export interface SftpHostKeyArgs {
+    /**
+     * If true, use this SFTP Host Key.
+     */
+    active?: pulumi.Input<boolean | undefined>;
     /**
      * The friendly name of this SFTP Host Key.
      */

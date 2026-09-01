@@ -374,6 +374,10 @@ namespace Jschady.Filescom
     public sealed class GetPartnerChannelTemplateResult
     {
         /// <summary>
+        /// Channel directions. &lt;span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`"&gt;`twoWay`&lt;/span&gt; enables both directions, &lt;span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`"&gt;`toPartner`&lt;/span&gt; enables outgoing downloads, and &lt;span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`"&gt;`fromPartner`&lt;/span&gt; enables incoming uploads.
+        /// </summary>
+        public readonly string Direction;
+        /// <summary>
         /// Resolved from-Partner folder name after Template override and default.
         /// </summary>
         public readonly string EffectiveFromPartnerFolderName;
@@ -424,6 +428,8 @@ namespace Jschady.Filescom
 
         [OutputConstructor]
         private GetPartnerChannelTemplateResult(
+            string direction,
+
             string effectiveFromPartnerFolderName,
 
             string effectiveToPartnerFolderName,
@@ -448,6 +454,7 @@ namespace Jschady.Filescom
 
             int workspaceId)
         {
+            Direction = direction;
             EffectiveFromPartnerFolderName = effectiveFromPartnerFolderName;
             EffectiveToPartnerFolderName = effectiveToPartnerFolderName;
             FromPartnerFolderName = fromPartnerFolderName;

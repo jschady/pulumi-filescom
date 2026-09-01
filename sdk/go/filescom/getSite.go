@@ -54,6 +54,8 @@ func LookupSite(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*LookupSiteRe
 type LookupSiteResult struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId int `pulumi:"activeSftpHostKeyId"`
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds []int `pulumi:"activeSftpHostKeyIds"`
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes []string `pulumi:"additionalTextFileTypes"`
 	// User ID for the main site administrator
@@ -465,6 +467,11 @@ func (o LookupSiteResultOutput) ToLookupSiteResultOutputWithContext(ctx context.
 // Id of the currently selected custom SFTP Host Key
 func (o LookupSiteResultOutput) ActiveSftpHostKeyId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupSiteResult) int { return v.ActiveSftpHostKeyId }).(pulumi.IntOutput)
+}
+
+// Ids of the selected custom SFTP Host Keys
+func (o LookupSiteResultOutput) ActiveSftpHostKeyIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v LookupSiteResult) []int { return v.ActiveSftpHostKeyIds }).(pulumi.IntArrayOutput)
 }
 
 // Additional extensions that are considered text files

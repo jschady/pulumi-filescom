@@ -386,6 +386,10 @@ namespace Jschady.Filescom
     public sealed class GetSftpHostKeyResult
     {
         /// <summary>
+        /// If true, use this SFTP Host Key.
+        /// </summary>
+        public readonly bool Active;
+        /// <summary>
         /// MD5 Fingerprint of the public key
         /// </summary>
         public readonly string FingerprintMd5;
@@ -398,23 +402,33 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int Id;
         /// <summary>
+        /// SSH key type
+        /// </summary>
+        public readonly string KeyType;
+        /// <summary>
         /// The friendly name of this SFTP Host Key.
         /// </summary>
         public readonly string Name;
 
         [OutputConstructor]
         private GetSftpHostKeyResult(
+            bool active,
+
             string fingerprintMd5,
 
             string fingerprintSha256,
 
             int id,
 
+            string keyType,
+
             string name)
         {
+            Active = active;
             FingerprintMd5 = fingerprintMd5;
             FingerprintSha256 = fingerprintSha256;
             Id = id;
+            KeyType = keyType;
             Name = name;
         }
     }
