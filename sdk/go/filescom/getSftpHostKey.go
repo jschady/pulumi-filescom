@@ -60,12 +60,16 @@ type LookupSftpHostKeyArgs struct {
 
 // A collection of values returned by getSftpHostKey.
 type LookupSftpHostKeyResult struct {
+	// If true, use this SFTP Host Key.
+	Active bool `pulumi:"active"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 string `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
 	FingerprintSha256 string `pulumi:"fingerprintSha256"`
 	// SFTP Host Key ID
 	Id int `pulumi:"id"`
+	// SSH key type
+	KeyType string `pulumi:"keyType"`
 	// The friendly name of this SFTP Host Key.
 	Name string `pulumi:"name"`
 }
@@ -100,6 +104,11 @@ func (o LookupSftpHostKeyResultOutput) ToLookupSftpHostKeyResultOutputWithContex
 	return o
 }
 
+// If true, use this SFTP Host Key.
+func (o LookupSftpHostKeyResultOutput) Active() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSftpHostKeyResult) bool { return v.Active }).(pulumi.BoolOutput)
+}
+
 // MD5 Fingerprint of the public key
 func (o LookupSftpHostKeyResultOutput) FingerprintMd5() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSftpHostKeyResult) string { return v.FingerprintMd5 }).(pulumi.StringOutput)
@@ -113,6 +122,11 @@ func (o LookupSftpHostKeyResultOutput) FingerprintSha256() pulumi.StringOutput {
 // SFTP Host Key ID
 func (o LookupSftpHostKeyResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupSftpHostKeyResult) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// SSH key type
+func (o LookupSftpHostKeyResultOutput) KeyType() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSftpHostKeyResult) string { return v.KeyType }).(pulumi.StringOutput)
 }
 
 // The friendly name of this SFTP Host Key.

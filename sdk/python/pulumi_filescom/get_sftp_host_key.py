@@ -26,7 +26,10 @@ class GetSftpHostKeyResult:
     """
     A collection of values returned by getSftpHostKey.
     """
-    def __init__(__self__, fingerprint_md5=None, fingerprint_sha256=None, id=None, name=None):
+    def __init__(__self__, active=None, fingerprint_md5=None, fingerprint_sha256=None, id=None, key_type=None, name=None):
+        if active and not isinstance(active, bool):
+            raise TypeError("Expected argument 'active' to be a bool")
+        pulumi.set(__self__, "active", active)
         if fingerprint_md5 and not isinstance(fingerprint_md5, str):
             raise TypeError("Expected argument 'fingerprint_md5' to be a str")
         pulumi.set(__self__, "fingerprint_md5", fingerprint_md5)
@@ -36,9 +39,20 @@ class GetSftpHostKeyResult:
         if id and not isinstance(id, int):
             raise TypeError("Expected argument 'id' to be a int")
         pulumi.set(__self__, "id", id)
+        if key_type and not isinstance(key_type, str):
+            raise TypeError("Expected argument 'key_type' to be a str")
+        pulumi.set(__self__, "key_type", key_type)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> _builtins.bool:
+        """
+        If true, use this SFTP Host Key.
+        """
+        return pulumi.get(self, "active")
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")
@@ -65,6 +79,14 @@ class GetSftpHostKeyResult:
         return pulumi.get(self, "id")
 
     @_builtins.property
+    @pulumi.getter(name="keyType")
+    def key_type(self) -> _builtins.str:
+        """
+        SSH key type
+        """
+        return pulumi.get(self, "key_type")
+
+    @_builtins.property
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
@@ -79,9 +101,11 @@ class AwaitableGetSftpHostKeyResult(GetSftpHostKeyResult):
         if False:
             yield self
         return GetSftpHostKeyResult(
+            active=self.active,
             fingerprint_md5=self.fingerprint_md5,
             fingerprint_sha256=self.fingerprint_sha256,
             id=self.id,
+            key_type=self.key_type,
             name=self.name)
 
 
@@ -112,9 +136,11 @@ def get_sftp_host_key(id: Optional[_builtins.int] = None,
     __ret__ = pulumi.runtime.invoke('filescom:index/getSftpHostKey:getSftpHostKey', __args__, opts=opts, typ=GetSftpHostKeyResult).value
 
     return AwaitableGetSftpHostKeyResult(
+        active=pulumi.get(__ret__, 'active'),
         fingerprint_md5=pulumi.get(__ret__, 'fingerprint_md5'),
         fingerprint_sha256=pulumi.get(__ret__, 'fingerprint_sha256'),
         id=pulumi.get(__ret__, 'id'),
+        key_type=pulumi.get(__ret__, 'key_type'),
         name=pulumi.get(__ret__, 'name'))
 def get_sftp_host_key_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSftpHostKeyResult]:
@@ -142,7 +168,9 @@ def get_sftp_host_key_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getSftpHostKey:getSftpHostKey', __args__, opts=opts, typ=GetSftpHostKeyResult)
     return __ret__.apply(lambda __response__: GetSftpHostKeyResult(
+        active=pulumi.get(__response__, 'active'),
         fingerprint_md5=pulumi.get(__response__, 'fingerprint_md5'),
         fingerprint_sha256=pulumi.get(__response__, 'fingerprint_sha256'),
         id=pulumi.get(__response__, 'id'),
+        key_type=pulumi.get(__response__, 'key_type'),
         name=pulumi.get(__response__, 'name')))

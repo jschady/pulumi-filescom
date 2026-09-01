@@ -35,6 +35,10 @@ export interface GetSiteResult {
      */
     readonly activeSftpHostKeyId: number;
     /**
+     * Ids of the selected custom SFTP Host Keys
+     */
+    readonly activeSftpHostKeyIds: number[];
+    /**
      * Additional extensions that are considered text files
      */
     readonly additionalTextFileTypes: string[];

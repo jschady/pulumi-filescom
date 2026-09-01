@@ -21,6 +21,7 @@ class PartnerChannelArgs:
     def __init__(__self__, *,
                  partner_id: pulumi.Input[_builtins.int],
                  path: pulumi.Input[_builtins.str],
+                 direction: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  from_partner_route_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -33,6 +34,7 @@ class PartnerChannelArgs:
 
         :param pulumi.Input[_builtins.int] partner_id: ID of the Partner this Channel belongs to.
         :param pulumi.Input[_builtins.str] path: Channel path relative to the Partner root folder. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+        :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] from_partner_managed_folder_paths: Managed folder paths inside the from-Partner folder.
         :param pulumi.Input[_builtins.str] from_partner_route_path: Optional route path for files uploaded by the Partner.
@@ -43,6 +45,8 @@ class PartnerChannelArgs:
         """
         pulumi.set(__self__, "partner_id", partner_id)
         pulumi.set(__self__, "path", path)
+        if direction is not None:
+            pulumi.set(__self__, "direction", direction)
         if from_partner_folder_name is not None:
             pulumi.set(__self__, "from_partner_folder_name", from_partner_folder_name)
         if from_partner_managed_folder_paths is not None:
@@ -81,6 +85,18 @@ class PartnerChannelArgs:
     @path.setter
     def path(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "path", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def direction(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+        """
+        return pulumi.get(self, "direction")
+
+    @direction.setter
+    def direction(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "direction", value)
 
     @_builtins.property
     @pulumi.getter(name="fromPartnerFolderName")
@@ -171,6 +187,7 @@ class PartnerChannelArgs:
 class _PartnerChannelState:
     def __init__(__self__, *,
                  channel_path: pulumi.Input[Optional[_builtins.str]] = None,
+                 direction: pulumi.Input[Optional[_builtins.str]] = None,
                  effective_from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  effective_to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -189,6 +206,7 @@ class _PartnerChannelState:
         Input properties used for looking up and filtering PartnerChannel resources.
 
         :param pulumi.Input[_builtins.str] channel_path: Resolved Channel folder path.
+        :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
         :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner folder name after Channel override and default.
         :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner folder name after Channel override and default.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
@@ -206,6 +224,8 @@ class _PartnerChannelState:
         """
         if channel_path is not None:
             pulumi.set(__self__, "channel_path", channel_path)
+        if direction is not None:
+            pulumi.set(__self__, "direction", direction)
         if effective_from_partner_folder_name is not None:
             pulumi.set(__self__, "effective_from_partner_folder_name", effective_from_partner_folder_name)
         if effective_to_partner_folder_name is not None:
@@ -246,6 +266,18 @@ class _PartnerChannelState:
     @channel_path.setter
     def channel_path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "channel_path", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def direction(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+        """
+        return pulumi.get(self, "direction")
+
+    @direction.setter
+    def direction(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "direction", value)
 
     @_builtins.property
     @pulumi.getter(name="effectiveFromPartnerFolderName")
@@ -422,6 +454,7 @@ class PartnerChannel(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 direction: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  from_partner_route_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -443,6 +476,7 @@ class PartnerChannel(pulumi.CustomResource):
         import pulumi_filescom as filescom
 
         example_partner_channel = filescom.PartnerChannel("example_partner_channel",
+            direction="two_way",
             from_partner_folder_name="incoming",
             from_partner_managed_folder_paths=["claims/received"],
             from_partner_route_path="processing/from-partner",
@@ -468,6 +502,7 @@ class PartnerChannel(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] from_partner_managed_folder_paths: Managed folder paths inside the from-Partner folder.
         :param pulumi.Input[_builtins.str] from_partner_route_path: Optional route path for files uploaded by the Partner.
@@ -495,6 +530,7 @@ class PartnerChannel(pulumi.CustomResource):
         import pulumi_filescom as filescom
 
         example_partner_channel = filescom.PartnerChannel("example_partner_channel",
+            direction="two_way",
             from_partner_folder_name="incoming",
             from_partner_managed_folder_paths=["claims/received"],
             from_partner_route_path="processing/from-partner",
@@ -533,6 +569,7 @@ class PartnerChannel(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 direction: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  from_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  from_partner_route_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -551,6 +588,7 @@ class PartnerChannel(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = PartnerChannelArgs.__new__(PartnerChannelArgs)
 
+            __props__.__dict__["direction"] = direction
             __props__.__dict__["from_partner_folder_name"] = from_partner_folder_name
             __props__.__dict__["from_partner_managed_folder_paths"] = from_partner_managed_folder_paths
             __props__.__dict__["from_partner_route_path"] = from_partner_route_path
@@ -581,6 +619,7 @@ class PartnerChannel(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             channel_path: pulumi.Input[Optional[_builtins.str]] = None,
+            direction: pulumi.Input[Optional[_builtins.str]] = None,
             effective_from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
             effective_to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
             from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -603,6 +642,7 @@ class PartnerChannel(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] channel_path: Resolved Channel folder path.
+        :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
         :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner folder name after Channel override and default.
         :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner folder name after Channel override and default.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
@@ -623,6 +663,7 @@ class PartnerChannel(pulumi.CustomResource):
         __props__ = _PartnerChannelState.__new__(_PartnerChannelState)
 
         __props__.__dict__["channel_path"] = channel_path
+        __props__.__dict__["direction"] = direction
         __props__.__dict__["effective_from_partner_folder_name"] = effective_from_partner_folder_name
         __props__.__dict__["effective_to_partner_folder_name"] = effective_to_partner_folder_name
         __props__.__dict__["from_partner_folder_name"] = from_partner_folder_name
@@ -646,6 +687,14 @@ class PartnerChannel(pulumi.CustomResource):
         Resolved Channel folder path.
         """
         return pulumi.get(self, "channel_path")
+
+    @_builtins.property
+    @pulumi.getter
+    def direction(self) -> pulumi.Output[_builtins.str]:
+        """
+        Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+        """
+        return pulumi.get(self, "direction")
 
     @_builtins.property
     @pulumi.getter(name="effectiveFromPartnerFolderName")

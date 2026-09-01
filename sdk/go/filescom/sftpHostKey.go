@@ -31,7 +31,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.NewSftpHostKey(ctx, "example_sftp_host_key", &filescom.SftpHostKeyArgs{
-//				Name: pulumi.String("My Key"),
+//				Active: pulumi.Bool(true),
+//				Name:   pulumi.String("My Key"),
 //			})
 //			if err != nil {
 //				return err
@@ -55,10 +56,14 @@ import (
 type SftpHostKey struct {
 	pulumi.CustomResourceState
 
+	// If true, use this SFTP Host Key.
+	Active pulumi.BoolOutput `pulumi:"active"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 pulumi.StringOutput `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
 	FingerprintSha256 pulumi.StringOutput `pulumi:"fingerprintSha256"`
+	// SSH key type
+	KeyType pulumi.StringOutput `pulumi:"keyType"`
 	// The friendly name of this SFTP Host Key.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -103,10 +108,14 @@ func GetSftpHostKey(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SftpHostKey resources.
 type sftpHostKeyState struct {
+	// If true, use this SFTP Host Key.
+	Active *bool `pulumi:"active"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 *string `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
 	FingerprintSha256 *string `pulumi:"fingerprintSha256"`
+	// SSH key type
+	KeyType *string `pulumi:"keyType"`
 	// The friendly name of this SFTP Host Key.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -115,10 +124,14 @@ type sftpHostKeyState struct {
 }
 
 type SftpHostKeyState struct {
+	// If true, use this SFTP Host Key.
+	Active pulumi.BoolPtrInput
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 pulumi.StringPtrInput
 	// SHA256 Fingerprint of the public key
 	FingerprintSha256 pulumi.StringPtrInput
+	// SSH key type
+	KeyType pulumi.StringPtrInput
 	// The friendly name of this SFTP Host Key.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -131,6 +144,8 @@ func (SftpHostKeyState) ElementType() reflect.Type {
 }
 
 type sftpHostKeyArgs struct {
+	// If true, use this SFTP Host Key.
+	Active *bool `pulumi:"active"`
 	// The friendly name of this SFTP Host Key.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -140,6 +155,8 @@ type sftpHostKeyArgs struct {
 
 // The set of arguments for constructing a SftpHostKey resource.
 type SftpHostKeyArgs struct {
+	// If true, use this SFTP Host Key.
+	Active pulumi.BoolPtrInput
 	// The friendly name of this SFTP Host Key.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -234,6 +251,11 @@ func (o SftpHostKeyOutput) ToSftpHostKeyOutputWithContext(ctx context.Context) S
 	return o
 }
 
+// If true, use this SFTP Host Key.
+func (o SftpHostKeyOutput) Active() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SftpHostKey) pulumi.BoolOutput { return v.Active }).(pulumi.BoolOutput)
+}
+
 // MD5 Fingerprint of the public key
 func (o SftpHostKeyOutput) FingerprintMd5() pulumi.StringOutput {
 	return o.ApplyT(func(v *SftpHostKey) pulumi.StringOutput { return v.FingerprintMd5 }).(pulumi.StringOutput)
@@ -242,6 +264,11 @@ func (o SftpHostKeyOutput) FingerprintMd5() pulumi.StringOutput {
 // SHA256 Fingerprint of the public key
 func (o SftpHostKeyOutput) FingerprintSha256() pulumi.StringOutput {
 	return o.ApplyT(func(v *SftpHostKey) pulumi.StringOutput { return v.FingerprintSha256 }).(pulumi.StringOutput)
+}
+
+// SSH key type
+func (o SftpHostKeyOutput) KeyType() pulumi.StringOutput {
+	return o.ApplyT(func(v *SftpHostKey) pulumi.StringOutput { return v.KeyType }).(pulumi.StringOutput)
 }
 
 // The friendly name of this SFTP Host Key.

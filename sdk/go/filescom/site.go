@@ -150,8 +150,11 @@ import (
 //				ShowUserNotificationsLogInLink:                     pulumi.Bool(false),
 //				SftpHostKeyType:                                    pulumi.String("default"),
 //				ActiveSftpHostKeyId:                                pulumi.Int(1),
-//				ProtocolAccessGroupsOnly:                           pulumi.Bool(false),
-//				RevokeBundleAccessOnDisableOrDelete:                pulumi.Bool(false),
+//				ActiveSftpHostKeyIds: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				ProtocolAccessGroupsOnly:            pulumi.Bool(false),
+//				RevokeBundleAccessOnDisableOrDelete: pulumi.Bool(false),
 //				BundleWatermarkValue: pulumi.Any(map[string]interface{}{
 //					"key": "example value",
 //				}),
@@ -246,6 +249,8 @@ type Site struct {
 
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId pulumi.IntOutput `pulumi:"activeSftpHostKeyId"`
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds pulumi.IntArrayOutput `pulumi:"activeSftpHostKeyIds"`
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes pulumi.StringArrayOutput `pulumi:"additionalTextFileTypes"`
 	// User ID for the main site administrator
@@ -664,6 +669,8 @@ func GetSite(ctx *pulumi.Context,
 type siteState struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId *int `pulumi:"activeSftpHostKeyId"`
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds []int `pulumi:"activeSftpHostKeyIds"`
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes []string `pulumi:"additionalTextFileTypes"`
 	// User ID for the main site administrator
@@ -1053,6 +1060,8 @@ type siteState struct {
 type SiteState struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId pulumi.IntPtrInput
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds pulumi.IntArrayInput
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes pulumi.StringArrayInput
 	// User ID for the main site administrator
@@ -1446,6 +1455,8 @@ func (SiteState) ElementType() reflect.Type {
 type siteArgs struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId *int `pulumi:"activeSftpHostKeyId"`
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds []int `pulumi:"activeSftpHostKeyIds"`
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes []string `pulumi:"additionalTextFileTypes"`
 	// Allow admins to bypass the locked subfolders setting.
@@ -1784,6 +1795,8 @@ type siteArgs struct {
 type SiteArgs struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId pulumi.IntPtrInput
+	// Ids of the selected custom SFTP Host Keys
+	ActiveSftpHostKeyIds pulumi.IntArrayInput
 	// Additional extensions that are considered text files
 	AdditionalTextFileTypes pulumi.StringArrayInput
 	// Allow admins to bypass the locked subfolders setting.
@@ -2208,6 +2221,11 @@ func (o SiteOutput) ToSiteOutputWithContext(ctx context.Context) SiteOutput {
 // Id of the currently selected custom SFTP Host Key
 func (o SiteOutput) ActiveSftpHostKeyId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Site) pulumi.IntOutput { return v.ActiveSftpHostKeyId }).(pulumi.IntOutput)
+}
+
+// Ids of the selected custom SFTP Host Keys
+func (o SiteOutput) ActiveSftpHostKeyIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *Site) pulumi.IntArrayOutput { return v.ActiveSftpHostKeyIds }).(pulumi.IntArrayOutput)
 }
 
 // Additional extensions that are considered text files

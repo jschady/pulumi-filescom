@@ -325,6 +325,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int ActiveSftpHostKeyId;
         /// <summary>
+        /// Ids of the selected custom SFTP Host Keys
+        /// </summary>
+        public readonly ImmutableArray<int> ActiveSftpHostKeyIds;
+        /// <summary>
         /// Additional extensions that are considered text files
         /// </summary>
         public readonly ImmutableArray<string> AdditionalTextFileTypes;
@@ -1101,6 +1105,8 @@ namespace Jschady.Filescom
         private GetSiteResult(
             int activeSftpHostKeyId,
 
+            ImmutableArray<int> activeSftpHostKeyIds,
+
             ImmutableArray<string> additionalTextFileTypes,
 
             int adminUserId,
@@ -1488,6 +1494,7 @@ namespace Jschady.Filescom
             bool windowsModeFtp)
         {
             ActiveSftpHostKeyId = activeSftpHostKeyId;
+            ActiveSftpHostKeyIds = activeSftpHostKeyIds;
             AdditionalTextFileTypes = additionalTextFileTypes;
             AdminUserId = adminUserId;
             AdminsBypassLockedSubfolders = adminsBypassLockedSubfolders;

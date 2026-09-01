@@ -150,6 +150,10 @@ namespace Jschady.Filescom
     ///         ShowUserNotificationsLogInLink = false,
     ///         SftpHostKeyType = "default",
     ///         ActiveSftpHostKeyId = 1,
+    ///         ActiveSftpHostKeyIds = new[]
+    ///         {
+    ///             1,
+    ///         },
     ///         ProtocolAccessGroupsOnly = false,
     ///         RevokeBundleAccessOnDisableOrDelete = false,
     ///         BundleWatermarkValue = new Dictionary&lt;string, object?&gt;
@@ -247,6 +251,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("activeSftpHostKeyId")]
         public Output<int> ActiveSftpHostKeyId { get; private set; } = null!;
+
+        /// <summary>
+        /// Ids of the selected custom SFTP Host Keys
+        /// </summary>
+        [Output("activeSftpHostKeyIds")]
+        public Output<ImmutableArray<int>> ActiveSftpHostKeyIds { get; private set; } = null!;
 
         /// <summary>
         /// Additional extensions that are considered text files
@@ -1453,6 +1463,18 @@ namespace Jschady.Filescom
         [Input("activeSftpHostKeyId")]
         public Input<int>? ActiveSftpHostKeyId { get; set; }
 
+        [Input("activeSftpHostKeyIds")]
+        private InputList<int>? _activeSftpHostKeyIds;
+
+        /// <summary>
+        /// Ids of the selected custom SFTP Host Keys
+        /// </summary>
+        public InputList<int> ActiveSftpHostKeyIds
+        {
+            get => _activeSftpHostKeyIds ?? (_activeSftpHostKeyIds = new InputList<int>());
+            set => _activeSftpHostKeyIds = value;
+        }
+
         [Input("additionalTextFileTypes")]
         private InputList<string>? _additionalTextFileTypes;
 
@@ -2474,6 +2496,18 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("activeSftpHostKeyId")]
         public Input<int>? ActiveSftpHostKeyId { get; set; }
+
+        [Input("activeSftpHostKeyIds")]
+        private InputList<int>? _activeSftpHostKeyIds;
+
+        /// <summary>
+        /// Ids of the selected custom SFTP Host Keys
+        /// </summary>
+        public InputList<int> ActiveSftpHostKeyIds
+        {
+            get => _activeSftpHostKeyIds ?? (_activeSftpHostKeyIds = new InputList<int>());
+            set => _activeSftpHostKeyIds = value;
+        }
 
         [Input("additionalTextFileTypes")]
         private InputList<string>? _additionalTextFileTypes;

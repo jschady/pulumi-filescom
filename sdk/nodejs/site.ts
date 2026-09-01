@@ -134,6 +134,7 @@ import * as utilities from "./utilities";
  *     showUserNotificationsLogInLink: false,
  *     sftpHostKeyType: "default",
  *     activeSftpHostKeyId: 1,
+ *     activeSftpHostKeyIds: [1],
  *     protocolAccessGroupsOnly: false,
  *     revokeBundleAccessOnDisableOrDelete: false,
  *     bundleWatermarkValue: {
@@ -249,6 +250,10 @@ export class Site extends pulumi.CustomResource {
      * Id of the currently selected custom SFTP Host Key
      */
     declare public readonly activeSftpHostKeyId: pulumi.Output<number>;
+    /**
+     * Ids of the selected custom SFTP Host Keys
+     */
+    declare public readonly activeSftpHostKeyIds: pulumi.Output<number[]>;
     /**
      * Additional extensions that are considered text files
      */
@@ -1032,6 +1037,7 @@ export class Site extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as SiteState | undefined;
             resourceInputs["activeSftpHostKeyId"] = state?.activeSftpHostKeyId;
+            resourceInputs["activeSftpHostKeyIds"] = state?.activeSftpHostKeyIds;
             resourceInputs["additionalTextFileTypes"] = state?.additionalTextFileTypes;
             resourceInputs["adminUserId"] = state?.adminUserId;
             resourceInputs["adminsBypassLockedSubfolders"] = state?.adminsBypassLockedSubfolders;
@@ -1227,6 +1233,7 @@ export class Site extends pulumi.CustomResource {
         } else {
             const args = argsOrState as SiteArgs | undefined;
             resourceInputs["activeSftpHostKeyId"] = args?.activeSftpHostKeyId;
+            resourceInputs["activeSftpHostKeyIds"] = args?.activeSftpHostKeyIds;
             resourceInputs["additionalTextFileTypes"] = args?.additionalTextFileTypes;
             resourceInputs["adminsBypassLockedSubfolders"] = args?.adminsBypassLockedSubfolders;
             resourceInputs["aiFeatureAvailability"] = args?.aiFeatureAvailability;
@@ -1433,6 +1440,10 @@ export interface SiteState {
      * Id of the currently selected custom SFTP Host Key
      */
     activeSftpHostKeyId?: pulumi.Input<number | undefined>;
+    /**
+     * Ids of the selected custom SFTP Host Keys
+     */
+    activeSftpHostKeyIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Additional extensions that are considered text files
      */
@@ -2211,6 +2222,10 @@ export interface SiteArgs {
      * Id of the currently selected custom SFTP Host Key
      */
     activeSftpHostKeyId?: pulumi.Input<number | undefined>;
+    /**
+     * Ids of the selected custom SFTP Host Keys
+     */
+    activeSftpHostKeyIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Additional extensions that are considered text files
      */

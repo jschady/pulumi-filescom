@@ -26,7 +26,10 @@ class GetPartnerChannelTemplateResult:
     """
     A collection of values returned by getPartnerChannelTemplate.
     """
-    def __init__(__self__, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_managed_folder_paths=None, from_partner_route_path_pattern=None, id=None, name=None, path=None, to_partner_folder_name=None, to_partner_managed_folder_paths=None, to_partner_route_path_pattern=None, workspace_id=None):
+    def __init__(__self__, direction=None, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_managed_folder_paths=None, from_partner_route_path_pattern=None, id=None, name=None, path=None, to_partner_folder_name=None, to_partner_managed_folder_paths=None, to_partner_route_path_pattern=None, workspace_id=None):
+        if direction and not isinstance(direction, str):
+            raise TypeError("Expected argument 'direction' to be a str")
+        pulumi.set(__self__, "direction", direction)
         if effective_from_partner_folder_name and not isinstance(effective_from_partner_folder_name, str):
             raise TypeError("Expected argument 'effective_from_partner_folder_name' to be a str")
         pulumi.set(__self__, "effective_from_partner_folder_name", effective_from_partner_folder_name)
@@ -63,6 +66,14 @@ class GetPartnerChannelTemplateResult:
         if workspace_id and not isinstance(workspace_id, int):
             raise TypeError("Expected argument 'workspace_id' to be a int")
         pulumi.set(__self__, "workspace_id", workspace_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def direction(self) -> _builtins.str:
+        """
+        Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+        """
+        return pulumi.get(self, "direction")
 
     @_builtins.property
     @pulumi.getter(name="effectiveFromPartnerFolderName")
@@ -167,6 +178,7 @@ class AwaitableGetPartnerChannelTemplateResult(GetPartnerChannelTemplateResult):
         if False:
             yield self
         return GetPartnerChannelTemplateResult(
+            direction=self.direction,
             effective_from_partner_folder_name=self.effective_from_partner_folder_name,
             effective_to_partner_folder_name=self.effective_to_partner_folder_name,
             from_partner_folder_name=self.from_partner_folder_name,
@@ -206,6 +218,7 @@ def get_partner_channel_template(id: Optional[_builtins.int] = None,
     __ret__ = pulumi.runtime.invoke('filescom:index/getPartnerChannelTemplate:getPartnerChannelTemplate', __args__, opts=opts, typ=GetPartnerChannelTemplateResult).value
 
     return AwaitableGetPartnerChannelTemplateResult(
+        direction=pulumi.get(__ret__, 'direction'),
         effective_from_partner_folder_name=pulumi.get(__ret__, 'effective_from_partner_folder_name'),
         effective_to_partner_folder_name=pulumi.get(__ret__, 'effective_to_partner_folder_name'),
         from_partner_folder_name=pulumi.get(__ret__, 'from_partner_folder_name'),
@@ -242,6 +255,7 @@ def get_partner_channel_template_output(id: pulumi.Input[Optional[_builtins.int]
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getPartnerChannelTemplate:getPartnerChannelTemplate', __args__, opts=opts, typ=GetPartnerChannelTemplateResult)
     return __ret__.apply(lambda __response__: GetPartnerChannelTemplateResult(
+        direction=pulumi.get(__response__, 'direction'),
         effective_from_partner_folder_name=pulumi.get(__response__, 'effective_from_partner_folder_name'),
         effective_to_partner_folder_name=pulumi.get(__response__, 'effective_to_partner_folder_name'),
         from_partner_folder_name=pulumi.get(__response__, 'from_partner_folder_name'),

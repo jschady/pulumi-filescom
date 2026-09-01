@@ -15,6 +15,7 @@ import * as utilities from "./utilities";
  * import * as filescom from "pulumi-filescom";
  *
  * const examplePartnerChannel = new filescom.PartnerChannel("example_partner_channel", {
+ *     direction: "two_way",
  *     fromPartnerFolderName: "incoming",
  *     fromPartnerManagedFolderPaths: ["claims/received"],
  *     fromPartnerRoutePath: "processing/from-partner",
@@ -70,6 +71,10 @@ export class PartnerChannel extends pulumi.CustomResource {
      * Resolved Channel folder path.
      */
     declare public /*out*/ readonly channelPath: pulumi.Output<string>;
+    /**
+     * Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+     */
+    declare public readonly direction: pulumi.Output<string>;
     /**
      * Resolved from-Partner folder name after Channel override and default.
      */
@@ -141,6 +146,7 @@ export class PartnerChannel extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as PartnerChannelState | undefined;
             resourceInputs["channelPath"] = state?.channelPath;
+            resourceInputs["direction"] = state?.direction;
             resourceInputs["effectiveFromPartnerFolderName"] = state?.effectiveFromPartnerFolderName;
             resourceInputs["effectiveToPartnerFolderName"] = state?.effectiveToPartnerFolderName;
             resourceInputs["fromPartnerFolderName"] = state?.fromPartnerFolderName;
@@ -163,6 +169,7 @@ export class PartnerChannel extends pulumi.CustomResource {
             if (args?.path === undefined && !opts.urn) {
                 throw new Error("Missing required property 'path'");
             }
+            resourceInputs["direction"] = args?.direction;
             resourceInputs["fromPartnerFolderName"] = args?.fromPartnerFolderName;
             resourceInputs["fromPartnerManagedFolderPaths"] = args?.fromPartnerManagedFolderPaths;
             resourceInputs["fromPartnerRoutePath"] = args?.fromPartnerRoutePath;
@@ -192,6 +199,10 @@ export interface PartnerChannelState {
      * Resolved Channel folder path.
      */
     channelPath?: pulumi.Input<string | undefined>;
+    /**
+     * Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+     */
+    direction?: pulumi.Input<string | undefined>;
     /**
      * Resolved from-Partner folder name after Channel override and default.
      */
@@ -254,6 +265,10 @@ export interface PartnerChannelState {
  * The set of arguments for constructing a PartnerChannel resource.
  */
 export interface PartnerChannelArgs {
+    /**
+     * Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
+     */
+    direction?: pulumi.Input<string | undefined>;
     /**
      * Optional Channel-level from-Partner folder name override.
      */

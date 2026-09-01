@@ -28,6 +28,7 @@ namespace Jschady.Filescom
     /// {
     ///     var exampleSftpHostKey = new Filescom.SftpHostKey("example_sftp_host_key", new()
     ///     {
+    ///         Active = true,
     ///         Name = "My Key",
     ///     });
     /// 
@@ -49,6 +50,12 @@ namespace Jschady.Filescom
     public partial class SftpHostKey : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// If true, use this SFTP Host Key.
+        /// </summary>
+        [Output("active")]
+        public Output<bool> Active { get; private set; } = null!;
+
+        /// <summary>
         /// MD5 Fingerprint of the public key
         /// </summary>
         [Output("fingerprintMd5")]
@@ -59,6 +66,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("fingerprintSha256")]
         public Output<string> FingerprintSha256 { get; private set; } = null!;
+
+        /// <summary>
+        /// SSH key type
+        /// </summary>
+        [Output("keyType")]
+        public Output<string> KeyType { get; private set; } = null!;
 
         /// <summary>
         /// The friendly name of this SFTP Host Key.
@@ -125,6 +138,12 @@ namespace Jschady.Filescom
     public sealed class SftpHostKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// If true, use this SFTP Host Key.
+        /// </summary>
+        [Input("active")]
+        public Input<bool>? Active { get; set; }
+
+        /// <summary>
         /// The friendly name of this SFTP Host Key.
         /// </summary>
         [Input("name")]
@@ -156,6 +175,12 @@ namespace Jschady.Filescom
     public sealed class SftpHostKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// If true, use this SFTP Host Key.
+        /// </summary>
+        [Input("active")]
+        public Input<bool>? Active { get; set; }
+
+        /// <summary>
         /// MD5 Fingerprint of the public key
         /// </summary>
         [Input("fingerprintMd5")]
@@ -166,6 +191,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("fingerprintSha256")]
         public Input<string>? FingerprintSha256 { get; set; }
+
+        /// <summary>
+        /// SSH key type
+        /// </summary>
+        [Input("keyType")]
+        public Input<string>? KeyType { get; set; }
 
         /// <summary>
         /// The friendly name of this SFTP Host Key.
