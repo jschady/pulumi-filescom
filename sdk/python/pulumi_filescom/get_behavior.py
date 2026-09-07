@@ -26,7 +26,7 @@ class GetBehaviorResult:
     """
     A collection of values returned by getBehavior.
     """
-    def __init__(__self__, attachment_url=None, behavior=None, description=None, disable_parent_folder_behavior=None, id=None, inherited=None, managed=None, name=None, path=None, public_hosting_url=None, recursive=None, root_behavior_site_admin_only=None, value=None):
+    def __init__(__self__, attachment_url=None, behavior=None, description=None, disable_parent_folder_behavior=None, id=None, inherited=None, managed=None, name=None, path=None, public_hosting_url=None, recursive=None, root_behavior_site_admin_only=None, value=None, value_format=None):
         if attachment_url and not isinstance(attachment_url, str):
             raise TypeError("Expected argument 'attachment_url' to be a str")
         pulumi.set(__self__, "attachment_url", attachment_url)
@@ -66,6 +66,9 @@ class GetBehaviorResult:
         if value and not isinstance(value, dict):
             raise TypeError("Expected argument 'value' to be a dict")
         pulumi.set(__self__, "value", value)
+        if value_format and not isinstance(value_format, str):
+            raise TypeError("Expected argument 'value_format' to be a str")
+        pulumi.set(__self__, "value_format", value_format)
 
     @_builtins.property
     @pulumi.getter(name="attachmentUrl")
@@ -167,9 +170,17 @@ class GetBehaviorResult:
     @pulumi.getter
     def value(self) -> Any:
         """
-        Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+        Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format ">`valueFormat </span>= "typed"` to return the future typed shape under the selected behavior name.
         """
         return pulumi.get(self, "value")
+
+    @_builtins.property
+    @pulumi.getter(name="valueFormat")
+    def value_format(self) -> Optional[_builtins.str]:
+        """
+        Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
+        """
+        return pulumi.get(self, "value_format")
 
 
 class AwaitableGetBehaviorResult(GetBehaviorResult):
@@ -190,10 +201,12 @@ class AwaitableGetBehaviorResult(GetBehaviorResult):
             public_hosting_url=self.public_hosting_url,
             recursive=self.recursive,
             root_behavior_site_admin_only=self.root_behavior_site_admin_only,
-            value=self.value)
+            value=self.value,
+            value_format=self.value_format)
 
 
 def get_behavior(id: Optional[_builtins.int] = None,
+                 value_format: Optional[_builtins.str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetBehaviorResult:
     """
     A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
@@ -204,7 +217,7 @@ def get_behavior(id: Optional[_builtins.int] = None,
 
     Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
 
-    Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+    Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
 
     Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
 
@@ -215,15 +228,18 @@ def get_behavior(id: Optional[_builtins.int] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_behavior = filescom.get_behavior(id=1)
+    example_behavior = filescom.get_behavior(id=1,
+        value_format="typed")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param _builtins.int id: Folder behavior ID
+    :param _builtins.str value_format: Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['valueFormat'] = value_format
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('filescom:index/getBehavior:getBehavior', __args__, opts=opts, typ=GetBehaviorResult).value
 
@@ -240,8 +256,10 @@ def get_behavior(id: Optional[_builtins.int] = None,
         public_hosting_url=pulumi.get(__ret__, 'public_hosting_url'),
         recursive=pulumi.get(__ret__, 'recursive'),
         root_behavior_site_admin_only=pulumi.get(__ret__, 'root_behavior_site_admin_only'),
-        value=pulumi.get(__ret__, 'value'))
+        value=pulumi.get(__ret__, 'value'),
+        value_format=pulumi.get(__ret__, 'value_format'))
 def get_behavior_output(id: pulumi.Input[Optional[_builtins.int]] = None,
+                        value_format: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetBehaviorResult]:
     """
     A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
@@ -252,7 +270,7 @@ def get_behavior_output(id: pulumi.Input[Optional[_builtins.int]] = None,
 
     Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
 
-    Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+    Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
 
     Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
 
@@ -263,15 +281,18 @@ def get_behavior_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_behavior = filescom.get_behavior(id=1)
+    example_behavior = filescom.get_behavior(id=1,
+        value_format="typed")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param _builtins.int id: Folder behavior ID
+    :param _builtins.str value_format: Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['valueFormat'] = value_format
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getBehavior:getBehavior', __args__, opts=opts, typ=GetBehaviorResult)
     return __ret__.apply(lambda __response__: GetBehaviorResult(
@@ -287,4 +308,5 @@ def get_behavior_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         public_hosting_url=pulumi.get(__response__, 'public_hosting_url'),
         recursive=pulumi.get(__response__, 'recursive'),
         root_behavior_site_admin_only=pulumi.get(__response__, 'root_behavior_site_admin_only'),
-        value=pulumi.get(__response__, 'value')))
+        value=pulumi.get(__response__, 'value'),
+        value_format=pulumi.get(__response__, 'value_format')))

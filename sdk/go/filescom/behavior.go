@@ -20,7 +20,7 @@ import (
 //
 // Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
 //
-// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+// Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
 //
 // Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
 //
@@ -41,7 +41,13 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.NewBehavior(ctx, "example_behavior", &filescom.BehaviorArgs{
 //				Value: pulumi.Any(map[string]interface{}{
-//					"method": "GET",
+//					"webhook": map[string]interface{}{
+//						"urls": []string{
+//							"https://example.com/webhook",
+//						},
+//						"method":   "POST",
+//						"encoding": "JSON",
+//					},
 //				}),
 //				DisableParentFolderBehavior: pulumi.Bool(false),
 //				Recursive:                   pulumi.Bool(false),
@@ -57,37 +63,13 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("webhook"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"urls": []string{
-//						"https://mysite.com/url...",
+//					"webhook": map[string]interface{}{
+//						"urls": []string{
+//							"https://example.com/webhook",
+//						},
+//						"method":   "POST",
+//						"encoding": "JSON",
 //					},
-//					"method": "POST",
-//					"triggers": []string{
-//						"create",
-//						"read",
-//						"update",
-//						"destroy",
-//						"move",
-//						"copy",
-//					},
-//					"triggeringFilenames": []string{
-//						"*.pdf",
-//						"*so*.jpg",
-//					},
-//					"excludeFilenames": []string{
-//						"*.txt",
-//						"*wo*.png",
-//					},
-//					"encoding": "RAW",
-//					"headers": map[string]string{
-//						"MY-HEADER": "foo",
-//					},
-//					"body": map[string]string{
-//						"MY_BODY_PARAM": "bar",
-//					},
-//					"verificationToken": "tok12345",
-//					"fileFormField":     "my_form_field",
-//					"fileAsBody":        "my_file_body",
-//					"useDedicatedIps":   false,
 //				}),
 //			})
 //			if err != nil {
@@ -97,8 +79,10 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("file_expiration"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"daysToRetain":       30,
-//					"deleteEmptyFolders": false,
+//					"fileExpiration": map[string]interface{}{
+//						"daysToRetain":       30,
+//						"deleteEmptyFolders": false,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -108,15 +92,14 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("auto_encrypt"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"gpgKeyId": 1,
-//					"gpgKeyIds": []int{
-//						1,
+//					"autoEncrypt": map[string]interface{}{
+//						"gpgKeyIds": []int{
+//							1,
+//						},
+//						"algorithm": "PGP/GPG",
+//						"suffix":    ".gpg",
+//						"armor":     false,
 //					},
-//					"algorithm":       "PGP/GPG",
-//					"signingKeyId":    1,
-//					"suffix":          ".gpg",
-//					"armor":           false,
-//					"gpgKeyPartnerId": 1,
 //				}),
 //			})
 //			if err != nil {
@@ -126,7 +109,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("lock_subfolders"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"level": "children_recursive",
+//					"lockSubfolders": map[string]string{
+//						"level": "children_recursive",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -135,7 +120,9 @@ import (
 //			_, err = filescom.NewBehavior(ctx, "example_storage_region_behavior", &filescom.BehaviorArgs{
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("storage_region"),
-//				Value:    pulumi.Any("us-east-1"),
+//				Value: pulumi.Any(map[string]interface{}{
+//					"storageRegion": "us-east-1",
+//				}),
 //			})
 //			if err != nil {
 //				return err
@@ -144,11 +131,11 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("serve_publicly"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"key":                       "public-photos",
-//					"showIndex":                 true,
-//					"forceDownload":             true,
-//					"corsEnabled":               false,
-//					"requireSiteAuthentication": false,
+//					"servePublicly": map[string]interface{}{
+//						"key":           "public-files",
+//						"showIndex":     true,
+//						"forceDownload": false,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -158,14 +145,10 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("create_user_folders"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"permission":           "full",
-//					"additionalPermission": "bundle",
-//					"existingUsers":        true,
-//					"groupId":              1,
-//					"newFolderName":        "username",
-//					"subfolders": []string{
-//						"in",
-//						"out",
+//					"createUserFolders": map[string]interface{}{
+//						"permission":    "full",
+//						"existingUsers": false,
+//						"newFolderName": "name",
 //					},
 //				}),
 //			})
@@ -176,35 +159,17 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("inbox"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"key":                             "application-forms",
-//					"dontSeparateSubmissionsByFolder": true,
-//					"dontSeparateSubmissionsByFolderForInboundEmail": true,
-//					"dontAllowFoldersInUploads":                      false,
-//					"requireInboxRecipient":                          false,
-//					"showOnLoginPage":                                true,
-//					"title":                                          "Submit Your Job Applications Here",
-//					"description":                                    "Thanks for coming to the Files.com Job Application Page",
-//					"helpText":                                       "If you have trouble here, please contact your recruiter.",
-//					"requireRegistration":                            true,
-//					"password":                                       "foobar",
-//					"pathTemplate":                                   "{{name}}_{{ip}}",
-//					"pathTemplateTimeZone":                           "Eastern Time (US & Canada)",
-//					"enableInboundEmailAddress":                      true,
-//					"notifySendersOnSuccessfulUploadsViaEmail":       true,
-//					"notifySendersOnSuccessfulUploadsViaWeb":         true,
-//					"allowWhitelisting":                              true,
-//					"whitelist": []string{
-//						"john@test.com",
-//						"mydomain.com",
-//					},
-//					"disableWebUpload":         true,
-//					"captureEmailBodyFilename": "_body.txt",
-//					"requestedUploadSlots": []map[string]string{
-//						{
-//							"name": "Photo ID",
-//						},
-//						{
-//							"name": "Proof of Address",
+//					"inbox": map[string]interface{}{
+//						"key":                             "application-forms",
+//						"dontSeparateSubmissionsByFolder": false,
+//						"showOnLoginPage":                 false,
+//						"title":                           "Application Forms",
+//						"requireRegistration":             false,
+//						"disableWebUpload":                false,
+//						"requestedUploadSlots": []map[string]string{
+//							{
+//								"name": "Photo ID",
+//							},
 //						},
 //					},
 //				}),
@@ -216,11 +181,13 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("limit_file_extensions"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"extensions": []string{
-//						"xls",
-//						"csv",
+//					"limitFileExtensions": map[string]interface{}{
+//						"extensions": []string{
+//							"pdf",
+//							"csv",
+//						},
+//						"mode": "whitelist",
 //					},
-//					"mode": "whitelist",
 //				}),
 //			})
 //			if err != nil {
@@ -229,9 +196,11 @@ import (
 //			_, err = filescom.NewBehavior(ctx, "example_limit_file_regex_behavior", &filescom.BehaviorArgs{
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("limit_file_regex"),
-//				Value: pulumi.Any{
-//					"/Document-.*/",
-//				},
+//				Value: pulumi.Any(map[string]interface{}{
+//					"limitFileRegex": []string{
+//						"/Document-.*/",
+//					},
+//				}),
 //			})
 //			if err != nil {
 //				return err
@@ -240,21 +209,15 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("amazon_sns"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"arns": []string{
-//						"ARN",
-//					},
-//					"triggers": []string{
-//						"create",
-//						"read",
-//						"update",
-//						"destroy",
-//						"move",
-//						"copy",
-//					},
-//					"awsCredentials": map[string]string{
-//						"accessKeyId":     "ACCESS_KEY_ID",
-//						"region":          "us-east-1",
-//						"secretAccessKey": "SECRET_ACCESS_KEY",
+//					"amazonSns": map[string]interface{}{
+//						"arns": []string{
+//							"arn:aws:sns:us-east-1:123456789012:files-events",
+//						},
+//						"awsCredentials": map[string]string{
+//							"accessKeyId":     "ACCESS_KEY_ID",
+//							"region":          "us-east-1",
+//							"secretAccessKey": "SECRET_ACCESS_KEY",
+//						},
 //					},
 //				}),
 //			})
@@ -265,10 +228,11 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("watermark"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"gravity":          "SouthWest",
-//					"maxHeightOrWidth": 20,
-//					"transparency":     25,
-//					"dynamicText":      "Confidential: For use by {{user}} only.",
+//					"watermark": map[string]interface{}{
+//						"gravity":          "SouthWest",
+//						"maxHeightOrWidth": 20,
+//						"transparency":     25,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -278,8 +242,10 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("remote_server_mount"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"remoteServerId": 1,
-//					"remotePath":     "",
+//					"remoteServerMount": map[string]interface{}{
+//						"remoteServerId": 1,
+//						"remotePath":     "shared/files",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -289,17 +255,11 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("slack_webhook"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"url":       "https://mysite.com/url...",
-//					"username":  "Files.com",
-//					"channel":   "alerts",
-//					"iconEmoji": ":robot_face:",
-//					"triggers": []string{
-//						"create",
-//						"read",
-//						"update",
-//						"destroy",
-//						"move",
-//						"copy",
+//					"slackWebhook": map[string]interface{}{
+//						"url": "https://hooks.slack.com/services/example",
+//						"triggers": []string{
+//							"create",
+//						},
 //					},
 //				}),
 //			})
@@ -310,15 +270,14 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("auto_decrypt"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"gpgKeyId": 1,
-//					"gpgKeyIds": []int{
-//						1,
+//					"autoDecrypt": map[string]interface{}{
+//						"gpgKeyIds": []int{
+//							1,
+//						},
+//						"algorithm":      "PGP/GPG",
+//						"suffix":         ".gpg",
+//						"ignoreMdcError": false,
 //					},
-//					"algorithm":         "PGP/GPG",
-//					"suffix":            ".gpg",
-//					"ignoreMdcError":    true,
-//					"gpgKeyPartnerId":   1,
-//					"useAllPrivateKeys": false,
 //				}),
 //			})
 //			if err != nil {
@@ -328,12 +287,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("override_upload_filename"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"filenameOverridePattern":  "%Fb_addition5%Fe",
-//					"filenameReplaceFrom":      nil,
-//					"filenameReplaceTo":        nil,
-//					"filenameRegexReplaceFrom": nil,
-//					"filenameRegexReplaceTo":   nil,
-//					"timeZone":                 "Eastern Time (US & Canada)",
+//					"overrideUploadFilename": map[string]string{
+//						"filenameOverridePattern": "%Fb_uploaded%Fe",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -343,7 +299,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("permission_fence"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"fencedPermissions": "all",
+//					"permissionFence": map[string]string{
+//						"fencedPermissions": "all",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -353,8 +311,10 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("limit_filename_length"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"maxLength": 30,
-//					"shorten":   true,
+//					"limitFilenameLength": map[string]interface{}{
+//						"maxLength": 30,
+//						"shorten":   true,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -364,11 +324,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("organize_files_into_subfolders"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"subfolderNameType": "regex, extension, created_at, provided_modified_at",
-//					"regex":             "(?<=\\-)(.*?)(?=\\.)",
-//					"strftimeFormat":    "%Y-%m-%d",
-//					"timeZone":          "Eastern Time (US & Canada)",
-//					"applyBehavior":     true,
+//					"organizeFilesIntoSubfolders": map[string]string{
+//						"subfolderNameType": "extension",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -378,14 +336,11 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("teams_webhook"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"url": "https://mysite.com/url...",
-//					"triggers": []string{
-//						"create",
-//						"read",
-//						"update",
-//						"destroy",
-//						"move",
-//						"copy",
+//					"teamsWebhook": map[string]interface{}{
+//						"url": "https://example.webhook.office.com/webhook",
+//						"triggers": []string{
+//							"create",
+//						},
 //					},
 //				}),
 //			})
@@ -396,31 +351,25 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("google_pub_sub"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"projectsTopics": []map[string]string{
-//						{
-//							"projectId": "my-project-id",
-//							"topicId":   "my-topic-id",
+//					"googlePubSub": map[string]interface{}{
+//						"projectsTopics": []map[string]string{
+//							{
+//								"projectId": "my-project",
+//								"topicId":   "files-events",
+//							},
 //						},
-//					},
-//					"triggers": []string{
-//						"create",
-//						"read",
-//						"update",
-//						"destroy",
-//						"move",
-//						"copy",
-//					},
-//					"googleCredentials": map[string]string{
-//						"type":                    "service_account",
-//						"projectId":               "your-project-id",
-//						"privateKeyId":            "your-private-key-id",
-//						"privateKey":              "-----BEGIN PRIVATE KEY-----\\nMIIC...",
-//						"clientEmail":             "your-service-account@your-project-id.iam.gserviceaccount.com",
-//						"clientId":                "your-client-id",
-//						"authUri":                 "https=>//accounts.google.com/o/oauth2/auth",
-//						"tokenUri":                "https=>//oauth2.googleapis.com/token",
-//						"authProviderX509CertUrl": "https://www.googleapis.com/oauth2/v1/certs",
-//						"clientX509CertUrl":       "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+//						"googleCredentials": map[string]string{
+//							"type":                    "service_account",
+//							"projectId":               "your-project-id",
+//							"privateKeyId":            "your-private-key-id",
+//							"privateKey":              "-----BEGIN PRIVATE KEY-----\\nMIIC...",
+//							"clientEmail":             "your-service-account@your-project-id.iam.gserviceaccount.com",
+//							"clientId":                "your-client-id",
+//							"authUri":                 "https://accounts.google.com/o/oauth2/auth",
+//							"tokenUri":                "https://oauth2.googleapis.com/token",
+//							"authProviderX509CertUrl": "https://www.googleapis.com/oauth2/v1/certs",
+//							"clientX509CertUrl":       "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+//						},
 //					},
 //				}),
 //			})
@@ -431,7 +380,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("archive_overwritten_or_deleted_files"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"archivePath": "/Archive",
+//					"archiveOverwrittenOrDeletedFiles": map[string]string{
+//						"archivePath": "/Archive",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -441,17 +392,16 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("auto_recrypt"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"decryptGpgKeyIds": []int{
-//						1,
+//					"autoRecrypt": map[string]interface{}{
+//						"decryptGpgKeyIds": []int{
+//							1,
+//						},
+//						"encryptGpgKeyIds": []int{
+//							2,
+//						},
+//						"ignoreMdcError": false,
+//						"armor":          false,
 //					},
-//					"encryptGpgKeyIds": []int{
-//						1,
-//					},
-//					"decryptGpgKeyPartnerId": 1,
-//					"encryptGpgKeyPartnerId": 1,
-//					"ignoreMdcError":         true,
-//					"signingKeyId":           1,
-//					"armor":                  false,
 //				}),
 //			})
 //			if err != nil {
@@ -461,7 +411,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("metadata_category"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"metadataCategoryId": 1,
+//					"metadataCategory": map[string]int{
+//						"metadataCategoryId": 1,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -471,8 +423,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("auto_unzip"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"destinationPath": "/Uploads/Unzipped/%Y/%m/%d",
-//					"pathTimeZone":    "Eastern Time (US & Canada)",
+//					"autoUnzip": map[string]string{
+//						"destinationPath": "/Uploads/Unzipped/%Y/%m/%d",
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -482,8 +435,9 @@ import (
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("remote_server_metadata_index"),
 //				Value: pulumi.Any(map[string]interface{}{
-//					"intervalMinutes":      1440,
-//					"initialScanCompleted": false,
+//					"remoteServerMetadataIndex": map[string]int{
+//						"intervalMinutes": 1440,
+//					},
 //				}),
 //			})
 //			if err != nil {
@@ -492,7 +446,9 @@ import (
 //			_, err = filescom.NewBehavior(ctx, "example_malware_scanning_behavior", &filescom.BehaviorArgs{
 //				Path:     pulumi.String("path"),
 //				Behavior: pulumi.String("malware_scanning"),
-//				Value:    pulumi.Any(map[string]interface{}{}),
+//				Value: pulumi.Any(map[string]interface{}{
+//					"malwareScanning": map[string]interface{}{},
+//				}),
 //			})
 //			if err != nil {
 //				return err
@@ -538,7 +494,7 @@ type Behavior struct {
 	Recursive pulumi.BoolOutput `pulumi:"recursive"`
 	// If true, this behavior may only be modified by a site admin because it is at the site root or disables a root behavior.
 	RootBehaviorSiteAdminOnly pulumi.BoolOutput `pulumi:"rootBehaviorSiteAdminOnly"`
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 	Value pulumi.AnyOutput `pulumi:"value"`
 }
 
@@ -600,7 +556,7 @@ type behaviorState struct {
 	Recursive *bool `pulumi:"recursive"`
 	// If true, this behavior may only be modified by a site admin because it is at the site root or disables a root behavior.
 	RootBehaviorSiteAdminOnly *bool `pulumi:"rootBehaviorSiteAdminOnly"`
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 	Value interface{} `pulumi:"value"`
 }
 
@@ -627,7 +583,7 @@ type BehaviorState struct {
 	Recursive pulumi.BoolPtrInput
 	// If true, this behavior may only be modified by a site admin because it is at the site root or disables a root behavior.
 	RootBehaviorSiteAdminOnly pulumi.BoolPtrInput
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 	Value pulumi.Input
 }
 
@@ -648,7 +604,7 @@ type behaviorArgs struct {
 	Path string `pulumi:"path"`
 	// Whether this behavior is recursive for this record. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> behaviors are always <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> behaviors are always <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> behaviors may be either value.
 	Recursive *bool `pulumi:"recursive"`
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 	Value interface{} `pulumi:"value"`
 }
 
@@ -666,7 +622,7 @@ type BehaviorArgs struct {
 	Path pulumi.StringInput
 	// Whether this behavior is recursive for this record. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> behaviors are always <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> behaviors are always <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> behaviors may be either value.
 	Recursive pulumi.BoolPtrInput
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 	Value pulumi.Input
 }
 
@@ -812,7 +768,7 @@ func (o BehaviorOutput) RootBehaviorSiteAdminOnly() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Behavior) pulumi.BoolOutput { return v.RootBehaviorSiteAdminOnly }).(pulumi.BoolOutput)
 }
 
-// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+// Settings for this behavior. Wrap the value under the selected behavior name. See the Behavior sections above for fields and examples.
 func (o BehaviorOutput) Value() pulumi.AnyOutput {
 	return o.ApplyT(func(v *Behavior) pulumi.AnyOutput { return v.Value }).(pulumi.AnyOutput)
 }

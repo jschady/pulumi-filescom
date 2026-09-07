@@ -29,7 +29,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+        /// Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
         /// 
         /// 
         /// 
@@ -44,13 +44,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleBehavior = filescom.getBehavior({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_behavior = filescom.get_behavior(id=1)
+        /// example_behavior = filescom.get_behavior(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -63,6 +65,7 @@ namespace Jschady.Filescom
         ///     var exampleBehavior = Filescom.GetBehavior.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -78,7 +81,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetBehavior(ctx, &amp;filescom.LookupBehaviorArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -97,7 +101,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getbehavior" "exampleBehavior" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -123,6 +128,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleBehavior = FilescomFunctions.getBehavior(GetBehaviorArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -135,6 +141,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getBehavior
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -158,7 +165,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+        /// Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
         /// 
         /// 
         /// 
@@ -173,13 +180,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleBehavior = filescom.getBehavior({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_behavior = filescom.get_behavior(id=1)
+        /// example_behavior = filescom.get_behavior(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -192,6 +201,7 @@ namespace Jschady.Filescom
         ///     var exampleBehavior = Filescom.GetBehavior.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -207,7 +217,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetBehavior(ctx, &amp;filescom.LookupBehaviorArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -226,7 +237,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getbehavior" "exampleBehavior" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -252,6 +264,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleBehavior = FilescomFunctions.getBehavior(GetBehaviorArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -264,6 +277,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getBehavior
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -287,7 +301,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+        /// Each behavior uses a different format for its settings value. The accepted fields and an example are shown with each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
         /// 
         /// 
         /// 
@@ -302,13 +316,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleBehavior = filescom.getBehavior({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_behavior = filescom.get_behavior(id=1)
+        /// example_behavior = filescom.get_behavior(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -321,6 +337,7 @@ namespace Jschady.Filescom
         ///     var exampleBehavior = Filescom.GetBehavior.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -336,7 +353,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetBehavior(ctx, &amp;filescom.LookupBehaviorArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -355,7 +373,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getbehavior" "exampleBehavior" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -381,6 +400,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleBehavior = FilescomFunctions.getBehavior(GetBehaviorArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -393,6 +413,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getBehavior
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -409,6 +430,12 @@ namespace Jschady.Filescom
         [Input("id", required: true)]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
+        /// </summary>
+        [Input("valueFormat")]
+        public string? ValueFormat { get; set; }
+
         public GetBehaviorArgs()
         {
         }
@@ -422,6 +449,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("id", required: true)]
         public Input<int> Id { get; set; } = null!;
+
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
+        /// </summary>
+        [Input("valueFormat")]
+        public Input<string>? ValueFormat { get; set; }
 
         public GetBehaviorInvokeArgs()
         {
@@ -482,9 +515,13 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool RootBehaviorSiteAdminOnly;
         /// <summary>
-        /// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+        /// Settings for this behavior. Set &lt;span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format "&gt;`valueFormat &lt;/span&gt;= "typed"` to return the future typed shape under the selected behavior name.
         /// </summary>
         public readonly object Value;
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return the future files_behavior.value output shape before it becomes the default on March 1, 2027. Omit this attribute to keep the current output until then.
+        /// </summary>
+        public readonly string? ValueFormat;
 
         [OutputConstructor]
         private GetBehaviorResult(
@@ -512,7 +549,9 @@ namespace Jschady.Filescom
 
             bool rootBehaviorSiteAdminOnly,
 
-            object value)
+            object value,
+
+            string? valueFormat)
         {
             AttachmentUrl = attachmentUrl;
             Behavior = behavior;
@@ -527,6 +566,7 @@ namespace Jschady.Filescom
             Recursive = recursive;
             RootBehaviorSiteAdminOnly = rootBehaviorSiteAdminOnly;
             Value = value;
+            ValueFormat = valueFormat;
         }
     }
 }
