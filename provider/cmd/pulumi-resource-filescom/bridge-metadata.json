@@ -580,18 +580,6 @@
             "files_lock": {
                 "current": "filescom:index/lock:Lock"
             },
-            "files_message": {
-                "current": "filescom:index/message:Message"
-            },
-            "files_message_comment": {
-                "current": "filescom:index/messageComment:MessageComment"
-            },
-            "files_message_comment_reaction": {
-                "current": "filescom:index/messageCommentReaction:MessageCommentReaction"
-            },
-            "files_message_reaction": {
-                "current": "filescom:index/messageReaction:MessageReaction"
-            },
             "files_metadata_category": {
                 "current": "filescom:index/metadataCategory:MetadataCategory",
                 "fields": {
@@ -671,9 +659,6 @@
                         "maxItemsOne": false
                     }
                 }
-            },
-            "files_project": {
-                "current": "filescom:index/project:Project"
             },
             "files_public_key": {
                 "current": "filescom:index/publicKey:PublicKey"
@@ -1421,18 +1406,6 @@
             "files_lock": {
                 "current": "filescom:index/getLock:getLock"
             },
-            "files_message": {
-                "current": "filescom:index/getMessage:getMessage"
-            },
-            "files_message_comment": {
-                "current": "filescom:index/getMessageComment:getMessageComment"
-            },
-            "files_message_comment_reaction": {
-                "current": "filescom:index/getMessageCommentReaction:getMessageCommentReaction"
-            },
-            "files_message_reaction": {
-                "current": "filescom:index/getMessageReaction:getMessageReaction"
-            },
             "files_metadata_category": {
                 "current": "filescom:index/getMetadataCategory:getMetadataCategory",
                 "fields": {
@@ -1523,9 +1496,6 @@
                         "maxItemsOne": false
                     }
                 }
-            },
-            "files_project": {
-                "current": "filescom:index/getProject:getProject"
             },
             "files_public_key": {
                 "current": "filescom:index/getPublicKey:getPublicKey"
@@ -1883,34 +1853,6 @@
                     "kind": "missing"
                 }
             },
-            "files_message": {
-                "fields": {
-                    "id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "files_message_comment": {
-                "fields": {
-                    "id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "files_message_comment_reaction": {
-                "fields": {
-                    "id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "files_message_reaction": {
-                "fields": {
-                    "id": {
-                        "type": "string"
-                    }
-                }
-            },
             "files_metadata_category": {
                 "fields": {
                     "id": {
@@ -1954,13 +1896,6 @@
                 }
             },
             "files_permission": {
-                "fields": {
-                    "id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "files_project": {
                 "fields": {
                     "id": {
                         "type": "string"

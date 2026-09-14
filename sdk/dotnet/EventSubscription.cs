@@ -32,6 +32,7 @@ namespace Jschady.Filescom
     ///         Name = "example",
     ///         Subject = "example",
     ///         Message = "example",
+    ///         MessageOnly = true,
     ///         Enabled = true,
     ///         EventTypes = new[]
     ///         {
@@ -114,6 +115,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("message")]
         public Output<string> Message { get; private set; } = null!;
+
+        /// <summary>
+        /// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        /// </summary>
+        [Output("messageOnly")]
+        public Output<bool> MessageOnly { get; private set; } = null!;
 
         /// <summary>
         /// Event Subscription name.
@@ -247,6 +254,12 @@ namespace Jschady.Filescom
         public Input<string>? Message { get; set; }
 
         /// <summary>
+        /// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        /// </summary>
+        [Input("messageOnly")]
+        public Input<bool>? MessageOnly { get; set; }
+
+        /// <summary>
         /// Event Subscription name.
         /// </summary>
         [Input("name")]
@@ -337,6 +350,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("message")]
         public Input<string>? Message { get; set; }
+
+        /// <summary>
+        /// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        /// </summary>
+        [Input("messageOnly")]
+        public Input<bool>? MessageOnly { get; set; }
 
         /// <summary>
         /// Event Subscription name.
