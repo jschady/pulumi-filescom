@@ -305,26 +305,6 @@ export const getLock: typeof import("./getLock").getLock = null as any;
 export const getLockOutput: typeof import("./getLock").getLockOutput = null as any;
 utilities.lazyLoad(exports, ["getLock","getLockOutput"], () => require("./getLock"));
 
-export { GetMessageArgs, GetMessageResult, GetMessageOutputArgs } from "./getMessage";
-export const getMessage: typeof import("./getMessage").getMessage = null as any;
-export const getMessageOutput: typeof import("./getMessage").getMessageOutput = null as any;
-utilities.lazyLoad(exports, ["getMessage","getMessageOutput"], () => require("./getMessage"));
-
-export { GetMessageCommentArgs, GetMessageCommentResult, GetMessageCommentOutputArgs } from "./getMessageComment";
-export const getMessageComment: typeof import("./getMessageComment").getMessageComment = null as any;
-export const getMessageCommentOutput: typeof import("./getMessageComment").getMessageCommentOutput = null as any;
-utilities.lazyLoad(exports, ["getMessageComment","getMessageCommentOutput"], () => require("./getMessageComment"));
-
-export { GetMessageCommentReactionArgs, GetMessageCommentReactionResult, GetMessageCommentReactionOutputArgs } from "./getMessageCommentReaction";
-export const getMessageCommentReaction: typeof import("./getMessageCommentReaction").getMessageCommentReaction = null as any;
-export const getMessageCommentReactionOutput: typeof import("./getMessageCommentReaction").getMessageCommentReactionOutput = null as any;
-utilities.lazyLoad(exports, ["getMessageCommentReaction","getMessageCommentReactionOutput"], () => require("./getMessageCommentReaction"));
-
-export { GetMessageReactionArgs, GetMessageReactionResult, GetMessageReactionOutputArgs } from "./getMessageReaction";
-export const getMessageReaction: typeof import("./getMessageReaction").getMessageReaction = null as any;
-export const getMessageReactionOutput: typeof import("./getMessageReaction").getMessageReactionOutput = null as any;
-utilities.lazyLoad(exports, ["getMessageReaction","getMessageReactionOutput"], () => require("./getMessageReaction"));
-
 export { GetMetadataCategoryArgs, GetMetadataCategoryResult, GetMetadataCategoryOutputArgs } from "./getMetadataCategory";
 export const getMetadataCategory: typeof import("./getMetadataCategory").getMetadataCategory = null as any;
 export const getMetadataCategoryOutput: typeof import("./getMetadataCategory").getMetadataCategoryOutput = null as any;
@@ -369,11 +349,6 @@ export { GetPermissionArgs, GetPermissionResult, GetPermissionOutputArgs } from 
 export const getPermission: typeof import("./getPermission").getPermission = null as any;
 export const getPermissionOutput: typeof import("./getPermission").getPermissionOutput = null as any;
 utilities.lazyLoad(exports, ["getPermission","getPermissionOutput"], () => require("./getPermission"));
-
-export { GetProjectArgs, GetProjectResult, GetProjectOutputArgs } from "./getProject";
-export const getProject: typeof import("./getProject").getProject = null as any;
-export const getProjectOutput: typeof import("./getProject").getProjectOutput = null as any;
-utilities.lazyLoad(exports, ["getProject","getProjectOutput"], () => require("./getProject"));
 
 export { GetPublicKeyArgs, GetPublicKeyResult, GetPublicKeyOutputArgs } from "./getPublicKey";
 export const getPublicKey: typeof import("./getPublicKey").getPublicKey = null as any;
@@ -545,26 +520,6 @@ export type Lock = import("./lock").Lock;
 export const Lock: typeof import("./lock").Lock = null as any;
 utilities.lazyLoad(exports, ["Lock"], () => require("./lock"));
 
-export { MessageArgs, MessageState } from "./message";
-export type Message = import("./message").Message;
-export const Message: typeof import("./message").Message = null as any;
-utilities.lazyLoad(exports, ["Message"], () => require("./message"));
-
-export { MessageCommentArgs, MessageCommentState } from "./messageComment";
-export type MessageComment = import("./messageComment").MessageComment;
-export const MessageComment: typeof import("./messageComment").MessageComment = null as any;
-utilities.lazyLoad(exports, ["MessageComment"], () => require("./messageComment"));
-
-export { MessageCommentReactionArgs, MessageCommentReactionState } from "./messageCommentReaction";
-export type MessageCommentReaction = import("./messageCommentReaction").MessageCommentReaction;
-export const MessageCommentReaction: typeof import("./messageCommentReaction").MessageCommentReaction = null as any;
-utilities.lazyLoad(exports, ["MessageCommentReaction"], () => require("./messageCommentReaction"));
-
-export { MessageReactionArgs, MessageReactionState } from "./messageReaction";
-export type MessageReaction = import("./messageReaction").MessageReaction;
-export const MessageReaction: typeof import("./messageReaction").MessageReaction = null as any;
-utilities.lazyLoad(exports, ["MessageReaction"], () => require("./messageReaction"));
-
 export { MetadataCategoryArgs, MetadataCategoryState } from "./metadataCategory";
 export type MetadataCategory = import("./metadataCategory").MetadataCategory;
 export const MetadataCategory: typeof import("./metadataCategory").MetadataCategory = null as any;
@@ -599,11 +554,6 @@ export { PermissionArgs, PermissionState } from "./permission";
 export type Permission = import("./permission").Permission;
 export const Permission: typeof import("./permission").Permission = null as any;
 utilities.lazyLoad(exports, ["Permission"], () => require("./permission"));
-
-export { ProjectArgs, ProjectState } from "./project";
-export type Project = import("./project").Project;
-export const Project: typeof import("./project").Project = null as any;
-utilities.lazyLoad(exports, ["Project"], () => require("./project"));
 
 export * from "./provider";
 import { Provider } from "./provider";
@@ -778,14 +728,6 @@ const _module = {
                 return new KeyLifecycleRule(name, <any>undefined, { urn })
             case "filescom:index/lock:Lock":
                 return new Lock(name, <any>undefined, { urn })
-            case "filescom:index/message:Message":
-                return new Message(name, <any>undefined, { urn })
-            case "filescom:index/messageComment:MessageComment":
-                return new MessageComment(name, <any>undefined, { urn })
-            case "filescom:index/messageCommentReaction:MessageCommentReaction":
-                return new MessageCommentReaction(name, <any>undefined, { urn })
-            case "filescom:index/messageReaction:MessageReaction":
-                return new MessageReaction(name, <any>undefined, { urn })
             case "filescom:index/metadataCategory:MetadataCategory":
                 return new MetadataCategory(name, <any>undefined, { urn })
             case "filescom:index/notification:Notification":
@@ -800,8 +742,6 @@ const _module = {
                 return new PartnerSiteRequest(name, <any>undefined, { urn })
             case "filescom:index/permission:Permission":
                 return new Permission(name, <any>undefined, { urn })
-            case "filescom:index/project:Project":
-                return new Project(name, <any>undefined, { urn })
             case "filescom:index/publicKey:PublicKey":
                 return new PublicKey(name, <any>undefined, { urn })
             case "filescom:index/remoteMountBackend:RemoteMountBackend":
@@ -875,10 +815,6 @@ pulumi.runtime.registerResourceModule("filescom", "index/holidayCalendar", _modu
 pulumi.runtime.registerResourceModule("filescom", "index/integrationCentricProfile", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/keyLifecycleRule", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/lock", _module)
-pulumi.runtime.registerResourceModule("filescom", "index/message", _module)
-pulumi.runtime.registerResourceModule("filescom", "index/messageComment", _module)
-pulumi.runtime.registerResourceModule("filescom", "index/messageCommentReaction", _module)
-pulumi.runtime.registerResourceModule("filescom", "index/messageReaction", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/metadataCategory", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/notification", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/partner", _module)
@@ -886,7 +822,6 @@ pulumi.runtime.registerResourceModule("filescom", "index/partnerChannel", _modul
 pulumi.runtime.registerResourceModule("filescom", "index/partnerChannelTemplate", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/partnerSiteRequest", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/permission", _module)
-pulumi.runtime.registerResourceModule("filescom", "index/project", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/publicKey", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/remoteMountBackend", _module)
 pulumi.runtime.registerResourceModule("filescom", "index/remoteServer", _module)

@@ -66,10 +66,6 @@ from .get_integration_centric_profile import *
 from .get_invoice import *
 from .get_key_lifecycle_rule import *
 from .get_lock import *
-from .get_message import *
-from .get_message_comment import *
-from .get_message_comment_reaction import *
-from .get_message_reaction import *
 from .get_metadata_category import *
 from .get_notification import *
 from .get_partner import *
@@ -79,7 +75,6 @@ from .get_partner_site_request import *
 from .get_payment import *
 from .get_pending_work_event import *
 from .get_permission import *
-from .get_project import *
 from .get_public_key import *
 from .get_remote_mount_backend import *
 from .get_remote_server import *
@@ -114,10 +109,6 @@ from .holiday_calendar import *
 from .integration_centric_profile import *
 from .key_lifecycle_rule import *
 from .lock import *
-from .message import *
-from .message_comment import *
-from .message_comment_reaction import *
-from .message_reaction import *
 from .metadata_category import *
 from .notification import *
 from .partner import *
@@ -125,7 +116,6 @@ from .partner_channel import *
 from .partner_channel_template import *
 from .partner_site_request import *
 from .permission import *
-from .project import *
 from .provider import *
 from .public_key import *
 from .remote_mount_backend import *
@@ -386,38 +376,6 @@ _utilities.register(
  },
  {
   "pkg": "filescom",
-  "mod": "index/message",
-  "fqn": "pulumi_filescom",
-  "classes": {
-   "filescom:index/message:Message": "Message"
-  }
- },
- {
-  "pkg": "filescom",
-  "mod": "index/messageComment",
-  "fqn": "pulumi_filescom",
-  "classes": {
-   "filescom:index/messageComment:MessageComment": "MessageComment"
-  }
- },
- {
-  "pkg": "filescom",
-  "mod": "index/messageCommentReaction",
-  "fqn": "pulumi_filescom",
-  "classes": {
-   "filescom:index/messageCommentReaction:MessageCommentReaction": "MessageCommentReaction"
-  }
- },
- {
-  "pkg": "filescom",
-  "mod": "index/messageReaction",
-  "fqn": "pulumi_filescom",
-  "classes": {
-   "filescom:index/messageReaction:MessageReaction": "MessageReaction"
-  }
- },
- {
-  "pkg": "filescom",
   "mod": "index/metadataCategory",
   "fqn": "pulumi_filescom",
   "classes": {
@@ -470,14 +428,6 @@ _utilities.register(
   "fqn": "pulumi_filescom",
   "classes": {
    "filescom:index/permission:Permission": "Permission"
-  }
- },
- {
-  "pkg": "filescom",
-  "mod": "index/project",
-  "fqn": "pulumi_filescom",
-  "classes": {
-   "filescom:index/project:Project": "Project"
   }
  },
  {

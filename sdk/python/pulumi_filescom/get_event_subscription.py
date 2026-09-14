@@ -26,7 +26,7 @@ class GetEventSubscriptionResult:
     """
     A collection of values returned by getEventSubscription.
     """
-    def __init__(__self__, apply_to_all_workspaces=None, created_at=None, delivery_policy=None, enabled=None, event_channel_id=None, event_target_ids=None, event_types=None, filter=None, id=None, message=None, name=None, subject=None, updated_at=None, workspace_id=None):
+    def __init__(__self__, apply_to_all_workspaces=None, created_at=None, delivery_policy=None, enabled=None, event_channel_id=None, event_target_ids=None, event_types=None, filter=None, id=None, message=None, message_only=None, name=None, subject=None, updated_at=None, workspace_id=None):
         if apply_to_all_workspaces and not isinstance(apply_to_all_workspaces, bool):
             raise TypeError("Expected argument 'apply_to_all_workspaces' to be a bool")
         pulumi.set(__self__, "apply_to_all_workspaces", apply_to_all_workspaces)
@@ -57,6 +57,9 @@ class GetEventSubscriptionResult:
         if message and not isinstance(message, str):
             raise TypeError("Expected argument 'message' to be a str")
         pulumi.set(__self__, "message", message)
+        if message_only and not isinstance(message_only, bool):
+            raise TypeError("Expected argument 'message_only' to be a bool")
+        pulumi.set(__self__, "message_only", message_only)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
@@ -151,6 +154,14 @@ class GetEventSubscriptionResult:
         return pulumi.get(self, "message")
 
     @_builtins.property
+    @pulumi.getter(name="messageOnly")
+    def message_only(self) -> _builtins.bool:
+        """
+        If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        """
+        return pulumi.get(self, "message_only")
+
+    @_builtins.property
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
@@ -199,6 +210,7 @@ class AwaitableGetEventSubscriptionResult(GetEventSubscriptionResult):
             filter=self.filter,
             id=self.id,
             message=self.message,
+            message_only=self.message_only,
             name=self.name,
             subject=self.subject,
             updated_at=self.updated_at,
@@ -240,6 +252,7 @@ def get_event_subscription(id: Optional[_builtins.int] = None,
         filter=pulumi.get(__ret__, 'filter'),
         id=pulumi.get(__ret__, 'id'),
         message=pulumi.get(__ret__, 'message'),
+        message_only=pulumi.get(__ret__, 'message_only'),
         name=pulumi.get(__ret__, 'name'),
         subject=pulumi.get(__ret__, 'subject'),
         updated_at=pulumi.get(__ret__, 'updated_at'),
@@ -278,6 +291,7 @@ def get_event_subscription_output(id: pulumi.Input[Optional[_builtins.int]] = No
         filter=pulumi.get(__response__, 'filter'),
         id=pulumi.get(__response__, 'id'),
         message=pulumi.get(__response__, 'message'),
+        message_only=pulumi.get(__response__, 'message_only'),
         name=pulumi.get(__response__, 'name'),
         subject=pulumi.get(__response__, 'subject'),
         updated_at=pulumi.get(__response__, 'updated_at'),

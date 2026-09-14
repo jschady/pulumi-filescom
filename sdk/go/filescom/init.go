@@ -77,14 +77,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &KeyLifecycleRule{}
 	case "filescom:index/lock:Lock":
 		r = &Lock{}
-	case "filescom:index/message:Message":
-		r = &Message{}
-	case "filescom:index/messageComment:MessageComment":
-		r = &MessageComment{}
-	case "filescom:index/messageCommentReaction:MessageCommentReaction":
-		r = &MessageCommentReaction{}
-	case "filescom:index/messageReaction:MessageReaction":
-		r = &MessageReaction{}
 	case "filescom:index/metadataCategory:MetadataCategory":
 		r = &MetadataCategory{}
 	case "filescom:index/notification:Notification":
@@ -99,8 +91,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PartnerSiteRequest{}
 	case "filescom:index/permission:Permission":
 		r = &Permission{}
-	case "filescom:index/project:Project":
-		r = &Project{}
 	case "filescom:index/publicKey:PublicKey":
 		r = &PublicKey{}
 	case "filescom:index/remoteMountBackend:RemoteMountBackend":
@@ -314,26 +304,6 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"filescom",
-		"index/message",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"filescom",
-		"index/messageComment",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"filescom",
-		"index/messageCommentReaction",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"filescom",
-		"index/messageReaction",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"filescom",
 		"index/metadataCategory",
 		&module{version},
 	)
@@ -365,11 +335,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"filescom",
 		"index/permission",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"filescom",
-		"index/project",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
