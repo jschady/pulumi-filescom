@@ -17,10 +17,11 @@ resources:
       behavior: ${behaviorType}
       path: ${behaviorPath}
       name: ${behaviorName}
-      # The value goes to the API unchanged, so its keys are the ones each type names.
+      # The value sits under the behavior name. The provider sends the inner keys to the API.
       value:
-        days_to_retain: 30
-        delete_empty_folders: false
+        file_expiration:
+          days_to_retain: 30
+          delete_empty_folders: false
 
 outputs:
   behaviorId: ${probe.id}

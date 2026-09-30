@@ -20,10 +20,13 @@ return await Deployment.RunAsync(() =>
         Name = config.Require("behaviorName"),
         Value = new Dictionary<string, object>
         {
-            ["urls"] = new[] { "https://example.com/pulumi-filescom-behavior-probe" },
-            ["method"] = "POST",
-            ["triggers"] = new[] { "create" },
-            ["headers"] = new Dictionary<string, string> { ["x-pulumi-filescom-probe"] = "v1" },
+            ["webhook"] = new Dictionary<string, object>
+            {
+                ["urls"] = new[] { "https://example.com/pulumi-filescom-behavior-probe" },
+                ["method"] = "POST",
+                ["triggers"] = new[] { "create" },
+                ["headers"] = new Dictionary<string, string> { ["x-pulumi-filescom-probe"] = "v1" },
+            },
         },
     });
 

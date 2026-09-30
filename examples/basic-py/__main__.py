@@ -18,10 +18,12 @@ behavior = filescom.Behavior(
     path=folder_path,
     name=behavior_name,
     value={
-        "urls": ["https://example.com/pulumi-filescom-behavior-probe"],
-        "method": "POST",
-        "triggers": ["create"],
-        "headers": {"x-pulumi-filescom-probe": "v1"},
+        "webhook": {
+            "urls": ["https://example.com/pulumi-filescom-behavior-probe"],
+            "method": "POST",
+            "triggers": ["create"],
+            "headers": {"x-pulumi-filescom-probe": "v1"},
+        },
     },
 )
 

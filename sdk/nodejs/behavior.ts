@@ -7,13 +7,13 @@ import * as utilities from "./utilities";
 /**
  * A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
  *
- * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level. The exact options for each behavior type are explained in the table below.
+ * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
  *
  * Each behavior type also has a recursion mode in the behavior type documentation. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> means the behavior is always recursive, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> means it is never recursive, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> means callers may choose the value of the <span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`">`recursive`</span> field.
  *
- * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+ * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
  *
- * Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+ * Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
  *
  * Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
  *
@@ -26,7 +26,11 @@ import * as utilities from "./utilities";
  *
  * const exampleBehavior = new filescom.Behavior("example_behavior", {
  *     value: {
- *         method: "GET",
+ *         webhook: {
+ *             urls: ["https://example.com/webhook"],
+ *             method: "POST",
+ *             encoding: "JSON",
+ *         },
  *     },
  *     disableParentFolderBehavior: false,
  *     recursive: false,
@@ -39,166 +43,121 @@ import * as utilities from "./utilities";
  *     path: "path",
  *     behavior: "webhook",
  *     value: {
- *         urls: ["https://mysite.com/url..."],
- *         method: "POST",
- *         triggers: [
- *             "create",
- *             "read",
- *             "update",
- *             "destroy",
- *             "move",
- *             "copy",
- *         ],
- *         triggeringFilenames: [
- *             "*.pdf",
- *             "*so*.jpg",
- *         ],
- *         excludeFilenames: [
- *             "*.txt",
- *             "*wo*.png",
- *         ],
- *         encoding: "RAW",
- *         headers: {
- *             "MY-HEADER": "foo",
+ *         webhook: {
+ *             urls: ["https://example.com/webhook"],
+ *             method: "POST",
+ *             encoding: "JSON",
  *         },
- *         body: {
- *             MY_BODY_PARAM: "bar",
- *         },
- *         verificationToken: "tok12345",
- *         fileFormField: "my_form_field",
- *         fileAsBody: "my_file_body",
- *         useDedicatedIps: false,
  *     },
  * });
  * const exampleFileExpirationBehavior = new filescom.Behavior("example_file_expiration_behavior", {
  *     path: "path",
  *     behavior: "file_expiration",
  *     value: {
- *         daysToRetain: 30,
- *         deleteEmptyFolders: false,
+ *         file_expiration: {
+ *             days_to_retain: 30,
+ *             delete_empty_folders: false,
+ *         },
  *     },
  * });
  * const exampleAutoEncryptBehavior = new filescom.Behavior("example_auto_encrypt_behavior", {
  *     path: "path",
  *     behavior: "auto_encrypt",
  *     value: {
- *         gpgKeyId: 1,
- *         gpgKeyIds: [1],
- *         algorithm: "PGP/GPG",
- *         signingKeyId: 1,
- *         suffix: ".gpg",
- *         armor: false,
- *         gpgKeyPartnerId: 1,
+ *         auto_encrypt: {
+ *             gpg_key_ids: [1],
+ *             algorithm: "PGP/GPG",
+ *             suffix: ".gpg",
+ *             armor: false,
+ *         },
  *     },
  * });
  * const exampleLockSubfoldersBehavior = new filescom.Behavior("example_lock_subfolders_behavior", {
  *     path: "path",
  *     behavior: "lock_subfolders",
  *     value: {
- *         level: "children_recursive",
+ *         lock_subfolders: {
+ *             level: "children_recursive",
+ *         },
  *     },
  * });
  * const exampleStorageRegionBehavior = new filescom.Behavior("example_storage_region_behavior", {
  *     path: "path",
  *     behavior: "storage_region",
- *     value: "us-east-1",
+ *     value: {
+ *         storage_region: "us-east-1",
+ *     },
  * });
  * const exampleServePubliclyBehavior = new filescom.Behavior("example_serve_publicly_behavior", {
  *     path: "path",
  *     behavior: "serve_publicly",
  *     value: {
- *         key: "public-photos",
- *         showIndex: true,
- *         forceDownload: true,
- *         corsEnabled: false,
- *         requireSiteAuthentication: false,
+ *         serve_publicly: {
+ *             key: "public-files",
+ *             show_index: true,
+ *             force_download: false,
+ *         },
  *     },
  * });
  * const exampleCreateUserFoldersBehavior = new filescom.Behavior("example_create_user_folders_behavior", {
  *     path: "path",
  *     behavior: "create_user_folders",
  *     value: {
- *         permission: "full",
- *         additionalPermission: "bundle",
- *         existingUsers: true,
- *         groupId: 1,
- *         newFolderName: "username",
- *         subfolders: [
- *             "in",
- *             "out",
- *         ],
+ *         create_user_folders: {
+ *             permission: "full",
+ *             existing_users: false,
+ *             new_folder_name: "name",
+ *         },
  *     },
  * });
  * const exampleInboxBehavior = new filescom.Behavior("example_inbox_behavior", {
  *     path: "path",
  *     behavior: "inbox",
  *     value: {
- *         key: "application-forms",
- *         dontSeparateSubmissionsByFolder: true,
- *         dontSeparateSubmissionsByFolderForInboundEmail: true,
- *         dontAllowFoldersInUploads: false,
- *         requireInboxRecipient: false,
- *         showOnLoginPage: true,
- *         title: "Submit Your Job Applications Here",
- *         description: "Thanks for coming to the Files.com Job Application Page",
- *         helpText: "If you have trouble here, please contact your recruiter.",
- *         requireRegistration: true,
- *         password: "foobar",
- *         pathTemplate: "{{name}}_{{ip}}",
- *         pathTemplateTimeZone: "Eastern Time (US & Canada)",
- *         enableInboundEmailAddress: true,
- *         notifySendersOnSuccessfulUploadsViaEmail: true,
- *         notifySendersOnSuccessfulUploadsViaWeb: true,
- *         allowWhitelisting: true,
- *         whitelist: [
- *             "john@test.com",
- *             "mydomain.com",
- *         ],
- *         disableWebUpload: true,
- *         captureEmailBodyFilename: "_body.txt",
- *         requestedUploadSlots: [
- *             {
+ *         inbox: {
+ *             key: "application-forms",
+ *             dont_separate_submissions_by_folder: false,
+ *             show_on_login_page: false,
+ *             title: "Application Forms",
+ *             require_registration: false,
+ *             disable_web_upload: false,
+ *             requested_upload_slots: [{
  *                 name: "Photo ID",
- *             },
- *             {
- *                 name: "Proof of Address",
- *             },
- *         ],
+ *             }],
+ *         },
  *     },
  * });
  * const exampleLimitFileExtensionsBehavior = new filescom.Behavior("example_limit_file_extensions_behavior", {
  *     path: "path",
  *     behavior: "limit_file_extensions",
  *     value: {
- *         extensions: [
- *             "xls",
- *             "csv",
- *         ],
- *         mode: "whitelist",
+ *         limit_file_extensions: {
+ *             extensions: [
+ *                 "pdf",
+ *                 "csv",
+ *             ],
+ *             mode: "whitelist",
+ *         },
  *     },
  * });
  * const exampleLimitFileRegexBehavior = new filescom.Behavior("example_limit_file_regex_behavior", {
  *     path: "path",
  *     behavior: "limit_file_regex",
- *     value: ["/Document-.*&#47;"],
+ *     value: {
+ *         limit_file_regex: ["/Document-.*&#47;"],
+ *     },
  * });
  * const exampleAmazonSnsBehavior = new filescom.Behavior("example_amazon_sns_behavior", {
  *     path: "path",
  *     behavior: "amazon_sns",
  *     value: {
- *         arns: ["ARN"],
- *         triggers: [
- *             "create",
- *             "read",
- *             "update",
- *             "destroy",
- *             "move",
- *             "copy",
- *         ],
- *         awsCredentials: {
- *             accessKeyId: "ACCESS_KEY_ID",
- *             region: "us-east-1",
- *             secretAccessKey: "SECRET_ACCESS_KEY",
+ *         amazon_sns: {
+ *             arns: ["arn:aws:sns:us-east-1:123456789012:files-events"],
+ *             aws_credentials: {
+ *                 access_key_id: "ACCESS_KEY_ID",
+ *                 region: "us-east-1",
+ *                 secret_access_key: "SECRET_ACCESS_KEY",
+ *             },
  *         },
  *     },
  * });
@@ -206,131 +165,113 @@ import * as utilities from "./utilities";
  *     path: "path",
  *     behavior: "watermark",
  *     value: {
- *         gravity: "SouthWest",
- *         maxHeightOrWidth: 20,
- *         transparency: 25,
- *         dynamicText: "Confidential: For use by {{user}} only.",
+ *         watermark: {
+ *             gravity: "SouthWest",
+ *             max_height_or_width: 20,
+ *             transparency: 25,
+ *         },
  *     },
  * });
  * const exampleRemoteServerMountBehavior = new filescom.Behavior("example_remote_server_mount_behavior", {
  *     path: "path",
  *     behavior: "remote_server_mount",
  *     value: {
- *         remoteServerId: 1,
- *         remotePath: "",
+ *         remote_server_mount: {
+ *             remote_server_id: 1,
+ *             remote_path: "shared/files",
+ *         },
  *     },
  * });
  * const exampleSlackWebhookBehavior = new filescom.Behavior("example_slack_webhook_behavior", {
  *     path: "path",
  *     behavior: "slack_webhook",
  *     value: {
- *         url: "https://mysite.com/url...",
- *         username: "Files.com",
- *         channel: "alerts",
- *         iconEmoji: ":robot_face:",
- *         triggers: [
- *             "create",
- *             "read",
- *             "update",
- *             "destroy",
- *             "move",
- *             "copy",
- *         ],
+ *         slack_webhook: {
+ *             url: "https://hooks.slack.com/services/example",
+ *             triggers: ["create"],
+ *         },
  *     },
  * });
  * const exampleAutoDecryptBehavior = new filescom.Behavior("example_auto_decrypt_behavior", {
  *     path: "path",
  *     behavior: "auto_decrypt",
  *     value: {
- *         gpgKeyId: 1,
- *         gpgKeyIds: [1],
- *         algorithm: "PGP/GPG",
- *         suffix: ".gpg",
- *         ignoreMdcError: true,
- *         gpgKeyPartnerId: 1,
- *         useAllPrivateKeys: false,
+ *         auto_decrypt: {
+ *             gpg_key_ids: [1],
+ *             algorithm: "PGP/GPG",
+ *             suffix: ".gpg",
+ *             ignore_mdc_error: false,
+ *         },
  *     },
  * });
  * const exampleOverrideUploadFilenameBehavior = new filescom.Behavior("example_override_upload_filename_behavior", {
  *     path: "path",
  *     behavior: "override_upload_filename",
  *     value: {
- *         filenameOverridePattern: "%Fb_addition5%Fe",
- *         filenameReplaceFrom: null,
- *         filenameReplaceTo: null,
- *         filenameRegexReplaceFrom: null,
- *         filenameRegexReplaceTo: null,
- *         timeZone: "Eastern Time (US & Canada)",
+ *         override_upload_filename: {
+ *             filename_override_pattern: "%Fb_uploaded%Fe",
+ *         },
  *     },
  * });
  * const examplePermissionFenceBehavior = new filescom.Behavior("example_permission_fence_behavior", {
  *     path: "path",
  *     behavior: "permission_fence",
  *     value: {
- *         fencedPermissions: "all",
+ *         permission_fence: {
+ *             fenced_permissions: "all",
+ *         },
  *     },
  * });
  * const exampleLimitFilenameLengthBehavior = new filescom.Behavior("example_limit_filename_length_behavior", {
  *     path: "path",
  *     behavior: "limit_filename_length",
  *     value: {
- *         maxLength: 30,
- *         shorten: true,
+ *         limit_filename_length: {
+ *             max_length: 30,
+ *             shorten: true,
+ *         },
  *     },
  * });
  * const exampleOrganizeFilesIntoSubfoldersBehavior = new filescom.Behavior("example_organize_files_into_subfolders_behavior", {
  *     path: "path",
  *     behavior: "organize_files_into_subfolders",
  *     value: {
- *         subfolderNameType: "regex, extension, created_at, provided_modified_at",
- *         regex: "(?<=\\-)(.*?)(?=\\.)",
- *         strftimeFormat: "%Y-%m-%d",
- *         timeZone: "Eastern Time (US & Canada)",
- *         applyBehavior: true,
+ *         organize_files_into_subfolders: {
+ *             subfolder_name_type: "extension",
+ *         },
  *     },
  * });
  * const exampleTeamsWebhookBehavior = new filescom.Behavior("example_teams_webhook_behavior", {
  *     path: "path",
  *     behavior: "teams_webhook",
  *     value: {
- *         url: "https://mysite.com/url...",
- *         triggers: [
- *             "create",
- *             "read",
- *             "update",
- *             "destroy",
- *             "move",
- *             "copy",
- *         ],
+ *         teams_webhook: {
+ *             url: "https://example.webhook.office.com/webhook",
+ *             triggers: ["create"],
+ *         },
  *     },
  * });
  * const exampleGooglePubSubBehavior = new filescom.Behavior("example_google_pub_sub_behavior", {
  *     path: "path",
  *     behavior: "google_pub_sub",
  *     value: {
- *         projectsTopics: [{
- *             projectId: "my-project-id",
- *             topicId: "my-topic-id",
- *         }],
- *         triggers: [
- *             "create",
- *             "read",
- *             "update",
- *             "destroy",
- *             "move",
- *             "copy",
- *         ],
- *         googleCredentials: {
- *             type: "service_account",
- *             projectId: "your-project-id",
- *             privateKeyId: "your-private-key-id",
- *             privateKey: "-----BEGIN PRIVATE KEY-----\\nMIIC...",
- *             clientEmail: "your-service-account@your-project-id.iam.gserviceaccount.com",
- *             clientId: "your-client-id",
- *             authUri: "https=>//accounts.google.com/o/oauth2/auth",
- *             tokenUri: "https=>//oauth2.googleapis.com/token",
- *             authProviderX509CertUrl: "https://www.googleapis.com/oauth2/v1/certs",
- *             clientX509CertUrl: "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+ *         google_pub_sub: {
+ *             projects_topics: [{
+ *                 project_id: "my-project",
+ *                 topic_id: "files-events",
+ *             }],
+ *             google_credentials: {
+ *                 type: "service_account",
+ *                 project_id: "your-project-id",
+ *                 private_key_id: "your-private-key-id",
+ *                 private_key: "-----BEGIN PRIVATE KEY-----\\nMIIC...",
+ *                 client_email: "your-service-account@your-project-id.iam.gserviceaccount.com",
+ *                 client_id: "your-client-id",
+ *                 auth_uri: "https://accounts.google.com/o/oauth2/auth",
+ *                 token_uri: "https://oauth2.googleapis.com/token",
+ *                 auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+ *                 client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+ *             },
  *         },
  *     },
  * });
@@ -338,49 +279,56 @@ import * as utilities from "./utilities";
  *     path: "path",
  *     behavior: "archive_overwritten_or_deleted_files",
  *     value: {
- *         archivePath: "/Archive",
+ *         archive_overwritten_or_deleted_files: {
+ *             archive_path: "/Archive",
+ *         },
  *     },
  * });
  * const exampleAutoRecryptBehavior = new filescom.Behavior("example_auto_recrypt_behavior", {
  *     path: "path",
  *     behavior: "auto_recrypt",
  *     value: {
- *         decryptGpgKeyIds: [1],
- *         encryptGpgKeyIds: [1],
- *         decryptGpgKeyPartnerId: 1,
- *         encryptGpgKeyPartnerId: 1,
- *         ignoreMdcError: true,
- *         signingKeyId: 1,
- *         armor: false,
+ *         auto_recrypt: {
+ *             decrypt_gpg_key_ids: [1],
+ *             encrypt_gpg_key_ids: [2],
+ *             ignore_mdc_error: false,
+ *             armor: false,
+ *         },
  *     },
  * });
  * const exampleMetadataCategoryBehavior = new filescom.Behavior("example_metadata_category_behavior", {
  *     path: "path",
  *     behavior: "metadata_category",
  *     value: {
- *         metadataCategoryId: 1,
+ *         metadata_category: {
+ *             metadata_category_id: 1,
+ *         },
  *     },
  * });
  * const exampleAutoUnzipBehavior = new filescom.Behavior("example_auto_unzip_behavior", {
  *     path: "path",
  *     behavior: "auto_unzip",
  *     value: {
- *         destinationPath: "/Uploads/Unzipped/%Y/%m/%d",
- *         pathTimeZone: "Eastern Time (US & Canada)",
+ *         auto_unzip: {
+ *             destination_path: "/Uploads/Unzipped/%Y/%m/%d",
+ *         },
  *     },
  * });
  * const exampleRemoteServerMetadataIndexBehavior = new filescom.Behavior("example_remote_server_metadata_index_behavior", {
  *     path: "path",
  *     behavior: "remote_server_metadata_index",
  *     value: {
- *         intervalMinutes: 1440,
- *         initialScanCompleted: false,
+ *         remote_server_metadata_index: {
+ *             interval_minutes: 1440,
+ *         },
  *     },
  * });
  * const exampleMalwareScanningBehavior = new filescom.Behavior("example_malware_scanning_behavior", {
  *     path: "path",
  *     behavior: "malware_scanning",
- *     value: {},
+ *     value: {
+ *         malware_scanning: {},
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -394,6 +342,8 @@ import * as utilities from "./utilities";
  * ```sh
  * $ pulumi import filescom:index/behavior:Behavior example_behavior 1
  * ```
+ *
+ * Importing a behavior crashes the provider if its value holds a nested object, such as webhook headers.
  */
 export class Behavior extends pulumi.CustomResource {
     /**
@@ -468,7 +418,7 @@ export class Behavior extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly rootBehaviorSiteAdminOnly: pulumi.Output<boolean>;
     /**
-     * Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+     * Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
      */
     declare public readonly value: pulumi.Output<any>;
 
@@ -572,7 +522,7 @@ export interface BehaviorState {
      */
     rootBehaviorSiteAdminOnly?: pulumi.Input<boolean | undefined>;
     /**
-     * Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+     * Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
      */
     value?: any | undefined;
 }
@@ -606,7 +556,7 @@ export interface BehaviorArgs {
      */
     recursive?: pulumi.Input<boolean | undefined>;
     /**
-     * Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+     * Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
      */
     value?: any | undefined;
 }

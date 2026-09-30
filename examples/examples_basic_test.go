@@ -71,6 +71,22 @@ func requireBasicExampleOnTheAccount(t *testing.T, stack integration.RuntimeVali
 		"the behavior on the account should carry the configured name")
 	require.Equal(t, "webhook", behavior.Behavior,
 		"the program should create a webhook behavior")
+	require.Equal(t, valueJSON(t, behavior.Value), wrappedValueJSON(t, requireBasicBehaviorValue(t, stack)),
+		"the state should hold the value on the account under one webhook key")
+}
+
+// requireBasicBehaviorValue reads the behavior value from the state. The program wraps it under
+// the behavior name, and the state keeps the wrapper.
+func requireBasicBehaviorValue(t *testing.T, stack integration.RuntimeValidationStackInfo) any {
+	t.Helper()
+	require.NotNil(t, stack.Deployment, "the program test should pass the stack state")
+	for _, resource := range stack.Deployment.Resources {
+		if string(resource.Type) == behaviorToken {
+			return resource.Outputs["value"]
+		}
+	}
+	t.Fatalf("the stack state should hold one %s", behaviorToken)
+	return nil
 }
 
 func requireBasicStringOutput(t *testing.T, stack integration.RuntimeValidationStackInfo, name string) string {

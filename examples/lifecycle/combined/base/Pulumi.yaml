@@ -25,13 +25,14 @@ resources:
       path: ${folderPath}
       name: ${behaviorName}
       value:
-        urls:
-          - https://example.com/pulumi-filescom-behavior-probe
-        method: POST
-        triggers:
-          - create
-        headers:
-          x-pulumi-filescom-probe: v1
+        webhook:
+          urls:
+            - https://example.com/pulumi-filescom-behavior-probe
+          method: POST
+          triggers:
+            - create
+          headers:
+            x-pulumi-filescom-probe: v1
   # The key reads the group id and the behavior path from the resources, not from the config,
   # so Pulumi creates both before the key and each reference carries a real value.
   apiKey:

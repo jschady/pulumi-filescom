@@ -15,6 +15,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"testing"
@@ -560,6 +561,9 @@ func requireGroupNamed(t *testing.T, id, name string) {
 	t.Fatalf("the account lists no group with id %s", id)
 }
 
+//nolint:gosec // The value is the Pulumi type token of the resource, not a credential.
+const behaviorToken = "filescom:index/behavior:Behavior"
+
 type filesBehavior struct {
 	ID       int64  `json:"id"`
 	Path     string `json:"path"`
@@ -608,6 +612,44 @@ func requireBehaviorOnPath(t *testing.T, folder string) filesBehavior {
 	}
 	require.Lenf(t, matches, 1, "the account should list one behavior on %s", folder)
 	return matches[0]
+}
+
+// valueJSON reduces a Dynamic value to urls, method, triggers and headers. Marshalling sorts
+// the keys, so two reduced values compare as strings that read back in a failure message.
+func valueJSON(t *testing.T, raw any) string {
+	t.Helper()
+	object, ok := raw.(map[string]any)
+	require.Truef(t, ok, "the behavior value should be an object, got %T: %v", raw, raw)
+
+	reduced := map[string]any{}
+	for _, key := range []string{"urls", "method", "triggers", "headers"} {
+		value, present := object[key]
+		require.Truef(t, present, "the behavior value should carry %q, got the keys %v", key, sortedKeys(object))
+		reduced[key] = value
+	}
+	encoded, err := json.Marshal(reduced)
+	require.NoError(t, err)
+	return string(encoded)
+}
+
+// wrappedValueJSON reads the value the program wrote, from the stack outputs or the state. The
+// provider keeps the wrapper there, so the value holds one webhook key and the four keys under it.
+func wrappedValueJSON(t *testing.T, raw any) string {
+	t.Helper()
+	object, ok := raw.(map[string]any)
+	require.Truef(t, ok, "the wrapped behavior value should be an object, got %T: %v", raw, raw)
+	require.Equal(t, []string{"webhook"}, sortedKeys(object),
+		"the wrapped behavior value should hold one webhook key")
+	return valueJSON(t, object["webhook"])
+}
+
+func sortedKeys(object map[string]any) []string {
+	keys := make([]string, 0, len(object))
+	for key := range object {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 // behaviorsToSweep picks the behaviors a cleanup may delete. Two guards apply: the behavior

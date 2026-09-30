@@ -27,6 +27,7 @@ class EventSubscriptionArgs:
                  event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  filter: Optional[Any] = None,
                  message: pulumi.Input[Optional[_builtins.str]] = None,
+                 message_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  subject: pulumi.Input[Optional[_builtins.str]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
@@ -41,6 +42,7 @@ class EventSubscriptionArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
         :param Any filter: Structured event payload filter.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
+        :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
         :param pulumi.Input[_builtins.str] subject: Custom subject line to use for notification emails.
         :param pulumi.Input[_builtins.int] workspace_id: Workspace ID. 0 means the default workspace or site-wide.
@@ -61,6 +63,8 @@ class EventSubscriptionArgs:
             pulumi.set(__self__, "filter", filter)
         if message is not None:
             pulumi.set(__self__, "message", message)
+        if message_only is not None:
+            pulumi.set(__self__, "message_only", message_only)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if subject is not None:
@@ -165,6 +169,18 @@ class EventSubscriptionArgs:
         pulumi.set(self, "message", value)
 
     @_builtins.property
+    @pulumi.getter(name="messageOnly")
+    def message_only(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        """
+        return pulumi.get(self, "message_only")
+
+    @message_only.setter
+    def message_only(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "message_only", value)
+
+    @_builtins.property
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -213,6 +229,7 @@ class _EventSubscriptionState:
                  event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  filter: Optional[Any] = None,
                  message: pulumi.Input[Optional[_builtins.str]] = None,
+                 message_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  subject: pulumi.Input[Optional[_builtins.str]] = None,
                  updated_at: pulumi.Input[Optional[_builtins.str]] = None,
@@ -229,6 +246,7 @@ class _EventSubscriptionState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
         :param Any filter: Structured event payload filter.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
+        :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
         :param pulumi.Input[_builtins.str] subject: Custom subject line to use for notification emails.
         :param pulumi.Input[_builtins.str] updated_at: Event Subscription update date/time.
@@ -252,6 +270,8 @@ class _EventSubscriptionState:
             pulumi.set(__self__, "filter", filter)
         if message is not None:
             pulumi.set(__self__, "message", message)
+        if message_only is not None:
+            pulumi.set(__self__, "message_only", message_only)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if subject is not None:
@@ -370,6 +390,18 @@ class _EventSubscriptionState:
         pulumi.set(self, "message", value)
 
     @_builtins.property
+    @pulumi.getter(name="messageOnly")
+    def message_only(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        """
+        return pulumi.get(self, "message_only")
+
+    @message_only.setter
+    def message_only(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "message_only", value)
+
+    @_builtins.property
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -432,6 +464,7 @@ class EventSubscription(pulumi.CustomResource):
                  event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  filter: Optional[Any] = None,
                  message: pulumi.Input[Optional[_builtins.str]] = None,
+                 message_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  subject: pulumi.Input[Optional[_builtins.str]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
@@ -453,6 +486,7 @@ class EventSubscription(pulumi.CustomResource):
             name="example",
             subject="example",
             message="example",
+            message_only=True,
             enabled=True,
             event_types=["example"],
             delivery_policy="example",
@@ -481,6 +515,7 @@ class EventSubscription(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
         :param Any filter: Structured event payload filter.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
+        :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
         :param pulumi.Input[_builtins.str] subject: Custom subject line to use for notification emails.
         :param pulumi.Input[_builtins.int] workspace_id: Workspace ID. 0 means the default workspace or site-wide.
@@ -508,6 +543,7 @@ class EventSubscription(pulumi.CustomResource):
             name="example",
             subject="example",
             message="example",
+            message_only=True,
             enabled=True,
             event_types=["example"],
             delivery_policy="example",
@@ -549,6 +585,7 @@ class EventSubscription(pulumi.CustomResource):
                  event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  filter: Optional[Any] = None,
                  message: pulumi.Input[Optional[_builtins.str]] = None,
+                 message_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  subject: pulumi.Input[Optional[_builtins.str]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
@@ -569,6 +606,7 @@ class EventSubscription(pulumi.CustomResource):
             __props__.__dict__["event_types"] = event_types
             __props__.__dict__["filter"] = filter
             __props__.__dict__["message"] = message
+            __props__.__dict__["message_only"] = message_only
             __props__.__dict__["name"] = name
             __props__.__dict__["subject"] = subject
             __props__.__dict__["workspace_id"] = workspace_id
@@ -593,6 +631,7 @@ class EventSubscription(pulumi.CustomResource):
             event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             filter: Optional[Any] = None,
             message: pulumi.Input[Optional[_builtins.str]] = None,
+            message_only: pulumi.Input[Optional[_builtins.bool]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             subject: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None,
@@ -613,6 +652,7 @@ class EventSubscription(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
         :param Any filter: Structured event payload filter.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
+        :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
         :param pulumi.Input[_builtins.str] subject: Custom subject line to use for notification emails.
         :param pulumi.Input[_builtins.str] updated_at: Event Subscription update date/time.
@@ -631,6 +671,7 @@ class EventSubscription(pulumi.CustomResource):
         __props__.__dict__["event_types"] = event_types
         __props__.__dict__["filter"] = filter
         __props__.__dict__["message"] = message
+        __props__.__dict__["message_only"] = message_only
         __props__.__dict__["name"] = name
         __props__.__dict__["subject"] = subject
         __props__.__dict__["updated_at"] = updated_at
@@ -708,6 +749,14 @@ class EventSubscription(pulumi.CustomResource):
         Custom message to include in notification emails.
         """
         return pulumi.get(self, "message")
+
+    @_builtins.property
+    @pulumi.getter(name="messageOnly")
+    def message_only(self) -> pulumi.Output[_builtins.bool]:
+        """
+        If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        """
+        return pulumi.get(self, "message_only")
 
     @_builtins.property
     @pulumi.getter

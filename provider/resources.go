@@ -19,6 +19,7 @@ import (
 	"context"
 	"path"
 	"reflect"
+	"regexp"
 	"strings"
 
 	// embed serves the bridge-metadata.json directive below.
@@ -89,7 +90,14 @@ func Provider() tfbridge.ProviderInfo {
 			EditRules: func(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 				return append(defaults,
 					tfbridge.DocsEdit{Path: lockDocPage, Edit: dropLockExampleToken},
-					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: correctBehaviorValueEncoding},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: describeTheWrappedBehaviorValue},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: dropBehaviorTableReference},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: pointBehaviorValueAtTheExamples},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: dropBehaviorDetailsReference},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: repairBehaviorValueFormatSpan},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: describeBehaviorValueFormat},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: quoteBehaviorValueKeys},
+					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: cautionBehaviorImportOfANestedValue},
 					tfbridge.DocsEdit{Path: credentialDocPage, Edit: dropCredentialTerraformMention},
 				)
 			},
@@ -269,15 +277,99 @@ func dropLockExampleToken(_ string, content []byte) ([]byte, error) {
 	return bytes.Replace(content, []byte("\n  token = \"token\""), nil, 1), nil
 }
 
-// A Dynamic property cannot change its runtime type (pulumi/pulumi-terraform-bridge#3122), so the
-// second encoding upstream offers creates the behavior and then fails every later plan.
-func correctBehaviorValueEncoding(_ string, content []byte) ([]byte, error) {
-	const promise = "May be sent as nested JSON or a single JSON-encoded string.  " +
-		"If using XML encoding for the API call, this data must be sent as a JSON-encoded string."
-	const rule = "Write this property as nested JSON.  A JSON-encoded string creates the " +
-		"behavior, and then every later plan fails.  The bridge cannot change the runtime " +
-		"type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122)."
-	return bytes.ReplaceAll(content, []byte(promise), []byte(rule)), nil
+// The upstream value description points at per-type sections that the Pulumi page does not have,
+// and it does not say that the value keys keep the API's snake_case names. A snake_case word
+// between spaces becomes a per-language span, so "snake_case" ends its sentence.
+func describeTheWrappedBehaviorValue(_ string, content []byte) ([]byte, error) {
+	const value = "Settings for this behavior. Wrap the value under the selected behavior name. " +
+		"See the Behavior sections above for fields and examples."
+	const wrapped = "Settings for this behavior, wrapped under the behavior name, for example " +
+		"`{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. " +
+		"Keep the API's keys in snake_case."
+	return bytes.ReplaceAll(content, []byte(value), []byte(wrapped)), nil
+}
+
+// The upstream page points at a table of options for each behavior type, and no page has one.
+func dropBehaviorTableReference(_ string, content []byte) ([]byte, error) {
+	const table = " The exact options for each behavior type are explained in the table below."
+	return bytes.ReplaceAll(content, []byte(table), nil), nil
+}
+
+// The upstream page says each behavior type shows its fields, and only the examples do.
+func pointBehaviorValueAtTheExamples(_ string, content []byte) ([]byte, error) {
+	const shown = "The accepted fields and an example are shown with each behavior type."
+	const examples = "The Behavior resource examples show the value for each behavior type."
+	return bytes.ReplaceAll(content, []byte(shown), []byte(examples)), nil
+}
+
+// The upstream page points below at which behaviors non-admins can see or set, and no page lists them.
+func dropBehaviorDetailsReference(_ string, content []byte) ([]byte, error) {
+	const details = " All the details are below."
+	return bytes.ReplaceAll(content, []byte(details), nil), nil
+}
+
+// The bridge turns `value_format ` inside a code span into a span of its own, which takes the
+// opening backtick and leaves the closing one outside. The rewrite also says the shape the way
+// the value_format description does.
+func repairBehaviorValueFormatSpan(_ string, content []byte) ([]byte, error) {
+	const setting = "Set `value_format = \"typed\"` to return the future typed shape under the " +
+		"selected behavior name."
+	const split = "Set `value_format` to `\"typed\"` to return it wrapped under the behavior name."
+	return bytes.ReplaceAll(content, []byte(setting), []byte(split)), nil
+}
+
+// The upstream value_format description names the Terraform path files_behavior.value. A bare
+// `typed` becomes `Typed` in .NET. The date is a Files.com plan; upstream checks no date.
+func describeBehaviorValueFormat(_ string, content []byte) ([]byte, error) {
+	const format = "Set to `typed` to return the future files_behavior.value output shape before it " +
+		"becomes the default on March 1, 2027. Omit this attribute to keep the current output until then."
+	const typed = "Set to `\"typed\"` to return `value` wrapped under the behavior name. " +
+		"Files.com plans to make this the default on March 1, 2027."
+	return bytes.ReplaceAll(content, []byte(format), []byte(typed)), nil
+}
+
+// Importing a behavior panics the bridge when a nested object sits under the Dynamic value, and
+// the upstream Import section offers the command without that condition. The rule appends the
+// condition at the end of the section, after the command.
+func cautionBehaviorImportOfANestedValue(_ string, content []byte) ([]byte, error) {
+	const heading = "\n## Import\n"
+	// A code span around a single word such as value becomes a per-language span that .NET
+	// capitalizes, so the sentence carries none.
+	const crash = "\nImporting a behavior crashes the provider if its value holds a nested object, " +
+		"such as webhook headers.\n"
+	start := bytes.Index(content, []byte(heading))
+	if start < 0 {
+		return content, nil
+	}
+	body := start + len(heading)
+	end := len(content)
+	if next := bytes.Index(content[body:], []byte("\n## ")); next >= 0 {
+		end = body + next
+	}
+	return append(append(content[:end:end], crash...), content[end:]...), nil
+}
+
+var (
+	behaviorValueStart = regexp.MustCompile(`^\s+value\s*=\s*\{\s*$`)
+	behaviorValueKey   = regexp.MustCompile(`^(\s+)([a-z0-9_]+)(\s*=)`)
+)
+
+// The example converter camelCases each key of an object whose type it does not know, and value
+// is Dynamic, so the API would receive fileExpiration. It keeps every key of an object that has a
+// quoted key (pulumi/pulumi-converter-terraform#451).
+func quoteBehaviorValueKeys(_ string, content []byte) ([]byte, error) {
+	var out bytes.Buffer
+	depth := 0
+	for _, line := range bytes.SplitAfter(content, []byte("\n")) {
+		if depth > 0 {
+			line = behaviorValueKey.ReplaceAll(line, []byte(`$1"$2"$3`))
+		}
+		if depth > 0 || behaviorValueStart.Match(line) {
+			depth += bytes.Count(line, []byte("{")) - bytes.Count(line, []byte("}"))
+		}
+		out.Write(line)
+	}
+	return out.Bytes(), nil
 }
 
 // The upstream page tells the reader to reach for Terraform, which is the wrong tool for a

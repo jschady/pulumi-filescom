@@ -414,6 +414,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Message;
         /// <summary>
+        /// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+        /// </summary>
+        public readonly bool MessageOnly;
+        /// <summary>
         /// Event Subscription name.
         /// </summary>
         public readonly string Name;
@@ -452,6 +456,8 @@ namespace Jschady.Filescom
 
             string message,
 
+            bool messageOnly,
+
             string name,
 
             string subject,
@@ -470,6 +476,7 @@ namespace Jschady.Filescom
             Filter = filter;
             Id = id;
             Message = message;
+            MessageOnly = messageOnly;
             Name = name;
             Subject = subject;
             UpdatedAt = updatedAt;

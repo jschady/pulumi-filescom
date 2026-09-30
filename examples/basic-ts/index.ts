@@ -16,10 +16,12 @@ const behavior = new filescom.Behavior("behavior", {
     path: folderPath,
     name: behaviorName,
     value: {
-        urls: ["https://example.com/pulumi-filescom-behavior-probe"],
-        method: "POST",
-        triggers: ["create"],
-        headers: { "x-pulumi-filescom-probe": "v1" },
+        webhook: {
+            urls: ["https://example.com/pulumi-filescom-behavior-probe"],
+            method: "POST",
+            triggers: ["create"],
+            headers: { "x-pulumi-filescom-probe": "v1" },
+        },
     },
 });
 

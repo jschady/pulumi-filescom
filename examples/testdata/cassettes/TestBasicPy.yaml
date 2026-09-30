@@ -8,14 +8,14 @@ interactions:
         proto_minor: 1
         content_length: 0
         host: app.files.com
-        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/68deecd7
+        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/02120ec7
         method: POST
       response:
         proto: HTTP/2.0
         proto_major: 2
         proto_minor: 0
         content_length: 808
-        body: '{"path":"pulumi-filescom-test/68deecd7","created_by_id":1400342,"created_by_api_key_id":5450823,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"68deecd7","type":"directory","size":null,"created_at":"2026-08-26T01:19:11Z","last_modified_by_id":1400342,"last_modified_by_api_key_id":5450823,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-08-26T01:19:11Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
+        body: '{"path":"pulumi-filescom-test/02120ec7","created_by_id":1437572,"created_by_api_key_id":5602101,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"02120ec7","type":"directory","size":null,"created_at":"2026-09-29T22:03:10Z","last_modified_by_id":1437572,"last_modified_by_api_key_id":5602101,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-09-29T22:03:10Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -26,7 +26,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:11 GMT
+                - Tue, 29 Sep 2026 22:03:10 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -46,12 +46,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - a4ca3746ddac56e5a68e75046b602a30
+                - 0af7eb8acf0f45ca35abe060370e6186
             X-Xss-Protection:
                 - "0"
         status: 201 Created
         code: 201
-        duration: 144.5195ms
+        duration: 100.047709ms
     - id: 1
       request:
         proto: HTTP/1.1
@@ -59,7 +59,7 @@ interactions:
         proto_minor: 1
         content_length: 79
         host: app.files.com
-        body: '{"name":"pulumi-test-group-ce488663","notes":"The group of the basic example."}'
+        body: '{"name":"pulumi-test-group-117ff252","notes":"The group of the basic example."}'
         headers:
             Content-Type:
                 - application/json
@@ -71,19 +71,19 @@ interactions:
         proto: HTTP/2.0
         proto_major: 2
         proto_minor: 0
-        content_length: 397
-        body: '{"id":99642,"name":"pulumi-test-group-ce488663","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        content_length: 440
+        body: '{"id":102129,"name":"pulumi-test-group-117ff252","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
             Content-Length:
-                - "397"
+                - "440"
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:21 GMT
+                - Tue, 29 Sep 2026 22:03:19 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -103,12 +103,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 62960ca6043682b4031372b0040eeaa9
+                - 39e55d146c4f7ca9dda87318b673091c
             X-Xss-Protection:
                 - "0"
         status: 201 Created
         code: 201
-        duration: 179.297708ms
+        duration: 59.461334ms
     - id: 2
       request:
         proto: HTTP/1.1
@@ -116,7 +116,7 @@ interactions:
         proto_minor: 1
         content_length: 253
         host: app.files.com
-        body: '{"behavior":"webhook","name":"pulumi-test-behavior-42b6d6f3","path":"pulumi-filescom-test/68deecd7","value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]}}'
+        body: '{"behavior":"webhook","name":"pulumi-test-behavior-bb89c975","path":"pulumi-filescom-test/02120ec7","value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]}}'
         headers:
             Content-Type:
                 - application/json
@@ -129,7 +129,7 @@ interactions:
         proto_major: 2
         proto_minor: 0
         content_length: 412
-        body: '{"id":586200,"path":"pulumi-filescom-test/68deecd7","behavior":"webhook","name":"pulumi-test-behavior-42b6d6f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
+        body: '{"id":598063,"path":"pulumi-filescom-test/02120ec7","behavior":"webhook","name":"pulumi-test-behavior-bb89c975","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -140,7 +140,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:21 GMT
+                - Tue, 29 Sep 2026 22:03:19 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -160,12 +160,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 6ea8e5c9c1ff4a1e1bd78892337833f8
+                - e93ab62904b51e8eebf5b8ebc5d7f0d7
             X-Xss-Protection:
                 - "0"
         status: 201 Created
         code: 201
-        duration: 189.846167ms
+        duration: 84.169042ms
     - id: 3
       request:
         proto: HTTP/1.1
@@ -184,7 +184,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '[{"id":99642,"name":"pulumi-test-group-ce488663","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}]'
+        body: '[{"id":102129,"name":"pulumi-test-group-117ff252","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}]'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -193,7 +193,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:23 GMT
+                - Tue, 29 Sep 2026 22:03:21 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -213,12 +213,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - e03ff7a2baf666002f40f5634af6e220
+                - c0814b3ad2c6473ba307874a9f395261
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 89.235916ms
+        duration: 33.2495ms
     - id: 4
       request:
         proto: HTTP/1.1
@@ -237,7 +237,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '[{"id":586200,"path":"pulumi-filescom-test/68deecd7","behavior":"webhook","name":"pulumi-test-behavior-42b6d6f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}]'
+        body: '[{"id":598063,"path":"pulumi-filescom-test/02120ec7","behavior":"webhook","name":"pulumi-test-behavior-bb89c975","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}]'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -246,7 +246,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:23 GMT
+                - Tue, 29 Sep 2026 22:03:21 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -266,12 +266,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 938a202cfacaae590e2715a5147f8066
+                - 37dd71222b65bc980854a9a8e5d87f06
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 58.663959ms
+        duration: 35.721417ms
     - id: 5
       request:
         proto: HTTP/1.1
@@ -282,7 +282,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/groups/99642
+        url: https://app.files.com/api/rest/v1/groups/102129
         method: GET
       response:
         proto: HTTP/2.0
@@ -290,7 +290,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '{"id":99642,"name":"pulumi-test-group-ce488663","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        body: '{"id":102129,"name":"pulumi-test-group-117ff252","allowed_ips":null,"admin_ids":"","notes":"The group of the basic example.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -299,7 +299,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:23 GMT
+                - Tue, 29 Sep 2026 22:03:21 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -319,12 +319,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - dc3953b4950f666d9a7251d890251ba7
+                - 991e49b3d5f92e871c18e4a68084e72d
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 67.00225ms
+        duration: 33.528125ms
     - id: 6
       request:
         proto: HTTP/1.1
@@ -335,7 +335,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/behaviors/586200
+        url: https://app.files.com/api/rest/v1/behaviors/598063
         method: GET
       response:
         proto: HTTP/2.0
@@ -343,7 +343,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '{"id":586200,"path":"pulumi-filescom-test/68deecd7","behavior":"webhook","name":"pulumi-test-behavior-42b6d6f3","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
+        body: '{"id":598063,"path":"pulumi-filescom-test/02120ec7","behavior":"webhook","name":"pulumi-test-behavior-bb89c975","description":null,"value":{"headers":{"x-pulumi-filescom-probe":"v1"},"method":"POST","triggers":["create"],"urls":["https://example.com/pulumi-filescom-behavior-probe"]},"disable_parent_folder_behavior":false,"recursive":true,"inherited":false,"managed":false,"root_behavior_site_admin_only":false}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -352,7 +352,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:23 GMT
+                - Tue, 29 Sep 2026 22:03:21 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -372,12 +372,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 4ce7cb7e8eab8e363ec5eae396f6f8df
+                - 1562e20ae967d56d618acfadd56e13f8
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 128.966834ms
+        duration: 38.154583ms
     - id: 7
       request:
         proto: HTTP/1.1
@@ -388,7 +388,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/groups/99642
+        url: https://app.files.com/api/rest/v1/groups/102129
         method: DELETE
       response:
         proto: HTTP/2.0
@@ -402,7 +402,7 @@ interactions:
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Date:
-                - Wed, 26 Aug 2026 01:19:24 GMT
+                - Tue, 29 Sep 2026 22:03:22 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -422,12 +422,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 0b93635ce38d38d628013f7ee2ef1032
+                - 9a0501c06b7c3c43c8a7859ac8ec3de4
             X-Xss-Protection:
                 - "0"
         status: 204 No Content
         code: 204
-        duration: 113.051666ms
+        duration: 53.557875ms
     - id: 8
       request:
         proto: HTTP/1.1
@@ -438,7 +438,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/behaviors/586200
+        url: https://app.files.com/api/rest/v1/behaviors/598063
         method: DELETE
       response:
         proto: HTTP/2.0
@@ -452,7 +452,7 @@ interactions:
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Date:
-                - Wed, 26 Aug 2026 01:19:24 GMT
+                - Tue, 29 Sep 2026 22:03:22 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -472,12 +472,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - d51710000fceae3bbffd16dda25330ed
+                - 361f5ac363ec14f8c79bbd03fbb77d56
             X-Xss-Protection:
                 - "0"
         status: 204 No Content
         code: 204
-        duration: 216.902ms
+        duration: 83.360917ms
     - id: 9
       request:
         proto: HTTP/1.1
@@ -506,7 +506,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:25 GMT
+                - Tue, 29 Sep 2026 22:03:22 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -526,12 +526,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - c3d80685536b7f7a0f2edaa10cafd165
+                - 46c40372b035f5ea71bb09ff2c9bb556
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 95.310458ms
+        duration: 51.718125ms
     - id: 10
       request:
         proto: HTTP/1.1
@@ -560,7 +560,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:19:25 GMT
+                - Tue, 29 Sep 2026 22:03:22 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -580,12 +580,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - ace88ea4c1f3d0299acdc91d8c110fe7
+                - 7fda81bbbf49500b627ffdc24836d524
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 58.227375ms
+        duration: 38.922291ms
     - id: 11
       request:
         proto: HTTP/1.1
@@ -596,7 +596,7 @@ interactions:
         form:
             recursive:
                 - "true"
-        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/68deecd7?recursive=true
+        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/02120ec7?recursive=true
         method: DELETE
       response:
         proto: HTTP/2.0
@@ -610,7 +610,7 @@ interactions:
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Date:
-                - Wed, 26 Aug 2026 01:19:25 GMT
+                - Tue, 29 Sep 2026 22:03:22 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -630,9 +630,9 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - f93893c612d40657d32579b1034c22a7
+                - fc2c6df514b165a75fe8a5dc155d9d6c
             X-Xss-Protection:
                 - "0"
         status: 204 No Content
         code: 204
-        duration: 157.204791ms
+        duration: 62.985167ms

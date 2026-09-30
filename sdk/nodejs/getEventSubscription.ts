@@ -82,6 +82,10 @@ export interface GetEventSubscriptionResult {
      */
     readonly message: string;
     /**
+     * If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+     */
+    readonly messageOnly: boolean;
+    /**
      * Event Subscription name.
      */
     readonly name: string;

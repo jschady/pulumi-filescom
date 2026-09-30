@@ -7,7 +7,6 @@ package examples
 import (
 	"encoding/json"
 	"path/filepath"
-	"sort"
 	"strconv"
 	"testing"
 
@@ -21,9 +20,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/auto/optrefresh"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/apitype"
 )
-
-//nolint:gosec // The value is the Pulumi type token of the resource, not a credential.
-const behaviorToken = "filescom:index/behavior:Behavior"
 
 // The webhook target of the probe value. It resolves nowhere and no test uploads a file,
 // so the behavior never fires.
@@ -79,7 +75,7 @@ func TestBehaviorLifecycle(t *testing.T) {
 	require.Equal(t, name, created.Name, "the behavior on the account should carry the configured name")
 	require.Equal(t, wantValueJSON(t, baseHeaders), valueJSON(t, created.Value),
 		"the value on the account should carry the four keys the program sent")
-	require.Equal(t, wantValueJSON(t, baseHeaders), valueJSON(t, up.Outputs["behaviorValue"].Value),
+	require.Equal(t, wantValueJSON(t, baseHeaders), wrappedValueJSON(t, up.Outputs["behaviorValue"].Value),
 		"the value in the stack outputs should carry the four keys the program sent")
 
 	// 2. The immediate second preview reports no changes. This is the map-versus-object
@@ -102,7 +98,7 @@ func TestBehaviorLifecycle(t *testing.T) {
 	pt.Up(t)
 	pt.Refresh(t)
 	refreshed := requireBehaviorResource(t, pt)
-	require.Equal(t, wantValueJSON(t, extraHeaders), valueJSON(t, refreshed.Outputs["value"]),
+	require.Equal(t, wantValueJSON(t, extraHeaders), wrappedValueJSON(t, refreshed.Outputs["value"]),
 		"the refreshed value should carry the new header")
 	require.Equal(t, wantValueJSON(t, extraHeaders), valueJSON(t, requireBehaviorOnPath(t, folderA).Value),
 		"the value on the account should carry the new header")
@@ -118,15 +114,17 @@ func TestBehaviorLifecycle(t *testing.T) {
 		"the replacement behavior should carry the same value")
 	require.Len(t, sandboxBehaviors(t), 1, "the replace should leave one behavior in the sandbox")
 
-	// 6. Changing behavior is a replace. The first preview keeps the webhook value, so the
-	// replace is attributable to the behavior property alone, and restoring the type is clean.
+	// 6. Changing behavior is a replace. The value sits under the type name, so a new type
+	// that keeps the webhook value fails at preview, and restoring the type is clean.
 	pt.SetConfig(t, "behaviorType", replacementBehaviorType)
-	requireReplacePlan(t, "changed behavior", pt.Preview(t, optpreview.Diff()))
+	_, err := pt.PreviewErr(t, optpreview.Diff())
+	require.ErrorContains(t, err, "Invalid Value Wrapper",
+		"a new type with the webhook value should fail at preview")
 	pt.SetConfig(t, "behaviorType", "webhook")
 	requireNoChanges(t, "restored behavior", pt.Preview(t, optpreview.Diff()))
 
-	// Then the replace is applied, with the value the second type takes. A preview alone
-	// would not show whether the replacement create reaches the account.
+	// The type and its value change together. A value change alone is an in-place update, so
+	// the replace comes from the type. The up shows the replacement create reaches the account.
 	pt.SetConfig(t, "behaviorType", replacementBehaviorType)
 	pt.UpdateSource(t, "lifecycle", "behavior", "file-expiration")
 	requireReplacePlan(t, "changed behavior with its own value", pt.Preview(t, optpreview.Diff()))
@@ -137,6 +135,12 @@ func TestBehaviorLifecycle(t *testing.T) {
 	require.NotEqual(t, moved.ID, retyped.ID, "the replacement should carry a new id")
 	require.EqualValues(t, retentionDays, retentionValue(t, retyped.Value),
 		"the replacement on the account should carry the retention the program set")
+	retypedState, ok := requireBehaviorResource(t, pt).Outputs["value"].(map[string]any)
+	require.True(t, ok, "the value in the state should be an object")
+	require.Equal(t, []string{replacementBehaviorType}, sortedKeys(retypedState),
+		"the value in the state should sit under the file_expiration key")
+	require.EqualValues(t, retentionDays, retentionValue(t, retypedState[replacementBehaviorType]),
+		"the value in the state should carry the retention the program set")
 	require.Len(t, sandboxBehaviors(t), 1, "the replace should leave one behavior in the sandbox")
 	requireNoChanges(t, "after the behavior replace", pt.Preview(t, optpreview.Diff()))
 
@@ -157,24 +161,6 @@ func requireBehaviorResource(t *testing.T, pt *pulumitest.PulumiTest) apitype.Re
 	resource, found := findResource(t, pt, behaviorToken)
 	require.Truef(t, found, "the stack state should hold one %s", behaviorToken)
 	return resource
-}
-
-// valueJSON reduces a Dynamic value to urls, method, triggers and headers. Marshalling sorts
-// the keys, so two reduced values compare as strings that read back in a failure message.
-func valueJSON(t *testing.T, raw any) string {
-	t.Helper()
-	object, ok := raw.(map[string]any)
-	require.Truef(t, ok, "the behavior value should be an object, got %T: %v", raw, raw)
-
-	reduced := map[string]any{}
-	for _, key := range []string{"urls", "method", "triggers", "headers"} {
-		value, present := object[key]
-		require.Truef(t, present, "the behavior value should carry %q, got the keys %v", key, sortedKeys(object))
-		reduced[key] = value
-	}
-	encoded, err := json.Marshal(reduced)
-	require.NoError(t, err)
-	return string(encoded)
 }
 
 // retentionValue reads the one key the file expiration value of assertion 6 is asserted on.
@@ -198,15 +184,6 @@ func wantValueJSON(t *testing.T, headers map[string]string) string {
 	})
 	require.NoError(t, err)
 	return string(encoded)
-}
-
-func sortedKeys(object map[string]any) []string {
-	keys := make([]string, 0, len(object))
-	for key := range object {
-		keys = append(keys, key)
-	}
-	sort.Strings(keys)
-	return keys
 }
 
 // requireReplacePlan fails unless the preview replaces the behavior. A plain update instead

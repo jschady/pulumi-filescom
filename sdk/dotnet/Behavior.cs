@@ -13,13 +13,13 @@ namespace Jschady.Filescom
     /// <summary>
     /// A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
     /// 
-    /// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level. The exact options for each behavior type are explained in the table below.
+    /// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
     /// 
     /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
     /// 
-    /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+    /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
     /// 
-    /// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+    /// Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
     /// 
     /// Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
     /// 
@@ -38,7 +38,15 @@ namespace Jschady.Filescom
     ///     {
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["method"] = "GET",
+    ///             ["webhook"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["urls"] = new[]
+    ///                 {
+    ///                     "https://example.com/webhook",
+    ///                 },
+    ///                 ["method"] = "POST",
+    ///                 ["encoding"] = "JSON",
+    ///             },
     ///         },
     ///         DisableParentFolderBehavior = false,
     ///         Recursive = false,
@@ -54,43 +62,15 @@ namespace Jschady.Filescom
     ///         BehaviorType = "webhook",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["urls"] = new[]
+    ///             ["webhook"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "https://mysite.com/url...",
+    ///                 ["urls"] = new[]
+    ///                 {
+    ///                     "https://example.com/webhook",
+    ///                 },
+    ///                 ["method"] = "POST",
+    ///                 ["encoding"] = "JSON",
     ///             },
-    ///             ["method"] = "POST",
-    ///             ["triggers"] = new[]
-    ///             {
-    ///                 "create",
-    ///                 "read",
-    ///                 "update",
-    ///                 "destroy",
-    ///                 "move",
-    ///                 "copy",
-    ///             },
-    ///             ["triggeringFilenames"] = new[]
-    ///             {
-    ///                 "*.pdf",
-    ///                 "*so*.jpg",
-    ///             },
-    ///             ["excludeFilenames"] = new[]
-    ///             {
-    ///                 "*.txt",
-    ///                 "*wo*.png",
-    ///             },
-    ///             ["encoding"] = "RAW",
-    ///             ["headers"] = new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 ["MY-HEADER"] = "foo",
-    ///             },
-    ///             ["body"] = new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 ["MY_BODY_PARAM"] = "bar",
-    ///             },
-    ///             ["verificationToken"] = "tok12345",
-    ///             ["fileFormField"] = "my_form_field",
-    ///             ["fileAsBody"] = "my_file_body",
-    ///             ["useDedicatedIps"] = false,
     ///         },
     ///     });
     /// 
@@ -100,8 +80,11 @@ namespace Jschady.Filescom
     ///         BehaviorType = "file_expiration",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["daysToRetain"] = 30,
-    ///             ["deleteEmptyFolders"] = false,
+    ///             ["file_expiration"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["days_to_retain"] = 30,
+    ///                 ["delete_empty_folders"] = false,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -111,16 +94,16 @@ namespace Jschady.Filescom
     ///         BehaviorType = "auto_encrypt",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["gpgKeyId"] = 1,
-    ///             ["gpgKeyIds"] = new[]
+    ///             ["auto_encrypt"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 1,
+    ///                 ["gpg_key_ids"] = new[]
+    ///                 {
+    ///                     1,
+    ///                 },
+    ///                 ["algorithm"] = "PGP/GPG",
+    ///                 ["suffix"] = ".gpg",
+    ///                 ["armor"] = false,
     ///             },
-    ///             ["algorithm"] = "PGP/GPG",
-    ///             ["signingKeyId"] = 1,
-    ///             ["suffix"] = ".gpg",
-    ///             ["armor"] = false,
-    ///             ["gpgKeyPartnerId"] = 1,
     ///         },
     ///     });
     /// 
@@ -130,7 +113,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "lock_subfolders",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["level"] = "children_recursive",
+    ///             ["lock_subfolders"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["level"] = "children_recursive",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -138,7 +124,10 @@ namespace Jschady.Filescom
     ///     {
     ///         Path = "path",
     ///         BehaviorType = "storage_region",
-    ///         Value = "us-east-1",
+    ///         Value = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["storage_region"] = "us-east-1",
+    ///         },
     ///     });
     /// 
     ///     var exampleServePubliclyBehavior = new Filescom.Behavior("example_serve_publicly_behavior", new()
@@ -147,11 +136,12 @@ namespace Jschady.Filescom
     ///         BehaviorType = "serve_publicly",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "public-photos",
-    ///             ["showIndex"] = true,
-    ///             ["forceDownload"] = true,
-    ///             ["corsEnabled"] = false,
-    ///             ["requireSiteAuthentication"] = false,
+    ///             ["serve_publicly"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["key"] = "public-files",
+    ///                 ["show_index"] = true,
+    ///                 ["force_download"] = false,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -161,15 +151,11 @@ namespace Jschady.Filescom
     ///         BehaviorType = "create_user_folders",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["permission"] = "full",
-    ///             ["additionalPermission"] = "bundle",
-    ///             ["existingUsers"] = true,
-    ///             ["groupId"] = 1,
-    ///             ["newFolderName"] = "username",
-    ///             ["subfolders"] = new[]
+    ///             ["create_user_folders"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "in",
-    ///                 "out",
+    ///                 ["permission"] = "full",
+    ///                 ["existing_users"] = false,
+    ///                 ["new_folder_name"] = "name",
     ///             },
     ///         },
     ///     });
@@ -180,39 +166,20 @@ namespace Jschady.Filescom
     ///         BehaviorType = "inbox",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "application-forms",
-    ///             ["dontSeparateSubmissionsByFolder"] = true,
-    ///             ["dontSeparateSubmissionsByFolderForInboundEmail"] = true,
-    ///             ["dontAllowFoldersInUploads"] = false,
-    ///             ["requireInboxRecipient"] = false,
-    ///             ["showOnLoginPage"] = true,
-    ///             ["title"] = "Submit Your Job Applications Here",
-    ///             ["description"] = "Thanks for coming to the Files.com Job Application Page",
-    ///             ["helpText"] = "If you have trouble here, please contact your recruiter.",
-    ///             ["requireRegistration"] = true,
-    ///             ["password"] = "foobar",
-    ///             ["pathTemplate"] = "{{name}}_{{ip}}",
-    ///             ["pathTemplateTimeZone"] = "Eastern Time (US &amp; Canada)",
-    ///             ["enableInboundEmailAddress"] = true,
-    ///             ["notifySendersOnSuccessfulUploadsViaEmail"] = true,
-    ///             ["notifySendersOnSuccessfulUploadsViaWeb"] = true,
-    ///             ["allowWhitelisting"] = true,
-    ///             ["whitelist"] = new[]
+    ///             ["inbox"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "john@test.com",
-    ///                 "mydomain.com",
-    ///             },
-    ///             ["disableWebUpload"] = true,
-    ///             ["captureEmailBodyFilename"] = "_body.txt",
-    ///             ["requestedUploadSlots"] = new[]
-    ///             {
-    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 ["key"] = "application-forms",
+    ///                 ["dont_separate_submissions_by_folder"] = false,
+    ///                 ["show_on_login_page"] = false,
+    ///                 ["title"] = "Application Forms",
+    ///                 ["require_registration"] = false,
+    ///                 ["disable_web_upload"] = false,
+    ///                 ["requested_upload_slots"] = new[]
     ///                 {
-    ///                     ["name"] = "Photo ID",
-    ///                 },
-    ///                 new Dictionary&lt;string, object?&gt;
-    ///                 {
-    ///                     ["name"] = "Proof of Address",
+    ///                     new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["name"] = "Photo ID",
+    ///                     },
     ///                 },
     ///             },
     ///         },
@@ -224,12 +191,15 @@ namespace Jschady.Filescom
     ///         BehaviorType = "limit_file_extensions",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["extensions"] = new[]
+    ///             ["limit_file_extensions"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "xls",
-    ///                 "csv",
+    ///                 ["extensions"] = new[]
+    ///                 {
+    ///                     "pdf",
+    ///                     "csv",
+    ///                 },
+    ///                 ["mode"] = "whitelist",
     ///             },
-    ///             ["mode"] = "whitelist",
     ///         },
     ///     });
     /// 
@@ -237,9 +207,12 @@ namespace Jschady.Filescom
     ///     {
     ///         Path = "path",
     ///         BehaviorType = "limit_file_regex",
-    ///         Value = new[]
+    ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             "/Document-.*/",
+    ///             ["limit_file_regex"] = new[]
+    ///             {
+    ///                 "/Document-.*/",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -249,24 +222,18 @@ namespace Jschady.Filescom
     ///         BehaviorType = "amazon_sns",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["arns"] = new[]
+    ///             ["amazon_sns"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "ARN",
-    ///             },
-    ///             ["triggers"] = new[]
-    ///             {
-    ///                 "create",
-    ///                 "read",
-    ///                 "update",
-    ///                 "destroy",
-    ///                 "move",
-    ///                 "copy",
-    ///             },
-    ///             ["awsCredentials"] = new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 ["accessKeyId"] = "ACCESS_KEY_ID",
-    ///                 ["region"] = "us-east-1",
-    ///                 ["secretAccessKey"] = "SECRET_ACCESS_KEY",
+    ///                 ["arns"] = new[]
+    ///                 {
+    ///                     "arn:aws:sns:us-east-1:123456789012:files-events",
+    ///                 },
+    ///                 ["aws_credentials"] = new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["access_key_id"] = "ACCESS_KEY_ID",
+    ///                     ["region"] = "us-east-1",
+    ///                     ["secret_access_key"] = "SECRET_ACCESS_KEY",
+    ///                 },
     ///             },
     ///         },
     ///     });
@@ -277,10 +244,12 @@ namespace Jschady.Filescom
     ///         BehaviorType = "watermark",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["gravity"] = "SouthWest",
-    ///             ["maxHeightOrWidth"] = 20,
-    ///             ["transparency"] = 25,
-    ///             ["dynamicText"] = "Confidential: For use by {{user}} only.",
+    ///             ["watermark"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["gravity"] = "SouthWest",
+    ///                 ["max_height_or_width"] = 20,
+    ///                 ["transparency"] = 25,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -290,8 +259,11 @@ namespace Jschady.Filescom
     ///         BehaviorType = "remote_server_mount",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["remoteServerId"] = 1,
-    ///             ["remotePath"] = "",
+    ///             ["remote_server_mount"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["remote_server_id"] = 1,
+    ///                 ["remote_path"] = "shared/files",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -301,18 +273,13 @@ namespace Jschady.Filescom
     ///         BehaviorType = "slack_webhook",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["url"] = "https://mysite.com/url...",
-    ///             ["username"] = "Files.com",
-    ///             ["channel"] = "alerts",
-    ///             ["iconEmoji"] = ":robot_face:",
-    ///             ["triggers"] = new[]
+    ///             ["slack_webhook"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "create",
-    ///                 "read",
-    ///                 "update",
-    ///                 "destroy",
-    ///                 "move",
-    ///                 "copy",
+    ///                 ["url"] = "https://hooks.slack.com/services/example",
+    ///                 ["triggers"] = new[]
+    ///                 {
+    ///                     "create",
+    ///                 },
     ///             },
     ///         },
     ///     });
@@ -323,16 +290,16 @@ namespace Jschady.Filescom
     ///         BehaviorType = "auto_decrypt",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["gpgKeyId"] = 1,
-    ///             ["gpgKeyIds"] = new[]
+    ///             ["auto_decrypt"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 1,
+    ///                 ["gpg_key_ids"] = new[]
+    ///                 {
+    ///                     1,
+    ///                 },
+    ///                 ["algorithm"] = "PGP/GPG",
+    ///                 ["suffix"] = ".gpg",
+    ///                 ["ignore_mdc_error"] = false,
     ///             },
-    ///             ["algorithm"] = "PGP/GPG",
-    ///             ["suffix"] = ".gpg",
-    ///             ["ignoreMdcError"] = true,
-    ///             ["gpgKeyPartnerId"] = 1,
-    ///             ["useAllPrivateKeys"] = false,
     ///         },
     ///     });
     /// 
@@ -342,12 +309,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "override_upload_filename",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["filenameOverridePattern"] = "%Fb_addition5%Fe",
-    ///             ["filenameReplaceFrom"] = null,
-    ///             ["filenameReplaceTo"] = null,
-    ///             ["filenameRegexReplaceFrom"] = null,
-    ///             ["filenameRegexReplaceTo"] = null,
-    ///             ["timeZone"] = "Eastern Time (US &amp; Canada)",
+    ///             ["override_upload_filename"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["filename_override_pattern"] = "%Fb_uploaded%Fe",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -357,7 +322,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "permission_fence",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["fencedPermissions"] = "all",
+    ///             ["permission_fence"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["fenced_permissions"] = "all",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -367,8 +335,11 @@ namespace Jschady.Filescom
     ///         BehaviorType = "limit_filename_length",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["maxLength"] = 30,
-    ///             ["shorten"] = true,
+    ///             ["limit_filename_length"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["max_length"] = 30,
+    ///                 ["shorten"] = true,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -378,11 +349,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "organize_files_into_subfolders",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["subfolderNameType"] = "regex, extension, created_at, provided_modified_at",
-    ///             ["regex"] = "(?&lt;=\\-)(.*?)(?=\\.)",
-    ///             ["strftimeFormat"] = "%Y-%m-%d",
-    ///             ["timeZone"] = "Eastern Time (US &amp; Canada)",
-    ///             ["applyBehavior"] = true,
+    ///             ["organize_files_into_subfolders"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["subfolder_name_type"] = "extension",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -392,15 +362,13 @@ namespace Jschady.Filescom
     ///         BehaviorType = "teams_webhook",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["url"] = "https://mysite.com/url...",
-    ///             ["triggers"] = new[]
+    ///             ["teams_webhook"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 "create",
-    ///                 "read",
-    ///                 "update",
-    ///                 "destroy",
-    ///                 "move",
-    ///                 "copy",
+    ///                 ["url"] = "https://example.webhook.office.com/webhook",
+    ///                 ["triggers"] = new[]
+    ///                 {
+    ///                     "create",
+    ///                 },
     ///             },
     ///         },
     ///     });
@@ -411,35 +379,29 @@ namespace Jschady.Filescom
     ///         BehaviorType = "google_pub_sub",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["projectsTopics"] = new[]
+    ///             ["google_pub_sub"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 ["projects_topics"] = new[]
     ///                 {
-    ///                     ["projectId"] = "my-project-id",
-    ///                     ["topicId"] = "my-topic-id",
+    ///                     new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["project_id"] = "my-project",
+    ///                         ["topic_id"] = "files-events",
+    ///                     },
     ///                 },
-    ///             },
-    ///             ["triggers"] = new[]
-    ///             {
-    ///                 "create",
-    ///                 "read",
-    ///                 "update",
-    ///                 "destroy",
-    ///                 "move",
-    ///                 "copy",
-    ///             },
-    ///             ["googleCredentials"] = new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 ["type"] = "service_account",
-    ///                 ["projectId"] = "your-project-id",
-    ///                 ["privateKeyId"] = "your-private-key-id",
-    ///                 ["privateKey"] = "-----BEGIN PRIVATE KEY-----\\nMIIC...",
-    ///                 ["clientEmail"] = "your-service-account@your-project-id.iam.gserviceaccount.com",
-    ///                 ["clientId"] = "your-client-id",
-    ///                 ["authUri"] = "https=&gt;//accounts.google.com/o/oauth2/auth",
-    ///                 ["tokenUri"] = "https=&gt;//oauth2.googleapis.com/token",
-    ///                 ["authProviderX509CertUrl"] = "https://www.googleapis.com/oauth2/v1/certs",
-    ///                 ["clientX509CertUrl"] = "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+    ///                 ["google_credentials"] = new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["type"] = "service_account",
+    ///                     ["project_id"] = "your-project-id",
+    ///                     ["private_key_id"] = "your-private-key-id",
+    ///                     ["private_key"] = "-----BEGIN PRIVATE KEY-----\\nMIIC...",
+    ///                     ["client_email"] = "your-service-account@your-project-id.iam.gserviceaccount.com",
+    ///                     ["client_id"] = "your-client-id",
+    ///                     ["auth_uri"] = "https://accounts.google.com/o/oauth2/auth",
+    ///                     ["token_uri"] = "https://oauth2.googleapis.com/token",
+    ///                     ["auth_provider_x509_cert_url"] = "https://www.googleapis.com/oauth2/v1/certs",
+    ///                     ["client_x509_cert_url"] = "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
+    ///                 },
     ///             },
     ///         },
     ///     });
@@ -450,7 +412,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "archive_overwritten_or_deleted_files",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["archivePath"] = "/Archive",
+    ///             ["archive_overwritten_or_deleted_files"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["archive_path"] = "/Archive",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -460,19 +425,19 @@ namespace Jschady.Filescom
     ///         BehaviorType = "auto_recrypt",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["decryptGpgKeyIds"] = new[]
+    ///             ["auto_recrypt"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 1,
+    ///                 ["decrypt_gpg_key_ids"] = new[]
+    ///                 {
+    ///                     1,
+    ///                 },
+    ///                 ["encrypt_gpg_key_ids"] = new[]
+    ///                 {
+    ///                     2,
+    ///                 },
+    ///                 ["ignore_mdc_error"] = false,
+    ///                 ["armor"] = false,
     ///             },
-    ///             ["encryptGpgKeyIds"] = new[]
-    ///             {
-    ///                 1,
-    ///             },
-    ///             ["decryptGpgKeyPartnerId"] = 1,
-    ///             ["encryptGpgKeyPartnerId"] = 1,
-    ///             ["ignoreMdcError"] = true,
-    ///             ["signingKeyId"] = 1,
-    ///             ["armor"] = false,
     ///         },
     ///     });
     /// 
@@ -482,7 +447,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "metadata_category",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["metadataCategoryId"] = 1,
+    ///             ["metadata_category"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["metadata_category_id"] = 1,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -492,8 +460,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "auto_unzip",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["destinationPath"] = "/Uploads/Unzipped/%Y/%m/%d",
-    ///             ["pathTimeZone"] = "Eastern Time (US &amp; Canada)",
+    ///             ["auto_unzip"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["destination_path"] = "/Uploads/Unzipped/%Y/%m/%d",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -503,8 +473,10 @@ namespace Jschady.Filescom
     ///         BehaviorType = "remote_server_metadata_index",
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["intervalMinutes"] = 1440,
-    ///             ["initialScanCompleted"] = false,
+    ///             ["remote_server_metadata_index"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["interval_minutes"] = 1440,
+    ///             },
     ///         },
     ///     });
     /// 
@@ -512,7 +484,12 @@ namespace Jschady.Filescom
     ///     {
     ///         Path = "path",
     ///         BehaviorType = "malware_scanning",
-    ///         Value = null,
+    ///         Value = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["malware_scanning"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -528,6 +505,8 @@ namespace Jschady.Filescom
     /// ```sh
     /// $ pulumi import filescom:index/behavior:Behavior example_behavior 1
     /// ```
+    /// 
+    /// Importing a behavior crashes the provider if its value holds a nested object, such as webhook headers.
     /// </summary>
     [FilescomResourceType("filescom:index/behavior:Behavior")]
     public partial class Behavior : global::Pulumi.CustomResource
@@ -599,7 +578,7 @@ namespace Jschady.Filescom
         public Output<bool> RootBehaviorSiteAdminOnly { get; private set; } = null!;
 
         /// <summary>
-        /// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+        /// Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
         /// </summary>
         [Output("value")]
         public Output<object> Value { get; private set; } = null!;
@@ -688,7 +667,7 @@ namespace Jschady.Filescom
         public Input<bool>? Recursive { get; set; }
 
         /// <summary>
-        /// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+        /// Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
         /// </summary>
         [Input("value")]
         public Input<object>? Value { get; set; }
@@ -768,7 +747,7 @@ namespace Jschady.Filescom
         public Input<bool>? RootBehaviorSiteAdminOnly { get; set; }
 
         /// <summary>
-        /// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+        /// Settings for this behavior, wrapped under the behavior name, for example `{ file_expiration: { days_to_retain: 30, delete_empty_folders: false } }`. Keep the API's keys in snake_case.
         /// </summary>
         [Input("value")]
         public Input<object>? Value { get; set; }

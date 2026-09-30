@@ -25,10 +25,12 @@ func main() {
 			Path:     pulumi.String(folderPath),
 			Name:     pulumi.String(cfg.Require("behaviorName")),
 			Value: pulumi.Any(map[string]any{
-				"urls":     []string{"https://example.com/pulumi-filescom-behavior-probe"},
-				"method":   "POST",
-				"triggers": []string{"create"},
-				"headers":  map[string]string{"x-pulumi-filescom-probe": "v1"},
+				"webhook": map[string]any{
+					"urls":     []string{"https://example.com/pulumi-filescom-behavior-probe"},
+					"method":   "POST",
+					"triggers": []string{"create"},
+					"headers":  map[string]string{"x-pulumi-filescom-probe": "v1"},
+				},
 			}),
 		})
 		if err != nil {

@@ -21,6 +21,7 @@ import * as utilities from "./utilities";
  *     name: "example",
  *     subject: "example",
  *     message: "example",
+ *     messageOnly: true,
  *     enabled: true,
  *     eventTypes: ["example"],
  *     deliveryPolicy: "example",
@@ -104,6 +105,10 @@ export class EventSubscription extends pulumi.CustomResource {
      */
     declare public readonly message: pulumi.Output<string>;
     /**
+     * If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+     */
+    declare public readonly messageOnly: pulumi.Output<boolean>;
+    /**
      * Event Subscription name.
      */
     declare public readonly name: pulumi.Output<string>;
@@ -142,6 +147,7 @@ export class EventSubscription extends pulumi.CustomResource {
             resourceInputs["eventTypes"] = state?.eventTypes;
             resourceInputs["filter"] = state?.filter;
             resourceInputs["message"] = state?.message;
+            resourceInputs["messageOnly"] = state?.messageOnly;
             resourceInputs["name"] = state?.name;
             resourceInputs["subject"] = state?.subject;
             resourceInputs["updatedAt"] = state?.updatedAt;
@@ -156,6 +162,7 @@ export class EventSubscription extends pulumi.CustomResource {
             resourceInputs["eventTypes"] = args?.eventTypes;
             resourceInputs["filter"] = args?.filter;
             resourceInputs["message"] = args?.message;
+            resourceInputs["messageOnly"] = args?.messageOnly;
             resourceInputs["name"] = args?.name;
             resourceInputs["subject"] = args?.subject;
             resourceInputs["workspaceId"] = args?.workspaceId;
@@ -207,6 +214,10 @@ export interface EventSubscriptionState {
      * Custom message to include in notification emails.
      */
     message?: pulumi.Input<string | undefined>;
+    /**
+     * If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+     */
+    messageOnly?: pulumi.Input<boolean | undefined>;
     /**
      * Event Subscription name.
      */
@@ -261,6 +272,10 @@ export interface EventSubscriptionArgs {
      * Custom message to include in notification emails.
      */
     message?: pulumi.Input<string | undefined>;
+    /**
+     * If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+     */
+    messageOnly?: pulumi.Input<boolean | undefined>;
     /**
      * Event Subscription name.
      */

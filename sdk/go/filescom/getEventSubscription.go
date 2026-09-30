@@ -78,6 +78,8 @@ type LookupEventSubscriptionResult struct {
 	Id int `pulumi:"id"`
 	// Custom message to include in notification emails.
 	Message string `pulumi:"message"`
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly bool `pulumi:"messageOnly"`
 	// Event Subscription name.
 	Name string `pulumi:"name"`
 	// Custom subject line to use for notification emails.
@@ -166,6 +168,11 @@ func (o LookupEventSubscriptionResultOutput) Id() pulumi.IntOutput {
 // Custom message to include in notification emails.
 func (o LookupEventSubscriptionResultOutput) Message() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupEventSubscriptionResult) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+func (o LookupEventSubscriptionResultOutput) MessageOnly() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupEventSubscriptionResult) bool { return v.MessageOnly }).(pulumi.BoolOutput)
 }
 
 // Event Subscription name.

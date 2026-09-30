@@ -18,13 +18,14 @@ resources:
       path: ${behaviorPath}
       name: ${behaviorName}
       value:
-        urls:
-          - https://example.com/pulumi-filescom-behavior-probe
-        method: POST
-        triggers:
-          - create
-        headers:
-          x-pulumi-filescom-probe: v1
+        webhook:
+          urls:
+            - https://example.com/pulumi-filescom-behavior-probe
+          method: POST
+          triggers:
+            - create
+          headers:
+            x-pulumi-filescom-probe: v1
 
 outputs:
   behaviorId: ${probe.id}
