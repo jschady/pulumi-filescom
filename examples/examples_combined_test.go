@@ -85,6 +85,9 @@ func TestCombinedStackLifecycle(t *testing.T) {
 		"the Pulumi id should be the id the account gives the behavior")
 	require.Equal(t, behaviorName, behavior.Name,
 		"the behavior on the account should carry the configured name")
+	require.Equal(t, valueJSON(t, behavior.Value),
+		wrappedValueJSON(t, requireCombinedResource(t, pt, behaviorToken).Outputs["value"]),
+		"the state should hold the value on the account under one webhook key")
 
 	key := requireAPIKeyNamed(t, apiKeyName)
 	createdKeyIDs = append(createdKeyIDs, key.ID)

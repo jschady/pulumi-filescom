@@ -12,11 +12,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/auto/optpreview"
 )
 
-// The second `value` encoding the description promises. Held out of `make test_examples` and
-// run with `-tags all,knownissue`. Cause: pulumi/pulumi-terraform-bridge#3122, open.
-func TestKnownIssueBehaviorValueAsAJSONEncodedString(t *testing.T) {
-	// The known issue is what the account stores, so this test reads the account. No cassette
-	// records a failure nobody has fixed yet.
+// A behavior created with a JSON-encoded string value should move to the wrapped object. Held
+// out of `make test_examples` and run with `-tags all,knownissue`. Today the preview fails with
+// "can't unmarshal tftypes.Object[...] into *string": the state holds a string and the program
+// sends an object. Cause: pulumi/pulumi-terraform-bridge#3122. The test passes once the bridge
+// fixes it.
+func TestKnownIssueBehaviorValueChangesFromAJSONStringToAnObject(t *testing.T) {
+	// The known issue is what the provider does with the state the account gave it, so this
+	// test runs live. No cassette records a failure nobody has fixed yet.
 	requireLiveProvider(t)
 	requireFilesAPIKey(t)
 	recorderFor(t)
@@ -30,9 +33,10 @@ func TestKnownIssueBehaviorValueAsAJSONEncodedString(t *testing.T) {
 	)
 	pt.SetConfig(t, "behaviorName", testObjectName(t, "behavior"))
 	pt.SetConfig(t, "behaviorPath", folder)
-
 	pt.Up(t)
-	t.Logf("the account stored %v", requireBehaviorOnPath(t, folder).Value)
-	requireNoChanges(t, "second", pt.Preview(t, optpreview.Diff()))
+
+	pt.UpdateSource(t, "lifecycle", "behavior", "value-json-string-wrapped")
+	logPlan(t, "wrapped value", pt.Preview(t, optpreview.Diff()).StdOut)
+	pt.Up(t)
 	pt.Destroy(t)
 }

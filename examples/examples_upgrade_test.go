@@ -19,6 +19,7 @@ import (
 	"github.com/pulumi/providertest/pulumitest"
 	"github.com/pulumi/providertest/pulumitest/assertpreview"
 	"github.com/pulumi/providertest/pulumitest/opttest"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/workspace"
 )
 
 // The released version the upgrade runs from. A repository variable carries it, and it exists
@@ -46,7 +47,7 @@ func TestUpgradeFromTheReleasedProvider(t *testing.T) {
 	groupName := testObjectName(t, "group")
 	t.Cleanup(func() { deleteGroupsNamed(t, groupName) })
 
-	installBaselinePlugin(t, baseline)
+	baselineDir := installBaselinePlugin(t, baseline)
 
 	pt := pulumitest.NewPulumiTest(t, upgradeProgram,
 		attachProvider(t),
@@ -55,14 +56,17 @@ func TestUpgradeFromTheReleasedProvider(t *testing.T) {
 	pt.SetConfig(t, "groupName", groupName)
 	pt.SetConfig(t, "groupNotes", "Upgrade coverage for the Files.com bridge.")
 
+	// The harness default runs its own `pulumi plugin install` with no server, which the registry
+	// refuses. This option replaces that default, so the baseline is the binary installed above.
 	preview := providertest.PreviewProviderUpgrade(t, pt, providerName, baseline,
-		optproviderupgrade.CacheDir(upgradeCacheDir(t)))
+		optproviderupgrade.CacheDir(upgradeCacheDir(t)),
+		optproviderupgrade.BaselineOpts(opttest.AttachProviderBinary(providerName, baselineDir)))
 	assertpreview.HasNoChanges(t, preview)
 }
 
-// installBaselinePlugin downloads the released provider. The harness runs a plain `pulumi plugin
-// install`, which reads a registry holding no community plugin, so the server is named here first.
-func installBaselinePlugin(t *testing.T, baseline string) {
+// installBaselinePlugin downloads the released provider and returns its directory. A plain
+// `pulumi plugin install` reads a registry holding no community plugin, so the server is named.
+func installBaselinePlugin(t *testing.T, baseline string) string {
 	t.Helper()
 	//nolint:gosec // G204: the arguments are a constant, a repository variable, and the
 	// server the committed schema advertises. Each reaches the CLI as one argument.
@@ -70,6 +74,10 @@ func installBaselinePlugin(t *testing.T, baseline string) {
 		"--server", pluginDownloadURL(t))
 	out, err := cmd.CombinedOutput()
 	require.NoErrorf(t, err, "install the %s baseline plugin: %s", baseline, out)
+
+	pluginDir, err := workspace.GetPluginDir()
+	require.NoError(t, err, "find the plugin directory")
+	return filepath.Join(pluginDir, "resource-"+providerName+"-v"+baseline)
 }
 
 // pluginDownloadURL reads the server the committed schema advertises. That is the same server

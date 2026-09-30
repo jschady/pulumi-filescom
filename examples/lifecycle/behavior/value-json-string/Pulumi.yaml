@@ -1,6 +1,6 @@
 name: filescom-lifecycle-behavior
 runtime: yaml
-description: The program sends the webhook behavior value as one JSON encoded string. The other programs send nested JSON.
+description: The program sends the webhook behavior value as one JSON-encoded string. The other programs send the wrapped object.
 
 config:
   behaviorName:

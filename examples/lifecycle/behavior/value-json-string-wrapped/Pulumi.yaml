@@ -1,20 +1,18 @@
 name: filescom-lifecycle-behavior
 runtime: yaml
-description: The program creates the same webhook behavior with a second header. Files.com updates that header in place.
+description: "The second state of the value-json-string program: the same value as the wrapped object."
 
 config:
   behaviorName:
     type: string
   behaviorPath:
     type: string
-  behaviorType:
-    type: string
 
 resources:
   probe:
     type: filescom:index/behavior:Behavior
     properties:
-      behavior: ${behaviorType}
+      behavior: webhook
       path: ${behaviorPath}
       name: ${behaviorName}
       value:
@@ -26,7 +24,6 @@ resources:
             - create
           headers:
             x-pulumi-filescom-probe: v1
-            x-pulumi-filescom-probe-2: v2
 
 outputs:
   behaviorId: ${probe.id}

@@ -8,14 +8,14 @@ interactions:
         proto_minor: 1
         content_length: 0
         host: app.files.com
-        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/f6b5eba4
+        url: https://app.files.com/api/rest/v1/folders/pulumi-filescom-test/fe6437a7
         method: POST
       response:
         proto: HTTP/2.0
         proto_major: 2
         proto_minor: 0
         content_length: 808
-        body: '{"path":"pulumi-filescom-test/f6b5eba4","created_by_id":1400342,"created_by_api_key_id":5450823,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"f6b5eba4","type":"directory","size":null,"created_at":"2026-08-26T01:18:43Z","last_modified_by_id":1400342,"last_modified_by_api_key_id":5450823,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-08-26T01:18:43Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
+        body: '{"path":"pulumi-filescom-test/fe6437a7","created_by_id":1437572,"created_by_api_key_id":5602101,"created_by_as2_incoming_message_id":null,"created_by_automation_id":null,"created_by_bundle_registration_id":null,"created_by_inbox_id":null,"created_by_remote_server_id":null,"created_by_sync_id":null,"custom_metadata":{},"display_name":"fe6437a7","type":"directory","size":null,"created_at":"2026-09-29T22:02:47Z","last_modified_by_id":1437572,"last_modified_by_api_key_id":5602101,"last_modified_by_automation_id":null,"last_modified_by_bundle_registration_id":null,"last_modified_by_remote_server_id":null,"last_modified_by_sync_id":null,"mtime":"2026-09-29T22:02:47Z","provided_mtime":null,"crc32":null,"md5":null,"sha1":null,"sha256":null,"permissions":"lrwd","subfolders_locked?":false,"is_locked":false}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -26,7 +26,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:43 GMT
+                - Tue, 29 Sep 2026 22:02:47 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -46,12 +46,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 1ce6b07f7582c07f209b47d6c84723a3
+                - 45e09ff28b864b24ab5a50b944db385d
             X-Xss-Protection:
                 - "0"
         status: 201 Created
         code: 201
-        duration: 150.838584ms
+        duration: 79.9435ms
     - id: 1
       request:
         proto: HTTP/1.1
@@ -59,7 +59,7 @@ interactions:
         proto_minor: 1
         content_length: 92
         host: app.files.com
-        body: '{"name":"pulumi-test-group-ded4b744","notes":"Lifecycle coverage for the Files.com bridge."}'
+        body: '{"name":"pulumi-test-group-6a97ab76","notes":"Lifecycle coverage for the Files.com bridge."}'
         headers:
             Content-Type:
                 - application/json
@@ -71,19 +71,19 @@ interactions:
         proto: HTTP/2.0
         proto_major: 2
         proto_minor: 0
-        content_length: 410
-        body: '{"id":99640,"name":"pulumi-test-group-ded4b744","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        content_length: 453
+        body: '{"id":102127,"name":"pulumi-test-group-6a97ab76","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
             Content-Length:
-                - "410"
+                - "453"
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:44 GMT
+                - Tue, 29 Sep 2026 22:02:48 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -103,12 +103,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 3053a02b83cf88134b7fe514d0647361
+                - f429512bf3e5e496280f1f9e7e330949
             X-Xss-Protection:
                 - "0"
         status: 201 Created
         code: 201
-        duration: 83.744791ms
+        duration: 54.846875ms
     - id: 2
       request:
         proto: HTTP/1.1
@@ -127,7 +127,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '[{"id":99640,"name":"pulumi-test-group-ded4b744","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}]'
+        body: '[{"id":102127,"name":"pulumi-test-group-6a97ab76","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}]'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -136,7 +136,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:45 GMT
+                - Tue, 29 Sep 2026 22:02:48 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -156,26 +156,26 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 6be270a3eadae4ede9be1e5dc24329b0
+                - 8f18d0e53af557e57beda05e07391bf7
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 114.7785ms
+        duration: 37.560541ms
     - id: 3
       request:
         proto: HTTP/1.1
         proto_major: 1
         proto_minor: 1
-        content_length: 111
+        content_length: 112
         host: app.files.com
-        body: '{"id":99640,"name":"pulumi-test-group-ded4b744-renamed","notes":"Lifecycle coverage for the Files.com bridge."}'
+        body: '{"id":102127,"name":"pulumi-test-group-6a97ab76-renamed","notes":"Lifecycle coverage for the Files.com bridge."}'
         headers:
             Content-Type:
                 - application/json
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/groups/99640
+        url: https://app.files.com/api/rest/v1/groups/102127
         method: PATCH
       response:
         proto: HTTP/2.0
@@ -183,7 +183,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '{"id":99640,"name":"pulumi-test-group-ded4b744-renamed","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        body: '{"id":102127,"name":"pulumi-test-group-6a97ab76-renamed","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -192,7 +192,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:46 GMT
+                - Tue, 29 Sep 2026 22:02:50 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -212,12 +212,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - e72fda6b142f00a8fbe95755aef8fe11
+                - d2f11f86763db28d0633ba119141b3c9
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 81.819208ms
+        duration: 50.137459ms
     - id: 4
       request:
         proto: HTTP/1.1
@@ -228,7 +228,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/groups/99640
+        url: https://app.files.com/api/rest/v1/groups/102127
         method: GET
       response:
         proto: HTTP/2.0
@@ -236,7 +236,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '{"id":99640,"name":"pulumi-test-group-ded4b744-renamed","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":151632,"workspace_id":0}'
+        body: '{"id":102127,"name":"pulumi-test-group-6a97ab76-renamed","allowed_ips":null,"admin_ids":"","notes":"Lifecycle coverage for the Files.com bridge.","user_ids":"","usernames":"","ai_assistant_personality_id":null,"ftp_permission":false,"sftp_permission":false,"dav_permission":false,"restapi_permission":false,"s3_compatible_endpoint_permission":false,"desktop_configuration_profile_id":null,"integration_centric_profile_id":null,"site_id":153656,"workspace_id":0}'
         headers:
             Cache-Control:
                 - no-cache, no-store, max-age=0, must-revalidate
@@ -245,7 +245,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:46 GMT
+                - Tue, 29 Sep 2026 22:02:50 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -265,12 +265,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 35e0e81ff86f4d1bf5f21b8a0a02494b
+                - a9c4c6ee5add8b3b7a96cedb84ae38bc
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 57.005083ms
+        duration: 56.0375ms
     - id: 5
       request:
         proto: HTTP/1.1
@@ -281,7 +281,7 @@ interactions:
         headers:
             User-Agent:
                 - Files.com Terraform 0.1.0
-        url: https://app.files.com/api/rest/v1/groups/99640
+        url: https://app.files.com/api/rest/v1/groups/102127
         method: DELETE
       response:
         proto: HTTP/2.0
@@ -295,7 +295,7 @@ interactions:
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Date:
-                - Wed, 26 Aug 2026 01:18:47 GMT
+                - Tue, 29 Sep 2026 22:02:52 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -315,12 +315,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - fa042646cd0ef5dcb7aacad79eacb2ce
+                - 2044ad56af91d2dc283258c64f408769
             X-Xss-Protection:
                 - "0"
         status: 204 No Content
         code: 204
-        duration: 94.0225ms
+        duration: 77.719916ms
     - id: 6
       request:
         proto: HTTP/1.1
@@ -349,7 +349,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:48 GMT
+                - Tue, 29 Sep 2026 22:02:52 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -369,12 +369,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 532710c5835120025efb392a2cd602db
+                - 86f77082d805dc77a9448f3929fcacf3
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 62.665875ms
+        duration: 35.4225ms
     - id: 7
       request:
         proto: HTTP/1.1
@@ -403,7 +403,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:48 GMT
+                - Tue, 29 Sep 2026 22:02:52 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -423,12 +423,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 5cbb528070ac785c74330b3774196c3d
+                - 6540ff39a2eac158806b2c4012759ed6
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 81.885208ms
+        duration: 31.010833ms
     - id: 8
       request:
         proto: HTTP/1.1
@@ -439,7 +439,7 @@ interactions:
         form:
             recursive:
                 - "true"
-        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/f6b5eba4?recursive=true
+        url: https://app.files.com/api/rest/v1/files/pulumi-filescom-test/fe6437a7?recursive=true
         method: DELETE
       response:
         proto: HTTP/2.0
@@ -453,7 +453,7 @@ interactions:
             Content-Security-Policy:
                 - default-src 'none'; base-uri 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; media-src 'none'; object-src 'none'; script-src 'none'; style-src 'none'; upgrade-insecure-requests
             Date:
-                - Wed, 26 Aug 2026 01:18:49 GMT
+                - Tue, 29 Sep 2026 22:02:53 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -473,12 +473,12 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 607b38c7250c012516f4cb960b1035fd
+                - ee87d08514f4ce674a83839aa63983ba
             X-Xss-Protection:
                 - "0"
         status: 204 No Content
         code: 204
-        duration: 135.820083ms
+        duration: 55.889792ms
     - id: 9
       request:
         proto: HTTP/1.1
@@ -507,7 +507,7 @@ interactions:
             Content-Type:
                 - application/json
             Date:
-                - Wed, 26 Aug 2026 01:18:49 GMT
+                - Tue, 29 Sep 2026 22:02:53 GMT
             Expires:
                 - Fri, 01 Jan 1990 00:00:00 GMT
             Pragma:
@@ -527,9 +527,9 @@ interactions:
             X-Permitted-Cross-Domain-Policies:
                 - none
             X-Request-Id:
-                - 6619ad9a4b4eb609c0b620e54fb6933c
+                - 83ecbd36d2d72e19ec182168bd76d106
             X-Xss-Protection:
                 - "0"
         status: 200 OK
         code: 200
-        duration: 58.237542ms
+        duration: 31.453042ms

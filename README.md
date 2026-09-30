@@ -60,6 +60,7 @@ configuration. It also carries one program in each of the four languages.
 ## Reference
 
 - [Provider overview and the known limitations](./docs/_index.md)
+- [Upgrade from 0.1.x to 0.2.0](./docs/_index.md#upgrade-from-01x-to-020)
 - [Installation and the configuration](./docs/installation-configuration.md)
 - [How to build and test this repository](./CONTRIBUTING.md)
 

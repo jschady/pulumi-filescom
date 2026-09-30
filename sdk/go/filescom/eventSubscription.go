@@ -35,6 +35,7 @@ import (
 //				Name:                 pulumi.String("example"),
 //				Subject:              pulumi.String("example"),
 //				Message:              pulumi.String("example"),
+//				MessageOnly:          pulumi.Bool(true),
 //				Enabled:              pulumi.Bool(true),
 //				EventTypes: pulumi.StringArray{
 //					pulumi.String("example"),
@@ -84,6 +85,8 @@ type EventSubscription struct {
 	Filter pulumi.AnyOutput `pulumi:"filter"`
 	// Custom message to include in notification emails.
 	Message pulumi.StringOutput `pulumi:"message"`
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly pulumi.BoolOutput `pulumi:"messageOnly"`
 	// Event Subscription name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Custom subject line to use for notification emails.
@@ -142,6 +145,8 @@ type eventSubscriptionState struct {
 	Filter interface{} `pulumi:"filter"`
 	// Custom message to include in notification emails.
 	Message *string `pulumi:"message"`
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly *bool `pulumi:"messageOnly"`
 	// Event Subscription name.
 	Name *string `pulumi:"name"`
 	// Custom subject line to use for notification emails.
@@ -171,6 +176,8 @@ type EventSubscriptionState struct {
 	Filter pulumi.Input
 	// Custom message to include in notification emails.
 	Message pulumi.StringPtrInput
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly pulumi.BoolPtrInput
 	// Event Subscription name.
 	Name pulumi.StringPtrInput
 	// Custom subject line to use for notification emails.
@@ -202,6 +209,8 @@ type eventSubscriptionArgs struct {
 	Filter interface{} `pulumi:"filter"`
 	// Custom message to include in notification emails.
 	Message *string `pulumi:"message"`
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly *bool `pulumi:"messageOnly"`
 	// Event Subscription name.
 	Name *string `pulumi:"name"`
 	// Custom subject line to use for notification emails.
@@ -228,6 +237,8 @@ type EventSubscriptionArgs struct {
 	Filter pulumi.Input
 	// Custom message to include in notification emails.
 	Message pulumi.StringPtrInput
+	// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+	MessageOnly pulumi.BoolPtrInput
 	// Event Subscription name.
 	Name pulumi.StringPtrInput
 	// Custom subject line to use for notification emails.
@@ -366,6 +377,11 @@ func (o EventSubscriptionOutput) Filter() pulumi.AnyOutput {
 // Custom message to include in notification emails.
 func (o EventSubscriptionOutput) Message() pulumi.StringOutput {
 	return o.ApplyT(func(v *EventSubscription) pulumi.StringOutput { return v.Message }).(pulumi.StringOutput)
+}
+
+// If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
+func (o EventSubscriptionOutput) MessageOnly() pulumi.BoolOutput {
+	return o.ApplyT(func(v *EventSubscription) pulumi.BoolOutput { return v.MessageOnly }).(pulumi.BoolOutput)
 }
 
 // Event Subscription name.

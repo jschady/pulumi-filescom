@@ -13,13 +13,13 @@ import (
 
 // A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
 //
-// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level. The exact options for each behavior type are explained in the table below.
+// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
 //
 // Each behavior type also has a recursion mode in the behavior type documentation. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> means the behavior is always recursive, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> means it is never recursive, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> means callers may choose the value of the <span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`">`recursive`</span> field.
 //
-// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
 //
-// Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+// Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
 //
 // Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
 //
@@ -39,7 +39,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.GetBehavior(ctx, &filescom.LookupBehaviorArgs{
-//				Id: 1,
+//				Id:          1,
+//				ValueFormat: pulumi.StringRef("typed"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -64,6 +65,8 @@ func LookupBehavior(ctx *pulumi.Context, args *LookupBehaviorArgs, opts ...pulum
 type LookupBehaviorArgs struct {
 	// Folder behavior ID
 	Id int `pulumi:"id"`
+	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	ValueFormat *string `pulumi:"valueFormat"`
 }
 
 // A collection of values returned by getBehavior.
@@ -92,8 +95,10 @@ type LookupBehaviorResult struct {
 	Recursive bool `pulumi:"recursive"`
 	// If true, this behavior may only be modified by a site admin because it is at the site root or disables a root behavior.
 	RootBehaviorSiteAdminOnly bool `pulumi:"rootBehaviorSiteAdminOnly"`
-	// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+	// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat`" pulumi-lang-dotnet="`ValueFormat`" pulumi-lang-go="`valueFormat`" pulumi-lang-python="`value_format`" pulumi-lang-yaml="`valueFormat`" pulumi-lang-java="`valueFormat`" pulumi-lang-hcl="`value_format`">`valueFormat`</span> to `"typed"` to return it wrapped under the behavior name.
 	Value interface{} `pulumi:"value"`
+	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	ValueFormat *string `pulumi:"valueFormat"`
 }
 
 func LookupBehaviorOutput(ctx *pulumi.Context, args LookupBehaviorOutputArgs, opts ...pulumi.InvokeOption) LookupBehaviorResultOutput {
@@ -105,6 +110,8 @@ func LookupBehaviorOutput(ctx *pulumi.Context, args LookupBehaviorOutputArgs, op
 type LookupBehaviorOutputArgs struct {
 	// Folder behavior ID
 	Id pulumi.IntInput `pulumi:"id"`
+	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	ValueFormat pulumi.StringPtrInput `pulumi:"valueFormat"`
 }
 
 func (LookupBehaviorOutputArgs) ElementType() reflect.Type {
@@ -186,9 +193,14 @@ func (o LookupBehaviorResultOutput) RootBehaviorSiteAdminOnly() pulumi.BoolOutpu
 	return o.ApplyT(func(v LookupBehaviorResult) bool { return v.RootBehaviorSiteAdminOnly }).(pulumi.BoolOutput)
 }
 
-// Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat`" pulumi-lang-dotnet="`ValueFormat`" pulumi-lang-go="`valueFormat`" pulumi-lang-python="`value_format`" pulumi-lang-yaml="`valueFormat`" pulumi-lang-java="`valueFormat`" pulumi-lang-hcl="`value_format`">`valueFormat`</span> to `"typed"` to return it wrapped under the behavior name.
 func (o LookupBehaviorResultOutput) Value() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupBehaviorResult) interface{} { return v.Value }).(pulumi.AnyOutput)
+}
+
+// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+func (o LookupBehaviorResultOutput) ValueFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupBehaviorResult) *string { return v.ValueFormat }).(pulumi.StringPtrOutput)
 }
 
 func init() {

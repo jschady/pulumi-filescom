@@ -7,13 +7,13 @@ import * as utilities from "./utilities";
 /**
  * A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
  *
- * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level. The exact options for each behavior type are explained in the table below.
+ * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
  *
  * Each behavior type also has a recursion mode in the behavior type documentation. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> means the behavior is always recursive, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> means it is never recursive, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> means callers may choose the value of the <span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`">`recursive`</span> field.
  *
- * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+ * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
  *
- * Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+ * Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
  *
  * Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
  *
@@ -26,6 +26,7 @@ import * as utilities from "./utilities";
  *
  * const exampleBehavior = filescom.getBehavior({
  *     id: 1,
+ *     valueFormat: "typed",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -34,6 +35,7 @@ export function getBehavior(args: GetBehaviorArgs, opts?: pulumi.InvokeOptions):
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("filescom:index/getBehavior:getBehavior", {
         "id": args.id,
+        "valueFormat": args.valueFormat,
     }, opts);
 }
 
@@ -45,6 +47,10 @@ export interface GetBehaviorArgs {
      * Folder behavior ID
      */
     id: number;
+    /**
+     * Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+     */
+    valueFormat?: string;
 }
 
 /**
@@ -100,20 +106,24 @@ export interface GetBehaviorResult {
      */
     readonly rootBehaviorSiteAdminOnly: boolean;
     /**
-     * Settings for this behavior.  See the section above for an example value to provide here.  Formatting is different for each Behavior type.  Write this property as nested JSON.  A JSON-encoded string creates the behavior, and then every later plan fails.  The bridge cannot change the runtime type of a Dynamic property (pulumi/pulumi-terraform-bridge#3122).
+     * Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat`" pulumi-lang-dotnet="`ValueFormat`" pulumi-lang-go="`valueFormat`" pulumi-lang-python="`value_format`" pulumi-lang-yaml="`valueFormat`" pulumi-lang-java="`valueFormat`" pulumi-lang-hcl="`value_format`">`valueFormat`</span> to `"typed"` to return it wrapped under the behavior name.
      */
     readonly value: any;
+    /**
+     * Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+     */
+    readonly valueFormat?: string;
 }
 /**
  * A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
  *
- * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level. The exact options for each behavior type are explained in the table below.
+ * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
  *
  * Each behavior type also has a recursion mode in the behavior type documentation. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> means the behavior is always recursive, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> means it is never recursive, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> means callers may choose the value of the <span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`">`recursive`</span> field.
  *
- * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+ * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
  *
- * Each behavior uses a different format for storing its settings value. Next to each behavior type is an example value. Our API and SDKs currently require that the value for behaviors be sent as raw JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field. Our SDK generator and API documentation generator doesn't fully keep up with this requirement, so if you need any help finding the exact syntax to use for your language or use case, just reach out.
+ * Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
  *
  * Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
  *
@@ -126,6 +136,7 @@ export interface GetBehaviorResult {
  *
  * const exampleBehavior = filescom.getBehavior({
  *     id: 1,
+ *     valueFormat: "typed",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -134,6 +145,7 @@ export function getBehaviorOutput(args: GetBehaviorOutputArgs, opts?: pulumi.Inv
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("filescom:index/getBehavior:getBehavior", {
         "id": args.id,
+        "valueFormat": args.valueFormat,
     }, opts);
 }
 
@@ -145,4 +157,8 @@ export interface GetBehaviorOutputArgs {
      * Folder behavior ID
      */
     id: pulumi.Input<number>;
+    /**
+     * Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+     */
+    valueFormat?: pulumi.Input<string | undefined>;
 }

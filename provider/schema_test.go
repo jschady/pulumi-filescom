@@ -80,6 +80,12 @@ type schemaResource struct {
 
 type schemaFunction struct {
 	Description string `json:"description"`
+	Inputs      struct {
+		Properties map[string]schemaProperty `json:"properties"`
+	} `json:"inputs"`
+	Outputs struct {
+		Properties map[string]schemaProperty `json:"properties"`
+	} `json:"outputs"`
 }
 
 type packageSchema struct {
@@ -731,31 +737,49 @@ var terraformResidue = []string{"Terraform", "HCL", "terraform import"}
 // doc edit rule reaches it. TestTheBridgeMethodStillNamesTerraform pins that fact.
 const terraformConfigToken = "pulumi:providers:filescom/terraformConfig"
 
-func schemaAssertNoTerraformResidue(t *testing.T, what, description string) {
+// terraformTypeNames matches a Terraform type name such as files_behavior. The word boundary
+// spares an example resource name that ends in one.
+func terraformTypeNames(t *testing.T) *regexp.Regexp {
 	t.Helper()
+	list := schemaReadEntityList(t)
+	var names []string
+	for _, name := range append(append([]string(nil), list.resources...), list.dataSources...) {
+		names = append(names, regexp.QuoteMeta(name))
+	}
+	return regexp.MustCompile(`\b(?:` + strings.Join(names, "|") + `)\b`)
+}
+
+func schemaAssertNoTerraformResidue(t *testing.T, typeNames *regexp.Regexp, what, description string) {
+	t.Helper()
+	quote := func(at, length int) string {
+		return description[max(at-60, 0):min(at+length+60, len(description))]
+	}
 	for _, word := range terraformResidue {
 		at := strings.Index(description, word)
 		if at < 0 {
 			continue
 		}
-		start := max(at-60, 0)
-		end := min(at+len(word)+60, len(description))
-		t.Errorf("%s names %q: ...%s...", what, word, description[start:end])
+		t.Errorf("%s names %q: ...%s...", what, word, quote(at, len(word)))
+	}
+	if at := typeNames.FindStringIndex(description); at != nil {
+		t.Errorf("%s names the Terraform type %q: ...%s...",
+			what, description[at[0]:at[1]], quote(at[0], at[1]-at[0]))
 	}
 }
 
 func TestNoDescriptionCarriesTerraformResidue(t *testing.T) {
 	committed := schemaCommitted(t)
+	typeNames := terraformTypeNames(t)
 
 	for _, token := range schemaSortedKeys(committed.Resources) {
 		resource := committed.Resources[token]
-		schemaAssertNoTerraformResidue(t, token, resource.Description)
+		schemaAssertNoTerraformResidue(t, typeNames, token, resource.Description)
 		for _, name := range schemaSortedKeys(resource.InputProperties) {
-			schemaAssertNoTerraformResidue(t, token+"."+name+" input",
+			schemaAssertNoTerraformResidue(t, typeNames, token+"."+name+" input",
 				resource.InputProperties[name].Description)
 		}
 		for _, name := range schemaSortedKeys(resource.Properties) {
-			schemaAssertNoTerraformResidue(t, token+"."+name,
+			schemaAssertNoTerraformResidue(t, typeNames, token+"."+name,
 				resource.Properties[name].Description)
 		}
 	}
@@ -763,7 +787,16 @@ func TestNoDescriptionCarriesTerraformResidue(t *testing.T) {
 		if token == terraformConfigToken {
 			continue
 		}
-		schemaAssertNoTerraformResidue(t, token, committed.Functions[token].Description)
+		function := committed.Functions[token]
+		schemaAssertNoTerraformResidue(t, typeNames, token, function.Description)
+		for _, name := range schemaSortedKeys(function.Inputs.Properties) {
+			schemaAssertNoTerraformResidue(t, typeNames, token+"."+name+" input",
+				function.Inputs.Properties[name].Description)
+		}
+		for _, name := range schemaSortedKeys(function.Outputs.Properties) {
+			schemaAssertNoTerraformResidue(t, typeNames, token+"."+name,
+				function.Outputs.Properties[name].Description)
+		}
 	}
 }
 
@@ -779,13 +812,51 @@ func TestTheBridgeMethodStillNamesTerraform(t *testing.T) {
 	}
 }
 
-// A Dynamic property cannot change its runtime type
-// (pulumi/pulumi-terraform-bridge#3122), so the upstream promise of a JSON-encoded string is wrong.
-func TestTheBehaviorValueDescriptionRefusesTheEncodedString(t *testing.T) {
+// The upstream behavior page points at a table, per-type sections, and non-admin details that no
+// Pulumi page carries. The doc rules drop each pointer from both descriptions.
+func TestTheBehaviorDescriptionsPointAtNothingThePageLacks(t *testing.T) {
+	committed := schemaCommitted(t)
+	descriptions := map[string]string{}
+	if resource, found := committed.Resources[indexModule+"behavior:Behavior"]; found {
+		descriptions["the Behavior resource"] = resource.Description
+	}
+	if function, found := committed.Functions[indexModule+"getBehavior:getBehavior"]; found {
+		descriptions["the getBehavior function"] = function.Description
+	}
+	if len(descriptions) != 2 {
+		t.Fatalf("the schema holds %d of the Behavior resource and the getBehavior function", len(descriptions))
+	}
+
+	for what, description := range descriptions {
+		for _, pointer := range []string{
+			"explained in the table below",
+			"shown with each behavior type",
+			"All the details are below.",
+		} {
+			if strings.Contains(description, pointer) {
+				t.Errorf("the description of %s still says %q", what, pointer)
+			}
+		}
+	}
+}
+
+var (
+	codeSpan     = regexp.MustCompile("`[^`]*`")
+	snakeCaseKey = regexp.MustCompile(`[a-z0-9]+(?:_[a-z0-9]+)+:`)
+)
+
+// Upstream v0.1.970 wants the value wrapped under the behavior name, and Pulumi passes its keys to
+// the API unchanged. The upstream text points at sections the Pulumi page does not have.
+func TestTheBehaviorValueDescriptionShowsTheWrappedSnakeCaseValue(t *testing.T) {
 	token := indexModule + "behavior:Behavior"
 	resource, found := schemaCommitted(t).Resources[token]
 	if !found {
 		t.Fatalf("the schema holds no %s", token)
+	}
+	// The docs example carries the value a live create accepted, so the description shows the same.
+	guide, err := os.ReadFile(filepath.Join("..", "docs", "_index.md"))
+	if err != nil {
+		t.Fatalf("read docs/_index.md: %v", err)
 	}
 
 	for what, properties := range map[string]map[string]schemaProperty{
@@ -797,13 +868,181 @@ func TestTheBehaviorValueDescriptionRefusesTheEncodedString(t *testing.T) {
 			t.Errorf("%s has no %s property value", token, what)
 			continue
 		}
-		if strings.Contains(value.Description, "May be sent as nested JSON") {
-			t.Errorf("the %s description still promises the encoded string: %s",
-				what, value.Description)
+		description := value.Description
+		if strings.Contains(description, "May be sent as nested JSON") {
+			t.Errorf("the %s description still promises the encoded string: %s", what, description)
 		}
-		if !strings.Contains(value.Description, "3122") {
-			t.Errorf("the %s description does not cite the bridge issue: %s",
-				what, value.Description)
+		if !strings.Contains(description, "wrapped under the behavior name") {
+			t.Errorf("the %s description does not say to wrap the value: %s", what, description)
+		}
+		if !strings.Contains(description, "snake_case") {
+			t.Errorf("the %s description does not say the keys are snake_case: %s", what, description)
+		}
+		examples := 0
+		for _, span := range codeSpan.FindAllString(description, -1) {
+			if snakeCaseKey.MatchString(span) {
+				examples++
+				if !bytes.Contains(guide, []byte(strings.Trim(span, "`"))) {
+					t.Errorf("the %s description shows %s, which docs/_index.md does not show", what, span)
+				}
+			}
+		}
+		if examples != 1 {
+			t.Errorf("the %s description shows %d snake_case examples, want 1: %s",
+				what, examples, description)
+		}
+		// A span means the bridge renamed a key of the example for each language.
+		for _, stale := range []string{"sections above", "files_behavior", "3122", "<span"} {
+			if strings.Contains(description, stale) {
+				t.Errorf("the %s description carries %q: %s", what, stale, description)
+			}
+		}
+	}
+}
+
+// Importing a behavior panics the bridge only when a nested object sits under the Dynamic value
+// (a nil schema there), so the page keeps the upstream import command and names that condition.
+func TestTheBehaviorPageNamesTheImportThatCrashes(t *testing.T) {
+	token := indexModule + "behavior:Behavior"
+	resource, found := schemaCommitted(t).Resources[token]
+	if !found {
+		t.Fatalf("the schema holds no %s", token)
+	}
+	_, section, found := strings.Cut(resource.Description, "\n## Import\n")
+	if !found {
+		t.Fatalf("the %s description has no Import section", token)
+	}
+	if !strings.Contains(section, "$ pulumi import "+token+" ") {
+		t.Errorf("the Import section does not offer the import command: %s", section)
+	}
+	if !strings.Contains(section, "crash") || !strings.Contains(section, "nested object") {
+		t.Errorf("the Import section does not say that a nested object crashes the import: %s", section)
+	}
+	for _, claim := range []string{"cannot import", "Pulumi cannot"} {
+		if strings.Contains(section, claim) {
+			t.Errorf("the Import section still says %q: %s", claim, section)
+		}
+	}
+}
+
+// The bridge wraps a snake_case name in a span per language even inside a code span. A name that
+// a space follows takes the opening backtick into the span and leaves the closing one outside
+// (fixupPropertyReference, pkg/tfgen/docs.go), so the display text holds an odd count of backticks.
+var languageSpan = regexp.MustCompile(`(?s)<span pulumi-lang-nodejs=[^>]*>(.*?)</span>`)
+
+func TestNoLanguageSpanSplitsACodeSpan(t *testing.T) {
+	raw, err := os.ReadFile(committedSchemaPath)
+	if err != nil {
+		t.Fatalf("read %s: %v", committedSchemaPath, err)
+	}
+	var document any
+	if err := json.Unmarshal(raw, &document); err != nil {
+		t.Fatalf("parse %s: %v", committedSchemaPath, err)
+	}
+
+	spans := 0
+	var walk func(at string, node any)
+	walk = func(at string, node any) {
+		switch node := node.(type) {
+		case map[string]any:
+			for _, key := range schemaSortedKeys(node) {
+				walk(at+"/"+key, node[key])
+			}
+		case []any:
+			for i, item := range node {
+				walk(at+"/"+strconv.Itoa(i), item)
+			}
+		case string:
+			for _, match := range languageSpan.FindAllStringSubmatch(node, -1) {
+				spans++
+				if strings.Count(match[1], "`")%2 == 1 {
+					t.Errorf("%s: the span %q splits a code span", at, match[1])
+				}
+			}
+		}
+	}
+	walk("", document)
+	if spans == 0 {
+		t.Fatalf("%s holds no language span; the census reads nothing", committedSchemaPath)
+	}
+}
+
+var (
+	hclFence       = regexp.MustCompile("(?s)```terraform\n(.*?)```")
+	hclValueAssign = regexp.MustCompile(`(?m)^[ \t]*"?value"?[ \t]*=[ \t]*`)
+	hclMultiWord   = regexp.MustCompile(`(?m)(?:^|[{,\s])"?([a-z0-9]+(?:_[a-z0-9]+)+)"?\s*=(?:[^=]|$)`)
+)
+
+// hclExpression answers the object or list that opens at text[0], with its nested brackets and
+// with brackets inside string literals skipped. It answers "" for any other expression.
+func hclExpression(text string) string {
+	if text == "" || (text[0] != '{' && text[0] != '[') {
+		return ""
+	}
+	depth, quoted, escaped := 0, false, false
+	for i, char := range text {
+		switch {
+		case escaped:
+			escaped = false
+		case quoted && char == '\\':
+			escaped = true
+		case char == '"':
+			quoted = !quoted
+		case quoted:
+		case char == '{' || char == '[':
+			depth++
+		case char == '}' || char == ']':
+			depth--
+			if depth == 0 {
+				return text[:i+1]
+			}
+		}
+	}
+	return text
+}
+
+// upstreamBehaviorValueKeys reads every multi-word key of the objects the upstream examples assign
+// to value. It parses the HCL itself, so it sees a value shape the doc rule does not handle.
+func upstreamBehaviorValueKeys(t *testing.T) []string {
+	t.Helper()
+	page, err := os.ReadFile(filepath.Join("..", "upstream", "docs", "resources", behaviorDocPage))
+	if err != nil {
+		t.Fatalf("read the upstream %s: %v", behaviorDocPage, err)
+	}
+	keys := map[string]bool{}
+	for _, fence := range hclFence.FindAllStringSubmatch(string(page), -1) {
+		for _, at := range hclValueAssign.FindAllStringIndex(fence[1], -1) {
+			expression := hclExpression(fence[1][at[1]:])
+			for _, key := range hclMultiWord.FindAllStringSubmatch(expression, -1) {
+				keys[key[1]] = true
+			}
+		}
+	}
+	return schemaSortedKeys(keys)
+}
+
+// The example converter camelCases each key of an object whose type it does not know, and value is
+// Dynamic, so a copied example sends daysToRetain and the API answers 422.
+func TestTheBehaviorExamplesKeepTheSnakeCaseValueKeys(t *testing.T) {
+	keys := upstreamBehaviorValueKeys(t)
+	if len(keys) == 0 {
+		t.Fatalf("the upstream %s examples assign value no multi-word key; the test reads nothing",
+			behaviorDocPage)
+	}
+	token := indexModule + "behavior:Behavior"
+	resource, found := schemaCommitted(t).Resources[token]
+	if !found {
+		t.Fatalf("the schema holds no %s", token)
+	}
+
+	for _, key := range keys {
+		words := strings.Split(key, "_")
+		for i := 1; i < len(words); i++ {
+			words[i] = strings.ToUpper(words[i][:1]) + words[i][1:]
+		}
+		camel := strings.Join(words, "")
+		if regexp.MustCompile(`\b` + camel + `\b`).MatchString(resource.Description) {
+			t.Errorf("a Behavior example writes %s where the API reads %s", camel, key)
 		}
 	}
 }
