@@ -25,7 +25,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
+        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
         /// 
         /// 
         /// 
@@ -161,7 +161,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
+        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
         /// 
         /// 
         /// 
@@ -297,7 +297,7 @@ namespace Jschady.Filescom
         /// 
         /// 
         /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins.
+        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
         /// 
         /// 
         /// 

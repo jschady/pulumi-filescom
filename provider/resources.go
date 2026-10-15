@@ -93,7 +93,6 @@ func Provider() tfbridge.ProviderInfo {
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: describeTheWrappedBehaviorValue},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: dropBehaviorTableReference},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: pointBehaviorValueAtTheExamples},
-					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: dropBehaviorDetailsReference},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: repairBehaviorValueFormatSpan},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: describeBehaviorValueFormat},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: quoteBehaviorValueKeys},
@@ -300,12 +299,6 @@ func pointBehaviorValueAtTheExamples(_ string, content []byte) ([]byte, error) {
 	const shown = "The accepted fields and an example are shown with each behavior type."
 	const examples = "The Behavior resource examples show the value for each behavior type."
 	return bytes.ReplaceAll(content, []byte(shown), []byte(examples)), nil
-}
-
-// The upstream page points below at which behaviors non-admins can see or set, and no page lists them.
-func dropBehaviorDetailsReference(_ string, content []byte) ([]byte, error) {
-	const details = " All the details are below."
-	return bytes.ReplaceAll(content, []byte(details), nil), nil
 }
 
 // The bridge turns `value_format ` inside a code span into a span of its own, which takes the

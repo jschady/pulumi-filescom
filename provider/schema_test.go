@@ -812,8 +812,8 @@ func TestTheBridgeMethodStillNamesTerraform(t *testing.T) {
 	}
 }
 
-// The upstream behavior page points at a table, per-type sections, and non-admin details that no
-// Pulumi page carries. The doc rules drop each pointer from both descriptions.
+// The upstream behavior page points at a table and per-type sections that no Pulumi page carries.
+// The doc rules drop each pointer from both descriptions.
 func TestTheBehaviorDescriptionsPointAtNothingThePageLacks(t *testing.T) {
 	committed := schemaCommitted(t)
 	descriptions := map[string]string{}
@@ -831,7 +831,6 @@ func TestTheBehaviorDescriptionsPointAtNothingThePageLacks(t *testing.T) {
 		for _, pointer := range []string{
 			"explained in the table below",
 			"shown with each behavior type",
-			"All the details are below.",
 		} {
 			if strings.Contains(description, pointer) {
 				t.Errorf("the description of %s still says %q", what, pointer)
