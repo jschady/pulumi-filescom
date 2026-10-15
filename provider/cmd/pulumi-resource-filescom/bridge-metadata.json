@@ -195,6 +195,9 @@
                                             "fields": {
                                                 "config": {
                                                     "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
                                                         "on_error": {
                                                             "maxItemsOne": false
                                                         }
@@ -242,9 +245,6 @@
                                             "fields": {
                                                 "config": {
                                                     "fields": {
-                                                        "legacy_sync_ids": {
-                                                            "maxItemsOne": false
-                                                        },
                                                         "on_error": {
                                                             "maxItemsOne": false
                                                         },
@@ -397,9 +397,6 @@
                     "group_ids": {
                         "maxItemsOne": false
                     },
-                    "legacy_sync_ids": {
-                        "maxItemsOne": false
-                    },
                     "recurring_days": {
                         "maxItemsOne": false
                     },
@@ -452,7 +449,15 @@
                 "current": "filescom:index/clickwrap:Clickwrap"
             },
             "files_custom_domain": {
-                "current": "filescom:index/customDomain:CustomDomain"
+                "current": "filescom:index/customDomain:CustomDomain",
+                "fields": {
+                    "ip_addresses": {
+                        "maxItemsOne": false
+                    },
+                    "outbound_ip_addresses": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "files_desktop_configuration_profile": {
                 "current": "filescom:index/desktopConfigurationProfile:DesktopConfigurationProfile"
@@ -667,7 +672,12 @@
                 "current": "filescom:index/remoteMountBackend:RemoteMountBackend"
             },
             "files_remote_server": {
-                "current": "filescom:index/remoteServer:RemoteServer"
+                "current": "filescom:index/remoteServer:RemoteServer",
+                "fields": {
+                    "outbound_ip_addresses": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "files_remote_server_credential": {
                 "current": "filescom:index/remoteServerCredential:RemoteServerCredential"
@@ -986,6 +996,9 @@
                                             "fields": {
                                                 "config": {
                                                     "fields": {
+                                                        "destinations": {
+                                                            "maxItemsOne": false
+                                                        },
                                                         "on_error": {
                                                             "maxItemsOne": false
                                                         }
@@ -1033,9 +1046,6 @@
                                             "fields": {
                                                 "config": {
                                                     "fields": {
-                                                        "legacy_sync_ids": {
-                                                            "maxItemsOne": false
-                                                        },
                                                         "on_error": {
                                                             "maxItemsOne": false
                                                         },
@@ -1188,9 +1198,6 @@
                     "group_ids": {
                         "maxItemsOne": false
                     },
-                    "legacy_sync_ids": {
-                        "maxItemsOne": false
-                    },
                     "recurring_days": {
                         "maxItemsOne": false
                     },
@@ -1249,7 +1256,15 @@
                 "current": "filescom:index/getClickwrap:getClickwrap"
             },
             "files_custom_domain": {
-                "current": "filescom:index/getCustomDomain:getCustomDomain"
+                "current": "filescom:index/getCustomDomain:getCustomDomain",
+                "fields": {
+                    "ip_addresses": {
+                        "maxItemsOne": false
+                    },
+                    "outbound_ip_addresses": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "files_desktop_configuration_profile": {
                 "current": "filescom:index/getDesktopConfigurationProfile:getDesktopConfigurationProfile"
@@ -1504,7 +1519,12 @@
                 "current": "filescom:index/getRemoteMountBackend:getRemoteMountBackend"
             },
             "files_remote_server": {
-                "current": "filescom:index/getRemoteServer:getRemoteServer"
+                "current": "filescom:index/getRemoteServer:getRemoteServer",
+                "fields": {
+                    "outbound_ip_addresses": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "files_remote_server_credential": {
                 "current": "filescom:index/getRemoteServerCredential:getRemoteServerCredential"
