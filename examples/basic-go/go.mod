@@ -1,6 +1,6 @@
 module github.com/jschady/pulumi-filescom/examples/basic-go
 
-go 1.26.0
+go 1.27.2
 
 replace github.com/jschady/pulumi-filescom/sdk/go/filescom => ../../sdk/go/filescom
 

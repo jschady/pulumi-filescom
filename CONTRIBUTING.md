@@ -12,7 +12,7 @@ in the workflows together.
 
 | Tool | Version |
 | --- | --- |
-| Go | 1.26.4 |
+| Go | 1.27.2 |
 | Pulumi | 3.258.0 |
 | golangci-lint | 2.12.2 |
 | Node.js | 24 |

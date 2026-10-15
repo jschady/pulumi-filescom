@@ -1,7 +1,7 @@
 # Hand-owned. Do not regenerate with ci-mgmt.
 # The local tool versions. No workflow reads this file, so raise a version here and in
 # .github/workflows together. The Go version comes from provider/go.mod.
-golang 1.26.4
+golang 1.27.2
 pulumi 3.258.0
 golangci-lint 2.12.2
 goreleaser 2.17.1
