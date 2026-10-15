@@ -42,6 +42,10 @@ export interface GetEventDeliveryAttemptArgs {
  */
 export interface GetEventDeliveryAttemptResult {
     /**
+     * Shared summary ID when this event is delivered in a Slack or Teams subfolder summary. All events in a summary share its delivery outcome.
+     */
+    readonly activityNotificationBatchId: number;
+    /**
      * Number of delivery attempts made.
      */
     readonly attemptNumber: number;

@@ -30,10 +30,12 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.NewCustomDomain(ctx, "example_custom_domain", &filescom.CustomDomainArgs{
-//				Destination:      pulumi.String("site_alias"),
-//				FolderBehaviorId: pulumi.Int(1),
-//				SslCertificateId: pulumi.Int(1),
-//				Domain:           pulumi.String("files.example.com"),
+//				AvailableToAllWorkspaces: pulumi.Bool(false),
+//				WorkspaceId:              pulumi.Int(0),
+//				Destination:              pulumi.String("site_alias"),
+//				FolderBehaviorId:         pulumi.Int(1),
+//				SslCertificateId:         pulumi.Int(1),
+//				Domain:                   pulumi.String("files.example.com"),
 //			})
 //			if err != nil {
 //				return err
@@ -57,6 +59,8 @@ import (
 type CustomDomain struct {
 	pulumi.CustomResourceState
 
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces pulumi.BoolOutput `pulumi:"availableToAllWorkspaces"`
 	// Is this domain's SSL certificate automatically managed and renewed by Files.com?
 	BrickManaged pulumi.BoolOutput `pulumi:"brickManaged"`
 	// When this Custom Domain was created.
@@ -69,10 +73,16 @@ type CustomDomain struct {
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
 	FolderBehaviorId pulumi.IntOutput `pulumi:"folderBehaviorId"`
+	// Dedicated public IP addresses allocated to this Custom Domain.
+	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
+	// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+	OutboundIpAddresses pulumi.StringArrayOutput `pulumi:"outboundIpAddresses"`
 	// Current SSL certificate ID.
 	SslCertificateId pulumi.IntOutput `pulumi:"sslCertificateId"`
 	// When this Custom Domain was last updated.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId pulumi.IntOutput `pulumi:"workspaceId"`
 }
 
 // NewCustomDomain registers a new resource with the given unique name, arguments, and options.
@@ -108,6 +118,8 @@ func GetCustomDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CustomDomain resources.
 type customDomainState struct {
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces *bool `pulumi:"availableToAllWorkspaces"`
 	// Is this domain's SSL certificate automatically managed and renewed by Files.com?
 	BrickManaged *bool `pulumi:"brickManaged"`
 	// When this Custom Domain was created.
@@ -120,13 +132,21 @@ type customDomainState struct {
 	Domain *string `pulumi:"domain"`
 	// Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
 	FolderBehaviorId *int `pulumi:"folderBehaviorId"`
+	// Dedicated public IP addresses allocated to this Custom Domain.
+	IpAddresses []string `pulumi:"ipAddresses"`
+	// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+	OutboundIpAddresses []string `pulumi:"outboundIpAddresses"`
 	// Current SSL certificate ID.
 	SslCertificateId *int `pulumi:"sslCertificateId"`
 	// When this Custom Domain was last updated.
 	UpdatedAt *string `pulumi:"updatedAt"`
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId *int `pulumi:"workspaceId"`
 }
 
 type CustomDomainState struct {
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces pulumi.BoolPtrInput
 	// Is this domain's SSL certificate automatically managed and renewed by Files.com?
 	BrickManaged pulumi.BoolPtrInput
 	// When this Custom Domain was created.
@@ -139,10 +159,16 @@ type CustomDomainState struct {
 	Domain pulumi.StringPtrInput
 	// Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
 	FolderBehaviorId pulumi.IntPtrInput
+	// Dedicated public IP addresses allocated to this Custom Domain.
+	IpAddresses pulumi.StringArrayInput
+	// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+	OutboundIpAddresses pulumi.StringArrayInput
 	// Current SSL certificate ID.
 	SslCertificateId pulumi.IntPtrInput
 	// When this Custom Domain was last updated.
 	UpdatedAt pulumi.StringPtrInput
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId pulumi.IntPtrInput
 }
 
 func (CustomDomainState) ElementType() reflect.Type {
@@ -150,6 +176,8 @@ func (CustomDomainState) ElementType() reflect.Type {
 }
 
 type customDomainArgs struct {
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces *bool `pulumi:"availableToAllWorkspaces"`
 	// Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
 	Destination *string `pulumi:"destination"`
 	// Customer-owned domain name.
@@ -158,10 +186,14 @@ type customDomainArgs struct {
 	FolderBehaviorId *int `pulumi:"folderBehaviorId"`
 	// Current SSL certificate ID.
 	SslCertificateId *int `pulumi:"sslCertificateId"`
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId *int `pulumi:"workspaceId"`
 }
 
 // The set of arguments for constructing a CustomDomain resource.
 type CustomDomainArgs struct {
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces pulumi.BoolPtrInput
 	// Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
 	Destination pulumi.StringPtrInput
 	// Customer-owned domain name.
@@ -170,6 +202,8 @@ type CustomDomainArgs struct {
 	FolderBehaviorId pulumi.IntPtrInput
 	// Current SSL certificate ID.
 	SslCertificateId pulumi.IntPtrInput
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId pulumi.IntPtrInput
 }
 
 func (CustomDomainArgs) ElementType() reflect.Type {
@@ -259,6 +293,11 @@ func (o CustomDomainOutput) ToCustomDomainOutputWithContext(ctx context.Context)
 	return o
 }
 
+// Allow all workspaces to use this default-workspace Custom Domain.
+func (o CustomDomainOutput) AvailableToAllWorkspaces() pulumi.BoolOutput {
+	return o.ApplyT(func(v *CustomDomain) pulumi.BoolOutput { return v.AvailableToAllWorkspaces }).(pulumi.BoolOutput)
+}
+
 // Is this domain's SSL certificate automatically managed and renewed by Files.com?
 func (o CustomDomainOutput) BrickManaged() pulumi.BoolOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.BoolOutput { return v.BrickManaged }).(pulumi.BoolOutput)
@@ -289,6 +328,16 @@ func (o CustomDomainOutput) FolderBehaviorId() pulumi.IntOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.IntOutput { return v.FolderBehaviorId }).(pulumi.IntOutput)
 }
 
+// Dedicated public IP addresses allocated to this Custom Domain.
+func (o CustomDomainOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomDomain) pulumi.StringArrayOutput { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+func (o CustomDomainOutput) OutboundIpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomDomain) pulumi.StringArrayOutput { return v.OutboundIpAddresses }).(pulumi.StringArrayOutput)
+}
+
 // Current SSL certificate ID.
 func (o CustomDomainOutput) SslCertificateId() pulumi.IntOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.IntOutput { return v.SslCertificateId }).(pulumi.IntOutput)
@@ -297,6 +346,11 @@ func (o CustomDomainOutput) SslCertificateId() pulumi.IntOutput {
 // When this Custom Domain was last updated.
 func (o CustomDomainOutput) UpdatedAt() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.StringOutput { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+// Workspace ID (0 for the default workspace).
+func (o CustomDomainOutput) WorkspaceId() pulumi.IntOutput {
+	return o.ApplyT(func(v *CustomDomain) pulumi.IntOutput { return v.WorkspaceId }).(pulumi.IntOutput)
 }
 
 type CustomDomainArrayOutput struct{ *pulumi.OutputState }

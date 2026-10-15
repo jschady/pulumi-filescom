@@ -26,7 +26,7 @@ class GetPartnerResult:
     """
     A collection of values returned by getPartner.
     """
-    def __init__(__self__, ai_assistant_personality_id=None, allow_bypassing2fa_policies=None, allow_credential_changes=None, allow_providing_gpg_keys=None, allow_user_creation=None, allowed_ips=None, cc_emails_to_responsible_party=None, id=None, name=None, notes=None, partner_admin_ids=None, partner_channel_template_id=None, partnership_role=None, responsible_group_id=None, responsible_user_id=None, root_folder=None, show_partner_channel_home_page=None, tags=None, user_ids=None, workspace_id=None):
+    def __init__(__self__, ai_assistant_personality_id=None, allow_bypassing2fa_policies=None, allow_credential_changes=None, allow_providing_gpg_keys=None, allow_user_creation=None, allowed_ips=None, cc_emails_to_responsible_party=None, connections=None, id=None, name=None, notes=None, partner_admin_ids=None, partner_channel_template_id=None, partnership_role=None, responsible_group_id=None, responsible_user_id=None, root_folder=None, show_partner_channel_home_page=None, tags=None, user_ids=None, workspace_id=None):
         if ai_assistant_personality_id and not isinstance(ai_assistant_personality_id, int):
             raise TypeError("Expected argument 'ai_assistant_personality_id' to be a int")
         pulumi.set(__self__, "ai_assistant_personality_id", ai_assistant_personality_id)
@@ -48,6 +48,9 @@ class GetPartnerResult:
         if cc_emails_to_responsible_party and not isinstance(cc_emails_to_responsible_party, bool):
             raise TypeError("Expected argument 'cc_emails_to_responsible_party' to be a bool")
         pulumi.set(__self__, "cc_emails_to_responsible_party", cc_emails_to_responsible_party)
+        if connections and not isinstance(connections, dict):
+            raise TypeError("Expected argument 'connections' to be a dict")
+        pulumi.set(__self__, "connections", connections)
         if id and not isinstance(id, int):
             raise TypeError("Expected argument 'id' to be a int")
         pulumi.set(__self__, "id", id)
@@ -146,6 +149,14 @@ class GetPartnerResult:
 
     @_builtins.property
     @pulumi.getter
+    def connections(self) -> Any:
+        """
+        Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
+        """
+        return pulumi.get(self, "connections")
+
+    @_builtins.property
+    @pulumi.getter
     def id(self) -> _builtins.int:
         """
         The unique ID of the Partner.
@@ -188,7 +199,7 @@ class GetPartnerResult:
     @pulumi.getter(name="partnershipRole")
     def partnership_role(self) -> _builtins.str:
         """
-        This site's role in Partner Site relationships for this Partner. Can be <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span>, <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span>, <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span>, or null.
+        This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         """
         return pulumi.get(self, "partnership_role")
 
@@ -262,6 +273,7 @@ class AwaitableGetPartnerResult(GetPartnerResult):
             allow_user_creation=self.allow_user_creation,
             allowed_ips=self.allowed_ips,
             cc_emails_to_responsible_party=self.cc_emails_to_responsible_party,
+            connections=self.connections,
             id=self.id,
             name=self.name,
             notes=self.notes,
@@ -309,6 +321,7 @@ def get_partner(id: Optional[_builtins.int] = None,
         allow_user_creation=pulumi.get(__ret__, 'allow_user_creation'),
         allowed_ips=pulumi.get(__ret__, 'allowed_ips'),
         cc_emails_to_responsible_party=pulumi.get(__ret__, 'cc_emails_to_responsible_party'),
+        connections=pulumi.get(__ret__, 'connections'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         notes=pulumi.get(__ret__, 'notes'),
@@ -353,6 +366,7 @@ def get_partner_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         allow_user_creation=pulumi.get(__response__, 'allow_user_creation'),
         allowed_ips=pulumi.get(__response__, 'allowed_ips'),
         cc_emails_to_responsible_party=pulumi.get(__response__, 'cc_emails_to_responsible_party'),
+        connections=pulumi.get(__response__, 'connections'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name'),
         notes=pulumi.get(__response__, 'notes'),

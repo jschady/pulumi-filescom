@@ -17,6 +17,8 @@ namespace Jschady.Filescom
     /// 
     /// One policy can be designated as the default policy. It applies to every child site not explicitly assigned to another policy or listed in its &lt;span pulumi-lang-nodejs="`skipChildSiteIds`" pulumi-lang-dotnet="`SkipChildSiteIds`" pulumi-lang-go="`skipChildSiteIds`" pulumi-lang-python="`skip_child_site_ids`" pulumi-lang-yaml="`skipChildSiteIds`" pulumi-lang-java="`skipChildSiteIds`" pulumi-lang-hcl="`skip_child_site_ids`"&gt;`skipChildSiteIds`&lt;/span&gt;, including newly created child sites. Only a default policy can exclude child sites. The &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field contains the policy configuration data, with the format varying based on the policy type. When a policy is active, its managed configurations are automatically enforced on applicable child sites, and attribute modifications are not permitted.
     /// 
+    /// On a Child Site, listing policies returns only the policy covering that site. Each key in &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; identifies a managed setting, but its value is always &lt;span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`"&gt;`null`&lt;/span&gt;. Read non-secret effective setting values from the Child Site's own Site settings response.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -122,7 +124,7 @@ namespace Jschady.Filescom
         public Output<string> UpdatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// Policy configuration data. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
         [Output("value")]
         public Output<object> Value { get; private set; } = null!;
@@ -223,7 +225,7 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
-        /// Policy configuration data. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
         [Input("value")]
         public Input<object>? Value { get; set; }
@@ -309,7 +311,7 @@ namespace Jschady.Filescom
         public Input<string>? UpdatedAt { get; set; }
 
         /// <summary>
-        /// Policy configuration data. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
         [Input("value")]
         public Input<object>? Value { get; set; }

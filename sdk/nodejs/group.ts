@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+ * A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
  *
  * All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
  *
@@ -27,6 +27,7 @@ import * as utilities from "./utilities";
  *     sftpPermission: true,
  *     davPermission: true,
  *     restapiPermission: true,
+ *     s3CompatibleEndpointPermission: true,
  *     desktopConfigurationProfileId: 1,
  *     integrationCentricProfileId: 1,
  *     allowedIps: `10.0.0.0/8
@@ -116,6 +117,10 @@ export class Group extends pulumi.CustomResource {
      */
     declare public readonly restapiPermission: pulumi.Output<boolean>;
     /**
+     * If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+     */
+    declare public readonly s3CompatibleEndpointPermission: pulumi.Output<boolean>;
+    /**
      * If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.
      */
     declare public readonly sftpPermission: pulumi.Output<boolean>;
@@ -159,6 +164,7 @@ export class Group extends pulumi.CustomResource {
             resourceInputs["name"] = state?.name;
             resourceInputs["notes"] = state?.notes;
             resourceInputs["restapiPermission"] = state?.restapiPermission;
+            resourceInputs["s3CompatibleEndpointPermission"] = state?.s3CompatibleEndpointPermission;
             resourceInputs["sftpPermission"] = state?.sftpPermission;
             resourceInputs["siteId"] = state?.siteId;
             resourceInputs["userIds"] = state?.userIds;
@@ -176,6 +182,7 @@ export class Group extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["notes"] = args?.notes;
             resourceInputs["restapiPermission"] = args?.restapiPermission;
+            resourceInputs["s3CompatibleEndpointPermission"] = args?.s3CompatibleEndpointPermission;
             resourceInputs["sftpPermission"] = args?.sftpPermission;
             resourceInputs["userIds"] = args?.userIds;
             resourceInputs["workspaceId"] = args?.workspaceId;
@@ -231,6 +238,10 @@ export interface GroupState {
      * If true, users in this group can use the REST API to login.  This will override a false value of <span pulumi-lang-nodejs="`restapiPermission`" pulumi-lang-dotnet="`RestapiPermission`" pulumi-lang-go="`restapiPermission`" pulumi-lang-python="`restapi_permission`" pulumi-lang-yaml="`restapiPermission`" pulumi-lang-java="`restapiPermission`" pulumi-lang-hcl="`restapi_permission`">`restapiPermission`</span> on the user level.
      */
     restapiPermission?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+     */
+    s3CompatibleEndpointPermission?: pulumi.Input<boolean | undefined>;
     /**
      * If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.
      */
@@ -297,6 +308,10 @@ export interface GroupArgs {
      * If true, users in this group can use the REST API to login.  This will override a false value of <span pulumi-lang-nodejs="`restapiPermission`" pulumi-lang-dotnet="`RestapiPermission`" pulumi-lang-go="`restapiPermission`" pulumi-lang-python="`restapi_permission`" pulumi-lang-yaml="`restapiPermission`" pulumi-lang-java="`restapiPermission`" pulumi-lang-hcl="`restapi_permission`">`restapiPermission`</span> on the user level.
      */
     restapiPermission?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+     */
+    s3CompatibleEndpointPermission?: pulumi.Input<boolean | undefined>;
     /**
      * If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.
      */

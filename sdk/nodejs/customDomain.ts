@@ -15,6 +15,8 @@ import * as utilities from "./utilities";
  * import * as filescom from "pulumi-filescom";
  *
  * const exampleCustomDomain = new filescom.CustomDomain("example_custom_domain", {
+ *     availableToAllWorkspaces: false,
+ *     workspaceId: 0,
  *     destination: "site_alias",
  *     folderBehaviorId: 1,
  *     sslCertificateId: 1,
@@ -62,6 +64,10 @@ export class CustomDomain extends pulumi.CustomResource {
     }
 
     /**
+     * Allow all workspaces to use this default-workspace Custom Domain.
+     */
+    declare public readonly availableToAllWorkspaces: pulumi.Output<boolean>;
+    /**
      * Is this domain's SSL certificate automatically managed and renewed by Files.com?
      */
     declare public /*out*/ readonly brickManaged: pulumi.Output<boolean>;
@@ -86,6 +92,14 @@ export class CustomDomain extends pulumi.CustomResource {
      */
     declare public readonly folderBehaviorId: pulumi.Output<number>;
     /**
+     * Dedicated public IP addresses allocated to this Custom Domain.
+     */
+    declare public /*out*/ readonly ipAddresses: pulumi.Output<string[]>;
+    /**
+     * Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+     */
+    declare public /*out*/ readonly outboundIpAddresses: pulumi.Output<string[]>;
+    /**
      * Current SSL certificate ID.
      */
     declare public readonly sslCertificateId: pulumi.Output<number>;
@@ -93,6 +107,10 @@ export class CustomDomain extends pulumi.CustomResource {
      * When this Custom Domain was last updated.
      */
     declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
+    /**
+     * Workspace ID (0 for the default workspace).
+     */
+    declare public readonly workspaceId: pulumi.Output<number>;
 
     /**
      * Create a CustomDomain resource with the given unique name, arguments, and options.
@@ -107,26 +125,34 @@ export class CustomDomain extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CustomDomainState | undefined;
+            resourceInputs["availableToAllWorkspaces"] = state?.availableToAllWorkspaces;
             resourceInputs["brickManaged"] = state?.brickManaged;
             resourceInputs["createdAt"] = state?.createdAt;
             resourceInputs["destination"] = state?.destination;
             resourceInputs["dnsStatus"] = state?.dnsStatus;
             resourceInputs["domain"] = state?.domain;
             resourceInputs["folderBehaviorId"] = state?.folderBehaviorId;
+            resourceInputs["ipAddresses"] = state?.ipAddresses;
+            resourceInputs["outboundIpAddresses"] = state?.outboundIpAddresses;
             resourceInputs["sslCertificateId"] = state?.sslCertificateId;
             resourceInputs["updatedAt"] = state?.updatedAt;
+            resourceInputs["workspaceId"] = state?.workspaceId;
         } else {
             const args = argsOrState as CustomDomainArgs | undefined;
             if (args?.domain === undefined && !opts.urn) {
                 throw new Error("Missing required property 'domain'");
             }
+            resourceInputs["availableToAllWorkspaces"] = args?.availableToAllWorkspaces;
             resourceInputs["destination"] = args?.destination;
             resourceInputs["domain"] = args?.domain;
             resourceInputs["folderBehaviorId"] = args?.folderBehaviorId;
             resourceInputs["sslCertificateId"] = args?.sslCertificateId;
+            resourceInputs["workspaceId"] = args?.workspaceId;
             resourceInputs["brickManaged"] = undefined /*out*/;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["dnsStatus"] = undefined /*out*/;
+            resourceInputs["ipAddresses"] = undefined /*out*/;
+            resourceInputs["outboundIpAddresses"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -138,6 +164,10 @@ export class CustomDomain extends pulumi.CustomResource {
  * Input properties used for looking up and filtering CustomDomain resources.
  */
 export interface CustomDomainState {
+    /**
+     * Allow all workspaces to use this default-workspace Custom Domain.
+     */
+    availableToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
      * Is this domain's SSL certificate automatically managed and renewed by Files.com?
      */
@@ -163,6 +193,14 @@ export interface CustomDomainState {
      */
     folderBehaviorId?: pulumi.Input<number | undefined>;
     /**
+     * Dedicated public IP addresses allocated to this Custom Domain.
+     */
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+     */
+    outboundIpAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * Current SSL certificate ID.
      */
     sslCertificateId?: pulumi.Input<number | undefined>;
@@ -170,12 +208,20 @@ export interface CustomDomainState {
      * When this Custom Domain was last updated.
      */
     updatedAt?: pulumi.Input<string | undefined>;
+    /**
+     * Workspace ID (0 for the default workspace).
+     */
+    workspaceId?: pulumi.Input<number | undefined>;
 }
 
 /**
  * The set of arguments for constructing a CustomDomain resource.
  */
 export interface CustomDomainArgs {
+    /**
+     * Allow all workspaces to use this default-workspace Custom Domain.
+     */
+    availableToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
      * Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
      */
@@ -192,4 +238,8 @@ export interface CustomDomainArgs {
      * Current SSL certificate ID.
      */
     sslCertificateId?: pulumi.Input<number | undefined>;
+    /**
+     * Workspace ID (0 for the default workspace).
+     */
+    workspaceId?: pulumi.Input<number | undefined>;
 }

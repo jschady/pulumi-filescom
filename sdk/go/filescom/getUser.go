@@ -21,17 +21,12 @@ import (
 //
 // These authentication methods can be configured during user creation and can be modified at any time by site administrators. The meanings of the available values are as follows:
 //
-// * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
-//
+// * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
 // * <span pulumi-lang-nodejs="`emailSignup`" pulumi-lang-dotnet="`EmailSignup`" pulumi-lang-go="`emailSignup`" pulumi-lang-python="`email_signup`" pulumi-lang-yaml="`emailSignup`" pulumi-lang-java="`emailSignup`" pulumi-lang-hcl="`email_signup`">`emailSignup`</span> - When set upon user creation, an email will be sent to the new user with a link for them to create their password. Once the user has created their password, their authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>.
-//
-// * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On. When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
-//
-// * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format. Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>. Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
-//
-// * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key. Typically only used for service users.
-//
-// * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt. If API Keys are also configured, those can be used *instead* of the password and key combination. This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once. Typically only used for service users.
+// * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On.  When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
+// * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format.  Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>.  Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
+// * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key.  Typically only used for service users.
+// * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt.  If API Keys are also configured, those can be used *instead* of the password and key combination.  This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once.  Typically only used for service users.
 //
 // ## Example Usage
 //
@@ -220,6 +215,8 @@ type LookupUserResult struct {
 	ResponsibleUserId int `pulumi:"responsibleUserId"`
 	// Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
 	RestapiPermission bool `pulumi:"restapiPermission"`
+	// Can the user access the S3-compatible endpoint? Defaults to true.
+	S3CompatibleEndpointPermission bool `pulumi:"s3CompatibleEndpointPermission"`
 	// Does this user manage it's own credentials or is it a shared/bot user?
 	SelfManaged bool `pulumi:"selfManaged"`
 	// Can the user access with SFTP?
@@ -250,9 +247,9 @@ type LookupUserResult struct {
 	UserRoot string `pulumi:"userRoot"`
 	// User's username
 	Username string `pulumi:"username"`
-	// Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+	// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
 	WorkspaceAdmin bool `pulumi:"workspaceAdmin"`
-	// Workspace ID
+	// ID of the Workspace the user belongs to. 0 is the Default Workspace.
 	WorkspaceId int `pulumi:"workspaceId"`
 }
 
@@ -641,6 +638,11 @@ func (o LookupUserResultOutput) RestapiPermission() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.RestapiPermission }).(pulumi.BoolOutput)
 }
 
+// Can the user access the S3-compatible endpoint? Defaults to true.
+func (o LookupUserResultOutput) S3CompatibleEndpointPermission() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupUserResult) bool { return v.S3CompatibleEndpointPermission }).(pulumi.BoolOutput)
+}
+
 // Does this user manage it's own credentials or is it a shared/bot user?
 func (o LookupUserResultOutput) SelfManaged() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.SelfManaged }).(pulumi.BoolOutput)
@@ -716,12 +718,12 @@ func (o LookupUserResultOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Username }).(pulumi.StringOutput)
 }
 
-// Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
 func (o LookupUserResultOutput) WorkspaceAdmin() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.WorkspaceAdmin }).(pulumi.BoolOutput)
 }
 
-// Workspace ID
+// ID of the Workspace the user belongs to. 0 is the Default Workspace.
 func (o LookupUserResultOutput) WorkspaceId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupUserResult) int { return v.WorkspaceId }).(pulumi.IntOutput)
 }

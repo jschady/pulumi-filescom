@@ -13,6 +13,8 @@ import * as utilities from "./utilities";
  *
  * The rule can also include or exclude site and folder admins from the action.
  *
+ * A Custom Workspace rule applies only to users who belong to that Workspace. Default Workspace users with access to a Custom Workspace, including Workspace Administrators, remain covered by Default Workspace rules.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -52,7 +54,7 @@ export interface GetUserLifecycleRuleResult {
      */
     readonly action: string;
     /**
-     * If true, a default-workspace rule also applies to users in all workspaces.
+     * If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     readonly applyToAllWorkspaces: boolean;
     /**
@@ -76,7 +78,7 @@ export interface GetUserLifecycleRuleResult {
      */
     readonly includeFolderAdmins: boolean;
     /**
-     * If true, the rule will apply to site admins.
+     * If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     readonly includeSiteAdmins: boolean;
     /**
@@ -104,7 +106,7 @@ export interface GetUserLifecycleRuleResult {
      */
     readonly userTag: string;
     /**
-     * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
+     * Workspace whose users the rule applies to. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
      */
     readonly workspaceId: number;
 }
@@ -116,6 +118,8 @@ export interface GetUserLifecycleRuleResult {
  * The<span pulumi-lang-nodejs=" authenticationMethod " pulumi-lang-dotnet=" AuthenticationMethod " pulumi-lang-go=" authenticationMethod " pulumi-lang-python=" authentication_method " pulumi-lang-yaml=" authenticationMethod " pulumi-lang-java=" authenticationMethod " pulumi-lang-hcl=" authentication_method "> authenticationMethod </span>property specifies the authentication method for the rule, which can be set to "all", <span pulumi-lang-nodejs=""allNonSso"" pulumi-lang-dotnet=""AllNonSso"" pulumi-lang-go=""allNonSso"" pulumi-lang-python=""all_non_sso"" pulumi-lang-yaml=""allNonSso"" pulumi-lang-java=""allNonSso"" pulumi-lang-hcl=""all_non_sso"">"allNonSso"</span>, or a specific authentication method.
  *
  * The rule can also include or exclude site and folder admins from the action.
+ *
+ * A Custom Workspace rule applies only to users who belong to that Workspace. Default Workspace users with access to a Custom Workspace, including Workspace Administrators, remain covered by Default Workspace rules.
  *
  * ## Example Usage
  *

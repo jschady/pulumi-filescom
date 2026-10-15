@@ -14,7 +14,7 @@ namespace Jschady.Filescom.Inputs
     public sealed class AutomationDefinitionNodeUnzipConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("destination")]
         public Input<string>? Destination { get; set; }

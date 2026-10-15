@@ -13,13 +13,9 @@ namespace Jschady.Filescom
     public static class GetGroup
     {
         /// <summary>
-        /// A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
-        /// 
-        /// 
+        /// A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
         /// 
         /// All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
-        /// 
-        /// 
         /// 
         /// Files.com's Group Admin feature allows you to define Group Admins, who then have access to add and remove users within their groups.
         /// 
@@ -130,13 +126,9 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupResult>("filescom:index/getGroup:getGroup", args ?? new GetGroupArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
-        /// 
-        /// 
+        /// A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
         /// 
         /// All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
-        /// 
-        /// 
         /// 
         /// Files.com's Group Admin feature allows you to define Group Admins, who then have access to add and remove users within their groups.
         /// 
@@ -247,13 +239,9 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("filescom:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
-        /// 
-        /// 
+        /// A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
         /// 
         /// All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
-        /// 
-        /// 
         /// 
         /// Files.com's Group Admin feature allows you to define Group Admins, who then have access to add and remove users within their groups.
         /// 
@@ -442,6 +430,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool RestapiPermission;
         /// <summary>
+        /// If true, users in this group can access the S3-compatible endpoint. This will override a false value of &lt;span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`"&gt;`s3CompatibleEndpointPermission`&lt;/span&gt; on the user level. Defaults to false.
+        /// </summary>
+        public readonly bool S3CompatibleEndpointPermission;
+        /// <summary>
         /// If true, users in this group can use SFTP to login.  This will override a false value of &lt;span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`"&gt;`sftpPermission`&lt;/span&gt; on the user level.
         /// </summary>
         public readonly bool SftpPermission;
@@ -486,6 +478,8 @@ namespace Jschady.Filescom
 
             bool restapiPermission,
 
+            bool s3CompatibleEndpointPermission,
+
             bool sftpPermission,
 
             int siteId,
@@ -507,6 +501,7 @@ namespace Jschady.Filescom
             Name = name;
             Notes = notes;
             RestapiPermission = restapiPermission;
+            S3CompatibleEndpointPermission = s3CompatibleEndpointPermission;
             SftpPermission = sftpPermission;
             SiteId = siteId;
             UserIds = userIds;

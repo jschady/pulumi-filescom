@@ -374,6 +374,10 @@ namespace Jschady.Filescom
     public sealed class GetEventDeliveryAttemptResult
     {
         /// <summary>
+        /// Shared summary ID when this event is delivered in a Slack or Teams subfolder summary. All events in a summary share its delivery outcome.
+        /// </summary>
+        public readonly int ActivityNotificationBatchId;
+        /// <summary>
         /// Number of delivery attempts made.
         /// </summary>
         public readonly int AttemptNumber;
@@ -436,6 +440,8 @@ namespace Jschady.Filescom
 
         [OutputConstructor]
         private GetEventDeliveryAttemptResult(
+            int activityNotificationBatchId,
+
             int attemptNumber,
 
             string createdAt,
@@ -466,6 +472,7 @@ namespace Jschady.Filescom
 
             int workspaceId)
         {
+            ActivityNotificationBatchId = activityNotificationBatchId;
             AttemptNumber = attemptNumber;
             CreatedAt = createdAt;
             DeliveredAt = deliveredAt;

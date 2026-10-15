@@ -11,6 +11,10 @@ using Pulumi;
 namespace Jschady.Filescom
 {
     /// <summary>
+    /// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+    /// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+    /// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -27,7 +31,7 @@ namespace Jschady.Filescom
     ///         Name = "example",
     ///         AdditionalHeaders = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "example value",
+    ///             ["authorization"] = "Bearer YOUR_TOKEN",
     ///         },
     ///         SendingActive = true,
     ///         GenericPayloadType = "example",
@@ -471,6 +475,7 @@ namespace Jschady.Filescom
                 PluginDownloadURL = "github://api.github.com/jschady/pulumi-filescom",
                 AdditionalSecretOutputs =
                 {
+                    "additionalHeaders",
                     "azureOauthClientCredentialsClientSecret",
                     "crowdstrikeToken",
                     "datadogApiKey",
@@ -508,11 +513,21 @@ namespace Jschady.Filescom
         [Input("actionSendEnabled")]
         public Input<bool>? ActionSendEnabled { get; set; }
 
+        [Input("additionalHeaders")]
+        private Input<object>? _additionalHeaders;
+
         /// <summary>
         /// Additional HTTP Headers included in calls to the destination URL
         /// </summary>
-        [Input("additionalHeaders")]
-        public Input<object>? AdditionalHeaders { get; set; }
+        public Input<object>? AdditionalHeaders
+        {
+            get => _additionalHeaders;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _additionalHeaders = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Whether or not sending is enabled for&lt;span pulumi-lang-nodejs=" apiRequest " pulumi-lang-dotnet=" ApiRequest " pulumi-lang-go=" apiRequest " pulumi-lang-python=" api_request " pulumi-lang-yaml=" apiRequest " pulumi-lang-java=" apiRequest " pulumi-lang-hcl=" api_request "&gt; apiRequest &lt;/span&gt;logs.
@@ -797,11 +812,21 @@ namespace Jschady.Filescom
         [Input("actionSendEnabled")]
         public Input<bool>? ActionSendEnabled { get; set; }
 
+        [Input("additionalHeaders")]
+        private Input<object>? _additionalHeaders;
+
         /// <summary>
         /// Additional HTTP Headers included in calls to the destination URL
         /// </summary>
-        [Input("additionalHeaders")]
-        public Input<object>? AdditionalHeaders { get; set; }
+        public Input<object>? AdditionalHeaders
+        {
+            get => _additionalHeaders;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _additionalHeaders = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Number of log entries sent for the lifetime of this destination.

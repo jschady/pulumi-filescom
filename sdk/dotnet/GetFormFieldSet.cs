@@ -15,13 +15,17 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Form Field Set is a custom form to be used for bundle and inbox registrations.
         /// 
-        /// 
-        /// 
         /// Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
         /// 
-        /// 
-        /// 
         /// Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
+        /// 
+        /// Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+        /// 
+        /// Enable&lt;span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "&gt; requireCompleteMetadataCapture &lt;/span&gt;to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+        /// 
+        /// Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;when submitting new answers or editing the form again.
+        /// 
+        /// Authenticated form field set responses include historical definitions in&lt;span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "&gt; formFields &lt;/span&gt;so existing answers can still be interpreted. Only IDs in&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
         /// 
         /// ## Example Usage
         /// 
@@ -132,13 +136,17 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Form Field Set is a custom form to be used for bundle and inbox registrations.
         /// 
-        /// 
-        /// 
         /// Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
         /// 
-        /// 
-        /// 
         /// Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
+        /// 
+        /// Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+        /// 
+        /// Enable&lt;span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "&gt; requireCompleteMetadataCapture &lt;/span&gt;to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+        /// 
+        /// Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;when submitting new answers or editing the form again.
+        /// 
+        /// Authenticated form field set responses include historical definitions in&lt;span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "&gt; formFields &lt;/span&gt;so existing answers can still be interpreted. Only IDs in&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
         /// 
         /// ## Example Usage
         /// 
@@ -249,13 +257,17 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Form Field Set is a custom form to be used for bundle and inbox registrations.
         /// 
-        /// 
-        /// 
         /// Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
         /// 
-        /// 
-        /// 
         /// Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
+        /// 
+        /// Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+        /// 
+        /// Enable&lt;span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "&gt; requireCompleteMetadataCapture &lt;/span&gt;to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+        /// 
+        /// Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;when submitting new answers or editing the form again.
+        /// 
+        /// Authenticated form field set responses include historical definitions in&lt;span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "&gt; formFields &lt;/span&gt;so existing answers can still be interpreted. Only IDs in&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
         /// 
         /// ## Example Usage
         /// 
@@ -398,7 +410,7 @@ namespace Jschady.Filescom
     public sealed class GetFormFieldSetResult
     {
         /// <summary>
-        /// Associated form fields
+        /// Associated form field definitions; authenticated form field set responses include historical definitions, while&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;identifies current fields
         /// </summary>
         public readonly object FormFields;
         /// <summary>
@@ -413,6 +425,10 @@ namespace Jschady.Filescom
         /// Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
         /// </summary>
         public readonly bool InUse;
+        /// <summary>
+        /// Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
+        /// </summary>
+        public readonly bool RequireCompleteMetadataCapture;
         /// <summary>
         /// Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         /// </summary>
@@ -440,6 +456,8 @@ namespace Jschady.Filescom
 
             bool inUse,
 
+            bool requireCompleteMetadataCapture,
+
             bool skipCompany,
 
             bool skipEmail,
@@ -452,6 +470,7 @@ namespace Jschady.Filescom
             FormLayouts = formLayouts;
             Id = id;
             InUse = inUse;
+            RequireCompleteMetadataCapture = requireCompleteMetadataCapture;
             SkipCompany = skipCompany;
             SkipEmail = skipEmail;
             SkipName = skipName;

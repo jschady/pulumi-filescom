@@ -13,7 +13,7 @@ namespace Jschady.Filescom
     public static class GetAs2Partner
     {
         /// <summary>
-        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
         /// 
         /// ## Example Usage
         /// 
@@ -122,7 +122,7 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAs2PartnerResult>("filescom:index/getAs2Partner:getAs2Partner", args ?? new GetAs2PartnerArgs(), options.WithDefaults());
 
         /// <summary>
-        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
         /// 
         /// ## Example Usage
         /// 
@@ -231,7 +231,7 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetAs2PartnerResult>("filescom:index/getAs2Partner:getAs2Partner", args ?? new GetAs2PartnerInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+        /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
         /// 
         /// ## Example Usage
         /// 
@@ -442,7 +442,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string ServerCertificate;
         /// <summary>
-        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: Automatically set the correct value for this setting based on next message received.
+        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: A one-time starting state. The next message received is always accepted and switches this to &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt; if it carries a valid signature, or &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; if it does not.
         /// </summary>
         public readonly string SignatureValidationLevel;
         /// <summary>

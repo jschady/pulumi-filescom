@@ -700,6 +700,10 @@ class AwaitableGetSiemHttpDestinationResult(GetSiemHttpDestinationResult):
 def get_siem_http_destination(id: Optional[_builtins.int] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiemHttpDestinationResult:
     """
+    A SIEM HTTP Destination defines where Files.com sends the log types you select.
+    For HTTP destinations, Files.com sends JSON to the configured endpoint.
+    For file destinations, Files.com writes JSON or CSV files to the configured folder.
+
     ## Example Usage
 
     <!--Start PulumiCodeChooser -->
@@ -778,6 +782,10 @@ def get_siem_http_destination(id: Optional[_builtins.int] = None,
 def get_siem_http_destination_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSiemHttpDestinationResult]:
     """
+    A SIEM HTTP Destination defines where Files.com sends the log types you select.
+    For HTTP destinations, Files.com sends JSON to the configured endpoint.
+    For file destinations, Files.com writes JSON or CSV files to the configured folder.
+
     ## Example Usage
 
     <!--Start PulumiCodeChooser -->

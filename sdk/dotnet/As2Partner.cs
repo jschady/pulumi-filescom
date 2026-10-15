@@ -11,7 +11,7 @@ using Pulumi;
 namespace Jschady.Filescom
 {
     /// <summary>
-    /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+    /// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
     /// 
     /// ## Example Usage
     /// 
@@ -34,12 +34,12 @@ namespace Jschady.Filescom
     ///         DefaultMimeType = "application/octet-stream",
     ///         AdditionalHttpHeaders = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "example value",
+    ///             ["x-Partner"] = "acme",
     ///         },
     ///         As2StationId = 1,
     ///         Name = "AS2 Partner Name",
     ///         Uri = "example",
-    ///         PublicCertificate = "public_certificate",
+    ///         PublicCertificate = "example",
     ///     });
     /// 
     /// });
@@ -115,6 +115,20 @@ namespace Jschady.Filescom
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+        /// </summary>
+        [Output("pkcs12")]
+        public Output<string?> Pkcs12 { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+        /// </summary>
+        [Output("pkcs12Password")]
+        public Output<string?> Pkcs12Password { get; private set; } = null!;
+
+        /// <summary>
         /// Public certificate used for message security.
         /// </summary>
         [Output("publicCertificate")]
@@ -163,7 +177,7 @@ namespace Jschady.Filescom
         public Output<string> ServerCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: Automatically set the correct value for this setting based on next message received.
+        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: A one-time starting state. The next message received is always accepted and switches this to &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt; if it carries a valid signature, or &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; if it does not.
         /// </summary>
         [Output("signatureValidationLevel")]
         public Output<string> SignatureValidationLevel { get; private set; } = null!;
@@ -207,6 +221,8 @@ namespace Jschady.Filescom
                 AdditionalSecretOutputs =
                 {
                     "httpAuthPassword",
+                    "pkcs12",
+                    "pkcs12Password",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -290,11 +306,45 @@ namespace Jschady.Filescom
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        [Input("pkcs12")]
+        private Input<string>? _pkcs12;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+        /// </summary>
+        public Input<string>? Pkcs12
+        {
+            get => _pkcs12;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("pkcs12Password")]
+        private Input<string>? _pkcs12Password;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+        /// </summary>
+        public Input<string>? Pkcs12Password
+        {
+            get => _pkcs12Password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12Password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// Public certificate used for message security.
         /// </summary>
-        [Input("publicCertificate", required: true)]
-        public Input<string> PublicCertificate { get; set; } = null!;
+        [Input("publicCertificate")]
+        public Input<string>? PublicCertificate { get; set; }
 
         /// <summary>
         /// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
@@ -303,7 +353,7 @@ namespace Jschady.Filescom
         public Input<string>? ServerCertificate { get; set; }
 
         /// <summary>
-        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: Automatically set the correct value for this setting based on next message received.
+        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: A one-time starting state. The next message received is always accepted and switches this to &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt; if it carries a valid signature, or &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; if it does not.
         /// </summary>
         [Input("signatureValidationLevel")]
         public Input<string>? SignatureValidationLevel { get; set; }
@@ -387,6 +437,40 @@ namespace Jschady.Filescom
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        [Input("pkcs12")]
+        private Input<string>? _pkcs12;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+        /// </summary>
+        public Input<string>? Pkcs12
+        {
+            get => _pkcs12;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("pkcs12Password")]
+        private Input<string>? _pkcs12Password;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+        /// </summary>
+        public Input<string>? Pkcs12Password
+        {
+            get => _pkcs12Password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12Password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// Public certificate used for message security.
         /// </summary>
@@ -436,7 +520,7 @@ namespace Jschady.Filescom
         public Input<string>? ServerCertificate { get; set; }
 
         /// <summary>
-        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: Automatically set the correct value for this setting based on next message received.
+        /// Should Files.com require signatures on incoming AS2 messages?  &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt;: require that incoming messages are signed with a valid matching signature. &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;: Unsigned incoming messages are allowed. &lt;span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`"&gt;`auto`&lt;/span&gt;: A one-time starting state. The next message received is always accepted and switches this to &lt;span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`"&gt;`normal`&lt;/span&gt; if it carries a valid signature, or &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; if it does not.
         /// </summary>
         [Input("signatureValidationLevel")]
         public Input<string>? SignatureValidationLevel { get; set; }

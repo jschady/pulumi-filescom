@@ -16,6 +16,9 @@ namespace Jschady.Filescom.Inputs
         [Input("excludePattern")]
         public Input<string>? ExcludePattern { get; set; }
 
+        [Input("kind")]
+        public Input<string>? Kind { get; set; }
+
         [Input("path")]
         public Input<string>? Path { get; set; }
 

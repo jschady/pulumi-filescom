@@ -48,6 +48,10 @@ export interface GetSftpHostKeyResult {
      */
     readonly active: boolean;
     /**
+     * Custom Domain ID. If set, this key is used only for that Custom Domain.
+     */
+    readonly customDomainId: number;
+    /**
      * MD5 Fingerprint of the public key
      */
     readonly fingerprintMd5: string;

@@ -8,7 +8,6 @@ import * as utilities from "./utilities";
  * An SSOStrategy is a way for users to sign in via another identity provider, such as Okta or Auth0.
  *
  * It is rare that you will need to use API endpoints for managing these, and we recommend instead managing these via the web interface.
- *
  * Nevertheless, we share the API documentation here.
  *
  * ## Example Usage
@@ -105,6 +104,10 @@ export interface GetSsoStrategyResult {
      * Use secure LDAP?
      */
     readonly ldapSecure: boolean;
+    /**
+     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+     */
+    readonly ldapServerCertificate: string;
     /**
      * LDAP server type
      */
@@ -231,7 +234,7 @@ export interface GetSsoStrategyResult {
      */
     readonly scimAuthenticationMethod: string;
     /**
-     * SCIM OAuth Access Token.
+     * SCIM OAuth Access Token. Only returned when the token is first issued or reset.
      */
     readonly scimOauthAccessToken: string;
     /**
@@ -255,7 +258,6 @@ export interface GetSsoStrategyResult {
  * An SSOStrategy is a way for users to sign in via another identity provider, such as Okta or Auth0.
  *
  * It is rare that you will need to use API endpoints for managing these, and we recommend instead managing these via the web interface.
- *
  * Nevertheless, we share the API documentation here.
  *
  * ## Example Usage

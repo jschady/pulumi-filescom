@@ -17,12 +17,12 @@ namespace Jschady.Filescom.Outputs
         public readonly ImmutableArray<string> Attachments;
         public readonly ImmutableArray<string> Bccs;
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         public readonly string Body;
         public readonly ImmutableArray<string> Ccs;
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         public readonly string From;
         /// <summary>
@@ -30,7 +30,7 @@ namespace Jschady.Filescom.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetAutomationDefinitionNodeSendEmailConfigOnErrorResult> OnErrors;
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         public readonly string Subject;
         public readonly ImmutableArray<string> Tos;

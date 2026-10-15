@@ -20,24 +20,32 @@ __all__ = ['CustomDomainArgs', 'CustomDomain']
 class CustomDomainArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[_builtins.str],
+                 available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
                  destination: pulumi.Input[Optional[_builtins.str]] = None,
                  folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None):
+                 ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a CustomDomain resource.
 
         :param pulumi.Input[_builtins.str] domain: Customer-owned domain name.
+        :param pulumi.Input[_builtins.bool] available_to_all_workspaces: Allow all workspaces to use this default-workspace Custom Domain.
         :param pulumi.Input[_builtins.str] destination: Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
         :param pulumi.Input[_builtins.int] folder_behavior_id: Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
         :param pulumi.Input[_builtins.int] ssl_certificate_id: Current SSL certificate ID.
+        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID (0 for the default workspace).
         """
         pulumi.set(__self__, "domain", domain)
+        if available_to_all_workspaces is not None:
+            pulumi.set(__self__, "available_to_all_workspaces", available_to_all_workspaces)
         if destination is not None:
             pulumi.set(__self__, "destination", destination)
         if folder_behavior_id is not None:
             pulumi.set(__self__, "folder_behavior_id", folder_behavior_id)
         if ssl_certificate_id is not None:
             pulumi.set(__self__, "ssl_certificate_id", ssl_certificate_id)
+        if workspace_id is not None:
+            pulumi.set(__self__, "workspace_id", workspace_id)
 
     @_builtins.property
     @pulumi.getter
@@ -50,6 +58,18 @@ class CustomDomainArgs:
     @domain.setter
     def domain(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "domain", value)
+
+    @_builtins.property
+    @pulumi.getter(name="availableToAllWorkspaces")
+    def available_to_all_workspaces(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow all workspaces to use this default-workspace Custom Domain.
+        """
+        return pulumi.get(self, "available_to_all_workspaces")
+
+    @available_to_all_workspaces.setter
+    def available_to_all_workspaces(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "available_to_all_workspaces", value)
 
     @_builtins.property
     @pulumi.getter
@@ -87,30 +107,52 @@ class CustomDomainArgs:
     def ssl_certificate_id(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "ssl_certificate_id", value)
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Workspace ID (0 for the default workspace).
+        """
+        return pulumi.get(self, "workspace_id")
+
+    @workspace_id.setter
+    def workspace_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "workspace_id", value)
+
 
 @pulumi.input_type
 class _CustomDomainState:
     def __init__(__self__, *,
+                 available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
                  brick_managed: pulumi.Input[Optional[_builtins.bool]] = None,
                  created_at: pulumi.Input[Optional[_builtins.str]] = None,
                  destination: pulumi.Input[Optional[_builtins.str]] = None,
                  dns_status: pulumi.Input[Optional[_builtins.str]] = None,
                  domain: pulumi.Input[Optional[_builtins.str]] = None,
                  folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 outbound_ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 updated_at: pulumi.Input[Optional[_builtins.str]] = None):
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering CustomDomain resources.
 
+        :param pulumi.Input[_builtins.bool] available_to_all_workspaces: Allow all workspaces to use this default-workspace Custom Domain.
         :param pulumi.Input[_builtins.bool] brick_managed: Is this domain's SSL certificate automatically managed and renewed by Files.com?
         :param pulumi.Input[_builtins.str] created_at: When this Custom Domain was created.
         :param pulumi.Input[_builtins.str] destination: Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
         :param pulumi.Input[_builtins.str] dns_status: Current DNS verification status.
         :param pulumi.Input[_builtins.str] domain: Customer-owned domain name.
         :param pulumi.Input[_builtins.int] folder_behavior_id: Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: Dedicated public IP addresses allocated to this Custom Domain.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] outbound_ip_addresses: Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
         :param pulumi.Input[_builtins.int] ssl_certificate_id: Current SSL certificate ID.
         :param pulumi.Input[_builtins.str] updated_at: When this Custom Domain was last updated.
+        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID (0 for the default workspace).
         """
+        if available_to_all_workspaces is not None:
+            pulumi.set(__self__, "available_to_all_workspaces", available_to_all_workspaces)
         if brick_managed is not None:
             pulumi.set(__self__, "brick_managed", brick_managed)
         if created_at is not None:
@@ -123,10 +165,28 @@ class _CustomDomainState:
             pulumi.set(__self__, "domain", domain)
         if folder_behavior_id is not None:
             pulumi.set(__self__, "folder_behavior_id", folder_behavior_id)
+        if ip_addresses is not None:
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
+        if outbound_ip_addresses is not None:
+            pulumi.set(__self__, "outbound_ip_addresses", outbound_ip_addresses)
         if ssl_certificate_id is not None:
             pulumi.set(__self__, "ssl_certificate_id", ssl_certificate_id)
         if updated_at is not None:
             pulumi.set(__self__, "updated_at", updated_at)
+        if workspace_id is not None:
+            pulumi.set(__self__, "workspace_id", workspace_id)
+
+    @_builtins.property
+    @pulumi.getter(name="availableToAllWorkspaces")
+    def available_to_all_workspaces(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow all workspaces to use this default-workspace Custom Domain.
+        """
+        return pulumi.get(self, "available_to_all_workspaces")
+
+    @available_to_all_workspaces.setter
+    def available_to_all_workspaces(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "available_to_all_workspaces", value)
 
     @_builtins.property
     @pulumi.getter(name="brickManaged")
@@ -201,6 +261,30 @@ class _CustomDomainState:
         pulumi.set(self, "folder_behavior_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Dedicated public IP addresses allocated to this Custom Domain.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @ip_addresses.setter
+    def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "ip_addresses", value)
+
+    @_builtins.property
+    @pulumi.getter(name="outboundIpAddresses")
+    def outbound_ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        """
+        return pulumi.get(self, "outbound_ip_addresses")
+
+    @outbound_ip_addresses.setter
+    def outbound_ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "outbound_ip_addresses", value)
+
+    @_builtins.property
     @pulumi.getter(name="sslCertificateId")
     def ssl_certificate_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -224,6 +308,18 @@ class _CustomDomainState:
     def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Workspace ID (0 for the default workspace).
+        """
+        return pulumi.get(self, "workspace_id")
+
+    @workspace_id.setter
+    def workspace_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "workspace_id", value)
+
 
 @pulumi.type_token("filescom:index/customDomain:CustomDomain")
 class CustomDomain(pulumi.CustomResource):
@@ -231,10 +327,12 @@ class CustomDomain(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
                  destination: pulumi.Input[Optional[_builtins.str]] = None,
                  domain: pulumi.Input[Optional[_builtins.str]] = None,
                  folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
                  ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
         A CustomDomain object represents an additional customer-owned domain that routes to a Files.com site.
@@ -247,6 +345,8 @@ class CustomDomain(pulumi.CustomResource):
         import pulumi_filescom as filescom
 
         example_custom_domain = filescom.CustomDomain("example_custom_domain",
+            available_to_all_workspaces=False,
+            workspace_id=0,
             destination="site_alias",
             folder_behavior_id=1,
             ssl_certificate_id=1,
@@ -267,10 +367,12 @@ class CustomDomain(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.bool] available_to_all_workspaces: Allow all workspaces to use this default-workspace Custom Domain.
         :param pulumi.Input[_builtins.str] destination: Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
         :param pulumi.Input[_builtins.str] domain: Customer-owned domain name.
         :param pulumi.Input[_builtins.int] folder_behavior_id: Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
         :param pulumi.Input[_builtins.int] ssl_certificate_id: Current SSL certificate ID.
+        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID (0 for the default workspace).
         """
         ...
     @overload
@@ -289,6 +391,8 @@ class CustomDomain(pulumi.CustomResource):
         import pulumi_filescom as filescom
 
         example_custom_domain = filescom.CustomDomain("example_custom_domain",
+            available_to_all_workspaces=False,
+            workspace_id=0,
             destination="site_alias",
             folder_behavior_id=1,
             ssl_certificate_id=1,
@@ -322,10 +426,12 @@ class CustomDomain(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
                  destination: pulumi.Input[Optional[_builtins.str]] = None,
                  domain: pulumi.Input[Optional[_builtins.str]] = None,
                  folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
                  ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -335,15 +441,19 @@ class CustomDomain(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = CustomDomainArgs.__new__(CustomDomainArgs)
 
+            __props__.__dict__["available_to_all_workspaces"] = available_to_all_workspaces
             __props__.__dict__["destination"] = destination
             if domain is None and not opts.urn:
                 raise TypeError("Missing required property 'domain'")
             __props__.__dict__["domain"] = domain
             __props__.__dict__["folder_behavior_id"] = folder_behavior_id
             __props__.__dict__["ssl_certificate_id"] = ssl_certificate_id
+            __props__.__dict__["workspace_id"] = workspace_id
             __props__.__dict__["brick_managed"] = None
             __props__.__dict__["created_at"] = None
             __props__.__dict__["dns_status"] = None
+            __props__.__dict__["ip_addresses"] = None
+            __props__.__dict__["outbound_ip_addresses"] = None
             __props__.__dict__["updated_at"] = None
         super(CustomDomain, __self__).__init__(
             'filescom:index/customDomain:CustomDomain',
@@ -355,14 +465,18 @@ class CustomDomain(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
             brick_managed: pulumi.Input[Optional[_builtins.bool]] = None,
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             destination: pulumi.Input[Optional[_builtins.str]] = None,
             dns_status: pulumi.Input[Optional[_builtins.str]] = None,
             domain: pulumi.Input[Optional[_builtins.str]] = None,
             folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            outbound_ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
-            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'CustomDomain':
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> 'CustomDomain':
         """
         Get an existing CustomDomain resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -370,28 +484,44 @@ class CustomDomain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.bool] available_to_all_workspaces: Allow all workspaces to use this default-workspace Custom Domain.
         :param pulumi.Input[_builtins.bool] brick_managed: Is this domain's SSL certificate automatically managed and renewed by Files.com?
         :param pulumi.Input[_builtins.str] created_at: When this Custom Domain was created.
         :param pulumi.Input[_builtins.str] destination: Where this custom domain routes. Can be <span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`">`siteAlias`</span>, <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span>, <span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`">`s3Endpoint`</span>, or <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> (not routing traffic). Set to <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span> automatically when a bound <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> folder behavior is deleted, and can be set manually via the API for any reason.
         :param pulumi.Input[_builtins.str] dns_status: Current DNS verification status.
         :param pulumi.Input[_builtins.str] domain: Customer-owned domain name.
         :param pulumi.Input[_builtins.int] folder_behavior_id: Public Hosting behavior ID when this domain routes to a specific Public Hosting behavior.  Preserved as historical context when <span pulumi-lang-nodejs="`destination`" pulumi-lang-dotnet="`Destination`" pulumi-lang-go="`destination`" pulumi-lang-python="`destination`" pulumi-lang-yaml="`destination`" pulumi-lang-java="`destination`" pulumi-lang-hcl="`destination`">`destination`</span> becomes <span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`">`unassigned`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: Dedicated public IP addresses allocated to this Custom Domain.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] outbound_ip_addresses: Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
         :param pulumi.Input[_builtins.int] ssl_certificate_id: Current SSL certificate ID.
         :param pulumi.Input[_builtins.str] updated_at: When this Custom Domain was last updated.
+        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID (0 for the default workspace).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _CustomDomainState.__new__(_CustomDomainState)
 
+        __props__.__dict__["available_to_all_workspaces"] = available_to_all_workspaces
         __props__.__dict__["brick_managed"] = brick_managed
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["destination"] = destination
         __props__.__dict__["dns_status"] = dns_status
         __props__.__dict__["domain"] = domain
         __props__.__dict__["folder_behavior_id"] = folder_behavior_id
+        __props__.__dict__["ip_addresses"] = ip_addresses
+        __props__.__dict__["outbound_ip_addresses"] = outbound_ip_addresses
         __props__.__dict__["ssl_certificate_id"] = ssl_certificate_id
         __props__.__dict__["updated_at"] = updated_at
+        __props__.__dict__["workspace_id"] = workspace_id
         return CustomDomain(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="availableToAllWorkspaces")
+    def available_to_all_workspaces(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Allow all workspaces to use this default-workspace Custom Domain.
+        """
+        return pulumi.get(self, "available_to_all_workspaces")
 
     @_builtins.property
     @pulumi.getter(name="brickManaged")
@@ -442,6 +572,22 @@ class CustomDomain(pulumi.CustomResource):
         return pulumi.get(self, "folder_behavior_id")
 
     @_builtins.property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        Dedicated public IP addresses allocated to this Custom Domain.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @_builtins.property
+    @pulumi.getter(name="outboundIpAddresses")
+    def outbound_ip_addresses(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        """
+        return pulumi.get(self, "outbound_ip_addresses")
+
+    @_builtins.property
     @pulumi.getter(name="sslCertificateId")
     def ssl_certificate_id(self) -> pulumi.Output[_builtins.int]:
         """
@@ -456,4 +602,12 @@ class CustomDomain(pulumi.CustomResource):
         When this Custom Domain was last updated.
         """
         return pulumi.get(self, "updated_at")
+
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> pulumi.Output[_builtins.int]:
+        """
+        Workspace ID (0 for the default workspace).
+        """
+        return pulumi.get(self, "workspace_id")
 

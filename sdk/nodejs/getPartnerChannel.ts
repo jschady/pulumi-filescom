@@ -50,11 +50,11 @@ export interface GetPartnerChannelResult {
      */
     readonly direction: string;
     /**
-     * Resolved from-Partner folder name after Channel override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     readonly effectiveFromPartnerFolderName: string;
     /**
-     * Resolved to-Partner folder name after Channel override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     readonly effectiveToPartnerFolderName: string;
     /**
@@ -105,6 +105,10 @@ export interface GetPartnerChannelResult {
      * Optional route path for files delivered to the Partner.
      */
     readonly toPartnerRoutePath: string;
+    /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+     */
+    readonly useChannelRoot: boolean;
     /**
      * ID of the Workspace associated with this Partner Channel.
      */

@@ -15,6 +15,7 @@ namespace Jschady.Filescom.Outputs
     public sealed class GetAutomationDefinitionNodeTriggerActionConfigResult
     {
         public readonly string ExcludePattern;
+        public readonly string Kind;
         public readonly string Path;
         public readonly string PathTimeZone;
         public readonly string Source;
@@ -23,6 +24,8 @@ namespace Jschady.Filescom.Outputs
         [OutputConstructor]
         private GetAutomationDefinitionNodeTriggerActionConfigResult(
             string excludePattern,
+
+            string kind,
 
             string path,
 
@@ -33,6 +36,7 @@ namespace Jschady.Filescom.Outputs
             ImmutableArray<string> triggerActions)
         {
             ExcludePattern = excludePattern;
+            Kind = kind;
             Path = path;
             PathTimeZone = pathTimeZone;
             Source = source;

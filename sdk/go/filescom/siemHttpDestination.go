@@ -12,6 +12,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
@@ -30,7 +34,7 @@ import (
 //			_, err := filescom.NewSiemHttpDestination(ctx, "example_siem_http_destination", &filescom.SiemHttpDestinationArgs{
 //				Name: pulumi.String("example"),
 //				AdditionalHeaders: pulumi.Any(map[string]interface{}{
-//					"key": "example value",
+//					"authorization": "Bearer YOUR_TOKEN",
 //				}),
 //				SendingActive:                       pulumi.Bool(true),
 //				GenericPayloadType:                  pulumi.String("example"),
@@ -220,6 +224,9 @@ func NewSiemHttpDestination(ctx *pulumi.Context,
 	if args.DestinationType == nil {
 		return nil, errors.New("invalid value for required argument 'DestinationType'")
 	}
+	if args.AdditionalHeaders != nil {
+		args.AdditionalHeaders = pulumi.ToSecret(args.AdditionalHeaders).(pulumi.Input)
+	}
 	if args.AzureOauthClientCredentialsClientSecret != nil {
 		args.AzureOauthClientCredentialsClientSecret = pulumi.ToSecret(args.AzureOauthClientCredentialsClientSecret).(pulumi.StringPtrInput)
 	}
@@ -242,6 +249,7 @@ func NewSiemHttpDestination(ctx *pulumi.Context,
 		args.SplunkToken = pulumi.ToSecret(args.SplunkToken).(pulumi.StringPtrInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"additionalHeaders",
 		"azureOauthClientCredentialsClientSecret",
 		"crowdstrikeToken",
 		"datadogApiKey",

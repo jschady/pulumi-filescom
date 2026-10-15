@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// An Integration Centric Profile defines the Remote Server integrations a user is expected to add and connect during integration-centric onboarding.
         /// 
-        /// 
-        /// 
         /// Use this to automate setup guidance for users who need access to multiple business systems without sending long manual instructions. Common scenarios include ongoing access to systems such as SharePoint, bridging Google, Microsoft, and Box environments after M&amp;A activity, and migrations where users connect legacy EFSS accounts during transition work.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// An Integration Centric Profile defines the Remote Server integrations a user is expected to add and connect during integration-centric onboarding.
         /// 
-        /// 
-        /// 
         /// Use this to automate setup guidance for users who need access to multiple business systems without sending long manual instructions. Common scenarios include ongoing access to systems such as SharePoint, bridging Google, Microsoft, and Box environments after M&amp;A activity, and migrations where users connect legacy EFSS accounts during transition work.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// An Integration Centric Profile defines the Remote Server integrations a user is expected to add and connect during integration-centric onboarding.
-        /// 
-        /// 
         /// 
         /// Use this to automate setup guidance for users who need access to multiple business systems without sending long manual instructions. Common scenarios include ongoing access to systems such as SharePoint, bridging Google, Microsoft, and Box environments after M&amp;A activity, and migrations where users connect legacy EFSS accounts during transition work.
         /// 

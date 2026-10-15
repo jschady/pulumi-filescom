@@ -39,8 +39,8 @@ class EventSubscriptionArgs:
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Subscription can dispatch events.
         :param pulumi.Input[_builtins.int] event_channel_id: Event Channel ID
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] event_target_ids: Event Target IDs this subscription sends to.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
-        :param Any filter: Structured event payload filter.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
+        :param Any filter: Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
         :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
@@ -136,7 +136,7 @@ class EventSubscriptionArgs:
     @pulumi.getter(name="eventTypes")
     def event_types(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        Event type strings matched by this subscription. Blank means all event types.
+        Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
         """
         return pulumi.get(self, "event_types")
 
@@ -148,7 +148,7 @@ class EventSubscriptionArgs:
     @pulumi.getter
     def filter(self) -> Optional[Any]:
         """
-        Structured event payload filter.
+        Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         """
         return pulumi.get(self, "filter")
 
@@ -243,8 +243,8 @@ class _EventSubscriptionState:
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Subscription can dispatch events.
         :param pulumi.Input[_builtins.int] event_channel_id: Event Channel ID
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] event_target_ids: Event Target IDs this subscription sends to.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
-        :param Any filter: Structured event payload filter.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
+        :param Any filter: Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
         :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
@@ -357,7 +357,7 @@ class _EventSubscriptionState:
     @pulumi.getter(name="eventTypes")
     def event_types(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        Event type strings matched by this subscription. Blank means all event types.
+        Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
         """
         return pulumi.get(self, "event_types")
 
@@ -369,7 +369,7 @@ class _EventSubscriptionState:
     @pulumi.getter
     def filter(self) -> Optional[Any]:
         """
-        Structured event payload filter.
+        Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         """
         return pulumi.get(self, "filter")
 
@@ -488,7 +488,15 @@ class EventSubscription(pulumi.CustomResource):
             message="example",
             message_only=True,
             enabled=True,
-            event_types=["example"],
+            event_types=["sync_run.failure.v1"],
+            filter={
+                "payload.sync_name": {
+                    "prefix": "Nightly",
+                },
+                "payload.event_errors": {
+                    "exists": True,
+                },
+            },
             delivery_policy="example",
             event_target_ids=[1])
         ```
@@ -512,8 +520,8 @@ class EventSubscription(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Subscription can dispatch events.
         :param pulumi.Input[_builtins.int] event_channel_id: Event Channel ID
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] event_target_ids: Event Target IDs this subscription sends to.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
-        :param Any filter: Structured event payload filter.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
+        :param Any filter: Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
         :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
@@ -545,7 +553,15 @@ class EventSubscription(pulumi.CustomResource):
             message="example",
             message_only=True,
             enabled=True,
-            event_types=["example"],
+            event_types=["sync_run.failure.v1"],
+            filter={
+                "payload.sync_name": {
+                    "prefix": "Nightly",
+                },
+                "payload.event_errors": {
+                    "exists": True,
+                },
+            },
             delivery_policy="example",
             event_target_ids=[1])
         ```
@@ -649,8 +665,8 @@ class EventSubscription(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Subscription can dispatch events.
         :param pulumi.Input[_builtins.int] event_channel_id: Event Channel ID
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] event_target_ids: Event Target IDs this subscription sends to.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types.
-        :param Any filter: Structured event payload filter.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] event_types: Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
+        :param Any filter: Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         :param pulumi.Input[_builtins.str] message: Custom message to include in notification emails.
         :param pulumi.Input[_builtins.bool] message_only: If true, notification email bodies contain only the custom message, omitting event details and the review button. Requires a custom message, defaults to false, and does not affect non-email targets.
         :param pulumi.Input[_builtins.str] name: Event Subscription name.
@@ -730,7 +746,7 @@ class EventSubscription(pulumi.CustomResource):
     @pulumi.getter(name="eventTypes")
     def event_types(self) -> pulumi.Output[Sequence[_builtins.str]]:
         """
-        Event type strings matched by this subscription. Blank means all event types.
+        Event type strings matched by this subscription. Blank means all event types. Valid values: `automation_run.canceled.v1`, `automation_run.failure.v1`, `automation_run.failure_will_retry.v1`, `automation_run.partial_failure.v1`, `automation_run.partial_failure_will_retry.v1`, `automation_run.skipped.v1`, `automation_run.success.v1`, `expectation_evaluation.invalid.v1`, `expectation_evaluation.late.v1`, `expectation_evaluation.missing.v1`, `expectation_evaluation.success.v1`, `expectation_incident.acknowledged.v1`, `expectation_incident.open.v1`, `expectation_incident.resolved.v1`, `expectation_incident.snoozed.v1`, `external_event.client_log.failure.v1`, `external_event.client_log.partial_failure.v1`, `external_event.client_log.skipped.v1`, `external_event.client_log.success.v1`, `pending_work_event.failure.v1`, `pending_work_event.partial_failure.v1`, `pending_work_event.skipped.v1`, `pending_work_event.success.v1`, `siem_http_destination_event.failure.v1`, `siem_http_destination_event.partial_failure.v1`, `siem_http_destination_event.skipped.v1`, `siem_http_destination_event.success.v1`, `sso_event.ldap_login.failure.v1`, `sso_event.ldap_login.partial_failure.v1`, `sso_event.ldap_login.skipped.v1`, `sso_event.ldap_login.success.v1`, `sso_event.ldap_sync.failure.v1`, `sso_event.ldap_sync.partial_failure.v1`, `sso_event.ldap_sync.skipped.v1`, `sso_event.ldap_sync.success.v1`, `sso_event.saml_login.failure.v1`, `sso_event.saml_login.partial_failure.v1`, `sso_event.saml_login.skipped.v1`, `sso_event.saml_login.success.v1`, `sync_run.failure.v1`, `sync_run.partial_failure.v1`, `sync_run.skipped.v1`, `sync_run.success.v1`, `user_security_event.lockout.v1`
         """
         return pulumi.get(self, "event_types")
 
@@ -738,7 +754,7 @@ class EventSubscription(pulumi.CustomResource):
     @pulumi.getter
     def filter(self) -> pulumi.Output[Any]:
         """
-        Structured event payload filter.
+        Conditions on event fields that an event must meet to be delivered, keyed by dot-notation field path. All conditions must match.
         """
         return pulumi.get(self, "filter")
 

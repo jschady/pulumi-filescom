@@ -11,11 +11,17 @@ using Pulumi;
 namespace Jschady.Filescom
 {
     /// <summary>
-    /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
+    /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
     /// 
     /// The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
     /// 
-    /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+    /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
+    /// 
+    /// The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
+    /// 
+    /// To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+    /// 
+    /// A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
     /// 
     /// ## Example Usage
     /// 
@@ -31,9 +37,11 @@ namespace Jschady.Filescom
     ///     var exampleLock = new Filescom.Lock("example_lock", new()
     ///     {
     ///         Path = "locked_file",
+    ///         Token = "17c54824e9931a4688ca032d03f6663c",
     ///         AllowAccessByAnyUser = false,
     ///         Exclusive = false,
     ///         Recursive = true,
+    ///         Owner = "user",
     ///         Timeout = 1,
     ///     });
     /// 
@@ -70,7 +78,13 @@ namespace Jschady.Filescom
         public Output<bool> Exclusive { get; private set; } = null!;
 
         /// <summary>
-        /// Owner of the lock.  This can be any arbitrary string.
+        /// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        /// </summary>
+        [Output("expectedToken")]
+        public Output<string?> ExpectedToken { get; private set; } = null!;
+
+        /// <summary>
+        /// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         /// </summary>
         [Output("owner")]
         public Output<string> Owner { get; private set; } = null!;
@@ -177,6 +191,18 @@ namespace Jschady.Filescom
         public Input<bool>? Exclusive { get; set; }
 
         /// <summary>
+        /// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        /// </summary>
+        [Input("expectedToken")]
+        public Input<string>? ExpectedToken { get; set; }
+
+        /// <summary>
+        /// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
+        /// </summary>
+        [Input("owner")]
+        public Input<string>? Owner { get; set; }
+
+        /// <summary>
         /// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         /// </summary>
         [Input("path", required: true)]
@@ -193,6 +219,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("timeout")]
         public Input<int>? Timeout { get; set; }
+
+        /// <summary>
+        /// Lock token.  Use to release lock.
+        /// </summary>
+        [Input("token")]
+        public Input<string>? Token { get; set; }
 
         public LockArgs()
         {
@@ -218,7 +250,13 @@ namespace Jschady.Filescom
         public Input<bool>? Exclusive { get; set; }
 
         /// <summary>
-        /// Owner of the lock.  This can be any arbitrary string.
+        /// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        /// </summary>
+        [Input("expectedToken")]
+        public Input<string>? ExpectedToken { get; set; }
+
+        /// <summary>
+        /// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         /// </summary>
         [Input("owner")]
         public Input<string>? Owner { get; set; }

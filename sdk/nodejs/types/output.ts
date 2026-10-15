@@ -64,6 +64,7 @@ export interface AutomationDefinitionNode {
     transform?: outputs.AutomationDefinitionNodeTransform;
     triggerAction?: outputs.AutomationDefinitionNodeTriggerAction;
     triggerEmail?: outputs.AutomationDefinitionNodeTriggerEmail;
+    triggerFolderCreation?: outputs.AutomationDefinitionNodeTriggerFolderCreation;
     triggerManual?: outputs.AutomationDefinitionNodeTriggerManual;
     triggerScheduled?: outputs.AutomationDefinitionNodeTriggerScheduled;
     triggerWebhook?: outputs.AutomationDefinitionNodeTriggerWebhook;
@@ -291,7 +292,7 @@ export interface AutomationDefinitionNodeDocumentConvert {
 
 export interface AutomationDefinitionNodeDocumentConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     /**
@@ -365,6 +366,7 @@ export interface AutomationDefinitionNodeFilterConfig {
      * A bare Files TransformScript expression, no braces.
      */
     condition: string;
+    kind?: string;
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
@@ -396,7 +398,7 @@ export interface AutomationDefinitionNodeGpgDecrypt {
 
 export interface AutomationDefinitionNodeGpgDecryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     gpgKeyId: number;
@@ -432,7 +434,7 @@ export interface AutomationDefinitionNodeGpgEncrypt {
 
 export interface AutomationDefinitionNodeGpgEncryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     gpgKeyId: number;
@@ -502,7 +504,7 @@ export interface AutomationDefinitionNodeImageConvert {
 
 export interface AutomationDefinitionNodeImageConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     height?: number;
@@ -540,13 +542,13 @@ export interface AutomationDefinitionNodeImportFile {
 
 export interface AutomationDefinitionNodeImportFileConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     content?: string;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * One or more destination path templates.
      */
-    destination?: string;
+    destinations?: string[];
     headers?: {[key: string]: string};
     method?: string;
     /**
@@ -554,7 +556,7 @@ export interface AutomationDefinitionNodeImportFileConfig {
      */
     onErrors?: outputs.AutomationDefinitionNodeImportFileConfigOnError[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     url: string;
 }
@@ -682,7 +684,7 @@ export interface AutomationDefinitionNodeRunSync {
     /**
      * Configuration fields for this node type.
      */
-    config?: outputs.AutomationDefinitionNodeRunSyncConfig;
+    config: outputs.AutomationDefinitionNodeRunSyncConfig;
     /**
      * Unique node ID within the graph.
      */
@@ -694,12 +696,11 @@ export interface AutomationDefinitionNodeRunSync {
 }
 
 export interface AutomationDefinitionNodeRunSyncConfig {
-    legacySyncIds?: number[];
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
     onErrors?: outputs.AutomationDefinitionNodeRunSyncConfigOnError[];
-    syncIds?: number[];
+    syncIds: number[];
 }
 
 export interface AutomationDefinitionNodeRunSyncConfigOnError {
@@ -729,12 +730,12 @@ export interface AutomationDefinitionNodeSendEmailConfig {
     attachments?: string[];
     bccs?: string[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     body?: string;
     ccs?: string[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     from?: string;
     /**
@@ -742,7 +743,7 @@ export interface AutomationDefinitionNodeSendEmailConfig {
      */
     onErrors?: outputs.AutomationDefinitionNodeSendEmailConfigOnError[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     subject?: string;
     tos: string[];
@@ -819,7 +820,7 @@ export interface AutomationDefinitionNodeSwitchConfigCase {
      */
     condition: string;
     /**
-     * Identifier used to connect nodes and named inputs or outputs.
+     * Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
      */
     name: string;
 }
@@ -849,7 +850,7 @@ export interface AutomationDefinitionNodeTransform {
 
 export interface AutomationDefinitionNodeTransformConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     fts: string;
@@ -880,6 +881,7 @@ export interface AutomationDefinitionNodeTriggerAction {
 
 export interface AutomationDefinitionNodeTriggerActionConfig {
     excludePattern?: string;
+    kind?: string;
     path?: string;
     pathTimeZone?: string;
     source?: string;
@@ -906,6 +908,24 @@ export interface AutomationDefinitionNodeTriggerEmailConfig {
     source?: string;
 }
 
+export interface AutomationDefinitionNodeTriggerFolderCreation {
+    /**
+     * Configuration fields for this node type.
+     */
+    config?: outputs.AutomationDefinitionNodeTriggerFolderCreationConfig;
+    /**
+     * Unique node ID within the graph.
+     */
+    id: string;
+}
+
+export interface AutomationDefinitionNodeTriggerFolderCreationConfig {
+    excludePattern?: string;
+    path?: string;
+    pathTimeZone?: string;
+    source?: string;
+}
+
 export interface AutomationDefinitionNodeTriggerManual {
     /**
      * Configuration fields for this node type.
@@ -922,6 +942,9 @@ export interface AutomationDefinitionNodeTriggerManualConfig {
     limit?: number;
     path?: string;
     pathTimeZone?: string;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: string;
 }
 
@@ -949,6 +972,9 @@ export interface AutomationDefinitionNodeTriggerScheduledConfig {
     scheduleId?: number;
     scheduleTimeZone?: string;
     scheduleTimesOfDays?: string[];
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: string;
 }
 
@@ -968,6 +994,9 @@ export interface AutomationDefinitionNodeTriggerWebhookConfig {
     limit?: number;
     path?: string;
     pathTimeZone?: string;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: string;
 }
 
@@ -988,7 +1017,7 @@ export interface AutomationDefinitionNodeUnzip {
 
 export interface AutomationDefinitionNodeUnzipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: string;
     /**
@@ -1054,7 +1083,7 @@ export interface AutomationDefinitionNodeZip {
 
 export interface AutomationDefinitionNodeZipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     /**
@@ -1131,6 +1160,7 @@ export interface GetAutomationDefinitionNode {
     transform: outputs.GetAutomationDefinitionNodeTransform;
     triggerAction: outputs.GetAutomationDefinitionNodeTriggerAction;
     triggerEmail: outputs.GetAutomationDefinitionNodeTriggerEmail;
+    triggerFolderCreation: outputs.GetAutomationDefinitionNodeTriggerFolderCreation;
     triggerManual: outputs.GetAutomationDefinitionNodeTriggerManual;
     triggerScheduled: outputs.GetAutomationDefinitionNodeTriggerScheduled;
     triggerWebhook: outputs.GetAutomationDefinitionNodeTriggerWebhook;
@@ -1358,7 +1388,7 @@ export interface GetAutomationDefinitionNodeDocumentConvert {
 
 export interface GetAutomationDefinitionNodeDocumentConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     /**
@@ -1432,6 +1462,7 @@ export interface GetAutomationDefinitionNodeFilterConfig {
      * A bare Files TransformScript expression, no braces.
      */
     condition: string;
+    kind: string;
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
@@ -1463,7 +1494,7 @@ export interface GetAutomationDefinitionNodeGpgDecrypt {
 
 export interface GetAutomationDefinitionNodeGpgDecryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     gpgKeyId: number;
@@ -1499,7 +1530,7 @@ export interface GetAutomationDefinitionNodeGpgEncrypt {
 
 export interface GetAutomationDefinitionNodeGpgEncryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     gpgKeyId: number;
@@ -1569,7 +1600,7 @@ export interface GetAutomationDefinitionNodeImageConvert {
 
 export interface GetAutomationDefinitionNodeImageConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     height: number;
@@ -1607,13 +1638,13 @@ export interface GetAutomationDefinitionNodeImportFile {
 
 export interface GetAutomationDefinitionNodeImportFileConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     content: string;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * One or more destination path templates.
      */
-    destination: string;
+    destinations: string[];
     headers: {[key: string]: string};
     method: string;
     /**
@@ -1621,7 +1652,7 @@ export interface GetAutomationDefinitionNodeImportFileConfig {
      */
     onErrors: outputs.GetAutomationDefinitionNodeImportFileConfigOnError[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     url: string;
 }
@@ -1761,7 +1792,6 @@ export interface GetAutomationDefinitionNodeRunSync {
 }
 
 export interface GetAutomationDefinitionNodeRunSyncConfig {
-    legacySyncIds: number[];
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
@@ -1796,12 +1826,12 @@ export interface GetAutomationDefinitionNodeSendEmailConfig {
     attachments: string[];
     bccs: string[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     body: string;
     ccs: string[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     from: string;
     /**
@@ -1809,7 +1839,7 @@ export interface GetAutomationDefinitionNodeSendEmailConfig {
      */
     onErrors: outputs.GetAutomationDefinitionNodeSendEmailConfigOnError[];
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     subject: string;
     tos: string[];
@@ -1886,7 +1916,7 @@ export interface GetAutomationDefinitionNodeSwitchConfigCase {
      */
     condition: string;
     /**
-     * Identifier used to connect nodes and named inputs or outputs.
+     * Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
      */
     name: string;
 }
@@ -1916,7 +1946,7 @@ export interface GetAutomationDefinitionNodeTransform {
 
 export interface GetAutomationDefinitionNodeTransformConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     fts: string;
@@ -1947,6 +1977,7 @@ export interface GetAutomationDefinitionNodeTriggerAction {
 
 export interface GetAutomationDefinitionNodeTriggerActionConfig {
     excludePattern: string;
+    kind: string;
     path: string;
     pathTimeZone: string;
     source: string;
@@ -1973,6 +2004,24 @@ export interface GetAutomationDefinitionNodeTriggerEmailConfig {
     source: string;
 }
 
+export interface GetAutomationDefinitionNodeTriggerFolderCreation {
+    /**
+     * Configuration fields for this node type.
+     */
+    config: outputs.GetAutomationDefinitionNodeTriggerFolderCreationConfig;
+    /**
+     * Unique node ID within the graph.
+     */
+    id: string;
+}
+
+export interface GetAutomationDefinitionNodeTriggerFolderCreationConfig {
+    excludePattern: string;
+    path: string;
+    pathTimeZone: string;
+    source: string;
+}
+
 export interface GetAutomationDefinitionNodeTriggerManual {
     /**
      * Configuration fields for this node type.
@@ -1989,6 +2038,9 @@ export interface GetAutomationDefinitionNodeTriggerManualConfig {
     limit: number;
     path: string;
     pathTimeZone: string;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source: string;
 }
 
@@ -2016,6 +2068,9 @@ export interface GetAutomationDefinitionNodeTriggerScheduledConfig {
     scheduleId: number;
     scheduleTimeZone: string;
     scheduleTimesOfDays: string[];
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source: string;
 }
 
@@ -2035,6 +2090,9 @@ export interface GetAutomationDefinitionNodeTriggerWebhookConfig {
     limit: number;
     path: string;
     pathTimeZone: string;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source: string;
 }
 
@@ -2055,7 +2113,7 @@ export interface GetAutomationDefinitionNodeUnzip {
 
 export interface GetAutomationDefinitionNodeUnzipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     /**
@@ -2121,7 +2179,7 @@ export interface GetAutomationDefinitionNodeZip {
 
 export interface GetAutomationDefinitionNodeZipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: string;
     /**

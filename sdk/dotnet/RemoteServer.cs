@@ -17,21 +17,18 @@ namespace Jschady.Filescom
     /// 
     /// Not every attribute will apply to every remote server.
     /// 
-    /// FTP Servers require that you specify their &lt;span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`"&gt;`hostname`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`"&gt;`port`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;, and a value for &lt;span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`"&gt;`ssl`&lt;/span&gt;. Optionally, provide &lt;span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`"&gt;`serverCertificate`&lt;/span&gt;.
+    /// FTP Servers require that you specify their &lt;span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`"&gt;`hostname`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`"&gt;`port`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;, and a value for &lt;span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`"&gt;`ssl`&lt;/span&gt;.  Optionally, provide &lt;span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`"&gt;`serverCertificate`&lt;/span&gt;.
     /// 
-    /// SFTP Servers require that you specify their &lt;span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`"&gt;`hostname`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`"&gt;`port`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`"&gt;`privateKey`&lt;/span&gt;, and a value for &lt;span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`"&gt;`ssl`&lt;/span&gt;. Optionally, provide &lt;span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`"&gt;`serverCertificate`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`"&gt;`privateKeyPassphrase`&lt;/span&gt;.
+    /// SFTP Servers require that you specify their &lt;span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`"&gt;`hostname`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`"&gt;`port`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`"&gt;`privateKey`&lt;/span&gt;, and a value for &lt;span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`"&gt;`ssl`&lt;/span&gt;.  Optionally, provide &lt;span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`"&gt;`serverCertificate`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`"&gt;`privateKeyPassphrase`&lt;/span&gt;.
     /// 
-    /// S3 Buckets require that you specify their &lt;span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`"&gt;`s3Bucket`&lt;/span&gt; name, and &lt;span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`"&gt;`s3Region`&lt;/span&gt;. Optionally provide a &lt;span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`"&gt;`awsAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`"&gt;`awsSecretKey`&lt;/span&gt;. If you don't provide credentials, you will need to use AWS to grant us access to your bucket.
+    /// S3 Buckets require that you specify their &lt;span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`"&gt;`s3Bucket`&lt;/span&gt; name, and &lt;span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`"&gt;`s3Region`&lt;/span&gt;.  Optionally provide a &lt;span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`"&gt;`awsAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`"&gt;`awsSecretKey`&lt;/span&gt;.  If you don't provide credentials, you will need to use AWS to grant us access to your bucket.  If your bucket requires a customer-managed KMS key, provide its ARN in &lt;span pulumi-lang-nodejs="`s3KmsKeyId`" pulumi-lang-dotnet="`S3KmsKeyId`" pulumi-lang-go="`s3KmsKeyId`" pulumi-lang-python="`s3_kms_key_id`" pulumi-lang-yaml="`s3KmsKeyId`" pulumi-lang-java="`s3KmsKeyId`" pulumi-lang-hcl="`s3_kms_key_id`"&gt;`s3KmsKeyId`&lt;/span&gt;.
     /// 
     /// S3-Compatible Buckets require that you specify &lt;span pulumi-lang-nodejs="`s3CompatibleBucket`" pulumi-lang-dotnet="`S3CompatibleBucket`" pulumi-lang-go="`s3CompatibleBucket`" pulumi-lang-python="`s3_compatible_bucket`" pulumi-lang-yaml="`s3CompatibleBucket`" pulumi-lang-java="`s3CompatibleBucket`" pulumi-lang-hcl="`s3_compatible_bucket`"&gt;`s3CompatibleBucket`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`s3CompatibleEndpoint`" pulumi-lang-dotnet="`S3CompatibleEndpoint`" pulumi-lang-go="`s3CompatibleEndpoint`" pulumi-lang-python="`s3_compatible_endpoint`" pulumi-lang-yaml="`s3CompatibleEndpoint`" pulumi-lang-java="`s3CompatibleEndpoint`" pulumi-lang-hcl="`s3_compatible_endpoint`"&gt;`s3CompatibleEndpoint`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`s3CompatibleAccessKey`" pulumi-lang-dotnet="`S3CompatibleAccessKey`" pulumi-lang-go="`s3CompatibleAccessKey`" pulumi-lang-python="`s3_compatible_access_key`" pulumi-lang-yaml="`s3CompatibleAccessKey`" pulumi-lang-java="`s3CompatibleAccessKey`" pulumi-lang-hcl="`s3_compatible_access_key`"&gt;`s3CompatibleAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`s3CompatibleSecretKey`" pulumi-lang-dotnet="`S3CompatibleSecretKey`" pulumi-lang-go="`s3CompatibleSecretKey`" pulumi-lang-python="`s3_compatible_secret_key`" pulumi-lang-yaml="`s3CompatibleSecretKey`" pulumi-lang-java="`s3CompatibleSecretKey`" pulumi-lang-hcl="`s3_compatible_secret_key`"&gt;`s3CompatibleSecretKey`&lt;/span&gt;. Optionally provide &lt;span pulumi-lang-nodejs="`s3CompatibleVirtualHostedStyle`" pulumi-lang-dotnet="`S3CompatibleVirtualHostedStyle`" pulumi-lang-go="`s3CompatibleVirtualHostedStyle`" pulumi-lang-python="`s3_compatible_virtual_hosted_style`" pulumi-lang-yaml="`s3CompatibleVirtualHostedStyle`" pulumi-lang-java="`s3CompatibleVirtualHostedStyle`" pulumi-lang-hcl="`s3_compatible_virtual_hosted_style`"&gt;`s3CompatibleVirtualHostedStyle`&lt;/span&gt; to use virtual-hosted-style URLs instead of path-style URLs.
     /// 
     /// Google Cloud Storage requires that you specify &lt;span pulumi-lang-nodejs="`googleCloudStorageBucket`" pulumi-lang-dotnet="`GoogleCloudStorageBucket`" pulumi-lang-go="`googleCloudStorageBucket`" pulumi-lang-python="`google_cloud_storage_bucket`" pulumi-lang-yaml="`googleCloudStorageBucket`" pulumi-lang-java="`googleCloudStorageBucket`" pulumi-lang-hcl="`google_cloud_storage_bucket`"&gt;`googleCloudStorageBucket`&lt;/span&gt;, and then one of the following sets of authentication credentials, selected by &lt;span pulumi-lang-nodejs="`googleCloudStorageAuthenticationMethod`" pulumi-lang-dotnet="`GoogleCloudStorageAuthenticationMethod`" pulumi-lang-go="`googleCloudStorageAuthenticationMethod`" pulumi-lang-python="`google_cloud_storage_authentication_method`" pulumi-lang-yaml="`googleCloudStorageAuthenticationMethod`" pulumi-lang-java="`googleCloudStorageAuthenticationMethod`" pulumi-lang-hcl="`google_cloud_storage_authentication_method`"&gt;`googleCloudStorageAuthenticationMethod`&lt;/span&gt; (defaults to &lt;span pulumi-lang-nodejs="`json`" pulumi-lang-dotnet="`Json`" pulumi-lang-go="`json`" pulumi-lang-python="`json`" pulumi-lang-yaml="`json`" pulumi-lang-java="`json`" pulumi-lang-hcl="`json`"&gt;`json`&lt;/span&gt;):
-    /// 
-    ///  - for JSON authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`"&gt;`googleCloudStorageProjectId`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`"&gt;`googleCloudStorageCredentialsJson`&lt;/span&gt;
-    /// 
-    ///  - for HMAC (S3-Compatible) authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`"&gt;`googleCloudStorageS3CompatibleAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`"&gt;`googleCloudStorageS3CompatibleSecretKey`&lt;/span&gt;
-    /// 
-    ///  - for OAuth authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`"&gt;`googleCloudStorageOauthScope`&lt;/span&gt;, then follow the &lt;span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`"&gt;`authSetupLink`&lt;/span&gt; and login with Google
+    ///   - for JSON authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`"&gt;`googleCloudStorageProjectId`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`"&gt;`googleCloudStorageCredentialsJson`&lt;/span&gt;
+    ///   - for HMAC (S3-Compatible) authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`"&gt;`googleCloudStorageS3CompatibleAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`"&gt;`googleCloudStorageS3CompatibleSecretKey`&lt;/span&gt;
+    ///   - for OAuth authentication: &lt;span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`"&gt;`googleCloudStorageOauthScope`&lt;/span&gt;, then follow the &lt;span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`"&gt;`authSetupLink`&lt;/span&gt; and login with Google
     /// 
     /// Wasabi requires &lt;span pulumi-lang-nodejs="`wasabiBucket`" pulumi-lang-dotnet="`WasabiBucket`" pulumi-lang-go="`wasabiBucket`" pulumi-lang-python="`wasabi_bucket`" pulumi-lang-yaml="`wasabiBucket`" pulumi-lang-java="`wasabiBucket`" pulumi-lang-hcl="`wasabi_bucket`"&gt;`wasabiBucket`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`wasabiRegion`" pulumi-lang-dotnet="`WasabiRegion`" pulumi-lang-go="`wasabiRegion`" pulumi-lang-python="`wasabi_region`" pulumi-lang-yaml="`wasabiRegion`" pulumi-lang-java="`wasabiRegion`" pulumi-lang-hcl="`wasabi_region`"&gt;`wasabiRegion`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`wasabiAccessKey`" pulumi-lang-dotnet="`WasabiAccessKey`" pulumi-lang-go="`wasabiAccessKey`" pulumi-lang-python="`wasabi_access_key`" pulumi-lang-yaml="`wasabiAccessKey`" pulumi-lang-java="`wasabiAccessKey`" pulumi-lang-hcl="`wasabi_access_key`"&gt;`wasabiAccessKey`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`wasabiSecretKey`" pulumi-lang-dotnet="`WasabiSecretKey`" pulumi-lang-go="`wasabiSecretKey`" pulumi-lang-python="`wasabi_secret_key`" pulumi-lang-yaml="`wasabiSecretKey`" pulumi-lang-java="`wasabiSecretKey`" pulumi-lang-hcl="`wasabi_secret_key`"&gt;`wasabiSecretKey`&lt;/span&gt;.
     /// 
@@ -98,6 +95,7 @@ namespace Jschady.Filescom
     ///         FilesAgentRoot = "example",
     ///         FilesAgentVersion = "example",
     ///         OutboundAgentId = 1,
+    ///         CustomDomainId = 1,
     ///         GoogleCloudStorageAuthenticationMethod = "json",
     ///         GoogleCloudStorageBucket = "my-bucket",
     ///         GoogleCloudStorageOauthScope = "https://www.googleapis.com/auth/devstorage.read_only",
@@ -122,6 +120,7 @@ namespace Jschady.Filescom
     ///         S3CompatibleEndpoint = "mys3platform.com",
     ///         S3CompatibleRegion = "us-east-1",
     ///         S3CompatibleVirtualHostedStyle = true,
+    ///         S3KmsKeyId = "arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
     ///         S3Region = "us-east-1",
     ///         ServerCertificate = "require_match",
     ///         ServerHostKey = "[public key]",
@@ -319,6 +318,12 @@ namespace Jschady.Filescom
         public Output<string?> CloudflareSecretKey { get; private set; } = null!;
 
         /// <summary>
+        /// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires&lt;span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "&gt; enableDedicatedIps &lt;/span&gt;and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+        /// </summary>
+        [Output("customDomainId")]
+        public Output<int> CustomDomainId { get; private set; } = null!;
+
+        /// <summary>
         /// Internal description for your reference
         /// </summary>
         [Output("description")]
@@ -331,7 +336,7 @@ namespace Jschady.Filescom
         public Output<bool> DirectTransferAvailable { get; private set; } = null!;
 
         /// <summary>
-        /// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+        /// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
         /// </summary>
         [Output("disabled")]
         public Output<bool> Disabled { get; private set; } = null!;
@@ -368,25 +373,19 @@ namespace Jschady.Filescom
         public Output<string?> FilebaseSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// Files Agent API Token
-        /// </summary>
-        [Output("filesAgentApiToken")]
-        public Output<string> FilesAgentApiToken { get; private set; } = null!;
-
-        /// <summary>
         /// Latest available Files Agent version
         /// </summary>
         [Output("filesAgentLatestVersion")]
         public Output<string> FilesAgentLatestVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Local permissions for files agent. read_only, write_only, or read_write
+        /// Agent file permissions: &lt;span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`"&gt;`readOnly`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`"&gt;`writeOnly`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`"&gt;`readWrite`&lt;/span&gt;. Files.com writes this value as &lt;span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`"&gt;`permissionSet`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
         /// </summary>
         [Output("filesAgentPermissionSet")]
         public Output<string> FilesAgentPermissionSet { get; private set; } = null!;
 
         /// <summary>
-        /// Agent local root path
+        /// Agent local root path. Files.com writes this value as &lt;span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`"&gt;`root`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
         /// </summary>
         [Output("filesAgentRoot")]
         public Output<string> FilesAgentRoot { get; private set; } = null!;
@@ -404,7 +403,7 @@ namespace Jschady.Filescom
         public Output<bool> FilesAgentUpToDate { get; private set; } = null!;
 
         /// <summary>
-        /// Files Agent version
+        /// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
         /// </summary>
         [Output("filesAgentVersion")]
         public Output<string> FilesAgentVersion { get; private set; } = null!;
@@ -467,7 +466,7 @@ namespace Jschady.Filescom
         public Output<string?> GoogleCloudStorageS3CompatibleSecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// Hostname or IP address
+        /// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Output("hostname")]
         public Output<string> Hostname { get; private set; } = null!;
@@ -522,6 +521,12 @@ namespace Jschady.Filescom
         public Output<int> OutboundAgentId { get; private set; } = null!;
 
         /// <summary>
+        /// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+        /// </summary>
+        [Output("outboundIpAddresses")]
+        public Output<ImmutableArray<string>> OutboundIpAddresses { get; private set; } = null!;
+
+        /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
         /// Password, if needed.
         /// </summary>
@@ -541,7 +546,7 @@ namespace Jschady.Filescom
         public Output<string> PinnedRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Port for remote server.
+        /// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Output("port")]
         public Output<int> Port { get; private set; } = null!;
@@ -641,6 +646,12 @@ namespace Jschady.Filescom
         public Output<bool> S3CompatibleVirtualHostedStyle { get; private set; } = null!;
 
         /// <summary>
+        /// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+        /// </summary>
+        [Output("s3KmsKeyId")]
+        public Output<string> S3KmsKeyId { get; private set; } = null!;
+
+        /// <summary>
         /// S3 region
         /// </summary>
         [Output("s3Region")]
@@ -653,7 +664,7 @@ namespace Jschady.Filescom
         public Output<string> ServerCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+        /// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; to replace the pin.
         /// </summary>
         [Output("serverHostKey")]
         public Output<string> ServerHostKey { get; private set; } = null!;
@@ -1077,6 +1088,12 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
+        /// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires&lt;span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "&gt; enableDedicatedIps &lt;/span&gt;and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+        /// </summary>
+        [Input("customDomainId")]
+        public Input<int>? CustomDomainId { get; set; }
+
+        /// <summary>
         /// Internal description for your reference
         /// </summary>
         [Input("description")]
@@ -1124,19 +1141,19 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
-        /// Local permissions for files agent. read_only, write_only, or read_write
+        /// Agent file permissions: &lt;span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`"&gt;`readOnly`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`"&gt;`writeOnly`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`"&gt;`readWrite`&lt;/span&gt;. Files.com writes this value as &lt;span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`"&gt;`permissionSet`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
         /// </summary>
         [Input("filesAgentPermissionSet")]
         public Input<string>? FilesAgentPermissionSet { get; set; }
 
         /// <summary>
-        /// Agent local root path
+        /// Agent local root path. Files.com writes this value as &lt;span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`"&gt;`root`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
         /// </summary>
         [Input("filesAgentRoot")]
         public Input<string>? FilesAgentRoot { get; set; }
 
         /// <summary>
-        /// Files Agent version
+        /// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
         /// </summary>
         [Input("filesAgentVersion")]
         public Input<string>? FilesAgentVersion { get; set; }
@@ -1223,7 +1240,7 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
-        /// Hostname or IP address
+        /// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
@@ -1311,7 +1328,7 @@ namespace Jschady.Filescom
         public Input<bool>? PinToSiteRegion { get; set; }
 
         /// <summary>
-        /// Port for remote server.
+        /// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -1439,6 +1456,12 @@ namespace Jschady.Filescom
         public Input<bool>? S3CompatibleVirtualHostedStyle { get; set; }
 
         /// <summary>
+        /// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+        /// </summary>
+        [Input("s3KmsKeyId")]
+        public Input<string>? S3KmsKeyId { get; set; }
+
+        /// <summary>
         /// S3 region
         /// </summary>
         [Input("s3Region")]
@@ -1451,7 +1474,7 @@ namespace Jschady.Filescom
         public Input<string>? ServerCertificate { get; set; }
 
         /// <summary>
-        /// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+        /// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; to replace the pin.
         /// </summary>
         [Input("serverHostKey")]
         public Input<string>? ServerHostKey { get; set; }
@@ -1860,6 +1883,12 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
+        /// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires&lt;span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "&gt; enableDedicatedIps &lt;/span&gt;and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+        /// </summary>
+        [Input("customDomainId")]
+        public Input<int>? CustomDomainId { get; set; }
+
+        /// <summary>
         /// Internal description for your reference
         /// </summary>
         [Input("description")]
@@ -1872,7 +1901,7 @@ namespace Jschady.Filescom
         public Input<bool>? DirectTransferAvailable { get; set; }
 
         /// <summary>
-        /// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+        /// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
@@ -1919,25 +1948,19 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
-        /// Files Agent API Token
-        /// </summary>
-        [Input("filesAgentApiToken")]
-        public Input<string>? FilesAgentApiToken { get; set; }
-
-        /// <summary>
         /// Latest available Files Agent version
         /// </summary>
         [Input("filesAgentLatestVersion")]
         public Input<string>? FilesAgentLatestVersion { get; set; }
 
         /// <summary>
-        /// Local permissions for files agent. read_only, write_only, or read_write
+        /// Agent file permissions: &lt;span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`"&gt;`readOnly`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`"&gt;`writeOnly`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`"&gt;`readWrite`&lt;/span&gt;. Files.com writes this value as &lt;span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`"&gt;`permissionSet`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
         /// </summary>
         [Input("filesAgentPermissionSet")]
         public Input<string>? FilesAgentPermissionSet { get; set; }
 
         /// <summary>
-        /// Agent local root path
+        /// Agent local root path. Files.com writes this value as &lt;span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`"&gt;`root`&lt;/span&gt; in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
         /// </summary>
         [Input("filesAgentRoot")]
         public Input<string>? FilesAgentRoot { get; set; }
@@ -1955,7 +1978,7 @@ namespace Jschady.Filescom
         public Input<bool>? FilesAgentUpToDate { get; set; }
 
         /// <summary>
-        /// Files Agent version
+        /// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
         /// </summary>
         [Input("filesAgentVersion")]
         public Input<string>? FilesAgentVersion { get; set; }
@@ -2048,7 +2071,7 @@ namespace Jschady.Filescom
         }
 
         /// <summary>
-        /// Hostname or IP address
+        /// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
@@ -2112,6 +2135,18 @@ namespace Jschady.Filescom
         [Input("outboundAgentId")]
         public Input<int>? OutboundAgentId { get; set; }
 
+        [Input("outboundIpAddresses")]
+        private InputList<string>? _outboundIpAddresses;
+
+        /// <summary>
+        /// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+        /// </summary>
+        public InputList<string> OutboundIpAddresses
+        {
+            get => _outboundIpAddresses ?? (_outboundIpAddresses = new InputList<string>());
+            set => _outboundIpAddresses = value;
+        }
+
         [Input("password")]
         private Input<string>? _password;
 
@@ -2142,7 +2177,7 @@ namespace Jschady.Filescom
         public Input<string>? PinnedRegion { get; set; }
 
         /// <summary>
-        /// Port for remote server.
+        /// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -2282,6 +2317,12 @@ namespace Jschady.Filescom
         public Input<bool>? S3CompatibleVirtualHostedStyle { get; set; }
 
         /// <summary>
+        /// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+        /// </summary>
+        [Input("s3KmsKeyId")]
+        public Input<string>? S3KmsKeyId { get; set; }
+
+        /// <summary>
         /// S3 region
         /// </summary>
         [Input("s3Region")]
@@ -2294,7 +2335,7 @@ namespace Jschady.Filescom
         public Input<string>? ServerCertificate { get; set; }
 
         /// <summary>
-        /// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+        /// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update &lt;span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`"&gt;`serverHostKey`&lt;/span&gt; to replace the pin.
         /// </summary>
         [Input("serverHostKey")]
         public Input<string>? ServerHostKey { get; set; }

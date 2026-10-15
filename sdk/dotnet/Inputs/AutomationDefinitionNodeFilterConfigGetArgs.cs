@@ -19,6 +19,9 @@ namespace Jschady.Filescom.Inputs
         [Input("condition", required: true)]
         public Input<string> Condition { get; set; } = null!;
 
+        [Input("kind")]
+        public Input<string>? Kind { get; set; }
+
         [Input("onErrors")]
         private InputList<Inputs.AutomationDefinitionNodeFilterConfigOnErrorGetArgs>? _onErrors;
 

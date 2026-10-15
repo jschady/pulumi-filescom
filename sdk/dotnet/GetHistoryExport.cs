@@ -15,54 +15,29 @@ namespace Jschady.Filescom
         /// <summary>
         /// A History Export is a resource on the API that is used to export historical action (history) logs.
         /// 
-        /// 
-        /// 
-        /// All queries against the archive must be submitted as Exports. (Even our Web UI creates an Export behind
-        /// 
+        /// All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind
         /// the scenes.)
         /// 
-        /// 
-        /// 
         /// We use Amazon Athena behind the scenes for processing these queries, and as such, have powerful
+        /// search capabilities.  We've done our best to expose search capabilities via this History Export API.
         /// 
-        /// search capabilities. We've done our best to expose search capabilities via this History Export API.
-        /// 
-        /// 
-        /// 
-        /// In any query field in this API, you may specify multiple values separated by commas. That means that commas
-        /// 
+        /// In any query field in this API, you may specify multiple values separated by commas.  That means that commas
         /// cannot be searched for themselves, and neither can single quotation marks.
         /// 
-        /// 
-        /// 
         /// We do not currently partition data by date on the backend, so all queries result in a full scan of the entire
-        /// 
-        /// data lake. This means that all queries will take about the same amount of time to complete, and we incur about
-        /// 
-        /// the same cost per query internally. We don't typically bill our customers for these queries, assuming
-        /// 
+        /// data lake.  This means that all queries will take about the same amount of time to complete, and we incur about
+        /// the same cost per query internally.  We don't typically bill our customers for these queries, assuming
         /// usage is occasional and manual.
         /// 
-        /// 
-        /// 
         /// If you intend to use this API for high volume or automated use, please contact us with more information
-        /// 
-        /// about your use case. We may decide to change the backend data schema to match your use case more closely, and
-        /// 
+        /// about your use case.  We may decide to change the backend data schema to match your use case more closely, and
         /// we may also need to charge an additional cost per query.
-        /// 
-        /// 
         /// 
         /// ## Example History Queries
         /// 
-        /// 
-        /// 
         /// * History for a user: `{ &lt;span pulumi-lang-nodejs=""queryUserId"" pulumi-lang-dotnet=""QueryUserId"" pulumi-lang-go=""queryUserId"" pulumi-lang-python=""query_user_id"" pulumi-lang-yaml=""queryUserId"" pulumi-lang-java=""queryUserId"" pulumi-lang-hcl=""query_user_id""&gt;"queryUserId"&lt;/span&gt;: 123 }`
-        /// 
         /// * History for a range of time: `{ &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
-        /// 
         /// * History of logins and failed logins: `{ &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "login,failedlogin" }`
-        /// 
         /// * A Complex query: `{ &lt;span pulumi-lang-nodejs=""queryFolder"" pulumi-lang-dotnet=""QueryFolder"" pulumi-lang-go=""queryFolder"" pulumi-lang-python=""query_folder"" pulumi-lang-yaml=""queryFolder"" pulumi-lang-java=""queryFolder"" pulumi-lang-hcl=""query_folder""&gt;"queryFolder"&lt;/span&gt;: "uploads", &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "create,copy,move", &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
         /// 
         /// ## Example Usage
@@ -174,54 +149,29 @@ namespace Jschady.Filescom
         /// <summary>
         /// A History Export is a resource on the API that is used to export historical action (history) logs.
         /// 
-        /// 
-        /// 
-        /// All queries against the archive must be submitted as Exports. (Even our Web UI creates an Export behind
-        /// 
+        /// All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind
         /// the scenes.)
         /// 
-        /// 
-        /// 
         /// We use Amazon Athena behind the scenes for processing these queries, and as such, have powerful
+        /// search capabilities.  We've done our best to expose search capabilities via this History Export API.
         /// 
-        /// search capabilities. We've done our best to expose search capabilities via this History Export API.
-        /// 
-        /// 
-        /// 
-        /// In any query field in this API, you may specify multiple values separated by commas. That means that commas
-        /// 
+        /// In any query field in this API, you may specify multiple values separated by commas.  That means that commas
         /// cannot be searched for themselves, and neither can single quotation marks.
         /// 
-        /// 
-        /// 
         /// We do not currently partition data by date on the backend, so all queries result in a full scan of the entire
-        /// 
-        /// data lake. This means that all queries will take about the same amount of time to complete, and we incur about
-        /// 
-        /// the same cost per query internally. We don't typically bill our customers for these queries, assuming
-        /// 
+        /// data lake.  This means that all queries will take about the same amount of time to complete, and we incur about
+        /// the same cost per query internally.  We don't typically bill our customers for these queries, assuming
         /// usage is occasional and manual.
         /// 
-        /// 
-        /// 
         /// If you intend to use this API for high volume or automated use, please contact us with more information
-        /// 
-        /// about your use case. We may decide to change the backend data schema to match your use case more closely, and
-        /// 
+        /// about your use case.  We may decide to change the backend data schema to match your use case more closely, and
         /// we may also need to charge an additional cost per query.
-        /// 
-        /// 
         /// 
         /// ## Example History Queries
         /// 
-        /// 
-        /// 
         /// * History for a user: `{ &lt;span pulumi-lang-nodejs=""queryUserId"" pulumi-lang-dotnet=""QueryUserId"" pulumi-lang-go=""queryUserId"" pulumi-lang-python=""query_user_id"" pulumi-lang-yaml=""queryUserId"" pulumi-lang-java=""queryUserId"" pulumi-lang-hcl=""query_user_id""&gt;"queryUserId"&lt;/span&gt;: 123 }`
-        /// 
         /// * History for a range of time: `{ &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
-        /// 
         /// * History of logins and failed logins: `{ &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "login,failedlogin" }`
-        /// 
         /// * A Complex query: `{ &lt;span pulumi-lang-nodejs=""queryFolder"" pulumi-lang-dotnet=""QueryFolder"" pulumi-lang-go=""queryFolder"" pulumi-lang-python=""query_folder"" pulumi-lang-yaml=""queryFolder"" pulumi-lang-java=""queryFolder"" pulumi-lang-hcl=""query_folder""&gt;"queryFolder"&lt;/span&gt;: "uploads", &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "create,copy,move", &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
         /// 
         /// ## Example Usage
@@ -333,54 +283,29 @@ namespace Jschady.Filescom
         /// <summary>
         /// A History Export is a resource on the API that is used to export historical action (history) logs.
         /// 
-        /// 
-        /// 
-        /// All queries against the archive must be submitted as Exports. (Even our Web UI creates an Export behind
-        /// 
+        /// All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind
         /// the scenes.)
         /// 
-        /// 
-        /// 
         /// We use Amazon Athena behind the scenes for processing these queries, and as such, have powerful
+        /// search capabilities.  We've done our best to expose search capabilities via this History Export API.
         /// 
-        /// search capabilities. We've done our best to expose search capabilities via this History Export API.
-        /// 
-        /// 
-        /// 
-        /// In any query field in this API, you may specify multiple values separated by commas. That means that commas
-        /// 
+        /// In any query field in this API, you may specify multiple values separated by commas.  That means that commas
         /// cannot be searched for themselves, and neither can single quotation marks.
         /// 
-        /// 
-        /// 
         /// We do not currently partition data by date on the backend, so all queries result in a full scan of the entire
-        /// 
-        /// data lake. This means that all queries will take about the same amount of time to complete, and we incur about
-        /// 
-        /// the same cost per query internally. We don't typically bill our customers for these queries, assuming
-        /// 
+        /// data lake.  This means that all queries will take about the same amount of time to complete, and we incur about
+        /// the same cost per query internally.  We don't typically bill our customers for these queries, assuming
         /// usage is occasional and manual.
         /// 
-        /// 
-        /// 
         /// If you intend to use this API for high volume or automated use, please contact us with more information
-        /// 
-        /// about your use case. We may decide to change the backend data schema to match your use case more closely, and
-        /// 
+        /// about your use case.  We may decide to change the backend data schema to match your use case more closely, and
         /// we may also need to charge an additional cost per query.
-        /// 
-        /// 
         /// 
         /// ## Example History Queries
         /// 
-        /// 
-        /// 
         /// * History for a user: `{ &lt;span pulumi-lang-nodejs=""queryUserId"" pulumi-lang-dotnet=""QueryUserId"" pulumi-lang-go=""queryUserId"" pulumi-lang-python=""query_user_id"" pulumi-lang-yaml=""queryUserId"" pulumi-lang-java=""queryUserId"" pulumi-lang-hcl=""query_user_id""&gt;"queryUserId"&lt;/span&gt;: 123 }`
-        /// 
         /// * History for a range of time: `{ &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
-        /// 
         /// * History of logins and failed logins: `{ &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "login,failedlogin" }`
-        /// 
         /// * A Complex query: `{ &lt;span pulumi-lang-nodejs=""queryFolder"" pulumi-lang-dotnet=""QueryFolder"" pulumi-lang-go=""queryFolder"" pulumi-lang-python=""query_folder"" pulumi-lang-yaml=""queryFolder"" pulumi-lang-java=""queryFolder"" pulumi-lang-hcl=""query_folder""&gt;"queryFolder"&lt;/span&gt;: "uploads", &lt;span pulumi-lang-nodejs=""queryAction"" pulumi-lang-dotnet=""QueryAction"" pulumi-lang-go=""queryAction"" pulumi-lang-python=""query_action"" pulumi-lang-yaml=""queryAction"" pulumi-lang-java=""queryAction"" pulumi-lang-hcl=""query_action""&gt;"queryAction"&lt;/span&gt;: "create,copy,move", &lt;span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at""&gt;"startAt"&lt;/span&gt;: "2021-03-18 12:00:00", &lt;span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at""&gt;"endAt"&lt;/span&gt;: "2021-03-19 12:00:00" }`
         /// 
         /// ## Example Usage
@@ -544,7 +469,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string QueryDestination;
         /// <summary>
-        /// If searching for Histories about login failures, this parameter restricts results to failures of this specific type.  Valid values: &lt;span pulumi-lang-nodejs="`expiredTrial`" pulumi-lang-dotnet="`ExpiredTrial`" pulumi-lang-go="`expiredTrial`" pulumi-lang-python="`expired_trial`" pulumi-lang-yaml="`expiredTrial`" pulumi-lang-java="`expiredTrial`" pulumi-lang-hcl="`expired_trial`"&gt;`expiredTrial`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`accountOverdue`" pulumi-lang-dotnet="`AccountOverdue`" pulumi-lang-go="`accountOverdue`" pulumi-lang-python="`account_overdue`" pulumi-lang-yaml="`accountOverdue`" pulumi-lang-java="`accountOverdue`" pulumi-lang-hcl="`account_overdue`"&gt;`accountOverdue`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`lockedOut`" pulumi-lang-dotnet="`LockedOut`" pulumi-lang-go="`lockedOut`" pulumi-lang-python="`locked_out`" pulumi-lang-yaml="`lockedOut`" pulumi-lang-java="`lockedOut`" pulumi-lang-hcl="`locked_out`"&gt;`lockedOut`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`ipMismatch`" pulumi-lang-dotnet="`IpMismatch`" pulumi-lang-go="`ipMismatch`" pulumi-lang-python="`ip_mismatch`" pulumi-lang-yaml="`ipMismatch`" pulumi-lang-java="`ipMismatch`" pulumi-lang-hcl="`ip_mismatch`"&gt;`ipMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`passwordMismatch`" pulumi-lang-dotnet="`PasswordMismatch`" pulumi-lang-go="`passwordMismatch`" pulumi-lang-python="`password_mismatch`" pulumi-lang-yaml="`passwordMismatch`" pulumi-lang-java="`passwordMismatch`" pulumi-lang-hcl="`password_mismatch`"&gt;`passwordMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`siteMismatch`" pulumi-lang-dotnet="`SiteMismatch`" pulumi-lang-go="`siteMismatch`" pulumi-lang-python="`site_mismatch`" pulumi-lang-yaml="`siteMismatch`" pulumi-lang-java="`siteMismatch`" pulumi-lang-hcl="`site_mismatch`"&gt;`siteMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`usernameNotFound`" pulumi-lang-dotnet="`UsernameNotFound`" pulumi-lang-go="`usernameNotFound`" pulumi-lang-python="`username_not_found`" pulumi-lang-yaml="`usernameNotFound`" pulumi-lang-java="`usernameNotFound`" pulumi-lang-hcl="`username_not_found`"&gt;`usernameNotFound`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noFtpPermission`" pulumi-lang-dotnet="`NoFtpPermission`" pulumi-lang-go="`noFtpPermission`" pulumi-lang-python="`no_ftp_permission`" pulumi-lang-yaml="`noFtpPermission`" pulumi-lang-java="`noFtpPermission`" pulumi-lang-hcl="`no_ftp_permission`"&gt;`noFtpPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noWebPermission`" pulumi-lang-dotnet="`NoWebPermission`" pulumi-lang-go="`noWebPermission`" pulumi-lang-python="`no_web_permission`" pulumi-lang-yaml="`noWebPermission`" pulumi-lang-java="`noWebPermission`" pulumi-lang-hcl="`no_web_permission`"&gt;`noWebPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noDirectory`" pulumi-lang-dotnet="`NoDirectory`" pulumi-lang-go="`noDirectory`" pulumi-lang-python="`no_directory`" pulumi-lang-yaml="`noDirectory`" pulumi-lang-java="`noDirectory`" pulumi-lang-hcl="`no_directory`"&gt;`noDirectory`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`errnoEnoent`" pulumi-lang-dotnet="`ErrnoEnoent`" pulumi-lang-go="`errnoEnoent`" pulumi-lang-python="`errno_enoent`" pulumi-lang-yaml="`errnoEnoent`" pulumi-lang-java="`errnoEnoent`" pulumi-lang-hcl="`errno_enoent`"&gt;`errnoEnoent`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noSftpPermission`" pulumi-lang-dotnet="`NoSftpPermission`" pulumi-lang-go="`noSftpPermission`" pulumi-lang-python="`no_sftp_permission`" pulumi-lang-yaml="`noSftpPermission`" pulumi-lang-java="`noSftpPermission`" pulumi-lang-hcl="`no_sftp_permission`"&gt;`noSftpPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noDavPermission`" pulumi-lang-dotnet="`NoDavPermission`" pulumi-lang-go="`noDavPermission`" pulumi-lang-python="`no_dav_permission`" pulumi-lang-yaml="`noDavPermission`" pulumi-lang-java="`noDavPermission`" pulumi-lang-hcl="`no_dav_permission`"&gt;`noDavPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noRestapiPermission`" pulumi-lang-dotnet="`NoRestapiPermission`" pulumi-lang-go="`noRestapiPermission`" pulumi-lang-python="`no_restapi_permission`" pulumi-lang-yaml="`noRestapiPermission`" pulumi-lang-java="`noRestapiPermission`" pulumi-lang-hcl="`no_restapi_permission`"&gt;`noRestapiPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`keyMismatch`" pulumi-lang-dotnet="`KeyMismatch`" pulumi-lang-go="`keyMismatch`" pulumi-lang-python="`key_mismatch`" pulumi-lang-yaml="`keyMismatch`" pulumi-lang-java="`keyMismatch`" pulumi-lang-hcl="`key_mismatch`"&gt;`keyMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`regionMismatch`" pulumi-lang-dotnet="`RegionMismatch`" pulumi-lang-go="`regionMismatch`" pulumi-lang-python="`region_mismatch`" pulumi-lang-yaml="`regionMismatch`" pulumi-lang-java="`regionMismatch`" pulumi-lang-hcl="`region_mismatch`"&gt;`regionMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`expiredAccess`" pulumi-lang-dotnet="`ExpiredAccess`" pulumi-lang-go="`expiredAccess`" pulumi-lang-python="`expired_access`" pulumi-lang-yaml="`expiredAccess`" pulumi-lang-java="`expiredAccess`" pulumi-lang-hcl="`expired_access`"&gt;`expiredAccess`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`desktopIpMismatch`" pulumi-lang-dotnet="`DesktopIpMismatch`" pulumi-lang-go="`desktopIpMismatch`" pulumi-lang-python="`desktop_ip_mismatch`" pulumi-lang-yaml="`desktopIpMismatch`" pulumi-lang-java="`desktopIpMismatch`" pulumi-lang-hcl="`desktop_ip_mismatch`"&gt;`desktopIpMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-dotnet="`DesktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-go="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-python="`desktop_api_key_not_used_quickly_enough`" pulumi-lang-yaml="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-java="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-hcl="`desktop_api_key_not_used_quickly_enough`"&gt;`desktopApiKeyNotUsedQuicklyEnough`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`disabled`" pulumi-lang-dotnet="`Disabled`" pulumi-lang-go="`disabled`" pulumi-lang-python="`disabled`" pulumi-lang-yaml="`disabled`" pulumi-lang-java="`disabled`" pulumi-lang-hcl="`disabled`"&gt;`disabled`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`countryMismatch`" pulumi-lang-dotnet="`CountryMismatch`" pulumi-lang-go="`countryMismatch`" pulumi-lang-python="`country_mismatch`" pulumi-lang-yaml="`countryMismatch`" pulumi-lang-java="`countryMismatch`" pulumi-lang-hcl="`country_mismatch`"&gt;`countryMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`insecureFtp`" pulumi-lang-dotnet="`InsecureFtp`" pulumi-lang-go="`insecureFtp`" pulumi-lang-python="`insecure_ftp`" pulumi-lang-yaml="`insecureFtp`" pulumi-lang-java="`insecureFtp`" pulumi-lang-hcl="`insecure_ftp`"&gt;`insecureFtp`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`insecureCipher`" pulumi-lang-dotnet="`InsecureCipher`" pulumi-lang-go="`insecureCipher`" pulumi-lang-python="`insecure_cipher`" pulumi-lang-yaml="`insecureCipher`" pulumi-lang-java="`insecureCipher`" pulumi-lang-hcl="`insecure_cipher`"&gt;`insecureCipher`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`rateLimited`" pulumi-lang-dotnet="`RateLimited`" pulumi-lang-go="`rateLimited`" pulumi-lang-python="`rate_limited`" pulumi-lang-yaml="`rateLimited`" pulumi-lang-java="`rateLimited`" pulumi-lang-hcl="`rate_limited`"&gt;`rateLimited`&lt;/span&gt;
+        /// If searching for Histories about login failures, this parameter restricts results to failures of this specific type.  Valid values: &lt;span pulumi-lang-nodejs="`expiredTrial`" pulumi-lang-dotnet="`ExpiredTrial`" pulumi-lang-go="`expiredTrial`" pulumi-lang-python="`expired_trial`" pulumi-lang-yaml="`expiredTrial`" pulumi-lang-java="`expiredTrial`" pulumi-lang-hcl="`expired_trial`"&gt;`expiredTrial`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`accountOverdue`" pulumi-lang-dotnet="`AccountOverdue`" pulumi-lang-go="`accountOverdue`" pulumi-lang-python="`account_overdue`" pulumi-lang-yaml="`accountOverdue`" pulumi-lang-java="`accountOverdue`" pulumi-lang-hcl="`account_overdue`"&gt;`accountOverdue`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`lockedOut`" pulumi-lang-dotnet="`LockedOut`" pulumi-lang-go="`lockedOut`" pulumi-lang-python="`locked_out`" pulumi-lang-yaml="`lockedOut`" pulumi-lang-java="`lockedOut`" pulumi-lang-hcl="`locked_out`"&gt;`lockedOut`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`ipMismatch`" pulumi-lang-dotnet="`IpMismatch`" pulumi-lang-go="`ipMismatch`" pulumi-lang-python="`ip_mismatch`" pulumi-lang-yaml="`ipMismatch`" pulumi-lang-java="`ipMismatch`" pulumi-lang-hcl="`ip_mismatch`"&gt;`ipMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`passwordMismatch`" pulumi-lang-dotnet="`PasswordMismatch`" pulumi-lang-go="`passwordMismatch`" pulumi-lang-python="`password_mismatch`" pulumi-lang-yaml="`passwordMismatch`" pulumi-lang-java="`passwordMismatch`" pulumi-lang-hcl="`password_mismatch`"&gt;`passwordMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`siteMismatch`" pulumi-lang-dotnet="`SiteMismatch`" pulumi-lang-go="`siteMismatch`" pulumi-lang-python="`site_mismatch`" pulumi-lang-yaml="`siteMismatch`" pulumi-lang-java="`siteMismatch`" pulumi-lang-hcl="`site_mismatch`"&gt;`siteMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`usernameNotFound`" pulumi-lang-dotnet="`UsernameNotFound`" pulumi-lang-go="`usernameNotFound`" pulumi-lang-python="`username_not_found`" pulumi-lang-yaml="`usernameNotFound`" pulumi-lang-java="`usernameNotFound`" pulumi-lang-hcl="`username_not_found`"&gt;`usernameNotFound`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noFtpPermission`" pulumi-lang-dotnet="`NoFtpPermission`" pulumi-lang-go="`noFtpPermission`" pulumi-lang-python="`no_ftp_permission`" pulumi-lang-yaml="`noFtpPermission`" pulumi-lang-java="`noFtpPermission`" pulumi-lang-hcl="`no_ftp_permission`"&gt;`noFtpPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noWebPermission`" pulumi-lang-dotnet="`NoWebPermission`" pulumi-lang-go="`noWebPermission`" pulumi-lang-python="`no_web_permission`" pulumi-lang-yaml="`noWebPermission`" pulumi-lang-java="`noWebPermission`" pulumi-lang-hcl="`no_web_permission`"&gt;`noWebPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noDirectory`" pulumi-lang-dotnet="`NoDirectory`" pulumi-lang-go="`noDirectory`" pulumi-lang-python="`no_directory`" pulumi-lang-yaml="`noDirectory`" pulumi-lang-java="`noDirectory`" pulumi-lang-hcl="`no_directory`"&gt;`noDirectory`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`errnoEnoent`" pulumi-lang-dotnet="`ErrnoEnoent`" pulumi-lang-go="`errnoEnoent`" pulumi-lang-python="`errno_enoent`" pulumi-lang-yaml="`errnoEnoent`" pulumi-lang-java="`errnoEnoent`" pulumi-lang-hcl="`errno_enoent`"&gt;`errnoEnoent`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noSftpPermission`" pulumi-lang-dotnet="`NoSftpPermission`" pulumi-lang-go="`noSftpPermission`" pulumi-lang-python="`no_sftp_permission`" pulumi-lang-yaml="`noSftpPermission`" pulumi-lang-java="`noSftpPermission`" pulumi-lang-hcl="`no_sftp_permission`"&gt;`noSftpPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noDavPermission`" pulumi-lang-dotnet="`NoDavPermission`" pulumi-lang-go="`noDavPermission`" pulumi-lang-python="`no_dav_permission`" pulumi-lang-yaml="`noDavPermission`" pulumi-lang-java="`noDavPermission`" pulumi-lang-hcl="`no_dav_permission`"&gt;`noDavPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noRestapiPermission`" pulumi-lang-dotnet="`NoRestapiPermission`" pulumi-lang-go="`noRestapiPermission`" pulumi-lang-python="`no_restapi_permission`" pulumi-lang-yaml="`noRestapiPermission`" pulumi-lang-java="`noRestapiPermission`" pulumi-lang-hcl="`no_restapi_permission`"&gt;`noRestapiPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`keyMismatch`" pulumi-lang-dotnet="`KeyMismatch`" pulumi-lang-go="`keyMismatch`" pulumi-lang-python="`key_mismatch`" pulumi-lang-yaml="`keyMismatch`" pulumi-lang-java="`keyMismatch`" pulumi-lang-hcl="`key_mismatch`"&gt;`keyMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`regionMismatch`" pulumi-lang-dotnet="`RegionMismatch`" pulumi-lang-go="`regionMismatch`" pulumi-lang-python="`region_mismatch`" pulumi-lang-yaml="`regionMismatch`" pulumi-lang-java="`regionMismatch`" pulumi-lang-hcl="`region_mismatch`"&gt;`regionMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`expiredAccess`" pulumi-lang-dotnet="`ExpiredAccess`" pulumi-lang-go="`expiredAccess`" pulumi-lang-python="`expired_access`" pulumi-lang-yaml="`expiredAccess`" pulumi-lang-java="`expiredAccess`" pulumi-lang-hcl="`expired_access`"&gt;`expiredAccess`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`desktopIpMismatch`" pulumi-lang-dotnet="`DesktopIpMismatch`" pulumi-lang-go="`desktopIpMismatch`" pulumi-lang-python="`desktop_ip_mismatch`" pulumi-lang-yaml="`desktopIpMismatch`" pulumi-lang-java="`desktopIpMismatch`" pulumi-lang-hcl="`desktop_ip_mismatch`"&gt;`desktopIpMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-dotnet="`DesktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-go="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-python="`desktop_api_key_not_used_quickly_enough`" pulumi-lang-yaml="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-java="`desktopApiKeyNotUsedQuicklyEnough`" pulumi-lang-hcl="`desktop_api_key_not_used_quickly_enough`"&gt;`desktopApiKeyNotUsedQuicklyEnough`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`disabled`" pulumi-lang-dotnet="`Disabled`" pulumi-lang-go="`disabled`" pulumi-lang-python="`disabled`" pulumi-lang-yaml="`disabled`" pulumi-lang-java="`disabled`" pulumi-lang-hcl="`disabled`"&gt;`disabled`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`countryMismatch`" pulumi-lang-dotnet="`CountryMismatch`" pulumi-lang-go="`countryMismatch`" pulumi-lang-python="`country_mismatch`" pulumi-lang-yaml="`countryMismatch`" pulumi-lang-java="`countryMismatch`" pulumi-lang-hcl="`country_mismatch`"&gt;`countryMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`insecureFtp`" pulumi-lang-dotnet="`InsecureFtp`" pulumi-lang-go="`insecureFtp`" pulumi-lang-python="`insecure_ftp`" pulumi-lang-yaml="`insecureFtp`" pulumi-lang-java="`insecureFtp`" pulumi-lang-hcl="`insecure_ftp`"&gt;`insecureFtp`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`insecureCipher`" pulumi-lang-dotnet="`InsecureCipher`" pulumi-lang-go="`insecureCipher`" pulumi-lang-python="`insecure_cipher`" pulumi-lang-yaml="`insecureCipher`" pulumi-lang-java="`insecureCipher`" pulumi-lang-hcl="`insecure_cipher`"&gt;`insecureCipher`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`rateLimited`" pulumi-lang-dotnet="`RateLimited`" pulumi-lang-go="`rateLimited`" pulumi-lang-python="`rate_limited`" pulumi-lang-yaml="`rateLimited`" pulumi-lang-java="`rateLimited`" pulumi-lang-hcl="`rate_limited`"&gt;`rateLimited`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`noS3CompatibleEndpointPermission`" pulumi-lang-dotnet="`NoS3CompatibleEndpointPermission`" pulumi-lang-go="`noS3CompatibleEndpointPermission`" pulumi-lang-python="`no_s3_compatible_endpoint_permission`" pulumi-lang-yaml="`noS3CompatibleEndpointPermission`" pulumi-lang-java="`noS3CompatibleEndpointPermission`" pulumi-lang-hcl="`no_s3_compatible_endpoint_permission`"&gt;`noS3CompatibleEndpointPermission`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`mobileIpMismatch`" pulumi-lang-dotnet="`MobileIpMismatch`" pulumi-lang-go="`mobileIpMismatch`" pulumi-lang-python="`mobile_ip_mismatch`" pulumi-lang-yaml="`mobileIpMismatch`" pulumi-lang-java="`mobileIpMismatch`" pulumi-lang-hcl="`mobile_ip_mismatch`"&gt;`mobileIpMismatch`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`mobileApiKeyNotUsedQuicklyEnough`" pulumi-lang-dotnet="`MobileApiKeyNotUsedQuicklyEnough`" pulumi-lang-go="`mobileApiKeyNotUsedQuicklyEnough`" pulumi-lang-python="`mobile_api_key_not_used_quickly_enough`" pulumi-lang-yaml="`mobileApiKeyNotUsedQuicklyEnough`" pulumi-lang-java="`mobileApiKeyNotUsedQuicklyEnough`" pulumi-lang-hcl="`mobile_api_key_not_used_quickly_enough`"&gt;`mobileApiKeyNotUsedQuicklyEnough`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`desktopAppDisabled`" pulumi-lang-dotnet="`DesktopAppDisabled`" pulumi-lang-go="`desktopAppDisabled`" pulumi-lang-python="`desktop_app_disabled`" pulumi-lang-yaml="`desktopAppDisabled`" pulumi-lang-java="`desktopAppDisabled`" pulumi-lang-hcl="`desktop_app_disabled`"&gt;`desktopAppDisabled`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`mobileAppDisabled`" pulumi-lang-dotnet="`MobileAppDisabled`" pulumi-lang-go="`mobileAppDisabled`" pulumi-lang-python="`mobile_app_disabled`" pulumi-lang-yaml="`mobileAppDisabled`" pulumi-lang-java="`mobileAppDisabled`" pulumi-lang-hcl="`mobile_app_disabled`"&gt;`mobileAppDisabled`&lt;/span&gt;
         /// </summary>
         public readonly string QueryFailureType;
         /// <summary>
@@ -623,6 +548,10 @@ namespace Jschady.Filescom
         /// Status of export.  Will be: &lt;span pulumi-lang-nodejs="`building`" pulumi-lang-dotnet="`Building`" pulumi-lang-go="`building`" pulumi-lang-python="`building`" pulumi-lang-yaml="`building`" pulumi-lang-java="`building`" pulumi-lang-hcl="`building`"&gt;`building`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`ready`" pulumi-lang-dotnet="`Ready`" pulumi-lang-go="`ready`" pulumi-lang-python="`ready`" pulumi-lang-yaml="`ready`" pulumi-lang-java="`ready`" pulumi-lang-hcl="`ready`"&gt;`ready`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`failed`" pulumi-lang-dotnet="`Failed`" pulumi-lang-go="`failed`" pulumi-lang-python="`failed`" pulumi-lang-yaml="`failed`" pulumi-lang-java="`failed`" pulumi-lang-hcl="`failed`"&gt;`failed`&lt;/span&gt;
         /// </summary>
         public readonly string Status;
+        /// <summary>
+        /// Workspace of the export. 0 represents the default workspace. A null value means a site-wide export.
+        /// </summary>
+        public readonly int WorkspaceId;
 
         [OutputConstructor]
         private GetHistoryExportResult(
@@ -674,7 +603,9 @@ namespace Jschady.Filescom
 
             string startAt,
 
-            string status)
+            string status,
+
+            int workspaceId)
         {
             EndAt = endAt;
             HistoryVersion = historyVersion;
@@ -701,6 +632,7 @@ namespace Jschady.Filescom
             ResultsUrl = resultsUrl;
             StartAt = startAt;
             Status = status;
+            WorkspaceId = workspaceId;
         }
     }
 }

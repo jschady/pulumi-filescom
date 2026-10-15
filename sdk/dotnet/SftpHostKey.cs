@@ -29,6 +29,7 @@ namespace Jschady.Filescom
     ///     var exampleSftpHostKey = new Filescom.SftpHostKey("example_sftp_host_key", new()
     ///     {
     ///         Active = true,
+    ///         CustomDomainId = 1,
     ///         Name = "My Key",
     ///     });
     /// 
@@ -54,6 +55,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("active")]
         public Output<bool> Active { get; private set; } = null!;
+
+        /// <summary>
+        /// Custom Domain ID. If set, this key is used only for that Custom Domain.
+        /// </summary>
+        [Output("customDomainId")]
+        public Output<int> CustomDomainId { get; private set; } = null!;
 
         /// <summary>
         /// MD5 Fingerprint of the public key
@@ -144,6 +151,12 @@ namespace Jschady.Filescom
         public Input<bool>? Active { get; set; }
 
         /// <summary>
+        /// Custom Domain ID. If set, this key is used only for that Custom Domain.
+        /// </summary>
+        [Input("customDomainId")]
+        public Input<int>? CustomDomainId { get; set; }
+
+        /// <summary>
         /// The friendly name of this SFTP Host Key.
         /// </summary>
         [Input("name")]
@@ -179,6 +192,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
+
+        /// <summary>
+        /// Custom Domain ID. If set, this key is used only for that Custom Domain.
+        /// </summary>
+        [Input("customDomainId")]
+        public Input<int>? CustomDomainId { get; set; }
 
         /// <summary>
         /// MD5 Fingerprint of the public key

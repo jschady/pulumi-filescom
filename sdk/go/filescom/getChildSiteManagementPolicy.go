@@ -17,6 +17,8 @@ import (
 //
 // One policy can be designated as the default policy. It applies to every child site not explicitly assigned to another policy or listed in its <span pulumi-lang-nodejs="`skipChildSiteIds`" pulumi-lang-dotnet="`SkipChildSiteIds`" pulumi-lang-go="`skipChildSiteIds`" pulumi-lang-python="`skip_child_site_ids`" pulumi-lang-yaml="`skipChildSiteIds`" pulumi-lang-java="`skipChildSiteIds`" pulumi-lang-hcl="`skip_child_site_ids`">`skipChildSiteIds`</span>, including newly created child sites. Only a default policy can exclude child sites. The <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field contains the policy configuration data, with the format varying based on the policy type. When a policy is active, its managed configurations are automatically enforced on applicable child sites, and attribute modifications are not permitted.
 //
+// On a Child Site, listing policies returns only the policy covering that site. Each key in <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> identifies a managed setting, but its value is always <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span>. Read non-secret effective setting values from the Child Site's own Site settings response.
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
@@ -82,7 +84,7 @@ type LookupChildSiteManagementPolicyResult struct {
 	SkipChildSiteIds []int `pulumi:"skipChildSiteIds"`
 	// When this policy was last updated.
 	UpdatedAt string `pulumi:"updatedAt"`
-	// Policy configuration data. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+	// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
 	Value interface{} `pulumi:"value"`
 }
 
@@ -166,7 +168,7 @@ func (o LookupChildSiteManagementPolicyResultOutput) UpdatedAt() pulumi.StringOu
 	return o.ApplyT(func(v LookupChildSiteManagementPolicyResult) string { return v.UpdatedAt }).(pulumi.StringOutput)
 }
 
-// Policy configuration data. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
 func (o LookupChildSiteManagementPolicyResultOutput) Value() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupChildSiteManagementPolicyResult) interface{} { return v.Value }).(pulumi.AnyOutput)
 }

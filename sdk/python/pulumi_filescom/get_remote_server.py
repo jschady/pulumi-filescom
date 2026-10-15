@@ -26,7 +26,7 @@ class GetRemoteServerResult:
     """
     A collection of values returned by getRemoteServer.
     """
-    def __init__(__self__, allow_relative_paths=None, auth_account_name=None, auth_status=None, authentication_method=None, aws_access_key=None, azure_blob_storage_account=None, azure_blob_storage_container=None, azure_blob_storage_dns_suffix=None, azure_blob_storage_hierarchical_namespace=None, azure_files_storage_account=None, azure_files_storage_dns_suffix=None, azure_files_storage_share_name=None, backblaze_b2_bucket=None, backblaze_b2_s3_endpoint=None, buffer_uploads=None, cloudflare_access_key=None, cloudflare_bucket=None, cloudflare_endpoint=None, description=None, direct_transfer_available=None, disabled=None, dropbox_teams=None, enable_dedicated_ips=None, filebase_access_key=None, filebase_bucket=None, files_agent_api_token=None, files_agent_latest_version=None, files_agent_permission_set=None, files_agent_root=None, files_agent_supports_push_updates=None, files_agent_up_to_date=None, files_agent_version=None, files_api_key_prefix=None, google_cloud_storage_authentication_method=None, google_cloud_storage_bucket=None, google_cloud_storage_oauth_scope=None, google_cloud_storage_project_id=None, google_cloud_storage_s3_compatible_access_key=None, hostname=None, id=None, linode_access_key=None, linode_bucket=None, linode_region=None, max_connections=None, name=None, one_drive_account_type=None, outbound_agent_id=None, pin_to_site_region=None, pinned_region=None, port=None, remote_home_path=None, remote_server_credential_id=None, s3_assume_role_arn=None, s3_assume_role_duration_seconds=None, s3_assume_role_external_id=None, s3_bucket=None, s3_compatible_access_key=None, s3_compatible_bucket=None, s3_compatible_endpoint=None, s3_compatible_region=None, s3_compatible_virtual_hosted_style=None, s3_region=None, server_certificate=None, server_host_key=None, server_type=None, sharepoint_app_authentication=None, sharepoint_app_credential_type=None, sharepoint_client_id=None, sharepoint_site_url=None, sharepoint_tenant_id=None, ssl=None, supports_versioning=None, upload_staging_path=None, username=None, wasabi_access_key=None, wasabi_bucket=None, wasabi_region=None, workspace_id=None):
+    def __init__(__self__, allow_relative_paths=None, auth_account_name=None, auth_status=None, authentication_method=None, aws_access_key=None, azure_blob_storage_account=None, azure_blob_storage_container=None, azure_blob_storage_dns_suffix=None, azure_blob_storage_hierarchical_namespace=None, azure_files_storage_account=None, azure_files_storage_dns_suffix=None, azure_files_storage_share_name=None, backblaze_b2_bucket=None, backblaze_b2_s3_endpoint=None, buffer_uploads=None, cloudflare_access_key=None, cloudflare_bucket=None, cloudflare_endpoint=None, custom_domain_id=None, description=None, direct_transfer_available=None, disabled=None, dropbox_teams=None, enable_dedicated_ips=None, filebase_access_key=None, filebase_bucket=None, files_agent_latest_version=None, files_agent_permission_set=None, files_agent_root=None, files_agent_supports_push_updates=None, files_agent_up_to_date=None, files_agent_version=None, files_api_key_prefix=None, google_cloud_storage_authentication_method=None, google_cloud_storage_bucket=None, google_cloud_storage_oauth_scope=None, google_cloud_storage_project_id=None, google_cloud_storage_s3_compatible_access_key=None, hostname=None, id=None, linode_access_key=None, linode_bucket=None, linode_region=None, max_connections=None, name=None, one_drive_account_type=None, outbound_agent_id=None, outbound_ip_addresses=None, pin_to_site_region=None, pinned_region=None, port=None, remote_home_path=None, remote_server_credential_id=None, s3_assume_role_arn=None, s3_assume_role_duration_seconds=None, s3_assume_role_external_id=None, s3_bucket=None, s3_compatible_access_key=None, s3_compatible_bucket=None, s3_compatible_endpoint=None, s3_compatible_region=None, s3_compatible_virtual_hosted_style=None, s3_kms_key_id=None, s3_region=None, server_certificate=None, server_host_key=None, server_type=None, sharepoint_app_authentication=None, sharepoint_app_credential_type=None, sharepoint_client_id=None, sharepoint_site_url=None, sharepoint_tenant_id=None, ssl=None, supports_versioning=None, upload_staging_path=None, username=None, wasabi_access_key=None, wasabi_bucket=None, wasabi_region=None, workspace_id=None):
         if allow_relative_paths and not isinstance(allow_relative_paths, bool):
             raise TypeError("Expected argument 'allow_relative_paths' to be a bool")
         pulumi.set(__self__, "allow_relative_paths", allow_relative_paths)
@@ -81,6 +81,9 @@ class GetRemoteServerResult:
         if cloudflare_endpoint and not isinstance(cloudflare_endpoint, str):
             raise TypeError("Expected argument 'cloudflare_endpoint' to be a str")
         pulumi.set(__self__, "cloudflare_endpoint", cloudflare_endpoint)
+        if custom_domain_id and not isinstance(custom_domain_id, int):
+            raise TypeError("Expected argument 'custom_domain_id' to be a int")
+        pulumi.set(__self__, "custom_domain_id", custom_domain_id)
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         pulumi.set(__self__, "description", description)
@@ -102,9 +105,6 @@ class GetRemoteServerResult:
         if filebase_bucket and not isinstance(filebase_bucket, str):
             raise TypeError("Expected argument 'filebase_bucket' to be a str")
         pulumi.set(__self__, "filebase_bucket", filebase_bucket)
-        if files_agent_api_token and not isinstance(files_agent_api_token, str):
-            raise TypeError("Expected argument 'files_agent_api_token' to be a str")
-        pulumi.set(__self__, "files_agent_api_token", files_agent_api_token)
         if files_agent_latest_version and not isinstance(files_agent_latest_version, str):
             raise TypeError("Expected argument 'files_agent_latest_version' to be a str")
         pulumi.set(__self__, "files_agent_latest_version", files_agent_latest_version)
@@ -168,6 +168,9 @@ class GetRemoteServerResult:
         if outbound_agent_id and not isinstance(outbound_agent_id, int):
             raise TypeError("Expected argument 'outbound_agent_id' to be a int")
         pulumi.set(__self__, "outbound_agent_id", outbound_agent_id)
+        if outbound_ip_addresses and not isinstance(outbound_ip_addresses, list):
+            raise TypeError("Expected argument 'outbound_ip_addresses' to be a list")
+        pulumi.set(__self__, "outbound_ip_addresses", outbound_ip_addresses)
         if pin_to_site_region and not isinstance(pin_to_site_region, bool):
             raise TypeError("Expected argument 'pin_to_site_region' to be a bool")
         pulumi.set(__self__, "pin_to_site_region", pin_to_site_region)
@@ -210,6 +213,9 @@ class GetRemoteServerResult:
         if s3_compatible_virtual_hosted_style and not isinstance(s3_compatible_virtual_hosted_style, bool):
             raise TypeError("Expected argument 's3_compatible_virtual_hosted_style' to be a bool")
         pulumi.set(__self__, "s3_compatible_virtual_hosted_style", s3_compatible_virtual_hosted_style)
+        if s3_kms_key_id and not isinstance(s3_kms_key_id, str):
+            raise TypeError("Expected argument 's3_kms_key_id' to be a str")
+        pulumi.set(__self__, "s3_kms_key_id", s3_kms_key_id)
         if s3_region and not isinstance(s3_region, str):
             raise TypeError("Expected argument 's3_region' to be a str")
         pulumi.set(__self__, "s3_region", s3_region)
@@ -407,6 +413,14 @@ class GetRemoteServerResult:
         return pulumi.get(self, "cloudflare_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="customDomainId")
+    def custom_domain_id(self) -> _builtins.int:
+        """
+        Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires enable*dedicated*ips and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+        """
+        return pulumi.get(self, "custom_domain_id")
+
+    @_builtins.property
     @pulumi.getter
     def description(self) -> _builtins.str:
         """
@@ -426,7 +440,7 @@ class GetRemoteServerResult:
     @pulumi.getter
     def disabled(self) -> _builtins.bool:
         """
-        If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+        If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
         """
         return pulumi.get(self, "disabled")
 
@@ -463,14 +477,6 @@ class GetRemoteServerResult:
         return pulumi.get(self, "filebase_bucket")
 
     @_builtins.property
-    @pulumi.getter(name="filesAgentApiToken")
-    def files_agent_api_token(self) -> _builtins.str:
-        """
-        Files Agent API Token
-        """
-        return pulumi.get(self, "files_agent_api_token")
-
-    @_builtins.property
     @pulumi.getter(name="filesAgentLatestVersion")
     def files_agent_latest_version(self) -> _builtins.str:
         """
@@ -482,7 +488,7 @@ class GetRemoteServerResult:
     @pulumi.getter(name="filesAgentPermissionSet")
     def files_agent_permission_set(self) -> _builtins.str:
         """
-        Local permissions for files agent. read*only, write*only, or read_write
+        Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
         """
         return pulumi.get(self, "files_agent_permission_set")
 
@@ -490,7 +496,7 @@ class GetRemoteServerResult:
     @pulumi.getter(name="filesAgentRoot")
     def files_agent_root(self) -> _builtins.str:
         """
-        Agent local root path
+        Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
         """
         return pulumi.get(self, "files_agent_root")
 
@@ -514,7 +520,7 @@ class GetRemoteServerResult:
     @pulumi.getter(name="filesAgentVersion")
     def files_agent_version(self) -> _builtins.str:
         """
-        Files Agent version
+        Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
         """
         return pulumi.get(self, "files_agent_version")
 
@@ -570,7 +576,7 @@ class GetRemoteServerResult:
     @pulumi.getter
     def hostname(self) -> _builtins.str:
         """
-        Hostname or IP address
+        Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         """
         return pulumi.get(self, "hostname")
 
@@ -639,6 +645,14 @@ class GetRemoteServerResult:
         return pulumi.get(self, "outbound_agent_id")
 
     @_builtins.property
+    @pulumi.getter(name="outboundIpAddresses")
+    def outbound_ip_addresses(self) -> Sequence[_builtins.str]:
+        """
+        Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+        """
+        return pulumi.get(self, "outbound_ip_addresses")
+
+    @_builtins.property
     @pulumi.getter(name="pinToSiteRegion")
     def pin_to_site_region(self) -> _builtins.bool:
         """
@@ -658,7 +672,7 @@ class GetRemoteServerResult:
     @pulumi.getter
     def port(self) -> _builtins.int:
         """
-        Port for remote server.
+        Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
         """
         return pulumi.get(self, "port")
 
@@ -751,6 +765,14 @@ class GetRemoteServerResult:
         return pulumi.get(self, "s3_compatible_virtual_hosted_style")
 
     @_builtins.property
+    @pulumi.getter(name="s3KmsKeyId")
+    def s3_kms_key_id(self) -> _builtins.str:
+        """
+        ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+        """
+        return pulumi.get(self, "s3_kms_key_id")
+
+    @_builtins.property
     @pulumi.getter(name="s3Region")
     def s3_region(self) -> _builtins.str:
         """
@@ -770,7 +792,7 @@ class GetRemoteServerResult:
     @pulumi.getter(name="serverHostKey")
     def server_host_key(self) -> _builtins.str:
         """
-        Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+        Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
         """
         return pulumi.get(self, "server_host_key")
 
@@ -911,6 +933,7 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             cloudflare_access_key=self.cloudflare_access_key,
             cloudflare_bucket=self.cloudflare_bucket,
             cloudflare_endpoint=self.cloudflare_endpoint,
+            custom_domain_id=self.custom_domain_id,
             description=self.description,
             direct_transfer_available=self.direct_transfer_available,
             disabled=self.disabled,
@@ -918,7 +941,6 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             enable_dedicated_ips=self.enable_dedicated_ips,
             filebase_access_key=self.filebase_access_key,
             filebase_bucket=self.filebase_bucket,
-            files_agent_api_token=self.files_agent_api_token,
             files_agent_latest_version=self.files_agent_latest_version,
             files_agent_permission_set=self.files_agent_permission_set,
             files_agent_root=self.files_agent_root,
@@ -940,6 +962,7 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             name=self.name,
             one_drive_account_type=self.one_drive_account_type,
             outbound_agent_id=self.outbound_agent_id,
+            outbound_ip_addresses=self.outbound_ip_addresses,
             pin_to_site_region=self.pin_to_site_region,
             pinned_region=self.pinned_region,
             port=self.port,
@@ -954,6 +977,7 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             s3_compatible_endpoint=self.s3_compatible_endpoint,
             s3_compatible_region=self.s3_compatible_region,
             s3_compatible_virtual_hosted_style=self.s3_compatible_virtual_hosted_style,
+            s3_kms_key_id=self.s3_kms_key_id,
             s3_region=self.s3_region,
             server_certificate=self.server_certificate,
             server_host_key=self.server_host_key,
@@ -982,21 +1006,18 @@ def get_remote_server(id: Optional[_builtins.int] = None,
 
     Not every attribute will apply to every remote server.
 
-    FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
+    FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
 
-    SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
+    SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
 
-    S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>. Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>. If you don't provide credentials, you will need to use AWS to grant us access to your bucket.
+    S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>.  Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>.  If you don't provide credentials, you will need to use AWS to grant us access to your bucket.  If your bucket requires a customer-managed KMS key, provide its ARN in <span pulumi-lang-nodejs="`s3KmsKeyId`" pulumi-lang-dotnet="`S3KmsKeyId`" pulumi-lang-go="`s3KmsKeyId`" pulumi-lang-python="`s3_kms_key_id`" pulumi-lang-yaml="`s3KmsKeyId`" pulumi-lang-java="`s3KmsKeyId`" pulumi-lang-hcl="`s3_kms_key_id`">`s3KmsKeyId`</span>.
 
     S3-Compatible Buckets require that you specify <span pulumi-lang-nodejs="`s3CompatibleBucket`" pulumi-lang-dotnet="`S3CompatibleBucket`" pulumi-lang-go="`s3CompatibleBucket`" pulumi-lang-python="`s3_compatible_bucket`" pulumi-lang-yaml="`s3CompatibleBucket`" pulumi-lang-java="`s3CompatibleBucket`" pulumi-lang-hcl="`s3_compatible_bucket`">`s3CompatibleBucket`</span>, <span pulumi-lang-nodejs="`s3CompatibleEndpoint`" pulumi-lang-dotnet="`S3CompatibleEndpoint`" pulumi-lang-go="`s3CompatibleEndpoint`" pulumi-lang-python="`s3_compatible_endpoint`" pulumi-lang-yaml="`s3CompatibleEndpoint`" pulumi-lang-java="`s3CompatibleEndpoint`" pulumi-lang-hcl="`s3_compatible_endpoint`">`s3CompatibleEndpoint`</span>, <span pulumi-lang-nodejs="`s3CompatibleAccessKey`" pulumi-lang-dotnet="`S3CompatibleAccessKey`" pulumi-lang-go="`s3CompatibleAccessKey`" pulumi-lang-python="`s3_compatible_access_key`" pulumi-lang-yaml="`s3CompatibleAccessKey`" pulumi-lang-java="`s3CompatibleAccessKey`" pulumi-lang-hcl="`s3_compatible_access_key`">`s3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`s3CompatibleSecretKey`" pulumi-lang-dotnet="`S3CompatibleSecretKey`" pulumi-lang-go="`s3CompatibleSecretKey`" pulumi-lang-python="`s3_compatible_secret_key`" pulumi-lang-yaml="`s3CompatibleSecretKey`" pulumi-lang-java="`s3CompatibleSecretKey`" pulumi-lang-hcl="`s3_compatible_secret_key`">`s3CompatibleSecretKey`</span>. Optionally provide <span pulumi-lang-nodejs="`s3CompatibleVirtualHostedStyle`" pulumi-lang-dotnet="`S3CompatibleVirtualHostedStyle`" pulumi-lang-go="`s3CompatibleVirtualHostedStyle`" pulumi-lang-python="`s3_compatible_virtual_hosted_style`" pulumi-lang-yaml="`s3CompatibleVirtualHostedStyle`" pulumi-lang-java="`s3CompatibleVirtualHostedStyle`" pulumi-lang-hcl="`s3_compatible_virtual_hosted_style`">`s3CompatibleVirtualHostedStyle`</span> to use virtual-hosted-style URLs instead of path-style URLs.
 
     Google Cloud Storage requires that you specify <span pulumi-lang-nodejs="`googleCloudStorageBucket`" pulumi-lang-dotnet="`GoogleCloudStorageBucket`" pulumi-lang-go="`googleCloudStorageBucket`" pulumi-lang-python="`google_cloud_storage_bucket`" pulumi-lang-yaml="`googleCloudStorageBucket`" pulumi-lang-java="`googleCloudStorageBucket`" pulumi-lang-hcl="`google_cloud_storage_bucket`">`googleCloudStorageBucket`</span>, and then one of the following sets of authentication credentials, selected by <span pulumi-lang-nodejs="`googleCloudStorageAuthenticationMethod`" pulumi-lang-dotnet="`GoogleCloudStorageAuthenticationMethod`" pulumi-lang-go="`googleCloudStorageAuthenticationMethod`" pulumi-lang-python="`google_cloud_storage_authentication_method`" pulumi-lang-yaml="`googleCloudStorageAuthenticationMethod`" pulumi-lang-java="`googleCloudStorageAuthenticationMethod`" pulumi-lang-hcl="`google_cloud_storage_authentication_method`">`googleCloudStorageAuthenticationMethod`</span> (defaults to <span pulumi-lang-nodejs="`json`" pulumi-lang-dotnet="`Json`" pulumi-lang-go="`json`" pulumi-lang-python="`json`" pulumi-lang-yaml="`json`" pulumi-lang-java="`json`" pulumi-lang-hcl="`json`">`json`</span>):
-
-     - for JSON authentication: <span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`">`googleCloudStorageProjectId`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`">`googleCloudStorageCredentialsJson`</span>
-
-     - for HMAC (S3-Compatible) authentication: <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`">`googleCloudStorageS3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`">`googleCloudStorageS3CompatibleSecretKey`</span>
-
-     - for OAuth authentication: <span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`">`googleCloudStorageOauthScope`</span>, then follow the <span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`">`authSetupLink`</span> and login with Google
+      - for JSON authentication: <span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`">`googleCloudStorageProjectId`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`">`googleCloudStorageCredentialsJson`</span>
+      - for HMAC (S3-Compatible) authentication: <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`">`googleCloudStorageS3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`">`googleCloudStorageS3CompatibleSecretKey`</span>
+      - for OAuth authentication: <span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`">`googleCloudStorageOauthScope`</span>, then follow the <span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`">`authSetupLink`</span> and login with Google
 
     Wasabi requires <span pulumi-lang-nodejs="`wasabiBucket`" pulumi-lang-dotnet="`WasabiBucket`" pulumi-lang-go="`wasabiBucket`" pulumi-lang-python="`wasabi_bucket`" pulumi-lang-yaml="`wasabiBucket`" pulumi-lang-java="`wasabiBucket`" pulumi-lang-hcl="`wasabi_bucket`">`wasabiBucket`</span>, <span pulumi-lang-nodejs="`wasabiRegion`" pulumi-lang-dotnet="`WasabiRegion`" pulumi-lang-go="`wasabiRegion`" pulumi-lang-python="`wasabi_region`" pulumi-lang-yaml="`wasabiRegion`" pulumi-lang-java="`wasabiRegion`" pulumi-lang-hcl="`wasabi_region`">`wasabiRegion`</span>, <span pulumi-lang-nodejs="`wasabiAccessKey`" pulumi-lang-dotnet="`WasabiAccessKey`" pulumi-lang-go="`wasabiAccessKey`" pulumi-lang-python="`wasabi_access_key`" pulumi-lang-yaml="`wasabiAccessKey`" pulumi-lang-java="`wasabiAccessKey`" pulumi-lang-hcl="`wasabi_access_key`">`wasabiAccessKey`</span>, and <span pulumi-lang-nodejs="`wasabiSecretKey`" pulumi-lang-dotnet="`WasabiSecretKey`" pulumi-lang-go="`wasabiSecretKey`" pulumi-lang-python="`wasabi_secret_key`" pulumi-lang-yaml="`wasabiSecretKey`" pulumi-lang-java="`wasabiSecretKey`" pulumi-lang-hcl="`wasabi_secret_key`">`wasabiSecretKey`</span>.
 
@@ -1062,6 +1083,7 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         cloudflare_access_key=pulumi.get(__ret__, 'cloudflare_access_key'),
         cloudflare_bucket=pulumi.get(__ret__, 'cloudflare_bucket'),
         cloudflare_endpoint=pulumi.get(__ret__, 'cloudflare_endpoint'),
+        custom_domain_id=pulumi.get(__ret__, 'custom_domain_id'),
         description=pulumi.get(__ret__, 'description'),
         direct_transfer_available=pulumi.get(__ret__, 'direct_transfer_available'),
         disabled=pulumi.get(__ret__, 'disabled'),
@@ -1069,7 +1091,6 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         enable_dedicated_ips=pulumi.get(__ret__, 'enable_dedicated_ips'),
         filebase_access_key=pulumi.get(__ret__, 'filebase_access_key'),
         filebase_bucket=pulumi.get(__ret__, 'filebase_bucket'),
-        files_agent_api_token=pulumi.get(__ret__, 'files_agent_api_token'),
         files_agent_latest_version=pulumi.get(__ret__, 'files_agent_latest_version'),
         files_agent_permission_set=pulumi.get(__ret__, 'files_agent_permission_set'),
         files_agent_root=pulumi.get(__ret__, 'files_agent_root'),
@@ -1091,6 +1112,7 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         name=pulumi.get(__ret__, 'name'),
         one_drive_account_type=pulumi.get(__ret__, 'one_drive_account_type'),
         outbound_agent_id=pulumi.get(__ret__, 'outbound_agent_id'),
+        outbound_ip_addresses=pulumi.get(__ret__, 'outbound_ip_addresses'),
         pin_to_site_region=pulumi.get(__ret__, 'pin_to_site_region'),
         pinned_region=pulumi.get(__ret__, 'pinned_region'),
         port=pulumi.get(__ret__, 'port'),
@@ -1105,6 +1127,7 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         s3_compatible_endpoint=pulumi.get(__ret__, 's3_compatible_endpoint'),
         s3_compatible_region=pulumi.get(__ret__, 's3_compatible_region'),
         s3_compatible_virtual_hosted_style=pulumi.get(__ret__, 's3_compatible_virtual_hosted_style'),
+        s3_kms_key_id=pulumi.get(__ret__, 's3_kms_key_id'),
         s3_region=pulumi.get(__ret__, 's3_region'),
         server_certificate=pulumi.get(__ret__, 'server_certificate'),
         server_host_key=pulumi.get(__ret__, 'server_host_key'),
@@ -1131,21 +1154,18 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
 
     Not every attribute will apply to every remote server.
 
-    FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
+    FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
 
-    SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
+    SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
 
-    S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>. Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>. If you don't provide credentials, you will need to use AWS to grant us access to your bucket.
+    S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>.  Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>.  If you don't provide credentials, you will need to use AWS to grant us access to your bucket.  If your bucket requires a customer-managed KMS key, provide its ARN in <span pulumi-lang-nodejs="`s3KmsKeyId`" pulumi-lang-dotnet="`S3KmsKeyId`" pulumi-lang-go="`s3KmsKeyId`" pulumi-lang-python="`s3_kms_key_id`" pulumi-lang-yaml="`s3KmsKeyId`" pulumi-lang-java="`s3KmsKeyId`" pulumi-lang-hcl="`s3_kms_key_id`">`s3KmsKeyId`</span>.
 
     S3-Compatible Buckets require that you specify <span pulumi-lang-nodejs="`s3CompatibleBucket`" pulumi-lang-dotnet="`S3CompatibleBucket`" pulumi-lang-go="`s3CompatibleBucket`" pulumi-lang-python="`s3_compatible_bucket`" pulumi-lang-yaml="`s3CompatibleBucket`" pulumi-lang-java="`s3CompatibleBucket`" pulumi-lang-hcl="`s3_compatible_bucket`">`s3CompatibleBucket`</span>, <span pulumi-lang-nodejs="`s3CompatibleEndpoint`" pulumi-lang-dotnet="`S3CompatibleEndpoint`" pulumi-lang-go="`s3CompatibleEndpoint`" pulumi-lang-python="`s3_compatible_endpoint`" pulumi-lang-yaml="`s3CompatibleEndpoint`" pulumi-lang-java="`s3CompatibleEndpoint`" pulumi-lang-hcl="`s3_compatible_endpoint`">`s3CompatibleEndpoint`</span>, <span pulumi-lang-nodejs="`s3CompatibleAccessKey`" pulumi-lang-dotnet="`S3CompatibleAccessKey`" pulumi-lang-go="`s3CompatibleAccessKey`" pulumi-lang-python="`s3_compatible_access_key`" pulumi-lang-yaml="`s3CompatibleAccessKey`" pulumi-lang-java="`s3CompatibleAccessKey`" pulumi-lang-hcl="`s3_compatible_access_key`">`s3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`s3CompatibleSecretKey`" pulumi-lang-dotnet="`S3CompatibleSecretKey`" pulumi-lang-go="`s3CompatibleSecretKey`" pulumi-lang-python="`s3_compatible_secret_key`" pulumi-lang-yaml="`s3CompatibleSecretKey`" pulumi-lang-java="`s3CompatibleSecretKey`" pulumi-lang-hcl="`s3_compatible_secret_key`">`s3CompatibleSecretKey`</span>. Optionally provide <span pulumi-lang-nodejs="`s3CompatibleVirtualHostedStyle`" pulumi-lang-dotnet="`S3CompatibleVirtualHostedStyle`" pulumi-lang-go="`s3CompatibleVirtualHostedStyle`" pulumi-lang-python="`s3_compatible_virtual_hosted_style`" pulumi-lang-yaml="`s3CompatibleVirtualHostedStyle`" pulumi-lang-java="`s3CompatibleVirtualHostedStyle`" pulumi-lang-hcl="`s3_compatible_virtual_hosted_style`">`s3CompatibleVirtualHostedStyle`</span> to use virtual-hosted-style URLs instead of path-style URLs.
 
     Google Cloud Storage requires that you specify <span pulumi-lang-nodejs="`googleCloudStorageBucket`" pulumi-lang-dotnet="`GoogleCloudStorageBucket`" pulumi-lang-go="`googleCloudStorageBucket`" pulumi-lang-python="`google_cloud_storage_bucket`" pulumi-lang-yaml="`googleCloudStorageBucket`" pulumi-lang-java="`googleCloudStorageBucket`" pulumi-lang-hcl="`google_cloud_storage_bucket`">`googleCloudStorageBucket`</span>, and then one of the following sets of authentication credentials, selected by <span pulumi-lang-nodejs="`googleCloudStorageAuthenticationMethod`" pulumi-lang-dotnet="`GoogleCloudStorageAuthenticationMethod`" pulumi-lang-go="`googleCloudStorageAuthenticationMethod`" pulumi-lang-python="`google_cloud_storage_authentication_method`" pulumi-lang-yaml="`googleCloudStorageAuthenticationMethod`" pulumi-lang-java="`googleCloudStorageAuthenticationMethod`" pulumi-lang-hcl="`google_cloud_storage_authentication_method`">`googleCloudStorageAuthenticationMethod`</span> (defaults to <span pulumi-lang-nodejs="`json`" pulumi-lang-dotnet="`Json`" pulumi-lang-go="`json`" pulumi-lang-python="`json`" pulumi-lang-yaml="`json`" pulumi-lang-java="`json`" pulumi-lang-hcl="`json`">`json`</span>):
-
-     - for JSON authentication: <span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`">`googleCloudStorageProjectId`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`">`googleCloudStorageCredentialsJson`</span>
-
-     - for HMAC (S3-Compatible) authentication: <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`">`googleCloudStorageS3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`">`googleCloudStorageS3CompatibleSecretKey`</span>
-
-     - for OAuth authentication: <span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`">`googleCloudStorageOauthScope`</span>, then follow the <span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`">`authSetupLink`</span> and login with Google
+      - for JSON authentication: <span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`">`googleCloudStorageProjectId`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`">`googleCloudStorageCredentialsJson`</span>
+      - for HMAC (S3-Compatible) authentication: <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`">`googleCloudStorageS3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`">`googleCloudStorageS3CompatibleSecretKey`</span>
+      - for OAuth authentication: <span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`">`googleCloudStorageOauthScope`</span>, then follow the <span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`">`authSetupLink`</span> and login with Google
 
     Wasabi requires <span pulumi-lang-nodejs="`wasabiBucket`" pulumi-lang-dotnet="`WasabiBucket`" pulumi-lang-go="`wasabiBucket`" pulumi-lang-python="`wasabi_bucket`" pulumi-lang-yaml="`wasabiBucket`" pulumi-lang-java="`wasabiBucket`" pulumi-lang-hcl="`wasabi_bucket`">`wasabiBucket`</span>, <span pulumi-lang-nodejs="`wasabiRegion`" pulumi-lang-dotnet="`WasabiRegion`" pulumi-lang-go="`wasabiRegion`" pulumi-lang-python="`wasabi_region`" pulumi-lang-yaml="`wasabiRegion`" pulumi-lang-java="`wasabiRegion`" pulumi-lang-hcl="`wasabi_region`">`wasabiRegion`</span>, <span pulumi-lang-nodejs="`wasabiAccessKey`" pulumi-lang-dotnet="`WasabiAccessKey`" pulumi-lang-go="`wasabiAccessKey`" pulumi-lang-python="`wasabi_access_key`" pulumi-lang-yaml="`wasabiAccessKey`" pulumi-lang-java="`wasabiAccessKey`" pulumi-lang-hcl="`wasabi_access_key`">`wasabiAccessKey`</span>, and <span pulumi-lang-nodejs="`wasabiSecretKey`" pulumi-lang-dotnet="`WasabiSecretKey`" pulumi-lang-go="`wasabiSecretKey`" pulumi-lang-python="`wasabi_secret_key`" pulumi-lang-yaml="`wasabiSecretKey`" pulumi-lang-java="`wasabiSecretKey`" pulumi-lang-hcl="`wasabi_secret_key`">`wasabiSecretKey`</span>.
 
@@ -1210,6 +1230,7 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         cloudflare_access_key=pulumi.get(__response__, 'cloudflare_access_key'),
         cloudflare_bucket=pulumi.get(__response__, 'cloudflare_bucket'),
         cloudflare_endpoint=pulumi.get(__response__, 'cloudflare_endpoint'),
+        custom_domain_id=pulumi.get(__response__, 'custom_domain_id'),
         description=pulumi.get(__response__, 'description'),
         direct_transfer_available=pulumi.get(__response__, 'direct_transfer_available'),
         disabled=pulumi.get(__response__, 'disabled'),
@@ -1217,7 +1238,6 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         enable_dedicated_ips=pulumi.get(__response__, 'enable_dedicated_ips'),
         filebase_access_key=pulumi.get(__response__, 'filebase_access_key'),
         filebase_bucket=pulumi.get(__response__, 'filebase_bucket'),
-        files_agent_api_token=pulumi.get(__response__, 'files_agent_api_token'),
         files_agent_latest_version=pulumi.get(__response__, 'files_agent_latest_version'),
         files_agent_permission_set=pulumi.get(__response__, 'files_agent_permission_set'),
         files_agent_root=pulumi.get(__response__, 'files_agent_root'),
@@ -1239,6 +1259,7 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         name=pulumi.get(__response__, 'name'),
         one_drive_account_type=pulumi.get(__response__, 'one_drive_account_type'),
         outbound_agent_id=pulumi.get(__response__, 'outbound_agent_id'),
+        outbound_ip_addresses=pulumi.get(__response__, 'outbound_ip_addresses'),
         pin_to_site_region=pulumi.get(__response__, 'pin_to_site_region'),
         pinned_region=pulumi.get(__response__, 'pinned_region'),
         port=pulumi.get(__response__, 'port'),
@@ -1253,6 +1274,7 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         s3_compatible_endpoint=pulumi.get(__response__, 's3_compatible_endpoint'),
         s3_compatible_region=pulumi.get(__response__, 's3_compatible_region'),
         s3_compatible_virtual_hosted_style=pulumi.get(__response__, 's3_compatible_virtual_hosted_style'),
+        s3_kms_key_id=pulumi.get(__response__, 's3_kms_key_id'),
         s3_region=pulumi.get(__response__, 's3_region'),
         server_certificate=pulumi.get(__response__, 'server_certificate'),
         server_host_key=pulumi.get(__response__, 'server_host_key'),

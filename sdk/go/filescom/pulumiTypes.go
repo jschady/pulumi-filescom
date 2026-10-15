@@ -313,36 +313,37 @@ func (o AutomationDefinitionEdgeArrayOutput) Index(i pulumi.IntInput) Automation
 }
 
 type AutomationDefinitionNode struct {
-	AgentCompute     *AutomationDefinitionNodeAgentCompute     `pulumi:"agentCompute"`
-	Aggregate        *AutomationDefinitionNodeAggregate        `pulumi:"aggregate"`
-	As2Send          *AutomationDefinitionNodeAs2Send          `pulumi:"as2Send"`
-	CopyFile         *AutomationDefinitionNodeCopyFile         `pulumi:"copyFile"`
-	CreateFolder     *AutomationDefinitionNodeCreateFolder     `pulumi:"createFolder"`
-	DeleteFile       *AutomationDefinitionNodeDeleteFile       `pulumi:"deleteFile"`
-	DocumentConvert  *AutomationDefinitionNodeDocumentConvert  `pulumi:"documentConvert"`
-	Extract          *AutomationDefinitionNodeExtract          `pulumi:"extract"`
-	Filter           *AutomationDefinitionNodeFilter           `pulumi:"filter"`
-	GpgDecrypt       *AutomationDefinitionNodeGpgDecrypt       `pulumi:"gpgDecrypt"`
-	GpgEncrypt       *AutomationDefinitionNodeGpgEncrypt       `pulumi:"gpgEncrypt"`
-	If               *AutomationDefinitionNodeIf               `pulumi:"if"`
-	ImageConvert     *AutomationDefinitionNodeImageConvert     `pulumi:"imageConvert"`
-	ImportFile       *AutomationDefinitionNodeImportFile       `pulumi:"importFile"`
-	Join             *AutomationDefinitionNodeJoin             `pulumi:"join"`
-	MoveFile         *AutomationDefinitionNodeMoveFile         `pulumi:"moveFile"`
-	RunAutomation    *AutomationDefinitionNodeRunAutomation    `pulumi:"runAutomation"`
-	RunSync          *AutomationDefinitionNodeRunSync          `pulumi:"runSync"`
-	SendEmail        *AutomationDefinitionNodeSendEmail        `pulumi:"sendEmail"`
-	SetMetadata      *AutomationDefinitionNodeSetMetadata      `pulumi:"setMetadata"`
-	Switch           *AutomationDefinitionNodeSwitch           `pulumi:"switch"`
-	Transform        *AutomationDefinitionNodeTransform        `pulumi:"transform"`
-	TriggerAction    *AutomationDefinitionNodeTriggerAction    `pulumi:"triggerAction"`
-	TriggerEmail     *AutomationDefinitionNodeTriggerEmail     `pulumi:"triggerEmail"`
-	TriggerManual    *AutomationDefinitionNodeTriggerManual    `pulumi:"triggerManual"`
-	TriggerScheduled *AutomationDefinitionNodeTriggerScheduled `pulumi:"triggerScheduled"`
-	TriggerWebhook   *AutomationDefinitionNodeTriggerWebhook   `pulumi:"triggerWebhook"`
-	Unzip            *AutomationDefinitionNodeUnzip            `pulumi:"unzip"`
-	Wait             *AutomationDefinitionNodeWait             `pulumi:"wait"`
-	Zip              *AutomationDefinitionNodeZip              `pulumi:"zip"`
+	AgentCompute          *AutomationDefinitionNodeAgentCompute          `pulumi:"agentCompute"`
+	Aggregate             *AutomationDefinitionNodeAggregate             `pulumi:"aggregate"`
+	As2Send               *AutomationDefinitionNodeAs2Send               `pulumi:"as2Send"`
+	CopyFile              *AutomationDefinitionNodeCopyFile              `pulumi:"copyFile"`
+	CreateFolder          *AutomationDefinitionNodeCreateFolder          `pulumi:"createFolder"`
+	DeleteFile            *AutomationDefinitionNodeDeleteFile            `pulumi:"deleteFile"`
+	DocumentConvert       *AutomationDefinitionNodeDocumentConvert       `pulumi:"documentConvert"`
+	Extract               *AutomationDefinitionNodeExtract               `pulumi:"extract"`
+	Filter                *AutomationDefinitionNodeFilter                `pulumi:"filter"`
+	GpgDecrypt            *AutomationDefinitionNodeGpgDecrypt            `pulumi:"gpgDecrypt"`
+	GpgEncrypt            *AutomationDefinitionNodeGpgEncrypt            `pulumi:"gpgEncrypt"`
+	If                    *AutomationDefinitionNodeIf                    `pulumi:"if"`
+	ImageConvert          *AutomationDefinitionNodeImageConvert          `pulumi:"imageConvert"`
+	ImportFile            *AutomationDefinitionNodeImportFile            `pulumi:"importFile"`
+	Join                  *AutomationDefinitionNodeJoin                  `pulumi:"join"`
+	MoveFile              *AutomationDefinitionNodeMoveFile              `pulumi:"moveFile"`
+	RunAutomation         *AutomationDefinitionNodeRunAutomation         `pulumi:"runAutomation"`
+	RunSync               *AutomationDefinitionNodeRunSync               `pulumi:"runSync"`
+	SendEmail             *AutomationDefinitionNodeSendEmail             `pulumi:"sendEmail"`
+	SetMetadata           *AutomationDefinitionNodeSetMetadata           `pulumi:"setMetadata"`
+	Switch                *AutomationDefinitionNodeSwitch                `pulumi:"switch"`
+	Transform             *AutomationDefinitionNodeTransform             `pulumi:"transform"`
+	TriggerAction         *AutomationDefinitionNodeTriggerAction         `pulumi:"triggerAction"`
+	TriggerEmail          *AutomationDefinitionNodeTriggerEmail          `pulumi:"triggerEmail"`
+	TriggerFolderCreation *AutomationDefinitionNodeTriggerFolderCreation `pulumi:"triggerFolderCreation"`
+	TriggerManual         *AutomationDefinitionNodeTriggerManual         `pulumi:"triggerManual"`
+	TriggerScheduled      *AutomationDefinitionNodeTriggerScheduled      `pulumi:"triggerScheduled"`
+	TriggerWebhook        *AutomationDefinitionNodeTriggerWebhook        `pulumi:"triggerWebhook"`
+	Unzip                 *AutomationDefinitionNodeUnzip                 `pulumi:"unzip"`
+	Wait                  *AutomationDefinitionNodeWait                  `pulumi:"wait"`
+	Zip                   *AutomationDefinitionNodeZip                   `pulumi:"zip"`
 }
 
 // AutomationDefinitionNodeInput is an input type that accepts AutomationDefinitionNodeArgs and AutomationDefinitionNodeOutput values.
@@ -357,36 +358,37 @@ type AutomationDefinitionNodeInput interface {
 }
 
 type AutomationDefinitionNodeArgs struct {
-	AgentCompute     AutomationDefinitionNodeAgentComputePtrInput     `pulumi:"agentCompute"`
-	Aggregate        AutomationDefinitionNodeAggregatePtrInput        `pulumi:"aggregate"`
-	As2Send          AutomationDefinitionNodeAs2SendPtrInput          `pulumi:"as2Send"`
-	CopyFile         AutomationDefinitionNodeCopyFilePtrInput         `pulumi:"copyFile"`
-	CreateFolder     AutomationDefinitionNodeCreateFolderPtrInput     `pulumi:"createFolder"`
-	DeleteFile       AutomationDefinitionNodeDeleteFilePtrInput       `pulumi:"deleteFile"`
-	DocumentConvert  AutomationDefinitionNodeDocumentConvertPtrInput  `pulumi:"documentConvert"`
-	Extract          AutomationDefinitionNodeExtractPtrInput          `pulumi:"extract"`
-	Filter           AutomationDefinitionNodeFilterPtrInput           `pulumi:"filter"`
-	GpgDecrypt       AutomationDefinitionNodeGpgDecryptPtrInput       `pulumi:"gpgDecrypt"`
-	GpgEncrypt       AutomationDefinitionNodeGpgEncryptPtrInput       `pulumi:"gpgEncrypt"`
-	If               AutomationDefinitionNodeIfPtrInput               `pulumi:"if"`
-	ImageConvert     AutomationDefinitionNodeImageConvertPtrInput     `pulumi:"imageConvert"`
-	ImportFile       AutomationDefinitionNodeImportFilePtrInput       `pulumi:"importFile"`
-	Join             AutomationDefinitionNodeJoinPtrInput             `pulumi:"join"`
-	MoveFile         AutomationDefinitionNodeMoveFilePtrInput         `pulumi:"moveFile"`
-	RunAutomation    AutomationDefinitionNodeRunAutomationPtrInput    `pulumi:"runAutomation"`
-	RunSync          AutomationDefinitionNodeRunSyncPtrInput          `pulumi:"runSync"`
-	SendEmail        AutomationDefinitionNodeSendEmailPtrInput        `pulumi:"sendEmail"`
-	SetMetadata      AutomationDefinitionNodeSetMetadataPtrInput      `pulumi:"setMetadata"`
-	Switch           AutomationDefinitionNodeSwitchPtrInput           `pulumi:"switch"`
-	Transform        AutomationDefinitionNodeTransformPtrInput        `pulumi:"transform"`
-	TriggerAction    AutomationDefinitionNodeTriggerActionPtrInput    `pulumi:"triggerAction"`
-	TriggerEmail     AutomationDefinitionNodeTriggerEmailPtrInput     `pulumi:"triggerEmail"`
-	TriggerManual    AutomationDefinitionNodeTriggerManualPtrInput    `pulumi:"triggerManual"`
-	TriggerScheduled AutomationDefinitionNodeTriggerScheduledPtrInput `pulumi:"triggerScheduled"`
-	TriggerWebhook   AutomationDefinitionNodeTriggerWebhookPtrInput   `pulumi:"triggerWebhook"`
-	Unzip            AutomationDefinitionNodeUnzipPtrInput            `pulumi:"unzip"`
-	Wait             AutomationDefinitionNodeWaitPtrInput             `pulumi:"wait"`
-	Zip              AutomationDefinitionNodeZipPtrInput              `pulumi:"zip"`
+	AgentCompute          AutomationDefinitionNodeAgentComputePtrInput          `pulumi:"agentCompute"`
+	Aggregate             AutomationDefinitionNodeAggregatePtrInput             `pulumi:"aggregate"`
+	As2Send               AutomationDefinitionNodeAs2SendPtrInput               `pulumi:"as2Send"`
+	CopyFile              AutomationDefinitionNodeCopyFilePtrInput              `pulumi:"copyFile"`
+	CreateFolder          AutomationDefinitionNodeCreateFolderPtrInput          `pulumi:"createFolder"`
+	DeleteFile            AutomationDefinitionNodeDeleteFilePtrInput            `pulumi:"deleteFile"`
+	DocumentConvert       AutomationDefinitionNodeDocumentConvertPtrInput       `pulumi:"documentConvert"`
+	Extract               AutomationDefinitionNodeExtractPtrInput               `pulumi:"extract"`
+	Filter                AutomationDefinitionNodeFilterPtrInput                `pulumi:"filter"`
+	GpgDecrypt            AutomationDefinitionNodeGpgDecryptPtrInput            `pulumi:"gpgDecrypt"`
+	GpgEncrypt            AutomationDefinitionNodeGpgEncryptPtrInput            `pulumi:"gpgEncrypt"`
+	If                    AutomationDefinitionNodeIfPtrInput                    `pulumi:"if"`
+	ImageConvert          AutomationDefinitionNodeImageConvertPtrInput          `pulumi:"imageConvert"`
+	ImportFile            AutomationDefinitionNodeImportFilePtrInput            `pulumi:"importFile"`
+	Join                  AutomationDefinitionNodeJoinPtrInput                  `pulumi:"join"`
+	MoveFile              AutomationDefinitionNodeMoveFilePtrInput              `pulumi:"moveFile"`
+	RunAutomation         AutomationDefinitionNodeRunAutomationPtrInput         `pulumi:"runAutomation"`
+	RunSync               AutomationDefinitionNodeRunSyncPtrInput               `pulumi:"runSync"`
+	SendEmail             AutomationDefinitionNodeSendEmailPtrInput             `pulumi:"sendEmail"`
+	SetMetadata           AutomationDefinitionNodeSetMetadataPtrInput           `pulumi:"setMetadata"`
+	Switch                AutomationDefinitionNodeSwitchPtrInput                `pulumi:"switch"`
+	Transform             AutomationDefinitionNodeTransformPtrInput             `pulumi:"transform"`
+	TriggerAction         AutomationDefinitionNodeTriggerActionPtrInput         `pulumi:"triggerAction"`
+	TriggerEmail          AutomationDefinitionNodeTriggerEmailPtrInput          `pulumi:"triggerEmail"`
+	TriggerFolderCreation AutomationDefinitionNodeTriggerFolderCreationPtrInput `pulumi:"triggerFolderCreation"`
+	TriggerManual         AutomationDefinitionNodeTriggerManualPtrInput         `pulumi:"triggerManual"`
+	TriggerScheduled      AutomationDefinitionNodeTriggerScheduledPtrInput      `pulumi:"triggerScheduled"`
+	TriggerWebhook        AutomationDefinitionNodeTriggerWebhookPtrInput        `pulumi:"triggerWebhook"`
+	Unzip                 AutomationDefinitionNodeUnzipPtrInput                 `pulumi:"unzip"`
+	Wait                  AutomationDefinitionNodeWaitPtrInput                  `pulumi:"wait"`
+	Zip                   AutomationDefinitionNodeZipPtrInput                   `pulumi:"zip"`
 }
 
 func (AutomationDefinitionNodeArgs) ElementType() reflect.Type {
@@ -534,6 +536,12 @@ func (o AutomationDefinitionNodeOutput) TriggerAction() AutomationDefinitionNode
 
 func (o AutomationDefinitionNodeOutput) TriggerEmail() AutomationDefinitionNodeTriggerEmailPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNode) *AutomationDefinitionNodeTriggerEmail { return v.TriggerEmail }).(AutomationDefinitionNodeTriggerEmailPtrOutput)
+}
+
+func (o AutomationDefinitionNodeOutput) TriggerFolderCreation() AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNode) *AutomationDefinitionNodeTriggerFolderCreation {
+		return v.TriggerFolderCreation
+	}).(AutomationDefinitionNodeTriggerFolderCreationPtrOutput)
 }
 
 func (o AutomationDefinitionNodeOutput) TriggerManual() AutomationDefinitionNodeTriggerManualPtrOutput {
@@ -3512,7 +3520,7 @@ func (o AutomationDefinitionNodeDocumentConvertPtrOutput) Return() pulumi.BoolPt
 }
 
 type AutomationDefinitionNodeDocumentConvertConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []AutomationDefinitionNodeDocumentConvertConfigOnError `pulumi:"onErrors"`
@@ -3532,7 +3540,7 @@ type AutomationDefinitionNodeDocumentConvertConfigInput interface {
 }
 
 type AutomationDefinitionNodeDocumentConvertConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       AutomationDefinitionNodeDocumentConvertConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -3617,7 +3625,7 @@ func (o AutomationDefinitionNodeDocumentConvertConfigOutput) ToAutomationDefinit
 	}).(AutomationDefinitionNodeDocumentConvertConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeDocumentConvertConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeDocumentConvertConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -3661,7 +3669,7 @@ func (o AutomationDefinitionNodeDocumentConvertConfigPtrOutput) Elem() Automatio
 	}).(AutomationDefinitionNodeDocumentConvertConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeDocumentConvertConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeDocumentConvertConfig) *string {
 		if v == nil {
@@ -4471,7 +4479,8 @@ func (o AutomationDefinitionNodeFilterPtrOutput) Return() pulumi.BoolPtrOutput {
 
 type AutomationDefinitionNodeFilterConfig struct {
 	// A bare Files TransformScript expression, no braces.
-	Condition string `pulumi:"condition"`
+	Condition string  `pulumi:"condition"`
+	Kind      *string `pulumi:"kind"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []AutomationDefinitionNodeFilterConfigOnError `pulumi:"onErrors"`
 }
@@ -4489,7 +4498,8 @@ type AutomationDefinitionNodeFilterConfigInput interface {
 
 type AutomationDefinitionNodeFilterConfigArgs struct {
 	// A bare Files TransformScript expression, no braces.
-	Condition pulumi.StringInput `pulumi:"condition"`
+	Condition pulumi.StringInput    `pulumi:"condition"`
+	Kind      pulumi.StringPtrInput `pulumi:"kind"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors AutomationDefinitionNodeFilterConfigOnErrorArrayInput `pulumi:"onErrors"`
 }
@@ -4576,6 +4586,10 @@ func (o AutomationDefinitionNodeFilterConfigOutput) Condition() pulumi.StringOut
 	return o.ApplyT(func(v AutomationDefinitionNodeFilterConfig) string { return v.Condition }).(pulumi.StringOutput)
 }
 
+func (o AutomationDefinitionNodeFilterConfigOutput) Kind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeFilterConfig) *string { return v.Kind }).(pulumi.StringPtrOutput)
+}
+
 // Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 func (o AutomationDefinitionNodeFilterConfigOutput) OnErrors() AutomationDefinitionNodeFilterConfigOnErrorArrayOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeFilterConfig) []AutomationDefinitionNodeFilterConfigOnError {
@@ -4614,6 +4628,15 @@ func (o AutomationDefinitionNodeFilterConfigPtrOutput) Condition() pulumi.String
 			return nil
 		}
 		return &v.Condition
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeFilterConfigPtrOutput) Kind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeFilterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Kind
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4906,7 +4929,7 @@ func (o AutomationDefinitionNodeGpgDecryptPtrOutput) Return() pulumi.BoolPtrOutp
 }
 
 type AutomationDefinitionNodeGpgDecryptConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	GpgKeyId    int     `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -4926,7 +4949,7 @@ type AutomationDefinitionNodeGpgDecryptConfigInput interface {
 }
 
 type AutomationDefinitionNodeGpgDecryptConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	GpgKeyId    pulumi.IntInput       `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -5011,7 +5034,7 @@ func (o AutomationDefinitionNodeGpgDecryptConfigOutput) ToAutomationDefinitionNo
 	}).(AutomationDefinitionNodeGpgDecryptConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeGpgDecryptConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeGpgDecryptConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -5055,7 +5078,7 @@ func (o AutomationDefinitionNodeGpgDecryptConfigPtrOutput) Elem() AutomationDefi
 	}).(AutomationDefinitionNodeGpgDecryptConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeGpgDecryptConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeGpgDecryptConfig) *string {
 		if v == nil {
@@ -5372,7 +5395,7 @@ func (o AutomationDefinitionNodeGpgEncryptPtrOutput) Return() pulumi.BoolPtrOutp
 }
 
 type AutomationDefinitionNodeGpgEncryptConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	GpgKeyId    int     `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -5392,7 +5415,7 @@ type AutomationDefinitionNodeGpgEncryptConfigInput interface {
 }
 
 type AutomationDefinitionNodeGpgEncryptConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	GpgKeyId    pulumi.IntInput       `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -5477,7 +5500,7 @@ func (o AutomationDefinitionNodeGpgEncryptConfigOutput) ToAutomationDefinitionNo
 	}).(AutomationDefinitionNodeGpgEncryptConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeGpgEncryptConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeGpgEncryptConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -5521,7 +5544,7 @@ func (o AutomationDefinitionNodeGpgEncryptConfigPtrOutput) Elem() AutomationDefi
 	}).(AutomationDefinitionNodeGpgEncryptConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeGpgEncryptConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeGpgEncryptConfig) *string {
 		if v == nil {
@@ -6274,7 +6297,7 @@ func (o AutomationDefinitionNodeImageConvertPtrOutput) Return() pulumi.BoolPtrOu
 }
 
 type AutomationDefinitionNodeImageConvertConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	Height      *int    `pulumi:"height"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -6296,7 +6319,7 @@ type AutomationDefinitionNodeImageConvertConfigInput interface {
 }
 
 type AutomationDefinitionNodeImageConvertConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	Height      pulumi.IntPtrInput    `pulumi:"height"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -6383,7 +6406,7 @@ func (o AutomationDefinitionNodeImageConvertConfigOutput) ToAutomationDefinition
 	}).(AutomationDefinitionNodeImageConvertConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImageConvertConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeImageConvertConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -6435,7 +6458,7 @@ func (o AutomationDefinitionNodeImageConvertConfigPtrOutput) Elem() AutomationDe
 	}).(AutomationDefinitionNodeImageConvertConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImageConvertConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeImageConvertConfig) *string {
 		if v == nil {
@@ -6770,15 +6793,15 @@ func (o AutomationDefinitionNodeImportFilePtrOutput) Return() pulumi.BoolPtrOutp
 }
 
 type AutomationDefinitionNodeImportFileConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Content *string `pulumi:"content"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-	Destination *string           `pulumi:"destination"`
-	Headers     map[string]string `pulumi:"headers"`
-	Method      *string           `pulumi:"method"`
+	// One or more destination path templates.
+	Destinations []string          `pulumi:"destinations"`
+	Headers      map[string]string `pulumi:"headers"`
+	Method       *string           `pulumi:"method"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []AutomationDefinitionNodeImportFileConfigOnError `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Url string `pulumi:"url"`
 }
 
@@ -6794,15 +6817,15 @@ type AutomationDefinitionNodeImportFileConfigInput interface {
 }
 
 type AutomationDefinitionNodeImportFileConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Content pulumi.StringPtrInput `pulumi:"content"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-	Destination pulumi.StringPtrInput `pulumi:"destination"`
-	Headers     pulumi.StringMapInput `pulumi:"headers"`
-	Method      pulumi.StringPtrInput `pulumi:"method"`
+	// One or more destination path templates.
+	Destinations pulumi.StringArrayInput `pulumi:"destinations"`
+	Headers      pulumi.StringMapInput   `pulumi:"headers"`
+	Method       pulumi.StringPtrInput   `pulumi:"method"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors AutomationDefinitionNodeImportFileConfigOnErrorArrayInput `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Url pulumi.StringInput `pulumi:"url"`
 }
 
@@ -6883,14 +6906,14 @@ func (o AutomationDefinitionNodeImportFileConfigOutput) ToAutomationDefinitionNo
 	}).(AutomationDefinitionNodeImportFileConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImportFileConfigOutput) Content() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeImportFileConfig) *string { return v.Content }).(pulumi.StringPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-func (o AutomationDefinitionNodeImportFileConfigOutput) Destination() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AutomationDefinitionNodeImportFileConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
+// One or more destination path templates.
+func (o AutomationDefinitionNodeImportFileConfigOutput) Destinations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeImportFileConfig) []string { return v.Destinations }).(pulumi.StringArrayOutput)
 }
 
 func (o AutomationDefinitionNodeImportFileConfigOutput) Headers() pulumi.StringMapOutput {
@@ -6908,7 +6931,7 @@ func (o AutomationDefinitionNodeImportFileConfigOutput) OnErrors() AutomationDef
 	}).(AutomationDefinitionNodeImportFileConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImportFileConfigOutput) Url() pulumi.StringOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeImportFileConfig) string { return v.Url }).(pulumi.StringOutput)
 }
@@ -6937,7 +6960,7 @@ func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Elem() AutomationDefi
 	}).(AutomationDefinitionNodeImportFileConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Content() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeImportFileConfig) *string {
 		if v == nil {
@@ -6947,14 +6970,14 @@ func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Content() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Destination() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AutomationDefinitionNodeImportFileConfig) *string {
+// One or more destination path templates.
+func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Destinations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeImportFileConfig) []string {
 		if v == nil {
 			return nil
 		}
-		return v.Destination
-	}).(pulumi.StringPtrOutput)
+		return v.Destinations
+	}).(pulumi.StringArrayOutput)
 }
 
 func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Headers() pulumi.StringMapOutput {
@@ -6985,7 +7008,7 @@ func (o AutomationDefinitionNodeImportFileConfigPtrOutput) OnErrors() Automation
 	}).(AutomationDefinitionNodeImportFileConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeImportFileConfigPtrOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeImportFileConfig) *string {
 		if v == nil {
@@ -8545,7 +8568,7 @@ func (o AutomationDefinitionNodeRunAutomationConfigOnErrorArrayOutput) Index(i p
 
 type AutomationDefinitionNodeRunSync struct {
 	// Configuration fields for this node type.
-	Config *AutomationDefinitionNodeRunSyncConfig `pulumi:"config"`
+	Config AutomationDefinitionNodeRunSyncConfig `pulumi:"config"`
 	// Unique node ID within the graph.
 	Id string `pulumi:"id"`
 	// Whether this node's output is included in the Automation result.
@@ -8565,7 +8588,7 @@ type AutomationDefinitionNodeRunSyncInput interface {
 
 type AutomationDefinitionNodeRunSyncArgs struct {
 	// Configuration fields for this node type.
-	Config AutomationDefinitionNodeRunSyncConfigPtrInput `pulumi:"config"`
+	Config AutomationDefinitionNodeRunSyncConfigInput `pulumi:"config"`
 	// Unique node ID within the graph.
 	Id pulumi.StringInput `pulumi:"id"`
 	// Whether this node's output is included in the Automation result.
@@ -8650,8 +8673,8 @@ func (o AutomationDefinitionNodeRunSyncOutput) ToAutomationDefinitionNodeRunSync
 }
 
 // Configuration fields for this node type.
-func (o AutomationDefinitionNodeRunSyncOutput) Config() AutomationDefinitionNodeRunSyncConfigPtrOutput {
-	return o.ApplyT(func(v AutomationDefinitionNodeRunSync) *AutomationDefinitionNodeRunSyncConfig { return v.Config }).(AutomationDefinitionNodeRunSyncConfigPtrOutput)
+func (o AutomationDefinitionNodeRunSyncOutput) Config() AutomationDefinitionNodeRunSyncConfigOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeRunSync) AutomationDefinitionNodeRunSyncConfig { return v.Config }).(AutomationDefinitionNodeRunSyncConfigOutput)
 }
 
 // Unique node ID within the graph.
@@ -8694,7 +8717,7 @@ func (o AutomationDefinitionNodeRunSyncPtrOutput) Config() AutomationDefinitionN
 		if v == nil {
 			return nil
 		}
-		return v.Config
+		return &v.Config
 	}).(AutomationDefinitionNodeRunSyncConfigPtrOutput)
 }
 
@@ -8719,7 +8742,6 @@ func (o AutomationDefinitionNodeRunSyncPtrOutput) Return() pulumi.BoolPtrOutput 
 }
 
 type AutomationDefinitionNodeRunSyncConfig struct {
-	LegacySyncIds []int `pulumi:"legacySyncIds"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []AutomationDefinitionNodeRunSyncConfigOnError `pulumi:"onErrors"`
 	SyncIds  []int                                          `pulumi:"syncIds"`
@@ -8737,7 +8759,6 @@ type AutomationDefinitionNodeRunSyncConfigInput interface {
 }
 
 type AutomationDefinitionNodeRunSyncConfigArgs struct {
-	LegacySyncIds pulumi.IntArrayInput `pulumi:"legacySyncIds"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors AutomationDefinitionNodeRunSyncConfigOnErrorArrayInput `pulumi:"onErrors"`
 	SyncIds  pulumi.IntArrayInput                                   `pulumi:"syncIds"`
@@ -8820,10 +8841,6 @@ func (o AutomationDefinitionNodeRunSyncConfigOutput) ToAutomationDefinitionNodeR
 	}).(AutomationDefinitionNodeRunSyncConfigPtrOutput)
 }
 
-func (o AutomationDefinitionNodeRunSyncConfigOutput) LegacySyncIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v AutomationDefinitionNodeRunSyncConfig) []int { return v.LegacySyncIds }).(pulumi.IntArrayOutput)
-}
-
 // Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 func (o AutomationDefinitionNodeRunSyncConfigOutput) OnErrors() AutomationDefinitionNodeRunSyncConfigOnErrorArrayOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeRunSyncConfig) []AutomationDefinitionNodeRunSyncConfigOnError {
@@ -8857,15 +8874,6 @@ func (o AutomationDefinitionNodeRunSyncConfigPtrOutput) Elem() AutomationDefinit
 		var ret AutomationDefinitionNodeRunSyncConfig
 		return ret
 	}).(AutomationDefinitionNodeRunSyncConfigOutput)
-}
-
-func (o AutomationDefinitionNodeRunSyncConfigPtrOutput) LegacySyncIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *AutomationDefinitionNodeRunSyncConfig) []int {
-		if v == nil {
-			return nil
-		}
-		return v.LegacySyncIds
-	}).(pulumi.IntArrayOutput)
 }
 
 // Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -9168,14 +9176,14 @@ func (o AutomationDefinitionNodeSendEmailPtrOutput) Return() pulumi.BoolPtrOutpu
 type AutomationDefinitionNodeSendEmailConfig struct {
 	Attachments []string `pulumi:"attachments"`
 	Bccs        []string `pulumi:"bccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Body *string  `pulumi:"body"`
 	Ccs  []string `pulumi:"ccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	From *string `pulumi:"from"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []AutomationDefinitionNodeSendEmailConfigOnError `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Subject *string  `pulumi:"subject"`
 	Tos     []string `pulumi:"tos"`
 }
@@ -9194,14 +9202,14 @@ type AutomationDefinitionNodeSendEmailConfigInput interface {
 type AutomationDefinitionNodeSendEmailConfigArgs struct {
 	Attachments pulumi.StringArrayInput `pulumi:"attachments"`
 	Bccs        pulumi.StringArrayInput `pulumi:"bccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Body pulumi.StringPtrInput   `pulumi:"body"`
 	Ccs  pulumi.StringArrayInput `pulumi:"ccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	From pulumi.StringPtrInput `pulumi:"from"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors AutomationDefinitionNodeSendEmailConfigOnErrorArrayInput `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Subject pulumi.StringPtrInput   `pulumi:"subject"`
 	Tos     pulumi.StringArrayInput `pulumi:"tos"`
 }
@@ -9291,7 +9299,7 @@ func (o AutomationDefinitionNodeSendEmailConfigOutput) Bccs() pulumi.StringArray
 	return o.ApplyT(func(v AutomationDefinitionNodeSendEmailConfig) []string { return v.Bccs }).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeSendEmailConfig) *string { return v.Body }).(pulumi.StringPtrOutput)
 }
@@ -9300,7 +9308,7 @@ func (o AutomationDefinitionNodeSendEmailConfigOutput) Ccs() pulumi.StringArrayO
 	return o.ApplyT(func(v AutomationDefinitionNodeSendEmailConfig) []string { return v.Ccs }).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigOutput) From() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeSendEmailConfig) *string { return v.From }).(pulumi.StringPtrOutput)
 }
@@ -9312,7 +9320,7 @@ func (o AutomationDefinitionNodeSendEmailConfigOutput) OnErrors() AutomationDefi
 	}).(AutomationDefinitionNodeSendEmailConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigOutput) Subject() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeSendEmailConfig) *string { return v.Subject }).(pulumi.StringPtrOutput)
 }
@@ -9363,7 +9371,7 @@ func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) Bccs() pulumi.StringAr
 	}).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeSendEmailConfig) *string {
 		if v == nil {
@@ -9382,7 +9390,7 @@ func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) Ccs() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) From() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeSendEmailConfig) *string {
 		if v == nil {
@@ -9402,7 +9410,7 @@ func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) OnErrors() AutomationD
 	}).(AutomationDefinitionNodeSendEmailConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeSendEmailConfigPtrOutput) Subject() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeSendEmailConfig) *string {
 		if v == nil {
@@ -10294,7 +10302,7 @@ func (o AutomationDefinitionNodeSwitchConfigPtrOutput) OnErrors() AutomationDefi
 type AutomationDefinitionNodeSwitchConfigCase struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition string `pulumi:"condition"`
-	// Identifier used to connect nodes and named inputs or outputs.
+	// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 	Name string `pulumi:"name"`
 }
 
@@ -10312,7 +10320,7 @@ type AutomationDefinitionNodeSwitchConfigCaseInput interface {
 type AutomationDefinitionNodeSwitchConfigCaseArgs struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition pulumi.StringInput `pulumi:"condition"`
-	// Identifier used to connect nodes and named inputs or outputs.
+	// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 	Name pulumi.StringInput `pulumi:"name"`
 }
 
@@ -10372,7 +10380,7 @@ func (o AutomationDefinitionNodeSwitchConfigCaseOutput) Condition() pulumi.Strin
 	return o.ApplyT(func(v AutomationDefinitionNodeSwitchConfigCase) string { return v.Condition }).(pulumi.StringOutput)
 }
 
-// Identifier used to connect nodes and named inputs or outputs.
+// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 func (o AutomationDefinitionNodeSwitchConfigCaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeSwitchConfigCase) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -10676,7 +10684,7 @@ func (o AutomationDefinitionNodeTransformPtrOutput) Return() pulumi.BoolPtrOutpu
 }
 
 type AutomationDefinitionNodeTransformConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	Fts         string  `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -10695,7 +10703,7 @@ type AutomationDefinitionNodeTransformConfigInput interface {
 }
 
 type AutomationDefinitionNodeTransformConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	Fts         pulumi.StringInput    `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -10779,7 +10787,7 @@ func (o AutomationDefinitionNodeTransformConfigOutput) ToAutomationDefinitionNod
 	}).(AutomationDefinitionNodeTransformConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTransformConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTransformConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -10819,7 +10827,7 @@ func (o AutomationDefinitionNodeTransformConfigPtrOutput) Elem() AutomationDefin
 	}).(AutomationDefinitionNodeTransformConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTransformConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeTransformConfig) *string {
 		if v == nil {
@@ -11111,6 +11119,7 @@ func (o AutomationDefinitionNodeTriggerActionPtrOutput) Id() pulumi.StringPtrOut
 
 type AutomationDefinitionNodeTriggerActionConfig struct {
 	ExcludePattern *string  `pulumi:"excludePattern"`
+	Kind           *string  `pulumi:"kind"`
 	Path           *string  `pulumi:"path"`
 	PathTimeZone   *string  `pulumi:"pathTimeZone"`
 	Source         *string  `pulumi:"source"`
@@ -11130,6 +11139,7 @@ type AutomationDefinitionNodeTriggerActionConfigInput interface {
 
 type AutomationDefinitionNodeTriggerActionConfigArgs struct {
 	ExcludePattern pulumi.StringPtrInput   `pulumi:"excludePattern"`
+	Kind           pulumi.StringPtrInput   `pulumi:"kind"`
 	Path           pulumi.StringPtrInput   `pulumi:"path"`
 	PathTimeZone   pulumi.StringPtrInput   `pulumi:"pathTimeZone"`
 	Source         pulumi.StringPtrInput   `pulumi:"source"`
@@ -11217,6 +11227,10 @@ func (o AutomationDefinitionNodeTriggerActionConfigOutput) ExcludePattern() pulu
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerActionConfig) *string { return v.ExcludePattern }).(pulumi.StringPtrOutput)
 }
 
+func (o AutomationDefinitionNodeTriggerActionConfigOutput) Kind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerActionConfig) *string { return v.Kind }).(pulumi.StringPtrOutput)
+}
+
 func (o AutomationDefinitionNodeTriggerActionConfigOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerActionConfig) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
@@ -11263,6 +11277,15 @@ func (o AutomationDefinitionNodeTriggerActionConfigPtrOutput) ExcludePattern() p
 			return nil
 		}
 		return v.ExcludePattern
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerActionConfigPtrOutput) Kind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerActionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Kind
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -11668,6 +11691,342 @@ func (o AutomationDefinitionNodeTriggerEmailConfigPtrOutput) Source() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+type AutomationDefinitionNodeTriggerFolderCreation struct {
+	// Configuration fields for this node type.
+	Config *AutomationDefinitionNodeTriggerFolderCreationConfig `pulumi:"config"`
+	// Unique node ID within the graph.
+	Id string `pulumi:"id"`
+}
+
+// AutomationDefinitionNodeTriggerFolderCreationInput is an input type that accepts AutomationDefinitionNodeTriggerFolderCreationArgs and AutomationDefinitionNodeTriggerFolderCreationOutput values.
+// You can construct a concrete instance of `AutomationDefinitionNodeTriggerFolderCreationInput` via:
+//
+//	AutomationDefinitionNodeTriggerFolderCreationArgs{...}
+type AutomationDefinitionNodeTriggerFolderCreationInput interface {
+	pulumi.Input
+
+	ToAutomationDefinitionNodeTriggerFolderCreationOutput() AutomationDefinitionNodeTriggerFolderCreationOutput
+	ToAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(context.Context) AutomationDefinitionNodeTriggerFolderCreationOutput
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationArgs struct {
+	// Configuration fields for this node type.
+	Config AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput `pulumi:"config"`
+	// Unique node ID within the graph.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (AutomationDefinitionNodeTriggerFolderCreationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationArgs) ToAutomationDefinitionNodeTriggerFolderCreationOutput() AutomationDefinitionNodeTriggerFolderCreationOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(context.Background())
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationArgs) ToAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationOutput)
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationArgs) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutput() AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(context.Background())
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationArgs) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationOutput).ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(ctx)
+}
+
+// AutomationDefinitionNodeTriggerFolderCreationPtrInput is an input type that accepts AutomationDefinitionNodeTriggerFolderCreationArgs, AutomationDefinitionNodeTriggerFolderCreationPtr and AutomationDefinitionNodeTriggerFolderCreationPtrOutput values.
+// You can construct a concrete instance of `AutomationDefinitionNodeTriggerFolderCreationPtrInput` via:
+//
+//	        AutomationDefinitionNodeTriggerFolderCreationArgs{...}
+//
+//	or:
+//
+//	        nil
+type AutomationDefinitionNodeTriggerFolderCreationPtrInput interface {
+	pulumi.Input
+
+	ToAutomationDefinitionNodeTriggerFolderCreationPtrOutput() AutomationDefinitionNodeTriggerFolderCreationPtrOutput
+	ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(context.Context) AutomationDefinitionNodeTriggerFolderCreationPtrOutput
+}
+
+type automationDefinitionNodeTriggerFolderCreationPtrType AutomationDefinitionNodeTriggerFolderCreationArgs
+
+func AutomationDefinitionNodeTriggerFolderCreationPtr(v *AutomationDefinitionNodeTriggerFolderCreationArgs) AutomationDefinitionNodeTriggerFolderCreationPtrInput {
+	return (*automationDefinitionNodeTriggerFolderCreationPtrType)(v)
+}
+
+func (*automationDefinitionNodeTriggerFolderCreationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (i *automationDefinitionNodeTriggerFolderCreationPtrType) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutput() AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(context.Background())
+}
+
+func (i *automationDefinitionNodeTriggerFolderCreationPtrType) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationPtrOutput)
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationOutput struct{ *pulumi.OutputState }
+
+func (AutomationDefinitionNodeTriggerFolderCreationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) ToAutomationDefinitionNodeTriggerFolderCreationOutput() AutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) ToAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutput() AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return o.ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(context.Background())
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AutomationDefinitionNodeTriggerFolderCreation) *AutomationDefinitionNodeTriggerFolderCreation {
+		return &v
+	}).(AutomationDefinitionNodeTriggerFolderCreationPtrOutput)
+}
+
+// Configuration fields for this node type.
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) Config() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreation) *AutomationDefinitionNodeTriggerFolderCreationConfig {
+		return v.Config
+	}).(AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput)
+}
+
+// Unique node ID within the graph.
+func (o AutomationDefinitionNodeTriggerFolderCreationOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreation) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationPtrOutput struct{ *pulumi.OutputState }
+
+func (AutomationDefinitionNodeTriggerFolderCreationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationPtrOutput) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutput() AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationPtrOutput) ToAutomationDefinitionNodeTriggerFolderCreationPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationPtrOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationPtrOutput) Elem() AutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreation) AutomationDefinitionNodeTriggerFolderCreation {
+		if v != nil {
+			return *v
+		}
+		var ret AutomationDefinitionNodeTriggerFolderCreation
+		return ret
+	}).(AutomationDefinitionNodeTriggerFolderCreationOutput)
+}
+
+// Configuration fields for this node type.
+func (o AutomationDefinitionNodeTriggerFolderCreationPtrOutput) Config() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreation) *AutomationDefinitionNodeTriggerFolderCreationConfig {
+		if v == nil {
+			return nil
+		}
+		return v.Config
+	}).(AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput)
+}
+
+// Unique node ID within the graph.
+func (o AutomationDefinitionNodeTriggerFolderCreationPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreation) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationConfig struct {
+	ExcludePattern *string `pulumi:"excludePattern"`
+	Path           *string `pulumi:"path"`
+	PathTimeZone   *string `pulumi:"pathTimeZone"`
+	Source         *string `pulumi:"source"`
+}
+
+// AutomationDefinitionNodeTriggerFolderCreationConfigInput is an input type that accepts AutomationDefinitionNodeTriggerFolderCreationConfigArgs and AutomationDefinitionNodeTriggerFolderCreationConfigOutput values.
+// You can construct a concrete instance of `AutomationDefinitionNodeTriggerFolderCreationConfigInput` via:
+//
+//	AutomationDefinitionNodeTriggerFolderCreationConfigArgs{...}
+type AutomationDefinitionNodeTriggerFolderCreationConfigInput interface {
+	pulumi.Input
+
+	ToAutomationDefinitionNodeTriggerFolderCreationConfigOutput() AutomationDefinitionNodeTriggerFolderCreationConfigOutput
+	ToAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigOutput
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationConfigArgs struct {
+	ExcludePattern pulumi.StringPtrInput `pulumi:"excludePattern"`
+	Path           pulumi.StringPtrInput `pulumi:"path"`
+	PathTimeZone   pulumi.StringPtrInput `pulumi:"pathTimeZone"`
+	Source         pulumi.StringPtrInput `pulumi:"source"`
+}
+
+func (AutomationDefinitionNodeTriggerFolderCreationConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToAutomationDefinitionNodeTriggerFolderCreationConfigOutput() AutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(context.Background())
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationConfigOutput)
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(context.Background())
+}
+
+func (i AutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationConfigOutput).ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(ctx)
+}
+
+// AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput is an input type that accepts AutomationDefinitionNodeTriggerFolderCreationConfigArgs, AutomationDefinitionNodeTriggerFolderCreationConfigPtr and AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput values.
+// You can construct a concrete instance of `AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput` via:
+//
+//	        AutomationDefinitionNodeTriggerFolderCreationConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput interface {
+	pulumi.Input
+
+	ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput
+	ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput
+}
+
+type automationDefinitionNodeTriggerFolderCreationConfigPtrType AutomationDefinitionNodeTriggerFolderCreationConfigArgs
+
+func AutomationDefinitionNodeTriggerFolderCreationConfigPtr(v *AutomationDefinitionNodeTriggerFolderCreationConfigArgs) AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput {
+	return (*automationDefinitionNodeTriggerFolderCreationConfigPtrType)(v)
+}
+
+func (*automationDefinitionNodeTriggerFolderCreationConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (i *automationDefinitionNodeTriggerFolderCreationConfigPtrType) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return i.ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *automationDefinitionNodeTriggerFolderCreationConfigPtrType) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput)
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationConfigOutput struct{ *pulumi.OutputState }
+
+func (AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigOutput() AutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o.ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(context.Background())
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AutomationDefinitionNodeTriggerFolderCreationConfig) *AutomationDefinitionNodeTriggerFolderCreationConfig {
+		return &v
+	}).(AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) ExcludePattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreationConfig) *string { return v.ExcludePattern }).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreationConfig) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) PathTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreationConfig) *string { return v.PathTimeZone }).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerFolderCreationConfig) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+type AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput() AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) ToAutomationDefinitionNodeTriggerFolderCreationConfigPtrOutputWithContext(ctx context.Context) AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput {
+	return o
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) Elem() AutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreationConfig) AutomationDefinitionNodeTriggerFolderCreationConfig {
+		if v != nil {
+			return *v
+		}
+		var ret AutomationDefinitionNodeTriggerFolderCreationConfig
+		return ret
+	}).(AutomationDefinitionNodeTriggerFolderCreationConfigOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) ExcludePattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreationConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExcludePattern
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreationConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) PathTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreationConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PathTimeZone
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerFolderCreationConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Source
+	}).(pulumi.StringPtrOutput)
+}
+
 type AutomationDefinitionNodeTriggerManual struct {
 	// Configuration fields for this node type.
 	Config *AutomationDefinitionNodeTriggerManualConfig `pulumi:"config"`
@@ -11831,7 +12190,8 @@ type AutomationDefinitionNodeTriggerManualConfig struct {
 	Limit          *int    `pulumi:"limit"`
 	Path           *string `pulumi:"path"`
 	PathTimeZone   *string `pulumi:"pathTimeZone"`
-	Source         *string `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source *string `pulumi:"source"`
 }
 
 // AutomationDefinitionNodeTriggerManualConfigInput is an input type that accepts AutomationDefinitionNodeTriggerManualConfigArgs and AutomationDefinitionNodeTriggerManualConfigOutput values.
@@ -11850,7 +12210,8 @@ type AutomationDefinitionNodeTriggerManualConfigArgs struct {
 	Limit          pulumi.IntPtrInput    `pulumi:"limit"`
 	Path           pulumi.StringPtrInput `pulumi:"path"`
 	PathTimeZone   pulumi.StringPtrInput `pulumi:"pathTimeZone"`
-	Source         pulumi.StringPtrInput `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringPtrInput `pulumi:"source"`
 }
 
 func (AutomationDefinitionNodeTriggerManualConfigArgs) ElementType() reflect.Type {
@@ -11946,6 +12307,7 @@ func (o AutomationDefinitionNodeTriggerManualConfigOutput) PathTimeZone() pulumi
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerManualConfig) *string { return v.PathTimeZone }).(pulumi.StringPtrOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerManualConfigOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerManualConfig) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -12010,6 +12372,7 @@ func (o AutomationDefinitionNodeTriggerManualConfigPtrOutput) PathTimeZone() pul
 	}).(pulumi.StringPtrOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerManualConfigPtrOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerManualConfig) *string {
 		if v == nil {
@@ -12190,7 +12553,8 @@ type AutomationDefinitionNodeTriggerScheduledConfig struct {
 	ScheduleId          *int     `pulumi:"scheduleId"`
 	ScheduleTimeZone    *string  `pulumi:"scheduleTimeZone"`
 	ScheduleTimesOfDays []string `pulumi:"scheduleTimesOfDays"`
-	Source              *string  `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source *string `pulumi:"source"`
 }
 
 // AutomationDefinitionNodeTriggerScheduledConfigInput is an input type that accepts AutomationDefinitionNodeTriggerScheduledConfigArgs and AutomationDefinitionNodeTriggerScheduledConfigOutput values.
@@ -12217,7 +12581,8 @@ type AutomationDefinitionNodeTriggerScheduledConfigArgs struct {
 	ScheduleId          pulumi.IntPtrInput      `pulumi:"scheduleId"`
 	ScheduleTimeZone    pulumi.StringPtrInput   `pulumi:"scheduleTimeZone"`
 	ScheduleTimesOfDays pulumi.StringArrayInput `pulumi:"scheduleTimesOfDays"`
-	Source              pulumi.StringPtrInput   `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringPtrInput `pulumi:"source"`
 }
 
 func (AutomationDefinitionNodeTriggerScheduledConfigArgs) ElementType() reflect.Type {
@@ -12345,6 +12710,7 @@ func (o AutomationDefinitionNodeTriggerScheduledConfigOutput) ScheduleTimesOfDay
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerScheduledConfig) []string { return v.ScheduleTimesOfDays }).(pulumi.StringArrayOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerScheduledConfigOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerScheduledConfig) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -12481,6 +12847,7 @@ func (o AutomationDefinitionNodeTriggerScheduledConfigPtrOutput) ScheduleTimesOf
 	}).(pulumi.StringArrayOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerScheduledConfigPtrOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerScheduledConfig) *string {
 		if v == nil {
@@ -12653,7 +13020,8 @@ type AutomationDefinitionNodeTriggerWebhookConfig struct {
 	Limit          *int    `pulumi:"limit"`
 	Path           *string `pulumi:"path"`
 	PathTimeZone   *string `pulumi:"pathTimeZone"`
-	Source         *string `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source *string `pulumi:"source"`
 }
 
 // AutomationDefinitionNodeTriggerWebhookConfigInput is an input type that accepts AutomationDefinitionNodeTriggerWebhookConfigArgs and AutomationDefinitionNodeTriggerWebhookConfigOutput values.
@@ -12672,7 +13040,8 @@ type AutomationDefinitionNodeTriggerWebhookConfigArgs struct {
 	Limit          pulumi.IntPtrInput    `pulumi:"limit"`
 	Path           pulumi.StringPtrInput `pulumi:"path"`
 	PathTimeZone   pulumi.StringPtrInput `pulumi:"pathTimeZone"`
-	Source         pulumi.StringPtrInput `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringPtrInput `pulumi:"source"`
 }
 
 func (AutomationDefinitionNodeTriggerWebhookConfigArgs) ElementType() reflect.Type {
@@ -12768,6 +13137,7 @@ func (o AutomationDefinitionNodeTriggerWebhookConfigOutput) PathTimeZone() pulum
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerWebhookConfig) *string { return v.PathTimeZone }).(pulumi.StringPtrOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerWebhookConfigOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerWebhookConfig) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -12832,6 +13202,7 @@ func (o AutomationDefinitionNodeTriggerWebhookConfigPtrOutput) PathTimeZone() pu
 	}).(pulumi.StringPtrOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeTriggerWebhookConfigPtrOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerWebhookConfig) *string {
 		if v == nil {
@@ -13017,7 +13388,7 @@ func (o AutomationDefinitionNodeUnzipPtrOutput) Return() pulumi.BoolPtrOutput {
 }
 
 type AutomationDefinitionNodeUnzipConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination *string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []AutomationDefinitionNodeUnzipConfigOnError `pulumi:"onErrors"`
@@ -13036,7 +13407,7 @@ type AutomationDefinitionNodeUnzipConfigInput interface {
 }
 
 type AutomationDefinitionNodeUnzipConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       AutomationDefinitionNodeUnzipConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -13120,7 +13491,7 @@ func (o AutomationDefinitionNodeUnzipConfigOutput) ToAutomationDefinitionNodeUnz
 	}).(AutomationDefinitionNodeUnzipConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeUnzipConfigOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeUnzipConfig) *string { return v.Destination }).(pulumi.StringPtrOutput)
 }
@@ -13160,7 +13531,7 @@ func (o AutomationDefinitionNodeUnzipConfigPtrOutput) Elem() AutomationDefinitio
 	}).(AutomationDefinitionNodeUnzipConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeUnzipConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeUnzipConfig) *string {
 		if v == nil {
@@ -13900,7 +14271,7 @@ func (o AutomationDefinitionNodeZipPtrOutput) Return() pulumi.BoolPtrOutput {
 }
 
 type AutomationDefinitionNodeZipConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []AutomationDefinitionNodeZipConfigOnError `pulumi:"onErrors"`
@@ -13919,7 +14290,7 @@ type AutomationDefinitionNodeZipConfigInput interface {
 }
 
 type AutomationDefinitionNodeZipConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       AutomationDefinitionNodeZipConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -14003,7 +14374,7 @@ func (o AutomationDefinitionNodeZipConfigOutput) ToAutomationDefinitionNodeZipCo
 	}).(AutomationDefinitionNodeZipConfigPtrOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeZipConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeZipConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -14043,7 +14414,7 @@ func (o AutomationDefinitionNodeZipConfigPtrOutput) Elem() AutomationDefinitionN
 	}).(AutomationDefinitionNodeZipConfigOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeZipConfigPtrOutput) Destination() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AutomationDefinitionNodeZipConfig) *string {
 		if v == nil {
@@ -16101,36 +16472,37 @@ func (o GetAutomationDefinitionEdgeArrayOutput) Index(i pulumi.IntInput) GetAuto
 }
 
 type GetAutomationDefinitionNode struct {
-	AgentCompute     GetAutomationDefinitionNodeAgentCompute     `pulumi:"agentCompute"`
-	Aggregate        GetAutomationDefinitionNodeAggregate        `pulumi:"aggregate"`
-	As2Send          GetAutomationDefinitionNodeAs2Send          `pulumi:"as2Send"`
-	CopyFile         GetAutomationDefinitionNodeCopyFile         `pulumi:"copyFile"`
-	CreateFolder     GetAutomationDefinitionNodeCreateFolder     `pulumi:"createFolder"`
-	DeleteFile       GetAutomationDefinitionNodeDeleteFile       `pulumi:"deleteFile"`
-	DocumentConvert  GetAutomationDefinitionNodeDocumentConvert  `pulumi:"documentConvert"`
-	Extract          GetAutomationDefinitionNodeExtract          `pulumi:"extract"`
-	Filter           GetAutomationDefinitionNodeFilter           `pulumi:"filter"`
-	GpgDecrypt       GetAutomationDefinitionNodeGpgDecrypt       `pulumi:"gpgDecrypt"`
-	GpgEncrypt       GetAutomationDefinitionNodeGpgEncrypt       `pulumi:"gpgEncrypt"`
-	If               GetAutomationDefinitionNodeIf               `pulumi:"if"`
-	ImageConvert     GetAutomationDefinitionNodeImageConvert     `pulumi:"imageConvert"`
-	ImportFile       GetAutomationDefinitionNodeImportFile       `pulumi:"importFile"`
-	Join             GetAutomationDefinitionNodeJoin             `pulumi:"join"`
-	MoveFile         GetAutomationDefinitionNodeMoveFile         `pulumi:"moveFile"`
-	RunAutomation    GetAutomationDefinitionNodeRunAutomation    `pulumi:"runAutomation"`
-	RunSync          GetAutomationDefinitionNodeRunSync          `pulumi:"runSync"`
-	SendEmail        GetAutomationDefinitionNodeSendEmail        `pulumi:"sendEmail"`
-	SetMetadata      GetAutomationDefinitionNodeSetMetadata      `pulumi:"setMetadata"`
-	Switch           GetAutomationDefinitionNodeSwitch           `pulumi:"switch"`
-	Transform        GetAutomationDefinitionNodeTransform        `pulumi:"transform"`
-	TriggerAction    GetAutomationDefinitionNodeTriggerAction    `pulumi:"triggerAction"`
-	TriggerEmail     GetAutomationDefinitionNodeTriggerEmail     `pulumi:"triggerEmail"`
-	TriggerManual    GetAutomationDefinitionNodeTriggerManual    `pulumi:"triggerManual"`
-	TriggerScheduled GetAutomationDefinitionNodeTriggerScheduled `pulumi:"triggerScheduled"`
-	TriggerWebhook   GetAutomationDefinitionNodeTriggerWebhook   `pulumi:"triggerWebhook"`
-	Unzip            GetAutomationDefinitionNodeUnzip            `pulumi:"unzip"`
-	Wait             GetAutomationDefinitionNodeWait             `pulumi:"wait"`
-	Zip              GetAutomationDefinitionNodeZip              `pulumi:"zip"`
+	AgentCompute          GetAutomationDefinitionNodeAgentCompute          `pulumi:"agentCompute"`
+	Aggregate             GetAutomationDefinitionNodeAggregate             `pulumi:"aggregate"`
+	As2Send               GetAutomationDefinitionNodeAs2Send               `pulumi:"as2Send"`
+	CopyFile              GetAutomationDefinitionNodeCopyFile              `pulumi:"copyFile"`
+	CreateFolder          GetAutomationDefinitionNodeCreateFolder          `pulumi:"createFolder"`
+	DeleteFile            GetAutomationDefinitionNodeDeleteFile            `pulumi:"deleteFile"`
+	DocumentConvert       GetAutomationDefinitionNodeDocumentConvert       `pulumi:"documentConvert"`
+	Extract               GetAutomationDefinitionNodeExtract               `pulumi:"extract"`
+	Filter                GetAutomationDefinitionNodeFilter                `pulumi:"filter"`
+	GpgDecrypt            GetAutomationDefinitionNodeGpgDecrypt            `pulumi:"gpgDecrypt"`
+	GpgEncrypt            GetAutomationDefinitionNodeGpgEncrypt            `pulumi:"gpgEncrypt"`
+	If                    GetAutomationDefinitionNodeIf                    `pulumi:"if"`
+	ImageConvert          GetAutomationDefinitionNodeImageConvert          `pulumi:"imageConvert"`
+	ImportFile            GetAutomationDefinitionNodeImportFile            `pulumi:"importFile"`
+	Join                  GetAutomationDefinitionNodeJoin                  `pulumi:"join"`
+	MoveFile              GetAutomationDefinitionNodeMoveFile              `pulumi:"moveFile"`
+	RunAutomation         GetAutomationDefinitionNodeRunAutomation         `pulumi:"runAutomation"`
+	RunSync               GetAutomationDefinitionNodeRunSync               `pulumi:"runSync"`
+	SendEmail             GetAutomationDefinitionNodeSendEmail             `pulumi:"sendEmail"`
+	SetMetadata           GetAutomationDefinitionNodeSetMetadata           `pulumi:"setMetadata"`
+	Switch                GetAutomationDefinitionNodeSwitch                `pulumi:"switch"`
+	Transform             GetAutomationDefinitionNodeTransform             `pulumi:"transform"`
+	TriggerAction         GetAutomationDefinitionNodeTriggerAction         `pulumi:"triggerAction"`
+	TriggerEmail          GetAutomationDefinitionNodeTriggerEmail          `pulumi:"triggerEmail"`
+	TriggerFolderCreation GetAutomationDefinitionNodeTriggerFolderCreation `pulumi:"triggerFolderCreation"`
+	TriggerManual         GetAutomationDefinitionNodeTriggerManual         `pulumi:"triggerManual"`
+	TriggerScheduled      GetAutomationDefinitionNodeTriggerScheduled      `pulumi:"triggerScheduled"`
+	TriggerWebhook        GetAutomationDefinitionNodeTriggerWebhook        `pulumi:"triggerWebhook"`
+	Unzip                 GetAutomationDefinitionNodeUnzip                 `pulumi:"unzip"`
+	Wait                  GetAutomationDefinitionNodeWait                  `pulumi:"wait"`
+	Zip                   GetAutomationDefinitionNodeZip                   `pulumi:"zip"`
 }
 
 // GetAutomationDefinitionNodeInput is an input type that accepts GetAutomationDefinitionNodeArgs and GetAutomationDefinitionNodeOutput values.
@@ -16145,36 +16517,37 @@ type GetAutomationDefinitionNodeInput interface {
 }
 
 type GetAutomationDefinitionNodeArgs struct {
-	AgentCompute     GetAutomationDefinitionNodeAgentComputeInput     `pulumi:"agentCompute"`
-	Aggregate        GetAutomationDefinitionNodeAggregateInput        `pulumi:"aggregate"`
-	As2Send          GetAutomationDefinitionNodeAs2SendInput          `pulumi:"as2Send"`
-	CopyFile         GetAutomationDefinitionNodeCopyFileInput         `pulumi:"copyFile"`
-	CreateFolder     GetAutomationDefinitionNodeCreateFolderInput     `pulumi:"createFolder"`
-	DeleteFile       GetAutomationDefinitionNodeDeleteFileInput       `pulumi:"deleteFile"`
-	DocumentConvert  GetAutomationDefinitionNodeDocumentConvertInput  `pulumi:"documentConvert"`
-	Extract          GetAutomationDefinitionNodeExtractInput          `pulumi:"extract"`
-	Filter           GetAutomationDefinitionNodeFilterInput           `pulumi:"filter"`
-	GpgDecrypt       GetAutomationDefinitionNodeGpgDecryptInput       `pulumi:"gpgDecrypt"`
-	GpgEncrypt       GetAutomationDefinitionNodeGpgEncryptInput       `pulumi:"gpgEncrypt"`
-	If               GetAutomationDefinitionNodeIfInput               `pulumi:"if"`
-	ImageConvert     GetAutomationDefinitionNodeImageConvertInput     `pulumi:"imageConvert"`
-	ImportFile       GetAutomationDefinitionNodeImportFileInput       `pulumi:"importFile"`
-	Join             GetAutomationDefinitionNodeJoinInput             `pulumi:"join"`
-	MoveFile         GetAutomationDefinitionNodeMoveFileInput         `pulumi:"moveFile"`
-	RunAutomation    GetAutomationDefinitionNodeRunAutomationInput    `pulumi:"runAutomation"`
-	RunSync          GetAutomationDefinitionNodeRunSyncInput          `pulumi:"runSync"`
-	SendEmail        GetAutomationDefinitionNodeSendEmailInput        `pulumi:"sendEmail"`
-	SetMetadata      GetAutomationDefinitionNodeSetMetadataInput      `pulumi:"setMetadata"`
-	Switch           GetAutomationDefinitionNodeSwitchInput           `pulumi:"switch"`
-	Transform        GetAutomationDefinitionNodeTransformInput        `pulumi:"transform"`
-	TriggerAction    GetAutomationDefinitionNodeTriggerActionInput    `pulumi:"triggerAction"`
-	TriggerEmail     GetAutomationDefinitionNodeTriggerEmailInput     `pulumi:"triggerEmail"`
-	TriggerManual    GetAutomationDefinitionNodeTriggerManualInput    `pulumi:"triggerManual"`
-	TriggerScheduled GetAutomationDefinitionNodeTriggerScheduledInput `pulumi:"triggerScheduled"`
-	TriggerWebhook   GetAutomationDefinitionNodeTriggerWebhookInput   `pulumi:"triggerWebhook"`
-	Unzip            GetAutomationDefinitionNodeUnzipInput            `pulumi:"unzip"`
-	Wait             GetAutomationDefinitionNodeWaitInput             `pulumi:"wait"`
-	Zip              GetAutomationDefinitionNodeZipInput              `pulumi:"zip"`
+	AgentCompute          GetAutomationDefinitionNodeAgentComputeInput          `pulumi:"agentCompute"`
+	Aggregate             GetAutomationDefinitionNodeAggregateInput             `pulumi:"aggregate"`
+	As2Send               GetAutomationDefinitionNodeAs2SendInput               `pulumi:"as2Send"`
+	CopyFile              GetAutomationDefinitionNodeCopyFileInput              `pulumi:"copyFile"`
+	CreateFolder          GetAutomationDefinitionNodeCreateFolderInput          `pulumi:"createFolder"`
+	DeleteFile            GetAutomationDefinitionNodeDeleteFileInput            `pulumi:"deleteFile"`
+	DocumentConvert       GetAutomationDefinitionNodeDocumentConvertInput       `pulumi:"documentConvert"`
+	Extract               GetAutomationDefinitionNodeExtractInput               `pulumi:"extract"`
+	Filter                GetAutomationDefinitionNodeFilterInput                `pulumi:"filter"`
+	GpgDecrypt            GetAutomationDefinitionNodeGpgDecryptInput            `pulumi:"gpgDecrypt"`
+	GpgEncrypt            GetAutomationDefinitionNodeGpgEncryptInput            `pulumi:"gpgEncrypt"`
+	If                    GetAutomationDefinitionNodeIfInput                    `pulumi:"if"`
+	ImageConvert          GetAutomationDefinitionNodeImageConvertInput          `pulumi:"imageConvert"`
+	ImportFile            GetAutomationDefinitionNodeImportFileInput            `pulumi:"importFile"`
+	Join                  GetAutomationDefinitionNodeJoinInput                  `pulumi:"join"`
+	MoveFile              GetAutomationDefinitionNodeMoveFileInput              `pulumi:"moveFile"`
+	RunAutomation         GetAutomationDefinitionNodeRunAutomationInput         `pulumi:"runAutomation"`
+	RunSync               GetAutomationDefinitionNodeRunSyncInput               `pulumi:"runSync"`
+	SendEmail             GetAutomationDefinitionNodeSendEmailInput             `pulumi:"sendEmail"`
+	SetMetadata           GetAutomationDefinitionNodeSetMetadataInput           `pulumi:"setMetadata"`
+	Switch                GetAutomationDefinitionNodeSwitchInput                `pulumi:"switch"`
+	Transform             GetAutomationDefinitionNodeTransformInput             `pulumi:"transform"`
+	TriggerAction         GetAutomationDefinitionNodeTriggerActionInput         `pulumi:"triggerAction"`
+	TriggerEmail          GetAutomationDefinitionNodeTriggerEmailInput          `pulumi:"triggerEmail"`
+	TriggerFolderCreation GetAutomationDefinitionNodeTriggerFolderCreationInput `pulumi:"triggerFolderCreation"`
+	TriggerManual         GetAutomationDefinitionNodeTriggerManualInput         `pulumi:"triggerManual"`
+	TriggerScheduled      GetAutomationDefinitionNodeTriggerScheduledInput      `pulumi:"triggerScheduled"`
+	TriggerWebhook        GetAutomationDefinitionNodeTriggerWebhookInput        `pulumi:"triggerWebhook"`
+	Unzip                 GetAutomationDefinitionNodeUnzipInput                 `pulumi:"unzip"`
+	Wait                  GetAutomationDefinitionNodeWaitInput                  `pulumi:"wait"`
+	Zip                   GetAutomationDefinitionNodeZipInput                   `pulumi:"zip"`
 }
 
 func (GetAutomationDefinitionNodeArgs) ElementType() reflect.Type {
@@ -16324,6 +16697,12 @@ func (o GetAutomationDefinitionNodeOutput) TriggerAction() GetAutomationDefiniti
 
 func (o GetAutomationDefinitionNodeOutput) TriggerEmail() GetAutomationDefinitionNodeTriggerEmailOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNode) GetAutomationDefinitionNodeTriggerEmail { return v.TriggerEmail }).(GetAutomationDefinitionNodeTriggerEmailOutput)
+}
+
+func (o GetAutomationDefinitionNodeOutput) TriggerFolderCreation() GetAutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNode) GetAutomationDefinitionNodeTriggerFolderCreation {
+		return v.TriggerFolderCreation
+	}).(GetAutomationDefinitionNodeTriggerFolderCreationOutput)
 }
 
 func (o GetAutomationDefinitionNodeOutput) TriggerManual() GetAutomationDefinitionNodeTriggerManualOutput {
@@ -17917,7 +18296,7 @@ func (o GetAutomationDefinitionNodeDocumentConvertOutput) Return() pulumi.BoolOu
 }
 
 type GetAutomationDefinitionNodeDocumentConvertConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []GetAutomationDefinitionNodeDocumentConvertConfigOnError `pulumi:"onErrors"`
@@ -17937,7 +18316,7 @@ type GetAutomationDefinitionNodeDocumentConvertConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeDocumentConvertConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       GetAutomationDefinitionNodeDocumentConvertConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -17971,7 +18350,7 @@ func (o GetAutomationDefinitionNodeDocumentConvertConfigOutput) ToGetAutomationD
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeDocumentConvertConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeDocumentConvertConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -18424,6 +18803,7 @@ func (o GetAutomationDefinitionNodeFilterOutput) Return() pulumi.BoolOutput {
 type GetAutomationDefinitionNodeFilterConfig struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition string `pulumi:"condition"`
+	Kind      string `pulumi:"kind"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []GetAutomationDefinitionNodeFilterConfigOnError `pulumi:"onErrors"`
 }
@@ -18442,6 +18822,7 @@ type GetAutomationDefinitionNodeFilterConfigInput interface {
 type GetAutomationDefinitionNodeFilterConfigArgs struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition pulumi.StringInput `pulumi:"condition"`
+	Kind      pulumi.StringInput `pulumi:"kind"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors GetAutomationDefinitionNodeFilterConfigOnErrorArrayInput `pulumi:"onErrors"`
 }
@@ -18475,6 +18856,10 @@ func (o GetAutomationDefinitionNodeFilterConfigOutput) ToGetAutomationDefinition
 // A bare Files TransformScript expression, no braces.
 func (o GetAutomationDefinitionNodeFilterConfigOutput) Condition() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeFilterConfig) string { return v.Condition }).(pulumi.StringOutput)
+}
+
+func (o GetAutomationDefinitionNodeFilterConfigOutput) Kind() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeFilterConfig) string { return v.Kind }).(pulumi.StringOutput)
 }
 
 // Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -18660,7 +19045,7 @@ func (o GetAutomationDefinitionNodeGpgDecryptOutput) Return() pulumi.BoolOutput 
 }
 
 type GetAutomationDefinitionNodeGpgDecryptConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	GpgKeyId    int    `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -18680,7 +19065,7 @@ type GetAutomationDefinitionNodeGpgDecryptConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeGpgDecryptConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	GpgKeyId    pulumi.IntInput    `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -18714,7 +19099,7 @@ func (o GetAutomationDefinitionNodeGpgDecryptConfigOutput) ToGetAutomationDefini
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeGpgDecryptConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeGpgDecryptConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -18910,7 +19295,7 @@ func (o GetAutomationDefinitionNodeGpgEncryptOutput) Return() pulumi.BoolOutput 
 }
 
 type GetAutomationDefinitionNodeGpgEncryptConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	GpgKeyId    int    `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -18930,7 +19315,7 @@ type GetAutomationDefinitionNodeGpgEncryptConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeGpgEncryptConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	GpgKeyId    pulumi.IntInput    `pulumi:"gpgKeyId"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -18964,7 +19349,7 @@ func (o GetAutomationDefinitionNodeGpgEncryptConfigOutput) ToGetAutomationDefini
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeGpgEncryptConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeGpgEncryptConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -19396,7 +19781,7 @@ func (o GetAutomationDefinitionNodeImageConvertOutput) Return() pulumi.BoolOutpu
 }
 
 type GetAutomationDefinitionNodeImageConvertConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	Height      int    `pulumi:"height"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -19418,7 +19803,7 @@ type GetAutomationDefinitionNodeImageConvertConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeImageConvertConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	Height      pulumi.IntInput    `pulumi:"height"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -19454,7 +19839,7 @@ func (o GetAutomationDefinitionNodeImageConvertConfigOutput) ToGetAutomationDefi
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeImageConvertConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeImageConvertConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -19658,15 +20043,15 @@ func (o GetAutomationDefinitionNodeImportFileOutput) Return() pulumi.BoolOutput 
 }
 
 type GetAutomationDefinitionNodeImportFileConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Content string `pulumi:"content"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-	Destination string            `pulumi:"destination"`
-	Headers     map[string]string `pulumi:"headers"`
-	Method      string            `pulumi:"method"`
+	// One or more destination path templates.
+	Destinations []string          `pulumi:"destinations"`
+	Headers      map[string]string `pulumi:"headers"`
+	Method       string            `pulumi:"method"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []GetAutomationDefinitionNodeImportFileConfigOnError `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Url string `pulumi:"url"`
 }
 
@@ -19682,15 +20067,15 @@ type GetAutomationDefinitionNodeImportFileConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeImportFileConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Content pulumi.StringInput `pulumi:"content"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-	Destination pulumi.StringInput    `pulumi:"destination"`
-	Headers     pulumi.StringMapInput `pulumi:"headers"`
-	Method      pulumi.StringInput    `pulumi:"method"`
+	// One or more destination path templates.
+	Destinations pulumi.StringArrayInput `pulumi:"destinations"`
+	Headers      pulumi.StringMapInput   `pulumi:"headers"`
+	Method       pulumi.StringInput      `pulumi:"method"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors GetAutomationDefinitionNodeImportFileConfigOnErrorArrayInput `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Url pulumi.StringInput `pulumi:"url"`
 }
 
@@ -19720,14 +20105,14 @@ func (o GetAutomationDefinitionNodeImportFileConfigOutput) ToGetAutomationDefini
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeImportFileConfigOutput) Content() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeImportFileConfig) string { return v.Content }).(pulumi.StringOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-func (o GetAutomationDefinitionNodeImportFileConfigOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v GetAutomationDefinitionNodeImportFileConfig) string { return v.Destination }).(pulumi.StringOutput)
+// One or more destination path templates.
+func (o GetAutomationDefinitionNodeImportFileConfigOutput) Destinations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeImportFileConfig) []string { return v.Destinations }).(pulumi.StringArrayOutput)
 }
 
 func (o GetAutomationDefinitionNodeImportFileConfigOutput) Headers() pulumi.StringMapOutput {
@@ -19745,7 +20130,7 @@ func (o GetAutomationDefinitionNodeImportFileConfigOutput) OnErrors() GetAutomat
 	}).(GetAutomationDefinitionNodeImportFileConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeImportFileConfigOutput) Url() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeImportFileConfig) string { return v.Url }).(pulumi.StringOutput)
 }
@@ -20688,7 +21073,6 @@ func (o GetAutomationDefinitionNodeRunSyncOutput) Return() pulumi.BoolOutput {
 }
 
 type GetAutomationDefinitionNodeRunSyncConfig struct {
-	LegacySyncIds []int `pulumi:"legacySyncIds"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []GetAutomationDefinitionNodeRunSyncConfigOnError `pulumi:"onErrors"`
 	SyncIds  []int                                             `pulumi:"syncIds"`
@@ -20706,7 +21090,6 @@ type GetAutomationDefinitionNodeRunSyncConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeRunSyncConfigArgs struct {
-	LegacySyncIds pulumi.IntArrayInput `pulumi:"legacySyncIds"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors GetAutomationDefinitionNodeRunSyncConfigOnErrorArrayInput `pulumi:"onErrors"`
 	SyncIds  pulumi.IntArrayInput                                      `pulumi:"syncIds"`
@@ -20736,10 +21119,6 @@ func (o GetAutomationDefinitionNodeRunSyncConfigOutput) ToGetAutomationDefinitio
 
 func (o GetAutomationDefinitionNodeRunSyncConfigOutput) ToGetAutomationDefinitionNodeRunSyncConfigOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeRunSyncConfigOutput {
 	return o
-}
-
-func (o GetAutomationDefinitionNodeRunSyncConfigOutput) LegacySyncIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v GetAutomationDefinitionNodeRunSyncConfig) []int { return v.LegacySyncIds }).(pulumi.IntArrayOutput)
 }
 
 // Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -20931,14 +21310,14 @@ func (o GetAutomationDefinitionNodeSendEmailOutput) Return() pulumi.BoolOutput {
 type GetAutomationDefinitionNodeSendEmailConfig struct {
 	Attachments []string `pulumi:"attachments"`
 	Bccs        []string `pulumi:"bccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Body string   `pulumi:"body"`
 	Ccs  []string `pulumi:"ccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	From string `pulumi:"from"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors []GetAutomationDefinitionNodeSendEmailConfigOnError `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Subject string   `pulumi:"subject"`
 	Tos     []string `pulumi:"tos"`
 }
@@ -20957,14 +21336,14 @@ type GetAutomationDefinitionNodeSendEmailConfigInput interface {
 type GetAutomationDefinitionNodeSendEmailConfigArgs struct {
 	Attachments pulumi.StringArrayInput `pulumi:"attachments"`
 	Bccs        pulumi.StringArrayInput `pulumi:"bccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Body pulumi.StringInput      `pulumi:"body"`
 	Ccs  pulumi.StringArrayInput `pulumi:"ccs"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	From pulumi.StringInput `pulumi:"from"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors GetAutomationDefinitionNodeSendEmailConfigOnErrorArrayInput `pulumi:"onErrors"`
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Subject pulumi.StringInput      `pulumi:"subject"`
 	Tos     pulumi.StringArrayInput `pulumi:"tos"`
 }
@@ -21003,7 +21382,7 @@ func (o GetAutomationDefinitionNodeSendEmailConfigOutput) Bccs() pulumi.StringAr
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSendEmailConfig) []string { return v.Bccs }).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeSendEmailConfigOutput) Body() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSendEmailConfig) string { return v.Body }).(pulumi.StringOutput)
 }
@@ -21012,7 +21391,7 @@ func (o GetAutomationDefinitionNodeSendEmailConfigOutput) Ccs() pulumi.StringArr
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSendEmailConfig) []string { return v.Ccs }).(pulumi.StringArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeSendEmailConfigOutput) From() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSendEmailConfig) string { return v.From }).(pulumi.StringOutput)
 }
@@ -21024,7 +21403,7 @@ func (o GetAutomationDefinitionNodeSendEmailConfigOutput) OnErrors() GetAutomati
 	}).(GetAutomationDefinitionNodeSendEmailConfigOnErrorArrayOutput)
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeSendEmailConfigOutput) Subject() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSendEmailConfig) string { return v.Subject }).(pulumi.StringOutput)
 }
@@ -21509,7 +21888,7 @@ func (o GetAutomationDefinitionNodeSwitchConfigOutput) OnErrors() GetAutomationD
 type GetAutomationDefinitionNodeSwitchConfigCase struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition string `pulumi:"condition"`
-	// Identifier used to connect nodes and named inputs or outputs.
+	// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 	Name string `pulumi:"name"`
 }
 
@@ -21527,7 +21906,7 @@ type GetAutomationDefinitionNodeSwitchConfigCaseInput interface {
 type GetAutomationDefinitionNodeSwitchConfigCaseArgs struct {
 	// A bare Files TransformScript expression, no braces.
 	Condition pulumi.StringInput `pulumi:"condition"`
-	// Identifier used to connect nodes and named inputs or outputs.
+	// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 	Name pulumi.StringInput `pulumi:"name"`
 }
 
@@ -21587,7 +21966,7 @@ func (o GetAutomationDefinitionNodeSwitchConfigCaseOutput) Condition() pulumi.St
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSwitchConfigCase) string { return v.Condition }).(pulumi.StringOutput)
 }
 
-// Identifier used to connect nodes and named inputs or outputs.
+// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
 func (o GetAutomationDefinitionNodeSwitchConfigCaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeSwitchConfigCase) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -21788,7 +22167,7 @@ func (o GetAutomationDefinitionNodeTransformOutput) Return() pulumi.BoolOutput {
 }
 
 type GetAutomationDefinitionNodeTransformConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	Fts         string `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -21807,7 +22186,7 @@ type GetAutomationDefinitionNodeTransformConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeTransformConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	Fts         pulumi.StringInput `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -21840,7 +22219,7 @@ func (o GetAutomationDefinitionNodeTransformConfigOutput) ToGetAutomationDefinit
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeTransformConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTransformConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -22024,6 +22403,7 @@ func (o GetAutomationDefinitionNodeTriggerActionOutput) Id() pulumi.StringOutput
 
 type GetAutomationDefinitionNodeTriggerActionConfig struct {
 	ExcludePattern string   `pulumi:"excludePattern"`
+	Kind           string   `pulumi:"kind"`
 	Path           string   `pulumi:"path"`
 	PathTimeZone   string   `pulumi:"pathTimeZone"`
 	Source         string   `pulumi:"source"`
@@ -22043,6 +22423,7 @@ type GetAutomationDefinitionNodeTriggerActionConfigInput interface {
 
 type GetAutomationDefinitionNodeTriggerActionConfigArgs struct {
 	ExcludePattern pulumi.StringInput      `pulumi:"excludePattern"`
+	Kind           pulumi.StringInput      `pulumi:"kind"`
 	Path           pulumi.StringInput      `pulumi:"path"`
 	PathTimeZone   pulumi.StringInput      `pulumi:"pathTimeZone"`
 	Source         pulumi.StringInput      `pulumi:"source"`
@@ -22077,6 +22458,10 @@ func (o GetAutomationDefinitionNodeTriggerActionConfigOutput) ToGetAutomationDef
 
 func (o GetAutomationDefinitionNodeTriggerActionConfigOutput) ExcludePattern() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerActionConfig) string { return v.ExcludePattern }).(pulumi.StringOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerActionConfigOutput) Kind() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerActionConfig) string { return v.Kind }).(pulumi.StringOutput)
 }
 
 func (o GetAutomationDefinitionNodeTriggerActionConfigOutput) Path() pulumi.StringOutput {
@@ -22237,6 +22622,136 @@ func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) Source() pulumi.Str
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerEmailConfig) string { return v.Source }).(pulumi.StringOutput)
 }
 
+type GetAutomationDefinitionNodeTriggerFolderCreation struct {
+	// Configuration fields for this node type.
+	Config GetAutomationDefinitionNodeTriggerFolderCreationConfig `pulumi:"config"`
+	// Unique node ID within the graph.
+	Id string `pulumi:"id"`
+}
+
+// GetAutomationDefinitionNodeTriggerFolderCreationInput is an input type that accepts GetAutomationDefinitionNodeTriggerFolderCreationArgs and GetAutomationDefinitionNodeTriggerFolderCreationOutput values.
+// You can construct a concrete instance of `GetAutomationDefinitionNodeTriggerFolderCreationInput` via:
+//
+//	GetAutomationDefinitionNodeTriggerFolderCreationArgs{...}
+type GetAutomationDefinitionNodeTriggerFolderCreationInput interface {
+	pulumi.Input
+
+	ToGetAutomationDefinitionNodeTriggerFolderCreationOutput() GetAutomationDefinitionNodeTriggerFolderCreationOutput
+	ToGetAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(context.Context) GetAutomationDefinitionNodeTriggerFolderCreationOutput
+}
+
+type GetAutomationDefinitionNodeTriggerFolderCreationArgs struct {
+	// Configuration fields for this node type.
+	Config GetAutomationDefinitionNodeTriggerFolderCreationConfigInput `pulumi:"config"`
+	// Unique node ID within the graph.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetAutomationDefinitionNodeTriggerFolderCreationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (i GetAutomationDefinitionNodeTriggerFolderCreationArgs) ToGetAutomationDefinitionNodeTriggerFolderCreationOutput() GetAutomationDefinitionNodeTriggerFolderCreationOutput {
+	return i.ToGetAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(context.Background())
+}
+
+func (i GetAutomationDefinitionNodeTriggerFolderCreationArgs) ToGetAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeTriggerFolderCreationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutomationDefinitionNodeTriggerFolderCreationOutput)
+}
+
+type GetAutomationDefinitionNodeTriggerFolderCreationOutput struct{ *pulumi.OutputState }
+
+func (GetAutomationDefinitionNodeTriggerFolderCreationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreation)(nil)).Elem()
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationOutput) ToGetAutomationDefinitionNodeTriggerFolderCreationOutput() GetAutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationOutput) ToGetAutomationDefinitionNodeTriggerFolderCreationOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeTriggerFolderCreationOutput {
+	return o
+}
+
+// Configuration fields for this node type.
+func (o GetAutomationDefinitionNodeTriggerFolderCreationOutput) Config() GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreation) GetAutomationDefinitionNodeTriggerFolderCreationConfig {
+		return v.Config
+	}).(GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput)
+}
+
+// Unique node ID within the graph.
+func (o GetAutomationDefinitionNodeTriggerFolderCreationOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreation) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetAutomationDefinitionNodeTriggerFolderCreationConfig struct {
+	ExcludePattern string `pulumi:"excludePattern"`
+	Path           string `pulumi:"path"`
+	PathTimeZone   string `pulumi:"pathTimeZone"`
+	Source         string `pulumi:"source"`
+}
+
+// GetAutomationDefinitionNodeTriggerFolderCreationConfigInput is an input type that accepts GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs and GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput values.
+// You can construct a concrete instance of `GetAutomationDefinitionNodeTriggerFolderCreationConfigInput` via:
+//
+//	GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs{...}
+type GetAutomationDefinitionNodeTriggerFolderCreationConfigInput interface {
+	pulumi.Input
+
+	ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutput() GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput
+	ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(context.Context) GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput
+}
+
+type GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs struct {
+	ExcludePattern pulumi.StringInput `pulumi:"excludePattern"`
+	Path           pulumi.StringInput `pulumi:"path"`
+	PathTimeZone   pulumi.StringInput `pulumi:"pathTimeZone"`
+	Source         pulumi.StringInput `pulumi:"source"`
+}
+
+func (GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (i GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutput() GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return i.ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(context.Background())
+}
+
+func (i GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs) ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput)
+}
+
+type GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput struct{ *pulumi.OutputState }
+
+func (GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreationConfig)(nil)).Elem()
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutput() GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) ToGetAutomationDefinitionNodeTriggerFolderCreationConfigOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput {
+	return o
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) ExcludePattern() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreationConfig) string { return v.ExcludePattern }).(pulumi.StringOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreationConfig) string { return v.Path }).(pulumi.StringOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) PathTimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreationConfig) string { return v.PathTimeZone }).(pulumi.StringOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerFolderCreationConfig) string { return v.Source }).(pulumi.StringOutput)
+}
+
 type GetAutomationDefinitionNodeTriggerManual struct {
 	// Configuration fields for this node type.
 	Config GetAutomationDefinitionNodeTriggerManualConfig `pulumi:"config"`
@@ -22305,7 +22820,8 @@ type GetAutomationDefinitionNodeTriggerManualConfig struct {
 	Limit          int    `pulumi:"limit"`
 	Path           string `pulumi:"path"`
 	PathTimeZone   string `pulumi:"pathTimeZone"`
-	Source         string `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source string `pulumi:"source"`
 }
 
 // GetAutomationDefinitionNodeTriggerManualConfigInput is an input type that accepts GetAutomationDefinitionNodeTriggerManualConfigArgs and GetAutomationDefinitionNodeTriggerManualConfigOutput values.
@@ -22324,7 +22840,8 @@ type GetAutomationDefinitionNodeTriggerManualConfigArgs struct {
 	Limit          pulumi.IntInput    `pulumi:"limit"`
 	Path           pulumi.StringInput `pulumi:"path"`
 	PathTimeZone   pulumi.StringInput `pulumi:"pathTimeZone"`
-	Source         pulumi.StringInput `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringInput `pulumi:"source"`
 }
 
 func (GetAutomationDefinitionNodeTriggerManualConfigArgs) ElementType() reflect.Type {
@@ -22369,6 +22886,7 @@ func (o GetAutomationDefinitionNodeTriggerManualConfigOutput) PathTimeZone() pul
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerManualConfig) string { return v.PathTimeZone }).(pulumi.StringOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeTriggerManualConfigOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerManualConfig) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -22449,7 +22967,8 @@ type GetAutomationDefinitionNodeTriggerScheduledConfig struct {
 	ScheduleId          int      `pulumi:"scheduleId"`
 	ScheduleTimeZone    string   `pulumi:"scheduleTimeZone"`
 	ScheduleTimesOfDays []string `pulumi:"scheduleTimesOfDays"`
-	Source              string   `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source string `pulumi:"source"`
 }
 
 // GetAutomationDefinitionNodeTriggerScheduledConfigInput is an input type that accepts GetAutomationDefinitionNodeTriggerScheduledConfigArgs and GetAutomationDefinitionNodeTriggerScheduledConfigOutput values.
@@ -22476,7 +22995,8 @@ type GetAutomationDefinitionNodeTriggerScheduledConfigArgs struct {
 	ScheduleId          pulumi.IntInput         `pulumi:"scheduleId"`
 	ScheduleTimeZone    pulumi.StringInput      `pulumi:"scheduleTimeZone"`
 	ScheduleTimesOfDays pulumi.StringArrayInput `pulumi:"scheduleTimesOfDays"`
-	Source              pulumi.StringInput      `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringInput `pulumi:"source"`
 }
 
 func (GetAutomationDefinitionNodeTriggerScheduledConfigArgs) ElementType() reflect.Type {
@@ -22553,6 +23073,7 @@ func (o GetAutomationDefinitionNodeTriggerScheduledConfigOutput) ScheduleTimesOf
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerScheduledConfig) []string { return v.ScheduleTimesOfDays }).(pulumi.StringArrayOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeTriggerScheduledConfigOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerScheduledConfig) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -22625,7 +23146,8 @@ type GetAutomationDefinitionNodeTriggerWebhookConfig struct {
 	Limit          int    `pulumi:"limit"`
 	Path           string `pulumi:"path"`
 	PathTimeZone   string `pulumi:"pathTimeZone"`
-	Source         string `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source string `pulumi:"source"`
 }
 
 // GetAutomationDefinitionNodeTriggerWebhookConfigInput is an input type that accepts GetAutomationDefinitionNodeTriggerWebhookConfigArgs and GetAutomationDefinitionNodeTriggerWebhookConfigOutput values.
@@ -22644,7 +23166,8 @@ type GetAutomationDefinitionNodeTriggerWebhookConfigArgs struct {
 	Limit          pulumi.IntInput    `pulumi:"limit"`
 	Path           pulumi.StringInput `pulumi:"path"`
 	PathTimeZone   pulumi.StringInput `pulumi:"pathTimeZone"`
-	Source         pulumi.StringInput `pulumi:"source"`
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+	Source pulumi.StringInput `pulumi:"source"`
 }
 
 func (GetAutomationDefinitionNodeTriggerWebhookConfigArgs) ElementType() reflect.Type {
@@ -22689,6 +23212,7 @@ func (o GetAutomationDefinitionNodeTriggerWebhookConfigOutput) PathTimeZone() pu
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerWebhookConfig) string { return v.PathTimeZone }).(pulumi.StringOutput)
 }
 
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeTriggerWebhookConfigOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerWebhookConfig) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -22764,7 +23288,7 @@ func (o GetAutomationDefinitionNodeUnzipOutput) Return() pulumi.BoolOutput {
 }
 
 type GetAutomationDefinitionNodeUnzipConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []GetAutomationDefinitionNodeUnzipConfigOnError `pulumi:"onErrors"`
@@ -22783,7 +23307,7 @@ type GetAutomationDefinitionNodeUnzipConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeUnzipConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       GetAutomationDefinitionNodeUnzipConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -22816,7 +23340,7 @@ func (o GetAutomationDefinitionNodeUnzipConfigOutput) ToGetAutomationDefinitionN
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeUnzipConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeUnzipConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -23239,7 +23763,7 @@ func (o GetAutomationDefinitionNodeZipOutput) Return() pulumi.BoolOutput {
 }
 
 type GetAutomationDefinitionNodeZipConfig struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       []GetAutomationDefinitionNodeZipConfigOnError `pulumi:"onErrors"`
@@ -23258,7 +23782,7 @@ type GetAutomationDefinitionNodeZipConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeZipConfigArgs struct {
-	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
 	OnErrors       GetAutomationDefinitionNodeZipConfigOnErrorArrayInput `pulumi:"onErrors"`
@@ -23291,7 +23815,7 @@ func (o GetAutomationDefinitionNodeZipConfigOutput) ToGetAutomationDefinitionNod
 	return o
 }
 
-// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o GetAutomationDefinitionNodeZipConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeZipConfig) string { return v.Destination }).(pulumi.StringOutput)
 }
@@ -24581,6 +25105,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerEmailPtrInput)(nil)).Elem(), AutomationDefinitionNodeTriggerEmailArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerEmailConfigInput)(nil)).Elem(), AutomationDefinitionNodeTriggerEmailConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerEmailConfigPtrInput)(nil)).Elem(), AutomationDefinitionNodeTriggerEmailConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationInput)(nil)).Elem(), AutomationDefinitionNodeTriggerFolderCreationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationPtrInput)(nil)).Elem(), AutomationDefinitionNodeTriggerFolderCreationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationConfigInput)(nil)).Elem(), AutomationDefinitionNodeTriggerFolderCreationConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerFolderCreationConfigPtrInput)(nil)).Elem(), AutomationDefinitionNodeTriggerFolderCreationConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerManualInput)(nil)).Elem(), AutomationDefinitionNodeTriggerManualArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerManualPtrInput)(nil)).Elem(), AutomationDefinitionNodeTriggerManualArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutomationDefinitionNodeTriggerManualConfigInput)(nil)).Elem(), AutomationDefinitionNodeTriggerManualConfigArgs{})
@@ -24732,6 +25260,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerActionConfigInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerActionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerEmailInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerEmailArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerEmailConfigInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerEmailConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreationInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerFolderCreationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerFolderCreationConfigInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerManualInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerManualArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerManualConfigInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerManualConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutomationDefinitionNodeTriggerScheduledInput)(nil)).Elem(), GetAutomationDefinitionNodeTriggerScheduledArgs{})
@@ -24913,6 +25443,10 @@ func init() {
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerEmailPtrOutput{})
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerEmailConfigOutput{})
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerEmailConfigPtrOutput{})
+	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerFolderCreationOutput{})
+	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerFolderCreationPtrOutput{})
+	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerFolderCreationConfigOutput{})
+	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerFolderCreationConfigPtrOutput{})
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerManualOutput{})
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerManualPtrOutput{})
 	pulumi.RegisterOutputType(AutomationDefinitionNodeTriggerManualConfigOutput{})
@@ -25064,6 +25598,8 @@ func init() {
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerActionConfigOutput{})
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerEmailOutput{})
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerEmailConfigOutput{})
+	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerFolderCreationOutput{})
+	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerFolderCreationConfigOutput{})
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerManualOutput{})
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerManualConfigOutput{})
 	pulumi.RegisterOutputType(GetAutomationDefinitionNodeTriggerScheduledOutput{})

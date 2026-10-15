@@ -402,6 +402,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool CcEmailsToResponsibleParty;
         /// <summary>
+        /// Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
+        /// </summary>
+        public readonly object Connections;
+        /// <summary>
         /// The unique ID of the Partner.
         /// </summary>
         public readonly int Id;
@@ -422,7 +426,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int PartnerChannelTemplateId;
         /// <summary>
-        /// This site's role in Partner Site relationships for this Partner. Can be &lt;span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`"&gt;`host`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`"&gt;`guest`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`"&gt;`hostAndGuest`&lt;/span&gt;, or null.
+        /// This site's role for this Partner in Connected Sites relationships. &lt;span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`"&gt;`host`&lt;/span&gt; is a Partner this site configured. &lt;span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`"&gt;`guest`&lt;/span&gt; is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. &lt;span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`"&gt;`hostAndGuest`&lt;/span&gt; is a configured Partner that is also the guest side of a connection. Promote a &lt;span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`"&gt;`guest`&lt;/span&gt; Partner by setting this to &lt;span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`"&gt;`hostAndGuest`&lt;/span&gt; together with a &lt;span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`"&gt;`rootFolder`&lt;/span&gt;.
         /// </summary>
         public readonly string PartnershipRole;
         /// <summary>
@@ -470,6 +474,8 @@ namespace Jschady.Filescom
 
             bool ccEmailsToResponsibleParty,
 
+            object connections,
+
             int id,
 
             string name,
@@ -503,6 +509,7 @@ namespace Jschady.Filescom
             AllowUserCreation = allowUserCreation;
             AllowedIps = allowedIps;
             CcEmailsToResponsibleParty = ccEmailsToResponsibleParty;
+            Connections = connections;
             Id = id;
             Name = name;
             Notes = notes;

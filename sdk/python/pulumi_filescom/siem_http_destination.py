@@ -1606,6 +1606,10 @@ class SiemHttpDestination(pulumi.CustomResource):
                  web_dav_action_send_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
+        A SIEM HTTP Destination defines where Files.com sends the log types you select.
+        For HTTP destinations, Files.com sends JSON to the configured endpoint.
+        For file destinations, Files.com writes JSON or CSV files to the configured folder.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -1616,7 +1620,7 @@ class SiemHttpDestination(pulumi.CustomResource):
         example_siem_http_destination = filescom.SiemHttpDestination("example_siem_http_destination",
             name="example",
             additional_headers={
-                "key": "example value",
+                "authorization": "Bearer YOUR_TOKEN",
             },
             sending_active=True,
             generic_payload_type="example",
@@ -1706,6 +1710,10 @@ class SiemHttpDestination(pulumi.CustomResource):
                  args: SiemHttpDestinationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
+        A SIEM HTTP Destination defines where Files.com sends the log types you select.
+        For HTTP destinations, Files.com sends JSON to the configured endpoint.
+        For file destinations, Files.com writes JSON or CSV files to the configured folder.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -1716,7 +1724,7 @@ class SiemHttpDestination(pulumi.CustomResource):
         example_siem_http_destination = filescom.SiemHttpDestination("example_siem_http_destination",
             name="example",
             additional_headers={
-                "key": "example value",
+                "authorization": "Bearer YOUR_TOKEN",
             },
             sending_active=True,
             generic_payload_type="example",
@@ -1814,7 +1822,7 @@ class SiemHttpDestination(pulumi.CustomResource):
             __props__ = SiemHttpDestinationArgs.__new__(SiemHttpDestinationArgs)
 
             __props__.__dict__["action_send_enabled"] = action_send_enabled
-            __props__.__dict__["additional_headers"] = additional_headers
+            __props__.__dict__["additional_headers"] = None if additional_headers is None else pulumi.Output.secret(additional_headers)
             __props__.__dict__["api_request_send_enabled"] = api_request_send_enabled
             __props__.__dict__["automation_send_enabled"] = automation_send_enabled
             __props__.__dict__["azure_dcr_immutable_id"] = azure_dcr_immutable_id
@@ -1876,7 +1884,7 @@ class SiemHttpDestination(pulumi.CustomResource):
             __props__.__dict__["splunk_token_masked"] = None
             __props__.__dict__["sync_entries_sent"] = None
             __props__.__dict__["web_dav_action_entries_sent"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["azureOauthClientCredentialsClientSecret", "crowdstrikeToken", "datadogApiKey", "newRelicApiKey", "qradarPassword", "solarWindsToken", "splunkToken"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["additionalHeaders", "azureOauthClientCredentialsClientSecret", "crowdstrikeToken", "datadogApiKey", "newRelicApiKey", "qradarPassword", "solarWindsToken", "splunkToken"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SiemHttpDestination, __self__).__init__(
             'filescom:index/siemHttpDestination:SiemHttpDestination',

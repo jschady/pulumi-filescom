@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
+ * A SIEM HTTP Destination defines where Files.com sends the log types you select.
+ * For HTTP destinations, Files.com sends JSON to the configured endpoint.
+ * For file destinations, Files.com writes JSON or CSV files to the configured folder.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -15,7 +19,7 @@ import * as utilities from "./utilities";
  * const exampleSiemHttpDestination = new filescom.SiemHttpDestination("example_siem_http_destination", {
  *     name: "example",
  *     additionalHeaders: {
- *         key: "example value",
+ *         authorization: "Bearer YOUR_TOKEN",
  *     },
  *     sendingActive: true,
  *     genericPayloadType: "example",
@@ -415,7 +419,7 @@ export class SiemHttpDestination extends pulumi.CustomResource {
                 throw new Error("Missing required property 'destinationType'");
             }
             resourceInputs["actionSendEnabled"] = args?.actionSendEnabled;
-            resourceInputs["additionalHeaders"] = args?.additionalHeaders;
+            resourceInputs["additionalHeaders"] = args?.additionalHeaders ? pulumi.secret(args.additionalHeaders) : undefined;
             resourceInputs["apiRequestSendEnabled"] = args?.apiRequestSendEnabled;
             resourceInputs["automationSendEnabled"] = args?.automationSendEnabled;
             resourceInputs["azureDcrImmutableId"] = args?.azureDcrImmutableId;
@@ -477,7 +481,7 @@ export class SiemHttpDestination extends pulumi.CustomResource {
             resourceInputs["webDavActionEntriesSent"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["azureOauthClientCredentialsClientSecret", "crowdstrikeToken", "datadogApiKey", "newRelicApiKey", "qradarPassword", "solarWindsToken", "splunkToken"] };
+        const secretOpts = { additionalSecretOutputs: ["additionalHeaders", "azureOauthClientCredentialsClientSecret", "crowdstrikeToken", "datadogApiKey", "newRelicApiKey", "qradarPassword", "solarWindsToken", "splunkToken"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(SiemHttpDestination.__pulumiType, name, resourceInputs, opts);
     }

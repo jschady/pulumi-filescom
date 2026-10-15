@@ -228,7 +228,7 @@ class GetAs2PartnerResult:
     @pulumi.getter(name="signatureValidationLevel")
     def signature_validation_level(self) -> _builtins.str:
         """
-        Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+        Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
         """
         return pulumi.get(self, "signature_validation_level")
 
@@ -280,7 +280,7 @@ class AwaitableGetAs2PartnerResult(GetAs2PartnerResult):
 def get_as2_partner(id: Optional[_builtins.int] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAs2PartnerResult:
     """
-    An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+    An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
 
     ## Example Usage
 
@@ -325,7 +325,7 @@ def get_as2_partner(id: Optional[_builtins.int] = None,
 def get_as2_partner_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                            opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetAs2PartnerResult]:
     """
-    An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+    An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
 
     ## Example Usage
 

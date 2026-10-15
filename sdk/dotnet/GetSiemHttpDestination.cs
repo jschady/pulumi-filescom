@@ -13,6 +13,10 @@ namespace Jschady.Filescom
     public static class GetSiemHttpDestination
     {
         /// <summary>
+        /// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+        /// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+        /// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -120,6 +124,10 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSiemHttpDestinationResult>("filescom:index/getSiemHttpDestination:getSiemHttpDestination", args ?? new GetSiemHttpDestinationArgs(), options.WithDefaults());
 
         /// <summary>
+        /// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+        /// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+        /// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -227,6 +235,10 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetSiemHttpDestinationResult>("filescom:index/getSiemHttpDestination:getSiemHttpDestination", args ?? new GetSiemHttpDestinationInvokeArgs(), options.WithDefaults());
 
         /// <summary>
+        /// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+        /// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+        /// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;

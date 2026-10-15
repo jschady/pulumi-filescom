@@ -14,15 +14,10 @@ namespace Jschady.Filescom
     {
         /// <summary>
         /// A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-        /// 
         /// via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-        /// 
         /// constraints, and a set of default columns to display in the UI.
         /// 
-        /// 
-        /// 
         /// If a key's &lt;span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`"&gt;`allowedValues`&lt;/span&gt; array is empty, it is treated as a free-form text field.
-        /// 
         /// If the array is non-empty, the key is constrained to those values in the Web UI.
         /// 
         /// ## Example Usage
@@ -133,15 +128,10 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-        /// 
         /// via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-        /// 
         /// constraints, and a set of default columns to display in the UI.
         /// 
-        /// 
-        /// 
         /// If a key's &lt;span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`"&gt;`allowedValues`&lt;/span&gt; array is empty, it is treated as a free-form text field.
-        /// 
         /// If the array is non-empty, the key is constrained to those values in the Web UI.
         /// 
         /// ## Example Usage
@@ -252,15 +242,10 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-        /// 
         /// via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-        /// 
         /// constraints, and a set of default columns to display in the UI.
         /// 
-        /// 
-        /// 
         /// If a key's &lt;span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`"&gt;`allowedValues`&lt;/span&gt; array is empty, it is treated as a free-form text field.
-        /// 
         /// If the array is non-empty, the key is constrained to those values in the Web UI.
         /// 
         /// ## Example Usage

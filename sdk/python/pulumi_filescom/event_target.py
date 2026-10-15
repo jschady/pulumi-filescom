@@ -32,7 +32,7 @@ class EventTargetArgs:
         :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
         :param pulumi.Input[_builtins.str] target_type: Event Target type.
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
-        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
         :param pulumi.Input[_builtins.str] name: Event Target name.
         :param pulumi.Input[_builtins.int] workspace_id: Workspace ID. 0 means the default workspace or site-wide.
@@ -90,7 +90,7 @@ class EventTargetArgs:
     @pulumi.getter(name="deliveryPolicy")
     def delivery_policy(self) -> Optional[Any]:
         """
-        Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         """
         return pulumi.get(self, "delivery_policy")
 
@@ -153,7 +153,7 @@ class _EventTargetState:
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
         :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
         :param pulumi.Input[_builtins.str] created_at: Event Target create date/time.
-        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
         :param pulumi.Input[_builtins.str] name: Event Target name.
         :param pulumi.Input[_builtins.str] target_type: Event Target type.
@@ -219,7 +219,7 @@ class _EventTargetState:
     @pulumi.getter(name="deliveryPolicy")
     def delivery_policy(self) -> Optional[Any]:
         """
-        Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         """
         return pulumi.get(self, "delivery_policy")
 
@@ -338,7 +338,7 @@ class EventTarget(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
         :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
-        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
         :param pulumi.Input[_builtins.str] name: Event Target name.
         :param pulumi.Input[_builtins.str] target_type: Event Target type.
@@ -455,7 +455,7 @@ class EventTarget(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
         :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
         :param pulumi.Input[_builtins.str] created_at: Event Target create date/time.
-        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
         :param pulumi.Input[_builtins.str] name: Event Target name.
         :param pulumi.Input[_builtins.str] target_type: Event Target type.
@@ -505,7 +505,7 @@ class EventTarget(pulumi.CustomResource):
     @pulumi.getter(name="deliveryPolicy")
     def delivery_policy(self) -> pulumi.Output[Any]:
         """
-        Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+        Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         """
         return pulumi.get(self, "delivery_policy")
 

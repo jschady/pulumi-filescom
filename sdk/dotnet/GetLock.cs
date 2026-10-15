@@ -13,15 +13,17 @@ namespace Jschady.Filescom
     public static class GetLock
     {
         /// <summary>
-        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
-        /// 
-        /// 
+        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
         /// 
         /// The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
         /// 
+        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
         /// 
+        /// The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
         /// 
-        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+        /// To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+        /// 
+        /// A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
         /// 
         /// ## Example Usage
         /// 
@@ -130,15 +132,17 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLockResult>("filescom:index/getLock:getLock", args ?? new GetLockArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
-        /// 
-        /// 
+        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
         /// 
         /// The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
         /// 
+        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
         /// 
+        /// The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
         /// 
-        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+        /// To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+        /// 
+        /// A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
         /// 
         /// ## Example Usage
         /// 
@@ -247,15 +251,17 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetLockResult>("filescom:index/getLock:getLock", args ?? new GetLockInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
-        /// 
-        /// 
+        /// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
         /// 
         /// The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
         /// 
+        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
         /// 
+        /// The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
         /// 
-        /// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+        /// To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+        /// 
+        /// A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting&lt;span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "&gt; expectedToken &lt;/span&gt;retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
         /// 
         /// ## Example Usage
         /// 
@@ -407,7 +413,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool Exclusive;
         /// <summary>
-        /// Owner of the lock.  This can be any arbitrary string.
+        /// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         /// </summary>
         public readonly string Owner;
         /// <summary>

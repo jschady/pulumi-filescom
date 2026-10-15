@@ -13,6 +13,12 @@ namespace Jschady.Filescom
     /// <summary>
     /// A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
     /// 
+    /// Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+    /// Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+    /// become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+    /// "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+    /// The expanded route must point to an existing folder in the same Workspace.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -27,6 +33,7 @@ namespace Jschady.Filescom
     ///     var examplePartnerChannelTemplate = new Filescom.PartnerChannelTemplate("example_partner_channel_template", new()
     ///     {
     ///         Direction = "two_way",
+    ///         UseChannelRoot = false,
     ///         FromPartnerFolderName = "incoming",
     ///         FromPartnerManagedFolderPaths = new[]
     ///         {
@@ -68,13 +75,13 @@ namespace Jschady.Filescom
         public Output<string> Direction { get; private set; } = null!;
 
         /// <summary>
-        /// Resolved from-Partner folder name after Template override and default.
+        /// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         [Output("effectiveFromPartnerFolderName")]
         public Output<string> EffectiveFromPartnerFolderName { get; private set; } = null!;
 
         /// <summary>
-        /// Resolved to-Partner folder name after Template override and default.
+        /// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         [Output("effectiveToPartnerFolderName")]
         public Output<string> EffectiveToPartnerFolderName { get; private set; } = null!;
@@ -126,6 +133,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("toPartnerRoutePathPattern")]
         public Output<string> ToPartnerRoutePathPattern { get; private set; } = null!;
+
+        /// <summary>
+        /// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        /// </summary>
+        [Output("useChannelRoot")]
+        public Output<bool> UseChannelRoot { get; private set; } = null!;
 
         /// <summary>
         /// ID of the Workspace associated with this Partner Channel Template.
@@ -247,6 +260,12 @@ namespace Jschady.Filescom
         public Input<string>? ToPartnerRoutePathPattern { get; set; }
 
         /// <summary>
+        /// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        /// </summary>
+        [Input("useChannelRoot")]
+        public Input<bool>? UseChannelRoot { get; set; }
+
+        /// <summary>
         /// ID of the Workspace associated with this Partner Channel Template.
         /// </summary>
         [Input("workspaceId")]
@@ -267,13 +286,13 @@ namespace Jschady.Filescom
         public Input<string>? Direction { get; set; }
 
         /// <summary>
-        /// Resolved from-Partner folder name after Template override and default.
+        /// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         [Input("effectiveFromPartnerFolderName")]
         public Input<string>? EffectiveFromPartnerFolderName { get; set; }
 
         /// <summary>
-        /// Resolved to-Partner folder name after Template override and default.
+        /// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         [Input("effectiveToPartnerFolderName")]
         public Input<string>? EffectiveToPartnerFolderName { get; set; }
@@ -337,6 +356,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("toPartnerRoutePathPattern")]
         public Input<string>? ToPartnerRoutePathPattern { get; set; }
+
+        /// <summary>
+        /// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        /// </summary>
+        [Input("useChannelRoot")]
+        public Input<bool>? UseChannelRoot { get; set; }
 
         /// <summary>
         /// ID of the Workspace associated with this Partner Channel Template.

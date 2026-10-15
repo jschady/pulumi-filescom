@@ -11,6 +11,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// A SIEM HTTP Destination defines where Files.com sends the log types you select.
+// For HTTP destinations, Files.com sends JSON to the configured endpoint.
+// For file destinations, Files.com writes JSON or CSV files to the configured folder.
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->

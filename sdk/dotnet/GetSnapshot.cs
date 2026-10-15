@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// Snapshots allow you to create a read-only archive of files at a specific point in time. You can define a snapshot, add files to it, and then finalize it. Once finalized, the snapshot’s contents are immutable.
         /// 
-        /// 
-        /// 
         /// Each snapshot may have an expiration date. When the expiration date is reached, the snapshot is automatically deleted from the Files.com platform.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// Snapshots allow you to create a read-only archive of files at a specific point in time. You can define a snapshot, add files to it, and then finalize it. Once finalized, the snapshot’s contents are immutable.
         /// 
-        /// 
-        /// 
         /// Each snapshot may have an expiration date. When the expiration date is reached, the snapshot is automatically deleted from the Files.com platform.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// Snapshots allow you to create a read-only archive of files at a specific point in time. You can define a snapshot, add files to it, and then finalize it. Once finalized, the snapshot’s contents are immutable.
-        /// 
-        /// 
         /// 
         /// Each snapshot may have an expiration date. When the expiration date is reached, the snapshot is automatically deleted from the Files.com platform.
         /// 

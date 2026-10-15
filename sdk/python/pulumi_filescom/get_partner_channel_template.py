@@ -26,7 +26,7 @@ class GetPartnerChannelTemplateResult:
     """
     A collection of values returned by getPartnerChannelTemplate.
     """
-    def __init__(__self__, direction=None, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_managed_folder_paths=None, from_partner_route_path_pattern=None, id=None, name=None, path=None, to_partner_folder_name=None, to_partner_managed_folder_paths=None, to_partner_route_path_pattern=None, workspace_id=None):
+    def __init__(__self__, direction=None, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_managed_folder_paths=None, from_partner_route_path_pattern=None, id=None, name=None, path=None, to_partner_folder_name=None, to_partner_managed_folder_paths=None, to_partner_route_path_pattern=None, use_channel_root=None, workspace_id=None):
         if direction and not isinstance(direction, str):
             raise TypeError("Expected argument 'direction' to be a str")
         pulumi.set(__self__, "direction", direction)
@@ -63,6 +63,9 @@ class GetPartnerChannelTemplateResult:
         if to_partner_route_path_pattern and not isinstance(to_partner_route_path_pattern, str):
             raise TypeError("Expected argument 'to_partner_route_path_pattern' to be a str")
         pulumi.set(__self__, "to_partner_route_path_pattern", to_partner_route_path_pattern)
+        if use_channel_root and not isinstance(use_channel_root, bool):
+            raise TypeError("Expected argument 'use_channel_root' to be a bool")
+        pulumi.set(__self__, "use_channel_root", use_channel_root)
         if workspace_id and not isinstance(workspace_id, int):
             raise TypeError("Expected argument 'workspace_id' to be a int")
         pulumi.set(__self__, "workspace_id", workspace_id)
@@ -79,7 +82,7 @@ class GetPartnerChannelTemplateResult:
     @pulumi.getter(name="effectiveFromPartnerFolderName")
     def effective_from_partner_folder_name(self) -> _builtins.str:
         """
-        Resolved from-Partner folder name after Template override and default.
+        Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_from_partner_folder_name")
 
@@ -87,7 +90,7 @@ class GetPartnerChannelTemplateResult:
     @pulumi.getter(name="effectiveToPartnerFolderName")
     def effective_to_partner_folder_name(self) -> _builtins.str:
         """
-        Resolved to-Partner folder name after Template override and default.
+        Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_to_partner_folder_name")
 
@@ -164,6 +167,14 @@ class GetPartnerChannelTemplateResult:
         return pulumi.get(self, "to_partner_route_path_pattern")
 
     @_builtins.property
+    @pulumi.getter(name="useChannelRoot")
+    def use_channel_root(self) -> _builtins.bool:
+        """
+        Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        """
+        return pulumi.get(self, "use_channel_root")
+
+    @_builtins.property
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> _builtins.int:
         """
@@ -190,6 +201,7 @@ class AwaitableGetPartnerChannelTemplateResult(GetPartnerChannelTemplateResult):
             to_partner_folder_name=self.to_partner_folder_name,
             to_partner_managed_folder_paths=self.to_partner_managed_folder_paths,
             to_partner_route_path_pattern=self.to_partner_route_path_pattern,
+            use_channel_root=self.use_channel_root,
             workspace_id=self.workspace_id)
 
 
@@ -197,6 +209,12 @@ def get_partner_channel_template(id: Optional[_builtins.int] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPartnerChannelTemplateResult:
     """
     A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
+
+    Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+    Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+    become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+    "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+    The expanded route must point to an existing folder in the same Workspace.
 
     ## Example Usage
 
@@ -230,11 +248,18 @@ def get_partner_channel_template(id: Optional[_builtins.int] = None,
         to_partner_folder_name=pulumi.get(__ret__, 'to_partner_folder_name'),
         to_partner_managed_folder_paths=pulumi.get(__ret__, 'to_partner_managed_folder_paths'),
         to_partner_route_path_pattern=pulumi.get(__ret__, 'to_partner_route_path_pattern'),
+        use_channel_root=pulumi.get(__ret__, 'use_channel_root'),
         workspace_id=pulumi.get(__ret__, 'workspace_id'))
 def get_partner_channel_template_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPartnerChannelTemplateResult]:
     """
     A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
+
+    Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+    Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+    become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+    "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+    The expanded route must point to an existing folder in the same Workspace.
 
     ## Example Usage
 
@@ -267,4 +292,5 @@ def get_partner_channel_template_output(id: pulumi.Input[Optional[_builtins.int]
         to_partner_folder_name=pulumi.get(__response__, 'to_partner_folder_name'),
         to_partner_managed_folder_paths=pulumi.get(__response__, 'to_partner_managed_folder_paths'),
         to_partner_route_path_pattern=pulumi.get(__response__, 'to_partner_route_path_pattern'),
+        use_channel_root=pulumi.get(__response__, 'use_channel_root'),
         workspace_id=pulumi.get(__response__, 'workspace_id')))

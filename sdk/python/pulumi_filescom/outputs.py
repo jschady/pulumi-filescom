@@ -90,6 +90,8 @@ __all__ = [
     'AutomationDefinitionNodeTriggerActionConfig',
     'AutomationDefinitionNodeTriggerEmail',
     'AutomationDefinitionNodeTriggerEmailConfig',
+    'AutomationDefinitionNodeTriggerFolderCreation',
+    'AutomationDefinitionNodeTriggerFolderCreationConfig',
     'AutomationDefinitionNodeTriggerManual',
     'AutomationDefinitionNodeTriggerManualConfig',
     'AutomationDefinitionNodeTriggerScheduled',
@@ -190,6 +192,8 @@ __all__ = [
     'GetAutomationDefinitionNodeTriggerActionConfigResult',
     'GetAutomationDefinitionNodeTriggerEmailResult',
     'GetAutomationDefinitionNodeTriggerEmailConfigResult',
+    'GetAutomationDefinitionNodeTriggerFolderCreationResult',
+    'GetAutomationDefinitionNodeTriggerFolderCreationConfigResult',
     'GetAutomationDefinitionNodeTriggerManualResult',
     'GetAutomationDefinitionNodeTriggerManualConfigResult',
     'GetAutomationDefinitionNodeTriggerScheduledResult',
@@ -386,6 +390,8 @@ class AutomationDefinitionNode(dict):
             suggest = "trigger_action"
         elif key == "triggerEmail":
             suggest = "trigger_email"
+        elif key == "triggerFolderCreation":
+            suggest = "trigger_folder_creation"
         elif key == "triggerManual":
             suggest = "trigger_manual"
         elif key == "triggerScheduled":
@@ -429,6 +435,7 @@ class AutomationDefinitionNode(dict):
                  transform: Optional['outputs.AutomationDefinitionNodeTransform'] = None,
                  trigger_action: Optional['outputs.AutomationDefinitionNodeTriggerAction'] = None,
                  trigger_email: Optional['outputs.AutomationDefinitionNodeTriggerEmail'] = None,
+                 trigger_folder_creation: Optional['outputs.AutomationDefinitionNodeTriggerFolderCreation'] = None,
                  trigger_manual: Optional['outputs.AutomationDefinitionNodeTriggerManual'] = None,
                  trigger_scheduled: Optional['outputs.AutomationDefinitionNodeTriggerScheduled'] = None,
                  trigger_webhook: Optional['outputs.AutomationDefinitionNodeTriggerWebhook'] = None,
@@ -483,6 +490,8 @@ class AutomationDefinitionNode(dict):
             pulumi.set(__self__, "trigger_action", trigger_action)
         if trigger_email is not None:
             pulumi.set(__self__, "trigger_email", trigger_email)
+        if trigger_folder_creation is not None:
+            pulumi.set(__self__, "trigger_folder_creation", trigger_folder_creation)
         if trigger_manual is not None:
             pulumi.set(__self__, "trigger_manual", trigger_manual)
         if trigger_scheduled is not None:
@@ -615,6 +624,11 @@ class AutomationDefinitionNode(dict):
     @pulumi.getter(name="triggerEmail")
     def trigger_email(self) -> Optional['outputs.AutomationDefinitionNodeTriggerEmail']:
         return pulumi.get(self, "trigger_email")
+
+    @_builtins.property
+    @pulumi.getter(name="triggerFolderCreation")
+    def trigger_folder_creation(self) -> Optional['outputs.AutomationDefinitionNodeTriggerFolderCreation']:
+        return pulumi.get(self, "trigger_folder_creation")
 
     @_builtins.property
     @pulumi.getter(name="triggerManual")
@@ -1606,7 +1620,7 @@ class AutomationDefinitionNodeDocumentConvertConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeDocumentConvertConfigOnError']] = None,
                  overwrite_files: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeDocumentConvertConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "target_format", target_format)
@@ -1626,7 +1640,7 @@ class AutomationDefinitionNodeDocumentConvertConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -1918,12 +1932,15 @@ class AutomationDefinitionNodeFilterConfig(dict):
 
     def __init__(__self__, *,
                  condition: _builtins.str,
+                 kind: Optional[_builtins.str] = None,
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeFilterConfigOnError']] = None):
         """
         :param _builtins.str condition: A bare Files TransformScript expression, no braces.
         :param Sequence['AutomationDefinitionNodeFilterConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "condition", condition)
+        if kind is not None:
+            pulumi.set(__self__, "kind", kind)
         if on_errors is not None:
             pulumi.set(__self__, "on_errors", on_errors)
 
@@ -1934,6 +1951,11 @@ class AutomationDefinitionNodeFilterConfig(dict):
         A bare Files TransformScript expression, no braces.
         """
         return pulumi.get(self, "condition")
+
+    @_builtins.property
+    @pulumi.getter
+    def kind(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "kind")
 
     @_builtins.property
     @pulumi.getter(name="onErrors")
@@ -2056,7 +2078,7 @@ class AutomationDefinitionNodeGpgDecryptConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeGpgDecryptConfigOnError']] = None,
                  overwrite_files: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeGpgDecryptConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "gpg_key_id", gpg_key_id)
@@ -2076,7 +2098,7 @@ class AutomationDefinitionNodeGpgDecryptConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -2206,7 +2228,7 @@ class AutomationDefinitionNodeGpgEncryptConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeGpgEncryptConfigOnError']] = None,
                  overwrite_files: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeGpgEncryptConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "gpg_key_id", gpg_key_id)
@@ -2226,7 +2248,7 @@ class AutomationDefinitionNodeGpgEncryptConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -2488,7 +2510,7 @@ class AutomationDefinitionNodeImageConvertConfig(dict):
                  overwrite_files: Optional[_builtins.bool] = None,
                  width: Optional[_builtins.int] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeImageConvertConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "target_format", target_format)
@@ -2512,7 +2534,7 @@ class AutomationDefinitionNodeImageConvertConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -2645,21 +2667,21 @@ class AutomationDefinitionNodeImportFileConfig(dict):
     def __init__(__self__, *,
                  url: _builtins.str,
                  content: Optional[_builtins.str] = None,
-                 destination: Optional[_builtins.str] = None,
+                 destinations: Optional[Sequence[_builtins.str]] = None,
                  headers: Optional[Mapping[str, _builtins.str]] = None,
                  method: Optional[_builtins.str] = None,
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeImportFileConfigOnError']] = None):
         """
-        :param _builtins.str url: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-        :param _builtins.str content: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str url: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        :param _builtins.str content: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        :param Sequence[_builtins.str] destinations: One or more destination path templates.
         :param Sequence['AutomationDefinitionNodeImportFileConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "url", url)
         if content is not None:
             pulumi.set(__self__, "content", content)
-        if destination is not None:
-            pulumi.set(__self__, "destination", destination)
+        if destinations is not None:
+            pulumi.set(__self__, "destinations", destinations)
         if headers is not None:
             pulumi.set(__self__, "headers", headers)
         if method is not None:
@@ -2671,7 +2693,7 @@ class AutomationDefinitionNodeImportFileConfig(dict):
     @pulumi.getter
     def url(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "url")
 
@@ -2679,17 +2701,17 @@ class AutomationDefinitionNodeImportFileConfig(dict):
     @pulumi.getter
     def content(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "content")
 
     @_builtins.property
     @pulumi.getter
-    def destination(self) -> Optional[_builtins.str]:
+    def destinations(self) -> Optional[Sequence[_builtins.str]]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        One or more destination path templates.
         """
-        return pulumi.get(self, "destination")
+        return pulumi.get(self, "destinations")
 
     @_builtins.property
     @pulumi.getter
@@ -3239,19 +3261,26 @@ class AutomationDefinitionNodeRunSync(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 config: 'outputs.AutomationDefinitionNodeRunSyncConfig',
                  id: _builtins.str,
-                 config: Optional['outputs.AutomationDefinitionNodeRunSyncConfig'] = None,
                  return_: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str id: Unique node ID within the graph.
         :param 'AutomationDefinitionNodeRunSyncConfigArgs' config: Configuration fields for this node type.
+        :param _builtins.str id: Unique node ID within the graph.
         :param _builtins.bool return_: Whether this node's output is included in the Automation result.
         """
+        pulumi.set(__self__, "config", config)
         pulumi.set(__self__, "id", id)
-        if config is not None:
-            pulumi.set(__self__, "config", config)
         if return_ is not None:
             pulumi.set(__self__, "return_", return_)
+
+    @_builtins.property
+    @pulumi.getter
+    def config(self) -> 'outputs.AutomationDefinitionNodeRunSyncConfig':
+        """
+        Configuration fields for this node type.
+        """
+        return pulumi.get(self, "config")
 
     @_builtins.property
     @pulumi.getter
@@ -3260,14 +3289,6 @@ class AutomationDefinitionNodeRunSync(dict):
         Unique node ID within the graph.
         """
         return pulumi.get(self, "id")
-
-    @_builtins.property
-    @pulumi.getter
-    def config(self) -> Optional['outputs.AutomationDefinitionNodeRunSyncConfig']:
-        """
-        Configuration fields for this node type.
-        """
-        return pulumi.get(self, "config")
 
     @_builtins.property
     @pulumi.getter(name="return")
@@ -3283,12 +3304,10 @@ class AutomationDefinitionNodeRunSyncConfig(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "legacySyncIds":
-            suggest = "legacy_sync_ids"
+        if key == "syncIds":
+            suggest = "sync_ids"
         elif key == "onErrors":
             suggest = "on_errors"
-        elif key == "syncIds":
-            suggest = "sync_ids"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in AutomationDefinitionNodeRunSyncConfig. Access the value via the '{suggest}' property getter instead.")
@@ -3302,23 +3321,19 @@ class AutomationDefinitionNodeRunSyncConfig(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 legacy_sync_ids: Optional[Sequence[_builtins.int]] = None,
-                 on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeRunSyncConfigOnError']] = None,
-                 sync_ids: Optional[Sequence[_builtins.int]] = None):
+                 sync_ids: Sequence[_builtins.int],
+                 on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeRunSyncConfigOnError']] = None):
         """
         :param Sequence['AutomationDefinitionNodeRunSyncConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
-        if legacy_sync_ids is not None:
-            pulumi.set(__self__, "legacy_sync_ids", legacy_sync_ids)
+        pulumi.set(__self__, "sync_ids", sync_ids)
         if on_errors is not None:
             pulumi.set(__self__, "on_errors", on_errors)
-        if sync_ids is not None:
-            pulumi.set(__self__, "sync_ids", sync_ids)
 
     @_builtins.property
-    @pulumi.getter(name="legacySyncIds")
-    def legacy_sync_ids(self) -> Optional[Sequence[_builtins.int]]:
-        return pulumi.get(self, "legacy_sync_ids")
+    @pulumi.getter(name="syncIds")
+    def sync_ids(self) -> Sequence[_builtins.int]:
+        return pulumi.get(self, "sync_ids")
 
     @_builtins.property
     @pulumi.getter(name="onErrors")
@@ -3327,11 +3342,6 @@ class AutomationDefinitionNodeRunSyncConfig(dict):
         Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         return pulumi.get(self, "on_errors")
-
-    @_builtins.property
-    @pulumi.getter(name="syncIds")
-    def sync_ids(self) -> Optional[Sequence[_builtins.int]]:
-        return pulumi.get(self, "sync_ids")
 
 
 @pulumi.output_type
@@ -3448,10 +3458,10 @@ class AutomationDefinitionNodeSendEmailConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeSendEmailConfigOnError']] = None,
                  subject: Optional[_builtins.str] = None):
         """
-        :param _builtins.str body: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-        :param _builtins.str from_: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str body: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        :param _builtins.str from_: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeSendEmailConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-        :param _builtins.str subject: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str subject: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         pulumi.set(__self__, "tos", tos)
         if attachments is not None:
@@ -3488,7 +3498,7 @@ class AutomationDefinitionNodeSendEmailConfig(dict):
     @pulumi.getter
     def body(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "body")
 
@@ -3501,7 +3511,7 @@ class AutomationDefinitionNodeSendEmailConfig(dict):
     @pulumi.getter(name="from")
     def from_(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "from_")
 
@@ -3517,7 +3527,7 @@ class AutomationDefinitionNodeSendEmailConfig(dict):
     @pulumi.getter
     def subject(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "subject")
 
@@ -3785,7 +3795,7 @@ class AutomationDefinitionNodeSwitchConfigCase(dict):
                  name: _builtins.str):
         """
         :param _builtins.str condition: A bare Files TransformScript expression, no braces.
-        :param _builtins.str name: Identifier used to connect nodes and named inputs or outputs.
+        :param _builtins.str name: Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         """
         pulumi.set(__self__, "condition", condition)
         pulumi.set(__self__, "name", name)
@@ -3802,7 +3812,7 @@ class AutomationDefinitionNodeSwitchConfigCase(dict):
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
-        Identifier used to connect nodes and named inputs or outputs.
+        Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         """
         return pulumi.get(self, "name")
 
@@ -3914,7 +3924,7 @@ class AutomationDefinitionNodeTransformConfig(dict):
                  destination: Optional[_builtins.str] = None,
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeTransformConfigOnError']] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeTransformConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "fts", fts)
@@ -3932,7 +3942,7 @@ class AutomationDefinitionNodeTransformConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -4025,12 +4035,15 @@ class AutomationDefinitionNodeTriggerActionConfig(dict):
     def __init__(__self__, *,
                  trigger_actions: Sequence[_builtins.str],
                  exclude_pattern: Optional[_builtins.str] = None,
+                 kind: Optional[_builtins.str] = None,
                  path: Optional[_builtins.str] = None,
                  path_time_zone: Optional[_builtins.str] = None,
                  source: Optional[_builtins.str] = None):
         pulumi.set(__self__, "trigger_actions", trigger_actions)
         if exclude_pattern is not None:
             pulumi.set(__self__, "exclude_pattern", exclude_pattern)
+        if kind is not None:
+            pulumi.set(__self__, "kind", kind)
         if path is not None:
             pulumi.set(__self__, "path", path)
         if path_time_zone is not None:
@@ -4047,6 +4060,11 @@ class AutomationDefinitionNodeTriggerActionConfig(dict):
     @pulumi.getter(name="excludePattern")
     def exclude_pattern(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "exclude_pattern")
+
+    @_builtins.property
+    @pulumi.getter
+    def kind(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "kind")
 
     @_builtins.property
     @pulumi.getter
@@ -4171,6 +4189,92 @@ class AutomationDefinitionNodeTriggerEmailConfig(dict):
 
 
 @pulumi.output_type
+class AutomationDefinitionNodeTriggerFolderCreation(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 config: Optional['outputs.AutomationDefinitionNodeTriggerFolderCreationConfig'] = None):
+        """
+        :param _builtins.str id: Unique node ID within the graph.
+        :param 'AutomationDefinitionNodeTriggerFolderCreationConfigArgs' config: Configuration fields for this node type.
+        """
+        pulumi.set(__self__, "id", id)
+        if config is not None:
+            pulumi.set(__self__, "config", config)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Unique node ID within the graph.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def config(self) -> Optional['outputs.AutomationDefinitionNodeTriggerFolderCreationConfig']:
+        """
+        Configuration fields for this node type.
+        """
+        return pulumi.get(self, "config")
+
+
+@pulumi.output_type
+class AutomationDefinitionNodeTriggerFolderCreationConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "excludePattern":
+            suggest = "exclude_pattern"
+        elif key == "pathTimeZone":
+            suggest = "path_time_zone"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AutomationDefinitionNodeTriggerFolderCreationConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AutomationDefinitionNodeTriggerFolderCreationConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AutomationDefinitionNodeTriggerFolderCreationConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 exclude_pattern: Optional[_builtins.str] = None,
+                 path: Optional[_builtins.str] = None,
+                 path_time_zone: Optional[_builtins.str] = None,
+                 source: Optional[_builtins.str] = None):
+        if exclude_pattern is not None:
+            pulumi.set(__self__, "exclude_pattern", exclude_pattern)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if path_time_zone is not None:
+            pulumi.set(__self__, "path_time_zone", path_time_zone)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+
+    @_builtins.property
+    @pulumi.getter(name="excludePattern")
+    def exclude_pattern(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "exclude_pattern")
+
+    @_builtins.property
+    @pulumi.getter
+    def path(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "path")
+
+    @_builtins.property
+    @pulumi.getter(name="pathTimeZone")
+    def path_time_zone(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "path_time_zone")
+
+    @_builtins.property
+    @pulumi.getter
+    def source(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
 class AutomationDefinitionNodeTriggerManual(dict):
     def __init__(__self__, *,
                  id: _builtins.str,
@@ -4227,6 +4331,9 @@ class AutomationDefinitionNodeTriggerManualConfig(dict):
                  path: Optional[_builtins.str] = None,
                  path_time_zone: Optional[_builtins.str] = None,
                  source: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         if exclude_pattern is not None:
             pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         if limit is not None:
@@ -4261,6 +4368,9 @@ class AutomationDefinitionNodeTriggerManualConfig(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> Optional[_builtins.str]:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -4343,6 +4453,9 @@ class AutomationDefinitionNodeTriggerScheduledConfig(dict):
                  schedule_time_zone: Optional[_builtins.str] = None,
                  schedule_times_of_days: Optional[Sequence[_builtins.str]] = None,
                  source: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         if exclude_pattern is not None:
             pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         if holiday_region is not None:
@@ -4433,6 +4546,9 @@ class AutomationDefinitionNodeTriggerScheduledConfig(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> Optional[_builtins.str]:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -4493,6 +4609,9 @@ class AutomationDefinitionNodeTriggerWebhookConfig(dict):
                  path: Optional[_builtins.str] = None,
                  path_time_zone: Optional[_builtins.str] = None,
                  source: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         if exclude_pattern is not None:
             pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         if limit is not None:
@@ -4527,6 +4646,9 @@ class AutomationDefinitionNodeTriggerWebhookConfig(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> Optional[_builtins.str]:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -4615,7 +4737,7 @@ class AutomationDefinitionNodeUnzipConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeUnzipConfigOnError']] = None,
                  overwrite_files: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeUnzipConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         if destination is not None:
@@ -4629,7 +4751,7 @@ class AutomationDefinitionNodeUnzipConfig(dict):
     @pulumi.getter
     def destination(self) -> Optional[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -4886,7 +5008,7 @@ class AutomationDefinitionNodeZipConfig(dict):
                  on_errors: Optional[Sequence['outputs.AutomationDefinitionNodeZipConfigOnError']] = None,
                  overwrite_files: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['AutomationDefinitionNodeZipConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -4899,7 +5021,7 @@ class AutomationDefinitionNodeZipConfig(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -5723,6 +5845,7 @@ class GetAutomationDefinitionNodeResult(dict):
                  transform: 'outputs.GetAutomationDefinitionNodeTransformResult',
                  trigger_action: 'outputs.GetAutomationDefinitionNodeTriggerActionResult',
                  trigger_email: 'outputs.GetAutomationDefinitionNodeTriggerEmailResult',
+                 trigger_folder_creation: 'outputs.GetAutomationDefinitionNodeTriggerFolderCreationResult',
                  trigger_manual: 'outputs.GetAutomationDefinitionNodeTriggerManualResult',
                  trigger_scheduled: 'outputs.GetAutomationDefinitionNodeTriggerScheduledResult',
                  trigger_webhook: 'outputs.GetAutomationDefinitionNodeTriggerWebhookResult',
@@ -5753,6 +5876,7 @@ class GetAutomationDefinitionNodeResult(dict):
         pulumi.set(__self__, "transform", transform)
         pulumi.set(__self__, "trigger_action", trigger_action)
         pulumi.set(__self__, "trigger_email", trigger_email)
+        pulumi.set(__self__, "trigger_folder_creation", trigger_folder_creation)
         pulumi.set(__self__, "trigger_manual", trigger_manual)
         pulumi.set(__self__, "trigger_scheduled", trigger_scheduled)
         pulumi.set(__self__, "trigger_webhook", trigger_webhook)
@@ -5879,6 +6003,11 @@ class GetAutomationDefinitionNodeResult(dict):
     @pulumi.getter(name="triggerEmail")
     def trigger_email(self) -> 'outputs.GetAutomationDefinitionNodeTriggerEmailResult':
         return pulumi.get(self, "trigger_email")
+
+    @_builtins.property
+    @pulumi.getter(name="triggerFolderCreation")
+    def trigger_folder_creation(self) -> 'outputs.GetAutomationDefinitionNodeTriggerFolderCreationResult':
+        return pulumi.get(self, "trigger_folder_creation")
 
     @_builtins.property
     @pulumi.getter(name="triggerManual")
@@ -6577,7 +6706,7 @@ class GetAutomationDefinitionNodeDocumentConvertConfigResult(dict):
                  overwrite_files: _builtins.bool,
                  target_format: _builtins.str):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeDocumentConvertConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -6589,7 +6718,7 @@ class GetAutomationDefinitionNodeDocumentConvertConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -6799,12 +6928,14 @@ class GetAutomationDefinitionNodeFilterResult(dict):
 class GetAutomationDefinitionNodeFilterConfigResult(dict):
     def __init__(__self__, *,
                  condition: _builtins.str,
+                 kind: _builtins.str,
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeFilterConfigOnErrorResult']):
         """
         :param _builtins.str condition: A bare Files TransformScript expression, no braces.
         :param Sequence['GetAutomationDefinitionNodeFilterConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "condition", condition)
+        pulumi.set(__self__, "kind", kind)
         pulumi.set(__self__, "on_errors", on_errors)
 
     @_builtins.property
@@ -6814,6 +6945,11 @@ class GetAutomationDefinitionNodeFilterConfigResult(dict):
         A bare Files TransformScript expression, no braces.
         """
         return pulumi.get(self, "condition")
+
+    @_builtins.property
+    @pulumi.getter
+    def kind(self) -> _builtins.str:
+        return pulumi.get(self, "kind")
 
     @_builtins.property
     @pulumi.getter(name="onErrors")
@@ -6897,7 +7033,7 @@ class GetAutomationDefinitionNodeGpgDecryptConfigResult(dict):
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeGpgDecryptConfigOnErrorResult'],
                  overwrite_files: _builtins.bool):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeGpgDecryptConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -6909,7 +7045,7 @@ class GetAutomationDefinitionNodeGpgDecryptConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -7005,7 +7141,7 @@ class GetAutomationDefinitionNodeGpgEncryptConfigResult(dict):
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeGpgEncryptConfigOnErrorResult'],
                  overwrite_files: _builtins.bool):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeGpgEncryptConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -7017,7 +7153,7 @@ class GetAutomationDefinitionNodeGpgEncryptConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -7209,7 +7345,7 @@ class GetAutomationDefinitionNodeImageConvertConfigResult(dict):
                  target_format: _builtins.str,
                  width: _builtins.int):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeImageConvertConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -7223,7 +7359,7 @@ class GetAutomationDefinitionNodeImageConvertConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -7325,19 +7461,19 @@ class GetAutomationDefinitionNodeImportFileResult(dict):
 class GetAutomationDefinitionNodeImportFileConfigResult(dict):
     def __init__(__self__, *,
                  content: _builtins.str,
-                 destination: _builtins.str,
+                 destinations: Sequence[_builtins.str],
                  headers: Mapping[str, _builtins.str],
                  method: _builtins.str,
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeImportFileConfigOnErrorResult'],
                  url: _builtins.str):
         """
-        :param _builtins.str content: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str content: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        :param Sequence[_builtins.str] destinations: One or more destination path templates.
         :param Sequence['GetAutomationDefinitionNodeImportFileConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-        :param _builtins.str url: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str url: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         pulumi.set(__self__, "content", content)
-        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "destinations", destinations)
         pulumi.set(__self__, "headers", headers)
         pulumi.set(__self__, "method", method)
         pulumi.set(__self__, "on_errors", on_errors)
@@ -7347,17 +7483,17 @@ class GetAutomationDefinitionNodeImportFileConfigResult(dict):
     @pulumi.getter
     def content(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "content")
 
     @_builtins.property
     @pulumi.getter
-    def destination(self) -> _builtins.str:
+    def destinations(self) -> Sequence[_builtins.str]:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        One or more destination path templates.
         """
-        return pulumi.get(self, "destination")
+        return pulumi.get(self, "destinations")
 
     @_builtins.property
     @pulumi.getter
@@ -7381,7 +7517,7 @@ class GetAutomationDefinitionNodeImportFileConfigResult(dict):
     @pulumi.getter
     def url(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "url")
 
@@ -7799,20 +7935,13 @@ class GetAutomationDefinitionNodeRunSyncResult(dict):
 @pulumi.output_type
 class GetAutomationDefinitionNodeRunSyncConfigResult(dict):
     def __init__(__self__, *,
-                 legacy_sync_ids: Sequence[_builtins.int],
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeRunSyncConfigOnErrorResult'],
                  sync_ids: Sequence[_builtins.int]):
         """
         :param Sequence['GetAutomationDefinitionNodeRunSyncConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
-        pulumi.set(__self__, "legacy_sync_ids", legacy_sync_ids)
         pulumi.set(__self__, "on_errors", on_errors)
         pulumi.set(__self__, "sync_ids", sync_ids)
-
-    @_builtins.property
-    @pulumi.getter(name="legacySyncIds")
-    def legacy_sync_ids(self) -> Sequence[_builtins.int]:
-        return pulumi.get(self, "legacy_sync_ids")
 
     @_builtins.property
     @pulumi.getter(name="onErrors")
@@ -7905,10 +8034,10 @@ class GetAutomationDefinitionNodeSendEmailConfigResult(dict):
                  subject: _builtins.str,
                  tos: Sequence[_builtins.str]):
         """
-        :param _builtins.str body: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
-        :param _builtins.str from_: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str body: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        :param _builtins.str from_: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeSendEmailConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-        :param _builtins.str subject: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str subject: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         pulumi.set(__self__, "attachments", attachments)
         pulumi.set(__self__, "bccs", bccs)
@@ -7933,7 +8062,7 @@ class GetAutomationDefinitionNodeSendEmailConfigResult(dict):
     @pulumi.getter
     def body(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "body")
 
@@ -7946,7 +8075,7 @@ class GetAutomationDefinitionNodeSendEmailConfigResult(dict):
     @pulumi.getter(name="from")
     def from_(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "from_")
 
@@ -7962,7 +8091,7 @@ class GetAutomationDefinitionNodeSendEmailConfigResult(dict):
     @pulumi.getter
     def subject(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "subject")
 
@@ -8163,7 +8292,7 @@ class GetAutomationDefinitionNodeSwitchConfigCaseResult(dict):
                  name: _builtins.str):
         """
         :param _builtins.str condition: A bare Files TransformScript expression, no braces.
-        :param _builtins.str name: Identifier used to connect nodes and named inputs or outputs.
+        :param _builtins.str name: Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         """
         pulumi.set(__self__, "condition", condition)
         pulumi.set(__self__, "name", name)
@@ -8180,7 +8309,7 @@ class GetAutomationDefinitionNodeSwitchConfigCaseResult(dict):
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
-        Identifier used to connect nodes and named inputs or outputs.
+        Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         """
         return pulumi.get(self, "name")
 
@@ -8257,7 +8386,7 @@ class GetAutomationDefinitionNodeTransformConfigResult(dict):
                  fts: _builtins.str,
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeTransformConfigOnErrorResult']):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeTransformConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -8268,7 +8397,7 @@ class GetAutomationDefinitionNodeTransformConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -8344,11 +8473,13 @@ class GetAutomationDefinitionNodeTriggerActionResult(dict):
 class GetAutomationDefinitionNodeTriggerActionConfigResult(dict):
     def __init__(__self__, *,
                  exclude_pattern: _builtins.str,
+                 kind: _builtins.str,
                  path: _builtins.str,
                  path_time_zone: _builtins.str,
                  source: _builtins.str,
                  trigger_actions: Sequence[_builtins.str]):
         pulumi.set(__self__, "exclude_pattern", exclude_pattern)
+        pulumi.set(__self__, "kind", kind)
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "path_time_zone", path_time_zone)
         pulumi.set(__self__, "source", source)
@@ -8358,6 +8489,11 @@ class GetAutomationDefinitionNodeTriggerActionConfigResult(dict):
     @pulumi.getter(name="excludePattern")
     def exclude_pattern(self) -> _builtins.str:
         return pulumi.get(self, "exclude_pattern")
+
+    @_builtins.property
+    @pulumi.getter
+    def kind(self) -> _builtins.str:
+        return pulumi.get(self, "kind")
 
     @_builtins.property
     @pulumi.getter
@@ -8457,6 +8593,68 @@ class GetAutomationDefinitionNodeTriggerEmailConfigResult(dict):
 
 
 @pulumi.output_type
+class GetAutomationDefinitionNodeTriggerFolderCreationResult(dict):
+    def __init__(__self__, *,
+                 config: 'outputs.GetAutomationDefinitionNodeTriggerFolderCreationConfigResult',
+                 id: _builtins.str):
+        """
+        :param 'GetAutomationDefinitionNodeTriggerFolderCreationConfigArgs' config: Configuration fields for this node type.
+        :param _builtins.str id: Unique node ID within the graph.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def config(self) -> 'outputs.GetAutomationDefinitionNodeTriggerFolderCreationConfigResult':
+        """
+        Configuration fields for this node type.
+        """
+        return pulumi.get(self, "config")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Unique node ID within the graph.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class GetAutomationDefinitionNodeTriggerFolderCreationConfigResult(dict):
+    def __init__(__self__, *,
+                 exclude_pattern: _builtins.str,
+                 path: _builtins.str,
+                 path_time_zone: _builtins.str,
+                 source: _builtins.str):
+        pulumi.set(__self__, "exclude_pattern", exclude_pattern)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "path_time_zone", path_time_zone)
+        pulumi.set(__self__, "source", source)
+
+    @_builtins.property
+    @pulumi.getter(name="excludePattern")
+    def exclude_pattern(self) -> _builtins.str:
+        return pulumi.get(self, "exclude_pattern")
+
+    @_builtins.property
+    @pulumi.getter
+    def path(self) -> _builtins.str:
+        return pulumi.get(self, "path")
+
+    @_builtins.property
+    @pulumi.getter(name="pathTimeZone")
+    def path_time_zone(self) -> _builtins.str:
+        return pulumi.get(self, "path_time_zone")
+
+    @_builtins.property
+    @pulumi.getter
+    def source(self) -> _builtins.str:
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
 class GetAutomationDefinitionNodeTriggerManualResult(dict):
     def __init__(__self__, *,
                  config: 'outputs.GetAutomationDefinitionNodeTriggerManualConfigResult',
@@ -8493,6 +8691,9 @@ class GetAutomationDefinitionNodeTriggerManualConfigResult(dict):
                  path: _builtins.str,
                  path_time_zone: _builtins.str,
                  source: _builtins.str):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         pulumi.set(__self__, "limit", limit)
         pulumi.set(__self__, "path", path)
@@ -8522,6 +8723,9 @@ class GetAutomationDefinitionNodeTriggerManualConfigResult(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> _builtins.str:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -8570,6 +8774,9 @@ class GetAutomationDefinitionNodeTriggerScheduledConfigResult(dict):
                  schedule_time_zone: _builtins.str,
                  schedule_times_of_days: Sequence[_builtins.str],
                  source: _builtins.str):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         pulumi.set(__self__, "holiday_region", holiday_region)
         pulumi.set(__self__, "interval", interval)
@@ -8647,6 +8854,9 @@ class GetAutomationDefinitionNodeTriggerScheduledConfigResult(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> _builtins.str:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -8687,6 +8897,9 @@ class GetAutomationDefinitionNodeTriggerWebhookConfigResult(dict):
                  path: _builtins.str,
                  path_time_zone: _builtins.str,
                  source: _builtins.str):
+        """
+        :param _builtins.str source: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         pulumi.set(__self__, "limit", limit)
         pulumi.set(__self__, "path", path)
@@ -8716,6 +8929,9 @@ class GetAutomationDefinitionNodeTriggerWebhookConfigResult(dict):
     @_builtins.property
     @pulumi.getter
     def source(self) -> _builtins.str:
+        """
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        """
         return pulumi.get(self, "source")
 
 
@@ -8766,7 +8982,7 @@ class GetAutomationDefinitionNodeUnzipConfigResult(dict):
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeUnzipConfigOnErrorResult'],
                  overwrite_files: _builtins.bool):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeUnzipConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -8777,7 +8993,7 @@ class GetAutomationDefinitionNodeUnzipConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 
@@ -8957,7 +9173,7 @@ class GetAutomationDefinitionNodeZipConfigResult(dict):
                  on_errors: Sequence['outputs.GetAutomationDefinitionNodeZipConfigOnErrorResult'],
                  overwrite_files: _builtins.bool):
         """
-        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        :param _builtins.str destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param Sequence['GetAutomationDefinitionNodeZipConfigOnErrorArgs'] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
@@ -8968,7 +9184,7 @@ class GetAutomationDefinitionNodeZipConfigResult(dict):
     @pulumi.getter
     def destination(self) -> _builtins.str:
         """
-        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         """
         return pulumi.get(self, "destination")
 

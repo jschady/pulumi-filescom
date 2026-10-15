@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/jschady/pulumi-filescom/sdk/go/filescom/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -32,8 +31,7 @@ import (
 //			_, err := filescom.NewAs2Station(ctx, "example_as2_station", &filescom.As2StationArgs{
 //				Name:              pulumi.String("AS2 Station Name"),
 //				WorkspaceId:       pulumi.Int(1),
-//				PublicCertificate: pulumi.String("public_certificate"),
-//				PrivateKey:        pulumi.String("private_key"),
+//				PublicCertificate: pulumi.String("example"),
 //			})
 //			if err != nil {
 //				return err
@@ -64,10 +62,18 @@ type As2Station struct {
 	// The station's formal AS2 name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	PrivateKey pulumi.StringOutput `pulumi:"privateKey"`
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+	Pkcs12 pulumi.StringPtrOutput `pulumi:"pkcs12"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+	Pkcs12Password pulumi.StringPtrOutput `pulumi:"pkcs12Password"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// PEM-encoded private key matching public_certificate.
+	PrivateKey pulumi.StringPtrOutput `pulumi:"privateKey"`
 	// MD5 hash of private key used for message security.
 	PrivateKeyMd5 pulumi.StringOutput `pulumi:"privateKeyMd5"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for the PEM-encoded private key.
 	PrivateKeyPassword pulumi.StringPtrOutput `pulumi:"privateKeyPassword"`
 	// MD5 hash of private key password used for message security.
 	PrivateKeyPasswordMd5 pulumi.StringOutput `pulumi:"privateKeyPasswordMd5"`
@@ -95,22 +101,24 @@ type As2Station struct {
 func NewAs2Station(ctx *pulumi.Context,
 	name string, args *As2StationArgs, opts ...pulumi.ResourceOption) (*As2Station, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &As2StationArgs{}
 	}
 
-	if args.PrivateKey == nil {
-		return nil, errors.New("invalid value for required argument 'PrivateKey'")
+	if args.Pkcs12 != nil {
+		args.Pkcs12 = pulumi.ToSecret(args.Pkcs12).(pulumi.StringPtrInput)
 	}
-	if args.PublicCertificate == nil {
-		return nil, errors.New("invalid value for required argument 'PublicCertificate'")
+	if args.Pkcs12Password != nil {
+		args.Pkcs12Password = pulumi.ToSecret(args.Pkcs12Password).(pulumi.StringPtrInput)
 	}
 	if args.PrivateKey != nil {
-		args.PrivateKey = pulumi.ToSecret(args.PrivateKey).(pulumi.StringInput)
+		args.PrivateKey = pulumi.ToSecret(args.PrivateKey).(pulumi.StringPtrInput)
 	}
 	if args.PrivateKeyPassword != nil {
 		args.PrivateKeyPassword = pulumi.ToSecret(args.PrivateKeyPassword).(pulumi.StringPtrInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"pkcs12",
+		"pkcs12Password",
 		"privateKey",
 		"privateKeyPassword",
 	})
@@ -145,10 +153,18 @@ type as2StationState struct {
 	// The station's formal AS2 name.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+	Pkcs12 *string `pulumi:"pkcs12"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+	Pkcs12Password *string `pulumi:"pkcs12Password"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// PEM-encoded private key matching public_certificate.
 	PrivateKey *string `pulumi:"privateKey"`
 	// MD5 hash of private key used for message security.
 	PrivateKeyMd5 *string `pulumi:"privateKeyMd5"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for the PEM-encoded private key.
 	PrivateKeyPassword *string `pulumi:"privateKeyPassword"`
 	// MD5 hash of private key password used for message security.
 	PrivateKeyPasswordMd5 *string `pulumi:"privateKeyPasswordMd5"`
@@ -180,10 +196,18 @@ type As2StationState struct {
 	// The station's formal AS2 name.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+	Pkcs12 pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+	Pkcs12Password pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// PEM-encoded private key matching public_certificate.
 	PrivateKey pulumi.StringPtrInput
 	// MD5 hash of private key used for message security.
 	PrivateKeyMd5 pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for the PEM-encoded private key.
 	PrivateKeyPassword pulumi.StringPtrInput
 	// MD5 hash of private key password used for message security.
 	PrivateKeyPasswordMd5 pulumi.StringPtrInput
@@ -215,11 +239,19 @@ type as2StationArgs struct {
 	// The station's formal AS2 name.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	PrivateKey string `pulumi:"privateKey"`
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+	Pkcs12 *string `pulumi:"pkcs12"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+	Pkcs12Password *string `pulumi:"pkcs12Password"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// PEM-encoded private key matching public_certificate.
+	PrivateKey *string `pulumi:"privateKey"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for the PEM-encoded private key.
 	PrivateKeyPassword *string `pulumi:"privateKeyPassword"`
 	// Public certificate used for message security.
-	PublicCertificate string `pulumi:"publicCertificate"`
+	PublicCertificate *string `pulumi:"publicCertificate"`
 	// ID of the Workspace associated with this AS2 Station.
 	WorkspaceId *int `pulumi:"workspaceId"`
 }
@@ -229,11 +261,19 @@ type As2StationArgs struct {
 	// The station's formal AS2 name.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	PrivateKey pulumi.StringInput
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+	Pkcs12 pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+	Pkcs12Password pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// PEM-encoded private key matching public_certificate.
+	PrivateKey pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for the PEM-encoded private key.
 	PrivateKeyPassword pulumi.StringPtrInput
 	// Public certificate used for message security.
-	PublicCertificate pulumi.StringInput
+	PublicCertificate pulumi.StringPtrInput
 	// ID of the Workspace associated with this AS2 Station.
 	WorkspaceId pulumi.IntPtrInput
 }
@@ -341,8 +381,21 @@ func (o As2StationOutput) Name() pulumi.StringOutput {
 }
 
 // **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-func (o As2StationOutput) PrivateKey() pulumi.StringOutput {
-	return o.ApplyT(func(v *As2Station) pulumi.StringOutput { return v.PrivateKey }).(pulumi.StringOutput)
+// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+func (o As2StationOutput) Pkcs12() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *As2Station) pulumi.StringPtrOutput { return v.Pkcs12 }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+func (o As2StationOutput) Pkcs12Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *As2Station) pulumi.StringPtrOutput { return v.Pkcs12Password }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// PEM-encoded private key matching public_certificate.
+func (o As2StationOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *As2Station) pulumi.StringPtrOutput { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 // MD5 hash of private key used for message security.
@@ -351,6 +404,7 @@ func (o As2StationOutput) PrivateKeyMd5() pulumi.StringOutput {
 }
 
 // **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Password for the PEM-encoded private key.
 func (o As2StationOutput) PrivateKeyPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *As2Station) pulumi.StringPtrOutput { return v.PrivateKeyPassword }).(pulumi.StringPtrOutput)
 }

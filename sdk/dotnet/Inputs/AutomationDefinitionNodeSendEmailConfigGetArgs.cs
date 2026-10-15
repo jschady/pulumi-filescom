@@ -30,7 +30,7 @@ namespace Jschady.Filescom.Inputs
         }
 
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("body")]
         public Input<string>? Body { get; set; }
@@ -44,7 +44,7 @@ namespace Jschady.Filescom.Inputs
         }
 
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("from")]
         public Input<string>? From { get; set; }
@@ -62,7 +62,7 @@ namespace Jschady.Filescom.Inputs
         }
 
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("subject")]
         public Input<string>? Subject { get; set; }

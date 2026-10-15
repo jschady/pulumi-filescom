@@ -18,6 +18,9 @@ namespace Jschady.Filescom.Outputs
         public readonly int? Limit;
         public readonly string? Path;
         public readonly string? PathTimeZone;
+        /// <summary>
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        /// </summary>
         public readonly string? Source;
 
         [OutputConstructor]

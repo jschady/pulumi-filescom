@@ -176,7 +176,6 @@ class GroupUser(pulumi.CustomResource):
         ## Creating GroupUsers
 
         GroupUsers can be created via the normal <span pulumi-lang-nodejs="`create`" pulumi-lang-dotnet="`Create`" pulumi-lang-go="`create`" pulumi-lang-python="`create`" pulumi-lang-yaml="`create`" pulumi-lang-java="`create`" pulumi-lang-hcl="`create`">`create`</span> action. When using the <span pulumi-lang-nodejs="`update`" pulumi-lang-dotnet="`Update`" pulumi-lang-go="`update`" pulumi-lang-python="`update`" pulumi-lang-yaml="`update`" pulumi-lang-java="`update`" pulumi-lang-hcl="`update`">`update`</span> action, if the
-
         GroupUser record does not exist for the given user/group IDs it will be created.
 
         ## Example Usage
@@ -222,7 +221,6 @@ class GroupUser(pulumi.CustomResource):
         ## Creating GroupUsers
 
         GroupUsers can be created via the normal <span pulumi-lang-nodejs="`create`" pulumi-lang-dotnet="`Create`" pulumi-lang-go="`create`" pulumi-lang-python="`create`" pulumi-lang-yaml="`create`" pulumi-lang-java="`create`" pulumi-lang-hcl="`create`">`create`</span> action. When using the <span pulumi-lang-nodejs="`update`" pulumi-lang-dotnet="`Update`" pulumi-lang-go="`update`" pulumi-lang-python="`update`" pulumi-lang-yaml="`update`" pulumi-lang-java="`update`" pulumi-lang-hcl="`update`">`update`</span> action, if the
-
         GroupUser record does not exist for the given user/group IDs it will be created.
 
         ## Example Usage

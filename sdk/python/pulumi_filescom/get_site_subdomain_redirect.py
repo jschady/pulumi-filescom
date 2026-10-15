@@ -89,7 +89,6 @@ def get_site_subdomain_redirect(id: Optional[_builtins.int] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteSubdomainRedirectResult:
     """
     A SiteSubdomainRedirect object represents an old Files.com subdomain that continues to work after the site's Files.com subdomain changes.
-
     HTTPS requests redirect to the current subdomain, and other protocols such as FTP and SFTP are routed through DNS.
 
     ## Example Usage
@@ -120,7 +119,6 @@ def get_site_subdomain_redirect_output(id: pulumi.Input[Optional[_builtins.int]]
                                        opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSiteSubdomainRedirectResult]:
     """
     A SiteSubdomainRedirect object represents an old Files.com subdomain that continues to work after the site's Files.com subdomain changes.
-
     HTTPS requests redirect to the current subdomain, and other protocols such as FTP and SFTP are routed through DNS.
 
     ## Example Usage

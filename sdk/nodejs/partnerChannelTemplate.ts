@@ -7,6 +7,12 @@ import * as utilities from "./utilities";
 /**
  * A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
  *
+ * Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+ * Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+ * become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+ * "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+ * The expanded route must point to an existing folder in the same Workspace.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -16,6 +22,7 @@ import * as utilities from "./utilities";
  *
  * const examplePartnerChannelTemplate = new filescom.PartnerChannelTemplate("example_partner_channel_template", {
  *     direction: "two_way",
+ *     useChannelRoot: false,
  *     fromPartnerFolderName: "incoming",
  *     fromPartnerManagedFolderPaths: ["claims/received"],
  *     fromPartnerRoutePathPattern: "processing/{{partner_name}}/from-partner",
@@ -72,11 +79,11 @@ export class PartnerChannelTemplate extends pulumi.CustomResource {
      */
     declare public readonly direction: pulumi.Output<string>;
     /**
-     * Resolved from-Partner folder name after Template override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     declare public /*out*/ readonly effectiveFromPartnerFolderName: pulumi.Output<string>;
     /**
-     * Resolved to-Partner folder name after Template override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     declare public /*out*/ readonly effectiveToPartnerFolderName: pulumi.Output<string>;
     /**
@@ -112,6 +119,10 @@ export class PartnerChannelTemplate extends pulumi.CustomResource {
      */
     declare public readonly toPartnerRoutePathPattern: pulumi.Output<string>;
     /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+     */
+    declare public readonly useChannelRoot: pulumi.Output<boolean>;
+    /**
      * ID of the Workspace associated with this Partner Channel Template.
      */
     declare public readonly workspaceId: pulumi.Output<number>;
@@ -140,6 +151,7 @@ export class PartnerChannelTemplate extends pulumi.CustomResource {
             resourceInputs["toPartnerFolderName"] = state?.toPartnerFolderName;
             resourceInputs["toPartnerManagedFolderPaths"] = state?.toPartnerManagedFolderPaths;
             resourceInputs["toPartnerRoutePathPattern"] = state?.toPartnerRoutePathPattern;
+            resourceInputs["useChannelRoot"] = state?.useChannelRoot;
             resourceInputs["workspaceId"] = state?.workspaceId;
         } else {
             const args = argsOrState as PartnerChannelTemplateArgs | undefined;
@@ -155,6 +167,7 @@ export class PartnerChannelTemplate extends pulumi.CustomResource {
             resourceInputs["toPartnerFolderName"] = args?.toPartnerFolderName;
             resourceInputs["toPartnerManagedFolderPaths"] = args?.toPartnerManagedFolderPaths;
             resourceInputs["toPartnerRoutePathPattern"] = args?.toPartnerRoutePathPattern;
+            resourceInputs["useChannelRoot"] = args?.useChannelRoot;
             resourceInputs["workspaceId"] = args?.workspaceId;
             resourceInputs["effectiveFromPartnerFolderName"] = undefined /*out*/;
             resourceInputs["effectiveToPartnerFolderName"] = undefined /*out*/;
@@ -173,11 +186,11 @@ export interface PartnerChannelTemplateState {
      */
     direction?: pulumi.Input<string | undefined>;
     /**
-     * Resolved from-Partner folder name after Template override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     effectiveFromPartnerFolderName?: pulumi.Input<string | undefined>;
     /**
-     * Resolved to-Partner folder name after Template override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     effectiveToPartnerFolderName?: pulumi.Input<string | undefined>;
     /**
@@ -212,6 +225,10 @@ export interface PartnerChannelTemplateState {
      * Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
      */
     toPartnerRoutePathPattern?: pulumi.Input<string | undefined>;
+    /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+     */
+    useChannelRoot?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the Workspace associated with this Partner Channel Template.
      */
@@ -258,6 +275,10 @@ export interface PartnerChannelTemplateArgs {
      * Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
      */
     toPartnerRoutePathPattern?: pulumi.Input<string | undefined>;
+    /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+     */
+    useChannelRoot?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the Workspace associated with this Partner Channel Template.
      */

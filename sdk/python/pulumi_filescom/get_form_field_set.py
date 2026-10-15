@@ -26,7 +26,7 @@ class GetFormFieldSetResult:
     """
     A collection of values returned by getFormFieldSet.
     """
-    def __init__(__self__, form_fields=None, form_layouts=None, id=None, in_use=None, skip_company=None, skip_email=None, skip_name=None, title=None):
+    def __init__(__self__, form_fields=None, form_layouts=None, id=None, in_use=None, require_complete_metadata_capture=None, skip_company=None, skip_email=None, skip_name=None, title=None):
         if form_fields and not isinstance(form_fields, dict):
             raise TypeError("Expected argument 'form_fields' to be a dict")
         pulumi.set(__self__, "form_fields", form_fields)
@@ -39,6 +39,9 @@ class GetFormFieldSetResult:
         if in_use and not isinstance(in_use, bool):
             raise TypeError("Expected argument 'in_use' to be a bool")
         pulumi.set(__self__, "in_use", in_use)
+        if require_complete_metadata_capture and not isinstance(require_complete_metadata_capture, bool):
+            raise TypeError("Expected argument 'require_complete_metadata_capture' to be a bool")
+        pulumi.set(__self__, "require_complete_metadata_capture", require_complete_metadata_capture)
         if skip_company and not isinstance(skip_company, bool):
             raise TypeError("Expected argument 'skip_company' to be a bool")
         pulumi.set(__self__, "skip_company", skip_company)
@@ -56,7 +59,7 @@ class GetFormFieldSetResult:
     @pulumi.getter(name="formFields")
     def form_fields(self) -> Any:
         """
-        Associated form fields
+        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         """
         return pulumi.get(self, "form_fields")
 
@@ -83,6 +86,14 @@ class GetFormFieldSetResult:
         Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
         """
         return pulumi.get(self, "in_use")
+
+    @_builtins.property
+    @pulumi.getter(name="requireCompleteMetadataCapture")
+    def require_complete_metadata_capture(self) -> _builtins.bool:
+        """
+        Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
+        """
+        return pulumi.get(self, "require_complete_metadata_capture")
 
     @_builtins.property
     @pulumi.getter(name="skipCompany")
@@ -127,6 +138,7 @@ class AwaitableGetFormFieldSetResult(GetFormFieldSetResult):
             form_layouts=self.form_layouts,
             id=self.id,
             in_use=self.in_use,
+            require_complete_metadata_capture=self.require_complete_metadata_capture,
             skip_company=self.skip_company,
             skip_email=self.skip_email,
             skip_name=self.skip_name,
@@ -141,6 +153,14 @@ def get_form_field_set(id: Optional[_builtins.int] = None,
     Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
 
     Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
+
+    Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+
+    Enable<span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "> requireCompleteMetadataCapture </span>to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+
+    Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>when submitting new answers or editing the form again.
+
+    Authenticated form field set responses include historical definitions in<span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "> formFields </span>so existing answers can still be interpreted. Only IDs in<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
 
     ## Example Usage
 
@@ -166,6 +186,7 @@ def get_form_field_set(id: Optional[_builtins.int] = None,
         form_layouts=pulumi.get(__ret__, 'form_layouts'),
         id=pulumi.get(__ret__, 'id'),
         in_use=pulumi.get(__ret__, 'in_use'),
+        require_complete_metadata_capture=pulumi.get(__ret__, 'require_complete_metadata_capture'),
         skip_company=pulumi.get(__ret__, 'skip_company'),
         skip_email=pulumi.get(__ret__, 'skip_email'),
         skip_name=pulumi.get(__ret__, 'skip_name'),
@@ -178,6 +199,14 @@ def get_form_field_set_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
 
     Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
+
+    Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+
+    Enable<span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "> requireCompleteMetadataCapture </span>to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+
+    Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>when submitting new answers or editing the form again.
+
+    Authenticated form field set responses include historical definitions in<span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "> formFields </span>so existing answers can still be interpreted. Only IDs in<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
 
     ## Example Usage
 
@@ -202,6 +231,7 @@ def get_form_field_set_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         form_layouts=pulumi.get(__response__, 'form_layouts'),
         id=pulumi.get(__response__, 'id'),
         in_use=pulumi.get(__response__, 'in_use'),
+        require_complete_metadata_capture=pulumi.get(__response__, 'require_complete_metadata_capture'),
         skip_company=pulumi.get(__response__, 'skip_company'),
         skip_email=pulumi.get(__response__, 'skip_email'),
         skip_name=pulumi.get(__response__, 'skip_name'),

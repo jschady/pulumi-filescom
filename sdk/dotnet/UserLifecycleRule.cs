@@ -19,6 +19,8 @@ namespace Jschady.Filescom
     /// 
     /// The rule can also include or exclude site and folder admins from the action.
     /// 
+    /// A Custom Workspace rule applies only to users who belong to that Workspace. Default Workspace users with access to a Custom Workspace, including Workspace Administrators, remain covered by Default Workspace rules.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -48,7 +50,7 @@ namespace Jschady.Filescom
     ///         PartnerTag = "guest",
     ///         UserState = "inactive",
     ///         UserTag = "guest",
-    ///         WorkspaceId = 12,
+    ///         WorkspaceId = 0,
     ///     });
     /// 
     /// });
@@ -75,7 +77,7 @@ namespace Jschady.Filescom
         public Output<string> Action { get; private set; } = null!;
 
         /// <summary>
-        /// If true, a default-workspace rule also applies to users in all workspaces.
+        /// If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Output("applyToAllWorkspaces")]
         public Output<bool> ApplyToAllWorkspaces { get; private set; } = null!;
@@ -105,7 +107,7 @@ namespace Jschady.Filescom
         public Output<bool> IncludeFolderAdmins { get; private set; } = null!;
 
         /// <summary>
-        /// If true, the rule will apply to site admins.
+        /// If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Output("includeSiteAdmins")]
         public Output<bool> IncludeSiteAdmins { get; private set; } = null!;
@@ -147,7 +149,7 @@ namespace Jschady.Filescom
         public Output<string> UserTag { get; private set; } = null!;
 
         /// <summary>
-        /// Workspace ID. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the default workspace.
+        /// Workspace whose users the rule applies to. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
         /// </summary>
         [Output("workspaceId")]
         public Output<int> WorkspaceId { get; private set; } = null!;
@@ -206,7 +208,7 @@ namespace Jschady.Filescom
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// If true, a default-workspace rule also applies to users in all workspaces.
+        /// If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Input("applyToAllWorkspaces")]
         public Input<bool>? ApplyToAllWorkspaces { get; set; }
@@ -242,7 +244,7 @@ namespace Jschady.Filescom
         public Input<bool>? IncludeFolderAdmins { get; set; }
 
         /// <summary>
-        /// If true, the rule will apply to site admins.
+        /// If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Input("includeSiteAdmins")]
         public Input<bool>? IncludeSiteAdmins { get; set; }
@@ -278,7 +280,7 @@ namespace Jschady.Filescom
         public Input<string>? UserTag { get; set; }
 
         /// <summary>
-        /// Workspace ID. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the default workspace.
+        /// Workspace whose users the rule applies to. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
         /// </summary>
         [Input("workspaceId")]
         public Input<int>? WorkspaceId { get; set; }
@@ -298,7 +300,7 @@ namespace Jschady.Filescom
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// If true, a default-workspace rule also applies to users in all workspaces.
+        /// If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Input("applyToAllWorkspaces")]
         public Input<bool>? ApplyToAllWorkspaces { get; set; }
@@ -334,7 +336,7 @@ namespace Jschady.Filescom
         public Input<bool>? IncludeFolderAdmins { get; set; }
 
         /// <summary>
-        /// If true, the rule will apply to site admins.
+        /// If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when &lt;span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`"&gt;`workspaceId`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt;.
         /// </summary>
         [Input("includeSiteAdmins")]
         public Input<bool>? IncludeSiteAdmins { get; set; }
@@ -376,7 +378,7 @@ namespace Jschady.Filescom
         public Input<string>? UserTag { get; set; }
 
         /// <summary>
-        /// Workspace ID. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the default workspace.
+        /// Workspace whose users the rule applies to. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
         /// </summary>
         [Input("workspaceId")]
         public Input<int>? WorkspaceId { get; set; }

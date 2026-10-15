@@ -89,13 +89,10 @@ def get_metadata_category(id: Optional[_builtins.int] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetMetadataCategoryResult:
     """
     A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-
     via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-
     constraints, and a set of default columns to display in the UI.
 
     If a key's <span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`">`allowedValues`</span> array is empty, it is treated as a free-form text field.
-
     If the array is non-empty, the key is constrained to those values in the Web UI.
 
     ## Example Usage
@@ -126,13 +123,10 @@ def get_metadata_category_output(id: pulumi.Input[Optional[_builtins.int]] = Non
                                  opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetMetadataCategoryResult]:
     """
     A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-
     via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-
     constraints, and a set of default columns to display in the UI.
 
     If a key's <span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`">`allowedValues`</span> array is empty, it is treated as a free-form text field.
-
     If the array is non-empty, the key is constrained to those values in the Web UI.
 
     ## Example Usage

@@ -74,9 +74,11 @@ type LookupScheduledExportResult struct {
 	Id int `pulumi:"id"`
 	// If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
 	Interval string `pulumi:"interval"`
+	// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+	LastError string `pulumi:"lastError"`
 	// Most recent Export ID created by this schedule.
 	LastExportId int `pulumi:"lastExportId"`
-	// Most recent scheduled run time.
+	// Most recent scheduled attempt time, including attempts that failed validation.
 	LastRunAt string `pulumi:"lastRunAt"`
 	// Name for this scheduled export.
 	Name string `pulumi:"name"`
@@ -172,12 +174,17 @@ func (o LookupScheduledExportResultOutput) Interval() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScheduledExportResult) string { return v.Interval }).(pulumi.StringOutput)
 }
 
+// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+func (o LookupScheduledExportResultOutput) LastError() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupScheduledExportResult) string { return v.LastError }).(pulumi.StringOutput)
+}
+
 // Most recent Export ID created by this schedule.
 func (o LookupScheduledExportResultOutput) LastExportId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupScheduledExportResult) int { return v.LastExportId }).(pulumi.IntOutput)
 }
 
-// Most recent scheduled run time.
+// Most recent scheduled attempt time, including attempts that failed validation.
 func (o LookupScheduledExportResultOutput) LastRunAt() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScheduledExportResult) string { return v.LastRunAt }).(pulumi.StringOutput)
 }

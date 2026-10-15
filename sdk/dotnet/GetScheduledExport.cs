@@ -406,11 +406,15 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Interval;
         /// <summary>
+        /// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        /// </summary>
+        public readonly string LastError;
+        /// <summary>
         /// Most recent Export ID created by this schedule.
         /// </summary>
         public readonly int LastExportId;
         /// <summary>
-        /// Most recent scheduled run time.
+        /// Most recent scheduled attempt time, including attempts that failed validation.
         /// </summary>
         public readonly string LastRunAt;
         /// <summary>
@@ -476,6 +480,8 @@ namespace Jschady.Filescom
 
             string interval,
 
+            string lastError,
+
             int lastExportId,
 
             string lastRunAt,
@@ -510,6 +516,7 @@ namespace Jschady.Filescom
             HumanReadableSchedule = humanReadableSchedule;
             Id = id;
             Interval = interval;
+            LastError = lastError;
             LastExportId = lastExportId;
             LastRunAt = lastRunAt;
             Name = name;

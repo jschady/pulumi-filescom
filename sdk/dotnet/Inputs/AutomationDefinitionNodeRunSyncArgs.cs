@@ -16,8 +16,8 @@ namespace Jschady.Filescom.Inputs
         /// <summary>
         /// Configuration fields for this node type.
         /// </summary>
-        [Input("config")]
-        public Input<Inputs.AutomationDefinitionNodeRunSyncConfigArgs>? Config { get; set; }
+        [Input("config", required: true)]
+        public Input<Inputs.AutomationDefinitionNodeRunSyncConfigArgs> Config { get; set; } = null!;
 
         /// <summary>
         /// Unique node ID within the graph.

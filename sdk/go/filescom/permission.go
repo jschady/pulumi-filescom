@@ -14,32 +14,22 @@ import (
 
 // A Permission object represents a grant of access permission on a specific Path to a User or Group.
 //
-// They can be optionally recursive or nonrecursive into the subfolders of that path.
+// A Permission can apply to the folder alone or recursively to its subfolders.
 //
 // A Permission may be applied to a User *or* a Group, but not both at once.
 //
 // The following table sets forth the available Permission types:
 //
 // | Permission | Access Level Granted | Automatically Also Includes/Implies Permissions |
-//
 // | --- | ----------- | --------------------- |
-//
-// | <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> | Able to manage Folder Behaviors, Permissions, and Notifications for the folder. Also grants all other permissions. | <span pulumi-lang-nodejs="`bundle`" pulumi-lang-dotnet="`Bundle`" pulumi-lang-go="`bundle`" pulumi-lang-python="`bundle`" pulumi-lang-yaml="`bundle`" pulumi-lang-java="`bundle`" pulumi-lang-hcl="`bundle`">`bundle`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`writeonly`" pulumi-lang-dotnet="`Writeonly`" pulumi-lang-go="`writeonly`" pulumi-lang-python="`writeonly`" pulumi-lang-yaml="`writeonly`" pulumi-lang-java="`writeonly`" pulumi-lang-hcl="`writeonly`">`writeonly`</span>, <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span> |
-//
+// | <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> | Able to manage Folder Behaviors, Permissions, and Notifications for the folder. Also grants all other permissions. On a Custom Workspace's root folder, also grants Workspace Administrator access. | <span pulumi-lang-nodejs="`bundle`" pulumi-lang-dotnet="`Bundle`" pulumi-lang-go="`bundle`" pulumi-lang-python="`bundle`" pulumi-lang-yaml="`bundle`" pulumi-lang-java="`bundle`" pulumi-lang-hcl="`bundle`">`bundle`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`writeonly`" pulumi-lang-dotnet="`Writeonly`" pulumi-lang-go="`writeonly`" pulumi-lang-python="`writeonly`" pulumi-lang-yaml="`writeonly`" pulumi-lang-java="`writeonly`" pulumi-lang-hcl="`writeonly`">`writeonly`</span>, <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span> |
 // | <span pulumi-lang-nodejs="`bundle`" pulumi-lang-dotnet="`Bundle`" pulumi-lang-go="`bundle`" pulumi-lang-python="`bundle`" pulumi-lang-yaml="`bundle`" pulumi-lang-java="`bundle`" pulumi-lang-hcl="`bundle`">`bundle`</span> | Able to share files and folders via a Bundle (share link). | <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span> |
-//
 // | <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span> | Able to read, write, move, delete, and rename files and folders. Also grants the ability to overwrite files upon upload. | <span pulumi-lang-nodejs="`writeonly`" pulumi-lang-dotnet="`Writeonly`" pulumi-lang-go="`writeonly`" pulumi-lang-python="`writeonly`" pulumi-lang-yaml="`writeonly`" pulumi-lang-java="`writeonly`" pulumi-lang-hcl="`writeonly`">`writeonly`</span>, <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span> |
-//
 // | <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span> | Able to view the history of files and folders and to create email notifications for themselves. | <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span> |
-//
 // | <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span> | Able to list files and folders, but not download. | none |
-//
 // | <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span> | Able to list, preview, and download files and folders. | <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span> |
-//
 // | <span pulumi-lang-nodejs="`readonlySiteAdmin`" pulumi-lang-dotnet="`ReadonlySiteAdmin`" pulumi-lang-go="`readonlySiteAdmin`" pulumi-lang-python="`readonly_site_admin`" pulumi-lang-yaml="`readonlySiteAdmin`" pulumi-lang-java="`readonlySiteAdmin`" pulumi-lang-hcl="`readonly_site_admin`">`readonlySiteAdmin`</span> | Able to behave as a read-only Site Admin on a given child site. Only applies to child sites. | <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span> |
-//
 // | <span pulumi-lang-nodejs="`siteAdmin`" pulumi-lang-dotnet="`SiteAdmin`" pulumi-lang-go="`siteAdmin`" pulumi-lang-python="`site_admin`" pulumi-lang-yaml="`siteAdmin`" pulumi-lang-java="`siteAdmin`" pulumi-lang-hcl="`site_admin`">`siteAdmin`</span> | Able to behave as a Site Admin on a given child site. Only applies to child sites. | <span pulumi-lang-nodejs="`bundle`" pulumi-lang-dotnet="`Bundle`" pulumi-lang-go="`bundle`" pulumi-lang-python="`bundle`" pulumi-lang-yaml="`bundle`" pulumi-lang-java="`bundle`" pulumi-lang-hcl="`bundle`">`bundle`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`writeonly`" pulumi-lang-dotnet="`Writeonly`" pulumi-lang-go="`writeonly`" pulumi-lang-python="`writeonly`" pulumi-lang-yaml="`writeonly`" pulumi-lang-java="`writeonly`" pulumi-lang-hcl="`writeonly`">`writeonly`</span>, <span pulumi-lang-nodejs="`readonly`" pulumi-lang-dotnet="`Readonly`" pulumi-lang-go="`readonly`" pulumi-lang-python="`readonly`" pulumi-lang-yaml="`readonly`" pulumi-lang-java="`readonly`" pulumi-lang-hcl="`readonly`">`readonly`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span> |
-//
 // | <span pulumi-lang-nodejs="`writeonly`" pulumi-lang-dotnet="`Writeonly`" pulumi-lang-go="`writeonly`" pulumi-lang-python="`writeonly`" pulumi-lang-yaml="`writeonly`" pulumi-lang-java="`writeonly`" pulumi-lang-hcl="`writeonly`">`writeonly`</span> | Able to upload files, create folders and list subfolders the user has write permission to. | none |
 //
 // ## Example Usage
@@ -95,7 +85,7 @@ type Permission struct {
 
 	// Group ID
 	GroupId pulumi.IntOutput `pulumi:"groupId"`
-	// Group IDs when this permission requires multiple groups
+	// Group IDs when this Permission requires membership in every listed group.
 	GroupIds pulumi.IntArrayOutput `pulumi:"groupIds"`
 	// Group name (if applicable)
 	GroupName pulumi.StringOutput `pulumi:"groupName"`
@@ -105,11 +95,11 @@ type Permission struct {
 	PartnerId pulumi.IntOutput `pulumi:"partnerId"`
 	// Partner name (if applicable)
 	PartnerName pulumi.StringOutput `pulumi:"partnerName"`
-	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+	// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringOutput `pulumi:"path"`
 	// Permission type.  See the table referenced in the documentation for an explanation of each permission.
 	Permission pulumi.StringOutput `pulumi:"permission"`
-	// Recursive: does this permission apply to subfolders?
+	// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 	Recursive pulumi.BoolOutput `pulumi:"recursive"`
 	// Site ID
 	SiteId pulumi.IntOutput `pulumi:"siteId"`
@@ -154,7 +144,7 @@ func GetPermission(ctx *pulumi.Context,
 type permissionState struct {
 	// Group ID
 	GroupId *int `pulumi:"groupId"`
-	// Group IDs when this permission requires multiple groups
+	// Group IDs when this Permission requires membership in every listed group.
 	GroupIds []int `pulumi:"groupIds"`
 	// Group name (if applicable)
 	GroupName *string `pulumi:"groupName"`
@@ -164,11 +154,11 @@ type permissionState struct {
 	PartnerId *int `pulumi:"partnerId"`
 	// Partner name (if applicable)
 	PartnerName *string `pulumi:"partnerName"`
-	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+	// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path *string `pulumi:"path"`
 	// Permission type.  See the table referenced in the documentation for an explanation of each permission.
 	Permission *string `pulumi:"permission"`
-	// Recursive: does this permission apply to subfolders?
+	// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 	Recursive *bool `pulumi:"recursive"`
 	// Site ID
 	SiteId *int `pulumi:"siteId"`
@@ -181,7 +171,7 @@ type permissionState struct {
 type PermissionState struct {
 	// Group ID
 	GroupId pulumi.IntPtrInput
-	// Group IDs when this permission requires multiple groups
+	// Group IDs when this Permission requires membership in every listed group.
 	GroupIds pulumi.IntArrayInput
 	// Group name (if applicable)
 	GroupName pulumi.StringPtrInput
@@ -191,11 +181,11 @@ type PermissionState struct {
 	PartnerId pulumi.IntPtrInput
 	// Partner name (if applicable)
 	PartnerName pulumi.StringPtrInput
-	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+	// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringPtrInput
 	// Permission type.  See the table referenced in the documentation for an explanation of each permission.
 	Permission pulumi.StringPtrInput
-	// Recursive: does this permission apply to subfolders?
+	// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 	Recursive pulumi.BoolPtrInput
 	// Site ID
 	SiteId pulumi.IntPtrInput
@@ -212,17 +202,17 @@ func (PermissionState) ElementType() reflect.Type {
 type permissionArgs struct {
 	// Group ID
 	GroupId *int `pulumi:"groupId"`
-	// Group IDs when this permission requires multiple groups
+	// Group IDs when this Permission requires membership in every listed group.
 	GroupIds []int `pulumi:"groupIds"`
 	// Group name (if applicable)
 	GroupName *string `pulumi:"groupName"`
 	// Partner ID (if applicable)
 	PartnerId *int `pulumi:"partnerId"`
-	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+	// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path string `pulumi:"path"`
 	// Permission type.  See the table referenced in the documentation for an explanation of each permission.
 	Permission *string `pulumi:"permission"`
-	// Recursive: does this permission apply to subfolders?
+	// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 	Recursive *bool `pulumi:"recursive"`
 	// Site ID
 	SiteId *int `pulumi:"siteId"`
@@ -236,17 +226,17 @@ type permissionArgs struct {
 type PermissionArgs struct {
 	// Group ID
 	GroupId pulumi.IntPtrInput
-	// Group IDs when this permission requires multiple groups
+	// Group IDs when this Permission requires membership in every listed group.
 	GroupIds pulumi.IntArrayInput
 	// Group name (if applicable)
 	GroupName pulumi.StringPtrInput
 	// Partner ID (if applicable)
 	PartnerId pulumi.IntPtrInput
-	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+	// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringInput
 	// Permission type.  See the table referenced in the documentation for an explanation of each permission.
 	Permission pulumi.StringPtrInput
-	// Recursive: does this permission apply to subfolders?
+	// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 	Recursive pulumi.BoolPtrInput
 	// Site ID
 	SiteId pulumi.IntPtrInput
@@ -348,7 +338,7 @@ func (o PermissionOutput) GroupId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Permission) pulumi.IntOutput { return v.GroupId }).(pulumi.IntOutput)
 }
 
-// Group IDs when this permission requires multiple groups
+// Group IDs when this Permission requires membership in every listed group.
 func (o PermissionOutput) GroupIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *Permission) pulumi.IntArrayOutput { return v.GroupIds }).(pulumi.IntArrayOutput)
 }
@@ -373,7 +363,7 @@ func (o PermissionOutput) PartnerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Permission) pulumi.StringOutput { return v.PartnerName }).(pulumi.StringOutput)
 }
 
-// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
+// Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 func (o PermissionOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v *Permission) pulumi.StringOutput { return v.Path }).(pulumi.StringOutput)
 }
@@ -383,7 +373,7 @@ func (o PermissionOutput) Permission() pulumi.StringOutput {
 	return o.ApplyT(func(v *Permission) pulumi.StringOutput { return v.Permission }).(pulumi.StringOutput)
 }
 
-// Recursive: does this permission apply to subfolders?
+// Whether this Permission applies to subfolders. Must be true for <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> Permissions.
 func (o PermissionOutput) Recursive() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Permission) pulumi.BoolOutput { return v.Recursive }).(pulumi.BoolOutput)
 }

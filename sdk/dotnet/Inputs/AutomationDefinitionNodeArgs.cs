@@ -85,6 +85,9 @@ namespace Jschady.Filescom.Inputs
         [Input("triggerEmail")]
         public Input<Inputs.AutomationDefinitionNodeTriggerEmailArgs>? TriggerEmail { get; set; }
 
+        [Input("triggerFolderCreation")]
+        public Input<Inputs.AutomationDefinitionNodeTriggerFolderCreationArgs>? TriggerFolderCreation { get; set; }
+
         [Input("triggerManual")]
         public Input<Inputs.AutomationDefinitionNodeTriggerManualArgs>? TriggerManual { get; set; }
 

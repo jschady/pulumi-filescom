@@ -62,7 +62,7 @@ type LookupSiteResult struct {
 	AdminUserId int `pulumi:"adminUserId"`
 	// Allow admins to bypass the locked subfolders setting.
 	AdminsBypassLockedSubfolders bool `pulumi:"adminsBypassLockedSubfolders"`
-	// Availability settings for AI features by user class
+	// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
 	AiFeatureAvailability interface{} `pulumi:"aiFeatureAvailability"`
 	// Are manual Bundle names allowed?
 	AllowBundleNames bool `pulumi:"allowBundleNames"`
@@ -136,6 +136,8 @@ type LookupSiteResult struct {
 	CalculateFileChecksumsSha1 bool `pulumi:"calculateFileChecksumsSha1"`
 	// Calculate SHA256 checksums for files?
 	CalculateFileChecksumsSha256 bool `pulumi:"calculateFileChecksumsSha256"`
+	// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+	ChildSiteFolderAdminsCanSeeParentSiteDirectory bool `pulumi:"childSiteFolderAdminsCanSeeParentSiteDirectory"`
 	// Page link and button color
 	Color2Left string `pulumi:"color2Left"`
 	// Top bar link color
@@ -188,10 +190,14 @@ type LookupSiteResult struct {
 	DomainLetsencryptChain string `pulumi:"domainLetsencryptChain"`
 	// Main email for this site
 	Email string `pulumi:"email"`
-	// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+	// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
 	EmailFooterCustomText string `pulumi:"emailFooterCustomText"`
 	// Are FedRAMP security restrictions enabled for this site?
 	Fedramp bool `pulumi:"fedramp"`
+	// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+	FileActivityEventsEnabled bool `pulumi:"fileActivityEventsEnabled"`
+	// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+	FilesComRemoteServerEnabled bool `pulumi:"filesComRemoteServerEnabled"`
 	// If true, permissions for this site must be bound to a group (not a user).
 	FolderPermissionsGroupsOnly bool `pulumi:"folderPermissionsGroupsOnly"`
 	// Is FTP enabled?
@@ -252,6 +258,8 @@ type LookupSiteResult struct {
 	LdapPort int `pulumi:"ldapPort"`
 	// Use secure LDAP?
 	LdapSecure bool `pulumi:"ldapSecure"`
+	// How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+	LdapServerCertificate string `pulumi:"ldapServerCertificate"`
 	// LDAP type
 	LdapType string `pulumi:"ldapType"`
 	// Should we sync users from LDAP server?
@@ -270,7 +278,7 @@ type LookupSiteResult struct {
 	LoginPageBackgroundImage string `pulumi:"loginPageBackgroundImage"`
 	// Branded logo
 	Logo string `pulumi:"logo"`
-	// List of site settings managed by the parent site
+	// Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
 	ManagedSiteSettings interface{} `pulumi:"managedSiteSettings"`
 	// Number of prior passwords to disallow
 	MaxPriorPasswords int `pulumi:"maxPriorPasswords"`
@@ -352,6 +360,8 @@ type LookupSiteResult struct {
 	RevokeBundleAccessOnDisableOrDelete bool `pulumi:"revokeBundleAccessOnDisableOrDelete"`
 	// If true, supported protective behaviors at the site root also apply within named workspaces. Requires restrict*root*folder*behaviors*to*site*admins to be enabled.
 	RootFolderBehaviorsApplyToWorkspaces bool `pulumi:"rootFolderBehaviorsApplyToWorkspaces"`
+	// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+	S3CompatibleEndpointEnabled bool `pulumi:"s3CompatibleEndpointEnabled"`
 	// Current session
 	Session string `pulumi:"session"`
 	// Session expiry in minutes
@@ -390,6 +400,8 @@ type LookupSiteResult struct {
 	SmtpFrom string `pulumi:"smtpFrom"`
 	// SMTP server port
 	SmtpPort int `pulumi:"smtpPort"`
+	// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+	SmtpSsl string `pulumi:"smtpSsl"`
 	// SMTP server username
 	SmtpUsername string `pulumi:"smtpUsername"`
 	// Allow snapshot share links creation
@@ -404,7 +416,7 @@ type LookupSiteResult struct {
 	TrialDaysLeft int `pulumi:"trialDaysLeft"`
 	// When does this Site trial expire?
 	TrialUntil string `pulumi:"trialUntil"`
-	// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+	// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
 	UploadsViaEmailAuthentication bool `pulumi:"uploadsViaEmailAuthentication"`
 	// If using custom SMTP, should we use dedicated IPs to deliver emails?
 	UseDedicatedIpsForSmtp bool `pulumi:"useDedicatedIpsForSmtp"`
@@ -442,6 +454,8 @@ type LookupSiteResult struct {
 	WelcomeScreen string `pulumi:"welcomeScreen"`
 	// Does FTP user Windows emulation mode?
 	WindowsModeFtp bool `pulumi:"windowsModeFtp"`
+	// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+	WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory bool `pulumi:"workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory"`
 }
 
 func LookupSiteOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) LookupSiteResultOutput {
@@ -489,7 +503,7 @@ func (o LookupSiteResultOutput) AdminsBypassLockedSubfolders() pulumi.BoolOutput
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.AdminsBypassLockedSubfolders }).(pulumi.BoolOutput)
 }
 
-// Availability settings for AI features by user class
+// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
 func (o LookupSiteResultOutput) AiFeatureAvailability() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupSiteResult) interface{} { return v.AiFeatureAvailability }).(pulumi.AnyOutput)
 }
@@ -674,6 +688,11 @@ func (o LookupSiteResultOutput) CalculateFileChecksumsSha256() pulumi.BoolOutput
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.CalculateFileChecksumsSha256 }).(pulumi.BoolOutput)
 }
 
+// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+func (o LookupSiteResultOutput) ChildSiteFolderAdminsCanSeeParentSiteDirectory() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.ChildSiteFolderAdminsCanSeeParentSiteDirectory }).(pulumi.BoolOutput)
+}
+
 // Page link and button color
 func (o LookupSiteResultOutput) Color2Left() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Color2Left }).(pulumi.StringOutput)
@@ -804,7 +823,7 @@ func (o LookupSiteResultOutput) Email() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Email }).(pulumi.StringOutput)
 }
 
-// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
 func (o LookupSiteResultOutput) EmailFooterCustomText() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.EmailFooterCustomText }).(pulumi.StringOutput)
 }
@@ -812,6 +831,16 @@ func (o LookupSiteResultOutput) EmailFooterCustomText() pulumi.StringOutput {
 // Are FedRAMP security restrictions enabled for this site?
 func (o LookupSiteResultOutput) Fedramp() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.Fedramp }).(pulumi.BoolOutput)
+}
+
+// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+func (o LookupSiteResultOutput) FileActivityEventsEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.FileActivityEventsEnabled }).(pulumi.BoolOutput)
+}
+
+// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+func (o LookupSiteResultOutput) FilesComRemoteServerEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.FilesComRemoteServerEnabled }).(pulumi.BoolOutput)
 }
 
 // If true, permissions for this site must be bound to a group (not a user).
@@ -964,6 +993,11 @@ func (o LookupSiteResultOutput) LdapSecure() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.LdapSecure }).(pulumi.BoolOutput)
 }
 
+// How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+func (o LookupSiteResultOutput) LdapServerCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapServerCertificate }).(pulumi.StringOutput)
+}
+
 // LDAP type
 func (o LookupSiteResultOutput) LdapType() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapType }).(pulumi.StringOutput)
@@ -1009,7 +1043,7 @@ func (o LookupSiteResultOutput) Logo() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Logo }).(pulumi.StringOutput)
 }
 
-// List of site settings managed by the parent site
+// Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
 func (o LookupSiteResultOutput) ManagedSiteSettings() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupSiteResult) interface{} { return v.ManagedSiteSettings }).(pulumi.AnyOutput)
 }
@@ -1214,6 +1248,11 @@ func (o LookupSiteResultOutput) RootFolderBehaviorsApplyToWorkspaces() pulumi.Bo
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.RootFolderBehaviorsApplyToWorkspaces }).(pulumi.BoolOutput)
 }
 
+// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+func (o LookupSiteResultOutput) S3CompatibleEndpointEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.S3CompatibleEndpointEnabled }).(pulumi.BoolOutput)
+}
+
 // Current session
 func (o LookupSiteResultOutput) Session() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Session }).(pulumi.StringOutput)
@@ -1309,6 +1348,11 @@ func (o LookupSiteResultOutput) SmtpPort() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupSiteResult) int { return v.SmtpPort }).(pulumi.IntOutput)
 }
 
+// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+func (o LookupSiteResultOutput) SmtpSsl() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.SmtpSsl }).(pulumi.StringOutput)
+}
+
 // SMTP server username
 func (o LookupSiteResultOutput) SmtpUsername() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.SmtpUsername }).(pulumi.StringOutput)
@@ -1344,7 +1388,7 @@ func (o LookupSiteResultOutput) TrialUntil() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.TrialUntil }).(pulumi.StringOutput)
 }
 
-// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
 func (o LookupSiteResultOutput) UploadsViaEmailAuthentication() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.UploadsViaEmailAuthentication }).(pulumi.BoolOutput)
 }
@@ -1437,6 +1481,11 @@ func (o LookupSiteResultOutput) WelcomeScreen() pulumi.StringOutput {
 // Does FTP user Windows emulation mode?
 func (o LookupSiteResultOutput) WindowsModeFtp() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.WindowsModeFtp }).(pulumi.BoolOutput)
+}
+
+// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+func (o LookupSiteResultOutput) WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory }).(pulumi.BoolOutput)
 }
 
 func init() {

@@ -14,9 +14,7 @@ namespace Jschady.Filescom
     {
         /// <summary>
         /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// 
         /// It can be scheduled, run manually, or triggered by custom logic. 
-        /// 
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage
@@ -127,9 +125,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// 
         /// It can be scheduled, run manually, or triggered by custom logic. 
-        /// 
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage
@@ -240,9 +236,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// 
         /// It can be scheduled, run manually, or triggered by custom logic. 
-        /// 
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage

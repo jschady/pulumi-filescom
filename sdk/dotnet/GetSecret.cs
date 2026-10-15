@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Secret stores named, typed secret material for later use by features that reference the Secret by ID.
         /// 
-        /// 
-        /// 
         /// Secret values are encrypted at rest and are write-only. API responses include metadata and configured value field names, but never include the stored secret values.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Secret stores named, typed secret material for later use by features that reference the Secret by ID.
         /// 
-        /// 
-        /// 
         /// Secret values are encrypted at rest and are write-only. API responses include metadata and configured value field names, but never include the stored secret values.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Secret stores named, typed secret material for later use by features that reference the Secret by ID.
-        /// 
-        /// 
         /// 
         /// Secret values are encrypted at rest and are write-only. API responses include metadata and configured value field names, but never include the stored secret values.
         /// 

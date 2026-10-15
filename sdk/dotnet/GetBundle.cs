@@ -14,10 +14,7 @@ namespace Jschady.Filescom
     {
         /// <summary>
         /// A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-        /// 
         /// The API provides the full set of actions related to Share Links, including sending them via E-Mail.
-        /// 
-        /// 
         /// 
         /// Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
         /// 
@@ -129,10 +126,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-        /// 
         /// The API provides the full set of actions related to Share Links, including sending them via E-Mail.
-        /// 
-        /// 
         /// 
         /// Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
         /// 
@@ -244,10 +238,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-        /// 
         /// The API provides the full set of actions related to Share Links, including sending them via E-Mail.
-        /// 
-        /// 
         /// 
         /// Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
         /// 
@@ -456,7 +447,11 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool DontSeparateSubmissionsByFolder;
         /// <summary>
-        /// Bundle expiration date/time
+        /// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        /// </summary>
+        public readonly string EffectiveExpiresAt;
+        /// <summary>
+        /// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         /// </summary>
         public readonly string ExpiresAt;
         /// <summary>
@@ -615,6 +610,8 @@ namespace Jschady.Filescom
 
             bool dontSeparateSubmissionsByFolder,
 
+            string effectiveExpiresAt,
+
             string expiresAt,
 
             string formFieldSet,
@@ -695,6 +692,7 @@ namespace Jschady.Filescom
             Description = description;
             DontAllowFoldersInUploads = dontAllowFoldersInUploads;
             DontSeparateSubmissionsByFolder = dontSeparateSubmissionsByFolder;
+            EffectiveExpiresAt = effectiveExpiresAt;
             ExpiresAt = expiresAt;
             FormFieldSet = formFieldSet;
             GroupId = groupId;

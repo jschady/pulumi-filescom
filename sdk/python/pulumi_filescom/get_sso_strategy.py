@@ -26,7 +26,7 @@ class GetSsoStrategyResult:
     """
     A collection of values returned by getSsoStrategy.
     """
-    def __init__(__self__, deprovision_behavior=None, deprovision_groups=None, deprovision_users=None, display_on_login_page=None, enabled=None, id=None, label=None, ldap_base_dn=None, ldap_domain=None, ldap_host=None, ldap_host2=None, ldap_host3=None, ldap_port=None, ldap_provisioning_enabled=None, ldap_secure=None, ldap_type=None, ldap_username=None, ldap_username_field=None, logo_url=None, protocol=None, provider_identifier=None, provider_=None, provision_attachments_permission=None, provision_company=None, provision_dav_permission=None, provision_email_signup_groups=None, provision_filesystem_layout=None, provision_ftp_permission=None, provision_group_admin_groups=None, provision_group_default=None, provision_group_exclusion=None, provision_group_inclusion=None, provision_group_required=None, provision_groups=None, provision_readonly_site_admin_groups=None, provision_require2fa=None, provision_sftp_permission=None, provision_site_admin_groups=None, provision_time_zone=None, provision_users=None, saml_provider_cert_fingerprint=None, saml_provider_issuer_url=None, saml_provider_metadata_content=None, saml_provider_metadata_url=None, saml_provider_slo_target_url=None, saml_provider_sso_target_url=None, scim_authentication_method=None, scim_oauth_access_token=None, scim_oauth_access_token_expires_at=None, scim_username=None, subdomain=None, user_count=None):
+    def __init__(__self__, deprovision_behavior=None, deprovision_groups=None, deprovision_users=None, display_on_login_page=None, enabled=None, id=None, label=None, ldap_base_dn=None, ldap_domain=None, ldap_host=None, ldap_host2=None, ldap_host3=None, ldap_port=None, ldap_provisioning_enabled=None, ldap_secure=None, ldap_server_certificate=None, ldap_type=None, ldap_username=None, ldap_username_field=None, logo_url=None, protocol=None, provider_identifier=None, provider_=None, provision_attachments_permission=None, provision_company=None, provision_dav_permission=None, provision_email_signup_groups=None, provision_filesystem_layout=None, provision_ftp_permission=None, provision_group_admin_groups=None, provision_group_default=None, provision_group_exclusion=None, provision_group_inclusion=None, provision_group_required=None, provision_groups=None, provision_readonly_site_admin_groups=None, provision_require2fa=None, provision_sftp_permission=None, provision_site_admin_groups=None, provision_time_zone=None, provision_users=None, saml_provider_cert_fingerprint=None, saml_provider_issuer_url=None, saml_provider_metadata_content=None, saml_provider_metadata_url=None, saml_provider_slo_target_url=None, saml_provider_sso_target_url=None, scim_authentication_method=None, scim_oauth_access_token=None, scim_oauth_access_token_expires_at=None, scim_username=None, subdomain=None, user_count=None):
         if deprovision_behavior and not isinstance(deprovision_behavior, str):
             raise TypeError("Expected argument 'deprovision_behavior' to be a str")
         pulumi.set(__self__, "deprovision_behavior", deprovision_behavior)
@@ -72,6 +72,9 @@ class GetSsoStrategyResult:
         if ldap_secure and not isinstance(ldap_secure, bool):
             raise TypeError("Expected argument 'ldap_secure' to be a bool")
         pulumi.set(__self__, "ldap_secure", ldap_secure)
+        if ldap_server_certificate and not isinstance(ldap_server_certificate, str):
+            raise TypeError("Expected argument 'ldap_server_certificate' to be a str")
+        pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
         if ldap_type and not isinstance(ldap_type, str):
             raise TypeError("Expected argument 'ldap_type' to be a str")
         pulumi.set(__self__, "ldap_type", ldap_type)
@@ -303,6 +306,14 @@ class GetSsoStrategyResult:
         Use secure LDAP?
         """
         return pulumi.get(self, "ldap_secure")
+
+    @_builtins.property
+    @pulumi.getter(name="ldapServerCertificate")
+    def ldap_server_certificate(self) -> _builtins.str:
+        """
+        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+        """
+        return pulumi.get(self, "ldap_server_certificate")
 
     @_builtins.property
     @pulumi.getter(name="ldapType")
@@ -561,7 +572,7 @@ class GetSsoStrategyResult:
     @pulumi.getter(name="scimOauthAccessToken")
     def scim_oauth_access_token(self) -> _builtins.str:
         """
-        SCIM OAuth Access Token.
+        SCIM OAuth Access Token. Only returned when the token is first issued or reset.
         """
         return pulumi.get(self, "scim_oauth_access_token")
 
@@ -619,6 +630,7 @@ class AwaitableGetSsoStrategyResult(GetSsoStrategyResult):
             ldap_port=self.ldap_port,
             ldap_provisioning_enabled=self.ldap_provisioning_enabled,
             ldap_secure=self.ldap_secure,
+            ldap_server_certificate=self.ldap_server_certificate,
             ldap_type=self.ldap_type,
             ldap_username=self.ldap_username,
             ldap_username_field=self.ldap_username_field,
@@ -664,7 +676,6 @@ def get_sso_strategy(id: Optional[_builtins.int] = None,
     An SSOStrategy is a way for users to sign in via another identity provider, such as Okta or Auth0.
 
     It is rare that you will need to use API endpoints for managing these, and we recommend instead managing these via the web interface.
-
     Nevertheless, we share the API documentation here.
 
     ## Example Usage
@@ -702,6 +713,7 @@ def get_sso_strategy(id: Optional[_builtins.int] = None,
         ldap_port=pulumi.get(__ret__, 'ldap_port'),
         ldap_provisioning_enabled=pulumi.get(__ret__, 'ldap_provisioning_enabled'),
         ldap_secure=pulumi.get(__ret__, 'ldap_secure'),
+        ldap_server_certificate=pulumi.get(__ret__, 'ldap_server_certificate'),
         ldap_type=pulumi.get(__ret__, 'ldap_type'),
         ldap_username=pulumi.get(__ret__, 'ldap_username'),
         ldap_username_field=pulumi.get(__ret__, 'ldap_username_field'),
@@ -745,7 +757,6 @@ def get_sso_strategy_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     An SSOStrategy is a way for users to sign in via another identity provider, such as Okta or Auth0.
 
     It is rare that you will need to use API endpoints for managing these, and we recommend instead managing these via the web interface.
-
     Nevertheless, we share the API documentation here.
 
     ## Example Usage
@@ -782,6 +793,7 @@ def get_sso_strategy_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         ldap_port=pulumi.get(__response__, 'ldap_port'),
         ldap_provisioning_enabled=pulumi.get(__response__, 'ldap_provisioning_enabled'),
         ldap_secure=pulumi.get(__response__, 'ldap_secure'),
+        ldap_server_certificate=pulumi.get(__response__, 'ldap_server_certificate'),
         ldap_type=pulumi.get(__response__, 'ldap_type'),
         ldap_username=pulumi.get(__response__, 'ldap_username'),
         ldap_username_field=pulumi.get(__response__, 'ldap_username_field'),

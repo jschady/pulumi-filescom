@@ -17,6 +17,8 @@ namespace Jschady.Filescom
     /// 
     /// Every Site has an implicit Default workspace (ID 0). Resources that are not explicitly assigned to a named workspace are considered part of the Default workspace.
     /// 
+    /// Use the [Workspaces guide](https://developers.files.com/rest/overview/workspaces/) for request scoping and delegated administration.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;

@@ -14,7 +14,6 @@ namespace Jschady.Filescom.Outputs
     [OutputType]
     public sealed class GetAutomationDefinitionNodeRunSyncConfigResult
     {
-        public readonly ImmutableArray<int> LegacySyncIds;
         /// <summary>
         /// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         /// </summary>
@@ -23,13 +22,10 @@ namespace Jschady.Filescom.Outputs
 
         [OutputConstructor]
         private GetAutomationDefinitionNodeRunSyncConfigResult(
-            ImmutableArray<int> legacySyncIds,
-
             ImmutableArray<Outputs.GetAutomationDefinitionNodeRunSyncConfigOnErrorResult> onErrors,
 
             ImmutableArray<int> syncIds)
         {
-            LegacySyncIds = legacySyncIds;
             OnErrors = onErrors;
             SyncIds = syncIds;
         }

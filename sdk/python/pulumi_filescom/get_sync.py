@@ -437,9 +437,7 @@ def get_sync(id: Optional[_builtins.int] = None,
              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSyncResult:
     """
     A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
-
     It can be scheduled, run manually, or triggered by custom logic.
-
     Syncs track their runs, status, and configuration.
 
     ## Example Usage
@@ -499,9 +497,7 @@ def get_sync_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSyncResult]:
     """
     A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
-
     It can be scheduled, run manually, or triggered by custom logic.
-
     Syncs track their runs, status, and configuration.
 
     ## Example Usage

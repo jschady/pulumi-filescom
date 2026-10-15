@@ -71,7 +71,7 @@ namespace Jschady.Filescom
         public Output<string> CreatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// Event Target delivery policy. Email and folder targets support&lt;span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "&gt; batchInterval &lt;/span&gt;in seconds, between 600 and 86400.
+        /// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         /// </summary>
         [Output("deliveryPolicy")]
         public Output<object> DeliveryPolicy { get; private set; } = null!;
@@ -166,7 +166,7 @@ namespace Jschady.Filescom
         public Input<object> Config { get; set; } = null!;
 
         /// <summary>
-        /// Event Target delivery policy. Email and folder targets support&lt;span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "&gt; batchInterval &lt;/span&gt;in seconds, between 600 and 86400.
+        /// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         /// </summary>
         [Input("deliveryPolicy")]
         public Input<object>? DeliveryPolicy { get; set; }
@@ -222,7 +222,7 @@ namespace Jschady.Filescom
         public Input<string>? CreatedAt { get; set; }
 
         /// <summary>
-        /// Event Target delivery policy. Email and folder targets support&lt;span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "&gt; batchInterval &lt;/span&gt;in seconds, between 600 and 86400.
+        /// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         /// </summary>
         [Input("deliveryPolicy")]
         public Input<object>? DeliveryPolicy { get; set; }

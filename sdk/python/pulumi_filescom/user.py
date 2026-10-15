@@ -73,6 +73,7 @@ class UserArgs:
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  self_managed: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  site_admin: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -115,7 +116,7 @@ class UserArgs:
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+               Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Group ID to associate this user with.
         :param pulumi.Input[_builtins.str] group_ids: Comma-separated list of group IDs of which this user is a member
@@ -152,6 +153,7 @@ class UserArgs:
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the internal Group responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the internal User responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.bool] restapi_permission: Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_permission: Can the user access the S3-compatible endpoint? Defaults to true.
         :param pulumi.Input[_builtins.bool] self_managed: Does this user manage it's own credentials or is it a shared/bot user?
         :param pulumi.Input[_builtins.bool] sftp_permission: Can the user access with SFTP?
         :param pulumi.Input[_builtins.bool] site_admin: Is the user an administrator for this site?
@@ -163,8 +165,8 @@ class UserArgs:
         :param pulumi.Input[_builtins.str] time_zone: User time zone
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
         :param pulumi.Input[_builtins.str] user_root: If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is<span pulumi-lang-nodejs=" siteRoot " pulumi-lang-dotnet=" SiteRoot " pulumi-lang-go=" siteRoot " pulumi-lang-python=" site_root " pulumi-lang-yaml=" siteRoot " pulumi-lang-java=" siteRoot " pulumi-lang-hcl=" site_root "> siteRoot </span>or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.
-        :param pulumi.Input[_builtins.bool] workspace_admin: Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
-        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID
+        :param pulumi.Input[_builtins.bool] workspace_admin: Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
+        :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         pulumi.set(__self__, "username", username)
         if ai_assistant_personality_id is not None:
@@ -273,6 +275,8 @@ class UserArgs:
             pulumi.set(__self__, "responsible_user_id", responsible_user_id)
         if restapi_permission is not None:
             pulumi.set(__self__, "restapi_permission", restapi_permission)
+        if s3_compatible_endpoint_permission is not None:
+            pulumi.set(__self__, "s3_compatible_endpoint_permission", s3_compatible_endpoint_permission)
         if self_managed is not None:
             pulumi.set(__self__, "self_managed", self_managed)
         if sftp_permission is not None:
@@ -561,7 +565,7 @@ class UserArgs:
     def grant_permission(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+        Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         """
         return pulumi.get(self, "grant_permission")
 
@@ -958,6 +962,18 @@ class UserArgs:
         pulumi.set(self, "restapi_permission", value)
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointPermission")
+    def s3_compatible_endpoint_permission(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Can the user access the S3-compatible endpoint? Defaults to true.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_permission")
+
+    @s3_compatible_endpoint_permission.setter
+    def s3_compatible_endpoint_permission(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "s3_compatible_endpoint_permission", value)
+
+    @_builtins.property
     @pulumi.getter(name="selfManaged")
     def self_managed(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -1093,7 +1109,7 @@ class UserArgs:
     @pulumi.getter(name="workspaceAdmin")
     def workspace_admin(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         """
         return pulumi.get(self, "workspace_admin")
 
@@ -1105,7 +1121,7 @@ class UserArgs:
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        Workspace ID
+        ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         return pulumi.get(self, "workspace_id")
 
@@ -1196,6 +1212,7 @@ class _UserState:
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  self_managed: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  site_admin: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1251,7 +1268,7 @@ class _UserState:
         :param pulumi.Input[_builtins.str] first_login_at: User's first login time
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+               Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Group ID to associate this user with.
         :param pulumi.Input[_builtins.str] group_ids: Comma-separated list of group IDs of which this user is a member
@@ -1304,6 +1321,7 @@ class _UserState:
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the internal Group responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the internal User responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.bool] restapi_permission: Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_permission: Can the user access the S3-compatible endpoint? Defaults to true.
         :param pulumi.Input[_builtins.bool] self_managed: Does this user manage it's own credentials or is it a shared/bot user?
         :param pulumi.Input[_builtins.bool] sftp_permission: Can the user access with SFTP?
         :param pulumi.Input[_builtins.bool] site_admin: Is the user an administrator for this site?
@@ -1319,8 +1337,8 @@ class _UserState:
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
         :param pulumi.Input[_builtins.str] user_root: If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is<span pulumi-lang-nodejs=" siteRoot " pulumi-lang-dotnet=" SiteRoot " pulumi-lang-go=" siteRoot " pulumi-lang-python=" site_root " pulumi-lang-yaml=" siteRoot " pulumi-lang-java=" siteRoot " pulumi-lang-hcl=" site_root "> siteRoot </span>or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.
         :param pulumi.Input[_builtins.str] username: User's username
-        :param pulumi.Input[_builtins.bool] workspace_admin: Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
-        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID
+        :param pulumi.Input[_builtins.bool] workspace_admin: Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
+        :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         if active2fa is not None:
             pulumi.set(__self__, "active2fa", active2fa)
@@ -1480,6 +1498,8 @@ class _UserState:
             pulumi.set(__self__, "responsible_user_id", responsible_user_id)
         if restapi_permission is not None:
             pulumi.set(__self__, "restapi_permission", restapi_permission)
+        if s3_compatible_endpoint_permission is not None:
+            pulumi.set(__self__, "s3_compatible_endpoint_permission", s3_compatible_endpoint_permission)
         if self_managed is not None:
             pulumi.set(__self__, "self_managed", self_managed)
         if sftp_permission is not None:
@@ -1884,7 +1904,7 @@ class _UserState:
     def grant_permission(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+        Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         """
         return pulumi.get(self, "grant_permission")
 
@@ -2473,6 +2493,18 @@ class _UserState:
         pulumi.set(self, "restapi_permission", value)
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointPermission")
+    def s3_compatible_endpoint_permission(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Can the user access the S3-compatible endpoint? Defaults to true.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_permission")
+
+    @s3_compatible_endpoint_permission.setter
+    def s3_compatible_endpoint_permission(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "s3_compatible_endpoint_permission", value)
+
+    @_builtins.property
     @pulumi.getter(name="selfManaged")
     def self_managed(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -2656,7 +2688,7 @@ class _UserState:
     @pulumi.getter(name="workspaceAdmin")
     def workspace_admin(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         """
         return pulumi.get(self, "workspace_admin")
 
@@ -2668,7 +2700,7 @@ class _UserState:
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        Workspace ID
+        ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         return pulumi.get(self, "workspace_id")
 
@@ -2736,6 +2768,7 @@ class User(pulumi.CustomResource):
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  self_managed: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  site_admin: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2762,17 +2795,12 @@ class User(pulumi.CustomResource):
 
         These authentication methods can be configured during user creation and can be modified at any time by site administrators. The meanings of the available values are as follows:
 
-        * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
-
+        * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
         * <span pulumi-lang-nodejs="`emailSignup`" pulumi-lang-dotnet="`EmailSignup`" pulumi-lang-go="`emailSignup`" pulumi-lang-python="`email_signup`" pulumi-lang-yaml="`emailSignup`" pulumi-lang-java="`emailSignup`" pulumi-lang-hcl="`email_signup`">`emailSignup`</span> - When set upon user creation, an email will be sent to the new user with a link for them to create their password. Once the user has created their password, their authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>.
-
-        * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On. When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
-
-        * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format. Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>. Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
-
-        * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key. Typically only used for service users.
-
-        * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt. If API Keys are also configured, those can be used *instead* of the password and key combination. This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once. Typically only used for service users.
+        * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On.  When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
+        * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format.  Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>.  Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
+        * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key.  Typically only used for service users.
+        * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt.  If API Keys are also configured, those can be used *instead* of the password and key combination.  This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once.  Typically only used for service users.
 
         ## Example Usage
 
@@ -2829,6 +2857,7 @@ class User(pulumi.CustomResource):
             responsible_group_id=1,
             responsible_user_id=1,
             restapi_permission=True,
+            s3_compatible_endpoint_permission=True,
             self_managed=True,
             sftp_permission=True,
             site_admin=True,
@@ -2885,7 +2914,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+               Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Group ID to associate this user with.
         :param pulumi.Input[_builtins.str] group_ids: Comma-separated list of group IDs of which this user is a member
@@ -2922,6 +2951,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the internal Group responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the internal User responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.bool] restapi_permission: Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_permission: Can the user access the S3-compatible endpoint? Defaults to true.
         :param pulumi.Input[_builtins.bool] self_managed: Does this user manage it's own credentials or is it a shared/bot user?
         :param pulumi.Input[_builtins.bool] sftp_permission: Can the user access with SFTP?
         :param pulumi.Input[_builtins.bool] site_admin: Is the user an administrator for this site?
@@ -2934,8 +2964,8 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
         :param pulumi.Input[_builtins.str] user_root: If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is<span pulumi-lang-nodejs=" siteRoot " pulumi-lang-dotnet=" SiteRoot " pulumi-lang-go=" siteRoot " pulumi-lang-python=" site_root " pulumi-lang-yaml=" siteRoot " pulumi-lang-java=" siteRoot " pulumi-lang-hcl=" site_root "> siteRoot </span>or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.
         :param pulumi.Input[_builtins.str] username: User's username
-        :param pulumi.Input[_builtins.bool] workspace_admin: Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
-        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID
+        :param pulumi.Input[_builtins.bool] workspace_admin: Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
+        :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         ...
     @overload
@@ -2954,17 +2984,12 @@ class User(pulumi.CustomResource):
 
         These authentication methods can be configured during user creation and can be modified at any time by site administrators. The meanings of the available values are as follows:
 
-        * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
-
+        * <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> - Allows authentication via a password.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
         * <span pulumi-lang-nodejs="`emailSignup`" pulumi-lang-dotnet="`EmailSignup`" pulumi-lang-go="`emailSignup`" pulumi-lang-python="`email_signup`" pulumi-lang-yaml="`emailSignup`" pulumi-lang-java="`emailSignup`" pulumi-lang-hcl="`email_signup`">`emailSignup`</span> - When set upon user creation, an email will be sent to the new user with a link for them to create their password. Once the user has created their password, their authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>.
-
-        * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On. When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
-
-        * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format. Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>. Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
-
-        * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key. Typically only used for service users.
-
-        * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt. If API Keys are also configured, those can be used *instead* of the password and key combination. This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once. Typically only used for service users.
+        * <span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`">`sso`</span> - Allows authentication via a linked Single Sign On provider.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On.  When using this method, you must also provide a valid <span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`">`ssoStrategyId`</span> to associate the User to the appropriate SSO provider.
+        * <span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`">`passwordWithImportedHash`</span> - Works like the <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format.  Provide the imported hash in the field <span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`">`importedPasswordHash`</span>.  Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. Typically only used when migrating to Files.com from another MFT solution.
+        * <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key.  Typically only used for service users.
+        * <span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`">`passwordAndSshKey`</span> - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt.  If API Keys are also configured, those can be used *instead* of the password and key combination.  This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once.  Typically only used for service users.
 
         ## Example Usage
 
@@ -3021,6 +3046,7 @@ class User(pulumi.CustomResource):
             responsible_group_id=1,
             responsible_user_id=1,
             restapi_permission=True,
+            s3_compatible_endpoint_permission=True,
             self_managed=True,
             sftp_permission=True,
             site_admin=True,
@@ -3118,6 +3144,7 @@ class User(pulumi.CustomResource):
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  self_managed: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
                  site_admin: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -3194,6 +3221,7 @@ class User(pulumi.CustomResource):
             __props__.__dict__["responsible_group_id"] = responsible_group_id
             __props__.__dict__["responsible_user_id"] = responsible_user_id
             __props__.__dict__["restapi_permission"] = restapi_permission
+            __props__.__dict__["s3_compatible_endpoint_permission"] = s3_compatible_endpoint_permission
             __props__.__dict__["self_managed"] = self_managed
             __props__.__dict__["sftp_permission"] = sftp_permission
             __props__.__dict__["site_admin"] = site_admin
@@ -3330,6 +3358,7 @@ class User(pulumi.CustomResource):
             responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
             responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
             restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
             self_managed: pulumi.Input[Optional[_builtins.bool]] = None,
             sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
             site_admin: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -3389,7 +3418,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] first_login_at: User's first login time
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+               Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Group ID to associate this user with.
         :param pulumi.Input[_builtins.str] group_ids: Comma-separated list of group IDs of which this user is a member
@@ -3442,6 +3471,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the internal Group responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the internal User responsible for this Partner User, overriding the Partner default.
         :param pulumi.Input[_builtins.bool] restapi_permission: Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_permission: Can the user access the S3-compatible endpoint? Defaults to true.
         :param pulumi.Input[_builtins.bool] self_managed: Does this user manage it's own credentials or is it a shared/bot user?
         :param pulumi.Input[_builtins.bool] sftp_permission: Can the user access with SFTP?
         :param pulumi.Input[_builtins.bool] site_admin: Is the user an administrator for this site?
@@ -3457,8 +3487,8 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
         :param pulumi.Input[_builtins.str] user_root: If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is<span pulumi-lang-nodejs=" siteRoot " pulumi-lang-dotnet=" SiteRoot " pulumi-lang-go=" siteRoot " pulumi-lang-python=" site_root " pulumi-lang-yaml=" siteRoot " pulumi-lang-java=" siteRoot " pulumi-lang-hcl=" site_root "> siteRoot </span>or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.
         :param pulumi.Input[_builtins.str] username: User's username
-        :param pulumi.Input[_builtins.bool] workspace_admin: Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
-        :param pulumi.Input[_builtins.int] workspace_id: Workspace ID
+        :param pulumi.Input[_builtins.bool] workspace_admin: Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
+        :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -3543,6 +3573,7 @@ class User(pulumi.CustomResource):
         __props__.__dict__["responsible_group_id"] = responsible_group_id
         __props__.__dict__["responsible_user_id"] = responsible_user_id
         __props__.__dict__["restapi_permission"] = restapi_permission
+        __props__.__dict__["s3_compatible_endpoint_permission"] = s3_compatible_endpoint_permission
         __props__.__dict__["self_managed"] = self_managed
         __props__.__dict__["sftp_permission"] = sftp_permission
         __props__.__dict__["site_admin"] = site_admin
@@ -3811,7 +3842,7 @@ class User(pulumi.CustomResource):
     def grant_permission(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        Permission to grant on the User Root upon user creation. Can be blank or <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, or `list+write`
+        Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         """
         return pulumi.get(self, "grant_permission")
 
@@ -4204,6 +4235,14 @@ class User(pulumi.CustomResource):
         return pulumi.get(self, "restapi_permission")
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointPermission")
+    def s3_compatible_endpoint_permission(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Can the user access the S3-compatible endpoint? Defaults to true.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_permission")
+
+    @_builtins.property
     @pulumi.getter(name="selfManaged")
     def self_managed(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -4327,7 +4366,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter(name="workspaceAdmin")
     def workspace_admin(self) -> pulumi.Output[_builtins.bool]:
         """
-        Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         """
         return pulumi.get(self, "workspace_admin")
 
@@ -4335,7 +4374,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Output[_builtins.int]:
         """
-        Workspace ID
+        ID of the Workspace the user belongs to. 0 is the Default Workspace.
         """
         return pulumi.get(self, "workspace_id")
 

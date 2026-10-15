@@ -42,6 +42,10 @@ export interface GetCustomDomainArgs {
  */
 export interface GetCustomDomainResult {
     /**
+     * Allow all workspaces to use this default-workspace Custom Domain.
+     */
+    readonly availableToAllWorkspaces: boolean;
+    /**
      * Is this domain's SSL certificate automatically managed and renewed by Files.com?
      */
     readonly brickManaged: boolean;
@@ -70,6 +74,14 @@ export interface GetCustomDomainResult {
      */
     readonly id: number;
     /**
+     * Dedicated public IP addresses allocated to this Custom Domain.
+     */
+    readonly ipAddresses: string[];
+    /**
+     * Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+     */
+    readonly outboundIpAddresses: string[];
+    /**
      * Current SSL certificate ID.
      */
     readonly sslCertificateId: number;
@@ -77,6 +89,10 @@ export interface GetCustomDomainResult {
      * When this Custom Domain was last updated.
      */
     readonly updatedAt: string;
+    /**
+     * Workspace ID (0 for the default workspace).
+     */
+    readonly workspaceId: number;
 }
 /**
  * A CustomDomain object represents an additional customer-owned domain that routes to a Files.com site.

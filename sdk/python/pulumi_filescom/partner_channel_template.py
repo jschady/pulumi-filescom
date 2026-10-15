@@ -28,6 +28,7 @@ class PartnerChannelTemplateArgs:
                  to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+                 use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a PartnerChannelTemplate resource.
@@ -41,6 +42,7 @@ class PartnerChannelTemplateArgs:
         :param pulumi.Input[_builtins.str] to_partner_folder_name: Optional Channel-level to-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] to_partner_managed_folder_paths: Managed folder paths inside the to-Partner folder.
         :param pulumi.Input[_builtins.str] to_partner_route_path_pattern: Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
+        :param pulumi.Input[_builtins.bool] use_channel_root: Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this Partner Channel Template.
         """
         pulumi.set(__self__, "path", path)
@@ -60,6 +62,8 @@ class PartnerChannelTemplateArgs:
             pulumi.set(__self__, "to_partner_managed_folder_paths", to_partner_managed_folder_paths)
         if to_partner_route_path_pattern is not None:
             pulumi.set(__self__, "to_partner_route_path_pattern", to_partner_route_path_pattern)
+        if use_channel_root is not None:
+            pulumi.set(__self__, "use_channel_root", use_channel_root)
         if workspace_id is not None:
             pulumi.set(__self__, "workspace_id", workspace_id)
 
@@ -172,6 +176,18 @@ class PartnerChannelTemplateArgs:
         pulumi.set(self, "to_partner_route_path_pattern", value)
 
     @_builtins.property
+    @pulumi.getter(name="useChannelRoot")
+    def use_channel_root(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        """
+        return pulumi.get(self, "use_channel_root")
+
+    @use_channel_root.setter
+    def use_channel_root(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "use_channel_root", value)
+
+    @_builtins.property
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -198,13 +214,14 @@ class _PartnerChannelTemplateState:
                  to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+                 use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering PartnerChannelTemplate resources.
 
         :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
-        :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner folder name after Template override and default.
-        :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner folder name after Template override and default.
+        :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
+        :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] from_partner_managed_folder_paths: Managed folder paths inside the from-Partner folder.
         :param pulumi.Input[_builtins.str] from_partner_route_path_pattern: Optional route path pattern for files uploaded by the Partner. Supports {{partner_name}}.
@@ -213,6 +230,7 @@ class _PartnerChannelTemplateState:
         :param pulumi.Input[_builtins.str] to_partner_folder_name: Optional Channel-level to-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] to_partner_managed_folder_paths: Managed folder paths inside the to-Partner folder.
         :param pulumi.Input[_builtins.str] to_partner_route_path_pattern: Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
+        :param pulumi.Input[_builtins.bool] use_channel_root: Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this Partner Channel Template.
         """
         if direction is not None:
@@ -237,6 +255,8 @@ class _PartnerChannelTemplateState:
             pulumi.set(__self__, "to_partner_managed_folder_paths", to_partner_managed_folder_paths)
         if to_partner_route_path_pattern is not None:
             pulumi.set(__self__, "to_partner_route_path_pattern", to_partner_route_path_pattern)
+        if use_channel_root is not None:
+            pulumi.set(__self__, "use_channel_root", use_channel_root)
         if workspace_id is not None:
             pulumi.set(__self__, "workspace_id", workspace_id)
 
@@ -256,7 +276,7 @@ class _PartnerChannelTemplateState:
     @pulumi.getter(name="effectiveFromPartnerFolderName")
     def effective_from_partner_folder_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Resolved from-Partner folder name after Template override and default.
+        Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_from_partner_folder_name")
 
@@ -268,7 +288,7 @@ class _PartnerChannelTemplateState:
     @pulumi.getter(name="effectiveToPartnerFolderName")
     def effective_to_partner_folder_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Resolved to-Partner folder name after Template override and default.
+        Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_to_partner_folder_name")
 
@@ -373,6 +393,18 @@ class _PartnerChannelTemplateState:
         pulumi.set(self, "to_partner_route_path_pattern", value)
 
     @_builtins.property
+    @pulumi.getter(name="useChannelRoot")
+    def use_channel_root(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        """
+        return pulumi.get(self, "use_channel_root")
+
+    @use_channel_root.setter
+    def use_channel_root(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "use_channel_root", value)
+
+    @_builtins.property
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -400,10 +432,17 @@ class PartnerChannelTemplate(pulumi.CustomResource):
                  to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+                 use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
         A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
+
+        Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+        Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+        become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+        "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+        The expanded route must point to an existing folder in the same Workspace.
 
         ## Example Usage
 
@@ -414,6 +453,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
 
         example_partner_channel_template = filescom.PartnerChannelTemplate("example_partner_channel_template",
             direction="two_way",
+            use_channel_root=False,
             from_partner_folder_name="incoming",
             from_partner_managed_folder_paths=["claims/received"],
             from_partner_route_path_pattern="processing/{{partner_name}}/from-partner",
@@ -448,6 +488,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] to_partner_folder_name: Optional Channel-level to-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] to_partner_managed_folder_paths: Managed folder paths inside the to-Partner folder.
         :param pulumi.Input[_builtins.str] to_partner_route_path_pattern: Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
+        :param pulumi.Input[_builtins.bool] use_channel_root: Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this Partner Channel Template.
         """
         ...
@@ -459,6 +500,12 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         """
         A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
 
+        Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+        Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+        become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+        "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+        The expanded route must point to an existing folder in the same Workspace.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -468,6 +515,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
 
         example_partner_channel_template = filescom.PartnerChannelTemplate("example_partner_channel_template",
             direction="two_way",
+            use_channel_root=False,
             from_partner_folder_name="incoming",
             from_partner_managed_folder_paths=["claims/received"],
             from_partner_route_path_pattern="processing/{{partner_name}}/from-partner",
@@ -515,6 +563,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
                  to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
                  to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+                 use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -536,6 +585,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
             __props__.__dict__["to_partner_folder_name"] = to_partner_folder_name
             __props__.__dict__["to_partner_managed_folder_paths"] = to_partner_managed_folder_paths
             __props__.__dict__["to_partner_route_path_pattern"] = to_partner_route_path_pattern
+            __props__.__dict__["use_channel_root"] = use_channel_root
             __props__.__dict__["workspace_id"] = workspace_id
             __props__.__dict__["effective_from_partner_folder_name"] = None
             __props__.__dict__["effective_to_partner_folder_name"] = None
@@ -560,6 +610,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
             to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
             to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+            use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
             workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> 'PartnerChannelTemplate':
         """
         Get an existing PartnerChannelTemplate resource's state with the given name, id, and optional extra
@@ -569,8 +620,8 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] direction: Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
-        :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner folder name after Template override and default.
-        :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner folder name after Template override and default.
+        :param pulumi.Input[_builtins.str] effective_from_partner_folder_name: Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
+        :param pulumi.Input[_builtins.str] effective_to_partner_folder_name: Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         :param pulumi.Input[_builtins.str] from_partner_folder_name: Optional Channel-level from-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] from_partner_managed_folder_paths: Managed folder paths inside the from-Partner folder.
         :param pulumi.Input[_builtins.str] from_partner_route_path_pattern: Optional route path pattern for files uploaded by the Partner. Supports {{partner_name}}.
@@ -579,6 +630,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] to_partner_folder_name: Optional Channel-level to-Partner folder name override.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] to_partner_managed_folder_paths: Managed folder paths inside the to-Partner folder.
         :param pulumi.Input[_builtins.str] to_partner_route_path_pattern: Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
+        :param pulumi.Input[_builtins.bool] use_channel_root: Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this Partner Channel Template.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -596,6 +648,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         __props__.__dict__["to_partner_folder_name"] = to_partner_folder_name
         __props__.__dict__["to_partner_managed_folder_paths"] = to_partner_managed_folder_paths
         __props__.__dict__["to_partner_route_path_pattern"] = to_partner_route_path_pattern
+        __props__.__dict__["use_channel_root"] = use_channel_root
         __props__.__dict__["workspace_id"] = workspace_id
         return PartnerChannelTemplate(resource_name, opts=opts, __props__=__props__)
 
@@ -611,7 +664,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
     @pulumi.getter(name="effectiveFromPartnerFolderName")
     def effective_from_partner_folder_name(self) -> pulumi.Output[_builtins.str]:
         """
-        Resolved from-Partner folder name after Template override and default.
+        Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_from_partner_folder_name")
 
@@ -619,7 +672,7 @@ class PartnerChannelTemplate(pulumi.CustomResource):
     @pulumi.getter(name="effectiveToPartnerFolderName")
     def effective_to_partner_folder_name(self) -> pulumi.Output[_builtins.str]:
         """
-        Resolved to-Partner folder name after Template override and default.
+        Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_to_partner_folder_name")
 
@@ -686,6 +739,14 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
         """
         return pulumi.get(self, "to_partner_route_path_pattern")
+
+    @_builtins.property
+    @pulumi.getter(name="useChannelRoot")
+    def use_channel_root(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+        """
+        return pulumi.get(self, "use_channel_root")
 
     @_builtins.property
     @pulumi.getter(name="workspaceId")

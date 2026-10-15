@@ -21,7 +21,7 @@ import * as utilities from "./utilities";
  *     description: "Used by production API integrations.",
  *     secretType: "token",
  *     metadata: {
- *         key: "example value",
+ *         headerName: "Authorization",
  *     },
  *     workspaceId: 0,
  * });

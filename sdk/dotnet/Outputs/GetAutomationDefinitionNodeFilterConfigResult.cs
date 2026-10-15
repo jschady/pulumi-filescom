@@ -18,6 +18,7 @@ namespace Jschady.Filescom.Outputs
         /// A bare Files TransformScript expression, no braces.
         /// </summary>
         public readonly string Condition;
+        public readonly string Kind;
         /// <summary>
         /// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         /// </summary>
@@ -27,9 +28,12 @@ namespace Jschady.Filescom.Outputs
         private GetAutomationDefinitionNodeFilterConfigResult(
             string condition,
 
+            string kind,
+
             ImmutableArray<Outputs.GetAutomationDefinitionNodeFilterConfigOnErrorResult> onErrors)
         {
             Condition = condition;
+            Kind = kind;
             OnErrors = onErrors;
         }
     }

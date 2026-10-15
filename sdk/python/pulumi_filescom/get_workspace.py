@@ -70,6 +70,8 @@ def get_workspace(id: Optional[_builtins.int] = None,
 
     Every Site has an implicit Default workspace (ID 0). Resources that are not explicitly assigned to a named workspace are considered part of the Default workspace.
 
+    Use the [Workspaces guide](https://developers.files.com/rest/overview/workspaces/) for request scoping and delegated administration.
+
     ## Example Usage
 
     <!--Start PulumiCodeChooser -->
@@ -100,6 +102,8 @@ def get_workspace_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     Customers commonly group resources by project, department, client, or region. Workspaces provide a built-in structure for that grouping, so the UI can operate within a clear “workspace context” and admins can delegate management for a subset of resources without requiring full site-level isolation.
 
     Every Site has an implicit Default workspace (ID 0). Resources that are not explicitly assigned to a named workspace are considered part of the Default workspace.
+
+    Use the [Workspaces guide](https://developers.files.com/rest/overview/workspaces/) for request scoping and delegated administration.
 
     ## Example Usage
 

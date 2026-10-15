@@ -20,7 +20,7 @@ namespace Jschady.Filescom.Inputs
         public Input<string> Condition { get; set; } = null!;
 
         /// <summary>
-        /// Identifier used to connect nodes and named inputs or outputs.
+        /// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;

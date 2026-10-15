@@ -64,7 +64,7 @@ type LookupEventTargetResult struct {
 	Config interface{} `pulumi:"config"`
 	// Event Target create date/time.
 	CreatedAt string `pulumi:"createdAt"`
-	// Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+	// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
 	DeliveryPolicy interface{} `pulumi:"deliveryPolicy"`
 	// Whether this Event Target can receive events.
 	Enabled bool `pulumi:"enabled"`
@@ -125,7 +125,7 @@ func (o LookupEventTargetResultOutput) CreatedAt() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupEventTargetResult) string { return v.CreatedAt }).(pulumi.StringOutput)
 }
 
-// Event Target delivery policy. Email and folder targets support<span pulumi-lang-nodejs=" batchInterval " pulumi-lang-dotnet=" BatchInterval " pulumi-lang-go=" batchInterval " pulumi-lang-python=" batch_interval " pulumi-lang-yaml=" batchInterval " pulumi-lang-java=" batchInterval " pulumi-lang-hcl=" batch_interval "> batchInterval </span>in seconds, between 600 and 86400.
+// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
 func (o LookupEventTargetResultOutput) DeliveryPolicy() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupEventTargetResult) interface{} { return v.DeliveryPolicy }).(pulumi.AnyOutput)
 }

@@ -19,52 +19,42 @@ __all__ = ['As2StationArgs', 'As2Station']
 @pulumi.input_type
 class As2StationArgs:
     def __init__(__self__, *,
-                 private_key: pulumi.Input[_builtins.str],
-                 public_certificate: pulumi.Input[_builtins.str],
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
+                 public_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a As2Station resource.
 
-        :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        :param pulumi.Input[_builtins.str] public_certificate: Public certificate used for message security.
         :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               PEM-encoded private key matching public_certificate.
         :param pulumi.Input[_builtins.str] private_key_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for the PEM-encoded private key.
+        :param pulumi.Input[_builtins.str] public_certificate: Public certificate used for message security.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this AS2 Station.
         """
-        pulumi.set(__self__, "private_key", private_key)
-        pulumi.set(__self__, "public_certificate", public_certificate)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if pkcs12 is not None:
+            pulumi.set(__self__, "pkcs12", pkcs12)
+        if pkcs12_password is not None:
+            pulumi.set(__self__, "pkcs12_password", pkcs12_password)
+        if private_key is not None:
+            pulumi.set(__self__, "private_key", private_key)
         if private_key_password is not None:
             pulumi.set(__self__, "private_key_password", private_key_password)
+        if public_certificate is not None:
+            pulumi.set(__self__, "public_certificate", public_certificate)
         if workspace_id is not None:
             pulumi.set(__self__, "workspace_id", workspace_id)
-
-    @_builtins.property
-    @pulumi.getter(name="privateKey")
-    def private_key(self) -> pulumi.Input[_builtins.str]:
-        """
-        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        """
-        return pulumi.get(self, "private_key")
-
-    @private_key.setter
-    def private_key(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "private_key", value)
-
-    @_builtins.property
-    @pulumi.getter(name="publicCertificate")
-    def public_certificate(self) -> pulumi.Input[_builtins.str]:
-        """
-        Public certificate used for message security.
-        """
-        return pulumi.get(self, "public_certificate")
-
-    @public_certificate.setter
-    def public_certificate(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "public_certificate", value)
 
     @_builtins.property
     @pulumi.getter
@@ -79,16 +69,68 @@ class As2StationArgs:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter
+    def pkcs12(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        """
+        return pulumi.get(self, "pkcs12")
+
+    @pkcs12.setter
+    def pkcs12(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "pkcs12", value)
+
+    @_builtins.property
+    @pulumi.getter(name="pkcs12Password")
+    def pkcs12_password(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        """
+        return pulumi.get(self, "pkcs12_password")
+
+    @pkcs12_password.setter
+    def pkcs12_password(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "pkcs12_password", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        PEM-encoded private key matching public_certificate.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
     @pulumi.getter(name="privateKeyPassword")
     def private_key_password(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for the PEM-encoded private key.
         """
         return pulumi.get(self, "private_key_password")
 
     @private_key_password.setter
     def private_key_password(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key_password", value)
+
+    @_builtins.property
+    @pulumi.getter(name="publicCertificate")
+    def public_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Public certificate used for message security.
+        """
+        return pulumi.get(self, "public_certificate")
+
+    @public_certificate.setter
+    def public_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "public_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="workspaceId")
@@ -109,6 +151,8 @@ class _As2StationState:
                  domain: pulumi.Input[Optional[_builtins.str]] = None,
                  hex_public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_md5: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
@@ -128,9 +172,15 @@ class _As2StationState:
         :param pulumi.Input[_builtins.str] domain: The station's AS2 domain name.
         :param pulumi.Input[_builtins.str] hex_public_certificate_serial: Serial of public certificate used for message security in hex format.
         :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               PEM-encoded private key matching public_certificate.
         :param pulumi.Input[_builtins.str] private_key_md5: MD5 hash of private key used for message security.
         :param pulumi.Input[_builtins.str] private_key_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for the PEM-encoded private key.
         :param pulumi.Input[_builtins.str] private_key_password_md5: MD5 hash of private key password used for message security.
         :param pulumi.Input[_builtins.str] public_certificate: Public certificate used for message security.
         :param pulumi.Input[_builtins.str] public_certificate_issuer: Issuer of public certificate used for message security.
@@ -148,6 +198,10 @@ class _As2StationState:
             pulumi.set(__self__, "hex_public_certificate_serial", hex_public_certificate_serial)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if pkcs12 is not None:
+            pulumi.set(__self__, "pkcs12", pkcs12)
+        if pkcs12_password is not None:
+            pulumi.set(__self__, "pkcs12_password", pkcs12_password)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
         if private_key_md5 is not None:
@@ -212,10 +266,37 @@ class _As2StationState:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter
+    def pkcs12(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        """
+        return pulumi.get(self, "pkcs12")
+
+    @pkcs12.setter
+    def pkcs12(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "pkcs12", value)
+
+    @_builtins.property
+    @pulumi.getter(name="pkcs12Password")
+    def pkcs12_password(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        """
+        return pulumi.get(self, "pkcs12_password")
+
+    @pkcs12_password.setter
+    def pkcs12_password(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "pkcs12_password", value)
+
+    @_builtins.property
     @pulumi.getter(name="privateKey")
     def private_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        PEM-encoded private key matching public_certificate.
         """
         return pulumi.get(self, "private_key")
 
@@ -240,6 +321,7 @@ class _As2StationState:
     def private_key_password(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for the PEM-encoded private key.
         """
         return pulumi.get(self, "private_key_password")
 
@@ -375,6 +457,8 @@ class As2Station(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
                  public_certificate: pulumi.Input[Optional[_builtins.str]] = None,
@@ -393,8 +477,7 @@ class As2Station(pulumi.CustomResource):
         example_as2_station = filescom.As2Station("example_as2_station",
             name="AS2 Station Name",
             workspace_id=1,
-            public_certificate="public_certificate",
-            private_key="private_key")
+            public_certificate="example")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -412,8 +495,14 @@ class As2Station(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               PEM-encoded private key matching public_certificate.
         :param pulumi.Input[_builtins.str] private_key_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for the PEM-encoded private key.
         :param pulumi.Input[_builtins.str] public_certificate: Public certificate used for message security.
         :param pulumi.Input[_builtins.int] workspace_id: ID of the Workspace associated with this AS2 Station.
         """
@@ -421,7 +510,7 @@ class As2Station(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: As2StationArgs,
+                 args: Optional[As2StationArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         An AS2Station is a remote AS2 server that can send data into Files.com and receive data from Files.com.
@@ -436,8 +525,7 @@ class As2Station(pulumi.CustomResource):
         example_as2_station = filescom.As2Station("example_as2_station",
             name="AS2 Station Name",
             workspace_id=1,
-            public_certificate="public_certificate",
-            private_key="private_key")
+            public_certificate="example")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -468,6 +556,8 @@ class As2Station(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+                 pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
                  public_certificate: pulumi.Input[Optional[_builtins.str]] = None,
@@ -482,12 +572,10 @@ class As2Station(pulumi.CustomResource):
             __props__ = As2StationArgs.__new__(As2StationArgs)
 
             __props__.__dict__["name"] = name
-            if private_key is None and not opts.urn:
-                raise TypeError("Missing required property 'private_key'")
+            __props__.__dict__["pkcs12"] = None if pkcs12 is None else pulumi.Output.secret(pkcs12)
+            __props__.__dict__["pkcs12_password"] = None if pkcs12_password is None else pulumi.Output.secret(pkcs12_password)
             __props__.__dict__["private_key"] = None if private_key is None else pulumi.Output.secret(private_key)
             __props__.__dict__["private_key_password"] = None if private_key_password is None else pulumi.Output.secret(private_key_password)
-            if public_certificate is None and not opts.urn:
-                raise TypeError("Missing required property 'public_certificate'")
             __props__.__dict__["public_certificate"] = public_certificate
             __props__.__dict__["workspace_id"] = workspace_id
             __props__.__dict__["domain"] = None
@@ -501,7 +589,7 @@ class As2Station(pulumi.CustomResource):
             __props__.__dict__["public_certificate_serial"] = None
             __props__.__dict__["public_certificate_subject"] = None
             __props__.__dict__["uri"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKey", "privateKeyPassword"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["pkcs12", "pkcs12Password", "privateKey", "privateKeyPassword"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(As2Station, __self__).__init__(
             'filescom:index/as2Station:As2Station',
@@ -516,6 +604,8 @@ class As2Station(pulumi.CustomResource):
             domain: pulumi.Input[Optional[_builtins.str]] = None,
             hex_public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
             private_key: pulumi.Input[Optional[_builtins.str]] = None,
             private_key_md5: pulumi.Input[Optional[_builtins.str]] = None,
             private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
@@ -539,9 +629,15 @@ class As2Station(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] domain: The station's AS2 domain name.
         :param pulumi.Input[_builtins.str] hex_public_certificate_serial: Serial of public certificate used for message security in hex format.
         :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               PEM-encoded private key matching public_certificate.
         :param pulumi.Input[_builtins.str] private_key_md5: MD5 hash of private key used for message security.
         :param pulumi.Input[_builtins.str] private_key_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Password for the PEM-encoded private key.
         :param pulumi.Input[_builtins.str] private_key_password_md5: MD5 hash of private key password used for message security.
         :param pulumi.Input[_builtins.str] public_certificate: Public certificate used for message security.
         :param pulumi.Input[_builtins.str] public_certificate_issuer: Issuer of public certificate used for message security.
@@ -560,6 +656,8 @@ class As2Station(pulumi.CustomResource):
         __props__.__dict__["domain"] = domain
         __props__.__dict__["hex_public_certificate_serial"] = hex_public_certificate_serial
         __props__.__dict__["name"] = name
+        __props__.__dict__["pkcs12"] = pkcs12
+        __props__.__dict__["pkcs12_password"] = pkcs12_password
         __props__.__dict__["private_key"] = private_key
         __props__.__dict__["private_key_md5"] = private_key_md5
         __props__.__dict__["private_key_password"] = private_key_password
@@ -600,10 +698,29 @@ class As2Station(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @_builtins.property
-    @pulumi.getter(name="privateKey")
-    def private_key(self) -> pulumi.Output[_builtins.str]:
+    @pulumi.getter
+    def pkcs12(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+        """
+        return pulumi.get(self, "pkcs12")
+
+    @_builtins.property
+    @pulumi.getter(name="pkcs12Password")
+    def pkcs12_password(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        """
+        return pulumi.get(self, "pkcs12_password")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        PEM-encoded private key matching public_certificate.
         """
         return pulumi.get(self, "private_key")
 
@@ -620,6 +737,7 @@ class As2Station(pulumi.CustomResource):
     def private_key_password(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Password for the PEM-encoded private key.
         """
         return pulumi.get(self, "private_key_password")
 

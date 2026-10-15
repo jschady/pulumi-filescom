@@ -14,16 +14,22 @@ namespace Jschady.Filescom.Inputs
     public sealed class AutomationDefinitionNodeImportFileConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
+        [Input("destinations")]
+        private InputList<string>? _destinations;
+
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// One or more destination path templates.
         /// </summary>
-        [Input("destination")]
-        public Input<string>? Destination { get; set; }
+        public InputList<string> Destinations
+        {
+            get => _destinations ?? (_destinations = new InputList<string>());
+            set => _destinations = value;
+        }
 
         [Input("headers")]
         private InputMap<string>? _headers;
@@ -49,7 +55,7 @@ namespace Jschady.Filescom.Inputs
         }
 
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         [Input("url", required: true)]
         public Input<string> Url { get; set; } = null!;

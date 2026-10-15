@@ -13,6 +13,8 @@ import * as utilities from "./utilities";
  *
  * The rule can also include or exclude site and folder admins from the action.
  *
+ * A Custom Workspace rule applies only to users who belong to that Workspace. Default Workspace users with access to a Custom Workspace, including Workspace Administrators, remain covered by Default Workspace rules.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -36,7 +38,7 @@ import * as utilities from "./utilities";
  *     partnerTag: "guest",
  *     userState: "inactive",
  *     userTag: "guest",
- *     workspaceId: 12,
+ *     workspaceId: 0,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -84,7 +86,7 @@ export class UserLifecycleRule extends pulumi.CustomResource {
      */
     declare public readonly action: pulumi.Output<string>;
     /**
-     * If true, a default-workspace rule also applies to users in all workspaces.
+     * If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     declare public readonly applyToAllWorkspaces: pulumi.Output<boolean>;
     /**
@@ -104,7 +106,7 @@ export class UserLifecycleRule extends pulumi.CustomResource {
      */
     declare public readonly includeFolderAdmins: pulumi.Output<boolean>;
     /**
-     * If true, the rule will apply to site admins.
+     * If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     declare public readonly includeSiteAdmins: pulumi.Output<boolean>;
     /**
@@ -132,7 +134,7 @@ export class UserLifecycleRule extends pulumi.CustomResource {
      */
     declare public readonly userTag: pulumi.Output<string>;
     /**
-     * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
+     * Workspace whose users the rule applies to. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
      */
     declare public readonly workspaceId: pulumi.Output<number>;
 
@@ -194,7 +196,7 @@ export interface UserLifecycleRuleState {
      */
     action?: pulumi.Input<string | undefined>;
     /**
-     * If true, a default-workspace rule also applies to users in all workspaces.
+     * If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     applyToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
@@ -214,7 +216,7 @@ export interface UserLifecycleRuleState {
      */
     includeFolderAdmins?: pulumi.Input<boolean | undefined>;
     /**
-     * If true, the rule will apply to site admins.
+     * If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     includeSiteAdmins?: pulumi.Input<boolean | undefined>;
     /**
@@ -242,7 +244,7 @@ export interface UserLifecycleRuleState {
      */
     userTag?: pulumi.Input<string | undefined>;
     /**
-     * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
+     * Workspace whose users the rule applies to. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
      */
     workspaceId?: pulumi.Input<number | undefined>;
 }
@@ -256,7 +258,7 @@ export interface UserLifecycleRuleArgs {
      */
     action?: pulumi.Input<string | undefined>;
     /**
-     * If true, a default-workspace rule also applies to users in all workspaces.
+     * If true, a Default Workspace rule also applies to users in all Custom Workspaces. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     applyToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
@@ -276,7 +278,7 @@ export interface UserLifecycleRuleArgs {
      */
     includeFolderAdmins?: pulumi.Input<boolean | undefined>;
     /**
-     * If true, the rule will apply to site admins.
+     * If true, the rule includes Site Administrators, who always belong to the Default Workspace. Can only be enabled when <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> is <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span>.
      */
     includeSiteAdmins?: pulumi.Input<boolean | undefined>;
     /**
@@ -300,7 +302,7 @@ export interface UserLifecycleRuleArgs {
      */
     userTag?: pulumi.Input<string | undefined>;
     /**
-     * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
+     * Workspace whose users the rule applies to. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the Default Workspace. A Custom Workspace rule applies only to users who belong to that Workspace, regardless of access granted to other users.
      */
     workspaceId?: pulumi.Input<number | undefined>;
 }

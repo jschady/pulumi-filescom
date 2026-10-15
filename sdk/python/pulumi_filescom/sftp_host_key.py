@@ -20,18 +20,22 @@ __all__ = ['SftpHostKeyArgs', 'SftpHostKey']
 class SftpHostKeyArgs:
     def __init__(__self__, *,
                  active: pulumi.Input[Optional[_builtins.bool]] = None,
+                 custom_domain_id: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a SftpHostKey resource.
 
         :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
+        :param pulumi.Input[_builtins.int] custom_domain_id: Custom Domain ID. If set, this key is used only for that Custom Domain.
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
         """
         if active is not None:
             pulumi.set(__self__, "active", active)
+        if custom_domain_id is not None:
+            pulumi.set(__self__, "custom_domain_id", custom_domain_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if private_key is not None:
@@ -48,6 +52,18 @@ class SftpHostKeyArgs:
     @active.setter
     def active(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "active", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customDomainId")
+    def custom_domain_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Custom Domain ID. If set, this key is used only for that Custom Domain.
+        """
+        return pulumi.get(self, "custom_domain_id")
+
+    @custom_domain_id.setter
+    def custom_domain_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "custom_domain_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -79,6 +95,7 @@ class SftpHostKeyArgs:
 class _SftpHostKeyState:
     def __init__(__self__, *,
                  active: pulumi.Input[Optional[_builtins.bool]] = None,
+                 custom_domain_id: pulumi.Input[Optional[_builtins.int]] = None,
                  fingerprint_md5: pulumi.Input[Optional[_builtins.str]] = None,
                  fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
                  key_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -88,6 +105,7 @@ class _SftpHostKeyState:
         Input properties used for looking up and filtering SftpHostKey resources.
 
         :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
+        :param pulumi.Input[_builtins.int] custom_domain_id: Custom Domain ID. If set, this key is used only for that Custom Domain.
         :param pulumi.Input[_builtins.str] fingerprint_md5: MD5 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] fingerprint_sha256: SHA256 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] key_type: SSH key type
@@ -97,6 +115,8 @@ class _SftpHostKeyState:
         """
         if active is not None:
             pulumi.set(__self__, "active", active)
+        if custom_domain_id is not None:
+            pulumi.set(__self__, "custom_domain_id", custom_domain_id)
         if fingerprint_md5 is not None:
             pulumi.set(__self__, "fingerprint_md5", fingerprint_md5)
         if fingerprint_sha256 is not None:
@@ -119,6 +139,18 @@ class _SftpHostKeyState:
     @active.setter
     def active(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "active", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customDomainId")
+    def custom_domain_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Custom Domain ID. If set, this key is used only for that Custom Domain.
+        """
+        return pulumi.get(self, "custom_domain_id")
+
+    @custom_domain_id.setter
+    def custom_domain_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "custom_domain_id", value)
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")
@@ -189,6 +221,7 @@ class SftpHostKey(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  active: pulumi.Input[Optional[_builtins.bool]] = None,
+                 custom_domain_id: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -206,6 +239,7 @@ class SftpHostKey(pulumi.CustomResource):
 
         example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key",
             active=True,
+            custom_domain_id=1,
             name="My Key")
         ```
         <!--End PulumiCodeChooser -->
@@ -224,6 +258,7 @@ class SftpHostKey(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
+        :param pulumi.Input[_builtins.int] custom_domain_id: Custom Domain ID. If set, this key is used only for that Custom Domain.
         :param pulumi.Input[_builtins.str] name: The friendly name of this SFTP Host Key.
         :param pulumi.Input[_builtins.str] private_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                The private key data.
@@ -248,6 +283,7 @@ class SftpHostKey(pulumi.CustomResource):
 
         example_sftp_host_key = filescom.SftpHostKey("example_sftp_host_key",
             active=True,
+            custom_domain_id=1,
             name="My Key")
         ```
         <!--End PulumiCodeChooser -->
@@ -279,6 +315,7 @@ class SftpHostKey(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  active: pulumi.Input[Optional[_builtins.bool]] = None,
+                 custom_domain_id: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -291,6 +328,7 @@ class SftpHostKey(pulumi.CustomResource):
             __props__ = SftpHostKeyArgs.__new__(SftpHostKeyArgs)
 
             __props__.__dict__["active"] = active
+            __props__.__dict__["custom_domain_id"] = custom_domain_id
             __props__.__dict__["name"] = name
             __props__.__dict__["private_key"] = None if private_key is None else pulumi.Output.secret(private_key)
             __props__.__dict__["fingerprint_md5"] = None
@@ -309,6 +347,7 @@ class SftpHostKey(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             active: pulumi.Input[Optional[_builtins.bool]] = None,
+            custom_domain_id: pulumi.Input[Optional[_builtins.int]] = None,
             fingerprint_md5: pulumi.Input[Optional[_builtins.str]] = None,
             fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
             key_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -322,6 +361,7 @@ class SftpHostKey(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] active: If true, use this SFTP Host Key.
+        :param pulumi.Input[_builtins.int] custom_domain_id: Custom Domain ID. If set, this key is used only for that Custom Domain.
         :param pulumi.Input[_builtins.str] fingerprint_md5: MD5 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] fingerprint_sha256: SHA256 Fingerprint of the public key
         :param pulumi.Input[_builtins.str] key_type: SSH key type
@@ -334,6 +374,7 @@ class SftpHostKey(pulumi.CustomResource):
         __props__ = _SftpHostKeyState.__new__(_SftpHostKeyState)
 
         __props__.__dict__["active"] = active
+        __props__.__dict__["custom_domain_id"] = custom_domain_id
         __props__.__dict__["fingerprint_md5"] = fingerprint_md5
         __props__.__dict__["fingerprint_sha256"] = fingerprint_sha256
         __props__.__dict__["key_type"] = key_type
@@ -348,6 +389,14 @@ class SftpHostKey(pulumi.CustomResource):
         If true, use this SFTP Host Key.
         """
         return pulumi.get(self, "active")
+
+    @_builtins.property
+    @pulumi.getter(name="customDomainId")
+    def custom_domain_id(self) -> pulumi.Output[_builtins.int]:
+        """
+        Custom Domain ID. If set, this key is used only for that Custom Domain.
+        """
+        return pulumi.get(self, "custom_domain_id")
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")

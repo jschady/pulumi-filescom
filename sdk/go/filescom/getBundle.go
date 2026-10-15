@@ -12,7 +12,6 @@ import (
 )
 
 // A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-//
 // The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 //
 // Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -94,7 +93,9 @@ type LookupBundleResult struct {
 	DontAllowFoldersInUploads bool `pulumi:"dontAllowFoldersInUploads"`
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder bool `pulumi:"dontSeparateSubmissionsByFolder"`
-	// Bundle expiration date/time
+	// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+	EffectiveExpiresAt string `pulumi:"effectiveExpiresAt"`
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt string `pulumi:"expiresAt"`
 	// Custom Form to use
 	FormFieldSet string `pulumi:"formFieldSet"`
@@ -269,7 +270,12 @@ func (o LookupBundleResultOutput) DontSeparateSubmissionsByFolder() pulumi.BoolO
 	return o.ApplyT(func(v LookupBundleResult) bool { return v.DontSeparateSubmissionsByFolder }).(pulumi.BoolOutput)
 }
 
-// Bundle expiration date/time
+// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+func (o LookupBundleResultOutput) EffectiveExpiresAt() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupBundleResult) string { return v.EffectiveExpiresAt }).(pulumi.StringOutput)
+}
+
+// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 func (o LookupBundleResultOutput) ExpiresAt() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupBundleResult) string { return v.ExpiresAt }).(pulumi.StringOutput)
 }

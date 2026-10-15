@@ -258,6 +258,7 @@ class _ScheduledExportState:
                  holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
                  human_readable_schedule: pulumi.Input[Optional[_builtins.str]] = None,
                  interval: pulumi.Input[Optional[_builtins.str]] = None,
+                 last_error: pulumi.Input[Optional[_builtins.str]] = None,
                  last_export_id: pulumi.Input[Optional[_builtins.int]] = None,
                  last_run_at: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -281,8 +282,9 @@ class _ScheduledExportState:
         :param pulumi.Input[_builtins.str] holiday_region: Optional holiday region used by the scheduled export schedule.
         :param pulumi.Input[_builtins.str] human_readable_schedule: Human-readable schedule description.
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
+        :param pulumi.Input[_builtins.str] last_error: Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
         :param pulumi.Input[_builtins.int] last_export_id: Most recent Export ID created by this schedule.
-        :param pulumi.Input[_builtins.str] last_run_at: Most recent scheduled run time.
+        :param pulumi.Input[_builtins.str] last_run_at: Most recent scheduled attempt time, including attempts that failed validation.
         :param pulumi.Input[_builtins.str] name: Name for this scheduled export.
         :param pulumi.Input[_builtins.int] recurring_day: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this selects the day number inside the chosen interval.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] recurring_days: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this selects one or more day numbers inside a <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, or <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span> interval.
@@ -309,6 +311,8 @@ class _ScheduledExportState:
             pulumi.set(__self__, "human_readable_schedule", human_readable_schedule)
         if interval is not None:
             pulumi.set(__self__, "interval", interval)
+        if last_error is not None:
+            pulumi.set(__self__, "last_error", last_error)
         if last_export_id is not None:
             pulumi.set(__self__, "last_export_id", last_export_id)
         if last_run_at is not None:
@@ -421,6 +425,18 @@ class _ScheduledExportState:
         pulumi.set(self, "interval", value)
 
     @_builtins.property
+    @pulumi.getter(name="lastError")
+    def last_error(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        """
+        return pulumi.get(self, "last_error")
+
+    @last_error.setter
+    def last_error(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "last_error", value)
+
+    @_builtins.property
     @pulumi.getter(name="lastExportId")
     def last_export_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -436,7 +452,7 @@ class _ScheduledExportState:
     @pulumi.getter(name="lastRunAt")
     def last_run_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Most recent scheduled run time.
+        Most recent scheduled attempt time, including attempts that failed validation.
         """
         return pulumi.get(self, "last_run_at")
 
@@ -773,6 +789,7 @@ class ScheduledExport(pulumi.CustomResource):
             __props__.__dict__["user_id"] = user_id
             __props__.__dict__["created_at"] = None
             __props__.__dict__["human_readable_schedule"] = None
+            __props__.__dict__["last_error"] = None
             __props__.__dict__["last_export_id"] = None
             __props__.__dict__["last_run_at"] = None
             __props__.__dict__["report_name"] = None
@@ -794,6 +811,7 @@ class ScheduledExport(pulumi.CustomResource):
             holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
             human_readable_schedule: pulumi.Input[Optional[_builtins.str]] = None,
             interval: pulumi.Input[Optional[_builtins.str]] = None,
+            last_error: pulumi.Input[Optional[_builtins.str]] = None,
             last_export_id: pulumi.Input[Optional[_builtins.int]] = None,
             last_run_at: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -821,8 +839,9 @@ class ScheduledExport(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] holiday_region: Optional holiday region used by the scheduled export schedule.
         :param pulumi.Input[_builtins.str] human_readable_schedule: Human-readable schedule description.
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
+        :param pulumi.Input[_builtins.str] last_error: Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
         :param pulumi.Input[_builtins.int] last_export_id: Most recent Export ID created by this schedule.
-        :param pulumi.Input[_builtins.str] last_run_at: Most recent scheduled run time.
+        :param pulumi.Input[_builtins.str] last_run_at: Most recent scheduled attempt time, including attempts that failed validation.
         :param pulumi.Input[_builtins.str] name: Name for this scheduled export.
         :param pulumi.Input[_builtins.int] recurring_day: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this selects the day number inside the chosen interval.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] recurring_days: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this selects one or more day numbers inside a <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, or <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span> interval.
@@ -846,6 +865,7 @@ class ScheduledExport(pulumi.CustomResource):
         __props__.__dict__["holiday_region"] = holiday_region
         __props__.__dict__["human_readable_schedule"] = human_readable_schedule
         __props__.__dict__["interval"] = interval
+        __props__.__dict__["last_error"] = last_error
         __props__.__dict__["last_export_id"] = last_export_id
         __props__.__dict__["last_run_at"] = last_run_at
         __props__.__dict__["name"] = name
@@ -918,6 +938,14 @@ class ScheduledExport(pulumi.CustomResource):
         return pulumi.get(self, "interval")
 
     @_builtins.property
+    @pulumi.getter(name="lastError")
+    def last_error(self) -> pulumi.Output[_builtins.str]:
+        """
+        Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        """
+        return pulumi.get(self, "last_error")
+
+    @_builtins.property
     @pulumi.getter(name="lastExportId")
     def last_export_id(self) -> pulumi.Output[_builtins.int]:
         """
@@ -929,7 +957,7 @@ class ScheduledExport(pulumi.CustomResource):
     @pulumi.getter(name="lastRunAt")
     def last_run_at(self) -> pulumi.Output[_builtins.str]:
         """
-        Most recent scheduled run time.
+        Most recent scheduled attempt time, including attempts that failed validation.
         """
         return pulumi.get(self, "last_run_at")
 
