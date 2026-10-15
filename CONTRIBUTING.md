@@ -14,7 +14,7 @@ in the workflows together.
 | --- | --- |
 | Go | 1.27.2 |
 | Pulumi | 3.258.0 |
-| golangci-lint | 2.12.2 |
+| golangci-lint | 2.14.0 |
 | Node.js | 24 |
 | Python | 3.11 |
 | .NET | 8.0 |

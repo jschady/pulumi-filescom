@@ -167,7 +167,7 @@ a pinned release inside a `run` step. The `ACTIONLINT_VERSION` and `ACTIONLINT_S
 | --- | --- |
 | Pulumi CLI | 3.258.0 |
 | `pulumictl` | v0.0.50 |
-| `golangci-lint` | v2.12.2 |
+| `golangci-lint` | v2.14.0 |
 | `actionlint` | 1.7.12 |
 | Node | 24 |
 | Yarn | 1.22.22 |
