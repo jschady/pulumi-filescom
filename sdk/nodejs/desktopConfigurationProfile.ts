@@ -17,7 +17,7 @@ import * as utilities from "./utilities";
  * const exampleDesktopConfigurationProfile = new filescom.DesktopConfigurationProfile("example_desktop_configuration_profile", {
  *     name: "North America Desktop Profile",
  *     mountMappings: {
- *         key: "example value",
+ *         W: "Americas",
  *     },
  *     workspaceId: 1,
  *     useForAllUsers: false,

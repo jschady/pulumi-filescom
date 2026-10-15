@@ -15,11 +15,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A GPGKey object on Files.com is used to securely store both the private and public keys associated with a GPG (GNU Privacy Guard) encryption key pair. This object enables the encryption and decryption of data using GPG, allowing you to protect sensitive information.
         /// 
-        /// 
-        /// 
         /// The private key is kept confidential and is used for decrypting data or signing messages to prove authenticity, while the public key is used to encrypt messages that only the owner of the private key can decrypt.
-        /// 
-        /// 
         /// 
         /// By storing both keys together in a GPGKey object, Files.com makes it easier to understand encryption operations, ensuring secure and efficient handling of encrypted data within the platform.
         /// 
@@ -132,11 +128,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A GPGKey object on Files.com is used to securely store both the private and public keys associated with a GPG (GNU Privacy Guard) encryption key pair. This object enables the encryption and decryption of data using GPG, allowing you to protect sensitive information.
         /// 
-        /// 
-        /// 
         /// The private key is kept confidential and is used for decrypting data or signing messages to prove authenticity, while the public key is used to encrypt messages that only the owner of the private key can decrypt.
-        /// 
-        /// 
         /// 
         /// By storing both keys together in a GPGKey object, Files.com makes it easier to understand encryption operations, ensuring secure and efficient handling of encrypted data within the platform.
         /// 
@@ -249,11 +241,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A GPGKey object on Files.com is used to securely store both the private and public keys associated with a GPG (GNU Privacy Guard) encryption key pair. This object enables the encryption and decryption of data using GPG, allowing you to protect sensitive information.
         /// 
-        /// 
-        /// 
         /// The private key is kept confidential and is used for decrypting data or signing messages to prove authenticity, while the public key is used to encrypt messages that only the owner of the private key can decrypt.
-        /// 
-        /// 
         /// 
         /// By storing both keys together in a GPGKey object, Files.com makes it easier to understand encryption operations, ensuring secure and efficient handling of encrypted data within the platform.
         /// 

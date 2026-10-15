@@ -5,13 +5,15 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
+ * A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
  *
- * Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
+ * Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level.
  *
  * Each behavior type also has a recursion mode in the behavior type documentation. <span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`">`always`</span> means the behavior is always recursive, <span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`">`never`</span> means it is never recursive, and <span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`">`sometimes`</span> means callers may choose the value of the <span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`">`recursive`</span> field.
  *
- * Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
+ * Some behavior types are visible to users without administrative permission on the behavior's folder, as indicated by `Visible to non-admins?` below. List Behaviors and List Behaviors by Path return these types when the user can see that the folder exists through a permission on that folder, an applicable permission on an ancestor folder, or a permission on a descendant folder. Seeing that a folder exists does not grant access to its files. Every user can see the site root, so root-level behaviors of these types appear in site-wide lists even for users with no folder permissions. Lists remain subject to the request's workspace scope. The same folder visibility rules apply to exports of these lists.
+ *
+ * In API list responses, site administrators and users with administrative permission on the behavior's own folder receive administrator values. Other users receive reduced values with sensitive settings removed. For Serve Publicly, these responses retain `value.key` and <span pulumi-lang-nodejs="`publicHostingUrl`" pulumi-lang-dotnet="`PublicHostingUrl`" pulumi-lang-go="`publicHostingUrl`" pulumi-lang-python="`public_hosting_url`" pulumi-lang-yaml="`publicHostingUrl`" pulumi-lang-java="`publicHostingUrl`" pulumi-lang-hcl="`public_hosting_url`">`publicHostingUrl`</span>, when configured, but omit the hosting <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span> and <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>. The password is write-only for everyone. Some behavior types are also settable by users without administrative permission, as described below.
  *
  * Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> field.
  *
@@ -32,7 +34,7 @@ import * as utilities from "./utilities";
  *             encoding: "JSON",
  *         },
  *     },
- *     disableParentFolderBehavior: false,
+ *     disableParentFolderBehavior: true,
  *     recursive: false,
  *     name: "example",
  *     description: "example",
@@ -310,7 +312,7 @@ import * as utilities from "./utilities";
  *     behavior: "auto_unzip",
  *     value: {
  *         auto_unzip: {
- *             destination_path: "/Uploads/Unzipped/%Y/%m/%d",
+ *             destination_path: "foo/bar/unzipped/%Y/%m/%d",
  *         },
  *     },
  * });
@@ -386,7 +388,7 @@ export class Behavior extends pulumi.CustomResource {
      */
     declare public readonly description: pulumi.Output<string>;
     /**
-     * If true, the parent folder's behavior will be disabled for this folder and its children.
+     * If true, disables the inherited behavior for this folder and its children. Valid only for behavior types that child folders may override, and requires recursive to be true. Rejected for all other behavior types.
      */
     declare public readonly disableParentFolderBehavior: pulumi.Output<boolean>;
     /**
@@ -406,7 +408,7 @@ export class Behavior extends pulumi.CustomResource {
      */
     declare public readonly path: pulumi.Output<string>;
     /**
-     * Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured.  When a Custom Domain with <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> destination is attached to this behavior, the URL uses that domain.  Otherwise it uses the site's `subdomain.hosted-by-files.com` host.
+     * Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured. When a Custom Domain with <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> destination is attached to this behavior, the URL uses that domain. Otherwise it uses the site's `subdomain.hosted-by-files.com` host, unless <span pulumi-lang-nodejs="`customDomainOnly`" pulumi-lang-dotnet="`CustomDomainOnly`" pulumi-lang-go="`customDomainOnly`" pulumi-lang-python="`custom_domain_only`" pulumi-lang-yaml="`customDomainOnly`" pulumi-lang-java="`customDomainOnly`" pulumi-lang-hcl="`custom_domain_only`">`customDomainOnly`</span> is enabled, in which case no URL is returned.
      */
     declare public /*out*/ readonly publicHostingUrl: pulumi.Output<string>;
     /**
@@ -490,7 +492,7 @@ export interface BehaviorState {
      */
     description?: pulumi.Input<string | undefined>;
     /**
-     * If true, the parent folder's behavior will be disabled for this folder and its children.
+     * If true, disables the inherited behavior for this folder and its children. Valid only for behavior types that child folders may override, and requires recursive to be true. Rejected for all other behavior types.
      */
     disableParentFolderBehavior?: pulumi.Input<boolean | undefined>;
     /**
@@ -510,7 +512,7 @@ export interface BehaviorState {
      */
     path?: pulumi.Input<string | undefined>;
     /**
-     * Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured.  When a Custom Domain with <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> destination is attached to this behavior, the URL uses that domain.  Otherwise it uses the site's `subdomain.hosted-by-files.com` host.
+     * Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured. When a Custom Domain with <span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`">`publicHosting`</span> destination is attached to this behavior, the URL uses that domain. Otherwise it uses the site's `subdomain.hosted-by-files.com` host, unless <span pulumi-lang-nodejs="`customDomainOnly`" pulumi-lang-dotnet="`CustomDomainOnly`" pulumi-lang-go="`customDomainOnly`" pulumi-lang-python="`custom_domain_only`" pulumi-lang-yaml="`customDomainOnly`" pulumi-lang-java="`customDomainOnly`" pulumi-lang-hcl="`custom_domain_only`">`customDomainOnly`</span> is enabled, in which case no URL is returned.
      */
     publicHostingUrl?: pulumi.Input<string | undefined>;
     /**
@@ -540,7 +542,7 @@ export interface BehaviorArgs {
      */
     description?: pulumi.Input<string | undefined>;
     /**
-     * If true, the parent folder's behavior will be disabled for this folder and its children.
+     * If true, disables the inherited behavior for this folder and its children. Valid only for behavior types that child folders may override, and requires recursive to be true. Rejected for all other behavior types.
      */
     disableParentFolderBehavior?: pulumi.Input<boolean | undefined>;
     /**

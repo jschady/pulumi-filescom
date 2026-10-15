@@ -13,14 +13,6 @@ namespace Jschady.Filescom.Inputs
 
     public sealed class AutomationDefinitionNodeRunSyncConfigArgs : global::Pulumi.ResourceArgs
     {
-        [Input("legacySyncIds")]
-        private InputList<int>? _legacySyncIds;
-        public InputList<int> LegacySyncIds
-        {
-            get => _legacySyncIds ?? (_legacySyncIds = new InputList<int>());
-            set => _legacySyncIds = value;
-        }
-
         [Input("onErrors")]
         private InputList<Inputs.AutomationDefinitionNodeRunSyncConfigOnErrorArgs>? _onErrors;
 
@@ -33,7 +25,7 @@ namespace Jschady.Filescom.Inputs
             set => _onErrors = value;
         }
 
-        [Input("syncIds")]
+        [Input("syncIds", required: true)]
         private InputList<int>? _syncIds;
         public InputList<int> SyncIds
         {

@@ -20,6 +20,7 @@ __all__ = ['FormFieldSetArgs', 'FormFieldSet']
 class FormFieldSetArgs:
     def __init__(__self__, *,
                  form_fields: Optional[Any] = None,
+                 require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -29,7 +30,8 @@ class FormFieldSetArgs:
         """
         The set of arguments for constructing a FormFieldSet resource.
 
-        :param Any form_fields: Associated form fields
+        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
         :param pulumi.Input[_builtins.bool] skip_name: Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
@@ -41,6 +43,8 @@ class FormFieldSetArgs:
         """
         if form_fields is not None:
             pulumi.set(__self__, "form_fields", form_fields)
+        if require_complete_metadata_capture is not None:
+            pulumi.set(__self__, "require_complete_metadata_capture", require_complete_metadata_capture)
         if skip_company is not None:
             pulumi.set(__self__, "skip_company", skip_company)
         if skip_email is not None:
@@ -58,13 +62,25 @@ class FormFieldSetArgs:
     @pulumi.getter(name="formFields")
     def form_fields(self) -> Optional[Any]:
         """
-        Associated form fields
+        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         """
         return pulumi.get(self, "form_fields")
 
     @form_fields.setter
     def form_fields(self, value: Optional[Any]):
         pulumi.set(self, "form_fields", value)
+
+    @_builtins.property
+    @pulumi.getter(name="requireCompleteMetadataCapture")
+    def require_complete_metadata_capture(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
+        """
+        return pulumi.get(self, "require_complete_metadata_capture")
+
+    @require_complete_metadata_capture.setter
+    def require_complete_metadata_capture(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "require_complete_metadata_capture", value)
 
     @_builtins.property
     @pulumi.getter(name="skipCompany")
@@ -147,6 +163,7 @@ class _FormFieldSetState:
                  form_fields: Optional[Any] = None,
                  form_layouts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  in_use: pulumi.Input[Optional[_builtins.bool]] = None,
+                 require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -156,9 +173,10 @@ class _FormFieldSetState:
         """
         Input properties used for looking up and filtering FormFieldSet resources.
 
-        :param Any form_fields: Associated form fields
+        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] form_layouts: Layout of the form
         :param pulumi.Input[_builtins.bool] in_use: Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
+        :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
         :param pulumi.Input[_builtins.bool] skip_name: Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
@@ -174,6 +192,8 @@ class _FormFieldSetState:
             pulumi.set(__self__, "form_layouts", form_layouts)
         if in_use is not None:
             pulumi.set(__self__, "in_use", in_use)
+        if require_complete_metadata_capture is not None:
+            pulumi.set(__self__, "require_complete_metadata_capture", require_complete_metadata_capture)
         if skip_company is not None:
             pulumi.set(__self__, "skip_company", skip_company)
         if skip_email is not None:
@@ -191,7 +211,7 @@ class _FormFieldSetState:
     @pulumi.getter(name="formFields")
     def form_fields(self) -> Optional[Any]:
         """
-        Associated form fields
+        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         """
         return pulumi.get(self, "form_fields")
 
@@ -222,6 +242,18 @@ class _FormFieldSetState:
     @in_use.setter
     def in_use(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "in_use", value)
+
+    @_builtins.property
+    @pulumi.getter(name="requireCompleteMetadataCapture")
+    def require_complete_metadata_capture(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
+        """
+        return pulumi.get(self, "require_complete_metadata_capture")
+
+    @require_complete_metadata_capture.setter
+    def require_complete_metadata_capture(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "require_complete_metadata_capture", value)
 
     @_builtins.property
     @pulumi.getter(name="skipCompany")
@@ -305,6 +337,7 @@ class FormFieldSet(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  form_fields: Optional[Any] = None,
+                 require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -319,6 +352,14 @@ class FormFieldSet(pulumi.CustomResource):
 
         Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
 
+        Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+
+        Enable<span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "> requireCompleteMetadataCapture </span>to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+
+        Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>when submitting new answers or editing the form again.
+
+        Authenticated form field set responses include historical definitions in<span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "> formFields </span>so existing answers can still be interpreted. Only IDs in<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -329,6 +370,7 @@ class FormFieldSet(pulumi.CustomResource):
         example_form_field_set = filescom.FormFieldSet("example_form_field_set",
             user_id=1,
             title="Sample Form Title",
+            require_complete_metadata_capture=False,
             workspace_id=1,
             skip_email=False,
             skip_name=False,
@@ -362,7 +404,8 @@ class FormFieldSet(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param Any form_fields: Associated form fields
+        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
         :param pulumi.Input[_builtins.bool] skip_name: Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
@@ -385,6 +428,14 @@ class FormFieldSet(pulumi.CustomResource):
 
         Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
 
+        Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+
+        Enable<span pulumi-lang-nodejs=" requireCompleteMetadataCapture " pulumi-lang-dotnet=" RequireCompleteMetadataCapture " pulumi-lang-go=" requireCompleteMetadataCapture " pulumi-lang-python=" require_complete_metadata_capture " pulumi-lang-yaml=" requireCompleteMetadataCapture " pulumi-lang-java=" requireCompleteMetadataCapture " pulumi-lang-hcl=" require_complete_metadata_capture "> requireCompleteMetadataCapture </span>to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+
+        Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>when submitting new answers or editing the form again.
+
+        Authenticated form field set responses include historical definitions in<span pulumi-lang-nodejs=" formFields " pulumi-lang-dotnet=" FormFields " pulumi-lang-go=" formFields " pulumi-lang-python=" form_fields " pulumi-lang-yaml=" formFields " pulumi-lang-java=" formFields " pulumi-lang-hcl=" form_fields "> formFields </span>so existing answers can still be interpreted. Only IDs in<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -395,6 +446,7 @@ class FormFieldSet(pulumi.CustomResource):
         example_form_field_set = filescom.FormFieldSet("example_form_field_set",
             user_id=1,
             title="Sample Form Title",
+            require_complete_metadata_capture=False,
             workspace_id=1,
             skip_email=False,
             skip_name=False,
@@ -442,6 +494,7 @@ class FormFieldSet(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  form_fields: Optional[Any] = None,
+                 require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
                  skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -458,6 +511,7 @@ class FormFieldSet(pulumi.CustomResource):
             __props__ = FormFieldSetArgs.__new__(FormFieldSetArgs)
 
             __props__.__dict__["form_fields"] = form_fields
+            __props__.__dict__["require_complete_metadata_capture"] = require_complete_metadata_capture
             __props__.__dict__["skip_company"] = skip_company
             __props__.__dict__["skip_email"] = skip_email
             __props__.__dict__["skip_name"] = skip_name
@@ -481,6 +535,7 @@ class FormFieldSet(pulumi.CustomResource):
             form_fields: Optional[Any] = None,
             form_layouts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             in_use: pulumi.Input[Optional[_builtins.bool]] = None,
+            require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
             skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
             skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
             skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -494,9 +549,10 @@ class FormFieldSet(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param Any form_fields: Associated form fields
+        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] form_layouts: Layout of the form
         :param pulumi.Input[_builtins.bool] in_use: Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
+        :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
         :param pulumi.Input[_builtins.bool] skip_name: Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
@@ -513,6 +569,7 @@ class FormFieldSet(pulumi.CustomResource):
         __props__.__dict__["form_fields"] = form_fields
         __props__.__dict__["form_layouts"] = form_layouts
         __props__.__dict__["in_use"] = in_use
+        __props__.__dict__["require_complete_metadata_capture"] = require_complete_metadata_capture
         __props__.__dict__["skip_company"] = skip_company
         __props__.__dict__["skip_email"] = skip_email
         __props__.__dict__["skip_name"] = skip_name
@@ -525,7 +582,7 @@ class FormFieldSet(pulumi.CustomResource):
     @pulumi.getter(name="formFields")
     def form_fields(self) -> pulumi.Output[Any]:
         """
-        Associated form fields
+        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
         """
         return pulumi.get(self, "form_fields")
 
@@ -544,6 +601,14 @@ class FormFieldSet(pulumi.CustomResource):
         Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
         """
         return pulumi.get(self, "in_use")
+
+    @_builtins.property
+    @pulumi.getter(name="requireCompleteMetadataCapture")
+    def require_complete_metadata_capture(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
+        """
+        return pulumi.get(self, "require_complete_metadata_capture")
 
     @_builtins.property
     @pulumi.getter(name="skipCompany")

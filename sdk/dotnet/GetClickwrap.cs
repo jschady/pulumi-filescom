@@ -15,18 +15,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Clickwrap is a legal agreement (such as an NDA or Terms of Use) that your Users and/or Bundle/Inbox participants will need to agree to via a "Clickwrap" UI before accessing the site, bundle, or inbox.
         /// 
-        /// 
-        /// 
         /// The values for &lt;span pulumi-lang-nodejs="`useWithUsers`" pulumi-lang-dotnet="`UseWithUsers`" pulumi-lang-go="`useWithUsers`" pulumi-lang-python="`use_with_users`" pulumi-lang-yaml="`useWithUsers`" pulumi-lang-java="`useWithUsers`" pulumi-lang-hcl="`use_with_users`"&gt;`useWithUsers`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithBundles`" pulumi-lang-dotnet="`UseWithBundles`" pulumi-lang-go="`useWithBundles`" pulumi-lang-python="`use_with_bundles`" pulumi-lang-yaml="`useWithBundles`" pulumi-lang-java="`useWithBundles`" pulumi-lang-hcl="`use_with_bundles`"&gt;`useWithBundles`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithInboxes`" pulumi-lang-dotnet="`UseWithInboxes`" pulumi-lang-go="`useWithInboxes`" pulumi-lang-python="`use_with_inboxes`" pulumi-lang-yaml="`useWithInboxes`" pulumi-lang-java="`useWithInboxes`" pulumi-lang-hcl="`use_with_inboxes`"&gt;`useWithInboxes`&lt;/span&gt; are explained as follows:
         /// 
-        /// 
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; - This Clickwrap may not be used in this context.
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`availableToAllUsers`" pulumi-lang-dotnet="`AvailableToAllUsers`" pulumi-lang-go="`availableToAllUsers`" pulumi-lang-python="`available_to_all_users`" pulumi-lang-yaml="`availableToAllUsers`" pulumi-lang-java="`availableToAllUsers`" pulumi-lang-hcl="`available_to_all_users`"&gt;`availableToAllUsers`&lt;/span&gt; - This Clickwrap may be assigned in this context by any user.
-        /// 
-        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins. We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
-        /// 
+        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins.  We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
         /// * &lt;span pulumi-lang-nodejs="`required`" pulumi-lang-dotnet="`Required`" pulumi-lang-go="`required`" pulumi-lang-python="`required`" pulumi-lang-yaml="`required`" pulumi-lang-java="`required`" pulumi-lang-hcl="`required`"&gt;`required`&lt;/span&gt; - This Clickwrap will always be used in this context, and may not be overridden.
         /// 
         /// ## Example Usage
@@ -138,18 +131,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Clickwrap is a legal agreement (such as an NDA or Terms of Use) that your Users and/or Bundle/Inbox participants will need to agree to via a "Clickwrap" UI before accessing the site, bundle, or inbox.
         /// 
-        /// 
-        /// 
         /// The values for &lt;span pulumi-lang-nodejs="`useWithUsers`" pulumi-lang-dotnet="`UseWithUsers`" pulumi-lang-go="`useWithUsers`" pulumi-lang-python="`use_with_users`" pulumi-lang-yaml="`useWithUsers`" pulumi-lang-java="`useWithUsers`" pulumi-lang-hcl="`use_with_users`"&gt;`useWithUsers`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithBundles`" pulumi-lang-dotnet="`UseWithBundles`" pulumi-lang-go="`useWithBundles`" pulumi-lang-python="`use_with_bundles`" pulumi-lang-yaml="`useWithBundles`" pulumi-lang-java="`useWithBundles`" pulumi-lang-hcl="`use_with_bundles`"&gt;`useWithBundles`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithInboxes`" pulumi-lang-dotnet="`UseWithInboxes`" pulumi-lang-go="`useWithInboxes`" pulumi-lang-python="`use_with_inboxes`" pulumi-lang-yaml="`useWithInboxes`" pulumi-lang-java="`useWithInboxes`" pulumi-lang-hcl="`use_with_inboxes`"&gt;`useWithInboxes`&lt;/span&gt; are explained as follows:
         /// 
-        /// 
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; - This Clickwrap may not be used in this context.
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`availableToAllUsers`" pulumi-lang-dotnet="`AvailableToAllUsers`" pulumi-lang-go="`availableToAllUsers`" pulumi-lang-python="`available_to_all_users`" pulumi-lang-yaml="`availableToAllUsers`" pulumi-lang-java="`availableToAllUsers`" pulumi-lang-hcl="`available_to_all_users`"&gt;`availableToAllUsers`&lt;/span&gt; - This Clickwrap may be assigned in this context by any user.
-        /// 
-        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins. We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
-        /// 
+        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins.  We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
         /// * &lt;span pulumi-lang-nodejs="`required`" pulumi-lang-dotnet="`Required`" pulumi-lang-go="`required`" pulumi-lang-python="`required`" pulumi-lang-yaml="`required`" pulumi-lang-java="`required`" pulumi-lang-hcl="`required`"&gt;`required`&lt;/span&gt; - This Clickwrap will always be used in this context, and may not be overridden.
         /// 
         /// ## Example Usage
@@ -261,18 +247,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Clickwrap is a legal agreement (such as an NDA or Terms of Use) that your Users and/or Bundle/Inbox participants will need to agree to via a "Clickwrap" UI before accessing the site, bundle, or inbox.
         /// 
-        /// 
-        /// 
         /// The values for &lt;span pulumi-lang-nodejs="`useWithUsers`" pulumi-lang-dotnet="`UseWithUsers`" pulumi-lang-go="`useWithUsers`" pulumi-lang-python="`use_with_users`" pulumi-lang-yaml="`useWithUsers`" pulumi-lang-java="`useWithUsers`" pulumi-lang-hcl="`use_with_users`"&gt;`useWithUsers`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithBundles`" pulumi-lang-dotnet="`UseWithBundles`" pulumi-lang-go="`useWithBundles`" pulumi-lang-python="`use_with_bundles`" pulumi-lang-yaml="`useWithBundles`" pulumi-lang-java="`useWithBundles`" pulumi-lang-hcl="`use_with_bundles`"&gt;`useWithBundles`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`useWithInboxes`" pulumi-lang-dotnet="`UseWithInboxes`" pulumi-lang-go="`useWithInboxes`" pulumi-lang-python="`use_with_inboxes`" pulumi-lang-yaml="`useWithInboxes`" pulumi-lang-java="`useWithInboxes`" pulumi-lang-hcl="`use_with_inboxes`"&gt;`useWithInboxes`&lt;/span&gt; are explained as follows:
         /// 
-        /// 
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; - This Clickwrap may not be used in this context.
-        /// 
         /// * &lt;span pulumi-lang-nodejs="`availableToAllUsers`" pulumi-lang-dotnet="`AvailableToAllUsers`" pulumi-lang-go="`availableToAllUsers`" pulumi-lang-python="`available_to_all_users`" pulumi-lang-yaml="`availableToAllUsers`" pulumi-lang-java="`availableToAllUsers`" pulumi-lang-hcl="`available_to_all_users`"&gt;`availableToAllUsers`&lt;/span&gt; - This Clickwrap may be assigned in this context by any user.
-        /// 
-        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins. We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
-        /// 
+        /// * &lt;span pulumi-lang-nodejs="`available`" pulumi-lang-dotnet="`Available`" pulumi-lang-go="`available`" pulumi-lang-python="`available`" pulumi-lang-yaml="`available`" pulumi-lang-java="`available`" pulumi-lang-hcl="`available`"&gt;`available`&lt;/span&gt; - This Clickwrap may be assigned in this context, but only by Site Admins.  We recognize that the name of this setting is somewhat ambiguous, but we maintain it for legacy reasons.
         /// * &lt;span pulumi-lang-nodejs="`required`" pulumi-lang-dotnet="`Required`" pulumi-lang-go="`required`" pulumi-lang-python="`required`" pulumi-lang-yaml="`required`" pulumi-lang-java="`required`" pulumi-lang-hcl="`required`"&gt;`required`&lt;/span&gt; - This Clickwrap will always be used in this context, and may not be overridden.
         /// 
         /// ## Example Usage

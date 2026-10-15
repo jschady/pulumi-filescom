@@ -25,6 +25,9 @@ namespace Jschady.Filescom.Inputs
         [Input("pathTimeZone")]
         public Input<string>? PathTimeZone { get; set; }
 
+        /// <summary>
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+        /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }
 

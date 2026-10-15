@@ -18,7 +18,10 @@ import * as utilities from "./utilities";
  *
  * const exampleIntegrationCentricProfile = new filescom.IntegrationCentricProfile("example_integration_centric_profile", {
  *     name: "Business Systems Onboarding",
- *     expectedRemoteServers: ["example"],
+ *     expectedRemoteServers: [{
+ *         serverType: "dropbox",
+ *         name: "Dropbox",
+ *     }],
  *     workspaceId: 1,
  *     useForAllUsers: false,
  * });

@@ -51,7 +51,7 @@ export interface GetSiteResult {
      */
     readonly adminsBypassLockedSubfolders: boolean;
     /**
-     * Availability settings for AI features by user class
+     * Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
      */
     readonly aiFeatureAvailability: any;
     /**
@@ -199,6 +199,10 @@ export interface GetSiteResult {
      */
     readonly calculateFileChecksumsSha256: boolean;
     /**
+     * If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+     */
+    readonly childSiteFolderAdminsCanSeeParentSiteDirectory: boolean;
+    /**
      * Page link and button color
      */
     readonly color2Left: string;
@@ -303,13 +307,21 @@ export interface GetSiteResult {
      */
     readonly email: string;
     /**
-     * Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+     * Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
      */
     readonly emailFooterCustomText: string;
     /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     readonly fedramp: boolean;
+    /**
+     * If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+     */
+    readonly fileActivityEventsEnabled: boolean;
+    /**
+     * Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+     */
+    readonly filesComRemoteServerEnabled: boolean;
     /**
      * If true, permissions for this site must be bound to a group (not a user).
      */
@@ -431,6 +443,10 @@ export interface GetSiteResult {
      */
     readonly ldapSecure: boolean;
     /**
+     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+     */
+    readonly ldapServerCertificate: string;
+    /**
      * LDAP type
      */
     readonly ldapType: string;
@@ -467,7 +483,7 @@ export interface GetSiteResult {
      */
     readonly logo: string;
     /**
-     * List of site settings managed by the parent site
+     * Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
      */
     readonly managedSiteSettings: any;
     /**
@@ -631,6 +647,10 @@ export interface GetSiteResult {
      */
     readonly rootFolderBehaviorsApplyToWorkspaces: boolean;
     /**
+     * Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+     */
+    readonly s3CompatibleEndpointEnabled: boolean;
+    /**
      * Current session
      */
     readonly session: string;
@@ -707,6 +727,10 @@ export interface GetSiteResult {
      */
     readonly smtpPort: number;
     /**
+     * Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+     */
+    readonly smtpSsl: string;
+    /**
      * SMTP server username
      */
     readonly smtpUsername: string;
@@ -735,7 +759,7 @@ export interface GetSiteResult {
      */
     readonly trialUntil: string;
     /**
-     * Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+     * Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
      */
     readonly uploadsViaEmailAuthentication: boolean;
     /**
@@ -810,6 +834,10 @@ export interface GetSiteResult {
      * Does FTP user Windows emulation mode?
      */
     readonly windowsModeFtp: boolean;
+    /**
+     * If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+     */
+    readonly workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory: boolean;
 }
 /**
  * A Site is the place you'll come to update site settings, as well as manage site-wide API keys.

@@ -26,7 +26,10 @@ class GetEventDeliveryAttemptResult:
     """
     A collection of values returned by getEventDeliveryAttempt.
     """
-    def __init__(__self__, attempt_number=None, created_at=None, delivered_at=None, error_message=None, event_record_id=None, event_subscription_id=None, event_target_id=None, id=None, last_attempted_at=None, latency_ms=None, next_attempt_at=None, response_body=None, response_code=None, status=None, workspace_id=None):
+    def __init__(__self__, activity_notification_batch_id=None, attempt_number=None, created_at=None, delivered_at=None, error_message=None, event_record_id=None, event_subscription_id=None, event_target_id=None, id=None, last_attempted_at=None, latency_ms=None, next_attempt_at=None, response_body=None, response_code=None, status=None, workspace_id=None):
+        if activity_notification_batch_id and not isinstance(activity_notification_batch_id, int):
+            raise TypeError("Expected argument 'activity_notification_batch_id' to be a int")
+        pulumi.set(__self__, "activity_notification_batch_id", activity_notification_batch_id)
         if attempt_number and not isinstance(attempt_number, int):
             raise TypeError("Expected argument 'attempt_number' to be a int")
         pulumi.set(__self__, "attempt_number", attempt_number)
@@ -72,6 +75,14 @@ class GetEventDeliveryAttemptResult:
         if workspace_id and not isinstance(workspace_id, int):
             raise TypeError("Expected argument 'workspace_id' to be a int")
         pulumi.set(__self__, "workspace_id", workspace_id)
+
+    @_builtins.property
+    @pulumi.getter(name="activityNotificationBatchId")
+    def activity_notification_batch_id(self) -> _builtins.int:
+        """
+        Shared summary ID when this event is delivered in a Slack or Teams subfolder summary. All events in a summary share its delivery outcome.
+        """
+        return pulumi.get(self, "activity_notification_batch_id")
 
     @_builtins.property
     @pulumi.getter(name="attemptNumber")
@@ -200,6 +211,7 @@ class AwaitableGetEventDeliveryAttemptResult(GetEventDeliveryAttemptResult):
         if False:
             yield self
         return GetEventDeliveryAttemptResult(
+            activity_notification_batch_id=self.activity_notification_batch_id,
             attempt_number=self.attempt_number,
             created_at=self.created_at,
             delivered_at=self.delivered_at,
@@ -242,6 +254,7 @@ def get_event_delivery_attempt(id: Optional[_builtins.int] = None,
     __ret__ = pulumi.runtime.invoke('filescom:index/getEventDeliveryAttempt:getEventDeliveryAttempt', __args__, opts=opts, typ=GetEventDeliveryAttemptResult).value
 
     return AwaitableGetEventDeliveryAttemptResult(
+        activity_notification_batch_id=pulumi.get(__ret__, 'activity_notification_batch_id'),
         attempt_number=pulumi.get(__ret__, 'attempt_number'),
         created_at=pulumi.get(__ret__, 'created_at'),
         delivered_at=pulumi.get(__ret__, 'delivered_at'),
@@ -281,6 +294,7 @@ def get_event_delivery_attempt_output(id: pulumi.Input[Optional[_builtins.int]] 
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getEventDeliveryAttempt:getEventDeliveryAttempt', __args__, opts=opts, typ=GetEventDeliveryAttemptResult)
     return __ret__.apply(lambda __response__: GetEventDeliveryAttemptResult(
+        activity_notification_batch_id=pulumi.get(__response__, 'activity_notification_batch_id'),
         attempt_number=pulumi.get(__response__, 'attempt_number'),
         created_at=pulumi.get(__response__, 'created_at'),
         delivered_at=pulumi.get(__response__, 'delivered_at'),

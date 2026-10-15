@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// An SFTP Host Key is a cryptographic key used to verify the identity of the server during an SFTP connection. This allows the client to be sure that it is connecting to the intended server, preventing man-in-the-middle attacks and ensuring secure communication between the client and Files.com.
         /// 
-        /// 
-        /// 
         /// Files.com allows you to provide custom SFTP Host Keys, which is particularly useful when migrating to Files.com from an existing SFTP server, allowing the Files.com platform to match your previously-installed host key for a seamless transition.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// An SFTP Host Key is a cryptographic key used to verify the identity of the server during an SFTP connection. This allows the client to be sure that it is connecting to the intended server, preventing man-in-the-middle attacks and ensuring secure communication between the client and Files.com.
         /// 
-        /// 
-        /// 
         /// Files.com allows you to provide custom SFTP Host Keys, which is particularly useful when migrating to Files.com from an existing SFTP server, allowing the Files.com platform to match your previously-installed host key for a seamless transition.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// An SFTP Host Key is a cryptographic key used to verify the identity of the server during an SFTP connection. This allows the client to be sure that it is connecting to the intended server, preventing man-in-the-middle attacks and ensuring secure communication between the client and Files.com.
-        /// 
-        /// 
         /// 
         /// Files.com allows you to provide custom SFTP Host Keys, which is particularly useful when migrating to Files.com from an existing SFTP server, allowing the Files.com platform to match your previously-installed host key for a seamless transition.
         /// 
@@ -390,6 +384,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool Active;
         /// <summary>
+        /// Custom Domain ID. If set, this key is used only for that Custom Domain.
+        /// </summary>
+        public readonly int CustomDomainId;
+        /// <summary>
         /// MD5 Fingerprint of the public key
         /// </summary>
         public readonly string FingerprintMd5;
@@ -414,6 +412,8 @@ namespace Jschady.Filescom
         private GetSftpHostKeyResult(
             bool active,
 
+            int customDomainId,
+
             string fingerprintMd5,
 
             string fingerprintSha256,
@@ -425,6 +425,7 @@ namespace Jschady.Filescom
             string name)
         {
             Active = active;
+            CustomDomainId = customDomainId;
             FingerprintMd5 = fingerprintMd5;
             FingerprintSha256 = fingerprintSha256;
             Id = id;

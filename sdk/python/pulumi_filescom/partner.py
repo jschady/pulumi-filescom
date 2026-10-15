@@ -30,6 +30,7 @@ class PartnerArgs:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notes: pulumi.Input[Optional[_builtins.str]] = None,
                  partner_channel_template_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 partnership_role: pulumi.Input[Optional[_builtins.str]] = None,
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  show_partner_channel_home_page: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -49,6 +50,7 @@ class PartnerArgs:
         :param pulumi.Input[_builtins.str] name: The name of the Partner.
         :param pulumi.Input[_builtins.str] notes: Notes about this Partner.
         :param pulumi.Input[_builtins.int] partner_channel_template_id: ID of the Partner Channel Template assigned to this Partner.
+        :param pulumi.Input[_builtins.str] partnership_role: This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the Group responsible for this Partner.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the User responsible for this Partner.
         :param pulumi.Input[_builtins.bool] show_partner_channel_home_page: Show Partner users a simplified home page built from this Partner's Channels.
@@ -76,6 +78,8 @@ class PartnerArgs:
             pulumi.set(__self__, "notes", notes)
         if partner_channel_template_id is not None:
             pulumi.set(__self__, "partner_channel_template_id", partner_channel_template_id)
+        if partnership_role is not None:
+            pulumi.set(__self__, "partnership_role", partnership_role)
         if responsible_group_id is not None:
             pulumi.set(__self__, "responsible_group_id", responsible_group_id)
         if responsible_user_id is not None:
@@ -220,6 +224,18 @@ class PartnerArgs:
         pulumi.set(self, "partner_channel_template_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="partnershipRole")
+    def partnership_role(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
+        """
+        return pulumi.get(self, "partnership_role")
+
+    @partnership_role.setter
+    def partnership_role(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "partnership_role", value)
+
+    @_builtins.property
     @pulumi.getter(name="responsibleGroupId")
     def responsible_group_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -290,6 +306,7 @@ class _PartnerState:
                  allow_user_creation: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed_ips: pulumi.Input[Optional[_builtins.str]] = None,
                  cc_emails_to_responsible_party: pulumi.Input[Optional[_builtins.bool]] = None,
+                 connections: Optional[Any] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notes: pulumi.Input[Optional[_builtins.str]] = None,
                  partner_admin_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
@@ -312,11 +329,12 @@ class _PartnerState:
         :param pulumi.Input[_builtins.bool] allow_user_creation: Allow Partner Admins to create users.
         :param pulumi.Input[_builtins.str] allowed_ips: A list of allowed IPs for this Partner. Newline delimited. Partner User IP access is allowed when the IP matches the Partner, User, or Site allowed IP lists.
         :param pulumi.Input[_builtins.bool] cc_emails_to_responsible_party: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, emails sent to Partner users are copied to the responsible User or Group.
+        :param Any connections: Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
         :param pulumi.Input[_builtins.str] name: The name of the Partner.
         :param pulumi.Input[_builtins.str] notes: Notes about this Partner.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] partner_admin_ids: Array of User IDs that are Partner Admins for this Partner.
         :param pulumi.Input[_builtins.int] partner_channel_template_id: ID of the Partner Channel Template assigned to this Partner.
-        :param pulumi.Input[_builtins.str] partnership_role: This site's role in Partner Site relationships for this Partner. Can be <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span>, <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span>, <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span>, or null.
+        :param pulumi.Input[_builtins.str] partnership_role: This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the Group responsible for this Partner.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the User responsible for this Partner.
         :param pulumi.Input[_builtins.str] root_folder: The root folder path for this Partner.
@@ -339,6 +357,8 @@ class _PartnerState:
             pulumi.set(__self__, "allowed_ips", allowed_ips)
         if cc_emails_to_responsible_party is not None:
             pulumi.set(__self__, "cc_emails_to_responsible_party", cc_emails_to_responsible_party)
+        if connections is not None:
+            pulumi.set(__self__, "connections", connections)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if notes is not None:
@@ -450,6 +470,18 @@ class _PartnerState:
 
     @_builtins.property
     @pulumi.getter
+    def connections(self) -> Optional[Any]:
+        """
+        Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
+        """
+        return pulumi.get(self, "connections")
+
+    @connections.setter
+    def connections(self, value: Optional[Any]):
+        pulumi.set(self, "connections", value)
+
+    @_builtins.property
+    @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the Partner.
@@ -500,7 +532,7 @@ class _PartnerState:
     @pulumi.getter(name="partnershipRole")
     def partnership_role(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        This site's role in Partner Site relationships for this Partner. Can be <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span>, <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span>, <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span>, or null.
+        This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         """
         return pulumi.get(self, "partnership_role")
 
@@ -609,6 +641,7 @@ class Partner(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notes: pulumi.Input[Optional[_builtins.str]] = None,
                  partner_channel_template_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 partnership_role: pulumi.Input[Optional[_builtins.str]] = None,
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  root_folder: pulumi.Input[Optional[_builtins.str]] = None,
@@ -670,6 +703,7 @@ class Partner(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: The name of the Partner.
         :param pulumi.Input[_builtins.str] notes: Notes about this Partner.
         :param pulumi.Input[_builtins.int] partner_channel_template_id: ID of the Partner Channel Template assigned to this Partner.
+        :param pulumi.Input[_builtins.str] partnership_role: This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the Group responsible for this Partner.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the User responsible for this Partner.
         :param pulumi.Input[_builtins.str] root_folder: The root folder path for this Partner.
@@ -750,6 +784,7 @@ class Partner(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notes: pulumi.Input[Optional[_builtins.str]] = None,
                  partner_channel_template_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 partnership_role: pulumi.Input[Optional[_builtins.str]] = None,
                  responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
                  root_folder: pulumi.Input[Optional[_builtins.str]] = None,
@@ -775,6 +810,7 @@ class Partner(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["notes"] = notes
             __props__.__dict__["partner_channel_template_id"] = partner_channel_template_id
+            __props__.__dict__["partnership_role"] = partnership_role
             __props__.__dict__["responsible_group_id"] = responsible_group_id
             __props__.__dict__["responsible_user_id"] = responsible_user_id
             if root_folder is None and not opts.urn:
@@ -783,8 +819,8 @@ class Partner(pulumi.CustomResource):
             __props__.__dict__["show_partner_channel_home_page"] = show_partner_channel_home_page
             __props__.__dict__["tags"] = tags
             __props__.__dict__["workspace_id"] = workspace_id
+            __props__.__dict__["connections"] = None
             __props__.__dict__["partner_admin_ids"] = None
-            __props__.__dict__["partnership_role"] = None
             __props__.__dict__["user_ids"] = None
         super(Partner, __self__).__init__(
             'filescom:index/partner:Partner',
@@ -803,6 +839,7 @@ class Partner(pulumi.CustomResource):
             allow_user_creation: pulumi.Input[Optional[_builtins.bool]] = None,
             allowed_ips: pulumi.Input[Optional[_builtins.str]] = None,
             cc_emails_to_responsible_party: pulumi.Input[Optional[_builtins.bool]] = None,
+            connections: Optional[Any] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             notes: pulumi.Input[Optional[_builtins.str]] = None,
             partner_admin_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
@@ -829,11 +866,12 @@ class Partner(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] allow_user_creation: Allow Partner Admins to create users.
         :param pulumi.Input[_builtins.str] allowed_ips: A list of allowed IPs for this Partner. Newline delimited. Partner User IP access is allowed when the IP matches the Partner, User, or Site allowed IP lists.
         :param pulumi.Input[_builtins.bool] cc_emails_to_responsible_party: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, emails sent to Partner users are copied to the responsible User or Group.
+        :param Any connections: Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
         :param pulumi.Input[_builtins.str] name: The name of the Partner.
         :param pulumi.Input[_builtins.str] notes: Notes about this Partner.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] partner_admin_ids: Array of User IDs that are Partner Admins for this Partner.
         :param pulumi.Input[_builtins.int] partner_channel_template_id: ID of the Partner Channel Template assigned to this Partner.
-        :param pulumi.Input[_builtins.str] partnership_role: This site's role in Partner Site relationships for this Partner. Can be <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span>, <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span>, <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span>, or null.
+        :param pulumi.Input[_builtins.str] partnership_role: This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         :param pulumi.Input[_builtins.int] responsible_group_id: ID of the Group responsible for this Partner.
         :param pulumi.Input[_builtins.int] responsible_user_id: ID of the User responsible for this Partner.
         :param pulumi.Input[_builtins.str] root_folder: The root folder path for this Partner.
@@ -853,6 +891,7 @@ class Partner(pulumi.CustomResource):
         __props__.__dict__["allow_user_creation"] = allow_user_creation
         __props__.__dict__["allowed_ips"] = allowed_ips
         __props__.__dict__["cc_emails_to_responsible_party"] = cc_emails_to_responsible_party
+        __props__.__dict__["connections"] = connections
         __props__.__dict__["name"] = name
         __props__.__dict__["notes"] = notes
         __props__.__dict__["partner_admin_ids"] = partner_admin_ids
@@ -925,6 +964,14 @@ class Partner(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
+    def connections(self) -> pulumi.Output[Any]:
+        """
+        Approved Connected Sites relationships for this Partner, in both directions. Empty when this Partner has no connections. Read-only.
+        """
+        return pulumi.get(self, "connections")
+
+    @_builtins.property
+    @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
         The name of the Partner.
@@ -959,7 +1006,7 @@ class Partner(pulumi.CustomResource):
     @pulumi.getter(name="partnershipRole")
     def partnership_role(self) -> pulumi.Output[_builtins.str]:
         """
-        This site's role in Partner Site relationships for this Partner. Can be <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span>, <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span>, <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span>, or null.
+        This site's role for this Partner in Connected Sites relationships. <span pulumi-lang-nodejs="`host`" pulumi-lang-dotnet="`Host`" pulumi-lang-go="`host`" pulumi-lang-python="`host`" pulumi-lang-yaml="`host`" pulumi-lang-java="`host`" pulumi-lang-hcl="`host`">`host`</span> is a Partner this site configured. <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> is a Partner created by approving another site's connection request; it has no root folder and cannot hold users, permissions, or Partner Channels, or host a connection. <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> is a configured Partner that is also the guest side of a connection. Promote a <span pulumi-lang-nodejs="`guest`" pulumi-lang-dotnet="`Guest`" pulumi-lang-go="`guest`" pulumi-lang-python="`guest`" pulumi-lang-yaml="`guest`" pulumi-lang-java="`guest`" pulumi-lang-hcl="`guest`">`guest`</span> Partner by setting this to <span pulumi-lang-nodejs="`hostAndGuest`" pulumi-lang-dotnet="`HostAndGuest`" pulumi-lang-go="`hostAndGuest`" pulumi-lang-python="`host_and_guest`" pulumi-lang-yaml="`hostAndGuest`" pulumi-lang-java="`hostAndGuest`" pulumi-lang-hcl="`host_and_guest`">`hostAndGuest`</span> together with a <span pulumi-lang-nodejs="`rootFolder`" pulumi-lang-dotnet="`RootFolder`" pulumi-lang-go="`rootFolder`" pulumi-lang-python="`root_folder`" pulumi-lang-yaml="`rootFolder`" pulumi-lang-java="`rootFolder`" pulumi-lang-hcl="`root_folder`">`rootFolder`</span>.
         """
         return pulumi.get(self, "partnership_role")
 

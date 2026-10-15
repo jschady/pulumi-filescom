@@ -26,7 +26,7 @@ class GetGroupResult:
     """
     A collection of values returned by getGroup.
     """
-    def __init__(__self__, admin_ids=None, ai_assistant_personality_id=None, allowed_ips=None, dav_permission=None, desktop_configuration_profile_id=None, ftp_permission=None, id=None, integration_centric_profile_id=None, name=None, notes=None, restapi_permission=None, sftp_permission=None, site_id=None, user_ids=None, usernames=None, workspace_id=None):
+    def __init__(__self__, admin_ids=None, ai_assistant_personality_id=None, allowed_ips=None, dav_permission=None, desktop_configuration_profile_id=None, ftp_permission=None, id=None, integration_centric_profile_id=None, name=None, notes=None, restapi_permission=None, s3_compatible_endpoint_permission=None, sftp_permission=None, site_id=None, user_ids=None, usernames=None, workspace_id=None):
         if admin_ids and not isinstance(admin_ids, str):
             raise TypeError("Expected argument 'admin_ids' to be a str")
         pulumi.set(__self__, "admin_ids", admin_ids)
@@ -60,6 +60,9 @@ class GetGroupResult:
         if restapi_permission and not isinstance(restapi_permission, bool):
             raise TypeError("Expected argument 'restapi_permission' to be a bool")
         pulumi.set(__self__, "restapi_permission", restapi_permission)
+        if s3_compatible_endpoint_permission and not isinstance(s3_compatible_endpoint_permission, bool):
+            raise TypeError("Expected argument 's3_compatible_endpoint_permission' to be a bool")
+        pulumi.set(__self__, "s3_compatible_endpoint_permission", s3_compatible_endpoint_permission)
         if sftp_permission and not isinstance(sftp_permission, bool):
             raise TypeError("Expected argument 'sftp_permission' to be a bool")
         pulumi.set(__self__, "sftp_permission", sftp_permission)
@@ -165,6 +168,14 @@ class GetGroupResult:
         return pulumi.get(self, "restapi_permission")
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointPermission")
+    def s3_compatible_endpoint_permission(self) -> _builtins.bool:
+        """
+        If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_permission")
+
+    @_builtins.property
     @pulumi.getter(name="sftpPermission")
     def sftp_permission(self) -> _builtins.bool:
         """
@@ -222,6 +233,7 @@ class AwaitableGetGroupResult(GetGroupResult):
             name=self.name,
             notes=self.notes,
             restapi_permission=self.restapi_permission,
+            s3_compatible_endpoint_permission=self.s3_compatible_endpoint_permission,
             sftp_permission=self.sftp_permission,
             site_id=self.site_id,
             user_ids=self.user_ids,
@@ -232,7 +244,7 @@ class AwaitableGetGroupResult(GetGroupResult):
 def get_group(id: Optional[_builtins.int] = None,
               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetGroupResult:
     """
-    A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+    A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
 
     All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
 
@@ -269,6 +281,7 @@ def get_group(id: Optional[_builtins.int] = None,
         name=pulumi.get(__ret__, 'name'),
         notes=pulumi.get(__ret__, 'notes'),
         restapi_permission=pulumi.get(__ret__, 'restapi_permission'),
+        s3_compatible_endpoint_permission=pulumi.get(__ret__, 's3_compatible_endpoint_permission'),
         sftp_permission=pulumi.get(__ret__, 'sftp_permission'),
         site_id=pulumi.get(__ret__, 'site_id'),
         user_ids=pulumi.get(__ret__, 'user_ids'),
@@ -277,7 +290,7 @@ def get_group(id: Optional[_builtins.int] = None,
 def get_group_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetGroupResult]:
     """
-    A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+    A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
 
     All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
 
@@ -313,6 +326,7 @@ def get_group_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         name=pulumi.get(__response__, 'name'),
         notes=pulumi.get(__response__, 'notes'),
         restapi_permission=pulumi.get(__response__, 'restapi_permission'),
+        s3_compatible_endpoint_permission=pulumi.get(__response__, 's3_compatible_endpoint_permission'),
         sftp_permission=pulumi.get(__response__, 'sftp_permission'),
         site_id=pulumi.get(__response__, 'site_id'),
         user_ids=pulumi.get(__response__, 'user_ids'),

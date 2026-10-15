@@ -109,11 +109,15 @@ export class ScheduledExport extends pulumi.CustomResource {
      */
     declare public readonly interval: pulumi.Output<string>;
     /**
+     * Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+     */
+    declare public /*out*/ readonly lastError: pulumi.Output<string>;
+    /**
      * Most recent Export ID created by this schedule.
      */
     declare public /*out*/ readonly lastExportId: pulumi.Output<number>;
     /**
-     * Most recent scheduled run time.
+     * Most recent scheduled attempt time, including attempts that failed validation.
      */
     declare public /*out*/ readonly lastRunAt: pulumi.Output<string>;
     /**
@@ -181,6 +185,7 @@ export class ScheduledExport extends pulumi.CustomResource {
             resourceInputs["holidayRegion"] = state?.holidayRegion;
             resourceInputs["humanReadableSchedule"] = state?.humanReadableSchedule;
             resourceInputs["interval"] = state?.interval;
+            resourceInputs["lastError"] = state?.lastError;
             resourceInputs["lastExportId"] = state?.lastExportId;
             resourceInputs["lastRunAt"] = state?.lastRunAt;
             resourceInputs["name"] = state?.name;
@@ -215,6 +220,7 @@ export class ScheduledExport extends pulumi.CustomResource {
             resourceInputs["userId"] = args?.userId;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["humanReadableSchedule"] = undefined /*out*/;
+            resourceInputs["lastError"] = undefined /*out*/;
             resourceInputs["lastExportId"] = undefined /*out*/;
             resourceInputs["lastRunAt"] = undefined /*out*/;
             resourceInputs["reportName"] = undefined /*out*/;
@@ -258,11 +264,15 @@ export interface ScheduledExportState {
      */
     interval?: pulumi.Input<string | undefined>;
     /**
+     * Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+     */
+    lastError?: pulumi.Input<string | undefined>;
+    /**
      * Most recent Export ID created by this schedule.
      */
     lastExportId?: pulumi.Input<number | undefined>;
     /**
-     * Most recent scheduled run time.
+     * Most recent scheduled attempt time, including attempts that failed validation.
      */
     lastRunAt?: pulumi.Input<string | undefined>;
     /**

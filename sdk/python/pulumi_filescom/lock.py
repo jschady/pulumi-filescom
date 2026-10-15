@@ -22,26 +22,38 @@ class LockArgs:
                  path: pulumi.Input[_builtins.str],
                  allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
                  exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+                 expected_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 owner: pulumi.Input[Optional[_builtins.str]] = None,
                  recursive: pulumi.Input[Optional[_builtins.bool]] = None,
-                 timeout: pulumi.Input[Optional[_builtins.int]] = None):
+                 timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 token: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Lock resource.
 
         :param pulumi.Input[_builtins.str] path: Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.bool] allow_access_by_any_user: Can lock be modified by users other than its creator?
         :param pulumi.Input[_builtins.bool] exclusive: Is lock exclusive?
+        :param pulumi.Input[_builtins.str] expected_token: Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        :param pulumi.Input[_builtins.str] owner: Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         :param pulumi.Input[_builtins.bool] recursive: Does lock apply to subfolders?
         :param pulumi.Input[_builtins.int] timeout: Lock timeout in seconds
+        :param pulumi.Input[_builtins.str] token: Lock token.  Use to release lock.
         """
         pulumi.set(__self__, "path", path)
         if allow_access_by_any_user is not None:
             pulumi.set(__self__, "allow_access_by_any_user", allow_access_by_any_user)
         if exclusive is not None:
             pulumi.set(__self__, "exclusive", exclusive)
+        if expected_token is not None:
+            pulumi.set(__self__, "expected_token", expected_token)
+        if owner is not None:
+            pulumi.set(__self__, "owner", owner)
         if recursive is not None:
             pulumi.set(__self__, "recursive", recursive)
         if timeout is not None:
             pulumi.set(__self__, "timeout", timeout)
+        if token is not None:
+            pulumi.set(__self__, "token", token)
 
     @_builtins.property
     @pulumi.getter
@@ -80,6 +92,30 @@ class LockArgs:
         pulumi.set(self, "exclusive", value)
 
     @_builtins.property
+    @pulumi.getter(name="expectedToken")
+    def expected_token(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        """
+        return pulumi.get(self, "expected_token")
+
+    @expected_token.setter
+    def expected_token(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "expected_token", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def owner(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
+        """
+        return pulumi.get(self, "owner")
+
+    @owner.setter
+    def owner(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "owner", value)
+
+    @_builtins.property
     @pulumi.getter
     def recursive(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -103,6 +139,18 @@ class LockArgs:
     def timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "timeout", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def token(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Lock token.  Use to release lock.
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "token", value)
+
 
 @pulumi.input_type
 class _LockState:
@@ -110,6 +158,7 @@ class _LockState:
                  allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
                  depth: pulumi.Input[Optional[_builtins.str]] = None,
                  exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+                 expected_token: pulumi.Input[Optional[_builtins.str]] = None,
                  owner: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  recursive: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -124,7 +173,8 @@ class _LockState:
 
         :param pulumi.Input[_builtins.bool] allow_access_by_any_user: Can lock be modified by users other than its creator?
         :param pulumi.Input[_builtins.bool] exclusive: Is lock exclusive?
-        :param pulumi.Input[_builtins.str] owner: Owner of the lock.  This can be any arbitrary string.
+        :param pulumi.Input[_builtins.str] expected_token: Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        :param pulumi.Input[_builtins.str] owner: Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         :param pulumi.Input[_builtins.str] path: Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.bool] recursive: Does lock apply to subfolders?
         :param pulumi.Input[_builtins.int] timeout: Lock timeout in seconds
@@ -138,6 +188,8 @@ class _LockState:
             pulumi.set(__self__, "depth", depth)
         if exclusive is not None:
             pulumi.set(__self__, "exclusive", exclusive)
+        if expected_token is not None:
+            pulumi.set(__self__, "expected_token", expected_token)
         if owner is not None:
             pulumi.set(__self__, "owner", owner)
         if path is not None:
@@ -191,10 +243,22 @@ class _LockState:
         pulumi.set(self, "exclusive", value)
 
     @_builtins.property
+    @pulumi.getter(name="expectedToken")
+    def expected_token(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        """
+        return pulumi.get(self, "expected_token")
+
+    @expected_token.setter
+    def expected_token(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "expected_token", value)
+
+    @_builtins.property
     @pulumi.getter
     def owner(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Owner of the lock.  This can be any arbitrary string.
+        Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         """
         return pulumi.get(self, "owner")
 
@@ -301,16 +365,25 @@ class Lock(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
                  exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+                 expected_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 owner: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  recursive: pulumi.Input[Optional[_builtins.bool]] = None,
                  timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 token: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
+        A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
 
         The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
 
-        Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+        Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
+
+        The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
+
+        To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+
+        A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
 
         ## Example Usage
 
@@ -321,9 +394,11 @@ class Lock(pulumi.CustomResource):
 
         example_lock = filescom.Lock("example_lock",
             path="locked_file",
+            token="17c54824e9931a4688ca032d03f6663c",
             allow_access_by_any_user=False,
             exclusive=False,
             recursive=True,
+            owner="user",
             timeout=1)
         ```
         <!--End PulumiCodeChooser -->
@@ -343,9 +418,12 @@ class Lock(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] allow_access_by_any_user: Can lock be modified by users other than its creator?
         :param pulumi.Input[_builtins.bool] exclusive: Is lock exclusive?
+        :param pulumi.Input[_builtins.str] expected_token: Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        :param pulumi.Input[_builtins.str] owner: Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         :param pulumi.Input[_builtins.str] path: Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.bool] recursive: Does lock apply to subfolders?
         :param pulumi.Input[_builtins.int] timeout: Lock timeout in seconds
+        :param pulumi.Input[_builtins.str] token: Lock token.  Use to release lock.
         """
         ...
     @overload
@@ -354,11 +432,17 @@ class Lock(pulumi.CustomResource):
                  args: LockArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
+        A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
 
         The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
 
-        Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+        Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
+
+        The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
+
+        To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+
+        A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
 
         ## Example Usage
 
@@ -369,9 +453,11 @@ class Lock(pulumi.CustomResource):
 
         example_lock = filescom.Lock("example_lock",
             path="locked_file",
+            token="17c54824e9931a4688ca032d03f6663c",
             allow_access_by_any_user=False,
             exclusive=False,
             recursive=True,
+            owner="user",
             timeout=1)
         ```
         <!--End PulumiCodeChooser -->
@@ -404,9 +490,12 @@ class Lock(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
                  exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+                 expected_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 owner: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  recursive: pulumi.Input[Optional[_builtins.bool]] = None,
                  timeout: pulumi.Input[Optional[_builtins.int]] = None,
+                 token: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -418,15 +507,16 @@ class Lock(pulumi.CustomResource):
 
             __props__.__dict__["allow_access_by_any_user"] = allow_access_by_any_user
             __props__.__dict__["exclusive"] = exclusive
+            __props__.__dict__["expected_token"] = expected_token
+            __props__.__dict__["owner"] = owner
             if path is None and not opts.urn:
                 raise TypeError("Missing required property 'path'")
             __props__.__dict__["path"] = path
             __props__.__dict__["recursive"] = recursive
             __props__.__dict__["timeout"] = timeout
+            __props__.__dict__["token"] = token
             __props__.__dict__["depth"] = None
-            __props__.__dict__["owner"] = None
             __props__.__dict__["scope"] = None
-            __props__.__dict__["token"] = None
             __props__.__dict__["type"] = None
             __props__.__dict__["user_id"] = None
             __props__.__dict__["username"] = None
@@ -443,6 +533,7 @@ class Lock(pulumi.CustomResource):
             allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
             depth: pulumi.Input[Optional[_builtins.str]] = None,
             exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+            expected_token: pulumi.Input[Optional[_builtins.str]] = None,
             owner: pulumi.Input[Optional[_builtins.str]] = None,
             path: pulumi.Input[Optional[_builtins.str]] = None,
             recursive: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -461,7 +552,8 @@ class Lock(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] allow_access_by_any_user: Can lock be modified by users other than its creator?
         :param pulumi.Input[_builtins.bool] exclusive: Is lock exclusive?
-        :param pulumi.Input[_builtins.str] owner: Owner of the lock.  This can be any arbitrary string.
+        :param pulumi.Input[_builtins.str] expected_token: Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        :param pulumi.Input[_builtins.str] owner: Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         :param pulumi.Input[_builtins.str] path: Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.bool] recursive: Does lock apply to subfolders?
         :param pulumi.Input[_builtins.int] timeout: Lock timeout in seconds
@@ -476,6 +568,7 @@ class Lock(pulumi.CustomResource):
         __props__.__dict__["allow_access_by_any_user"] = allow_access_by_any_user
         __props__.__dict__["depth"] = depth
         __props__.__dict__["exclusive"] = exclusive
+        __props__.__dict__["expected_token"] = expected_token
         __props__.__dict__["owner"] = owner
         __props__.__dict__["path"] = path
         __props__.__dict__["recursive"] = recursive
@@ -509,10 +602,18 @@ class Lock(pulumi.CustomResource):
         return pulumi.get(self, "exclusive")
 
     @_builtins.property
+    @pulumi.getter(name="expectedToken")
+    def expected_token(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+        """
+        return pulumi.get(self, "expected_token")
+
+    @_builtins.property
     @pulumi.getter
     def owner(self) -> pulumi.Output[_builtins.str]:
         """
-        Owner of the lock.  This can be any arbitrary string.
+        Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
         """
         return pulumi.get(self, "owner")
 

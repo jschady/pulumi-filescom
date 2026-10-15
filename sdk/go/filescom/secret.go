@@ -36,7 +36,7 @@ import (
 //				Description: pulumi.String("Used by production API integrations."),
 //				SecretType:  pulumi.String("token"),
 //				Metadata: pulumi.Any(map[string]interface{}{
-//					"key": "example value",
+//					"headerName": "Authorization",
 //				}),
 //				WorkspaceId: pulumi.Int(0),
 //			})

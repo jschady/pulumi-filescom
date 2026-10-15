@@ -12,7 +12,6 @@ namespace Jschady.Filescom
 {
     /// <summary>
     /// A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-    /// 
     /// The API provides the full set of actions related to Share Links, including sending them via E-Mail.
     /// 
     /// Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -63,6 +62,12 @@ namespace Jschady.Filescom
     ///         StartAccessOnDate = "2000-01-01T01:00:00Z",
     ///         SnapshotId = 1,
     ///         WorkspaceId = 1,
+    ///         WatermarkValue = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["gravity"] = "SouthWest",
+    ///             ["maxHeightOrWidth"] = 20,
+    ///             ["transparency"] = 25,
+    ///         },
     ///     });
     /// 
     /// });
@@ -186,7 +191,13 @@ namespace Jschady.Filescom
         public Output<bool> DontSeparateSubmissionsByFolder { get; private set; } = null!;
 
         /// <summary>
-        /// Bundle expiration date/time
+        /// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        /// </summary>
+        [Output("effectiveExpiresAt")]
+        public Output<string> EffectiveExpiresAt { get; private set; } = null!;
+
+        /// <summary>
+        /// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         /// </summary>
         [Output("expiresAt")]
         public Output<string> ExpiresAt { get; private set; } = null!;
@@ -491,7 +502,7 @@ namespace Jschady.Filescom
         public Input<bool>? DontSeparateSubmissionsByFolder { get; set; }
 
         /// <summary>
-        /// Bundle expiration date/time
+        /// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         /// </summary>
         [Input("expiresAt")]
         public Input<string>? ExpiresAt { get; set; }
@@ -668,6 +679,12 @@ namespace Jschady.Filescom
         public Input<int>? UserId { get; set; }
 
         /// <summary>
+        /// Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
+        /// </summary>
+        [Input("watermarkValue")]
+        public Input<object>? WatermarkValue { get; set; }
+
+        /// <summary>
         /// Workspace ID. &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; means the default workspace.
         /// </summary>
         [Input("workspaceId")]
@@ -795,7 +812,13 @@ namespace Jschady.Filescom
         public Input<bool>? DontSeparateSubmissionsByFolder { get; set; }
 
         /// <summary>
-        /// Bundle expiration date/time
+        /// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        /// </summary>
+        [Input("effectiveExpiresAt")]
+        public Input<string>? EffectiveExpiresAt { get; set; }
+
+        /// <summary>
+        /// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         /// </summary>
         [Input("expiresAt")]
         public Input<string>? ExpiresAt { get; set; }

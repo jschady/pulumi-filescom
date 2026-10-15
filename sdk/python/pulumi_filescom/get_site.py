@@ -26,7 +26,7 @@ class GetSiteResult:
     """
     A collection of values returned by getSite.
     """
-    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, fedramp=None, folder_permissions_groups_only=None, ftp_enabled=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, language=None, ldap_base_dn=None, ldap_domain=None, ldap_enabled=None, ldap_group_action=None, ldap_group_exclusion=None, ldap_group_inclusion=None, ldap_host=None, ldap_host2=None, ldap_host3=None, ldap_port=None, ldap_secure=None, ldap_type=None, ldap_user_action=None, ldap_user_include_groups=None, ldap_username=None, ldap_username_field=None, legacy_checksums_mode=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None):
+    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, child_site_folder_admins_can_see_parent_site_directory=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, fedramp=None, file_activity_events_enabled=None, files_com_remote_server_enabled=None, folder_permissions_groups_only=None, ftp_enabled=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, language=None, ldap_base_dn=None, ldap_domain=None, ldap_enabled=None, ldap_group_action=None, ldap_group_exclusion=None, ldap_group_inclusion=None, ldap_host=None, ldap_host2=None, ldap_host3=None, ldap_port=None, ldap_secure=None, ldap_server_certificate=None, ldap_type=None, ldap_user_action=None, ldap_user_include_groups=None, ldap_username=None, ldap_username_field=None, legacy_checksums_mode=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, s3_compatible_endpoint_enabled=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_ssl=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None, workspace_folder_admins_can_see_default_workspace_directory=None):
         if active_sftp_host_key_id and not isinstance(active_sftp_host_key_id, int):
             raise TypeError("Expected argument 'active_sftp_host_key_id' to be a int")
         pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
@@ -153,6 +153,9 @@ class GetSiteResult:
         if calculate_file_checksums_sha256 and not isinstance(calculate_file_checksums_sha256, bool):
             raise TypeError("Expected argument 'calculate_file_checksums_sha256' to be a bool")
         pulumi.set(__self__, "calculate_file_checksums_sha256", calculate_file_checksums_sha256)
+        if child_site_folder_admins_can_see_parent_site_directory and not isinstance(child_site_folder_admins_can_see_parent_site_directory, bool):
+            raise TypeError("Expected argument 'child_site_folder_admins_can_see_parent_site_directory' to be a bool")
+        pulumi.set(__self__, "child_site_folder_admins_can_see_parent_site_directory", child_site_folder_admins_can_see_parent_site_directory)
         if color2_left and not isinstance(color2_left, str):
             raise TypeError("Expected argument 'color2_left' to be a str")
         pulumi.set(__self__, "color2_left", color2_left)
@@ -237,6 +240,12 @@ class GetSiteResult:
         if fedramp and not isinstance(fedramp, bool):
             raise TypeError("Expected argument 'fedramp' to be a bool")
         pulumi.set(__self__, "fedramp", fedramp)
+        if file_activity_events_enabled and not isinstance(file_activity_events_enabled, bool):
+            raise TypeError("Expected argument 'file_activity_events_enabled' to be a bool")
+        pulumi.set(__self__, "file_activity_events_enabled", file_activity_events_enabled)
+        if files_com_remote_server_enabled and not isinstance(files_com_remote_server_enabled, bool):
+            raise TypeError("Expected argument 'files_com_remote_server_enabled' to be a bool")
+        pulumi.set(__self__, "files_com_remote_server_enabled", files_com_remote_server_enabled)
         if folder_permissions_groups_only and not isinstance(folder_permissions_groups_only, bool):
             raise TypeError("Expected argument 'folder_permissions_groups_only' to be a bool")
         pulumi.set(__self__, "folder_permissions_groups_only", folder_permissions_groups_only)
@@ -327,6 +336,9 @@ class GetSiteResult:
         if ldap_secure and not isinstance(ldap_secure, bool):
             raise TypeError("Expected argument 'ldap_secure' to be a bool")
         pulumi.set(__self__, "ldap_secure", ldap_secure)
+        if ldap_server_certificate and not isinstance(ldap_server_certificate, str):
+            raise TypeError("Expected argument 'ldap_server_certificate' to be a str")
+        pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
         if ldap_type and not isinstance(ldap_type, str):
             raise TypeError("Expected argument 'ldap_type' to be a str")
         pulumi.set(__self__, "ldap_type", ldap_type)
@@ -477,6 +489,9 @@ class GetSiteResult:
         if root_folder_behaviors_apply_to_workspaces and not isinstance(root_folder_behaviors_apply_to_workspaces, bool):
             raise TypeError("Expected argument 'root_folder_behaviors_apply_to_workspaces' to be a bool")
         pulumi.set(__self__, "root_folder_behaviors_apply_to_workspaces", root_folder_behaviors_apply_to_workspaces)
+        if s3_compatible_endpoint_enabled and not isinstance(s3_compatible_endpoint_enabled, bool):
+            raise TypeError("Expected argument 's3_compatible_endpoint_enabled' to be a bool")
+        pulumi.set(__self__, "s3_compatible_endpoint_enabled", s3_compatible_endpoint_enabled)
         if session and not isinstance(session, str):
             raise TypeError("Expected argument 'session' to be a str")
         pulumi.set(__self__, "session", session)
@@ -534,6 +549,9 @@ class GetSiteResult:
         if smtp_port and not isinstance(smtp_port, int):
             raise TypeError("Expected argument 'smtp_port' to be a int")
         pulumi.set(__self__, "smtp_port", smtp_port)
+        if smtp_ssl and not isinstance(smtp_ssl, str):
+            raise TypeError("Expected argument 'smtp_ssl' to be a str")
+        pulumi.set(__self__, "smtp_ssl", smtp_ssl)
         if smtp_username and not isinstance(smtp_username, str):
             raise TypeError("Expected argument 'smtp_username' to be a str")
         pulumi.set(__self__, "smtp_username", smtp_username)
@@ -612,6 +630,9 @@ class GetSiteResult:
         if windows_mode_ftp and not isinstance(windows_mode_ftp, bool):
             raise TypeError("Expected argument 'windows_mode_ftp' to be a bool")
         pulumi.set(__self__, "windows_mode_ftp", windows_mode_ftp)
+        if workspace_folder_admins_can_see_default_workspace_directory and not isinstance(workspace_folder_admins_can_see_default_workspace_directory, bool):
+            raise TypeError("Expected argument 'workspace_folder_admins_can_see_default_workspace_directory' to be a bool")
+        pulumi.set(__self__, "workspace_folder_admins_can_see_default_workspace_directory", workspace_folder_admins_can_see_default_workspace_directory)
 
     @_builtins.property
     @pulumi.getter(name="activeSftpHostKeyId")
@@ -657,7 +678,7 @@ class GetSiteResult:
     @pulumi.getter(name="aiFeatureAvailability")
     def ai_feature_availability(self) -> Any:
         """
-        Availability settings for AI features by user class
+        Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         """
         return pulumi.get(self, "ai_feature_availability")
 
@@ -950,6 +971,14 @@ class GetSiteResult:
         return pulumi.get(self, "calculate_file_checksums_sha256")
 
     @_builtins.property
+    @pulumi.getter(name="childSiteFolderAdminsCanSeeParentSiteDirectory")
+    def child_site_folder_admins_can_see_parent_site_directory(self) -> _builtins.bool:
+        """
+        If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        """
+        return pulumi.get(self, "child_site_folder_admins_can_see_parent_site_directory")
+
+    @_builtins.property
     @pulumi.getter(name="color2Left")
     def color2_left(self) -> _builtins.str:
         """
@@ -1161,7 +1190,7 @@ class GetSiteResult:
     @pulumi.getter(name="emailFooterCustomText")
     def email_footer_custom_text(self) -> _builtins.str:
         """
-        Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         """
         return pulumi.get(self, "email_footer_custom_text")
 
@@ -1172,6 +1201,22 @@ class GetSiteResult:
         Are FedRAMP security restrictions enabled for this site?
         """
         return pulumi.get(self, "fedramp")
+
+    @_builtins.property
+    @pulumi.getter(name="fileActivityEventsEnabled")
+    def file_activity_events_enabled(self) -> _builtins.bool:
+        """
+        If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        """
+        return pulumi.get(self, "file_activity_events_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="filesComRemoteServerEnabled")
+    def files_com_remote_server_enabled(self) -> _builtins.bool:
+        """
+        Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        """
+        return pulumi.get(self, "files_com_remote_server_enabled")
 
     @_builtins.property
     @pulumi.getter(name="folderPermissionsGroupsOnly")
@@ -1414,6 +1459,14 @@ class GetSiteResult:
         return pulumi.get(self, "ldap_secure")
 
     @_builtins.property
+    @pulumi.getter(name="ldapServerCertificate")
+    def ldap_server_certificate(self) -> _builtins.str:
+        """
+        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+        """
+        return pulumi.get(self, "ldap_server_certificate")
+
+    @_builtins.property
     @pulumi.getter(name="ldapType")
     def ldap_type(self) -> _builtins.str:
         """
@@ -1489,7 +1542,7 @@ class GetSiteResult:
     @pulumi.getter(name="managedSiteSettings")
     def managed_site_settings(self) -> Any:
         """
-        List of site settings managed by the parent site
+        Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         """
         return pulumi.get(self, "managed_site_settings")
 
@@ -1814,6 +1867,14 @@ class GetSiteResult:
         return pulumi.get(self, "root_folder_behaviors_apply_to_workspaces")
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointEnabled")
+    def s3_compatible_endpoint_enabled(self) -> _builtins.bool:
+        """
+        Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_enabled")
+
+    @_builtins.property
     @pulumi.getter
     def session(self) -> _builtins.str:
         """
@@ -1966,6 +2027,14 @@ class GetSiteResult:
         return pulumi.get(self, "smtp_port")
 
     @_builtins.property
+    @pulumi.getter(name="smtpSsl")
+    def smtp_ssl(self) -> _builtins.str:
+        """
+        Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        """
+        return pulumi.get(self, "smtp_ssl")
+
+    @_builtins.property
     @pulumi.getter(name="smtpUsername")
     def smtp_username(self) -> _builtins.str:
         """
@@ -2025,7 +2094,7 @@ class GetSiteResult:
     @pulumi.getter(name="uploadsViaEmailAuthentication")
     def uploads_via_email_authentication(self) -> _builtins.bool:
         """
-        Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         """
         return pulumi.get(self, "uploads_via_email_authentication")
 
@@ -2173,6 +2242,14 @@ class GetSiteResult:
         """
         return pulumi.get(self, "windows_mode_ftp")
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")
+    def workspace_folder_admins_can_see_default_workspace_directory(self) -> _builtins.bool:
+        """
+        If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        """
+        return pulumi.get(self, "workspace_folder_admins_can_see_default_workspace_directory")
+
 
 class AwaitableGetSiteResult(GetSiteResult):
     # pylint: disable=using-constant-test
@@ -2222,6 +2299,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             calculate_file_checksums_md5=self.calculate_file_checksums_md5,
             calculate_file_checksums_sha1=self.calculate_file_checksums_sha1,
             calculate_file_checksums_sha256=self.calculate_file_checksums_sha256,
+            child_site_folder_admins_can_see_parent_site_directory=self.child_site_folder_admins_can_see_parent_site_directory,
             color2_left=self.color2_left,
             color2_link=self.color2_link,
             color2_text=self.color2_text,
@@ -2250,6 +2328,8 @@ class AwaitableGetSiteResult(GetSiteResult):
             email=self.email,
             email_footer_custom_text=self.email_footer_custom_text,
             fedramp=self.fedramp,
+            file_activity_events_enabled=self.file_activity_events_enabled,
+            files_com_remote_server_enabled=self.files_com_remote_server_enabled,
             folder_permissions_groups_only=self.folder_permissions_groups_only,
             ftp_enabled=self.ftp_enabled,
             group_admins_can_add_users=self.group_admins_can_add_users,
@@ -2280,6 +2360,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             ldap_host3=self.ldap_host3,
             ldap_port=self.ldap_port,
             ldap_secure=self.ldap_secure,
+            ldap_server_certificate=self.ldap_server_certificate,
             ldap_type=self.ldap_type,
             ldap_user_action=self.ldap_user_action,
             ldap_user_include_groups=self.ldap_user_include_groups,
@@ -2330,6 +2411,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             restrict_root_folder_behaviors_to_site_admins=self.restrict_root_folder_behaviors_to_site_admins,
             revoke_bundle_access_on_disable_or_delete=self.revoke_bundle_access_on_disable_or_delete,
             root_folder_behaviors_apply_to_workspaces=self.root_folder_behaviors_apply_to_workspaces,
+            s3_compatible_endpoint_enabled=self.s3_compatible_endpoint_enabled,
             session=self.session,
             session_expiry_minutes=self.session_expiry_minutes,
             sftp_enabled=self.sftp_enabled,
@@ -2349,6 +2431,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             smtp_authentication=self.smtp_authentication,
             smtp_from=self.smtp_from,
             smtp_port=self.smtp_port,
+            smtp_ssl=self.smtp_ssl,
             smtp_username=self.smtp_username,
             snapshot_sharing_enabled=self.snapshot_sharing_enabled,
             ssl_required=self.ssl_required,
@@ -2374,7 +2457,8 @@ class AwaitableGetSiteResult(GetSiteResult):
             welcome_email_enabled=self.welcome_email_enabled,
             welcome_email_subject=self.welcome_email_subject,
             welcome_screen=self.welcome_screen,
-            windows_mode_ftp=self.windows_mode_ftp)
+            windows_mode_ftp=self.windows_mode_ftp,
+            workspace_folder_admins_can_see_default_workspace_directory=self.workspace_folder_admins_can_see_default_workspace_directory)
 
 
 def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteResult:
@@ -2441,6 +2525,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         calculate_file_checksums_md5=pulumi.get(__ret__, 'calculate_file_checksums_md5'),
         calculate_file_checksums_sha1=pulumi.get(__ret__, 'calculate_file_checksums_sha1'),
         calculate_file_checksums_sha256=pulumi.get(__ret__, 'calculate_file_checksums_sha256'),
+        child_site_folder_admins_can_see_parent_site_directory=pulumi.get(__ret__, 'child_site_folder_admins_can_see_parent_site_directory'),
         color2_left=pulumi.get(__ret__, 'color2_left'),
         color2_link=pulumi.get(__ret__, 'color2_link'),
         color2_text=pulumi.get(__ret__, 'color2_text'),
@@ -2469,6 +2554,8 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         email=pulumi.get(__ret__, 'email'),
         email_footer_custom_text=pulumi.get(__ret__, 'email_footer_custom_text'),
         fedramp=pulumi.get(__ret__, 'fedramp'),
+        file_activity_events_enabled=pulumi.get(__ret__, 'file_activity_events_enabled'),
+        files_com_remote_server_enabled=pulumi.get(__ret__, 'files_com_remote_server_enabled'),
         folder_permissions_groups_only=pulumi.get(__ret__, 'folder_permissions_groups_only'),
         ftp_enabled=pulumi.get(__ret__, 'ftp_enabled'),
         group_admins_can_add_users=pulumi.get(__ret__, 'group_admins_can_add_users'),
@@ -2499,6 +2586,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         ldap_host3=pulumi.get(__ret__, 'ldap_host3'),
         ldap_port=pulumi.get(__ret__, 'ldap_port'),
         ldap_secure=pulumi.get(__ret__, 'ldap_secure'),
+        ldap_server_certificate=pulumi.get(__ret__, 'ldap_server_certificate'),
         ldap_type=pulumi.get(__ret__, 'ldap_type'),
         ldap_user_action=pulumi.get(__ret__, 'ldap_user_action'),
         ldap_user_include_groups=pulumi.get(__ret__, 'ldap_user_include_groups'),
@@ -2549,6 +2637,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         restrict_root_folder_behaviors_to_site_admins=pulumi.get(__ret__, 'restrict_root_folder_behaviors_to_site_admins'),
         revoke_bundle_access_on_disable_or_delete=pulumi.get(__ret__, 'revoke_bundle_access_on_disable_or_delete'),
         root_folder_behaviors_apply_to_workspaces=pulumi.get(__ret__, 'root_folder_behaviors_apply_to_workspaces'),
+        s3_compatible_endpoint_enabled=pulumi.get(__ret__, 's3_compatible_endpoint_enabled'),
         session=pulumi.get(__ret__, 'session'),
         session_expiry_minutes=pulumi.get(__ret__, 'session_expiry_minutes'),
         sftp_enabled=pulumi.get(__ret__, 'sftp_enabled'),
@@ -2568,6 +2657,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         smtp_authentication=pulumi.get(__ret__, 'smtp_authentication'),
         smtp_from=pulumi.get(__ret__, 'smtp_from'),
         smtp_port=pulumi.get(__ret__, 'smtp_port'),
+        smtp_ssl=pulumi.get(__ret__, 'smtp_ssl'),
         smtp_username=pulumi.get(__ret__, 'smtp_username'),
         snapshot_sharing_enabled=pulumi.get(__ret__, 'snapshot_sharing_enabled'),
         ssl_required=pulumi.get(__ret__, 'ssl_required'),
@@ -2593,7 +2683,8 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         welcome_email_enabled=pulumi.get(__ret__, 'welcome_email_enabled'),
         welcome_email_subject=pulumi.get(__ret__, 'welcome_email_subject'),
         welcome_screen=pulumi.get(__ret__, 'welcome_screen'),
-        windows_mode_ftp=pulumi.get(__ret__, 'windows_mode_ftp'))
+        windows_mode_ftp=pulumi.get(__ret__, 'windows_mode_ftp'),
+        workspace_folder_admins_can_see_default_workspace_directory=pulumi.get(__ret__, 'workspace_folder_admins_can_see_default_workspace_directory'))
 def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSiteResult]:
     """
     A Site is the place you'll come to update site settings, as well as manage site-wide API keys.
@@ -2657,6 +2748,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         calculate_file_checksums_md5=pulumi.get(__response__, 'calculate_file_checksums_md5'),
         calculate_file_checksums_sha1=pulumi.get(__response__, 'calculate_file_checksums_sha1'),
         calculate_file_checksums_sha256=pulumi.get(__response__, 'calculate_file_checksums_sha256'),
+        child_site_folder_admins_can_see_parent_site_directory=pulumi.get(__response__, 'child_site_folder_admins_can_see_parent_site_directory'),
         color2_left=pulumi.get(__response__, 'color2_left'),
         color2_link=pulumi.get(__response__, 'color2_link'),
         color2_text=pulumi.get(__response__, 'color2_text'),
@@ -2685,6 +2777,8 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         email=pulumi.get(__response__, 'email'),
         email_footer_custom_text=pulumi.get(__response__, 'email_footer_custom_text'),
         fedramp=pulumi.get(__response__, 'fedramp'),
+        file_activity_events_enabled=pulumi.get(__response__, 'file_activity_events_enabled'),
+        files_com_remote_server_enabled=pulumi.get(__response__, 'files_com_remote_server_enabled'),
         folder_permissions_groups_only=pulumi.get(__response__, 'folder_permissions_groups_only'),
         ftp_enabled=pulumi.get(__response__, 'ftp_enabled'),
         group_admins_can_add_users=pulumi.get(__response__, 'group_admins_can_add_users'),
@@ -2715,6 +2809,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         ldap_host3=pulumi.get(__response__, 'ldap_host3'),
         ldap_port=pulumi.get(__response__, 'ldap_port'),
         ldap_secure=pulumi.get(__response__, 'ldap_secure'),
+        ldap_server_certificate=pulumi.get(__response__, 'ldap_server_certificate'),
         ldap_type=pulumi.get(__response__, 'ldap_type'),
         ldap_user_action=pulumi.get(__response__, 'ldap_user_action'),
         ldap_user_include_groups=pulumi.get(__response__, 'ldap_user_include_groups'),
@@ -2765,6 +2860,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         restrict_root_folder_behaviors_to_site_admins=pulumi.get(__response__, 'restrict_root_folder_behaviors_to_site_admins'),
         revoke_bundle_access_on_disable_or_delete=pulumi.get(__response__, 'revoke_bundle_access_on_disable_or_delete'),
         root_folder_behaviors_apply_to_workspaces=pulumi.get(__response__, 'root_folder_behaviors_apply_to_workspaces'),
+        s3_compatible_endpoint_enabled=pulumi.get(__response__, 's3_compatible_endpoint_enabled'),
         session=pulumi.get(__response__, 'session'),
         session_expiry_minutes=pulumi.get(__response__, 'session_expiry_minutes'),
         sftp_enabled=pulumi.get(__response__, 'sftp_enabled'),
@@ -2784,6 +2880,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         smtp_authentication=pulumi.get(__response__, 'smtp_authentication'),
         smtp_from=pulumi.get(__response__, 'smtp_from'),
         smtp_port=pulumi.get(__response__, 'smtp_port'),
+        smtp_ssl=pulumi.get(__response__, 'smtp_ssl'),
         smtp_username=pulumi.get(__response__, 'smtp_username'),
         snapshot_sharing_enabled=pulumi.get(__response__, 'snapshot_sharing_enabled'),
         ssl_required=pulumi.get(__response__, 'ssl_required'),
@@ -2809,4 +2906,5 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         welcome_email_enabled=pulumi.get(__response__, 'welcome_email_enabled'),
         welcome_email_subject=pulumi.get(__response__, 'welcome_email_subject'),
         welcome_screen=pulumi.get(__response__, 'welcome_screen'),
-        windows_mode_ftp=pulumi.get(__response__, 'windows_mode_ftp')))
+        windows_mode_ftp=pulumi.get(__response__, 'windows_mode_ftp'),
+        workspace_folder_admins_can_see_default_workspace_directory=pulumi.get(__response__, 'workspace_folder_admins_can_see_default_workspace_directory')))

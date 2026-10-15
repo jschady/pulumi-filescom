@@ -382,11 +382,11 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Direction;
         /// <summary>
-        /// Resolved from-Partner folder name after Channel override and default.
+        /// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         public readonly string EffectiveFromPartnerFolderName;
         /// <summary>
-        /// Resolved to-Partner folder name after Channel override and default.
+        /// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         /// </summary>
         public readonly string EffectiveToPartnerFolderName;
         /// <summary>
@@ -438,6 +438,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string ToPartnerRoutePath;
         /// <summary>
+        /// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+        /// </summary>
+        public readonly bool UseChannelRoot;
+        /// <summary>
         /// ID of the Workspace associated with this Partner Channel.
         /// </summary>
         public readonly int WorkspaceId;
@@ -476,6 +480,8 @@ namespace Jschady.Filescom
 
             string toPartnerRoutePath,
 
+            bool useChannelRoot,
+
             int workspaceId)
         {
             ChannelPath = channelPath;
@@ -494,6 +500,7 @@ namespace Jschady.Filescom
             ToPartnerFolderPath = toPartnerFolderPath;
             ToPartnerManagedFolderPaths = toPartnerManagedFolderPaths;
             ToPartnerRoutePath = toPartnerRoutePath;
+            UseChannelRoot = useChannelRoot;
             WorkspaceId = workspaceId;
         }
     }

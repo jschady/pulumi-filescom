@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A FileMigration is a background operation on one or more files, such as a copy or a region migration.
         /// 
-        /// 
-        /// 
         /// If no &lt;span pulumi-lang-nodejs="`operation`" pulumi-lang-dotnet="`Operation`" pulumi-lang-go="`operation`" pulumi-lang-python="`operation`" pulumi-lang-yaml="`operation`" pulumi-lang-java="`operation`" pulumi-lang-hcl="`operation`"&gt;`operation`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`destPath`" pulumi-lang-dotnet="`DestPath`" pulumi-lang-go="`destPath`" pulumi-lang-python="`dest_path`" pulumi-lang-yaml="`destPath`" pulumi-lang-java="`destPath`" pulumi-lang-hcl="`dest_path`"&gt;`destPath`&lt;/span&gt; is present, then the record represents a region migration.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A FileMigration is a background operation on one or more files, such as a copy or a region migration.
         /// 
-        /// 
-        /// 
         /// If no &lt;span pulumi-lang-nodejs="`operation`" pulumi-lang-dotnet="`Operation`" pulumi-lang-go="`operation`" pulumi-lang-python="`operation`" pulumi-lang-yaml="`operation`" pulumi-lang-java="`operation`" pulumi-lang-hcl="`operation`"&gt;`operation`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`destPath`" pulumi-lang-dotnet="`DestPath`" pulumi-lang-go="`destPath`" pulumi-lang-python="`dest_path`" pulumi-lang-yaml="`destPath`" pulumi-lang-java="`destPath`" pulumi-lang-hcl="`dest_path`"&gt;`destPath`&lt;/span&gt; is present, then the record represents a region migration.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A FileMigration is a background operation on one or more files, such as a copy or a region migration.
-        /// 
-        /// 
         /// 
         /// If no &lt;span pulumi-lang-nodejs="`operation`" pulumi-lang-dotnet="`Operation`" pulumi-lang-go="`operation`" pulumi-lang-python="`operation`" pulumi-lang-yaml="`operation`" pulumi-lang-java="`operation`" pulumi-lang-hcl="`operation`"&gt;`operation`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`destPath`" pulumi-lang-dotnet="`DestPath`" pulumi-lang-go="`destPath`" pulumi-lang-python="`dest_path`" pulumi-lang-yaml="`destPath`" pulumi-lang-java="`destPath`" pulumi-lang-hcl="`dest_path`"&gt;`destPath`&lt;/span&gt; is present, then the record represents a region migration.
         /// 

@@ -6,7 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * A Bundle is the API/SDK term for the feature called Share Links in the web interface.
- *
  * The API provides the full set of actions related to Share Links, including sending them via E-Mail.
  *
  * Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -110,7 +109,11 @@ export interface GetBundleResult {
      */
     readonly dontSeparateSubmissionsByFolder: boolean;
     /**
-     * Bundle expiration date/time
+     * Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+     */
+    readonly effectiveExpiresAt: string;
+    /**
+     * Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
      */
     readonly expiresAt: string;
     /**
@@ -237,7 +240,6 @@ export interface GetBundleResult {
 }
 /**
  * A Bundle is the API/SDK term for the feature called Share Links in the web interface.
- *
  * The API provides the full set of actions related to Share Links, including sending them via E-Mail.
  *
  * Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.

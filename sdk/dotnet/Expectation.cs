@@ -16,11 +16,8 @@ namespace Jschady.Filescom
     /// Expectations are meant to answer operational questions like:
     /// 
     /// * Did the expected file arrive?
-    /// 
     /// * Was it on time?
-    /// 
     /// * Did it meet the required shape and count rules?
-    /// 
     /// * Is there an active issue someone needs to acknowledge?
     /// 
     /// Expectations are different from Automations and Syncs. Automations and Syncs act on files; Expectations monitor whether expected files arrived on time, in the right place, and in the right shape. In practice, Expectations are the sensor and Automations are the actuator.
@@ -28,11 +25,8 @@ namespace Jschady.Filescom
     /// An Expectation combines four concepts:
     /// 
     /// 1. **Scope**: where to look for candidate files, using &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt;, and optional &lt;span pulumi-lang-nodejs="`excludePattern`" pulumi-lang-dotnet="`ExcludePattern`" pulumi-lang-go="`excludePattern`" pulumi-lang-python="`exclude_pattern`" pulumi-lang-yaml="`excludePattern`" pulumi-lang-java="`excludePattern`" pulumi-lang-hcl="`exclude_pattern`"&gt;`excludePattern`&lt;/span&gt;.
-    /// 
     /// 2. **Trigger / timing**: when a window opens and how long it stays eligible, using &lt;span pulumi-lang-nodejs="`trigger`" pulumi-lang-dotnet="`Trigger`" pulumi-lang-go="`trigger`" pulumi-lang-python="`trigger`" pulumi-lang-yaml="`trigger`" pulumi-lang-java="`trigger`" pulumi-lang-hcl="`trigger`"&gt;`trigger`&lt;/span&gt;, schedule fields, &lt;span pulumi-lang-nodejs="`lookbackInterval`" pulumi-lang-dotnet="`LookbackInterval`" pulumi-lang-go="`lookbackInterval`" pulumi-lang-python="`lookback_interval`" pulumi-lang-yaml="`lookbackInterval`" pulumi-lang-java="`lookbackInterval`" pulumi-lang-hcl="`lookback_interval`"&gt;`lookbackInterval`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`lateAcceptanceInterval`" pulumi-lang-dotnet="`LateAcceptanceInterval`" pulumi-lang-go="`lateAcceptanceInterval`" pulumi-lang-python="`late_acceptance_interval`" pulumi-lang-yaml="`lateAcceptanceInterval`" pulumi-lang-java="`lateAcceptanceInterval`" pulumi-lang-hcl="`late_acceptance_interval`"&gt;`lateAcceptanceInterval`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`inactivityInterval`" pulumi-lang-dotnet="`InactivityInterval`" pulumi-lang-go="`inactivityInterval`" pulumi-lang-python="`inactivity_interval`" pulumi-lang-yaml="`inactivityInterval`" pulumi-lang-java="`inactivityInterval`" pulumi-lang-hcl="`inactivity_interval`"&gt;`inactivityInterval`&lt;/span&gt;, and &lt;span pulumi-lang-nodejs="`maxOpenInterval`" pulumi-lang-dotnet="`MaxOpenInterval`" pulumi-lang-go="`maxOpenInterval`" pulumi-lang-python="`max_open_interval`" pulumi-lang-yaml="`maxOpenInterval`" pulumi-lang-java="`maxOpenInterval`" pulumi-lang-hcl="`max_open_interval`"&gt;`maxOpenInterval`&lt;/span&gt;.
-    /// 
     /// 3. **Criteria**: what must be true for the window to succeed, using the structured &lt;span pulumi-lang-nodejs="`criteria`" pulumi-lang-dotnet="`Criteria`" pulumi-lang-go="`criteria`" pulumi-lang-python="`criteria`" pulumi-lang-yaml="`criteria`" pulumi-lang-java="`criteria`" pulumi-lang-hcl="`criteria`"&gt;`criteria`&lt;/span&gt; JSON document.
-    /// 
     /// 4. **Outcome history**: what happened over time, exposed through `ExpectationEvaluation` history and `ExpectationIncident` lifecycle records.
     /// 
     /// ## Scope and matching
@@ -56,9 +50,7 @@ namespace Jschady.Filescom
     /// Expectations can open windows in three ways:
     /// 
     /// * &lt;span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`"&gt;`daily`&lt;/span&gt;: run on a recurring daily/weekly/monthly/quarterly/yearly cadence using &lt;span pulumi-lang-nodejs="`interval`" pulumi-lang-dotnet="`Interval`" pulumi-lang-go="`interval`" pulumi-lang-python="`interval`" pulumi-lang-yaml="`interval`" pulumi-lang-java="`interval`" pulumi-lang-hcl="`interval`"&gt;`interval`&lt;/span&gt; and either &lt;span pulumi-lang-nodejs="`recurringDay`" pulumi-lang-dotnet="`RecurringDay`" pulumi-lang-go="`recurringDay`" pulumi-lang-python="`recurring_day`" pulumi-lang-yaml="`recurringDay`" pulumi-lang-java="`recurringDay`" pulumi-lang-hcl="`recurring_day`"&gt;`recurringDay`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`recurringDays`" pulumi-lang-dotnet="`RecurringDays`" pulumi-lang-go="`recurringDays`" pulumi-lang-python="`recurring_days`" pulumi-lang-yaml="`recurringDays`" pulumi-lang-java="`recurringDays`" pulumi-lang-hcl="`recurring_days`"&gt;`recurringDays`&lt;/span&gt;.
-    /// 
     /// * &lt;span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`"&gt;`customSchedule`&lt;/span&gt;: run using either the reusable Site-level Schedule selected by &lt;span pulumi-lang-nodejs="`scheduleId`" pulumi-lang-dotnet="`ScheduleId`" pulumi-lang-go="`scheduleId`" pulumi-lang-python="`schedule_id`" pulumi-lang-yaml="`scheduleId`" pulumi-lang-java="`scheduleId`" pulumi-lang-hcl="`schedule_id`"&gt;`scheduleId`&lt;/span&gt; or specific weekdays and times stored on the Expectation.
-    /// 
     /// * &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt;: an operator explicitly opens the window.
     /// 
     /// Schedule-driven expectations define an on-time deadline and may optionally remain eligible to close as &lt;span pulumi-lang-nodejs="`late`" pulumi-lang-dotnet="`Late`" pulumi-lang-go="`late`" pulumi-lang-python="`late`" pulumi-lang-yaml="`late`" pulumi-lang-java="`late`" pulumi-lang-hcl="`late`"&gt;`late`&lt;/span&gt; during &lt;span pulumi-lang-nodejs="`lateAcceptanceInterval`" pulumi-lang-dotnet="`LateAcceptanceInterval`" pulumi-lang-go="`lateAcceptanceInterval`" pulumi-lang-python="`late_acceptance_interval`" pulumi-lang-yaml="`lateAcceptanceInterval`" pulumi-lang-java="`lateAcceptanceInterval`" pulumi-lang-hcl="`late_acceptance_interval`"&gt;`lateAcceptanceInterval`&lt;/span&gt;.
@@ -72,15 +64,10 @@ namespace Jschady.Filescom
     /// Criteria v1 can express things like:
     /// 
     /// * file count constraints
-    /// 
     /// * total byte constraints
-    /// 
     /// * allowed extensions
-    /// 
     /// * filename regex validation
-    /// 
     /// * forbidden files
-    /// 
     /// * required named or globbed files with their own per-file constraints
     /// 
     /// Criteria v2 adds &lt;span pulumi-lang-nodejs="`contentValidation`" pulumi-lang-dotnet="`ContentValidation`" pulumi-lang-go="`contentValidation`" pulumi-lang-python="`content_validation`" pulumi-lang-yaml="`contentValidation`" pulumi-lang-java="`contentValidation`" pulumi-lang-hcl="`content_validation`"&gt;`contentValidation`&lt;/span&gt;, which runs a customer-authored Files Transform Script in either &lt;span pulumi-lang-nodejs="`perFile`" pulumi-lang-dotnet="`PerFile`" pulumi-lang-go="`perFile`" pulumi-lang-python="`per_file`" pulumi-lang-yaml="`perFile`" pulumi-lang-java="`perFile`" pulumi-lang-hcl="`per_file`"&gt;`perFile`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`wholeBatch`" pulumi-lang-dotnet="`WholeBatch`" pulumi-lang-go="`wholeBatch`" pulumi-lang-python="`whole_batch`" pulumi-lang-yaml="`wholeBatch`" pulumi-lang-java="`wholeBatch`" pulumi-lang-hcl="`whole_batch`"&gt;`wholeBatch`&lt;/span&gt; mode. Per-file scripts receive the file contents parsed by FTS as &lt;span pulumi-lang-nodejs="`payload`" pulumi-lang-dotnet="`Payload`" pulumi-lang-go="`payload`" pulumi-lang-python="`payload`" pulumi-lang-yaml="`payload`" pulumi-lang-java="`payload`" pulumi-lang-hcl="`payload`"&gt;`payload`&lt;/span&gt;. Whole-batch scripts receive an array of file objects containing &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`size`" pulumi-lang-dotnet="`Size`" pulumi-lang-go="`size`" pulumi-lang-python="`size`" pulumi-lang-yaml="`size`" pulumi-lang-java="`size`" pulumi-lang-hcl="`size`"&gt;`size`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`lastModifiedAt`" pulumi-lang-dotnet="`LastModifiedAt`" pulumi-lang-go="`lastModifiedAt`" pulumi-lang-python="`last_modified_at`" pulumi-lang-yaml="`lastModifiedAt`" pulumi-lang-java="`lastModifiedAt`" pulumi-lang-hcl="`last_modified_at`"&gt;`lastModifiedAt`&lt;/span&gt;, and each file's parsed &lt;span pulumi-lang-nodejs="`payload`" pulumi-lang-dotnet="`Payload`" pulumi-lang-go="`payload`" pulumi-lang-python="`payload`" pulumi-lang-yaml="`payload`" pulumi-lang-java="`payload`" pulumi-lang-hcl="`payload`"&gt;`payload`&lt;/span&gt;.
@@ -96,7 +83,6 @@ namespace Jschady.Filescom
     /// For deeper inspection:
     /// 
     /// * `ExpectationEvaluation` history shows each open or closed window and the evidence captured for it.
-    /// 
     /// * `ExpectationIncident` records track ongoing failure situations over time, including acknowledge, snooze, and resolve actions.
     /// 
     /// Manual windows do not open incidents in v1. Schedule-driven failures can open incidents, and later qualifying success can resolve them.

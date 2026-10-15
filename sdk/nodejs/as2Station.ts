@@ -17,8 +17,7 @@ import * as utilities from "./utilities";
  * const exampleAs2Station = new filescom.As2Station("example_as2_station", {
  *     name: "AS2 Station Name",
  *     workspaceId: 1,
- *     publicCertificate: "public_certificate",
- *     privateKey: "private_key",
+ *     publicCertificate: "example",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -75,14 +74,26 @@ export class As2Station extends pulumi.CustomResource {
     declare public readonly name: pulumi.Output<string>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
      */
-    declare public readonly privateKey: pulumi.Output<string>;
+    declare public readonly pkcs12: pulumi.Output<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+     */
+    declare public readonly pkcs12Password: pulumi.Output<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * PEM-encoded private key matching public_certificate.
+     */
+    declare public readonly privateKey: pulumi.Output<string | undefined>;
     /**
      * MD5 hash of private key used for message security.
      */
     declare public /*out*/ readonly privateKeyMd5: pulumi.Output<string>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for the PEM-encoded private key.
      */
     declare public readonly privateKeyPassword: pulumi.Output<string | undefined>;
     /**
@@ -133,7 +144,7 @@ export class As2Station extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: As2StationArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: As2StationArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: As2StationArgs | As2StationState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -142,6 +153,8 @@ export class As2Station extends pulumi.CustomResource {
             resourceInputs["domain"] = state?.domain;
             resourceInputs["hexPublicCertificateSerial"] = state?.hexPublicCertificateSerial;
             resourceInputs["name"] = state?.name;
+            resourceInputs["pkcs12"] = state?.pkcs12;
+            resourceInputs["pkcs12Password"] = state?.pkcs12Password;
             resourceInputs["privateKey"] = state?.privateKey;
             resourceInputs["privateKeyMd5"] = state?.privateKeyMd5;
             resourceInputs["privateKeyPassword"] = state?.privateKeyPassword;
@@ -157,13 +170,9 @@ export class As2Station extends pulumi.CustomResource {
             resourceInputs["workspaceId"] = state?.workspaceId;
         } else {
             const args = argsOrState as As2StationArgs | undefined;
-            if (args?.privateKey === undefined && !opts.urn) {
-                throw new Error("Missing required property 'privateKey'");
-            }
-            if (args?.publicCertificate === undefined && !opts.urn) {
-                throw new Error("Missing required property 'publicCertificate'");
-            }
             resourceInputs["name"] = args?.name;
+            resourceInputs["pkcs12"] = args?.pkcs12 ? pulumi.secret(args.pkcs12) : undefined;
+            resourceInputs["pkcs12Password"] = args?.pkcs12Password ? pulumi.secret(args.pkcs12Password) : undefined;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
             resourceInputs["privateKeyPassword"] = args?.privateKeyPassword ? pulumi.secret(args.privateKeyPassword) : undefined;
             resourceInputs["publicCertificate"] = args?.publicCertificate;
@@ -181,7 +190,7 @@ export class As2Station extends pulumi.CustomResource {
             resourceInputs["uri"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["privateKey", "privateKeyPassword"] };
+        const secretOpts = { additionalSecretOutputs: ["pkcs12", "pkcs12Password", "privateKey", "privateKeyPassword"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(As2Station.__pulumiType, name, resourceInputs, opts);
     }
@@ -205,6 +214,17 @@ export interface As2StationState {
     name?: pulumi.Input<string | undefined>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
+     */
+    pkcs12?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+     */
+    pkcs12Password?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * PEM-encoded private key matching public_certificate.
      */
     privateKey?: pulumi.Input<string | undefined>;
     /**
@@ -213,6 +233,7 @@ export interface As2StationState {
     privateKeyMd5?: pulumi.Input<string | undefined>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for the PEM-encoded private key.
      */
     privateKeyPassword?: pulumi.Input<string | undefined>;
     /**
@@ -267,16 +288,28 @@ export interface As2StationArgs {
     name?: pulumi.Input<string | undefined>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
      */
-    privateKey: pulumi.Input<string>;
+    pkcs12?: pulumi.Input<string | undefined>;
     /**
      * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+     */
+    pkcs12Password?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * PEM-encoded private key matching public_certificate.
+     */
+    privateKey?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Password for the PEM-encoded private key.
      */
     privateKeyPassword?: pulumi.Input<string | undefined>;
     /**
      * Public certificate used for message security.
      */
-    publicCertificate: pulumi.Input<string>;
+    publicCertificate?: pulumi.Input<string | undefined>;
     /**
      * ID of the Workspace associated with this AS2 Station.
      */

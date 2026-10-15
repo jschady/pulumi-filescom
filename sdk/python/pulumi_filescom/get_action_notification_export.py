@@ -26,7 +26,7 @@ class GetActionNotificationExportResult:
     """
     A collection of values returned by getActionNotificationExport.
     """
-    def __init__(__self__, end_at=None, export_version=None, id=None, query_folder=None, query_message=None, query_path=None, query_request_method=None, query_request_url=None, query_status=None, query_success=None, results_url=None, start_at=None, status=None):
+    def __init__(__self__, end_at=None, export_version=None, id=None, query_folder=None, query_message=None, query_path=None, query_request_method=None, query_request_url=None, query_status=None, query_success=None, results_url=None, start_at=None, status=None, workspace_id=None):
         if end_at and not isinstance(end_at, str):
             raise TypeError("Expected argument 'end_at' to be a str")
         pulumi.set(__self__, "end_at", end_at)
@@ -66,6 +66,9 @@ class GetActionNotificationExportResult:
         if status and not isinstance(status, str):
             raise TypeError("Expected argument 'status' to be a str")
         pulumi.set(__self__, "status", status)
+        if workspace_id and not isinstance(workspace_id, int):
+            raise TypeError("Expected argument 'workspace_id' to be a int")
+        pulumi.set(__self__, "workspace_id", workspace_id)
 
     @_builtins.property
     @pulumi.getter(name="endAt")
@@ -171,6 +174,14 @@ class GetActionNotificationExportResult:
         """
         return pulumi.get(self, "status")
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> _builtins.int:
+        """
+        Workspace whose logs are exported. Set to <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> for the default workspace. A null value means a site-wide export.
+        """
+        return pulumi.get(self, "workspace_id")
+
 
 class AwaitableGetActionNotificationExportResult(GetActionNotificationExportResult):
     # pylint: disable=using-constant-test
@@ -190,7 +201,8 @@ class AwaitableGetActionNotificationExportResult(GetActionNotificationExportResu
             query_success=self.query_success,
             results_url=self.results_url,
             start_at=self.start_at,
-            status=self.status)
+            status=self.status,
+            workspace_id=self.workspace_id)
 
 
 def get_action_notification_export(id: Optional[_builtins.int] = None,
@@ -198,30 +210,27 @@ def get_action_notification_export(id: Optional[_builtins.int] = None,
     """
     An ActionNotificationExport is an operation that provides access to outgoing webhook logs. Querying webhook logs is a little different than other APIs.
 
-    All queries against the archive must be submitted as Exports. (Even our Web UI creates an Export behind the scenes.)
+    All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind the scenes.)
 
-    In any query field in this API, you may specify multiple values separated by commas. That means that commas
+    Only Site Administrators, including Read-only Administrators, and Workspace Administrators can create exports and access their results.
+    Workspace Administrators are limited to the workspace selected for the request. Site Administrators can select a workspace using <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> when creating an export, or use `X-Files-Workspace-Id` to scope requests to a workspace. Without a workspace selection, Site Administrators can export logs across the site.
 
+    In any query field in this API, you may specify multiple values separated by commas.  That means that commas
     cannot be searched for themselves, and neither can single quotation marks.
 
     Use the following steps to complete an export:
 
-    1. Initiate the export by using the Create Action Notification Export endpoint. Non Site Admins must query by folder or path.
-
+    1. Initiate the export by using the Create Action Notification Export endpoint.
     2. Using the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> from the response to step 1, poll the Show Action Notification Export endpoint. Check the <span pulumi-lang-nodejs="`status`" pulumi-lang-dotnet="`Status`" pulumi-lang-go="`status`" pulumi-lang-python="`status`" pulumi-lang-yaml="`status`" pulumi-lang-java="`status`" pulumi-lang-hcl="`status`">`status`</span> field until it is <span pulumi-lang-nodejs="`ready`" pulumi-lang-dotnet="`Ready`" pulumi-lang-go="`ready`" pulumi-lang-python="`ready`" pulumi-lang-yaml="`ready`" pulumi-lang-java="`ready`" pulumi-lang-hcl="`ready`">`ready`</span>.
-
-    3. You can download the results of the export as a CSV file using the <span pulumi-lang-nodejs="`resultsUrl`" pulumi-lang-dotnet="`ResultsUrl`" pulumi-lang-go="`resultsUrl`" pulumi-lang-python="`results_url`" pulumi-lang-yaml="`resultsUrl`" pulumi-lang-java="`resultsUrl`" pulumi-lang-hcl="`results_url`">`resultsUrl`</span> field in the response from step 2. If you want to page through the records in JSON format, use the List Action Notification Export Results endpoint, passing the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> that you got in step 1 as the <span pulumi-lang-nodejs="`actionNotificationExportId`" pulumi-lang-dotnet="`ActionNotificationExportId`" pulumi-lang-go="`actionNotificationExportId`" pulumi-lang-python="`action_notification_export_id`" pulumi-lang-yaml="`actionNotificationExportId`" pulumi-lang-java="`actionNotificationExportId`" pulumi-lang-hcl="`action_notification_export_id`">`actionNotificationExportId`</span> parameter. Check the `X-Files-Cursor-Next` header to see if there are more records available, and resubmit the same request with a <span pulumi-lang-nodejs="`cursor`" pulumi-lang-dotnet="`Cursor`" pulumi-lang-go="`cursor`" pulumi-lang-python="`cursor`" pulumi-lang-yaml="`cursor`" pulumi-lang-java="`cursor`" pulumi-lang-hcl="`cursor`">`cursor`</span> parameter to fetch the next page of results. Unlike most API Endpoints, this endpoint does not provide `X-Files-Cursor-Prev` cursors allowing reverse pagination through the results. This is due to limitations in Amazon Athena, the underlying data lake for these records.
+    3. You can download the results of the export as a CSV file using the <span pulumi-lang-nodejs="`resultsUrl`" pulumi-lang-dotnet="`ResultsUrl`" pulumi-lang-go="`resultsUrl`" pulumi-lang-python="`results_url`" pulumi-lang-yaml="`resultsUrl`" pulumi-lang-java="`resultsUrl`" pulumi-lang-hcl="`results_url`">`resultsUrl`</span> field in the response from step 2. If you want to page through the records in JSON format, use the List Action Notification Export Results endpoint, passing the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> that you got in step 1 as the <span pulumi-lang-nodejs="`actionNotificationExportId`" pulumi-lang-dotnet="`ActionNotificationExportId`" pulumi-lang-go="`actionNotificationExportId`" pulumi-lang-python="`action_notification_export_id`" pulumi-lang-yaml="`actionNotificationExportId`" pulumi-lang-java="`actionNotificationExportId`" pulumi-lang-hcl="`action_notification_export_id`">`actionNotificationExportId`</span> parameter. Check the `X-Files-Cursor-Next` header to see if there are more records available, and resubmit the same request with a <span pulumi-lang-nodejs="`cursor`" pulumi-lang-dotnet="`Cursor`" pulumi-lang-go="`cursor`" pulumi-lang-python="`cursor`" pulumi-lang-yaml="`cursor`" pulumi-lang-java="`cursor`" pulumi-lang-hcl="`cursor`">`cursor`</span> parameter to fetch the next page of results.  Unlike most API Endpoints, this endpoint does not provide `X-Files-Cursor-Prev` cursors allowing reverse pagination through the results.  This is due to limitations in Amazon Athena, the underlying data lake for these records.
 
     If you intend to use this API for high volume or automated use, please contact us with more information
-
     about your use case.
 
     ## Example Queries
 
     * History for a folder: `{ <span pulumi-lang-nodejs=""queryFolder"" pulumi-lang-dotnet=""QueryFolder"" pulumi-lang-go=""queryFolder"" pulumi-lang-python=""query_folder"" pulumi-lang-yaml=""queryFolder"" pulumi-lang-java=""queryFolder"" pulumi-lang-hcl=""query_folder"">"queryFolder"</span>: "path/to/folder" }`
-
     * History for a range of time: `{ <span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at"">"startAt"</span>: "2021-03-18 12:00:00", <span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at"">"endAt"</span>: "2021-03-19 12:00:00" }`
-
     * History of all notifications that used GET or POST: `{ <span pulumi-lang-nodejs=""queryRequestMethod"" pulumi-lang-dotnet=""QueryRequestMethod"" pulumi-lang-go=""queryRequestMethod"" pulumi-lang-python=""query_request_method"" pulumi-lang-yaml=""queryRequestMethod"" pulumi-lang-java=""queryRequestMethod"" pulumi-lang-hcl=""query_request_method"">"queryRequestMethod"</span>: "GET,POST" }`
 
     ## Example Usage
@@ -256,36 +265,34 @@ def get_action_notification_export(id: Optional[_builtins.int] = None,
         query_success=pulumi.get(__ret__, 'query_success'),
         results_url=pulumi.get(__ret__, 'results_url'),
         start_at=pulumi.get(__ret__, 'start_at'),
-        status=pulumi.get(__ret__, 'status'))
+        status=pulumi.get(__ret__, 'status'),
+        workspace_id=pulumi.get(__ret__, 'workspace_id'))
 def get_action_notification_export_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetActionNotificationExportResult]:
     """
     An ActionNotificationExport is an operation that provides access to outgoing webhook logs. Querying webhook logs is a little different than other APIs.
 
-    All queries against the archive must be submitted as Exports. (Even our Web UI creates an Export behind the scenes.)
+    All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind the scenes.)
 
-    In any query field in this API, you may specify multiple values separated by commas. That means that commas
+    Only Site Administrators, including Read-only Administrators, and Workspace Administrators can create exports and access their results.
+    Workspace Administrators are limited to the workspace selected for the request. Site Administrators can select a workspace using <span pulumi-lang-nodejs="`workspaceId`" pulumi-lang-dotnet="`WorkspaceId`" pulumi-lang-go="`workspaceId`" pulumi-lang-python="`workspace_id`" pulumi-lang-yaml="`workspaceId`" pulumi-lang-java="`workspaceId`" pulumi-lang-hcl="`workspace_id`">`workspaceId`</span> when creating an export, or use `X-Files-Workspace-Id` to scope requests to a workspace. Without a workspace selection, Site Administrators can export logs across the site.
 
+    In any query field in this API, you may specify multiple values separated by commas.  That means that commas
     cannot be searched for themselves, and neither can single quotation marks.
 
     Use the following steps to complete an export:
 
-    1. Initiate the export by using the Create Action Notification Export endpoint. Non Site Admins must query by folder or path.
-
+    1. Initiate the export by using the Create Action Notification Export endpoint.
     2. Using the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> from the response to step 1, poll the Show Action Notification Export endpoint. Check the <span pulumi-lang-nodejs="`status`" pulumi-lang-dotnet="`Status`" pulumi-lang-go="`status`" pulumi-lang-python="`status`" pulumi-lang-yaml="`status`" pulumi-lang-java="`status`" pulumi-lang-hcl="`status`">`status`</span> field until it is <span pulumi-lang-nodejs="`ready`" pulumi-lang-dotnet="`Ready`" pulumi-lang-go="`ready`" pulumi-lang-python="`ready`" pulumi-lang-yaml="`ready`" pulumi-lang-java="`ready`" pulumi-lang-hcl="`ready`">`ready`</span>.
-
-    3. You can download the results of the export as a CSV file using the <span pulumi-lang-nodejs="`resultsUrl`" pulumi-lang-dotnet="`ResultsUrl`" pulumi-lang-go="`resultsUrl`" pulumi-lang-python="`results_url`" pulumi-lang-yaml="`resultsUrl`" pulumi-lang-java="`resultsUrl`" pulumi-lang-hcl="`results_url`">`resultsUrl`</span> field in the response from step 2. If you want to page through the records in JSON format, use the List Action Notification Export Results endpoint, passing the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> that you got in step 1 as the <span pulumi-lang-nodejs="`actionNotificationExportId`" pulumi-lang-dotnet="`ActionNotificationExportId`" pulumi-lang-go="`actionNotificationExportId`" pulumi-lang-python="`action_notification_export_id`" pulumi-lang-yaml="`actionNotificationExportId`" pulumi-lang-java="`actionNotificationExportId`" pulumi-lang-hcl="`action_notification_export_id`">`actionNotificationExportId`</span> parameter. Check the `X-Files-Cursor-Next` header to see if there are more records available, and resubmit the same request with a <span pulumi-lang-nodejs="`cursor`" pulumi-lang-dotnet="`Cursor`" pulumi-lang-go="`cursor`" pulumi-lang-python="`cursor`" pulumi-lang-yaml="`cursor`" pulumi-lang-java="`cursor`" pulumi-lang-hcl="`cursor`">`cursor`</span> parameter to fetch the next page of results. Unlike most API Endpoints, this endpoint does not provide `X-Files-Cursor-Prev` cursors allowing reverse pagination through the results. This is due to limitations in Amazon Athena, the underlying data lake for these records.
+    3. You can download the results of the export as a CSV file using the <span pulumi-lang-nodejs="`resultsUrl`" pulumi-lang-dotnet="`ResultsUrl`" pulumi-lang-go="`resultsUrl`" pulumi-lang-python="`results_url`" pulumi-lang-yaml="`resultsUrl`" pulumi-lang-java="`resultsUrl`" pulumi-lang-hcl="`results_url`">`resultsUrl`</span> field in the response from step 2. If you want to page through the records in JSON format, use the List Action Notification Export Results endpoint, passing the <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> that you got in step 1 as the <span pulumi-lang-nodejs="`actionNotificationExportId`" pulumi-lang-dotnet="`ActionNotificationExportId`" pulumi-lang-go="`actionNotificationExportId`" pulumi-lang-python="`action_notification_export_id`" pulumi-lang-yaml="`actionNotificationExportId`" pulumi-lang-java="`actionNotificationExportId`" pulumi-lang-hcl="`action_notification_export_id`">`actionNotificationExportId`</span> parameter. Check the `X-Files-Cursor-Next` header to see if there are more records available, and resubmit the same request with a <span pulumi-lang-nodejs="`cursor`" pulumi-lang-dotnet="`Cursor`" pulumi-lang-go="`cursor`" pulumi-lang-python="`cursor`" pulumi-lang-yaml="`cursor`" pulumi-lang-java="`cursor`" pulumi-lang-hcl="`cursor`">`cursor`</span> parameter to fetch the next page of results.  Unlike most API Endpoints, this endpoint does not provide `X-Files-Cursor-Prev` cursors allowing reverse pagination through the results.  This is due to limitations in Amazon Athena, the underlying data lake for these records.
 
     If you intend to use this API for high volume or automated use, please contact us with more information
-
     about your use case.
 
     ## Example Queries
 
     * History for a folder: `{ <span pulumi-lang-nodejs=""queryFolder"" pulumi-lang-dotnet=""QueryFolder"" pulumi-lang-go=""queryFolder"" pulumi-lang-python=""query_folder"" pulumi-lang-yaml=""queryFolder"" pulumi-lang-java=""queryFolder"" pulumi-lang-hcl=""query_folder"">"queryFolder"</span>: "path/to/folder" }`
-
     * History for a range of time: `{ <span pulumi-lang-nodejs=""startAt"" pulumi-lang-dotnet=""StartAt"" pulumi-lang-go=""startAt"" pulumi-lang-python=""start_at"" pulumi-lang-yaml=""startAt"" pulumi-lang-java=""startAt"" pulumi-lang-hcl=""start_at"">"startAt"</span>: "2021-03-18 12:00:00", <span pulumi-lang-nodejs=""endAt"" pulumi-lang-dotnet=""EndAt"" pulumi-lang-go=""endAt"" pulumi-lang-python=""end_at"" pulumi-lang-yaml=""endAt"" pulumi-lang-java=""endAt"" pulumi-lang-hcl=""end_at"">"endAt"</span>: "2021-03-19 12:00:00" }`
-
     * History of all notifications that used GET or POST: `{ <span pulumi-lang-nodejs=""queryRequestMethod"" pulumi-lang-dotnet=""QueryRequestMethod"" pulumi-lang-go=""queryRequestMethod"" pulumi-lang-python=""query_request_method"" pulumi-lang-yaml=""queryRequestMethod"" pulumi-lang-java=""queryRequestMethod"" pulumi-lang-hcl=""query_request_method"">"queryRequestMethod"</span>: "GET,POST" }`
 
     ## Example Usage
@@ -319,4 +326,5 @@ def get_action_notification_export_output(id: pulumi.Input[Optional[_builtins.in
         query_success=pulumi.get(__response__, 'query_success'),
         results_url=pulumi.get(__response__, 'results_url'),
         start_at=pulumi.get(__response__, 'start_at'),
-        status=pulumi.get(__response__, 'status')))
+        status=pulumi.get(__response__, 'status'),
+        workspace_id=pulumi.get(__response__, 'workspace_id')))

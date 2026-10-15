@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+ * A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
  *
  * All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
  *
@@ -90,6 +90,10 @@ export interface GetGroupResult {
      */
     readonly restapiPermission: boolean;
     /**
+     * If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+     */
+    readonly s3CompatibleEndpointPermission: boolean;
+    /**
      * If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.
      */
     readonly sftpPermission: boolean;
@@ -111,7 +115,7 @@ export interface GetGroupResult {
     readonly workspaceId: number;
 }
 /**
- * A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+ * A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
  *
  * All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
  *

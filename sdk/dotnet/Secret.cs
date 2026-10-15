@@ -33,7 +33,7 @@ namespace Jschady.Filescom
     ///         SecretType = "token",
     ///         Metadata = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "example value",
+    ///             ["headerName"] = "Authorization",
     ///         },
     ///         WorkspaceId = 0,
     ///     });

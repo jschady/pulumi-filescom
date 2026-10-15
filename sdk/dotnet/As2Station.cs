@@ -28,8 +28,7 @@ namespace Jschady.Filescom
     ///     {
     ///         Name = "AS2 Station Name",
     ///         WorkspaceId = 1,
-    ///         PublicCertificate = "public_certificate",
-    ///         PrivateKey = "private_key",
+    ///         PublicCertificate = "example",
     ///     });
     /// 
     /// });
@@ -69,9 +68,24 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of&lt;span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "&gt; publicCertificate &lt;/span&gt;and private_key.
+        /// </summary>
+        [Output("pkcs12")]
+        public Output<string?> Pkcs12 { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        /// </summary>
+        [Output("pkcs12Password")]
+        public Output<string?> Pkcs12Password { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// PEM-encoded private key matching public_certificate.
         /// </summary>
         [Output("privateKey")]
-        public Output<string> PrivateKey { get; private set; } = null!;
+        public Output<string?> PrivateKey { get; private set; } = null!;
 
         /// <summary>
         /// MD5 hash of private key used for message security.
@@ -81,6 +95,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for the PEM-encoded private key.
         /// </summary>
         [Output("privateKeyPassword")]
         public Output<string?> PrivateKeyPassword { get; private set; } = null!;
@@ -153,7 +168,7 @@ namespace Jschady.Filescom
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public As2Station(string name, As2StationArgs args, CustomResourceOptions? options = null)
+        public As2Station(string name, As2StationArgs? args = null, CustomResourceOptions? options = null)
             : base("filescom:index/as2Station:As2Station", name, args ?? new As2StationArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -171,6 +186,8 @@ namespace Jschady.Filescom
                 PluginDownloadURL = "github://api.github.com/jschady/pulumi-filescom",
                 AdditionalSecretOutputs =
                 {
+                    "pkcs12",
+                    "pkcs12Password",
                     "privateKey",
                     "privateKeyPassword",
                 },
@@ -203,11 +220,46 @@ namespace Jschady.Filescom
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        [Input("privateKey", required: true)]
+        [Input("pkcs12")]
+        private Input<string>? _pkcs12;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of&lt;span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "&gt; publicCertificate &lt;/span&gt;and private_key.
+        /// </summary>
+        public Input<string>? Pkcs12
+        {
+            get => _pkcs12;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("pkcs12Password")]
+        private Input<string>? _pkcs12Password;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        /// </summary>
+        public Input<string>? Pkcs12Password
+        {
+            get => _pkcs12Password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12Password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("privateKey")]
         private Input<string>? _privateKey;
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// PEM-encoded private key matching public_certificate.
         /// </summary>
         public Input<string>? PrivateKey
         {
@@ -224,6 +276,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for the PEM-encoded private key.
         /// </summary>
         public Input<string>? PrivateKeyPassword
         {
@@ -238,8 +291,8 @@ namespace Jschady.Filescom
         /// <summary>
         /// Public certificate used for message security.
         /// </summary>
-        [Input("publicCertificate", required: true)]
-        public Input<string> PublicCertificate { get; set; } = null!;
+        [Input("publicCertificate")]
+        public Input<string>? PublicCertificate { get; set; }
 
         /// <summary>
         /// ID of the Workspace associated with this AS2 Station.
@@ -273,11 +326,46 @@ namespace Jschady.Filescom
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        [Input("pkcs12")]
+        private Input<string>? _pkcs12;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of&lt;span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "&gt; publicCertificate &lt;/span&gt;and private_key.
+        /// </summary>
+        public Input<string>? Pkcs12
+        {
+            get => _pkcs12;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("pkcs12Password")]
+        private Input<string>? _pkcs12Password;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for pkcs12. The file and password are used only for import; the extracted certificate and private key are stored as PEM.
+        /// </summary>
+        public Input<string>? Pkcs12Password
+        {
+            get => _pkcs12Password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _pkcs12Password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("privateKey")]
         private Input<string>? _privateKey;
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// PEM-encoded private key matching public_certificate.
         /// </summary>
         public Input<string>? PrivateKey
         {
@@ -300,6 +388,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Password for the PEM-encoded private key.
         /// </summary>
         public Input<string>? PrivateKeyPassword
         {

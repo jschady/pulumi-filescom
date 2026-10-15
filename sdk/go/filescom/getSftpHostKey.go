@@ -62,6 +62,8 @@ type LookupSftpHostKeyArgs struct {
 type LookupSftpHostKeyResult struct {
 	// If true, use this SFTP Host Key.
 	Active bool `pulumi:"active"`
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId int `pulumi:"customDomainId"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 string `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
@@ -107,6 +109,11 @@ func (o LookupSftpHostKeyResultOutput) ToLookupSftpHostKeyResultOutputWithContex
 // If true, use this SFTP Host Key.
 func (o LookupSftpHostKeyResultOutput) Active() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSftpHostKeyResult) bool { return v.Active }).(pulumi.BoolOutput)
+}
+
+// Custom Domain ID. If set, this key is used only for that Custom Domain.
+func (o LookupSftpHostKeyResultOutput) CustomDomainId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSftpHostKeyResult) int { return v.CustomDomainId }).(pulumi.IntOutput)
 }
 
 // MD5 Fingerprint of the public key

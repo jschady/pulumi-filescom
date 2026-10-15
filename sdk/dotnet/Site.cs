@@ -69,7 +69,13 @@ namespace Jschady.Filescom
     ///                 ["siteAdmins"] = true,
     ///                 ["workspaceAdmins"] = true,
     ///                 ["folderAdmins"] = true,
-    ///                 ["allUsers"] = true,
+    ///                 ["allUsers"] = false,
+    ///                 ["selectedGroupMembers"] = true,
+    ///                 ["groupIds"] = new object?[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                 },
     ///             },
     ///         },
     ///         McpDcrEnabled = false,
@@ -87,6 +93,7 @@ namespace Jschady.Filescom
     ///         LegacyChecksumsMode = false,
     ///         MigrateRemoteServerSyncToSync = false,
     ///         As2MessageRetentionDays = 1,
+    ///         FileActivityEventsEnabled = false,
     ///         UsernameDisplay = "username_only",
     ///         SessionExpiryMinutes = 1,
     ///         SslRequired = false,
@@ -142,7 +149,9 @@ namespace Jschady.Filescom
     ///         UserRequestsEnabled = false,
     ///         UserRequestsNotifyAdmins = false,
     ///         DavEnabled = false,
+    ///         FilesComRemoteServerEnabled = false,
     ///         FtpEnabled = false,
+    ///         S3CompatibleEndpointEnabled = false,
     ///         SftpEnabled = false,
     ///         SftpFinalizePartialUploads = false,
     ///         UsersCanCreateApiKeys = false,
@@ -156,10 +165,6 @@ namespace Jschady.Filescom
     ///         },
     ///         ProtocolAccessGroupsOnly = false,
     ///         RevokeBundleAccessOnDisableOrDelete = false,
-    ///         BundleWatermarkValue = new Dictionary&lt;string, object?&gt;
-    ///         {
-    ///             ["key"] = "example value",
-    ///         },
     ///         GroupAdminsCanAddUsers = false,
     ///         GroupAdminsCanManageGroupMemberships = false,
     ///         GroupAdminsCanDeleteUsers = false,
@@ -168,6 +173,8 @@ namespace Jschady.Filescom
     ///         GroupAdminsCanBypassUserLifecycleRules = false,
     ///         GroupAdminsCanResetPasswords = false,
     ///         GroupAdminsCanSetUserPassword = false,
+    ///         ChildSiteFolderAdminsCanSeeParentSiteDirectory = false,
+    ///         WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory = false,
     ///         BundleRecipientBlacklistFreeEmailDomains = false,
     ///         BundleRecipientBlacklistDomains = new[]
     ///         {
@@ -201,6 +208,7 @@ namespace Jschady.Filescom
     ///         SmtpFrom = "me@my-mail-server.com",
     ///         SmtpUsername = "mail",
     ///         SmtpPort = 1,
+    ///         SmtpSsl = "require",
     ///         LdapEnabled = false,
     ///         LdapType = "open_ldap",
     ///         LdapHost = "ldap.site.com",
@@ -208,6 +216,7 @@ namespace Jschady.Filescom
     ///         LdapHost3 = "ldap3.site.com",
     ///         LdapPort = 1,
     ///         LdapSecure = false,
+    ///         LdapServerCertificate = "require_match",
     ///         LdapUsername = "[ldap username]",
     ///         LdapUsernameField = "sAMAccountName",
     ///         LdapDomain = "mysite.com",
@@ -218,6 +227,12 @@ namespace Jschady.Filescom
     ///         LdapGroupInclusion = "example",
     ///         LdapBaseDn = "example",
     ///         UploadsViaEmailAuthentication = false,
+    ///         BundleWatermarkValue = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["gravity"] = "SouthWest",
+    ///             ["maxHeightOrWidth"] = 20,
+    ///             ["transparency"] = 25,
+    ///         },
     ///         Icon16Delete = false,
     ///         Icon32Delete = false,
     ///         Icon48Delete = false,
@@ -277,7 +292,7 @@ namespace Jschady.Filescom
         public Output<bool> AdminsBypassLockedSubfolders { get; private set; } = null!;
 
         /// <summary>
-        /// Availability settings for AI features by user class
+        /// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         /// </summary>
         [Output("aiFeatureAvailability")]
         public Output<object> AiFeatureAvailability { get; private set; } = null!;
@@ -499,6 +514,12 @@ namespace Jschady.Filescom
         public Output<bool> CalculateFileChecksumsSha256 { get; private set; } = null!;
 
         /// <summary>
+        /// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        /// </summary>
+        [Output("childSiteFolderAdminsCanSeeParentSiteDirectory")]
+        public Output<bool> ChildSiteFolderAdminsCanSeeParentSiteDirectory { get; private set; } = null!;
+
+        /// <summary>
         /// Page link and button color
         /// </summary>
         [Output("color2Left")]
@@ -655,7 +676,7 @@ namespace Jschady.Filescom
         public Output<string> Email { get; private set; } = null!;
 
         /// <summary>
-        /// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        /// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         /// </summary>
         [Output("emailFooterCustomText")]
         public Output<string> EmailFooterCustomText { get; private set; } = null!;
@@ -665,6 +686,18 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("fedramp")]
         public Output<bool> Fedramp { get; private set; } = null!;
+
+        /// <summary>
+        /// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        /// </summary>
+        [Output("fileActivityEventsEnabled")]
+        public Output<bool> FileActivityEventsEnabled { get; private set; } = null!;
+
+        /// <summary>
+        /// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        /// </summary>
+        [Output("filesComRemoteServerEnabled")]
+        public Output<bool> FilesComRemoteServerEnabled { get; private set; } = null!;
 
         /// <summary>
         /// If true, permissions for this site must be bound to a group (not a user).
@@ -841,6 +874,12 @@ namespace Jschady.Filescom
         public Output<bool> LdapSecure { get; private set; } = null!;
 
         /// <summary>
+        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
+        /// </summary>
+        [Output("ldapServerCertificate")]
+        public Output<string> LdapServerCertificate { get; private set; } = null!;
+
+        /// <summary>
         /// LDAP type
         /// </summary>
         [Output("ldapType")]
@@ -895,7 +934,7 @@ namespace Jschady.Filescom
         public Output<string> Logo { get; private set; } = null!;
 
         /// <summary>
-        /// List of site settings managed by the parent site
+        /// Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         /// </summary>
         [Output("managedSiteSettings")]
         public Output<object> ManagedSiteSettings { get; private set; } = null!;
@@ -1141,6 +1180,12 @@ namespace Jschady.Filescom
         public Output<bool> RootFolderBehaviorsApplyToWorkspaces { get; private set; } = null!;
 
         /// <summary>
+        /// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        /// </summary>
+        [Output("s3CompatibleEndpointEnabled")]
+        public Output<bool> S3CompatibleEndpointEnabled { get; private set; } = null!;
+
+        /// <summary>
         /// Current session
         /// </summary>
         [Output("session")]
@@ -1255,6 +1300,12 @@ namespace Jschady.Filescom
         public Output<int> SmtpPort { get; private set; } = null!;
 
         /// <summary>
+        /// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        /// </summary>
+        [Output("smtpSsl")]
+        public Output<string> SmtpSsl { get; private set; } = null!;
+
+        /// <summary>
         /// SMTP server username
         /// </summary>
         [Output("smtpUsername")]
@@ -1297,7 +1348,7 @@ namespace Jschady.Filescom
         public Output<string> TrialUntil { get; private set; } = null!;
 
         /// <summary>
-        /// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        /// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         /// </summary>
         [Output("uploadsViaEmailAuthentication")]
         public Output<bool> UploadsViaEmailAuthentication { get; private set; } = null!;
@@ -1410,6 +1461,12 @@ namespace Jschady.Filescom
         [Output("windowsModeFtp")]
         public Output<bool> WindowsModeFtp { get; private set; } = null!;
 
+        /// <summary>
+        /// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        /// </summary>
+        [Output("workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")]
+        public Output<bool> WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Site resource with the given unique name, arguments, and options.
@@ -1494,7 +1551,7 @@ namespace Jschady.Filescom
         public Input<bool>? AdminsBypassLockedSubfolders { get; set; }
 
         /// <summary>
-        /// Availability settings for AI features by user class
+        /// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         /// </summary>
         [Input("aiFeatureAvailability")]
         public Input<object>? AiFeatureAvailability { get; set; }
@@ -1716,6 +1773,12 @@ namespace Jschady.Filescom
         public Input<bool>? CalculateFileChecksumsSha256 { get; set; }
 
         /// <summary>
+        /// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        /// </summary>
+        [Input("childSiteFolderAdminsCanSeeParentSiteDirectory")]
+        public Input<bool>? ChildSiteFolderAdminsCanSeeParentSiteDirectory { get; set; }
+
+        /// <summary>
         /// Page link and button color
         /// </summary>
         [Input("color2Left")]
@@ -1848,7 +1911,7 @@ namespace Jschady.Filescom
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        /// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         /// </summary>
         [Input("emailFooterCustomText")]
         public Input<string>? EmailFooterCustomText { get; set; }
@@ -1858,6 +1921,18 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("fedramp")]
         public Input<bool>? Fedramp { get; set; }
+
+        /// <summary>
+        /// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        /// </summary>
+        [Input("fileActivityEventsEnabled")]
+        public Input<bool>? FileActivityEventsEnabled { get; set; }
+
+        /// <summary>
+        /// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        /// </summary>
+        [Input("filesComRemoteServerEnabled")]
+        public Input<bool>? FilesComRemoteServerEnabled { get; set; }
 
         /// <summary>
         /// If true, permissions for this site must be bound to a group (not a user).
@@ -1996,6 +2071,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ldapSecure")]
         public Input<bool>? LdapSecure { get; set; }
+
+        /// <summary>
+        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
+        /// </summary>
+        [Input("ldapServerCertificate")]
+        public Input<string>? LdapServerCertificate { get; set; }
 
         /// <summary>
         /// LDAP type
@@ -2244,6 +2325,12 @@ namespace Jschady.Filescom
         public Input<bool>? RootFolderBehaviorsApplyToWorkspaces { get; set; }
 
         /// <summary>
+        /// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        /// </summary>
+        [Input("s3CompatibleEndpointEnabled")]
+        public Input<bool>? S3CompatibleEndpointEnabled { get; set; }
+
+        /// <summary>
         /// Session expiry in minutes
         /// </summary>
         [Input("sessionExpiryMinutes")]
@@ -2352,6 +2439,12 @@ namespace Jschady.Filescom
         public Input<int>? SmtpPort { get; set; }
 
         /// <summary>
+        /// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        /// </summary>
+        [Input("smtpSsl")]
+        public Input<string>? SmtpSsl { get; set; }
+
+        /// <summary>
         /// SMTP server username
         /// </summary>
         [Input("smtpUsername")]
@@ -2376,7 +2469,7 @@ namespace Jschady.Filescom
         public Input<string>? Subdomain { get; set; }
 
         /// <summary>
-        /// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        /// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         /// </summary>
         [Input("uploadsViaEmailAuthentication")]
         public Input<bool>? UploadsViaEmailAuthentication { get; set; }
@@ -2483,6 +2576,12 @@ namespace Jschady.Filescom
         [Input("windowsModeFtp")]
         public Input<bool>? WindowsModeFtp { get; set; }
 
+        /// <summary>
+        /// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        /// </summary>
+        [Input("workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")]
+        public Input<bool>? WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory { get; set; }
+
         public SiteArgs()
         {
         }
@@ -2534,7 +2633,7 @@ namespace Jschady.Filescom
         public Input<bool>? AdminsBypassLockedSubfolders { get; set; }
 
         /// <summary>
-        /// Availability settings for AI features by user class
+        /// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         /// </summary>
         [Input("aiFeatureAvailability")]
         public Input<object>? AiFeatureAvailability { get; set; }
@@ -2762,6 +2861,12 @@ namespace Jschady.Filescom
         public Input<bool>? CalculateFileChecksumsSha256 { get; set; }
 
         /// <summary>
+        /// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        /// </summary>
+        [Input("childSiteFolderAdminsCanSeeParentSiteDirectory")]
+        public Input<bool>? ChildSiteFolderAdminsCanSeeParentSiteDirectory { get; set; }
+
+        /// <summary>
         /// Page link and button color
         /// </summary>
         [Input("color2Left")]
@@ -2918,7 +3023,7 @@ namespace Jschady.Filescom
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        /// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         /// </summary>
         [Input("emailFooterCustomText")]
         public Input<string>? EmailFooterCustomText { get; set; }
@@ -2928,6 +3033,18 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("fedramp")]
         public Input<bool>? Fedramp { get; set; }
+
+        /// <summary>
+        /// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        /// </summary>
+        [Input("fileActivityEventsEnabled")]
+        public Input<bool>? FileActivityEventsEnabled { get; set; }
+
+        /// <summary>
+        /// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        /// </summary>
+        [Input("filesComRemoteServerEnabled")]
+        public Input<bool>? FilesComRemoteServerEnabled { get; set; }
 
         /// <summary>
         /// If true, permissions for this site must be bound to a group (not a user).
@@ -3104,6 +3221,12 @@ namespace Jschady.Filescom
         public Input<bool>? LdapSecure { get; set; }
 
         /// <summary>
+        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
+        /// </summary>
+        [Input("ldapServerCertificate")]
+        public Input<string>? LdapServerCertificate { get; set; }
+
+        /// <summary>
         /// LDAP type
         /// </summary>
         [Input("ldapType")]
@@ -3158,7 +3281,7 @@ namespace Jschady.Filescom
         public Input<string>? Logo { get; set; }
 
         /// <summary>
-        /// List of site settings managed by the parent site
+        /// Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         /// </summary>
         [Input("managedSiteSettings")]
         public Input<object>? ManagedSiteSettings { get; set; }
@@ -3404,6 +3527,12 @@ namespace Jschady.Filescom
         public Input<bool>? RootFolderBehaviorsApplyToWorkspaces { get; set; }
 
         /// <summary>
+        /// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        /// </summary>
+        [Input("s3CompatibleEndpointEnabled")]
+        public Input<bool>? S3CompatibleEndpointEnabled { get; set; }
+
+        /// <summary>
         /// Current session
         /// </summary>
         [Input("session")]
@@ -3518,6 +3647,12 @@ namespace Jschady.Filescom
         public Input<int>? SmtpPort { get; set; }
 
         /// <summary>
+        /// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        /// </summary>
+        [Input("smtpSsl")]
+        public Input<string>? SmtpSsl { get; set; }
+
+        /// <summary>
         /// SMTP server username
         /// </summary>
         [Input("smtpUsername")]
@@ -3560,7 +3695,7 @@ namespace Jschady.Filescom
         public Input<string>? TrialUntil { get; set; }
 
         /// <summary>
-        /// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        /// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         /// </summary>
         [Input("uploadsViaEmailAuthentication")]
         public Input<bool>? UploadsViaEmailAuthentication { get; set; }
@@ -3672,6 +3807,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("windowsModeFtp")]
         public Input<bool>? WindowsModeFtp { get; set; }
+
+        /// <summary>
+        /// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        /// </summary>
+        [Input("workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")]
+        public Input<bool>? WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory { get; set; }
 
         public SiteState()
         {

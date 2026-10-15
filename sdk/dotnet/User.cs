@@ -21,17 +21,12 @@ namespace Jschady.Filescom
     /// 
     /// These authentication methods can be configured during user creation and can be modified at any time by site administrators. The meanings of the available values are as follows:
     /// 
-    /// * &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; - Allows authentication via a password. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
-    /// 
+    /// * &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; - Allows authentication via a password.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of the password.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to the password.
     /// * &lt;span pulumi-lang-nodejs="`emailSignup`" pulumi-lang-dotnet="`EmailSignup`" pulumi-lang-go="`emailSignup`" pulumi-lang-python="`email_signup`" pulumi-lang-yaml="`emailSignup`" pulumi-lang-java="`emailSignup`" pulumi-lang-hcl="`email_signup`"&gt;`emailSignup`&lt;/span&gt; - When set upon user creation, an email will be sent to the new user with a link for them to create their password. Once the user has created their password, their authentication type will change to &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;.
-    /// 
-    /// * &lt;span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`"&gt;`sso`&lt;/span&gt; - Allows authentication via a linked Single Sign On provider. If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On. If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On. When using this method, you must also provide a valid &lt;span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`"&gt;`ssoStrategyId`&lt;/span&gt; to associate the User to the appropriate SSO provider.
-    /// 
-    /// * &lt;span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`"&gt;`passwordWithImportedHash`&lt;/span&gt; - Works like the &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format. Provide the imported hash in the field &lt;span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`"&gt;`importedPasswordHash`&lt;/span&gt;. Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;. Typically only used when migrating to Files.com from another MFT solution.
-    /// 
-    /// * &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key. Typically only used for service users.
-    /// 
-    /// * &lt;span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`"&gt;`passwordAndSshKey`&lt;/span&gt; - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt. If API Keys are also configured, those can be used *instead* of the password and key combination. This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once. Typically only used for service users.
+    /// * &lt;span pulumi-lang-nodejs="`sso`" pulumi-lang-dotnet="`Sso`" pulumi-lang-go="`sso`" pulumi-lang-python="`sso`" pulumi-lang-yaml="`sso`" pulumi-lang-java="`sso`" pulumi-lang-hcl="`sso`"&gt;`sso`&lt;/span&gt; - Allows authentication via a linked Single Sign On provider.  If API Keys or SSH (SFTP) Keys are also configured, those can be used *instead* of Single Sign On.  If Two Factor Authentication (2FA) methods are also configured, a valid 2nd factor is required in addition to Single Sign On.  When using this method, you must also provide a valid &lt;span pulumi-lang-nodejs="`ssoStrategyId`" pulumi-lang-dotnet="`SsoStrategyId`" pulumi-lang-go="`ssoStrategyId`" pulumi-lang-python="`sso_strategy_id`" pulumi-lang-yaml="`ssoStrategyId`" pulumi-lang-java="`ssoStrategyId`" pulumi-lang-hcl="`sso_strategy_id`"&gt;`ssoStrategyId`&lt;/span&gt; to associate the User to the appropriate SSO provider.
+    /// * &lt;span pulumi-lang-nodejs="`passwordWithImportedHash`" pulumi-lang-dotnet="`PasswordWithImportedHash`" pulumi-lang-go="`passwordWithImportedHash`" pulumi-lang-python="`password_with_imported_hash`" pulumi-lang-yaml="`passwordWithImportedHash`" pulumi-lang-java="`passwordWithImportedHash`" pulumi-lang-hcl="`password_with_imported_hash`"&gt;`passwordWithImportedHash`&lt;/span&gt; - Works like the &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt; method but allows importing a hashed password in MD5, SHA-1, or SHA-256 format.  Provide the imported hash in the field &lt;span pulumi-lang-nodejs="`importedPasswordHash`" pulumi-lang-dotnet="`ImportedPasswordHash`" pulumi-lang-go="`importedPasswordHash`" pulumi-lang-python="`imported_password_hash`" pulumi-lang-yaml="`importedPasswordHash`" pulumi-lang-java="`importedPasswordHash`" pulumi-lang-hcl="`imported_password_hash`"&gt;`importedPasswordHash`&lt;/span&gt;.  Upon first use, the password will be converted to Files.com's internal storage format and the authentication type will change to &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;. Typically only used when migrating to Files.com from another MFT solution.
+    /// * &lt;span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`"&gt;`none`&lt;/span&gt; - Does not allow authentication via username and password, but does allow authentication via API Key or SSH (SFTP) Key.  Typically only used for service users.
+    /// * &lt;span pulumi-lang-nodejs="`passwordAndSshKey`" pulumi-lang-dotnet="`PasswordAndSshKey`" pulumi-lang-go="`passwordAndSshKey`" pulumi-lang-python="`password_and_ssh_key`" pulumi-lang-yaml="`passwordAndSshKey`" pulumi-lang-java="`passwordAndSshKey`" pulumi-lang-hcl="`password_and_ssh_key`"&gt;`passwordAndSshKey`&lt;/span&gt; - Allows authentication only by providing a password and also a valid SSH (SFTP) Key in a single attempt.  If API Keys are also configured, those can be used *instead* of the password and key combination.  This method only works with (typically enterprise) SSH/SFTP clients capable of sending both authentication methods at once.  Typically only used for service users.
     /// 
     /// ## Example Usage
     /// 
@@ -93,6 +88,7 @@ namespace Jschady.Filescom
     ///         ResponsibleGroupId = 1,
     ///         ResponsibleUserId = 1,
     ///         RestapiPermission = true,
+    ///         S3CompatibleEndpointPermission = true,
     ///         SelfManaged = true,
     ///         SftpPermission = true,
     ///         SiteAdmin = true,
@@ -313,7 +309,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// Permission to grant on the User Root upon user creation. Can be blank or &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, or `list+write`
+        /// Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt; on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, `list+write`, or &lt;span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`"&gt;`history`&lt;/span&gt;.
         /// </summary>
         [Output("grantPermission")]
         public Output<string?> GrantPermission { get; private set; } = null!;
@@ -611,6 +607,12 @@ namespace Jschady.Filescom
         public Output<bool> RestapiPermission { get; private set; } = null!;
 
         /// <summary>
+        /// Can the user access the S3-compatible endpoint? Defaults to true.
+        /// </summary>
+        [Output("s3CompatibleEndpointPermission")]
+        public Output<bool> S3CompatibleEndpointPermission { get; private set; } = null!;
+
+        /// <summary>
         /// Does this user manage it's own credentials or is it a shared/bot user?
         /// </summary>
         [Output("selfManaged")]
@@ -701,13 +703,13 @@ namespace Jschady.Filescom
         public Output<string> Username { get; private set; } = null!;
 
         /// <summary>
-        /// Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        /// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         /// </summary>
         [Output("workspaceAdmin")]
         public Output<bool> WorkspaceAdmin { get; private set; } = null!;
 
         /// <summary>
-        /// Workspace ID
+        /// ID of the Workspace the user belongs to. 0 is the Default Workspace.
         /// </summary>
         [Output("workspaceId")]
         public Output<int> WorkspaceId { get; private set; } = null!;
@@ -940,7 +942,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// Permission to grant on the User Root upon user creation. Can be blank or &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, or `list+write`
+        /// Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt; on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, `list+write`, or &lt;span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`"&gt;`history`&lt;/span&gt;.
         /// </summary>
         public Input<string>? GrantPermission
         {
@@ -1189,6 +1191,12 @@ namespace Jschady.Filescom
         public Input<bool>? RestapiPermission { get; set; }
 
         /// <summary>
+        /// Can the user access the S3-compatible endpoint? Defaults to true.
+        /// </summary>
+        [Input("s3CompatibleEndpointPermission")]
+        public Input<bool>? S3CompatibleEndpointPermission { get; set; }
+
+        /// <summary>
         /// Does this user manage it's own credentials or is it a shared/bot user?
         /// </summary>
         [Input("selfManaged")]
@@ -1261,13 +1269,13 @@ namespace Jschady.Filescom
         public Input<string> Username { get; set; } = null!;
 
         /// <summary>
-        /// Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        /// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         /// </summary>
         [Input("workspaceAdmin")]
         public Input<bool>? WorkspaceAdmin { get; set; }
 
         /// <summary>
-        /// Workspace ID
+        /// ID of the Workspace the user belongs to. 0 is the Default Workspace.
         /// </summary>
         [Input("workspaceId")]
         public Input<int>? WorkspaceId { get; set; }
@@ -1515,7 +1523,7 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// Permission to grant on the User Root upon user creation. Can be blank or &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, or `list+write`
+        /// Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt; on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or &lt;span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`"&gt;`admin`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`"&gt;`full`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`"&gt;`read`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`"&gt;`write`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`"&gt;`list`&lt;/span&gt;, `read+write`, `list+write`, or &lt;span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`"&gt;`history`&lt;/span&gt;.
         /// </summary>
         public Input<string>? GrantPermission
         {
@@ -1860,6 +1868,12 @@ namespace Jschady.Filescom
         public Input<bool>? RestapiPermission { get; set; }
 
         /// <summary>
+        /// Can the user access the S3-compatible endpoint? Defaults to true.
+        /// </summary>
+        [Input("s3CompatibleEndpointPermission")]
+        public Input<bool>? S3CompatibleEndpointPermission { get; set; }
+
+        /// <summary>
         /// Does this user manage it's own credentials or is it a shared/bot user?
         /// </summary>
         [Input("selfManaged")]
@@ -1950,13 +1964,13 @@ namespace Jschady.Filescom
         public Input<string>? Username { get; set; }
 
         /// <summary>
-        /// Is the user a Workspace administrator?  Applicable only to the workspace ID related to this user, if one is set.
+        /// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
         /// </summary>
         [Input("workspaceAdmin")]
         public Input<bool>? WorkspaceAdmin { get; set; }
 
         /// <summary>
-        /// Workspace ID
+        /// ID of the Workspace the user belongs to. 0 is the Default Workspace.
         /// </summary>
         [Input("workspaceId")]
         public Input<int>? WorkspaceId { get; set; }

@@ -6,7 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * A SyncRun represents a single execution (run) of a Sync job.
- *
  * It tracks status, statistics, logs, and timing for each sync operation.
  *
  * ## Example Usage
@@ -138,7 +137,6 @@ export interface GetSyncRunResult {
 }
 /**
  * A SyncRun represents a single execution (run) of a Sync job.
- *
  * It tracks status, statistics, logs, and timing for each sync operation.
  *
  * ## Example Usage

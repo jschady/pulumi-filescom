@@ -13,25 +13,17 @@ namespace Jschady.Filescom
     public static class GetBehavior
     {
         /// <summary>
-        /// A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
+        /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// 
-        /// 
-        /// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
-        /// 
-        /// 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
+        /// Some behavior types are visible to users without administrative permission on the behavior's folder, as indicated by `Visible to non-admins?` below. List Behaviors and List Behaviors by Path return these types when the user can see that the folder exists through a permission on that folder, an applicable permission on an ancestor folder, or a permission on a descendant folder. Seeing that a folder exists does not grant access to its files. Every user can see the site root, so root-level behaviors of these types appear in site-wide lists even for users with no folder permissions. Lists remain subject to the request's workspace scope. The same folder visibility rules apply to exports of these lists.
         /// 
-        /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
-        /// 
-        /// 
+        /// In API list responses, site administrators and users with administrative permission on the behavior's own folder receive administrator values. Other users receive reduced values with sensitive settings removed. For Serve Publicly, these responses retain `value.key` and &lt;span pulumi-lang-nodejs="`publicHostingUrl`" pulumi-lang-dotnet="`PublicHostingUrl`" pulumi-lang-go="`publicHostingUrl`" pulumi-lang-python="`public_hosting_url`" pulumi-lang-yaml="`publicHostingUrl`" pulumi-lang-java="`publicHostingUrl`" pulumi-lang-hcl="`public_hosting_url`"&gt;`publicHostingUrl`&lt;/span&gt;, when configured, but omit the hosting &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;. The password is write-only for everyone. Some behavior types are also settable by users without administrative permission, as described below.
         /// 
         /// Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
-        /// 
-        /// 
         /// 
         /// Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
         /// 
@@ -149,25 +141,17 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBehaviorResult>("filescom:index/getBehavior:getBehavior", args ?? new GetBehaviorArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
+        /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// 
-        /// 
-        /// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
-        /// 
-        /// 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
+        /// Some behavior types are visible to users without administrative permission on the behavior's folder, as indicated by `Visible to non-admins?` below. List Behaviors and List Behaviors by Path return these types when the user can see that the folder exists through a permission on that folder, an applicable permission on an ancestor folder, or a permission on a descendant folder. Seeing that a folder exists does not grant access to its files. Every user can see the site root, so root-level behaviors of these types appear in site-wide lists even for users with no folder permissions. Lists remain subject to the request's workspace scope. The same folder visibility rules apply to exports of these lists.
         /// 
-        /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
-        /// 
-        /// 
+        /// In API list responses, site administrators and users with administrative permission on the behavior's own folder receive administrator values. Other users receive reduced values with sensitive settings removed. For Serve Publicly, these responses retain `value.key` and &lt;span pulumi-lang-nodejs="`publicHostingUrl`" pulumi-lang-dotnet="`PublicHostingUrl`" pulumi-lang-go="`publicHostingUrl`" pulumi-lang-python="`public_hosting_url`" pulumi-lang-yaml="`publicHostingUrl`" pulumi-lang-java="`publicHostingUrl`" pulumi-lang-hcl="`public_hosting_url`"&gt;`publicHostingUrl`&lt;/span&gt;, when configured, but omit the hosting &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;. The password is write-only for everyone. Some behavior types are also settable by users without administrative permission, as described below.
         /// 
         /// Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
-        /// 
-        /// 
         /// 
         /// Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
         /// 
@@ -285,25 +269,17 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetBehaviorResult>("filescom:index/getBehavior:getBehavior", args ?? new GetBehaviorInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Behavior is an API resource for what are also known as Folder Settings. Every behavior is associated with a folder.
+        /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// 
-        /// 
-        /// Depending on the behavior, it may also operate on child folders. It may be overridable at the child folder level or maybe can be added to at the child folder level.
-        /// 
-        /// 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
+        /// Some behavior types are visible to users without administrative permission on the behavior's folder, as indicated by `Visible to non-admins?` below. List Behaviors and List Behaviors by Path return these types when the user can see that the folder exists through a permission on that folder, an applicable permission on an ancestor folder, or a permission on a descendant folder. Seeing that a folder exists does not grant access to its files. Every user can see the site root, so root-level behaviors of these types appear in site-wide lists even for users with no folder permissions. Lists remain subject to the request's workspace scope. The same folder visibility rules apply to exports of these lists.
         /// 
-        /// 
-        /// Additionally, some behaviors are visible to non-admins, and others are even settable by non-admins. All the details are below.
-        /// 
-        /// 
+        /// In API list responses, site administrators and users with administrative permission on the behavior's own folder receive administrator values. Other users receive reduced values with sensitive settings removed. For Serve Publicly, these responses retain `value.key` and &lt;span pulumi-lang-nodejs="`publicHostingUrl`" pulumi-lang-dotnet="`PublicHostingUrl`" pulumi-lang-go="`publicHostingUrl`" pulumi-lang-python="`public_hosting_url`" pulumi-lang-yaml="`publicHostingUrl`" pulumi-lang-java="`publicHostingUrl`" pulumi-lang-hcl="`public_hosting_url`"&gt;`publicHostingUrl`&lt;/span&gt;, when configured, but omit the hosting &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`"&gt;`password`&lt;/span&gt;. The password is write-only for everyone. Some behavior types are also settable by users without administrative permission, as described below.
         /// 
         /// Each behavior uses a different format for its settings value. The Behavior resource examples show the value for each behavior type. In the REST API, send these settings as JSON within the &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field.
-        /// 
-        /// 
         /// 
         /// Note: Append Timestamp behavior removed. Check Override Upload Filename behavior which have even more functionality to modify name on upload.
         /// 
@@ -479,7 +455,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Description;
         /// <summary>
-        /// If true, the parent folder's behavior will be disabled for this folder and its children.
+        /// If true, disables the inherited behavior for this folder and its children. Valid only for behavior types that child folders may override, and requires recursive to be true. Rejected for all other behavior types.
         /// </summary>
         public readonly bool DisableParentFolderBehavior;
         /// <summary>
@@ -503,7 +479,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Path;
         /// <summary>
-        /// Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured.  When a Custom Domain with &lt;span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`"&gt;`publicHosting`&lt;/span&gt; destination is attached to this behavior, the URL uses that domain.  Otherwise it uses the site's `subdomain.hosted-by-files.com` host.
+        /// Public URL for this publicly hosted folder when the `Serve Publicly` behavior has a key configured. When a Custom Domain with &lt;span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`"&gt;`publicHosting`&lt;/span&gt; destination is attached to this behavior, the URL uses that domain. Otherwise it uses the site's `subdomain.hosted-by-files.com` host, unless &lt;span pulumi-lang-nodejs="`customDomainOnly`" pulumi-lang-dotnet="`CustomDomainOnly`" pulumi-lang-go="`customDomainOnly`" pulumi-lang-python="`custom_domain_only`" pulumi-lang-yaml="`customDomainOnly`" pulumi-lang-java="`customDomainOnly`" pulumi-lang-hcl="`custom_domain_only`"&gt;`customDomainOnly`&lt;/span&gt; is enabled, in which case no URL is returned.
         /// </summary>
         public readonly string PublicHostingUrl;
         /// <summary>

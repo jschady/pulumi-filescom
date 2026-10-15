@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A RemoteServerCredential is a way to store a credential for Remote Servers in a centralized vault and then reference it from Remote Server definitions.
         /// 
-        /// 
-        /// 
         /// This allows you to manage your credentials in one place and avoid duplicating them across multiple Remote Server configurations. It also improves security.  You can manage the Remote Servers with Pulumi or with the API, and the credential stays in the vault.
         /// 
         /// ## Example Usage
@@ -128,8 +126,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A RemoteServerCredential is a way to store a credential for Remote Servers in a centralized vault and then reference it from Remote Server definitions.
         /// 
-        /// 
-        /// 
         /// This allows you to manage your credentials in one place and avoid duplicating them across multiple Remote Server configurations. It also improves security.  You can manage the Remote Servers with Pulumi or with the API, and the credential stays in the vault.
         /// 
         /// ## Example Usage
@@ -240,8 +236,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A RemoteServerCredential is a way to store a credential for Remote Servers in a centralized vault and then reference it from Remote Server definitions.
-        /// 
-        /// 
         /// 
         /// This allows you to manage your credentials in one place and avoid duplicating them across multiple Remote Server configurations. It also improves security.  You can manage the Remote Servers with Pulumi or with the API, and the credential stays in the vault.
         /// 

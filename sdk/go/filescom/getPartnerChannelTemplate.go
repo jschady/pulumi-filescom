@@ -13,6 +13,12 @@ import (
 
 // A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
 //
+// Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+// Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+// become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+// "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+// The expanded route must point to an existing folder in the same Workspace.
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
@@ -60,9 +66,9 @@ type LookupPartnerChannelTemplateArgs struct {
 type LookupPartnerChannelTemplateResult struct {
 	// Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
 	Direction string `pulumi:"direction"`
-	// Resolved from-Partner folder name after Template override and default.
+	// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 	EffectiveFromPartnerFolderName string `pulumi:"effectiveFromPartnerFolderName"`
-	// Resolved to-Partner folder name after Template override and default.
+	// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 	EffectiveToPartnerFolderName string `pulumi:"effectiveToPartnerFolderName"`
 	// Optional Channel-level from-Partner folder name override.
 	FromPartnerFolderName string `pulumi:"fromPartnerFolderName"`
@@ -82,6 +88,8 @@ type LookupPartnerChannelTemplateResult struct {
 	ToPartnerManagedFolderPaths []string `pulumi:"toPartnerManagedFolderPaths"`
 	// Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
 	ToPartnerRoutePathPattern string `pulumi:"toPartnerRoutePathPattern"`
+	// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+	UseChannelRoot bool `pulumi:"useChannelRoot"`
 	// ID of the Workspace associated with this Partner Channel Template.
 	WorkspaceId int `pulumi:"workspaceId"`
 }
@@ -121,12 +129,12 @@ func (o LookupPartnerChannelTemplateResultOutput) Direction() pulumi.StringOutpu
 	return o.ApplyT(func(v LookupPartnerChannelTemplateResult) string { return v.Direction }).(pulumi.StringOutput)
 }
 
-// Resolved from-Partner folder name after Template override and default.
+// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 func (o LookupPartnerChannelTemplateResultOutput) EffectiveFromPartnerFolderName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelTemplateResult) string { return v.EffectiveFromPartnerFolderName }).(pulumi.StringOutput)
 }
 
-// Resolved to-Partner folder name after Template override and default.
+// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 func (o LookupPartnerChannelTemplateResultOutput) EffectiveToPartnerFolderName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelTemplateResult) string { return v.EffectiveToPartnerFolderName }).(pulumi.StringOutput)
 }
@@ -174,6 +182,11 @@ func (o LookupPartnerChannelTemplateResultOutput) ToPartnerManagedFolderPaths() 
 // Optional route path pattern for files delivered to the Partner. Supports {{partner_name}}.
 func (o LookupPartnerChannelTemplateResultOutput) ToPartnerRoutePathPattern() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelTemplateResult) string { return v.ToPartnerRoutePathPattern }).(pulumi.StringOutput)
+}
+
+// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+func (o LookupPartnerChannelTemplateResultOutput) UseChannelRoot() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupPartnerChannelTemplateResult) bool { return v.UseChannelRoot }).(pulumi.BoolOutput)
 }
 
 // ID of the Workspace associated with this Partner Channel Template.

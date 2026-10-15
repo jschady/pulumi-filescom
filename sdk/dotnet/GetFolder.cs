@@ -13,6 +13,8 @@ namespace Jschady.Filescom
     public static class GetFolder
     {
         /// <summary>
+        /// A File object represents a file or folder on your Files.com site. The &lt;span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`"&gt;`type`&lt;/span&gt; field is &lt;span pulumi-lang-nodejs="`file`" pulumi-lang-dotnet="`File`" pulumi-lang-go="`file`" pulumi-lang-python="`file`" pulumi-lang-yaml="`file`" pulumi-lang-java="`file`" pulumi-lang-hcl="`file`"&gt;`file`&lt;/span&gt; for files and &lt;span pulumi-lang-nodejs="`directory`" pulumi-lang-dotnet="`Directory`" pulumi-lang-go="`directory`" pulumi-lang-python="`directory`" pulumi-lang-yaml="`directory`" pulumi-lang-java="`directory`" pulumi-lang-hcl="`directory`"&gt;`directory`&lt;/span&gt; for folders.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -120,6 +122,8 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFolderResult>("filescom:index/getFolder:getFolder", args ?? new GetFolderArgs(), options.WithDefaults());
 
         /// <summary>
+        /// A File object represents a file or folder on your Files.com site. The &lt;span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`"&gt;`type`&lt;/span&gt; field is &lt;span pulumi-lang-nodejs="`file`" pulumi-lang-dotnet="`File`" pulumi-lang-go="`file`" pulumi-lang-python="`file`" pulumi-lang-yaml="`file`" pulumi-lang-java="`file`" pulumi-lang-hcl="`file`"&gt;`file`&lt;/span&gt; for files and &lt;span pulumi-lang-nodejs="`directory`" pulumi-lang-dotnet="`Directory`" pulumi-lang-go="`directory`" pulumi-lang-python="`directory`" pulumi-lang-yaml="`directory`" pulumi-lang-java="`directory`" pulumi-lang-hcl="`directory`"&gt;`directory`&lt;/span&gt; for folders.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -227,6 +231,8 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetFolderResult>("filescom:index/getFolder:getFolder", args ?? new GetFolderInvokeArgs(), options.WithDefaults());
 
         /// <summary>
+        /// A File object represents a file or folder on your Files.com site. The &lt;span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`"&gt;`type`&lt;/span&gt; field is &lt;span pulumi-lang-nodejs="`file`" pulumi-lang-dotnet="`File`" pulumi-lang-go="`file`" pulumi-lang-python="`file`" pulumi-lang-yaml="`file`" pulumi-lang-java="`file`" pulumi-lang-hcl="`file`"&gt;`file`&lt;/span&gt; for files and &lt;span pulumi-lang-nodejs="`directory`" pulumi-lang-dotnet="`Directory`" pulumi-lang-go="`directory`" pulumi-lang-python="`directory`" pulumi-lang-yaml="`directory`" pulumi-lang-java="`directory`" pulumi-lang-hcl="`directory`"&gt;`directory`&lt;/span&gt; for folders.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;

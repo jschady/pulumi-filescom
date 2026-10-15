@@ -12,11 +12,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently. You are responsible for checking locks prior to accessing a file.
+// A Lock can be used by your custom-developed applications to implement file locking and concurrency features. These locks are advisory, meaning that while a lock can be created, it does not prevent other API requests from being processed concurrently.  You are responsible for checking locks prior to accessing a file.
 //
 // The lock feature is designed to emulate the locking functionality provided by WebDAV. For a deeper understanding of how the lock mechanism works, refer to the WebDAV specification, which outlines how these endpoints function.
 //
-// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files. It is not used within the Files.com web interface.
+// Files.com's WebDAV offering and desktop app leverage this locking API to manage concurrent file operations, ensuring consistency when multiple users or systems interact with the same files.  It is not used within the Files.com web interface.
+//
+// The optional owner parameter is a descriptive label, not the lock creator or a grant of permission. It can be set when creating a lock; refreshing a lock or replacing its token preserves it.
+//
+// To refresh only an existing lock or replace its token, send expected_token, token, and timeout to the create endpoint. Set token to<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>to refresh, or to a different value to replace. The expected token must identify an existing, unexpired lock on that path, and the caller must have permission to modify it. The token check and update happen together; invalid replacement values leave the stored lock unchanged.
+//
+// A missing, expired, or mismatched expected token returns processing-failure/resource-locked with data.lock_token containing an active token on that path, or an empty string when none exists. Omitting<span pulumi-lang-nodejs=" expectedToken " pulumi-lang-dotnet=" ExpectedToken " pulumi-lang-go=" expectedToken " pulumi-lang-python=" expected_token " pulumi-lang-yaml=" expectedToken " pulumi-lang-java=" expectedToken " pulumi-lang-hcl=" expected_token "> expectedToken </span>retains the existing acquire-or-refresh behavior. Shared locks retain their existing semantics.
 //
 // ## Example Usage
 //
@@ -35,9 +41,11 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.NewLock(ctx, "example_lock", &filescom.LockArgs{
 //				Path:                 pulumi.String("locked_file"),
+//				Token:                pulumi.String("17c54824e9931a4688ca032d03f6663c"),
 //				AllowAccessByAnyUser: pulumi.Bool(false),
 //				Exclusive:            pulumi.Bool(false),
 //				Recursive:            pulumi.Bool(true),
+//				Owner:                pulumi.String("user"),
 //				Timeout:              pulumi.Int(1),
 //			})
 //			if err != nil {
@@ -67,7 +75,9 @@ type Lock struct {
 	Depth                pulumi.StringOutput `pulumi:"depth"`
 	// Is lock exclusive?
 	Exclusive pulumi.BoolOutput `pulumi:"exclusive"`
-	// Owner of the lock.  This can be any arbitrary string.
+	// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+	ExpectedToken pulumi.StringPtrOutput `pulumi:"expectedToken"`
+	// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
 	Owner pulumi.StringOutput `pulumi:"owner"`
 	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringOutput `pulumi:"path"`
@@ -123,7 +133,9 @@ type lockState struct {
 	Depth                *string `pulumi:"depth"`
 	// Is lock exclusive?
 	Exclusive *bool `pulumi:"exclusive"`
-	// Owner of the lock.  This can be any arbitrary string.
+	// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+	ExpectedToken *string `pulumi:"expectedToken"`
+	// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
 	Owner *string `pulumi:"owner"`
 	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path *string `pulumi:"path"`
@@ -147,7 +159,9 @@ type LockState struct {
 	Depth                pulumi.StringPtrInput
 	// Is lock exclusive?
 	Exclusive pulumi.BoolPtrInput
-	// Owner of the lock.  This can be any arbitrary string.
+	// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+	ExpectedToken pulumi.StringPtrInput
+	// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
 	Owner pulumi.StringPtrInput
 	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringPtrInput
@@ -174,12 +188,18 @@ type lockArgs struct {
 	AllowAccessByAnyUser *bool `pulumi:"allowAccessByAnyUser"`
 	// Is lock exclusive?
 	Exclusive *bool `pulumi:"exclusive"`
+	// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+	ExpectedToken *string `pulumi:"expectedToken"`
+	// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
+	Owner *string `pulumi:"owner"`
 	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path string `pulumi:"path"`
 	// Does lock apply to subfolders?
 	Recursive *bool `pulumi:"recursive"`
 	// Lock timeout in seconds
 	Timeout *int `pulumi:"timeout"`
+	// Lock token.  Use to release lock.
+	Token *string `pulumi:"token"`
 }
 
 // The set of arguments for constructing a Lock resource.
@@ -188,12 +208,18 @@ type LockArgs struct {
 	AllowAccessByAnyUser pulumi.BoolPtrInput
 	// Is lock exclusive?
 	Exclusive pulumi.BoolPtrInput
+	// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+	ExpectedToken pulumi.StringPtrInput
+	// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
+	Owner pulumi.StringPtrInput
 	// Path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
 	Path pulumi.StringInput
 	// Does lock apply to subfolders?
 	Recursive pulumi.BoolPtrInput
 	// Lock timeout in seconds
 	Timeout pulumi.IntPtrInput
+	// Lock token.  Use to release lock.
+	Token pulumi.StringPtrInput
 }
 
 func (LockArgs) ElementType() reflect.Type {
@@ -297,7 +323,12 @@ func (o LockOutput) Exclusive() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Lock) pulumi.BoolOutput { return v.Exclusive }).(pulumi.BoolOutput)
 }
 
-// Owner of the lock.  This can be any arbitrary string.
+// Require this existing, unexpired token before refreshing or replacing a lock. Set token to the same value to refresh, or a different value to replace.
+func (o LockOutput) ExpectedToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Lock) pulumi.StringPtrOutput { return v.ExpectedToken }).(pulumi.StringPtrOutput)
+}
+
+// Arbitrary descriptive label for the lock. Does not change the lock creator or permissions.
 func (o LockOutput) Owner() pulumi.StringOutput {
 	return o.ApplyT(func(v *Lock) pulumi.StringOutput { return v.Owner }).(pulumi.StringOutput)
 }

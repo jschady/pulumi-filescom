@@ -15,8 +15,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Site is the place you'll come to update site settings, as well as manage site-wide API keys.
         /// 
-        /// 
-        /// 
         /// Most site settings can be set via the API.
         /// 
         /// ## Example Usage
@@ -116,8 +114,6 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Site is the place you'll come to update site settings, as well as manage site-wide API keys.
         /// 
-        /// 
-        /// 
         /// Most site settings can be set via the API.
         /// 
         /// ## Example Usage
@@ -216,8 +212,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A Site is the place you'll come to update site settings, as well as manage site-wide API keys.
-        /// 
-        /// 
         /// 
         /// Most site settings can be set via the API.
         /// 
@@ -341,7 +335,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool AdminsBypassLockedSubfolders;
         /// <summary>
-        /// Availability settings for AI features by user class
+        /// Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         /// </summary>
         public readonly object AiFeatureAvailability;
         /// <summary>
@@ -489,6 +483,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool CalculateFileChecksumsSha256;
         /// <summary>
+        /// If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        /// </summary>
+        public readonly bool ChildSiteFolderAdminsCanSeeParentSiteDirectory;
+        /// <summary>
         /// Page link and button color
         /// </summary>
         public readonly string Color2Left;
@@ -593,13 +591,21 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Email;
         /// <summary>
-        /// Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        /// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         /// </summary>
         public readonly string EmailFooterCustomText;
         /// <summary>
         /// Are FedRAMP security restrictions enabled for this site?
         /// </summary>
         public readonly bool Fedramp;
+        /// <summary>
+        /// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        /// </summary>
+        public readonly bool FileActivityEventsEnabled;
+        /// <summary>
+        /// Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        /// </summary>
+        public readonly bool FilesComRemoteServerEnabled;
         /// <summary>
         /// If true, permissions for this site must be bound to a group (not a user).
         /// </summary>
@@ -721,6 +727,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool LdapSecure;
         /// <summary>
+        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
+        /// </summary>
+        public readonly string LdapServerCertificate;
+        /// <summary>
         /// LDAP type
         /// </summary>
         public readonly string LdapType;
@@ -757,7 +767,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Logo;
         /// <summary>
-        /// List of site settings managed by the parent site
+        /// Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         /// </summary>
         public readonly object ManagedSiteSettings;
         /// <summary>
@@ -921,6 +931,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool RootFolderBehaviorsApplyToWorkspaces;
         /// <summary>
+        /// Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        /// </summary>
+        public readonly bool S3CompatibleEndpointEnabled;
+        /// <summary>
         /// Current session
         /// </summary>
         public readonly string Session;
@@ -997,6 +1011,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int SmtpPort;
         /// <summary>
+        /// Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        /// </summary>
+        public readonly string SmtpSsl;
+        /// <summary>
         /// SMTP server username
         /// </summary>
         public readonly string SmtpUsername;
@@ -1025,7 +1043,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string TrialUntil;
         /// <summary>
-        /// Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        /// Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         /// </summary>
         public readonly bool UploadsViaEmailAuthentication;
         /// <summary>
@@ -1100,6 +1118,10 @@ namespace Jschady.Filescom
         /// Does FTP user Windows emulation mode?
         /// </summary>
         public readonly bool WindowsModeFtp;
+        /// <summary>
+        /// If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        /// </summary>
+        public readonly bool WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory;
 
         [OutputConstructor]
         private GetSiteResult(
@@ -1187,6 +1209,8 @@ namespace Jschady.Filescom
 
             bool calculateFileChecksumsSha256,
 
+            bool childSiteFolderAdminsCanSeeParentSiteDirectory,
+
             string color2Left,
 
             string color2Link,
@@ -1242,6 +1266,10 @@ namespace Jschady.Filescom
             string emailFooterCustomText,
 
             bool fedramp,
+
+            bool fileActivityEventsEnabled,
+
+            bool filesComRemoteServerEnabled,
 
             bool folderPermissionsGroupsOnly,
 
@@ -1302,6 +1330,8 @@ namespace Jschady.Filescom
             int ldapPort,
 
             bool ldapSecure,
+
+            string ldapServerCertificate,
 
             string ldapType,
 
@@ -1403,6 +1433,8 @@ namespace Jschady.Filescom
 
             bool rootFolderBehaviorsApplyToWorkspaces,
 
+            bool s3CompatibleEndpointEnabled,
+
             string session,
 
             int sessionExpiryMinutes,
@@ -1440,6 +1472,8 @@ namespace Jschady.Filescom
             string smtpFrom,
 
             int smtpPort,
+
+            string smtpSsl,
 
             string smtpUsername,
 
@@ -1491,7 +1525,9 @@ namespace Jschady.Filescom
 
             string welcomeScreen,
 
-            bool windowsModeFtp)
+            bool windowsModeFtp,
+
+            bool workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory)
         {
             ActiveSftpHostKeyId = activeSftpHostKeyId;
             ActiveSftpHostKeyIds = activeSftpHostKeyIds;
@@ -1535,6 +1571,7 @@ namespace Jschady.Filescom
             CalculateFileChecksumsMd5 = calculateFileChecksumsMd5;
             CalculateFileChecksumsSha1 = calculateFileChecksumsSha1;
             CalculateFileChecksumsSha256 = calculateFileChecksumsSha256;
+            ChildSiteFolderAdminsCanSeeParentSiteDirectory = childSiteFolderAdminsCanSeeParentSiteDirectory;
             Color2Left = color2Left;
             Color2Link = color2Link;
             Color2Text = color2Text;
@@ -1563,6 +1600,8 @@ namespace Jschady.Filescom
             Email = email;
             EmailFooterCustomText = emailFooterCustomText;
             Fedramp = fedramp;
+            FileActivityEventsEnabled = fileActivityEventsEnabled;
+            FilesComRemoteServerEnabled = filesComRemoteServerEnabled;
             FolderPermissionsGroupsOnly = folderPermissionsGroupsOnly;
             FtpEnabled = ftpEnabled;
             GroupAdminsCanAddUsers = groupAdminsCanAddUsers;
@@ -1593,6 +1632,7 @@ namespace Jschady.Filescom
             LdapHost3 = ldapHost3;
             LdapPort = ldapPort;
             LdapSecure = ldapSecure;
+            LdapServerCertificate = ldapServerCertificate;
             LdapType = ldapType;
             LdapUserAction = ldapUserAction;
             LdapUserIncludeGroups = ldapUserIncludeGroups;
@@ -1643,6 +1683,7 @@ namespace Jschady.Filescom
             RestrictRootFolderBehaviorsToSiteAdmins = restrictRootFolderBehaviorsToSiteAdmins;
             RevokeBundleAccessOnDisableOrDelete = revokeBundleAccessOnDisableOrDelete;
             RootFolderBehaviorsApplyToWorkspaces = rootFolderBehaviorsApplyToWorkspaces;
+            S3CompatibleEndpointEnabled = s3CompatibleEndpointEnabled;
             Session = session;
             SessionExpiryMinutes = sessionExpiryMinutes;
             SftpEnabled = sftpEnabled;
@@ -1662,6 +1703,7 @@ namespace Jschady.Filescom
             SmtpAuthentication = smtpAuthentication;
             SmtpFrom = smtpFrom;
             SmtpPort = smtpPort;
+            SmtpSsl = smtpSsl;
             SmtpUsername = smtpUsername;
             SnapshotSharingEnabled = snapshotSharingEnabled;
             SslRequired = sslRequired;
@@ -1688,6 +1730,7 @@ namespace Jschady.Filescom
             WelcomeEmailSubject = welcomeEmailSubject;
             WelcomeScreen = welcomeScreen;
             WindowsModeFtp = windowsModeFtp;
+            WorkspaceFolderAdminsCanSeeDefaultWorkspaceDirectory = workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory;
         }
     }
 }

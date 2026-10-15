@@ -18,6 +18,7 @@ import * as utilities from "./utilities";
  *
  * const exampleSftpHostKey = new filescom.SftpHostKey("example_sftp_host_key", {
  *     active: true,
+ *     customDomainId: 1,
  *     name: "My Key",
  * });
  * ```
@@ -66,6 +67,10 @@ export class SftpHostKey extends pulumi.CustomResource {
      */
     declare public readonly active: pulumi.Output<boolean>;
     /**
+     * Custom Domain ID. If set, this key is used only for that Custom Domain.
+     */
+    declare public readonly customDomainId: pulumi.Output<number>;
+    /**
      * MD5 Fingerprint of the public key
      */
     declare public /*out*/ readonly fingerprintMd5: pulumi.Output<string>;
@@ -101,6 +106,7 @@ export class SftpHostKey extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as SftpHostKeyState | undefined;
             resourceInputs["active"] = state?.active;
+            resourceInputs["customDomainId"] = state?.customDomainId;
             resourceInputs["fingerprintMd5"] = state?.fingerprintMd5;
             resourceInputs["fingerprintSha256"] = state?.fingerprintSha256;
             resourceInputs["keyType"] = state?.keyType;
@@ -109,6 +115,7 @@ export class SftpHostKey extends pulumi.CustomResource {
         } else {
             const args = argsOrState as SftpHostKeyArgs | undefined;
             resourceInputs["active"] = args?.active;
+            resourceInputs["customDomainId"] = args?.customDomainId;
             resourceInputs["name"] = args?.name;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
             resourceInputs["fingerprintMd5"] = undefined /*out*/;
@@ -130,6 +137,10 @@ export interface SftpHostKeyState {
      * If true, use this SFTP Host Key.
      */
     active?: pulumi.Input<boolean | undefined>;
+    /**
+     * Custom Domain ID. If set, this key is used only for that Custom Domain.
+     */
+    customDomainId?: pulumi.Input<number | undefined>;
     /**
      * MD5 Fingerprint of the public key
      */
@@ -161,6 +172,10 @@ export interface SftpHostKeyArgs {
      * If true, use this SFTP Host Key.
      */
     active?: pulumi.Input<boolean | undefined>;
+    /**
+     * Custom Domain ID. If set, this key is used only for that Custom Domain.
+     */
+    customDomainId?: pulumi.Input<number | undefined>;
     /**
      * The friendly name of this SFTP Host Key.
      */

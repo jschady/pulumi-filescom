@@ -38,6 +38,7 @@ namespace Jschady.Filescom.Outputs
         public readonly Outputs.GetAutomationDefinitionNodeTransformResult Transform;
         public readonly Outputs.GetAutomationDefinitionNodeTriggerActionResult TriggerAction;
         public readonly Outputs.GetAutomationDefinitionNodeTriggerEmailResult TriggerEmail;
+        public readonly Outputs.GetAutomationDefinitionNodeTriggerFolderCreationResult TriggerFolderCreation;
         public readonly Outputs.GetAutomationDefinitionNodeTriggerManualResult TriggerManual;
         public readonly Outputs.GetAutomationDefinitionNodeTriggerScheduledResult TriggerScheduled;
         public readonly Outputs.GetAutomationDefinitionNodeTriggerWebhookResult TriggerWebhook;
@@ -95,6 +96,8 @@ namespace Jschady.Filescom.Outputs
 
             Outputs.GetAutomationDefinitionNodeTriggerEmailResult triggerEmail,
 
+            Outputs.GetAutomationDefinitionNodeTriggerFolderCreationResult triggerFolderCreation,
+
             Outputs.GetAutomationDefinitionNodeTriggerManualResult triggerManual,
 
             Outputs.GetAutomationDefinitionNodeTriggerScheduledResult triggerScheduled,
@@ -131,6 +134,7 @@ namespace Jschady.Filescom.Outputs
             Transform = transform;
             TriggerAction = triggerAction;
             TriggerEmail = triggerEmail;
+            TriggerFolderCreation = triggerFolderCreation;
             TriggerManual = triggerManual;
             TriggerScheduled = triggerScheduled;
             TriggerWebhook = triggerWebhook;

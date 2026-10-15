@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// A Group is a powerful tool for permissions and user management on Files.com. Users can belong to multiple groups.
+// A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
 //
 // All permissions can be managed via Groups, and Groups can also be synced to your identity platform via LDAP or SCIM.
 //
@@ -84,6 +84,8 @@ type LookupGroupResult struct {
 	Notes string `pulumi:"notes"`
 	// If true, users in this group can use the REST API to login.  This will override a false value of <span pulumi-lang-nodejs="`restapiPermission`" pulumi-lang-dotnet="`RestapiPermission`" pulumi-lang-go="`restapiPermission`" pulumi-lang-python="`restapi_permission`" pulumi-lang-yaml="`restapiPermission`" pulumi-lang-java="`restapiPermission`" pulumi-lang-hcl="`restapi_permission`">`restapiPermission`</span> on the user level.
 	RestapiPermission bool `pulumi:"restapiPermission"`
+	// If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+	S3CompatibleEndpointPermission bool `pulumi:"s3CompatibleEndpointPermission"`
 	// If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.
 	SftpPermission bool `pulumi:"sftpPermission"`
 	// Site ID
@@ -179,6 +181,11 @@ func (o LookupGroupResultOutput) Notes() pulumi.StringOutput {
 // If true, users in this group can use the REST API to login.  This will override a false value of <span pulumi-lang-nodejs="`restapiPermission`" pulumi-lang-dotnet="`RestapiPermission`" pulumi-lang-go="`restapiPermission`" pulumi-lang-python="`restapi_permission`" pulumi-lang-yaml="`restapiPermission`" pulumi-lang-java="`restapiPermission`" pulumi-lang-hcl="`restapi_permission`">`restapiPermission`</span> on the user level.
 func (o LookupGroupResultOutput) RestapiPermission() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupGroupResult) bool { return v.RestapiPermission }).(pulumi.BoolOutput)
+}
+
+// If true, users in this group can access the S3-compatible endpoint. This will override a false value of <span pulumi-lang-nodejs="`s3CompatibleEndpointPermission`" pulumi-lang-dotnet="`S3CompatibleEndpointPermission`" pulumi-lang-go="`s3CompatibleEndpointPermission`" pulumi-lang-python="`s3_compatible_endpoint_permission`" pulumi-lang-yaml="`s3CompatibleEndpointPermission`" pulumi-lang-java="`s3CompatibleEndpointPermission`" pulumi-lang-hcl="`s3_compatible_endpoint_permission`">`s3CompatibleEndpointPermission`</span> on the user level. Defaults to false.
+func (o LookupGroupResultOutput) S3CompatibleEndpointPermission() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupGroupResult) bool { return v.S3CompatibleEndpointPermission }).(pulumi.BoolOutput)
 }
 
 // If true, users in this group can use SFTP to login.  This will override a false value of <span pulumi-lang-nodejs="`sftpPermission`" pulumi-lang-dotnet="`SftpPermission`" pulumi-lang-go="`sftpPermission`" pulumi-lang-python="`sftp_permission`" pulumi-lang-yaml="`sftpPermission`" pulumi-lang-java="`sftpPermission`" pulumi-lang-hcl="`sftp_permission`">`sftpPermission`</span> on the user level.

@@ -26,7 +26,10 @@ class GetCustomDomainResult:
     """
     A collection of values returned by getCustomDomain.
     """
-    def __init__(__self__, brick_managed=None, created_at=None, destination=None, dns_status=None, domain=None, folder_behavior_id=None, id=None, ssl_certificate_id=None, updated_at=None):
+    def __init__(__self__, available_to_all_workspaces=None, brick_managed=None, created_at=None, destination=None, dns_status=None, domain=None, folder_behavior_id=None, id=None, ip_addresses=None, outbound_ip_addresses=None, ssl_certificate_id=None, updated_at=None, workspace_id=None):
+        if available_to_all_workspaces and not isinstance(available_to_all_workspaces, bool):
+            raise TypeError("Expected argument 'available_to_all_workspaces' to be a bool")
+        pulumi.set(__self__, "available_to_all_workspaces", available_to_all_workspaces)
         if brick_managed and not isinstance(brick_managed, bool):
             raise TypeError("Expected argument 'brick_managed' to be a bool")
         pulumi.set(__self__, "brick_managed", brick_managed)
@@ -48,12 +51,29 @@ class GetCustomDomainResult:
         if id and not isinstance(id, int):
             raise TypeError("Expected argument 'id' to be a int")
         pulumi.set(__self__, "id", id)
+        if ip_addresses and not isinstance(ip_addresses, list):
+            raise TypeError("Expected argument 'ip_addresses' to be a list")
+        pulumi.set(__self__, "ip_addresses", ip_addresses)
+        if outbound_ip_addresses and not isinstance(outbound_ip_addresses, list):
+            raise TypeError("Expected argument 'outbound_ip_addresses' to be a list")
+        pulumi.set(__self__, "outbound_ip_addresses", outbound_ip_addresses)
         if ssl_certificate_id and not isinstance(ssl_certificate_id, int):
             raise TypeError("Expected argument 'ssl_certificate_id' to be a int")
         pulumi.set(__self__, "ssl_certificate_id", ssl_certificate_id)
         if updated_at and not isinstance(updated_at, str):
             raise TypeError("Expected argument 'updated_at' to be a str")
         pulumi.set(__self__, "updated_at", updated_at)
+        if workspace_id and not isinstance(workspace_id, int):
+            raise TypeError("Expected argument 'workspace_id' to be a int")
+        pulumi.set(__self__, "workspace_id", workspace_id)
+
+    @_builtins.property
+    @pulumi.getter(name="availableToAllWorkspaces")
+    def available_to_all_workspaces(self) -> _builtins.bool:
+        """
+        Allow all workspaces to use this default-workspace Custom Domain.
+        """
+        return pulumi.get(self, "available_to_all_workspaces")
 
     @_builtins.property
     @pulumi.getter(name="brickManaged")
@@ -112,6 +132,22 @@ class GetCustomDomainResult:
         return pulumi.get(self, "id")
 
     @_builtins.property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Sequence[_builtins.str]:
+        """
+        Dedicated public IP addresses allocated to this Custom Domain.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @_builtins.property
+    @pulumi.getter(name="outboundIpAddresses")
+    def outbound_ip_addresses(self) -> Sequence[_builtins.str]:
+        """
+        Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        """
+        return pulumi.get(self, "outbound_ip_addresses")
+
+    @_builtins.property
     @pulumi.getter(name="sslCertificateId")
     def ssl_certificate_id(self) -> _builtins.int:
         """
@@ -127,6 +163,14 @@ class GetCustomDomainResult:
         """
         return pulumi.get(self, "updated_at")
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> _builtins.int:
+        """
+        Workspace ID (0 for the default workspace).
+        """
+        return pulumi.get(self, "workspace_id")
+
 
 class AwaitableGetCustomDomainResult(GetCustomDomainResult):
     # pylint: disable=using-constant-test
@@ -134,6 +178,7 @@ class AwaitableGetCustomDomainResult(GetCustomDomainResult):
         if False:
             yield self
         return GetCustomDomainResult(
+            available_to_all_workspaces=self.available_to_all_workspaces,
             brick_managed=self.brick_managed,
             created_at=self.created_at,
             destination=self.destination,
@@ -141,8 +186,11 @@ class AwaitableGetCustomDomainResult(GetCustomDomainResult):
             domain=self.domain,
             folder_behavior_id=self.folder_behavior_id,
             id=self.id,
+            ip_addresses=self.ip_addresses,
+            outbound_ip_addresses=self.outbound_ip_addresses,
             ssl_certificate_id=self.ssl_certificate_id,
-            updated_at=self.updated_at)
+            updated_at=self.updated_at,
+            workspace_id=self.workspace_id)
 
 
 def get_custom_domain(id: Optional[_builtins.int] = None,
@@ -170,6 +218,7 @@ def get_custom_domain(id: Optional[_builtins.int] = None,
     __ret__ = pulumi.runtime.invoke('filescom:index/getCustomDomain:getCustomDomain', __args__, opts=opts, typ=GetCustomDomainResult).value
 
     return AwaitableGetCustomDomainResult(
+        available_to_all_workspaces=pulumi.get(__ret__, 'available_to_all_workspaces'),
         brick_managed=pulumi.get(__ret__, 'brick_managed'),
         created_at=pulumi.get(__ret__, 'created_at'),
         destination=pulumi.get(__ret__, 'destination'),
@@ -177,8 +226,11 @@ def get_custom_domain(id: Optional[_builtins.int] = None,
         domain=pulumi.get(__ret__, 'domain'),
         folder_behavior_id=pulumi.get(__ret__, 'folder_behavior_id'),
         id=pulumi.get(__ret__, 'id'),
+        ip_addresses=pulumi.get(__ret__, 'ip_addresses'),
+        outbound_ip_addresses=pulumi.get(__ret__, 'outbound_ip_addresses'),
         ssl_certificate_id=pulumi.get(__ret__, 'ssl_certificate_id'),
-        updated_at=pulumi.get(__ret__, 'updated_at'))
+        updated_at=pulumi.get(__ret__, 'updated_at'),
+        workspace_id=pulumi.get(__ret__, 'workspace_id'))
 def get_custom_domain_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetCustomDomainResult]:
     """
@@ -203,6 +255,7 @@ def get_custom_domain_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getCustomDomain:getCustomDomain', __args__, opts=opts, typ=GetCustomDomainResult)
     return __ret__.apply(lambda __response__: GetCustomDomainResult(
+        available_to_all_workspaces=pulumi.get(__response__, 'available_to_all_workspaces'),
         brick_managed=pulumi.get(__response__, 'brick_managed'),
         created_at=pulumi.get(__response__, 'created_at'),
         destination=pulumi.get(__response__, 'destination'),
@@ -210,5 +263,8 @@ def get_custom_domain_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         domain=pulumi.get(__response__, 'domain'),
         folder_behavior_id=pulumi.get(__response__, 'folder_behavior_id'),
         id=pulumi.get(__response__, 'id'),
+        ip_addresses=pulumi.get(__response__, 'ip_addresses'),
+        outbound_ip_addresses=pulumi.get(__response__, 'outbound_ip_addresses'),
         ssl_certificate_id=pulumi.get(__response__, 'ssl_certificate_id'),
-        updated_at=pulumi.get(__response__, 'updated_at')))
+        updated_at=pulumi.get(__response__, 'updated_at'),
+        workspace_id=pulumi.get(__response__, 'workspace_id')))

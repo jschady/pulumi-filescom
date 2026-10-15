@@ -38,7 +38,6 @@ class AutomationArgs:
                  import_urls: Optional[Any] = None,
                  interval: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
-                 legacy_sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -78,7 +77,6 @@ class AutomationArgs:
         :param Any import_urls: List of URLs to be imported and names to be used.
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run this automation.  One of: <span pulumi-lang-nodejs="`day`" pulumi-lang-dotnet="`Day`" pulumi-lang-go="`day`" pulumi-lang-python="`day`" pulumi-lang-yaml="`day`" pulumi-lang-java="`day`" pulumi-lang-hcl="`day`">`day`</span>, <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`weekEnd`" pulumi-lang-dotnet="`WeekEnd`" pulumi-lang-go="`weekEnd`" pulumi-lang-python="`week_end`" pulumi-lang-yaml="`weekEnd`" pulumi-lang-java="`weekEnd`" pulumi-lang-hcl="`week_end`">`weekEnd`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`monthEnd`" pulumi-lang-dotnet="`MonthEnd`" pulumi-lang-go="`monthEnd`" pulumi-lang-python="`month_end`" pulumi-lang-yaml="`monthEnd`" pulumi-lang-java="`monthEnd`" pulumi-lang-hcl="`month_end`">`monthEnd`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>, <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span>, <span pulumi-lang-nodejs="`yearEnd`" pulumi-lang-dotnet="`YearEnd`" pulumi-lang-go="`yearEnd`" pulumi-lang-python="`year_end`" pulumi-lang-yaml="`yearEnd`" pulumi-lang-java="`yearEnd`" pulumi-lang-hcl="`year_end`">`yearEnd`</span>
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] legacy_sync_ids: IDs of remote sync folder behaviors to run by this Automation
         :param pulumi.Input[_builtins.str] name: Name for this automation.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
@@ -92,7 +90,7 @@ class AutomationArgs:
         :param pulumi.Input[_builtins.str] schedule_time_zone: Time zone for the schedule. If not set, times are interpreted as UTC.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] schedule_times_of_days: Times of day to run in HH:MM format (24-hour). For <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span>, run at these times on specified days of week. For <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, run at these times on the scheduled interval date.
         :param pulumi.Input[_builtins.str] source: Source path/glob.  See Automation docs for exact description, but this is used to filter for files in the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to find files to operate on. Supports globs, except on remote mounts.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of Syncs to run by this Automation.
         :param pulumi.Input[_builtins.str] trigger: How this automation is triggered to run.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] trigger_actions: If trigger is <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>, this is the list of action types on which to trigger the automation. Valid actions are create, copy, move, archived_delete, update, read, destroy
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] user_ids: IDs of Users for the Automation (i.e. who to Request File from)
@@ -132,8 +130,6 @@ class AutomationArgs:
             pulumi.set(__self__, "interval", interval)
         if legacy_folder_matching is not None:
             pulumi.set(__self__, "legacy_folder_matching", legacy_folder_matching)
-        if legacy_sync_ids is not None:
-            pulumi.set(__self__, "legacy_sync_ids", legacy_sync_ids)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if overwrite_files is not None:
@@ -378,18 +374,6 @@ class AutomationArgs:
         pulumi.set(self, "legacy_folder_matching", value)
 
     @_builtins.property
-    @pulumi.getter(name="legacySyncIds")
-    def legacy_sync_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
-        """
-        IDs of remote sync folder behaviors to run by this Automation
-        """
-        return pulumi.get(self, "legacy_sync_ids")
-
-    @legacy_sync_ids.setter
-    def legacy_sync_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
-        pulumi.set(self, "legacy_sync_ids", value)
-
-    @_builtins.property
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -549,7 +533,7 @@ class AutomationArgs:
     @pulumi.getter(name="syncIds")
     def sync_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         """
-        IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        IDs of Syncs to run by this Automation.
         """
         return pulumi.get(self, "sync_ids")
 
@@ -642,7 +626,6 @@ class _AutomationState:
                  interval: pulumi.Input[Optional[_builtins.str]] = None,
                  last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
-                 legacy_sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -690,7 +673,6 @@ class _AutomationState:
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run this automation.  One of: <span pulumi-lang-nodejs="`day`" pulumi-lang-dotnet="`Day`" pulumi-lang-go="`day`" pulumi-lang-python="`day`" pulumi-lang-yaml="`day`" pulumi-lang-java="`day`" pulumi-lang-hcl="`day`">`day`</span>, <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`weekEnd`" pulumi-lang-dotnet="`WeekEnd`" pulumi-lang-go="`weekEnd`" pulumi-lang-python="`week_end`" pulumi-lang-yaml="`weekEnd`" pulumi-lang-java="`weekEnd`" pulumi-lang-hcl="`week_end`">`weekEnd`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`monthEnd`" pulumi-lang-dotnet="`MonthEnd`" pulumi-lang-go="`monthEnd`" pulumi-lang-python="`month_end`" pulumi-lang-yaml="`monthEnd`" pulumi-lang-java="`monthEnd`" pulumi-lang-hcl="`month_end`">`monthEnd`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>, <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span>, <span pulumi-lang-nodejs="`yearEnd`" pulumi-lang-dotnet="`YearEnd`" pulumi-lang-go="`yearEnd`" pulumi-lang-python="`year_end`" pulumi-lang-yaml="`yearEnd`" pulumi-lang-java="`yearEnd`" pulumi-lang-hcl="`year_end`">`yearEnd`</span>
         :param pulumi.Input[_builtins.str] last_modified_at: Time when automation was last modified. Does not change for name or description updates.
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] legacy_sync_ids: IDs of remote sync folder behaviors to run by this Automation
         :param pulumi.Input[_builtins.str] name: Name for this automation.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
@@ -705,7 +687,7 @@ class _AutomationState:
         :param pulumi.Input[_builtins.str] schedule_time_zone: Time zone for the schedule. If not set, times are interpreted as UTC.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] schedule_times_of_days: Times of day to run in HH:MM format (24-hour). For <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span>, run at these times on specified days of week. For <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, run at these times on the scheduled interval date.
         :param pulumi.Input[_builtins.str] source: Source path/glob.  See Automation docs for exact description, but this is used to filter for files in the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to find files to operate on. Supports globs, except on remote mounts.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of Syncs to run by this Automation.
         :param pulumi.Input[_builtins.str] trigger: How this automation is triggered to run.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] trigger_actions: If trigger is <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>, this is the list of action types on which to trigger the automation. Valid actions are create, copy, move, archived_delete, update, read, destroy
         :param pulumi.Input[_builtins.int] user_id: User ID of the Automation's creator.
@@ -757,8 +739,6 @@ class _AutomationState:
             pulumi.set(__self__, "last_modified_at", last_modified_at)
         if legacy_folder_matching is not None:
             pulumi.set(__self__, "legacy_folder_matching", legacy_folder_matching)
-        if legacy_sync_ids is not None:
-            pulumi.set(__self__, "legacy_sync_ids", legacy_sync_ids)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if overwrite_files is not None:
@@ -1059,18 +1039,6 @@ class _AutomationState:
         pulumi.set(self, "legacy_folder_matching", value)
 
     @_builtins.property
-    @pulumi.getter(name="legacySyncIds")
-    def legacy_sync_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
-        """
-        IDs of remote sync folder behaviors to run by this Automation
-        """
-        return pulumi.get(self, "legacy_sync_ids")
-
-    @legacy_sync_ids.setter
-    def legacy_sync_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
-        pulumi.set(self, "legacy_sync_ids", value)
-
-    @_builtins.property
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -1242,7 +1210,7 @@ class _AutomationState:
     @pulumi.getter(name="syncIds")
     def sync_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
         """
-        IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        IDs of Syncs to run by this Automation.
         """
         return pulumi.get(self, "sync_ids")
 
@@ -1370,7 +1338,6 @@ class Automation(pulumi.CustomResource):
                  import_urls: Optional[Any] = None,
                  interval: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
-                 legacy_sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1401,54 +1368,45 @@ class Automation(pulumi.CustomResource):
         ## Path Matching
 
         The <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute specifies which folders this automation applies to.
-
         It gets combined with the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> attribute to determine which files are actually affected by the automation.
-
         Note that the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute supports globs, and only refers to _folders_.
-
         It's the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> attribute, which also supports globs, combined with the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute that determines which files are affected, and automations only operate on the files themselves.
-
         Additionally, paths in Automations can refer to folders which don't yet exist.
 
         ### Path Globs
 
         Although Automations may have a <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> specified, it can be a glob (which includes wildcards), which affects multiple folders.
 
-        `*` matches any folder at that level of the path, but not subfolders. For example, `path/to/*` matches `path/to/folder1` and `path/to/folder2`, but not `path/to/folder1/subfolder`.
+        `*` matches any folder at that level of the path, but not subfolders.  For example, `path/to/*` matches `path/to/folder1` and `path/to/folder2`, but not `path/to/folder1/subfolder`.
 
-        `**` matches subfolders recursively. For example, `path/to/**` matches `path/to/folder1`, `path/to/folder1/subfolder`, `path/to/folder2`, `path/to/folder2/subfolder`, etc.
+        `**` matches subfolders recursively.  For example, `path/to/**` matches `path/to/folder1`, `path/to/folder1/subfolder`, `path/to/folder2`, `path/to/folder2/subfolder`, etc.
 
         `?` matches any one character.
 
         Use square brackets `[]` to match any character from a set. This works like a regular expression, including negation using `^`.
 
         Curly brackets `{}` can be used to denote parts of a pattern which will accept a number of alternatives, separated by commas `,`.
-
         These alternatives can either be literal text or include special characters including nested curly brackets.
-
         For example `{Mon,Tue,Wed,Thu,Fri}` would match abbreviated weekdays, and `202{3-{0[7-9],1?},4-0[1-6]}-*` would match dates from `2023-07-01` through `2024-06-30`.
 
         To match any of the special characters literally, precede it with a backslash and enclose that pair with square brackets. For example to match a literal `?`, use `[\\?]`.
 
         Globs are supported on <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>, <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span>, and <span pulumi-lang-nodejs="`excludePattern`" pulumi-lang-dotnet="`ExcludePattern`" pulumi-lang-go="`excludePattern`" pulumi-lang-python="`exclude_pattern`" pulumi-lang-yaml="`excludePattern`" pulumi-lang-java="`excludePattern`" pulumi-lang-hcl="`exclude_pattern`">`excludePattern`</span> fields. Globs are not supported on remote paths of any kind or for any field.
 
-        By default, Copy and Move automations that use globs will implicitly replicate matched folder structures at the destination. If you want to flatten the folder structure, set <span pulumi-lang-nodejs="`flattenDestinationStructure`" pulumi-lang-dotnet="`FlattenDestinationStructure`" pulumi-lang-go="`flattenDestinationStructure`" pulumi-lang-python="`flatten_destination_structure`" pulumi-lang-yaml="`flattenDestinationStructure`" pulumi-lang-java="`flattenDestinationStructure`" pulumi-lang-hcl="`flatten_destination_structure`">`flattenDestinationStructure`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
+        By default, Copy and Move automations that use globs will implicitly replicate matched folder structures at the destination.  If you want to flatten the folder structure, set <span pulumi-lang-nodejs="`flattenDestinationStructure`" pulumi-lang-dotnet="`FlattenDestinationStructure`" pulumi-lang-go="`flattenDestinationStructure`" pulumi-lang-python="`flatten_destination_structure`" pulumi-lang-yaml="`flattenDestinationStructure`" pulumi-lang-java="`flattenDestinationStructure`" pulumi-lang-hcl="`flatten_destination_structure`">`flattenDestinationStructure`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
 
         ## Automation Triggers
 
         Automations can be triggered in the following ways:
 
         * <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span> : The automation will run according to either the reusable Site-level Schedule selected by <span pulumi-lang-nodejs="`scheduleId`" pulumi-lang-dotnet="`ScheduleId`" pulumi-lang-go="`scheduleId`" pulumi-lang-python="`schedule_id`" pulumi-lang-yaml="`scheduleId`" pulumi-lang-java="`scheduleId`" pulumi-lang-hcl="`schedule_id`">`scheduleId`</span> or its own custom schedule fields for <span pulumi-lang-nodejs="`daysOfWeek`" pulumi-lang-dotnet="`DaysOfWeek`" pulumi-lang-go="`daysOfWeek`" pulumi-lang-python="`days_of_week`" pulumi-lang-yaml="`daysOfWeek`" pulumi-lang-java="`daysOfWeek`" pulumi-lang-hcl="`days_of_week`">`daysOfWeek`</span> (0-based) and <span pulumi-lang-nodejs="`timesOfDay`" pulumi-lang-dotnet="`TimesOfDay`" pulumi-lang-go="`timesOfDay`" pulumi-lang-python="`times_of_day`" pulumi-lang-yaml="`timesOfDay`" pulumi-lang-java="`timesOfDay`" pulumi-lang-hcl="`times_of_day`">`timesOfDay`</span>. A time zone may be specified via <span pulumi-lang-nodejs="`timeZone`" pulumi-lang-dotnet="`TimeZone`" pulumi-lang-go="`timeZone`" pulumi-lang-python="`time_zone`" pulumi-lang-yaml="`timeZone`" pulumi-lang-java="`timeZone`" pulumi-lang-hcl="`time_zone`">`timeZone`</span> in Rails TimeZone name format.
-
         * <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span> : The automation will run in a picked <span pulumi-lang-nodejs="`interval`" pulumi-lang-dotnet="`Interval`" pulumi-lang-go="`interval`" pulumi-lang-python="`interval`" pulumi-lang-yaml="`interval`" pulumi-lang-java="`interval`" pulumi-lang-hcl="`interval`">`interval`</span>. You can specify <span pulumi-lang-nodejs="`recurringDay`" pulumi-lang-dotnet="`RecurringDay`" pulumi-lang-go="`recurringDay`" pulumi-lang-python="`recurring_day`" pulumi-lang-yaml="`recurringDay`" pulumi-lang-java="`recurringDay`" pulumi-lang-hcl="`recurring_day`">`recurringDay`</span> or <span pulumi-lang-nodejs="`recurringDays`" pulumi-lang-dotnet="`RecurringDays`" pulumi-lang-go="`recurringDays`" pulumi-lang-python="`recurring_days`" pulumi-lang-yaml="`recurringDays`" pulumi-lang-java="`recurringDays`" pulumi-lang-hcl="`recurring_days`">`recurringDays`</span> to select one or more day numbers inside the interval.
-
         * <span pulumi-lang-nodejs="`webhook`" pulumi-lang-dotnet="`Webhook`" pulumi-lang-go="`webhook`" pulumi-lang-python="`webhook`" pulumi-lang-yaml="`webhook`" pulumi-lang-java="`webhook`" pulumi-lang-hcl="`webhook`">`webhook`</span> : the automation will run when a request is sent to the corresponding webhook URL.
-
         * <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> : The automation will run when a specific action happens, e.g. a file is created or downloaded.
 
         Future enhancements will allow Automations to be triggered by an incoming email, or by other services.
 
-        Currently, all Automation types support all triggers, with the following exceptions: `Create Folder` and `Run Remote Server Sync` are not supported by the <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> trigger.
+        Currently, all Automation types support all triggers, with the following exceptions: `Create Folder` and  `Run Remote Server Sync` are not supported by the <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> trigger.
 
         Automations can be triggered manually if trigger is not set to <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>.
 
@@ -1462,20 +1420,16 @@ class Automation(pulumi.CustomResource):
 
         ### Files vs. Folders
 
-        If the destination path ends with a `/`, the filename from the source path will be preserved and put into the folder of this name. If the destination path does not end with a `/`, it will be interpreted as a filename and will override the source file's filename entirely.
+        If the destination path ends with a `/`, the filename from the source path will be preserved and put into the folder of this name.  If the destination path does not end with a `/`, it will be interpreted as a filename and will override the source file's filename entirely.
 
         ### Formatting Parameters
 
         **Action-Triggered Automations**
 
         * `%tf` : The name of the file that triggered the automation.
-
         * `%tp` : The path of the file that triggered the automation.
-
         * `%td` : The directory of the file that triggered the automation.
-
         * `%tb` : The name of the file (without extension) that triggered the automation.
-
         * `%te` : The extension of the file that triggered the automation.
 
         For example, if the triggering file is at `path/to/file.txt`, then the automation destination `path/to/dest/incoming-%tf` will result in the actual destination being `path/to/dest/incoming-file.txt`.
@@ -1495,36 +1449,24 @@ class Automation(pulumi.CustomResource):
         To reference the name of the source file being processed, use the following tokens:
 
         * `%Ff` : The name of the source file, with extension.
-
         * `%Fb` : The name of the source file, without extension.
-
         * `%Fe` : The extension of the source file.
-
         * `%Fl` : The name of the source file, with extension, converted to lowercase.
-
         * `%Fn` : The name of the source file, without non-alphanumeric characters, with extension.
-
         * `%Fp` : The name of the source file, with extension, spaces removed, lowercase, non-ASCII normalized.
 
         For example, if the source file is `Daily Report.xlsx` and the destination is `archive/%Y-%m-%d/%Fb.xlsx`, the resolved destination will be `archive/2024-01-15/Daily Report.xlsx`.
 
         **Dates and Times**
 
-        * `%Y` : The current year (4 digits)
-
-        * `%m` : The current month (2 digits)
-
-        * `%B` : The current month (full name)
-
-        * `%d` : The current day (2 digits)
-
-        * `%H` : The current hour (2 digits, 24-hour clock)
-
-        * `%M` : The current minute (2 digits)
-
-        * `%S` : The current second (2 digits)
-
-        * `%z` : UTC Time Zone (e.g. -0900)
+        * `%Y`  : The current year (4 digits)
+        * `%m`  : The current month (2 digits)
+        * `%B`  : The current month (full name)
+        * `%d`  : The current day (2 digits)
+        * `%H`  : The current hour (2 digits, 24-hour clock)
+        * `%M`  : The current minute (2 digits)
+        * `%S`  : The current second (2 digits)
+        * `%z`  : UTC Time Zone (e.g. -0900)
 
         For example, if the current date is June 23, 2023 and the source file is named `daily_sales.csv`, then the following automation destination `path/to/dest/%Y/%m/%d/` will result in the actual destination being `path/to/dest/2023/06/23/daily_sales.csv`.
 
@@ -1536,26 +1478,21 @@ class Automation(pulumi.CustomResource):
 
         ## Automation Types
 
-        There are several types of automations: Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
+        There are several types of automations:  Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
 
         ### Create Folder
 
         Creates the folder with named by <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span> in the path named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
-
         Destination may include formatting parameters to insert the date/time into the destination name.
 
-        Example Use case: Our business files sales tax for each division in 11 states every quarter.
-
+        Example Use case:  Our business files sales tax for each division in 11 states every quarter.
         I want to create the folders where those sales tax forms and data will be collected.
 
         I could create a Create Folder automation as follows:
 
         * Trigger: <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>
-
         * Interval: <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>
-
         * Path: `AccountingAndTax/SalesTax/State/*/`
-
         * Destinations: `%Y/Quarter-ending-%m-%d`
 
         Note this assumes you have folders in `AccountingAndTax/SalesTax/State/` already created for each state, e.g. `AccountingAndTax/SalesTax/State/CA/`.
@@ -1567,19 +1504,14 @@ class Automation(pulumi.CustomResource):
         ### Copy File
 
         Copies files in the folder named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to the path specified in <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span>.
-
         The automation will only fire on files matching the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
-
         If the parameter <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> exists, the automation will only copy the newest <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> files in each matching folder.
 
         ### Move File
 
         Moves files in the folder named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to the path specified in <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span>.
-
         The automation will only fire on files matching the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
-
         If the parameter <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> exists, the automation will only move the newest <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> files in each matching folder.
-
         Note that for a move with multiple destinations, all but one destination is treated as a copy.
 
         ### Run Remote Server Sync
@@ -1587,7 +1519,6 @@ class Automation(pulumi.CustomResource):
         The Run Remote Server Sync automation runs the remote server syncs specified by the <span pulumi-lang-nodejs="`syncIds`" pulumi-lang-dotnet="`SyncIds`" pulumi-lang-go="`syncIds`" pulumi-lang-python="`sync_ids`" pulumi-lang-yaml="`syncIds`" pulumi-lang-java="`syncIds`" pulumi-lang-hcl="`sync_ids`">`syncIds`</span>.
 
         Typically when this automation is used, the remote server syncs in question are set to the manual
-
         scheduling mode (<span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`">`manual`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> via the API) to disable the built in sync scheduler.
 
         ### Import File
@@ -1599,26 +1530,21 @@ class Automation(pulumi.CustomResource):
         The recognized keys are:
 
         * <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>: The file name which will be used to save the returned content. Required. `%` tokens will be replaced as described under Formatting Parameters.
-
         * <span pulumi-lang-nodejs="`url`" pulumi-lang-dotnet="`Url`" pulumi-lang-go="`url`" pulumi-lang-python="`url`" pulumi-lang-yaml="`url`" pulumi-lang-java="`url`" pulumi-lang-hcl="`url`">`url`</span>: The URL which will be requested. Required.
-
         * <span pulumi-lang-nodejs="`method`" pulumi-lang-dotnet="`Method`" pulumi-lang-go="`method`" pulumi-lang-python="`method`" pulumi-lang-yaml="`method`" pulumi-lang-java="`method`" pulumi-lang-hcl="`method`">`method`</span>: The HTTP method to be used for the request. May be either <span pulumi-lang-nodejs="`get`" pulumi-lang-dotnet="`Get`" pulumi-lang-go="`get`" pulumi-lang-python="`get`" pulumi-lang-yaml="`get`" pulumi-lang-java="`get`" pulumi-lang-hcl="`get`">`get`</span> or <span pulumi-lang-nodejs="`post`" pulumi-lang-dotnet="`Post`" pulumi-lang-go="`post`" pulumi-lang-python="`post`" pulumi-lang-yaml="`post`" pulumi-lang-java="`post`" pulumi-lang-hcl="`post`">`post`</span> (case insensitive). Defaults to <span pulumi-lang-nodejs="`get`" pulumi-lang-dotnet="`Get`" pulumi-lang-go="`get`" pulumi-lang-python="`get`" pulumi-lang-yaml="`get`" pulumi-lang-java="`get`" pulumi-lang-hcl="`get`">`get`</span>.
-
         * <span pulumi-lang-nodejs="`headers`" pulumi-lang-dotnet="`Headers`" pulumi-lang-go="`headers`" pulumi-lang-python="`headers`" pulumi-lang-yaml="`headers`" pulumi-lang-java="`headers`" pulumi-lang-hcl="`headers`">`headers`</span>: Optional headers to be included in the request. `%` tokens in the values will be replaced as described under Formatting Parameters.
-
         * <span pulumi-lang-nodejs="`content`" pulumi-lang-dotnet="`Content`" pulumi-lang-go="`content`" pulumi-lang-python="`content`" pulumi-lang-yaml="`content`" pulumi-lang-java="`content`" pulumi-lang-hcl="`content`">`content`</span>: Optional body to send for POST request. If supplied as a string, `%` tokens will be expanded. If supplied as a JSON Object, `%` tokens will be expanded for top-level values. Other JSON types will be sent as-is.
 
         ### Help us build the future of Automations
 
-        Do you have an idea for something that would work well as a Files.com Automation? Let us know!
-
+        Do you have an idea for something that would work well as a Files.com Automation?  Let us know!
         We are actively improving the types of automations offered on our platform.
 
         ## Retrying Failures
 
-        Automations will automatically retry individual action steps up to 3 times, with pauses between retries that increase from 15 seconds to 1 minute. If individual action steps fail after our 3rd attempt, that action will fail. If every action step in an Automation Run fails, that automation run will move to a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> status. If at least one step succeeds and one step fails, that automation run will move to a <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status.
+        Automations will automatically retry individual action steps up to 3 times, with pauses between retries that increase from 15 seconds to 1 minute.  If individual action steps fail after our 3rd attempt, that action will fail.  If every action step in an Automation Run fails, that automation run will move to a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> status.  If at least one step succeeds and one step fails, that automation run will move to a <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status.
 
-        Automation Runs can be retried automatically when they enter a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> or <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status as described above. A retry will re-run the automation from scratch, including the "planning" phase, which expands globs (wildcards) and identifies which files to transfer or skip.
+        Automation Runs can be retried automatically when they enter a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> or <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status as described above.  A retry will re-run the automation from scratch, including the "planning" phase, which expands globs (wildcards) and identifies which files to transfer or skip.
 
         Retrying of entire Automation Runs must be explicitly enabled by setting the <span pulumi-lang-nodejs="`retryOnFailureIntervalInMinutes`" pulumi-lang-dotnet="`RetryOnFailureIntervalInMinutes`" pulumi-lang-go="`retryOnFailureIntervalInMinutes`" pulumi-lang-python="`retry_on_failure_interval_in_minutes`" pulumi-lang-yaml="`retryOnFailureIntervalInMinutes`" pulumi-lang-java="`retryOnFailureIntervalInMinutes`" pulumi-lang-hcl="`retry_on_failure_interval_in_minutes`">`retryOnFailureIntervalInMinutes`</span> and <span pulumi-lang-nodejs="`retryOnFailureNumberOfAttempts`" pulumi-lang-dotnet="`RetryOnFailureNumberOfAttempts`" pulumi-lang-go="`retryOnFailureNumberOfAttempts`" pulumi-lang-python="`retry_on_failure_number_of_attempts`" pulumi-lang-yaml="`retryOnFailureNumberOfAttempts`" pulumi-lang-java="`retryOnFailureNumberOfAttempts`" pulumi-lang-hcl="`retry_on_failure_number_of_attempts`">`retryOnFailureNumberOfAttempts`</span> values on the Automation.
 
@@ -1640,10 +1566,6 @@ class Automation(pulumi.CustomResource):
             destination_replace_to="example",
             interval="year",
             path="example",
-            legacy_sync_ids=[
-                1,
-                2,
-            ],
             sync_ids=[
                 1,
                 2,
@@ -1717,7 +1639,7 @@ class Automation(pulumi.CustomResource):
             trigger="daily",
             trigger_actions=["create"],
             value={
-                "limit": 1,
+                "limit": "1",
             },
             recurring_day=25,
             recurring_days=[
@@ -1759,7 +1681,6 @@ class Automation(pulumi.CustomResource):
         :param Any import_urls: List of URLs to be imported and names to be used.
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run this automation.  One of: <span pulumi-lang-nodejs="`day`" pulumi-lang-dotnet="`Day`" pulumi-lang-go="`day`" pulumi-lang-python="`day`" pulumi-lang-yaml="`day`" pulumi-lang-java="`day`" pulumi-lang-hcl="`day`">`day`</span>, <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`weekEnd`" pulumi-lang-dotnet="`WeekEnd`" pulumi-lang-go="`weekEnd`" pulumi-lang-python="`week_end`" pulumi-lang-yaml="`weekEnd`" pulumi-lang-java="`weekEnd`" pulumi-lang-hcl="`week_end`">`weekEnd`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`monthEnd`" pulumi-lang-dotnet="`MonthEnd`" pulumi-lang-go="`monthEnd`" pulumi-lang-python="`month_end`" pulumi-lang-yaml="`monthEnd`" pulumi-lang-java="`monthEnd`" pulumi-lang-hcl="`month_end`">`monthEnd`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>, <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span>, <span pulumi-lang-nodejs="`yearEnd`" pulumi-lang-dotnet="`YearEnd`" pulumi-lang-go="`yearEnd`" pulumi-lang-python="`year_end`" pulumi-lang-yaml="`yearEnd`" pulumi-lang-java="`yearEnd`" pulumi-lang-hcl="`year_end`">`yearEnd`</span>
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] legacy_sync_ids: IDs of remote sync folder behaviors to run by this Automation
         :param pulumi.Input[_builtins.str] name: Name for this automation.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
@@ -1773,7 +1694,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] schedule_time_zone: Time zone for the schedule. If not set, times are interpreted as UTC.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] schedule_times_of_days: Times of day to run in HH:MM format (24-hour). For <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span>, run at these times on specified days of week. For <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, run at these times on the scheduled interval date.
         :param pulumi.Input[_builtins.str] source: Source path/glob.  See Automation docs for exact description, but this is used to filter for files in the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to find files to operate on. Supports globs, except on remote mounts.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of Syncs to run by this Automation.
         :param pulumi.Input[_builtins.str] trigger: How this automation is triggered to run.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] trigger_actions: If trigger is <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>, this is the list of action types on which to trigger the automation. Valid actions are create, copy, move, archived_delete, update, read, destroy
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] user_ids: IDs of Users for the Automation (i.e. who to Request File from)
@@ -1796,54 +1717,45 @@ class Automation(pulumi.CustomResource):
         ## Path Matching
 
         The <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute specifies which folders this automation applies to.
-
         It gets combined with the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> attribute to determine which files are actually affected by the automation.
-
         Note that the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute supports globs, and only refers to _folders_.
-
         It's the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> attribute, which also supports globs, combined with the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> attribute that determines which files are affected, and automations only operate on the files themselves.
-
         Additionally, paths in Automations can refer to folders which don't yet exist.
 
         ### Path Globs
 
         Although Automations may have a <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> specified, it can be a glob (which includes wildcards), which affects multiple folders.
 
-        `*` matches any folder at that level of the path, but not subfolders. For example, `path/to/*` matches `path/to/folder1` and `path/to/folder2`, but not `path/to/folder1/subfolder`.
+        `*` matches any folder at that level of the path, but not subfolders.  For example, `path/to/*` matches `path/to/folder1` and `path/to/folder2`, but not `path/to/folder1/subfolder`.
 
-        `**` matches subfolders recursively. For example, `path/to/**` matches `path/to/folder1`, `path/to/folder1/subfolder`, `path/to/folder2`, `path/to/folder2/subfolder`, etc.
+        `**` matches subfolders recursively.  For example, `path/to/**` matches `path/to/folder1`, `path/to/folder1/subfolder`, `path/to/folder2`, `path/to/folder2/subfolder`, etc.
 
         `?` matches any one character.
 
         Use square brackets `[]` to match any character from a set. This works like a regular expression, including negation using `^`.
 
         Curly brackets `{}` can be used to denote parts of a pattern which will accept a number of alternatives, separated by commas `,`.
-
         These alternatives can either be literal text or include special characters including nested curly brackets.
-
         For example `{Mon,Tue,Wed,Thu,Fri}` would match abbreviated weekdays, and `202{3-{0[7-9],1?},4-0[1-6]}-*` would match dates from `2023-07-01` through `2024-06-30`.
 
         To match any of the special characters literally, precede it with a backslash and enclose that pair with square brackets. For example to match a literal `?`, use `[\\?]`.
 
         Globs are supported on <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>, <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span>, and <span pulumi-lang-nodejs="`excludePattern`" pulumi-lang-dotnet="`ExcludePattern`" pulumi-lang-go="`excludePattern`" pulumi-lang-python="`exclude_pattern`" pulumi-lang-yaml="`excludePattern`" pulumi-lang-java="`excludePattern`" pulumi-lang-hcl="`exclude_pattern`">`excludePattern`</span> fields. Globs are not supported on remote paths of any kind or for any field.
 
-        By default, Copy and Move automations that use globs will implicitly replicate matched folder structures at the destination. If you want to flatten the folder structure, set <span pulumi-lang-nodejs="`flattenDestinationStructure`" pulumi-lang-dotnet="`FlattenDestinationStructure`" pulumi-lang-go="`flattenDestinationStructure`" pulumi-lang-python="`flatten_destination_structure`" pulumi-lang-yaml="`flattenDestinationStructure`" pulumi-lang-java="`flattenDestinationStructure`" pulumi-lang-hcl="`flatten_destination_structure`">`flattenDestinationStructure`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
+        By default, Copy and Move automations that use globs will implicitly replicate matched folder structures at the destination.  If you want to flatten the folder structure, set <span pulumi-lang-nodejs="`flattenDestinationStructure`" pulumi-lang-dotnet="`FlattenDestinationStructure`" pulumi-lang-go="`flattenDestinationStructure`" pulumi-lang-python="`flatten_destination_structure`" pulumi-lang-yaml="`flattenDestinationStructure`" pulumi-lang-java="`flattenDestinationStructure`" pulumi-lang-hcl="`flatten_destination_structure`">`flattenDestinationStructure`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
 
         ## Automation Triggers
 
         Automations can be triggered in the following ways:
 
         * <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span> : The automation will run according to either the reusable Site-level Schedule selected by <span pulumi-lang-nodejs="`scheduleId`" pulumi-lang-dotnet="`ScheduleId`" pulumi-lang-go="`scheduleId`" pulumi-lang-python="`schedule_id`" pulumi-lang-yaml="`scheduleId`" pulumi-lang-java="`scheduleId`" pulumi-lang-hcl="`schedule_id`">`scheduleId`</span> or its own custom schedule fields for <span pulumi-lang-nodejs="`daysOfWeek`" pulumi-lang-dotnet="`DaysOfWeek`" pulumi-lang-go="`daysOfWeek`" pulumi-lang-python="`days_of_week`" pulumi-lang-yaml="`daysOfWeek`" pulumi-lang-java="`daysOfWeek`" pulumi-lang-hcl="`days_of_week`">`daysOfWeek`</span> (0-based) and <span pulumi-lang-nodejs="`timesOfDay`" pulumi-lang-dotnet="`TimesOfDay`" pulumi-lang-go="`timesOfDay`" pulumi-lang-python="`times_of_day`" pulumi-lang-yaml="`timesOfDay`" pulumi-lang-java="`timesOfDay`" pulumi-lang-hcl="`times_of_day`">`timesOfDay`</span>. A time zone may be specified via <span pulumi-lang-nodejs="`timeZone`" pulumi-lang-dotnet="`TimeZone`" pulumi-lang-go="`timeZone`" pulumi-lang-python="`time_zone`" pulumi-lang-yaml="`timeZone`" pulumi-lang-java="`timeZone`" pulumi-lang-hcl="`time_zone`">`timeZone`</span> in Rails TimeZone name format.
-
         * <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span> : The automation will run in a picked <span pulumi-lang-nodejs="`interval`" pulumi-lang-dotnet="`Interval`" pulumi-lang-go="`interval`" pulumi-lang-python="`interval`" pulumi-lang-yaml="`interval`" pulumi-lang-java="`interval`" pulumi-lang-hcl="`interval`">`interval`</span>. You can specify <span pulumi-lang-nodejs="`recurringDay`" pulumi-lang-dotnet="`RecurringDay`" pulumi-lang-go="`recurringDay`" pulumi-lang-python="`recurring_day`" pulumi-lang-yaml="`recurringDay`" pulumi-lang-java="`recurringDay`" pulumi-lang-hcl="`recurring_day`">`recurringDay`</span> or <span pulumi-lang-nodejs="`recurringDays`" pulumi-lang-dotnet="`RecurringDays`" pulumi-lang-go="`recurringDays`" pulumi-lang-python="`recurring_days`" pulumi-lang-yaml="`recurringDays`" pulumi-lang-java="`recurringDays`" pulumi-lang-hcl="`recurring_days`">`recurringDays`</span> to select one or more day numbers inside the interval.
-
         * <span pulumi-lang-nodejs="`webhook`" pulumi-lang-dotnet="`Webhook`" pulumi-lang-go="`webhook`" pulumi-lang-python="`webhook`" pulumi-lang-yaml="`webhook`" pulumi-lang-java="`webhook`" pulumi-lang-hcl="`webhook`">`webhook`</span> : the automation will run when a request is sent to the corresponding webhook URL.
-
         * <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> : The automation will run when a specific action happens, e.g. a file is created or downloaded.
 
         Future enhancements will allow Automations to be triggered by an incoming email, or by other services.
 
-        Currently, all Automation types support all triggers, with the following exceptions: `Create Folder` and `Run Remote Server Sync` are not supported by the <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> trigger.
+        Currently, all Automation types support all triggers, with the following exceptions: `Create Folder` and  `Run Remote Server Sync` are not supported by the <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span> trigger.
 
         Automations can be triggered manually if trigger is not set to <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>.
 
@@ -1857,20 +1769,16 @@ class Automation(pulumi.CustomResource):
 
         ### Files vs. Folders
 
-        If the destination path ends with a `/`, the filename from the source path will be preserved and put into the folder of this name. If the destination path does not end with a `/`, it will be interpreted as a filename and will override the source file's filename entirely.
+        If the destination path ends with a `/`, the filename from the source path will be preserved and put into the folder of this name.  If the destination path does not end with a `/`, it will be interpreted as a filename and will override the source file's filename entirely.
 
         ### Formatting Parameters
 
         **Action-Triggered Automations**
 
         * `%tf` : The name of the file that triggered the automation.
-
         * `%tp` : The path of the file that triggered the automation.
-
         * `%td` : The directory of the file that triggered the automation.
-
         * `%tb` : The name of the file (without extension) that triggered the automation.
-
         * `%te` : The extension of the file that triggered the automation.
 
         For example, if the triggering file is at `path/to/file.txt`, then the automation destination `path/to/dest/incoming-%tf` will result in the actual destination being `path/to/dest/incoming-file.txt`.
@@ -1890,36 +1798,24 @@ class Automation(pulumi.CustomResource):
         To reference the name of the source file being processed, use the following tokens:
 
         * `%Ff` : The name of the source file, with extension.
-
         * `%Fb` : The name of the source file, without extension.
-
         * `%Fe` : The extension of the source file.
-
         * `%Fl` : The name of the source file, with extension, converted to lowercase.
-
         * `%Fn` : The name of the source file, without non-alphanumeric characters, with extension.
-
         * `%Fp` : The name of the source file, with extension, spaces removed, lowercase, non-ASCII normalized.
 
         For example, if the source file is `Daily Report.xlsx` and the destination is `archive/%Y-%m-%d/%Fb.xlsx`, the resolved destination will be `archive/2024-01-15/Daily Report.xlsx`.
 
         **Dates and Times**
 
-        * `%Y` : The current year (4 digits)
-
-        * `%m` : The current month (2 digits)
-
-        * `%B` : The current month (full name)
-
-        * `%d` : The current day (2 digits)
-
-        * `%H` : The current hour (2 digits, 24-hour clock)
-
-        * `%M` : The current minute (2 digits)
-
-        * `%S` : The current second (2 digits)
-
-        * `%z` : UTC Time Zone (e.g. -0900)
+        * `%Y`  : The current year (4 digits)
+        * `%m`  : The current month (2 digits)
+        * `%B`  : The current month (full name)
+        * `%d`  : The current day (2 digits)
+        * `%H`  : The current hour (2 digits, 24-hour clock)
+        * `%M`  : The current minute (2 digits)
+        * `%S`  : The current second (2 digits)
+        * `%z`  : UTC Time Zone (e.g. -0900)
 
         For example, if the current date is June 23, 2023 and the source file is named `daily_sales.csv`, then the following automation destination `path/to/dest/%Y/%m/%d/` will result in the actual destination being `path/to/dest/2023/06/23/daily_sales.csv`.
 
@@ -1931,26 +1827,21 @@ class Automation(pulumi.CustomResource):
 
         ## Automation Types
 
-        There are several types of automations: Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
+        There are several types of automations:  Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
 
         ### Create Folder
 
         Creates the folder with named by <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span> in the path named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
-
         Destination may include formatting parameters to insert the date/time into the destination name.
 
-        Example Use case: Our business files sales tax for each division in 11 states every quarter.
-
+        Example Use case:  Our business files sales tax for each division in 11 states every quarter.
         I want to create the folders where those sales tax forms and data will be collected.
 
         I could create a Create Folder automation as follows:
 
         * Trigger: <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>
-
         * Interval: <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>
-
         * Path: `AccountingAndTax/SalesTax/State/*/`
-
         * Destinations: `%Y/Quarter-ending-%m-%d`
 
         Note this assumes you have folders in `AccountingAndTax/SalesTax/State/` already created for each state, e.g. `AccountingAndTax/SalesTax/State/CA/`.
@@ -1962,19 +1853,14 @@ class Automation(pulumi.CustomResource):
         ### Copy File
 
         Copies files in the folder named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to the path specified in <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span>.
-
         The automation will only fire on files matching the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
-
         If the parameter <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> exists, the automation will only copy the newest <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> files in each matching folder.
 
         ### Move File
 
         Moves files in the folder named by <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to the path specified in <span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`">`destinations`</span>.
-
         The automation will only fire on files matching the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
-
         If the parameter <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> exists, the automation will only move the newest <span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`">`limit`</span> files in each matching folder.
-
         Note that for a move with multiple destinations, all but one destination is treated as a copy.
 
         ### Run Remote Server Sync
@@ -1982,7 +1868,6 @@ class Automation(pulumi.CustomResource):
         The Run Remote Server Sync automation runs the remote server syncs specified by the <span pulumi-lang-nodejs="`syncIds`" pulumi-lang-dotnet="`SyncIds`" pulumi-lang-go="`syncIds`" pulumi-lang-python="`sync_ids`" pulumi-lang-yaml="`syncIds`" pulumi-lang-java="`syncIds`" pulumi-lang-hcl="`sync_ids`">`syncIds`</span>.
 
         Typically when this automation is used, the remote server syncs in question are set to the manual
-
         scheduling mode (<span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`">`manual`</span> to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> via the API) to disable the built in sync scheduler.
 
         ### Import File
@@ -1994,26 +1879,21 @@ class Automation(pulumi.CustomResource):
         The recognized keys are:
 
         * <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>: The file name which will be used to save the returned content. Required. `%` tokens will be replaced as described under Formatting Parameters.
-
         * <span pulumi-lang-nodejs="`url`" pulumi-lang-dotnet="`Url`" pulumi-lang-go="`url`" pulumi-lang-python="`url`" pulumi-lang-yaml="`url`" pulumi-lang-java="`url`" pulumi-lang-hcl="`url`">`url`</span>: The URL which will be requested. Required.
-
         * <span pulumi-lang-nodejs="`method`" pulumi-lang-dotnet="`Method`" pulumi-lang-go="`method`" pulumi-lang-python="`method`" pulumi-lang-yaml="`method`" pulumi-lang-java="`method`" pulumi-lang-hcl="`method`">`method`</span>: The HTTP method to be used for the request. May be either <span pulumi-lang-nodejs="`get`" pulumi-lang-dotnet="`Get`" pulumi-lang-go="`get`" pulumi-lang-python="`get`" pulumi-lang-yaml="`get`" pulumi-lang-java="`get`" pulumi-lang-hcl="`get`">`get`</span> or <span pulumi-lang-nodejs="`post`" pulumi-lang-dotnet="`Post`" pulumi-lang-go="`post`" pulumi-lang-python="`post`" pulumi-lang-yaml="`post`" pulumi-lang-java="`post`" pulumi-lang-hcl="`post`">`post`</span> (case insensitive). Defaults to <span pulumi-lang-nodejs="`get`" pulumi-lang-dotnet="`Get`" pulumi-lang-go="`get`" pulumi-lang-python="`get`" pulumi-lang-yaml="`get`" pulumi-lang-java="`get`" pulumi-lang-hcl="`get`">`get`</span>.
-
         * <span pulumi-lang-nodejs="`headers`" pulumi-lang-dotnet="`Headers`" pulumi-lang-go="`headers`" pulumi-lang-python="`headers`" pulumi-lang-yaml="`headers`" pulumi-lang-java="`headers`" pulumi-lang-hcl="`headers`">`headers`</span>: Optional headers to be included in the request. `%` tokens in the values will be replaced as described under Formatting Parameters.
-
         * <span pulumi-lang-nodejs="`content`" pulumi-lang-dotnet="`Content`" pulumi-lang-go="`content`" pulumi-lang-python="`content`" pulumi-lang-yaml="`content`" pulumi-lang-java="`content`" pulumi-lang-hcl="`content`">`content`</span>: Optional body to send for POST request. If supplied as a string, `%` tokens will be expanded. If supplied as a JSON Object, `%` tokens will be expanded for top-level values. Other JSON types will be sent as-is.
 
         ### Help us build the future of Automations
 
-        Do you have an idea for something that would work well as a Files.com Automation? Let us know!
-
+        Do you have an idea for something that would work well as a Files.com Automation?  Let us know!
         We are actively improving the types of automations offered on our platform.
 
         ## Retrying Failures
 
-        Automations will automatically retry individual action steps up to 3 times, with pauses between retries that increase from 15 seconds to 1 minute. If individual action steps fail after our 3rd attempt, that action will fail. If every action step in an Automation Run fails, that automation run will move to a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> status. If at least one step succeeds and one step fails, that automation run will move to a <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status.
+        Automations will automatically retry individual action steps up to 3 times, with pauses between retries that increase from 15 seconds to 1 minute.  If individual action steps fail after our 3rd attempt, that action will fail.  If every action step in an Automation Run fails, that automation run will move to a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> status.  If at least one step succeeds and one step fails, that automation run will move to a <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status.
 
-        Automation Runs can be retried automatically when they enter a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> or <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status as described above. A retry will re-run the automation from scratch, including the "planning" phase, which expands globs (wildcards) and identifies which files to transfer or skip.
+        Automation Runs can be retried automatically when they enter a <span pulumi-lang-nodejs="`failure`" pulumi-lang-dotnet="`Failure`" pulumi-lang-go="`failure`" pulumi-lang-python="`failure`" pulumi-lang-yaml="`failure`" pulumi-lang-java="`failure`" pulumi-lang-hcl="`failure`">`failure`</span> or <span pulumi-lang-nodejs="`partialFailure`" pulumi-lang-dotnet="`PartialFailure`" pulumi-lang-go="`partialFailure`" pulumi-lang-python="`partial_failure`" pulumi-lang-yaml="`partialFailure`" pulumi-lang-java="`partialFailure`" pulumi-lang-hcl="`partial_failure`">`partialFailure`</span> status as described above.  A retry will re-run the automation from scratch, including the "planning" phase, which expands globs (wildcards) and identifies which files to transfer or skip.
 
         Retrying of entire Automation Runs must be explicitly enabled by setting the <span pulumi-lang-nodejs="`retryOnFailureIntervalInMinutes`" pulumi-lang-dotnet="`RetryOnFailureIntervalInMinutes`" pulumi-lang-go="`retryOnFailureIntervalInMinutes`" pulumi-lang-python="`retry_on_failure_interval_in_minutes`" pulumi-lang-yaml="`retryOnFailureIntervalInMinutes`" pulumi-lang-java="`retryOnFailureIntervalInMinutes`" pulumi-lang-hcl="`retry_on_failure_interval_in_minutes`">`retryOnFailureIntervalInMinutes`</span> and <span pulumi-lang-nodejs="`retryOnFailureNumberOfAttempts`" pulumi-lang-dotnet="`RetryOnFailureNumberOfAttempts`" pulumi-lang-go="`retryOnFailureNumberOfAttempts`" pulumi-lang-python="`retry_on_failure_number_of_attempts`" pulumi-lang-yaml="`retryOnFailureNumberOfAttempts`" pulumi-lang-java="`retryOnFailureNumberOfAttempts`" pulumi-lang-hcl="`retry_on_failure_number_of_attempts`">`retryOnFailureNumberOfAttempts`</span> values on the Automation.
 
@@ -2035,10 +1915,6 @@ class Automation(pulumi.CustomResource):
             destination_replace_to="example",
             interval="year",
             path="example",
-            legacy_sync_ids=[
-                1,
-                2,
-            ],
             sync_ids=[
                 1,
                 2,
@@ -2112,7 +1988,7 @@ class Automation(pulumi.CustomResource):
             trigger="daily",
             trigger_actions=["create"],
             value={
-                "limit": 1,
+                "limit": "1",
             },
             recurring_day=25,
             recurring_days=[
@@ -2167,7 +2043,6 @@ class Automation(pulumi.CustomResource):
                  import_urls: Optional[Any] = None,
                  interval: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
-                 legacy_sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2215,7 +2090,6 @@ class Automation(pulumi.CustomResource):
             __props__.__dict__["import_urls"] = import_urls
             __props__.__dict__["interval"] = interval
             __props__.__dict__["legacy_folder_matching"] = legacy_folder_matching
-            __props__.__dict__["legacy_sync_ids"] = legacy_sync_ids
             __props__.__dict__["name"] = name
             __props__.__dict__["overwrite_files"] = overwrite_files
             __props__.__dict__["path"] = path
@@ -2274,7 +2148,6 @@ class Automation(pulumi.CustomResource):
             interval: pulumi.Input[Optional[_builtins.str]] = None,
             last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
             legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
-            legacy_sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
             path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2326,7 +2199,6 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] interval: If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run this automation.  One of: <span pulumi-lang-nodejs="`day`" pulumi-lang-dotnet="`Day`" pulumi-lang-go="`day`" pulumi-lang-python="`day`" pulumi-lang-yaml="`day`" pulumi-lang-java="`day`" pulumi-lang-hcl="`day`">`day`</span>, <span pulumi-lang-nodejs="`week`" pulumi-lang-dotnet="`Week`" pulumi-lang-go="`week`" pulumi-lang-python="`week`" pulumi-lang-yaml="`week`" pulumi-lang-java="`week`" pulumi-lang-hcl="`week`">`week`</span>, <span pulumi-lang-nodejs="`weekEnd`" pulumi-lang-dotnet="`WeekEnd`" pulumi-lang-go="`weekEnd`" pulumi-lang-python="`week_end`" pulumi-lang-yaml="`weekEnd`" pulumi-lang-java="`weekEnd`" pulumi-lang-hcl="`week_end`">`weekEnd`</span>, <span pulumi-lang-nodejs="`month`" pulumi-lang-dotnet="`Month`" pulumi-lang-go="`month`" pulumi-lang-python="`month`" pulumi-lang-yaml="`month`" pulumi-lang-java="`month`" pulumi-lang-hcl="`month`">`month`</span>, <span pulumi-lang-nodejs="`monthEnd`" pulumi-lang-dotnet="`MonthEnd`" pulumi-lang-go="`monthEnd`" pulumi-lang-python="`month_end`" pulumi-lang-yaml="`monthEnd`" pulumi-lang-java="`monthEnd`" pulumi-lang-hcl="`month_end`">`monthEnd`</span>, <span pulumi-lang-nodejs="`quarter`" pulumi-lang-dotnet="`Quarter`" pulumi-lang-go="`quarter`" pulumi-lang-python="`quarter`" pulumi-lang-yaml="`quarter`" pulumi-lang-java="`quarter`" pulumi-lang-hcl="`quarter`">`quarter`</span>, <span pulumi-lang-nodejs="`quarterEnd`" pulumi-lang-dotnet="`QuarterEnd`" pulumi-lang-go="`quarterEnd`" pulumi-lang-python="`quarter_end`" pulumi-lang-yaml="`quarterEnd`" pulumi-lang-java="`quarterEnd`" pulumi-lang-hcl="`quarter_end`">`quarterEnd`</span>, <span pulumi-lang-nodejs="`year`" pulumi-lang-dotnet="`Year`" pulumi-lang-go="`year`" pulumi-lang-python="`year`" pulumi-lang-yaml="`year`" pulumi-lang-java="`year`" pulumi-lang-hcl="`year`">`year`</span>, <span pulumi-lang-nodejs="`yearEnd`" pulumi-lang-dotnet="`YearEnd`" pulumi-lang-go="`yearEnd`" pulumi-lang-python="`year_end`" pulumi-lang-yaml="`yearEnd`" pulumi-lang-java="`yearEnd`" pulumi-lang-hcl="`year_end`">`yearEnd`</span>
         :param pulumi.Input[_builtins.str] last_modified_at: Time when automation was last modified. Does not change for name or description updates.
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] legacy_sync_ids: IDs of remote sync folder behaviors to run by this Automation
         :param pulumi.Input[_builtins.str] name: Name for this automation.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
@@ -2341,7 +2213,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] schedule_time_zone: Time zone for the schedule. If not set, times are interpreted as UTC.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] schedule_times_of_days: Times of day to run in HH:MM format (24-hour). For <span pulumi-lang-nodejs="`customSchedule`" pulumi-lang-dotnet="`CustomSchedule`" pulumi-lang-go="`customSchedule`" pulumi-lang-python="`custom_schedule`" pulumi-lang-yaml="`customSchedule`" pulumi-lang-java="`customSchedule`" pulumi-lang-hcl="`custom_schedule`">`customSchedule`</span>, run at these times on specified days of week. For <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, run at these times on the scheduled interval date.
         :param pulumi.Input[_builtins.str] source: Source path/glob.  See Automation docs for exact description, but this is used to filter for files in the <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span> to find files to operate on. Supports globs, except on remote mounts.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] sync_ids: IDs of Syncs to run by this Automation.
         :param pulumi.Input[_builtins.str] trigger: How this automation is triggered to run.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] trigger_actions: If trigger is <span pulumi-lang-nodejs="`action`" pulumi-lang-dotnet="`Action`" pulumi-lang-go="`action`" pulumi-lang-python="`action`" pulumi-lang-yaml="`action`" pulumi-lang-java="`action`" pulumi-lang-hcl="`action`">`action`</span>, this is the list of action types on which to trigger the automation. Valid actions are create, copy, move, archived_delete, update, read, destroy
         :param pulumi.Input[_builtins.int] user_id: User ID of the Automation's creator.
@@ -2376,7 +2248,6 @@ class Automation(pulumi.CustomResource):
         __props__.__dict__["interval"] = interval
         __props__.__dict__["last_modified_at"] = last_modified_at
         __props__.__dict__["legacy_folder_matching"] = legacy_folder_matching
-        __props__.__dict__["legacy_sync_ids"] = legacy_sync_ids
         __props__.__dict__["name"] = name
         __props__.__dict__["overwrite_files"] = overwrite_files
         __props__.__dict__["path"] = path
@@ -2571,14 +2442,6 @@ class Automation(pulumi.CustomResource):
         return pulumi.get(self, "legacy_folder_matching")
 
     @_builtins.property
-    @pulumi.getter(name="legacySyncIds")
-    def legacy_sync_ids(self) -> pulumi.Output[Sequence[_builtins.int]]:
-        """
-        IDs of remote sync folder behaviors to run by this Automation
-        """
-        return pulumi.get(self, "legacy_sync_ids")
-
-    @_builtins.property
     @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
@@ -2694,7 +2557,7 @@ class Automation(pulumi.CustomResource):
     @pulumi.getter(name="syncIds")
     def sync_ids(self) -> pulumi.Output[Sequence[_builtins.int]]:
         """
-        IDs of syncs to run by this Automation. This is the new way to specify syncs, and it is recommended to use this instead of <span pulumi-lang-nodejs="`legacySyncIds`" pulumi-lang-dotnet="`LegacySyncIds`" pulumi-lang-go="`legacySyncIds`" pulumi-lang-python="`legacy_sync_ids`" pulumi-lang-yaml="`legacySyncIds`" pulumi-lang-java="`legacySyncIds`" pulumi-lang-hcl="`legacy_sync_ids`">`legacySyncIds`</span>.
+        IDs of Syncs to run by this Automation.
         """
         return pulumi.get(self, "sync_ids")
 

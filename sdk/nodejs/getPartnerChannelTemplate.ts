@@ -7,6 +7,12 @@ import * as utilities from "./utilities";
 /**
  * A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
  *
+ * Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+ * Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+ * become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+ * "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+ * The expanded route must point to an existing folder in the same Workspace.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -46,11 +52,11 @@ export interface GetPartnerChannelTemplateResult {
      */
     readonly direction: string;
     /**
-     * Resolved from-Partner folder name after Template override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     readonly effectiveFromPartnerFolderName: string;
     /**
-     * Resolved to-Partner folder name after Template override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     readonly effectiveToPartnerFolderName: string;
     /**
@@ -90,12 +96,22 @@ export interface GetPartnerChannelTemplateResult {
      */
     readonly toPartnerRoutePathPattern: string;
     /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Template must remain one-way.
+     */
+    readonly useChannelRoot: boolean;
+    /**
      * ID of the Workspace associated with this Partner Channel Template.
      */
     readonly workspaceId: number;
 }
 /**
  * A PartnerChannelTemplate defines reusable Partner Channel configuration that can be applied to Partners.
+ *
+ * Route path patterns can be fixed paths shared by all assigned Partners, or include {{partner_name}} to expand to a single folder name. Slashes in Partner names become pipes (|).
+ * Leading and trailing whitespace, percent signs, and null bytes are percent-encoded. Names consisting of . or ..
+ * become %2E or %2E%2E. For example, a Partner named "Acme " uses the folder "Acme%20", while "Acme%20" uses
+ * "Acme%2520". These percent sequences are literal folder-name characters, not URL encoding to decode.
+ * The expanded route must point to an existing folder in the same Workspace.
  *
  * ## Example Usage
  *

@@ -56,7 +56,12 @@ import * as utilities from "./utilities";
  *             siteAdmins: true,
  *             workspaceAdmins: true,
  *             folderAdmins: true,
- *             allUsers: true,
+ *             allUsers: false,
+ *             selectedGroupMembers: true,
+ *             groupIds: [
+ *                 1,
+ *                 2,
+ *             ],
  *         },
  *     },
  *     mcpDcrEnabled: false,
@@ -71,6 +76,7 @@ import * as utilities from "./utilities";
  *     legacyChecksumsMode: false,
  *     migrateRemoteServerSyncToSync: false,
  *     as2MessageRetentionDays: 1,
+ *     fileActivityEventsEnabled: false,
  *     usernameDisplay: "username_only",
  *     sessionExpiryMinutes: 1,
  *     sslRequired: false,
@@ -126,7 +132,9 @@ import * as utilities from "./utilities";
  *     userRequestsEnabled: false,
  *     userRequestsNotifyAdmins: false,
  *     davEnabled: false,
+ *     filesComRemoteServerEnabled: false,
  *     ftpEnabled: false,
+ *     s3CompatibleEndpointEnabled: false,
  *     sftpEnabled: false,
  *     sftpFinalizePartialUploads: false,
  *     usersCanCreateApiKeys: false,
@@ -137,9 +145,6 @@ import * as utilities from "./utilities";
  *     activeSftpHostKeyIds: [1],
  *     protocolAccessGroupsOnly: false,
  *     revokeBundleAccessOnDisableOrDelete: false,
- *     bundleWatermarkValue: {
- *         key: "example value",
- *     },
  *     groupAdminsCanAddUsers: false,
  *     groupAdminsCanManageGroupMemberships: false,
  *     groupAdminsCanDeleteUsers: false,
@@ -148,6 +153,8 @@ import * as utilities from "./utilities";
  *     groupAdminsCanBypassUserLifecycleRules: false,
  *     groupAdminsCanResetPasswords: false,
  *     groupAdminsCanSetUserPassword: false,
+ *     childSiteFolderAdminsCanSeeParentSiteDirectory: false,
+ *     workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory: false,
  *     bundleRecipientBlacklistFreeEmailDomains: false,
  *     bundleRecipientBlacklistDomains: ["example"],
  *     adminsBypassLockedSubfolders: false,
@@ -178,6 +185,7 @@ import * as utilities from "./utilities";
  *     smtpFrom: "me@my-mail-server.com",
  *     smtpUsername: "mail",
  *     smtpPort: 1,
+ *     smtpSsl: "require",
  *     ldapEnabled: false,
  *     ldapType: "open_ldap",
  *     ldapHost: "ldap.site.com",
@@ -185,6 +193,7 @@ import * as utilities from "./utilities";
  *     ldapHost3: "ldap3.site.com",
  *     ldapPort: 1,
  *     ldapSecure: false,
+ *     ldapServerCertificate: "require_match",
  *     ldapUsername: "[ldap username]",
  *     ldapUsernameField: "sAMAccountName",
  *     ldapDomain: "mysite.com",
@@ -195,6 +204,11 @@ import * as utilities from "./utilities";
  *     ldapGroupInclusion: "example",
  *     ldapBaseDn: "example",
  *     uploadsViaEmailAuthentication: false,
+ *     bundleWatermarkValue: {
+ *         gravity: "SouthWest",
+ *         maxHeightOrWidth: 20,
+ *         transparency: 25,
+ *     },
  *     icon16Delete: false,
  *     icon32Delete: false,
  *     icon48Delete: false,
@@ -267,7 +281,7 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly adminsBypassLockedSubfolders: pulumi.Output<boolean>;
     /**
-     * Availability settings for AI features by user class
+     * Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
      */
     declare public readonly aiFeatureAvailability: pulumi.Output<any>;
     /**
@@ -415,6 +429,10 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly calculateFileChecksumsSha256: pulumi.Output<boolean>;
     /**
+     * If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+     */
+    declare public readonly childSiteFolderAdminsCanSeeParentSiteDirectory: pulumi.Output<boolean>;
+    /**
      * Page link and button color
      */
     declare public readonly color2Left: pulumi.Output<string>;
@@ -519,13 +537,21 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly email: pulumi.Output<string>;
     /**
-     * Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+     * Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
      */
     declare public readonly emailFooterCustomText: pulumi.Output<string>;
     /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     declare public readonly fedramp: pulumi.Output<boolean>;
+    /**
+     * If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+     */
+    declare public readonly fileActivityEventsEnabled: pulumi.Output<boolean>;
+    /**
+     * Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+     */
+    declare public readonly filesComRemoteServerEnabled: pulumi.Output<boolean>;
     /**
      * If true, permissions for this site must be bound to a group (not a user).
      */
@@ -643,6 +669,10 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly ldapSecure: pulumi.Output<boolean>;
     /**
+     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+     */
+    declare public readonly ldapServerCertificate: pulumi.Output<string>;
+    /**
      * LDAP type
      */
     declare public readonly ldapType: pulumi.Output<string>;
@@ -679,7 +709,7 @@ export class Site extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly logo: pulumi.Output<string>;
     /**
-     * List of site settings managed by the parent site
+     * Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
      */
     declare public /*out*/ readonly managedSiteSettings: pulumi.Output<any>;
     /**
@@ -843,6 +873,10 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly rootFolderBehaviorsApplyToWorkspaces: pulumi.Output<boolean>;
     /**
+     * Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+     */
+    declare public readonly s3CompatibleEndpointEnabled: pulumi.Output<boolean>;
+    /**
      * Current session
      */
     declare public /*out*/ readonly session: pulumi.Output<string>;
@@ -919,6 +953,10 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly smtpPort: pulumi.Output<number>;
     /**
+     * Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+     */
+    declare public readonly smtpSsl: pulumi.Output<string>;
+    /**
      * SMTP server username
      */
     declare public readonly smtpUsername: pulumi.Output<string>;
@@ -947,7 +985,7 @@ export class Site extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly trialUntil: pulumi.Output<string>;
     /**
-     * Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+     * Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
      */
     declare public readonly uploadsViaEmailAuthentication: pulumi.Output<boolean>;
     /**
@@ -1022,6 +1060,10 @@ export class Site extends pulumi.CustomResource {
      * Does FTP user Windows emulation mode?
      */
     declare public readonly windowsModeFtp: pulumi.Output<boolean>;
+    /**
+     * If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+     */
+    declare public readonly workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory: pulumi.Output<boolean>;
 
     /**
      * Create a Site resource with the given unique name, arguments, and options.
@@ -1078,6 +1120,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["calculateFileChecksumsMd5"] = state?.calculateFileChecksumsMd5;
             resourceInputs["calculateFileChecksumsSha1"] = state?.calculateFileChecksumsSha1;
             resourceInputs["calculateFileChecksumsSha256"] = state?.calculateFileChecksumsSha256;
+            resourceInputs["childSiteFolderAdminsCanSeeParentSiteDirectory"] = state?.childSiteFolderAdminsCanSeeParentSiteDirectory;
             resourceInputs["color2Left"] = state?.color2Left;
             resourceInputs["color2Link"] = state?.color2Link;
             resourceInputs["color2Text"] = state?.color2Text;
@@ -1106,6 +1149,8 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["email"] = state?.email;
             resourceInputs["emailFooterCustomText"] = state?.emailFooterCustomText;
             resourceInputs["fedramp"] = state?.fedramp;
+            resourceInputs["fileActivityEventsEnabled"] = state?.fileActivityEventsEnabled;
+            resourceInputs["filesComRemoteServerEnabled"] = state?.filesComRemoteServerEnabled;
             resourceInputs["folderPermissionsGroupsOnly"] = state?.folderPermissionsGroupsOnly;
             resourceInputs["ftpEnabled"] = state?.ftpEnabled;
             resourceInputs["groupAdminsCanAddUsers"] = state?.groupAdminsCanAddUsers;
@@ -1135,6 +1180,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["ldapHost3"] = state?.ldapHost3;
             resourceInputs["ldapPort"] = state?.ldapPort;
             resourceInputs["ldapSecure"] = state?.ldapSecure;
+            resourceInputs["ldapServerCertificate"] = state?.ldapServerCertificate;
             resourceInputs["ldapType"] = state?.ldapType;
             resourceInputs["ldapUserAction"] = state?.ldapUserAction;
             resourceInputs["ldapUserIncludeGroups"] = state?.ldapUserIncludeGroups;
@@ -1185,6 +1231,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["restrictRootFolderBehaviorsToSiteAdmins"] = state?.restrictRootFolderBehaviorsToSiteAdmins;
             resourceInputs["revokeBundleAccessOnDisableOrDelete"] = state?.revokeBundleAccessOnDisableOrDelete;
             resourceInputs["rootFolderBehaviorsApplyToWorkspaces"] = state?.rootFolderBehaviorsApplyToWorkspaces;
+            resourceInputs["s3CompatibleEndpointEnabled"] = state?.s3CompatibleEndpointEnabled;
             resourceInputs["session"] = state?.session;
             resourceInputs["sessionExpiryMinutes"] = state?.sessionExpiryMinutes;
             resourceInputs["sftpEnabled"] = state?.sftpEnabled;
@@ -1204,6 +1251,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["smtpAuthentication"] = state?.smtpAuthentication;
             resourceInputs["smtpFrom"] = state?.smtpFrom;
             resourceInputs["smtpPort"] = state?.smtpPort;
+            resourceInputs["smtpSsl"] = state?.smtpSsl;
             resourceInputs["smtpUsername"] = state?.smtpUsername;
             resourceInputs["snapshotSharingEnabled"] = state?.snapshotSharingEnabled;
             resourceInputs["sslRequired"] = state?.sslRequired;
@@ -1230,6 +1278,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["welcomeEmailSubject"] = state?.welcomeEmailSubject;
             resourceInputs["welcomeScreen"] = state?.welcomeScreen;
             resourceInputs["windowsModeFtp"] = state?.windowsModeFtp;
+            resourceInputs["workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory"] = state?.workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory;
         } else {
             const args = argsOrState as SiteArgs | undefined;
             resourceInputs["activeSftpHostKeyId"] = args?.activeSftpHostKeyId;
@@ -1272,6 +1321,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["calculateFileChecksumsMd5"] = args?.calculateFileChecksumsMd5;
             resourceInputs["calculateFileChecksumsSha1"] = args?.calculateFileChecksumsSha1;
             resourceInputs["calculateFileChecksumsSha256"] = args?.calculateFileChecksumsSha256;
+            resourceInputs["childSiteFolderAdminsCanSeeParentSiteDirectory"] = args?.childSiteFolderAdminsCanSeeParentSiteDirectory;
             resourceInputs["color2Left"] = args?.color2Left;
             resourceInputs["color2Link"] = args?.color2Link;
             resourceInputs["color2Text"] = args?.color2Text;
@@ -1296,6 +1346,8 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["email"] = args?.email;
             resourceInputs["emailFooterCustomText"] = args?.emailFooterCustomText;
             resourceInputs["fedramp"] = args?.fedramp;
+            resourceInputs["fileActivityEventsEnabled"] = args?.fileActivityEventsEnabled;
+            resourceInputs["filesComRemoteServerEnabled"] = args?.filesComRemoteServerEnabled;
             resourceInputs["folderPermissionsGroupsOnly"] = args?.folderPermissionsGroupsOnly;
             resourceInputs["ftpEnabled"] = args?.ftpEnabled;
             resourceInputs["groupAdminsCanAddUsers"] = args?.groupAdminsCanAddUsers;
@@ -1319,6 +1371,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["ldapHost3"] = args?.ldapHost3;
             resourceInputs["ldapPort"] = args?.ldapPort;
             resourceInputs["ldapSecure"] = args?.ldapSecure;
+            resourceInputs["ldapServerCertificate"] = args?.ldapServerCertificate;
             resourceInputs["ldapType"] = args?.ldapType;
             resourceInputs["ldapUserAction"] = args?.ldapUserAction;
             resourceInputs["ldapUserIncludeGroups"] = args?.ldapUserIncludeGroups;
@@ -1360,6 +1413,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["restrictRootFolderBehaviorsToSiteAdmins"] = args?.restrictRootFolderBehaviorsToSiteAdmins;
             resourceInputs["revokeBundleAccessOnDisableOrDelete"] = args?.revokeBundleAccessOnDisableOrDelete;
             resourceInputs["rootFolderBehaviorsApplyToWorkspaces"] = args?.rootFolderBehaviorsApplyToWorkspaces;
+            resourceInputs["s3CompatibleEndpointEnabled"] = args?.s3CompatibleEndpointEnabled;
             resourceInputs["sessionExpiryMinutes"] = args?.sessionExpiryMinutes;
             resourceInputs["sftpEnabled"] = args?.sftpEnabled;
             resourceInputs["sftpFinalizePartialUploads"] = args?.sftpFinalizePartialUploads;
@@ -1378,6 +1432,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["smtpAuthentication"] = args?.smtpAuthentication;
             resourceInputs["smtpFrom"] = args?.smtpFrom;
             resourceInputs["smtpPort"] = args?.smtpPort;
+            resourceInputs["smtpSsl"] = args?.smtpSsl;
             resourceInputs["smtpUsername"] = args?.smtpUsername;
             resourceInputs["snapshotSharingEnabled"] = args?.snapshotSharingEnabled;
             resourceInputs["sslRequired"] = args?.sslRequired;
@@ -1400,6 +1455,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["welcomeEmailSubject"] = args?.welcomeEmailSubject;
             resourceInputs["welcomeScreen"] = args?.welcomeScreen;
             resourceInputs["windowsModeFtp"] = args?.windowsModeFtp;
+            resourceInputs["workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory"] = args?.workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory;
             resourceInputs["adminUserId"] = undefined /*out*/;
             resourceInputs["bundleWatermarkAttachment"] = undefined /*out*/;
             resourceInputs["contactName"] = undefined /*out*/;
@@ -1457,7 +1513,7 @@ export interface SiteState {
      */
     adminsBypassLockedSubfolders?: pulumi.Input<boolean | undefined>;
     /**
-     * Availability settings for AI features by user class
+     * Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
      */
     aiFeatureAvailability?: any | undefined;
     /**
@@ -1605,6 +1661,10 @@ export interface SiteState {
      */
     calculateFileChecksumsSha256?: pulumi.Input<boolean | undefined>;
     /**
+     * If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+     */
+    childSiteFolderAdminsCanSeeParentSiteDirectory?: pulumi.Input<boolean | undefined>;
+    /**
      * Page link and button color
      */
     color2Left?: pulumi.Input<string | undefined>;
@@ -1709,13 +1769,21 @@ export interface SiteState {
      */
     email?: pulumi.Input<string | undefined>;
     /**
-     * Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+     * Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
      */
     emailFooterCustomText?: pulumi.Input<string | undefined>;
     /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     fedramp?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+     */
+    fileActivityEventsEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+     */
+    filesComRemoteServerEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * If true, permissions for this site must be bound to a group (not a user).
      */
@@ -1833,6 +1901,10 @@ export interface SiteState {
      */
     ldapSecure?: pulumi.Input<boolean | undefined>;
     /**
+     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+     */
+    ldapServerCertificate?: pulumi.Input<string | undefined>;
+    /**
      * LDAP type
      */
     ldapType?: pulumi.Input<string | undefined>;
@@ -1869,7 +1941,7 @@ export interface SiteState {
      */
     logo?: pulumi.Input<string | undefined>;
     /**
-     * List of site settings managed by the parent site
+     * Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
      */
     managedSiteSettings?: any | undefined;
     /**
@@ -2033,6 +2105,10 @@ export interface SiteState {
      */
     rootFolderBehaviorsApplyToWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
+     * Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+     */
+    s3CompatibleEndpointEnabled?: pulumi.Input<boolean | undefined>;
+    /**
      * Current session
      */
     session?: pulumi.Input<string | undefined>;
@@ -2109,6 +2185,10 @@ export interface SiteState {
      */
     smtpPort?: pulumi.Input<number | undefined>;
     /**
+     * Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+     */
+    smtpSsl?: pulumi.Input<string | undefined>;
+    /**
      * SMTP server username
      */
     smtpUsername?: pulumi.Input<string | undefined>;
@@ -2137,7 +2217,7 @@ export interface SiteState {
      */
     trialUntil?: pulumi.Input<string | undefined>;
     /**
-     * Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+     * Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
      */
     uploadsViaEmailAuthentication?: pulumi.Input<boolean | undefined>;
     /**
@@ -2212,6 +2292,10 @@ export interface SiteState {
      * Does FTP user Windows emulation mode?
      */
     windowsModeFtp?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+     */
+    workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -2235,7 +2319,7 @@ export interface SiteArgs {
      */
     adminsBypassLockedSubfolders?: pulumi.Input<boolean | undefined>;
     /**
-     * Availability settings for AI features by user class
+     * Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
      */
     aiFeatureAvailability?: any | undefined;
     /**
@@ -2379,6 +2463,10 @@ export interface SiteArgs {
      */
     calculateFileChecksumsSha256?: pulumi.Input<boolean | undefined>;
     /**
+     * If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+     */
+    childSiteFolderAdminsCanSeeParentSiteDirectory?: pulumi.Input<boolean | undefined>;
+    /**
      * Page link and button color
      */
     color2Left?: pulumi.Input<string | undefined>;
@@ -2467,13 +2555,21 @@ export interface SiteArgs {
      */
     email?: pulumi.Input<string | undefined>;
     /**
-     * Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+     * Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
      */
     emailFooterCustomText?: pulumi.Input<string | undefined>;
     /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     fedramp?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+     */
+    fileActivityEventsEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+     */
+    filesComRemoteServerEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * If true, permissions for this site must be bound to a group (not a user).
      */
@@ -2566,6 +2662,10 @@ export interface SiteArgs {
      * Use secure LDAP?
      */
     ldapSecure?: pulumi.Input<boolean | undefined>;
+    /**
+     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+     */
+    ldapServerCertificate?: pulumi.Input<string | undefined>;
     /**
      * LDAP type
      */
@@ -2731,6 +2831,10 @@ export interface SiteArgs {
      */
     rootFolderBehaviorsApplyToWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
+     * Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+     */
+    s3CompatibleEndpointEnabled?: pulumi.Input<boolean | undefined>;
+    /**
      * Session expiry in minutes
      */
     sessionExpiryMinutes?: pulumi.Input<number | undefined>;
@@ -2803,6 +2907,10 @@ export interface SiteArgs {
      */
     smtpPort?: pulumi.Input<number | undefined>;
     /**
+     * Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+     */
+    smtpSsl?: pulumi.Input<string | undefined>;
+    /**
      * SMTP server username
      */
     smtpUsername?: pulumi.Input<string | undefined>;
@@ -2819,7 +2927,7 @@ export interface SiteArgs {
      */
     subdomain?: pulumi.Input<string | undefined>;
     /**
-     * Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+     * Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
      */
     uploadsViaEmailAuthentication?: pulumi.Input<boolean | undefined>;
     /**
@@ -2890,4 +2998,8 @@ export interface SiteArgs {
      * Does FTP user Windows emulation mode?
      */
     windowsModeFtp?: pulumi.Input<boolean | undefined>;
+    /**
+     * If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+     */
+    workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory?: pulumi.Input<boolean | undefined>;
 }

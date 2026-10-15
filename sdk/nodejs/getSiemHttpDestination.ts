@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
+ * A SIEM HTTP Destination defines where Files.com sends the log types you select.
+ * For HTTP destinations, Files.com sends JSON to the configured endpoint.
+ * For file destinations, Files.com writes JSON or CSV files to the configured folder.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -261,6 +265,10 @@ export interface GetSiemHttpDestinationResult {
     readonly webDavActionSendEnabled: boolean;
 }
 /**
+ * A SIEM HTTP Destination defines where Files.com sends the log types you select.
+ * For HTTP destinations, Files.com sends JSON to the configured endpoint.
+ * For file destinations, Files.com writes JSON or CSV files to the configured folder.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->

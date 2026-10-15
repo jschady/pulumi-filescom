@@ -17,20 +17,17 @@ import (
 //
 // Not every attribute will apply to every remote server.
 //
-// FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
+// FTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>.
 //
-// SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>. Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
+// SFTP Servers require that you specify their <span pulumi-lang-nodejs="`hostname`" pulumi-lang-dotnet="`Hostname`" pulumi-lang-go="`hostname`" pulumi-lang-python="`hostname`" pulumi-lang-yaml="`hostname`" pulumi-lang-java="`hostname`" pulumi-lang-hcl="`hostname`">`hostname`</span>, <span pulumi-lang-nodejs="`port`" pulumi-lang-dotnet="`Port`" pulumi-lang-go="`port`" pulumi-lang-python="`port`" pulumi-lang-yaml="`port`" pulumi-lang-java="`port`" pulumi-lang-hcl="`port`">`port`</span>, <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>, <span pulumi-lang-nodejs="`password`" pulumi-lang-dotnet="`Password`" pulumi-lang-go="`password`" pulumi-lang-python="`password`" pulumi-lang-yaml="`password`" pulumi-lang-java="`password`" pulumi-lang-hcl="`password`">`password`</span> or <span pulumi-lang-nodejs="`privateKey`" pulumi-lang-dotnet="`PrivateKey`" pulumi-lang-go="`privateKey`" pulumi-lang-python="`private_key`" pulumi-lang-yaml="`privateKey`" pulumi-lang-java="`privateKey`" pulumi-lang-hcl="`private_key`">`privateKey`</span>, and a value for <span pulumi-lang-nodejs="`ssl`" pulumi-lang-dotnet="`Ssl`" pulumi-lang-go="`ssl`" pulumi-lang-python="`ssl`" pulumi-lang-yaml="`ssl`" pulumi-lang-java="`ssl`" pulumi-lang-hcl="`ssl`">`ssl`</span>.  Optionally, provide <span pulumi-lang-nodejs="`serverCertificate`" pulumi-lang-dotnet="`ServerCertificate`" pulumi-lang-go="`serverCertificate`" pulumi-lang-python="`server_certificate`" pulumi-lang-yaml="`serverCertificate`" pulumi-lang-java="`serverCertificate`" pulumi-lang-hcl="`server_certificate`">`serverCertificate`</span>, <span pulumi-lang-nodejs="`privateKeyPassphrase`" pulumi-lang-dotnet="`PrivateKeyPassphrase`" pulumi-lang-go="`privateKeyPassphrase`" pulumi-lang-python="`private_key_passphrase`" pulumi-lang-yaml="`privateKeyPassphrase`" pulumi-lang-java="`privateKeyPassphrase`" pulumi-lang-hcl="`private_key_passphrase`">`privateKeyPassphrase`</span>.
 //
-// S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>. Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>. If you don't provide credentials, you will need to use AWS to grant us access to your bucket.
+// S3 Buckets require that you specify their <span pulumi-lang-nodejs="`s3Bucket`" pulumi-lang-dotnet="`S3Bucket`" pulumi-lang-go="`s3Bucket`" pulumi-lang-python="`s3_bucket`" pulumi-lang-yaml="`s3Bucket`" pulumi-lang-java="`s3Bucket`" pulumi-lang-hcl="`s3_bucket`">`s3Bucket`</span> name, and <span pulumi-lang-nodejs="`s3Region`" pulumi-lang-dotnet="`S3Region`" pulumi-lang-go="`s3Region`" pulumi-lang-python="`s3_region`" pulumi-lang-yaml="`s3Region`" pulumi-lang-java="`s3Region`" pulumi-lang-hcl="`s3_region`">`s3Region`</span>.  Optionally provide a <span pulumi-lang-nodejs="`awsAccessKey`" pulumi-lang-dotnet="`AwsAccessKey`" pulumi-lang-go="`awsAccessKey`" pulumi-lang-python="`aws_access_key`" pulumi-lang-yaml="`awsAccessKey`" pulumi-lang-java="`awsAccessKey`" pulumi-lang-hcl="`aws_access_key`">`awsAccessKey`</span>, and <span pulumi-lang-nodejs="`awsSecretKey`" pulumi-lang-dotnet="`AwsSecretKey`" pulumi-lang-go="`awsSecretKey`" pulumi-lang-python="`aws_secret_key`" pulumi-lang-yaml="`awsSecretKey`" pulumi-lang-java="`awsSecretKey`" pulumi-lang-hcl="`aws_secret_key`">`awsSecretKey`</span>.  If you don't provide credentials, you will need to use AWS to grant us access to your bucket.  If your bucket requires a customer-managed KMS key, provide its ARN in <span pulumi-lang-nodejs="`s3KmsKeyId`" pulumi-lang-dotnet="`S3KmsKeyId`" pulumi-lang-go="`s3KmsKeyId`" pulumi-lang-python="`s3_kms_key_id`" pulumi-lang-yaml="`s3KmsKeyId`" pulumi-lang-java="`s3KmsKeyId`" pulumi-lang-hcl="`s3_kms_key_id`">`s3KmsKeyId`</span>.
 //
 // S3-Compatible Buckets require that you specify <span pulumi-lang-nodejs="`s3CompatibleBucket`" pulumi-lang-dotnet="`S3CompatibleBucket`" pulumi-lang-go="`s3CompatibleBucket`" pulumi-lang-python="`s3_compatible_bucket`" pulumi-lang-yaml="`s3CompatibleBucket`" pulumi-lang-java="`s3CompatibleBucket`" pulumi-lang-hcl="`s3_compatible_bucket`">`s3CompatibleBucket`</span>, <span pulumi-lang-nodejs="`s3CompatibleEndpoint`" pulumi-lang-dotnet="`S3CompatibleEndpoint`" pulumi-lang-go="`s3CompatibleEndpoint`" pulumi-lang-python="`s3_compatible_endpoint`" pulumi-lang-yaml="`s3CompatibleEndpoint`" pulumi-lang-java="`s3CompatibleEndpoint`" pulumi-lang-hcl="`s3_compatible_endpoint`">`s3CompatibleEndpoint`</span>, <span pulumi-lang-nodejs="`s3CompatibleAccessKey`" pulumi-lang-dotnet="`S3CompatibleAccessKey`" pulumi-lang-go="`s3CompatibleAccessKey`" pulumi-lang-python="`s3_compatible_access_key`" pulumi-lang-yaml="`s3CompatibleAccessKey`" pulumi-lang-java="`s3CompatibleAccessKey`" pulumi-lang-hcl="`s3_compatible_access_key`">`s3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`s3CompatibleSecretKey`" pulumi-lang-dotnet="`S3CompatibleSecretKey`" pulumi-lang-go="`s3CompatibleSecretKey`" pulumi-lang-python="`s3_compatible_secret_key`" pulumi-lang-yaml="`s3CompatibleSecretKey`" pulumi-lang-java="`s3CompatibleSecretKey`" pulumi-lang-hcl="`s3_compatible_secret_key`">`s3CompatibleSecretKey`</span>. Optionally provide <span pulumi-lang-nodejs="`s3CompatibleVirtualHostedStyle`" pulumi-lang-dotnet="`S3CompatibleVirtualHostedStyle`" pulumi-lang-go="`s3CompatibleVirtualHostedStyle`" pulumi-lang-python="`s3_compatible_virtual_hosted_style`" pulumi-lang-yaml="`s3CompatibleVirtualHostedStyle`" pulumi-lang-java="`s3CompatibleVirtualHostedStyle`" pulumi-lang-hcl="`s3_compatible_virtual_hosted_style`">`s3CompatibleVirtualHostedStyle`</span> to use virtual-hosted-style URLs instead of path-style URLs.
 //
 // Google Cloud Storage requires that you specify <span pulumi-lang-nodejs="`googleCloudStorageBucket`" pulumi-lang-dotnet="`GoogleCloudStorageBucket`" pulumi-lang-go="`googleCloudStorageBucket`" pulumi-lang-python="`google_cloud_storage_bucket`" pulumi-lang-yaml="`googleCloudStorageBucket`" pulumi-lang-java="`googleCloudStorageBucket`" pulumi-lang-hcl="`google_cloud_storage_bucket`">`googleCloudStorageBucket`</span>, and then one of the following sets of authentication credentials, selected by <span pulumi-lang-nodejs="`googleCloudStorageAuthenticationMethod`" pulumi-lang-dotnet="`GoogleCloudStorageAuthenticationMethod`" pulumi-lang-go="`googleCloudStorageAuthenticationMethod`" pulumi-lang-python="`google_cloud_storage_authentication_method`" pulumi-lang-yaml="`googleCloudStorageAuthenticationMethod`" pulumi-lang-java="`googleCloudStorageAuthenticationMethod`" pulumi-lang-hcl="`google_cloud_storage_authentication_method`">`googleCloudStorageAuthenticationMethod`</span> (defaults to <span pulumi-lang-nodejs="`json`" pulumi-lang-dotnet="`Json`" pulumi-lang-go="`json`" pulumi-lang-python="`json`" pulumi-lang-yaml="`json`" pulumi-lang-java="`json`" pulumi-lang-hcl="`json`">`json`</span>):
-//
 //   - for JSON authentication: <span pulumi-lang-nodejs="`googleCloudStorageProjectId`" pulumi-lang-dotnet="`GoogleCloudStorageProjectId`" pulumi-lang-go="`googleCloudStorageProjectId`" pulumi-lang-python="`google_cloud_storage_project_id`" pulumi-lang-yaml="`googleCloudStorageProjectId`" pulumi-lang-java="`googleCloudStorageProjectId`" pulumi-lang-hcl="`google_cloud_storage_project_id`">`googleCloudStorageProjectId`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageCredentialsJson`" pulumi-lang-dotnet="`GoogleCloudStorageCredentialsJson`" pulumi-lang-go="`googleCloudStorageCredentialsJson`" pulumi-lang-python="`google_cloud_storage_credentials_json`" pulumi-lang-yaml="`googleCloudStorageCredentialsJson`" pulumi-lang-java="`googleCloudStorageCredentialsJson`" pulumi-lang-hcl="`google_cloud_storage_credentials_json`">`googleCloudStorageCredentialsJson`</span>
-//
 //   - for HMAC (S3-Compatible) authentication: <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleAccessKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_access_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleAccessKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_access_key`">`googleCloudStorageS3CompatibleAccessKey`</span>, and <span pulumi-lang-nodejs="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-dotnet="`GoogleCloudStorageS3CompatibleSecretKey`" pulumi-lang-go="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-python="`google_cloud_storage_s3_compatible_secret_key`" pulumi-lang-yaml="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-java="`googleCloudStorageS3CompatibleSecretKey`" pulumi-lang-hcl="`google_cloud_storage_s3_compatible_secret_key`">`googleCloudStorageS3CompatibleSecretKey`</span>
-//
 //   - for OAuth authentication: <span pulumi-lang-nodejs="`googleCloudStorageOauthScope`" pulumi-lang-dotnet="`GoogleCloudStorageOauthScope`" pulumi-lang-go="`googleCloudStorageOauthScope`" pulumi-lang-python="`google_cloud_storage_oauth_scope`" pulumi-lang-yaml="`googleCloudStorageOauthScope`" pulumi-lang-java="`googleCloudStorageOauthScope`" pulumi-lang-hcl="`google_cloud_storage_oauth_scope`">`googleCloudStorageOauthScope`</span>, then follow the <span pulumi-lang-nodejs="`authSetupLink`" pulumi-lang-dotnet="`AuthSetupLink`" pulumi-lang-go="`authSetupLink`" pulumi-lang-python="`auth_setup_link`" pulumi-lang-yaml="`authSetupLink`" pulumi-lang-java="`authSetupLink`" pulumi-lang-hcl="`auth_setup_link`">`authSetupLink`</span> and login with Google
 //
 // Wasabi requires <span pulumi-lang-nodejs="`wasabiBucket`" pulumi-lang-dotnet="`WasabiBucket`" pulumi-lang-go="`wasabiBucket`" pulumi-lang-python="`wasabi_bucket`" pulumi-lang-yaml="`wasabiBucket`" pulumi-lang-java="`wasabiBucket`" pulumi-lang-hcl="`wasabi_bucket`">`wasabiBucket`</span>, <span pulumi-lang-nodejs="`wasabiRegion`" pulumi-lang-dotnet="`WasabiRegion`" pulumi-lang-go="`wasabiRegion`" pulumi-lang-python="`wasabi_region`" pulumi-lang-yaml="`wasabiRegion`" pulumi-lang-java="`wasabiRegion`" pulumi-lang-hcl="`wasabi_region`">`wasabiRegion`</span>, <span pulumi-lang-nodejs="`wasabiAccessKey`" pulumi-lang-dotnet="`WasabiAccessKey`" pulumi-lang-go="`wasabiAccessKey`" pulumi-lang-python="`wasabi_access_key`" pulumi-lang-yaml="`wasabiAccessKey`" pulumi-lang-java="`wasabiAccessKey`" pulumi-lang-hcl="`wasabi_access_key`">`wasabiAccessKey`</span>, and <span pulumi-lang-nodejs="`wasabiSecretKey`" pulumi-lang-dotnet="`WasabiSecretKey`" pulumi-lang-go="`wasabiSecretKey`" pulumi-lang-python="`wasabi_secret_key`" pulumi-lang-yaml="`wasabiSecretKey`" pulumi-lang-java="`wasabiSecretKey`" pulumi-lang-hcl="`wasabi_secret_key`">`wasabiSecretKey`</span>.
@@ -101,6 +98,7 @@ import (
 //				FilesAgentRoot:                          pulumi.String("example"),
 //				FilesAgentVersion:                       pulumi.String("example"),
 //				OutboundAgentId:                         pulumi.Int(1),
+//				CustomDomainId:                          pulumi.Int(1),
 //				GoogleCloudStorageAuthenticationMethod:  pulumi.String("json"),
 //				GoogleCloudStorageBucket:                pulumi.String("my-bucket"),
 //				GoogleCloudStorageOauthScope:            pulumi.String("https://www.googleapis.com/auth/devstorage.read_only"),
@@ -125,6 +123,7 @@ import (
 //				S3CompatibleEndpoint:                    pulumi.String("mys3platform.com"),
 //				S3CompatibleRegion:                      pulumi.String("us-east-1"),
 //				S3CompatibleVirtualHostedStyle:          pulumi.Bool(true),
+//				S3KmsKeyId:                              pulumi.String("arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
 //				S3Region:                                pulumi.String("us-east-1"),
 //				ServerCertificate:                       pulumi.String("require_match"),
 //				ServerHostKey:                           pulumi.String("[public key]"),
@@ -221,11 +220,13 @@ type RemoteServer struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Cloudflare: Secret Key
 	CloudflareSecretKey pulumi.StringPtrOutput `pulumi:"cloudflareSecretKey"`
+	// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+	CustomDomainId pulumi.IntOutput `pulumi:"customDomainId"`
 	// Internal description for your reference
 	Description pulumi.StringOutput `pulumi:"description"`
 	// Whether the Files Agent Proxy recently validated a direct transfer connection. <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> means a direct connection was recently validated (actual availability can vary by client network), <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> means direct transfers are enabled but not currently available, and <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span> means direct transfers are disabled or unsupported. Only provided for a connected Files Agent when showing a single Remote Server.
 	DirectTransferAvailable pulumi.BoolOutput `pulumi:"directTransferAvailable"`
-	// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+	// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams pulumi.BoolOutput `pulumi:"dropboxTeams"`
@@ -238,19 +239,17 @@ type RemoteServer struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Filebase: Secret Key
 	FilebaseSecretKey pulumi.StringPtrOutput `pulumi:"filebaseSecretKey"`
-	// Files Agent API Token
-	FilesAgentApiToken pulumi.StringOutput `pulumi:"filesAgentApiToken"`
 	// Latest available Files Agent version
 	FilesAgentLatestVersion pulumi.StringOutput `pulumi:"filesAgentLatestVersion"`
-	// Local permissions for files agent. read_only, write_only, or read_write
+	// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 	FilesAgentPermissionSet pulumi.StringOutput `pulumi:"filesAgentPermissionSet"`
-	// Agent local root path
+	// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 	FilesAgentRoot pulumi.StringOutput `pulumi:"filesAgentRoot"`
 	// Files Agent supports receiving push updates
 	FilesAgentSupportsPushUpdates pulumi.BoolOutput `pulumi:"filesAgentSupportsPushUpdates"`
 	// If true, the Files Agent is up to date.
 	FilesAgentUpToDate pulumi.BoolOutput `pulumi:"filesAgentUpToDate"`
-	// Files Agent version
+	// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 	FilesAgentVersion pulumi.StringOutput `pulumi:"filesAgentVersion"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Files.com direct link: API key used once to pair the remote server.
@@ -273,7 +272,7 @@ type RemoteServer struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Google Cloud Storage: S3-compatible secret key
 	GoogleCloudStorageS3CompatibleSecretKey pulumi.StringPtrOutput `pulumi:"googleCloudStorageS3CompatibleSecretKey"`
-	// Hostname or IP address
+	// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// Linode: Access Key
 	LinodeAccessKey pulumi.StringOutput `pulumi:"linodeAccessKey"`
@@ -292,6 +291,8 @@ type RemoteServer struct {
 	OneDriveAccountType pulumi.StringOutput `pulumi:"oneDriveAccountType"`
 	// Route traffic to outbound on a files-agent
 	OutboundAgentId pulumi.IntOutput `pulumi:"outboundAgentId"`
+	// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+	OutboundIpAddresses pulumi.StringArrayOutput `pulumi:"outboundIpAddresses"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Password, if needed.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
@@ -299,7 +300,7 @@ type RemoteServer struct {
 	PinToSiteRegion pulumi.BoolOutput `pulumi:"pinToSiteRegion"`
 	// If set, all communications with this remote server are made through the provided region.
 	PinnedRegion pulumi.StringOutput `pulumi:"pinnedRegion"`
-	// Port for remote server.
+	// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Port pulumi.IntOutput `pulumi:"port"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Private key, if needed.
@@ -335,11 +336,13 @@ type RemoteServer struct {
 	S3CompatibleSecretKey pulumi.StringPtrOutput `pulumi:"s3CompatibleSecretKey"`
 	// S3-compatible: If true, use virtual-hosted-style URLs instead of path-style URLs
 	S3CompatibleVirtualHostedStyle pulumi.BoolOutput `pulumi:"s3CompatibleVirtualHostedStyle"`
+	// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+	S3KmsKeyId pulumi.StringOutput `pulumi:"s3KmsKeyId"`
 	// S3 region
 	S3Region pulumi.StringOutput `pulumi:"s3Region"`
 	// Remote server certificate
 	ServerCertificate pulumi.StringOutput `pulumi:"serverCertificate"`
-	// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+	// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 	ServerHostKey pulumi.StringOutput `pulumi:"serverHostKey"`
 	// Remote server type.
 	ServerType pulumi.StringOutput `pulumi:"serverType"`
@@ -571,11 +574,13 @@ type remoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Cloudflare: Secret Key
 	CloudflareSecretKey *string `pulumi:"cloudflareSecretKey"`
+	// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+	CustomDomainId *int `pulumi:"customDomainId"`
 	// Internal description for your reference
 	Description *string `pulumi:"description"`
 	// Whether the Files Agent Proxy recently validated a direct transfer connection. <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> means a direct connection was recently validated (actual availability can vary by client network), <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> means direct transfers are enabled but not currently available, and <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span> means direct transfers are disabled or unsupported. Only provided for a connected Files Agent when showing a single Remote Server.
 	DirectTransferAvailable *bool `pulumi:"directTransferAvailable"`
-	// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+	// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
 	Disabled *bool `pulumi:"disabled"`
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams *bool `pulumi:"dropboxTeams"`
@@ -588,19 +593,17 @@ type remoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Filebase: Secret Key
 	FilebaseSecretKey *string `pulumi:"filebaseSecretKey"`
-	// Files Agent API Token
-	FilesAgentApiToken *string `pulumi:"filesAgentApiToken"`
 	// Latest available Files Agent version
 	FilesAgentLatestVersion *string `pulumi:"filesAgentLatestVersion"`
-	// Local permissions for files agent. read_only, write_only, or read_write
+	// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 	FilesAgentPermissionSet *string `pulumi:"filesAgentPermissionSet"`
-	// Agent local root path
+	// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 	FilesAgentRoot *string `pulumi:"filesAgentRoot"`
 	// Files Agent supports receiving push updates
 	FilesAgentSupportsPushUpdates *bool `pulumi:"filesAgentSupportsPushUpdates"`
 	// If true, the Files Agent is up to date.
 	FilesAgentUpToDate *bool `pulumi:"filesAgentUpToDate"`
-	// Files Agent version
+	// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 	FilesAgentVersion *string `pulumi:"filesAgentVersion"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Files.com direct link: API key used once to pair the remote server.
@@ -623,7 +626,7 @@ type remoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Google Cloud Storage: S3-compatible secret key
 	GoogleCloudStorageS3CompatibleSecretKey *string `pulumi:"googleCloudStorageS3CompatibleSecretKey"`
-	// Hostname or IP address
+	// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Hostname *string `pulumi:"hostname"`
 	// Linode: Access Key
 	LinodeAccessKey *string `pulumi:"linodeAccessKey"`
@@ -642,6 +645,8 @@ type remoteServerState struct {
 	OneDriveAccountType *string `pulumi:"oneDriveAccountType"`
 	// Route traffic to outbound on a files-agent
 	OutboundAgentId *int `pulumi:"outboundAgentId"`
+	// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+	OutboundIpAddresses []string `pulumi:"outboundIpAddresses"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Password, if needed.
 	Password *string `pulumi:"password"`
@@ -649,7 +654,7 @@ type remoteServerState struct {
 	PinToSiteRegion *bool `pulumi:"pinToSiteRegion"`
 	// If set, all communications with this remote server are made through the provided region.
 	PinnedRegion *string `pulumi:"pinnedRegion"`
-	// Port for remote server.
+	// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Port *int `pulumi:"port"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Private key, if needed.
@@ -685,11 +690,13 @@ type remoteServerState struct {
 	S3CompatibleSecretKey *string `pulumi:"s3CompatibleSecretKey"`
 	// S3-compatible: If true, use virtual-hosted-style URLs instead of path-style URLs
 	S3CompatibleVirtualHostedStyle *bool `pulumi:"s3CompatibleVirtualHostedStyle"`
+	// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+	S3KmsKeyId *string `pulumi:"s3KmsKeyId"`
 	// S3 region
 	S3Region *string `pulumi:"s3Region"`
 	// Remote server certificate
 	ServerCertificate *string `pulumi:"serverCertificate"`
-	// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+	// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 	ServerHostKey *string `pulumi:"serverHostKey"`
 	// Remote server type.
 	ServerType *string `pulumi:"serverType"`
@@ -797,11 +804,13 @@ type RemoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Cloudflare: Secret Key
 	CloudflareSecretKey pulumi.StringPtrInput
+	// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+	CustomDomainId pulumi.IntPtrInput
 	// Internal description for your reference
 	Description pulumi.StringPtrInput
 	// Whether the Files Agent Proxy recently validated a direct transfer connection. <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> means a direct connection was recently validated (actual availability can vary by client network), <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> means direct transfers are enabled but not currently available, and <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span> means direct transfers are disabled or unsupported. Only provided for a connected Files Agent when showing a single Remote Server.
 	DirectTransferAvailable pulumi.BoolPtrInput
-	// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+	// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
 	Disabled pulumi.BoolPtrInput
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams pulumi.BoolPtrInput
@@ -814,19 +823,17 @@ type RemoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Filebase: Secret Key
 	FilebaseSecretKey pulumi.StringPtrInput
-	// Files Agent API Token
-	FilesAgentApiToken pulumi.StringPtrInput
 	// Latest available Files Agent version
 	FilesAgentLatestVersion pulumi.StringPtrInput
-	// Local permissions for files agent. read_only, write_only, or read_write
+	// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 	FilesAgentPermissionSet pulumi.StringPtrInput
-	// Agent local root path
+	// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 	FilesAgentRoot pulumi.StringPtrInput
 	// Files Agent supports receiving push updates
 	FilesAgentSupportsPushUpdates pulumi.BoolPtrInput
 	// If true, the Files Agent is up to date.
 	FilesAgentUpToDate pulumi.BoolPtrInput
-	// Files Agent version
+	// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 	FilesAgentVersion pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Files.com direct link: API key used once to pair the remote server.
@@ -849,7 +856,7 @@ type RemoteServerState struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Google Cloud Storage: S3-compatible secret key
 	GoogleCloudStorageS3CompatibleSecretKey pulumi.StringPtrInput
-	// Hostname or IP address
+	// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Hostname pulumi.StringPtrInput
 	// Linode: Access Key
 	LinodeAccessKey pulumi.StringPtrInput
@@ -868,6 +875,8 @@ type RemoteServerState struct {
 	OneDriveAccountType pulumi.StringPtrInput
 	// Route traffic to outbound on a files-agent
 	OutboundAgentId pulumi.IntPtrInput
+	// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+	OutboundIpAddresses pulumi.StringArrayInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Password, if needed.
 	Password pulumi.StringPtrInput
@@ -875,7 +884,7 @@ type RemoteServerState struct {
 	PinToSiteRegion pulumi.BoolPtrInput
 	// If set, all communications with this remote server are made through the provided region.
 	PinnedRegion pulumi.StringPtrInput
-	// Port for remote server.
+	// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Port pulumi.IntPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Private key, if needed.
@@ -911,11 +920,13 @@ type RemoteServerState struct {
 	S3CompatibleSecretKey pulumi.StringPtrInput
 	// S3-compatible: If true, use virtual-hosted-style URLs instead of path-style URLs
 	S3CompatibleVirtualHostedStyle pulumi.BoolPtrInput
+	// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+	S3KmsKeyId pulumi.StringPtrInput
 	// S3 region
 	S3Region pulumi.StringPtrInput
 	// Remote server certificate
 	ServerCertificate pulumi.StringPtrInput
-	// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+	// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 	ServerHostKey pulumi.StringPtrInput
 	// Remote server type.
 	ServerType pulumi.StringPtrInput
@@ -1021,6 +1032,8 @@ type remoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Cloudflare: Secret Key
 	CloudflareSecretKey *string `pulumi:"cloudflareSecretKey"`
+	// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+	CustomDomainId *int `pulumi:"customDomainId"`
 	// Internal description for your reference
 	Description *string `pulumi:"description"`
 	// Dropbox: If true, list Team folders in root?
@@ -1034,11 +1047,11 @@ type remoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Filebase: Secret Key
 	FilebaseSecretKey *string `pulumi:"filebaseSecretKey"`
-	// Local permissions for files agent. read_only, write_only, or read_write
+	// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 	FilesAgentPermissionSet *string `pulumi:"filesAgentPermissionSet"`
-	// Agent local root path
+	// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 	FilesAgentRoot *string `pulumi:"filesAgentRoot"`
-	// Files Agent version
+	// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 	FilesAgentVersion *string `pulumi:"filesAgentVersion"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Files.com direct link: API key used once to pair the remote server.
@@ -1059,7 +1072,7 @@ type remoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Google Cloud Storage: S3-compatible secret key
 	GoogleCloudStorageS3CompatibleSecretKey *string `pulumi:"googleCloudStorageS3CompatibleSecretKey"`
-	// Hostname or IP address
+	// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Hostname *string `pulumi:"hostname"`
 	// Linode: Access Key
 	LinodeAccessKey *string `pulumi:"linodeAccessKey"`
@@ -1083,7 +1096,7 @@ type remoteServerArgs struct {
 	Password *string `pulumi:"password"`
 	// If true, we will ensure that all communications with this remote server are made through the primary region of the site.  This setting can also be overridden by a site-wide setting which will force it to true.
 	PinToSiteRegion *bool `pulumi:"pinToSiteRegion"`
-	// Port for remote server.
+	// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Port *int `pulumi:"port"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Private key, if needed.
@@ -1115,11 +1128,13 @@ type remoteServerArgs struct {
 	S3CompatibleSecretKey *string `pulumi:"s3CompatibleSecretKey"`
 	// S3-compatible: If true, use virtual-hosted-style URLs instead of path-style URLs
 	S3CompatibleVirtualHostedStyle *bool `pulumi:"s3CompatibleVirtualHostedStyle"`
+	// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+	S3KmsKeyId *string `pulumi:"s3KmsKeyId"`
 	// S3 region
 	S3Region *string `pulumi:"s3Region"`
 	// Remote server certificate
 	ServerCertificate *string `pulumi:"serverCertificate"`
-	// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+	// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 	ServerHostKey *string `pulumi:"serverHostKey"`
 	// Remote server type.
 	ServerType *string `pulumi:"serverType"`
@@ -1216,6 +1231,8 @@ type RemoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Cloudflare: Secret Key
 	CloudflareSecretKey pulumi.StringPtrInput
+	// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+	CustomDomainId pulumi.IntPtrInput
 	// Internal description for your reference
 	Description pulumi.StringPtrInput
 	// Dropbox: If true, list Team folders in root?
@@ -1229,11 +1246,11 @@ type RemoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Filebase: Secret Key
 	FilebaseSecretKey pulumi.StringPtrInput
-	// Local permissions for files agent. read_only, write_only, or read_write
+	// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 	FilesAgentPermissionSet pulumi.StringPtrInput
-	// Agent local root path
+	// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 	FilesAgentRoot pulumi.StringPtrInput
-	// Files Agent version
+	// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 	FilesAgentVersion pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Files.com direct link: API key used once to pair the remote server.
@@ -1254,7 +1271,7 @@ type RemoteServerArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Google Cloud Storage: S3-compatible secret key
 	GoogleCloudStorageS3CompatibleSecretKey pulumi.StringPtrInput
-	// Hostname or IP address
+	// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Hostname pulumi.StringPtrInput
 	// Linode: Access Key
 	LinodeAccessKey pulumi.StringPtrInput
@@ -1278,7 +1295,7 @@ type RemoteServerArgs struct {
 	Password pulumi.StringPtrInput
 	// If true, we will ensure that all communications with this remote server are made through the primary region of the site.  This setting can also be overridden by a site-wide setting which will force it to true.
 	PinToSiteRegion pulumi.BoolPtrInput
-	// Port for remote server.
+	// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 	Port pulumi.IntPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Private key, if needed.
@@ -1310,11 +1327,13 @@ type RemoteServerArgs struct {
 	S3CompatibleSecretKey pulumi.StringPtrInput
 	// S3-compatible: If true, use virtual-hosted-style URLs instead of path-style URLs
 	S3CompatibleVirtualHostedStyle pulumi.BoolPtrInput
+	// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+	S3KmsKeyId pulumi.StringPtrInput
 	// S3 region
 	S3Region pulumi.StringPtrInput
 	// Remote server certificate
 	ServerCertificate pulumi.StringPtrInput
-	// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+	// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 	ServerHostKey pulumi.StringPtrInput
 	// Remote server type.
 	ServerType pulumi.StringPtrInput
@@ -1580,6 +1599,11 @@ func (o RemoteServerOutput) CloudflareSecretKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringPtrOutput { return v.CloudflareSecretKey }).(pulumi.StringPtrOutput)
 }
 
+// Custom Domain ID whose dedicated IP addresses are selected when this Remote Server uses dedicated IPs. Must be available to this Remote Server's workspace. Requires<span pulumi-lang-nodejs=" enableDedicatedIps " pulumi-lang-dotnet=" EnableDedicatedIps " pulumi-lang-go=" enableDedicatedIps " pulumi-lang-python=" enable_dedicated_ips " pulumi-lang-yaml=" enableDedicatedIps " pulumi-lang-java=" enableDedicatedIps " pulumi-lang-hcl=" enable_dedicated_ips "> enableDedicatedIps </span>and cannot be combined with an outbound Agent. Set to null to use the site's default dedicated IPs.
+func (o RemoteServerOutput) CustomDomainId() pulumi.IntOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.IntOutput { return v.CustomDomainId }).(pulumi.IntOutput)
+}
+
 // Internal description for your reference
 func (o RemoteServerOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
@@ -1590,7 +1614,7 @@ func (o RemoteServerOutput) DirectTransferAvailable() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.DirectTransferAvailable }).(pulumi.BoolOutput)
 }
 
-// If true, this Remote Server has been disabled due to failures.  Make any change or set disabled to false to clear this flag.
+// If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
 func (o RemoteServerOutput) Disabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.Disabled }).(pulumi.BoolOutput)
 }
@@ -1621,22 +1645,17 @@ func (o RemoteServerOutput) FilebaseSecretKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringPtrOutput { return v.FilebaseSecretKey }).(pulumi.StringPtrOutput)
 }
 
-// Files Agent API Token
-func (o RemoteServerOutput) FilesAgentApiToken() pulumi.StringOutput {
-	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.FilesAgentApiToken }).(pulumi.StringOutput)
-}
-
 // Latest available Files Agent version
 func (o RemoteServerOutput) FilesAgentLatestVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.FilesAgentLatestVersion }).(pulumi.StringOutput)
 }
 
-// Local permissions for files agent. read_only, write_only, or read_write
+// Agent file permissions: <span pulumi-lang-nodejs="`readOnly`" pulumi-lang-dotnet="`ReadOnly`" pulumi-lang-go="`readOnly`" pulumi-lang-python="`read_only`" pulumi-lang-yaml="`readOnly`" pulumi-lang-java="`readOnly`" pulumi-lang-hcl="`read_only`">`readOnly`</span>, <span pulumi-lang-nodejs="`writeOnly`" pulumi-lang-dotnet="`WriteOnly`" pulumi-lang-go="`writeOnly`" pulumi-lang-python="`write_only`" pulumi-lang-yaml="`writeOnly`" pulumi-lang-java="`writeOnly`" pulumi-lang-hcl="`write_only`">`writeOnly`</span>, or <span pulumi-lang-nodejs="`readWrite`" pulumi-lang-dotnet="`ReadWrite`" pulumi-lang-go="`readWrite`" pulumi-lang-python="`read_write`" pulumi-lang-yaml="`readWrite`" pulumi-lang-java="`readWrite`" pulumi-lang-hcl="`read_write`">`readWrite`</span>. Files.com writes this value as <span pulumi-lang-nodejs="`permissionSet`" pulumi-lang-dotnet="`PermissionSet`" pulumi-lang-go="`permissionSet`" pulumi-lang-python="`permission_set`" pulumi-lang-yaml="`permissionSet`" pulumi-lang-java="`permissionSet`" pulumi-lang-hcl="`permission_set`">`permissionSet`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the permissions in its local configuration file, controlled by the host's system administrator, and reports them at registration, replacing the stored value.
 func (o RemoteServerOutput) FilesAgentPermissionSet() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.FilesAgentPermissionSet }).(pulumi.StringOutput)
 }
 
-// Agent local root path
+// Agent local root path. Files.com writes this value as <span pulumi-lang-nodejs="`root`" pulumi-lang-dotnet="`Root`" pulumi-lang-go="`root`" pulumi-lang-python="`root`" pulumi-lang-yaml="`root`" pulumi-lang-java="`root`" pulumi-lang-hcl="`root`">`root`</span> in the configuration file generated for this Remote Server. Setting it on Create or Update changes the generated file, not a running Agent. The Agent enforces the root in its local configuration file, controlled by the host's system administrator, and reports it at registration, replacing the stored value.
 func (o RemoteServerOutput) FilesAgentRoot() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.FilesAgentRoot }).(pulumi.StringOutput)
 }
@@ -1651,7 +1670,7 @@ func (o RemoteServerOutput) FilesAgentUpToDate() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.FilesAgentUpToDate }).(pulumi.BoolOutput)
 }
 
-// Files Agent version
+// Files.com Agent version reported by the Agent at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not update the running Agent.
 func (o RemoteServerOutput) FilesAgentVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.FilesAgentVersion }).(pulumi.StringOutput)
 }
@@ -1704,7 +1723,7 @@ func (o RemoteServerOutput) GoogleCloudStorageS3CompatibleSecretKey() pulumi.Str
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringPtrOutput { return v.GoogleCloudStorageS3CompatibleSecretKey }).(pulumi.StringPtrOutput)
 }
 
-// Hostname or IP address
+// Hostname or IP address. For Agent Remote Servers, the Agent reports the hostname it connects from at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 func (o RemoteServerOutput) Hostname() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.Hostname }).(pulumi.StringOutput)
 }
@@ -1750,6 +1769,11 @@ func (o RemoteServerOutput) OutboundAgentId() pulumi.IntOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.IntOutput { return v.OutboundAgentId }).(pulumi.IntOutput)
 }
 
+// Current eligible public IP addresses for the selected Custom Domain. Any address in this list may originate a connection. Empty when no domain is selected or its configuration is unavailable. Only included in responses for a single Remote Server.
+func (o RemoteServerOutput) OutboundIpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.StringArrayOutput { return v.OutboundIpAddresses }).(pulumi.StringArrayOutput)
+}
+
 // **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 // Password, if needed.
 func (o RemoteServerOutput) Password() pulumi.StringPtrOutput {
@@ -1766,7 +1790,7 @@ func (o RemoteServerOutput) PinnedRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.PinnedRegion }).(pulumi.StringOutput)
 }
 
-// Port for remote server.
+// Port for remote server. For Agent Remote Servers, the Agent reports its downstream proxy port at each registration, replacing the stored value. This field is not included in the generated Agent configuration file. Setting it on Create or Update does not change the running Agent.
 func (o RemoteServerOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.IntOutput { return v.Port }).(pulumi.IntOutput)
 }
@@ -1850,6 +1874,11 @@ func (o RemoteServerOutput) S3CompatibleVirtualHostedStyle() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.S3CompatibleVirtualHostedStyle }).(pulumi.BoolOutput)
 }
 
+// ARN of the AWS KMS key that encrypts files written to the bucket (SSE-KMS). Leave blank unless your bucket requires a specific key.
+func (o RemoteServerOutput) S3KmsKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.S3KmsKeyId }).(pulumi.StringOutput)
+}
+
 // S3 region
 func (o RemoteServerOutput) S3Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.S3Region }).(pulumi.StringOutput)
@@ -1860,7 +1889,7 @@ func (o RemoteServerOutput) ServerCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.ServerCertificate }).(pulumi.StringOutput)
 }
 
-// Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+// Pinned SSH host key or OpenSSH host certificate for SFTP. If omitted, Files.com detects and stores a host key, preferring plain keys over certificates. With `server_certificate=require_match` (the default), the server must present the exact pinned key or certificate and prove it holds the matching private key. A pinned certificate is compared in full, so renewal can require updating <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> even when its underlying key is unchanged. Files.com does not check certificate CA signatures, principals, or validity periods. Certificate expiration alone does not end the pin. Update <span pulumi-lang-nodejs="`serverHostKey`" pulumi-lang-dotnet="`ServerHostKey`" pulumi-lang-go="`serverHostKey`" pulumi-lang-python="`server_host_key`" pulumi-lang-yaml="`serverHostKey`" pulumi-lang-java="`serverHostKey`" pulumi-lang-hcl="`server_host_key`">`serverHostKey`</span> to replace the pin.
 func (o RemoteServerOutput) ServerHostKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.ServerHostKey }).(pulumi.StringOutput)
 }

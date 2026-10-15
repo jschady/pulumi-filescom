@@ -117,13 +117,19 @@ namespace Jschady.Filescom
         public Output<string> Interval { get; private set; } = null!;
 
         /// <summary>
+        /// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        /// </summary>
+        [Output("lastError")]
+        public Output<string> LastError { get; private set; } = null!;
+
+        /// <summary>
         /// Most recent Export ID created by this schedule.
         /// </summary>
         [Output("lastExportId")]
         public Output<int> LastExportId { get; private set; } = null!;
 
         /// <summary>
-        /// Most recent scheduled run time.
+        /// Most recent scheduled attempt time, including attempts that failed validation.
         /// </summary>
         [Output("lastRunAt")]
         public Output<string> LastRunAt { get; private set; } = null!;
@@ -394,13 +400,19 @@ namespace Jschady.Filescom
         public Input<string>? Interval { get; set; }
 
         /// <summary>
+        /// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        /// </summary>
+        [Input("lastError")]
+        public Input<string>? LastError { get; set; }
+
+        /// <summary>
         /// Most recent Export ID created by this schedule.
         /// </summary>
         [Input("lastExportId")]
         public Input<int>? LastExportId { get; set; }
 
         /// <summary>
-        /// Most recent scheduled run time.
+        /// Most recent scheduled attempt time, including attempts that failed validation.
         /// </summary>
         [Input("lastRunAt")]
         public Input<string>? LastRunAt { get; set; }

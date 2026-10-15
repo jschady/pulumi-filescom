@@ -31,8 +31,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.NewSftpHostKey(ctx, "example_sftp_host_key", &filescom.SftpHostKeyArgs{
-//				Active: pulumi.Bool(true),
-//				Name:   pulumi.String("My Key"),
+//				Active:         pulumi.Bool(true),
+//				CustomDomainId: pulumi.Int(1),
+//				Name:           pulumi.String("My Key"),
 //			})
 //			if err != nil {
 //				return err
@@ -58,6 +59,8 @@ type SftpHostKey struct {
 
 	// If true, use this SFTP Host Key.
 	Active pulumi.BoolOutput `pulumi:"active"`
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId pulumi.IntOutput `pulumi:"customDomainId"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 pulumi.StringOutput `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
@@ -110,6 +113,8 @@ func GetSftpHostKey(ctx *pulumi.Context,
 type sftpHostKeyState struct {
 	// If true, use this SFTP Host Key.
 	Active *bool `pulumi:"active"`
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId *int `pulumi:"customDomainId"`
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 *string `pulumi:"fingerprintMd5"`
 	// SHA256 Fingerprint of the public key
@@ -126,6 +131,8 @@ type sftpHostKeyState struct {
 type SftpHostKeyState struct {
 	// If true, use this SFTP Host Key.
 	Active pulumi.BoolPtrInput
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId pulumi.IntPtrInput
 	// MD5 Fingerprint of the public key
 	FingerprintMd5 pulumi.StringPtrInput
 	// SHA256 Fingerprint of the public key
@@ -146,6 +153,8 @@ func (SftpHostKeyState) ElementType() reflect.Type {
 type sftpHostKeyArgs struct {
 	// If true, use this SFTP Host Key.
 	Active *bool `pulumi:"active"`
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId *int `pulumi:"customDomainId"`
 	// The friendly name of this SFTP Host Key.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -157,6 +166,8 @@ type sftpHostKeyArgs struct {
 type SftpHostKeyArgs struct {
 	// If true, use this SFTP Host Key.
 	Active pulumi.BoolPtrInput
+	// Custom Domain ID. If set, this key is used only for that Custom Domain.
+	CustomDomainId pulumi.IntPtrInput
 	// The friendly name of this SFTP Host Key.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -254,6 +265,11 @@ func (o SftpHostKeyOutput) ToSftpHostKeyOutputWithContext(ctx context.Context) S
 // If true, use this SFTP Host Key.
 func (o SftpHostKeyOutput) Active() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SftpHostKey) pulumi.BoolOutput { return v.Active }).(pulumi.BoolOutput)
+}
+
+// Custom Domain ID. If set, this key is used only for that Custom Domain.
+func (o SftpHostKeyOutput) CustomDomainId() pulumi.IntOutput {
+	return o.ApplyT(func(v *SftpHostKey) pulumi.IntOutput { return v.CustomDomainId }).(pulumi.IntOutput)
 }
 
 // MD5 Fingerprint of the public key

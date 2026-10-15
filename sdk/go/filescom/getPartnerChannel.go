@@ -62,9 +62,9 @@ type LookupPartnerChannelResult struct {
 	ChannelPath string `pulumi:"channelPath"`
 	// Channel directions. <span pulumi-lang-nodejs="`twoWay`" pulumi-lang-dotnet="`TwoWay`" pulumi-lang-go="`twoWay`" pulumi-lang-python="`two_way`" pulumi-lang-yaml="`twoWay`" pulumi-lang-java="`twoWay`" pulumi-lang-hcl="`two_way`">`twoWay`</span> enables both directions, <span pulumi-lang-nodejs="`toPartner`" pulumi-lang-dotnet="`ToPartner`" pulumi-lang-go="`toPartner`" pulumi-lang-python="`to_partner`" pulumi-lang-yaml="`toPartner`" pulumi-lang-java="`toPartner`" pulumi-lang-hcl="`to_partner`">`toPartner`</span> enables outgoing downloads, and <span pulumi-lang-nodejs="`fromPartner`" pulumi-lang-dotnet="`FromPartner`" pulumi-lang-go="`fromPartner`" pulumi-lang-python="`from_partner`" pulumi-lang-yaml="`fromPartner`" pulumi-lang-java="`fromPartner`" pulumi-lang-hcl="`from_partner`">`fromPartner`</span> enables incoming uploads.
 	Direction string `pulumi:"direction"`
-	// Resolved from-Partner folder name after Channel override and default.
+	// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 	EffectiveFromPartnerFolderName string `pulumi:"effectiveFromPartnerFolderName"`
-	// Resolved to-Partner folder name after Channel override and default.
+	// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 	EffectiveToPartnerFolderName string `pulumi:"effectiveToPartnerFolderName"`
 	// Optional Channel-level from-Partner folder name override.
 	FromPartnerFolderName string `pulumi:"fromPartnerFolderName"`
@@ -90,6 +90,8 @@ type LookupPartnerChannelResult struct {
 	ToPartnerManagedFolderPaths []string `pulumi:"toPartnerManagedFolderPaths"`
 	// Optional route path for files delivered to the Partner.
 	ToPartnerRoutePath string `pulumi:"toPartnerRoutePath"`
+	// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+	UseChannelRoot bool `pulumi:"useChannelRoot"`
 	// ID of the Workspace associated with this Partner Channel.
 	WorkspaceId int `pulumi:"workspaceId"`
 }
@@ -134,12 +136,12 @@ func (o LookupPartnerChannelResultOutput) Direction() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.Direction }).(pulumi.StringOutput)
 }
 
-// Resolved from-Partner folder name after Channel override and default.
+// Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 func (o LookupPartnerChannelResultOutput) EffectiveFromPartnerFolderName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.EffectiveFromPartnerFolderName }).(pulumi.StringOutput)
 }
 
-// Resolved to-Partner folder name after Channel override and default.
+// Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
 func (o LookupPartnerChannelResultOutput) EffectiveToPartnerFolderName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.EffectiveToPartnerFolderName }).(pulumi.StringOutput)
 }
@@ -202,6 +204,11 @@ func (o LookupPartnerChannelResultOutput) ToPartnerManagedFolderPaths() pulumi.S
 // Optional route path for files delivered to the Partner.
 func (o LookupPartnerChannelResultOutput) ToPartnerRoutePath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPartnerChannelResult) string { return v.ToPartnerRoutePath }).(pulumi.StringOutput)
+}
+
+// Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+func (o LookupPartnerChannelResultOutput) UseChannelRoot() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupPartnerChannelResult) bool { return v.UseChannelRoot }).(pulumi.BoolOutput)
 }
 
 // ID of the Workspace associated with this Partner Channel.

@@ -13,7 +13,6 @@ import (
 )
 
 // A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-//
 // The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 //
 // Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -66,6 +65,11 @@ import (
 //				StartAccessOnDate:                            pulumi.String("2000-01-01T01:00:00Z"),
 //				SnapshotId:                                   pulumi.Int(1),
 //				WorkspaceId:                                  pulumi.Int(1),
+//				WatermarkValue: pulumi.Any(map[string]interface{}{
+//					"gravity":          "SouthWest",
+//					"maxHeightOrWidth": 20,
+//					"transparency":     25,
+//				}),
 //			})
 //			if err != nil {
 //				return err
@@ -124,7 +128,9 @@ type Bundle struct {
 	DontAllowFoldersInUploads pulumi.BoolOutput `pulumi:"dontAllowFoldersInUploads"`
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder pulumi.BoolOutput `pulumi:"dontSeparateSubmissionsByFolder"`
-	// Bundle expiration date/time
+	// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+	EffectiveExpiresAt pulumi.StringOutput `pulumi:"effectiveExpiresAt"`
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt pulumi.StringOutput `pulumi:"expiresAt"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
@@ -283,7 +289,9 @@ type bundleState struct {
 	DontAllowFoldersInUploads *bool `pulumi:"dontAllowFoldersInUploads"`
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder *bool `pulumi:"dontSeparateSubmissionsByFolder"`
-	// Bundle expiration date/time
+	// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+	EffectiveExpiresAt *string `pulumi:"effectiveExpiresAt"`
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt *string `pulumi:"expiresAt"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
@@ -391,7 +399,9 @@ type BundleState struct {
 	DontAllowFoldersInUploads pulumi.BoolPtrInput
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder pulumi.BoolPtrInput
-	// Bundle expiration date/time
+	// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+	EffectiveExpiresAt pulumi.StringPtrInput
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
@@ -481,7 +491,7 @@ type bundleArgs struct {
 	Description *string `pulumi:"description"`
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder *bool `pulumi:"dontSeparateSubmissionsByFolder"`
-	// Bundle expiration date/time
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt *string `pulumi:"expiresAt"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
@@ -530,6 +540,8 @@ type bundleArgs struct {
 	StartAccessOnDate *string `pulumi:"startAccessOnDate"`
 	// Bundle creator user ID
 	UserId *int `pulumi:"userId"`
+	// Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
+	WatermarkValue interface{} `pulumi:"watermarkValue"`
 	// Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
 	WorkspaceId *int `pulumi:"workspaceId"`
 }
@@ -549,7 +561,7 @@ type BundleArgs struct {
 	Description pulumi.StringPtrInput
 	// Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
 	DontSeparateSubmissionsByFolder pulumi.BoolPtrInput
-	// Bundle expiration date/time
+	// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 	ExpiresAt pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
@@ -598,6 +610,8 @@ type BundleArgs struct {
 	StartAccessOnDate pulumi.StringPtrInput
 	// Bundle creator user ID
 	UserId pulumi.IntPtrInput
+	// Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
+	WatermarkValue pulumi.Input
 	// Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
 	WorkspaceId pulumi.IntPtrInput
 }
@@ -775,7 +789,12 @@ func (o BundleOutput) DontSeparateSubmissionsByFolder() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Bundle) pulumi.BoolOutput { return v.DontSeparateSubmissionsByFolder }).(pulumi.BoolOutput)
 }
 
-// Bundle expiration date/time
+// Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+func (o BundleOutput) EffectiveExpiresAt() pulumi.StringOutput {
+	return o.ApplyT(func(v *Bundle) pulumi.StringOutput { return v.EffectiveExpiresAt }).(pulumi.StringOutput)
+}
+
+// Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
 func (o BundleOutput) ExpiresAt() pulumi.StringOutput {
 	return o.ApplyT(func(v *Bundle) pulumi.StringOutput { return v.ExpiresAt }).(pulumi.StringOutput)
 }

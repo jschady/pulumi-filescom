@@ -125,13 +125,10 @@ class MetadataCategory(pulumi.CustomResource):
                  __props__=None):
         """
         A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-
         via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-
         constraints, and a set of default columns to display in the UI.
 
         If a key's <span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`">`allowedValues`</span> array is empty, it is treated as a free-form text field.
-
         If the array is non-empty, the key is constrained to those values in the Web UI.
 
         ## Example Usage
@@ -171,13 +168,10 @@ class MetadataCategory(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         A MetadataCategory defines a reusable set of Custom Metadata rules that can be assigned to folders
-
         via a folder behavior. Each category specifies named metadata keys with optional allowed-value
-
         constraints, and a set of default columns to display in the UI.
 
         If a key's <span pulumi-lang-nodejs="`allowedValues`" pulumi-lang-dotnet="`AllowedValues`" pulumi-lang-go="`allowedValues`" pulumi-lang-python="`allowed_values`" pulumi-lang-yaml="`allowedValues`" pulumi-lang-java="`allowedValues`" pulumi-lang-hcl="`allowed_values`">`allowedValues`</span> array is empty, it is treated as a free-form text field.
-
         If the array is non-empty, the key is constrained to those values in the Web UI.
 
         ## Example Usage

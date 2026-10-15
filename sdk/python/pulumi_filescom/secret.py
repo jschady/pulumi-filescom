@@ -270,7 +270,7 @@ class Secret(pulumi.CustomResource):
             description="Used by production API integrations.",
             secret_type="token",
             metadata={
-                "key": "example value",
+                "headerName": "Authorization",
             },
             workspace_id=0)
         ```
@@ -318,7 +318,7 @@ class Secret(pulumi.CustomResource):
             description="Used by production API integrations.",
             secret_type="token",
             metadata={
-                "key": "example value",
+                "headerName": "Authorization",
             },
             workspace_id=0)
         ```

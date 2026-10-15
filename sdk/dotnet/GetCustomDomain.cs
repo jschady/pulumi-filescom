@@ -374,6 +374,10 @@ namespace Jschady.Filescom
     public sealed class GetCustomDomainResult
     {
         /// <summary>
+        /// Allow all workspaces to use this default-workspace Custom Domain.
+        /// </summary>
+        public readonly bool AvailableToAllWorkspaces;
+        /// <summary>
         /// Is this domain's SSL certificate automatically managed and renewed by Files.com?
         /// </summary>
         public readonly bool BrickManaged;
@@ -402,6 +406,14 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int Id;
         /// <summary>
+        /// Dedicated public IP addresses allocated to this Custom Domain.
+        /// </summary>
+        public readonly ImmutableArray<string> IpAddresses;
+        /// <summary>
+        /// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        /// </summary>
+        public readonly ImmutableArray<string> OutboundIpAddresses;
+        /// <summary>
         /// Current SSL certificate ID.
         /// </summary>
         public readonly int SslCertificateId;
@@ -409,9 +421,15 @@ namespace Jschady.Filescom
         /// When this Custom Domain was last updated.
         /// </summary>
         public readonly string UpdatedAt;
+        /// <summary>
+        /// Workspace ID (0 for the default workspace).
+        /// </summary>
+        public readonly int WorkspaceId;
 
         [OutputConstructor]
         private GetCustomDomainResult(
+            bool availableToAllWorkspaces,
+
             bool brickManaged,
 
             string createdAt,
@@ -426,10 +444,17 @@ namespace Jschady.Filescom
 
             int id,
 
+            ImmutableArray<string> ipAddresses,
+
+            ImmutableArray<string> outboundIpAddresses,
+
             int sslCertificateId,
 
-            string updatedAt)
+            string updatedAt,
+
+            int workspaceId)
         {
+            AvailableToAllWorkspaces = availableToAllWorkspaces;
             BrickManaged = brickManaged;
             CreatedAt = createdAt;
             Destination = destination;
@@ -437,8 +462,11 @@ namespace Jschady.Filescom
             Domain = domain;
             FolderBehaviorId = folderBehaviorId;
             Id = id;
+            IpAddresses = ipAddresses;
+            OutboundIpAddresses = outboundIpAddresses;
             SslCertificateId = sslCertificateId;
             UpdatedAt = updatedAt;
+            WorkspaceId = workspaceId;
         }
     }
 }

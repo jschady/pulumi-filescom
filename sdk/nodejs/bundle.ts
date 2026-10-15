@@ -6,7 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * A Bundle is the API/SDK term for the feature called Share Links in the web interface.
- *
  * The API provides the full set of actions related to Share Links, including sending them via E-Mail.
  *
  * Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -49,6 +48,11 @@ import * as utilities from "./utilities";
  *     startAccessOnDate: "2000-01-01T01:00:00Z",
  *     snapshotId: 1,
  *     workspaceId: 1,
+ *     watermarkValue: {
+ *         gravity: "SouthWest",
+ *         maxHeightOrWidth: 20,
+ *         transparency: 25,
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -161,7 +165,11 @@ export class Bundle extends pulumi.CustomResource {
      */
     declare public readonly dontSeparateSubmissionsByFolder: pulumi.Output<boolean>;
     /**
-     * Bundle expiration date/time
+     * Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+     */
+    declare public /*out*/ readonly effectiveExpiresAt: pulumi.Output<string>;
+    /**
+     * Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
      */
     declare public readonly expiresAt: pulumi.Output<string>;
     /**
@@ -291,7 +299,7 @@ export class Bundle extends pulumi.CustomResource {
     /**
      * Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
      */
-    declare public /*out*/ readonly watermarkValue: pulumi.Output<any>;
+    declare public readonly watermarkValue: pulumi.Output<any>;
     /**
      * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
      */
@@ -327,6 +335,7 @@ export class Bundle extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["dontAllowFoldersInUploads"] = state?.dontAllowFoldersInUploads;
             resourceInputs["dontSeparateSubmissionsByFolder"] = state?.dontSeparateSubmissionsByFolder;
+            resourceInputs["effectiveExpiresAt"] = state?.effectiveExpiresAt;
             resourceInputs["expiresAt"] = state?.expiresAt;
             resourceInputs["finalizeSnapshot"] = state?.finalizeSnapshot;
             resourceInputs["formFieldSet"] = state?.formFieldSet;
@@ -395,6 +404,7 @@ export class Bundle extends pulumi.CustomResource {
             resourceInputs["snapshotId"] = args?.snapshotId;
             resourceInputs["startAccessOnDate"] = args?.startAccessOnDate;
             resourceInputs["userId"] = args?.userId;
+            resourceInputs["watermarkValue"] = args?.watermarkValue;
             resourceInputs["workspaceId"] = args?.workspaceId;
             resourceInputs["bundlepaths"] = undefined /*out*/;
             resourceInputs["clickwrapBody"] = undefined /*out*/;
@@ -407,6 +417,7 @@ export class Bundle extends pulumi.CustomResource {
             resourceInputs["deleted"] = undefined /*out*/;
             resourceInputs["deletedAt"] = undefined /*out*/;
             resourceInputs["dontAllowFoldersInUploads"] = undefined /*out*/;
+            resourceInputs["effectiveExpiresAt"] = undefined /*out*/;
             resourceInputs["formFieldSet"] = undefined /*out*/;
             resourceInputs["hasInbox"] = undefined /*out*/;
             resourceInputs["passwordProtected"] = undefined /*out*/;
@@ -416,7 +427,6 @@ export class Bundle extends pulumi.CustomResource {
             resourceInputs["url"] = undefined /*out*/;
             resourceInputs["username"] = undefined /*out*/;
             resourceInputs["watermarkAttachment"] = undefined /*out*/;
-            resourceInputs["watermarkValue"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["createSnapshot", "finalizeSnapshot", "formFieldSetId", "password"] };
@@ -499,7 +509,11 @@ export interface BundleState {
      */
     dontSeparateSubmissionsByFolder?: pulumi.Input<boolean | undefined>;
     /**
-     * Bundle expiration date/time
+     * Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+     */
+    effectiveExpiresAt?: pulumi.Input<string | undefined>;
+    /**
+     * Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
      */
     expiresAt?: pulumi.Input<string | undefined>;
     /**
@@ -666,7 +680,7 @@ export interface BundleArgs {
      */
     dontSeparateSubmissionsByFolder?: pulumi.Input<boolean | undefined>;
     /**
-     * Bundle expiration date/time
+     * Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
      */
     expiresAt?: pulumi.Input<string | undefined>;
     /**
@@ -760,6 +774,10 @@ export interface BundleArgs {
      * Bundle creator user ID
      */
     userId?: pulumi.Input<number | undefined>;
+    /**
+     * Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
+     */
+    watermarkValue?: any | undefined;
     /**
      * Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
      */

@@ -19,7 +19,7 @@ namespace Jschady.Filescom.Outputs
         /// </summary>
         public readonly string Condition;
         /// <summary>
-        /// Identifier used to connect nodes and named inputs or outputs.
+        /// Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
         /// </summary>
         public readonly string Name;
 

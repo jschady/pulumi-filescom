@@ -16,7 +16,6 @@ namespace Jschady.Filescom
     /// ## Creating GroupUsers
     /// 
     /// GroupUsers can be created via the normal &lt;span pulumi-lang-nodejs="`create`" pulumi-lang-dotnet="`Create`" pulumi-lang-go="`create`" pulumi-lang-python="`create`" pulumi-lang-yaml="`create`" pulumi-lang-java="`create`" pulumi-lang-hcl="`create`"&gt;`create`&lt;/span&gt; action. When using the &lt;span pulumi-lang-nodejs="`update`" pulumi-lang-dotnet="`Update`" pulumi-lang-go="`update`" pulumi-lang-python="`update`" pulumi-lang-yaml="`update`" pulumi-lang-java="`update`" pulumi-lang-hcl="`update`"&gt;`update`&lt;/span&gt; action, if the
-    /// 
     /// GroupUser record does not exist for the given user/group IDs it will be created.
     /// 
     /// ## Example Usage

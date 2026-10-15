@@ -15,13 +15,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
         /// 
-        /// 
-        /// 
         /// Non-default policies apply only to the child sites listed in &lt;span pulumi-lang-nodejs="`childSiteIds`" pulumi-lang-dotnet="`ChildSiteIds`" pulumi-lang-go="`childSiteIds`" pulumi-lang-python="`child_site_ids`" pulumi-lang-yaml="`childSiteIds`" pulumi-lang-java="`childSiteIds`" pulumi-lang-hcl="`child_site_ids`"&gt;`childSiteIds`&lt;/span&gt;, and each child site can be explicitly assigned to only one policy.
         /// 
-        /// 
-        /// 
         /// One policy can be designated as the default policy. It applies to every child site not explicitly assigned to another policy or listed in its &lt;span pulumi-lang-nodejs="`skipChildSiteIds`" pulumi-lang-dotnet="`SkipChildSiteIds`" pulumi-lang-go="`skipChildSiteIds`" pulumi-lang-python="`skip_child_site_ids`" pulumi-lang-yaml="`skipChildSiteIds`" pulumi-lang-java="`skipChildSiteIds`" pulumi-lang-hcl="`skip_child_site_ids`"&gt;`skipChildSiteIds`&lt;/span&gt;, including newly created child sites. Only a default policy can exclude child sites. The &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field contains the policy configuration data, with the format varying based on the policy type. When a policy is active, its managed configurations are automatically enforced on applicable child sites, and attribute modifications are not permitted.
+        /// 
+        /// On a Child Site, listing policies returns only the policy covering that site. Each key in &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; identifies a managed setting, but its value is always &lt;span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`"&gt;`null`&lt;/span&gt;. Read non-secret effective setting values from the Child Site's own Site settings response.
         /// 
         /// ## Example Usage
         /// 
@@ -132,13 +130,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
         /// 
-        /// 
-        /// 
         /// Non-default policies apply only to the child sites listed in &lt;span pulumi-lang-nodejs="`childSiteIds`" pulumi-lang-dotnet="`ChildSiteIds`" pulumi-lang-go="`childSiteIds`" pulumi-lang-python="`child_site_ids`" pulumi-lang-yaml="`childSiteIds`" pulumi-lang-java="`childSiteIds`" pulumi-lang-hcl="`child_site_ids`"&gt;`childSiteIds`&lt;/span&gt;, and each child site can be explicitly assigned to only one policy.
         /// 
-        /// 
-        /// 
         /// One policy can be designated as the default policy. It applies to every child site not explicitly assigned to another policy or listed in its &lt;span pulumi-lang-nodejs="`skipChildSiteIds`" pulumi-lang-dotnet="`SkipChildSiteIds`" pulumi-lang-go="`skipChildSiteIds`" pulumi-lang-python="`skip_child_site_ids`" pulumi-lang-yaml="`skipChildSiteIds`" pulumi-lang-java="`skipChildSiteIds`" pulumi-lang-hcl="`skip_child_site_ids`"&gt;`skipChildSiteIds`&lt;/span&gt;, including newly created child sites. Only a default policy can exclude child sites. The &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field contains the policy configuration data, with the format varying based on the policy type. When a policy is active, its managed configurations are automatically enforced on applicable child sites, and attribute modifications are not permitted.
+        /// 
+        /// On a Child Site, listing policies returns only the policy covering that site. Each key in &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; identifies a managed setting, but its value is always &lt;span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`"&gt;`null`&lt;/span&gt;. Read non-secret effective setting values from the Child Site's own Site settings response.
         /// 
         /// ## Example Usage
         /// 
@@ -249,13 +245,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
         /// 
-        /// 
-        /// 
         /// Non-default policies apply only to the child sites listed in &lt;span pulumi-lang-nodejs="`childSiteIds`" pulumi-lang-dotnet="`ChildSiteIds`" pulumi-lang-go="`childSiteIds`" pulumi-lang-python="`child_site_ids`" pulumi-lang-yaml="`childSiteIds`" pulumi-lang-java="`childSiteIds`" pulumi-lang-hcl="`child_site_ids`"&gt;`childSiteIds`&lt;/span&gt;, and each child site can be explicitly assigned to only one policy.
         /// 
-        /// 
-        /// 
         /// One policy can be designated as the default policy. It applies to every child site not explicitly assigned to another policy or listed in its &lt;span pulumi-lang-nodejs="`skipChildSiteIds`" pulumi-lang-dotnet="`SkipChildSiteIds`" pulumi-lang-go="`skipChildSiteIds`" pulumi-lang-python="`skip_child_site_ids`" pulumi-lang-yaml="`skipChildSiteIds`" pulumi-lang-java="`skipChildSiteIds`" pulumi-lang-hcl="`skip_child_site_ids`"&gt;`skipChildSiteIds`&lt;/span&gt;, including newly created child sites. Only a default policy can exclude child sites. The &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; field contains the policy configuration data, with the format varying based on the policy type. When a policy is active, its managed configurations are automatically enforced on applicable child sites, and attribute modifications are not permitted.
+        /// 
+        /// On a Child Site, listing policies returns only the policy covering that site. Each key in &lt;span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`"&gt;`value`&lt;/span&gt; identifies a managed setting, but its value is always &lt;span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`"&gt;`null`&lt;/span&gt;. Read non-secret effective setting values from the Child Site's own Site settings response.
         /// 
         /// ## Example Usage
         /// 
@@ -438,7 +432,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string UpdatedAt;
         /// <summary>
-        /// Policy configuration data. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
         public readonly object Value;
 

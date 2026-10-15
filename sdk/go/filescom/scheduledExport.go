@@ -92,9 +92,11 @@ type ScheduledExport struct {
 	HumanReadableSchedule pulumi.StringOutput `pulumi:"humanReadableSchedule"`
 	// If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
 	Interval pulumi.StringOutput `pulumi:"interval"`
+	// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+	LastError pulumi.StringOutput `pulumi:"lastError"`
 	// Most recent Export ID created by this schedule.
 	LastExportId pulumi.IntOutput `pulumi:"lastExportId"`
-	// Most recent scheduled run time.
+	// Most recent scheduled attempt time, including attempts that failed validation.
 	LastRunAt pulumi.StringOutput `pulumi:"lastRunAt"`
 	// Name for this scheduled export.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -167,9 +169,11 @@ type scheduledExportState struct {
 	HumanReadableSchedule *string `pulumi:"humanReadableSchedule"`
 	// If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
 	Interval *string `pulumi:"interval"`
+	// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+	LastError *string `pulumi:"lastError"`
 	// Most recent Export ID created by this schedule.
 	LastExportId *int `pulumi:"lastExportId"`
-	// Most recent scheduled run time.
+	// Most recent scheduled attempt time, including attempts that failed validation.
 	LastRunAt *string `pulumi:"lastRunAt"`
 	// Name for this scheduled export.
 	Name *string `pulumi:"name"`
@@ -210,9 +214,11 @@ type ScheduledExportState struct {
 	HumanReadableSchedule pulumi.StringPtrInput
 	// If trigger is <span pulumi-lang-nodejs="`daily`" pulumi-lang-dotnet="`Daily`" pulumi-lang-go="`daily`" pulumi-lang-python="`daily`" pulumi-lang-yaml="`daily`" pulumi-lang-java="`daily`" pulumi-lang-hcl="`daily`">`daily`</span>, this specifies how often to run the scheduled export.
 	Interval pulumi.StringPtrInput
+	// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+	LastError pulumi.StringPtrInput
 	// Most recent Export ID created by this schedule.
 	LastExportId pulumi.IntPtrInput
-	// Most recent scheduled run time.
+	// Most recent scheduled attempt time, including attempts that failed validation.
 	LastRunAt pulumi.StringPtrInput
 	// Name for this scheduled export.
 	Name pulumi.StringPtrInput
@@ -427,12 +433,17 @@ func (o ScheduledExportOutput) Interval() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScheduledExport) pulumi.StringOutput { return v.Interval }).(pulumi.StringOutput)
 }
 
+// Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+func (o ScheduledExportOutput) LastError() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledExport) pulumi.StringOutput { return v.LastError }).(pulumi.StringOutput)
+}
+
 // Most recent Export ID created by this schedule.
 func (o ScheduledExportOutput) LastExportId() pulumi.IntOutput {
 	return o.ApplyT(func(v *ScheduledExport) pulumi.IntOutput { return v.LastExportId }).(pulumi.IntOutput)
 }
 
-// Most recent scheduled run time.
+// Most recent scheduled attempt time, including attempts that failed validation.
 func (o ScheduledExportOutput) LastRunAt() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScheduledExport) pulumi.StringOutput { return v.LastRunAt }).(pulumi.StringOutput)
 }

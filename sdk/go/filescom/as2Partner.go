@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity. Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
+// An AS2Partner is a counterparty of the Files.com site's AS2 connectivity.  Generally you will have one AS2 Partner created for each counterparty with whom you send and/or receive files via AS2.
 //
 // ## Example Usage
 //
@@ -37,12 +37,12 @@ import (
 //				ServerCertificate:        pulumi.String("require_match"),
 //				DefaultMimeType:          pulumi.String("application/octet-stream"),
 //				AdditionalHttpHeaders: pulumi.Any(map[string]interface{}{
-//					"key": "example value",
+//					"x-Partner": "acme",
 //				}),
 //				As2StationId:      pulumi.Int(1),
 //				Name:              pulumi.String("AS2 Partner Name"),
 //				Uri:               pulumi.String("example"),
-//				PublicCertificate: pulumi.String("public_certificate"),
+//				PublicCertificate: pulumi.String("example"),
 //			})
 //			if err != nil {
 //				return err
@@ -85,6 +85,12 @@ type As2Partner struct {
 	MdnValidationLevel pulumi.StringOutput `pulumi:"mdnValidationLevel"`
 	// The partner's formal AS2 name.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+	Pkcs12 pulumi.StringPtrOutput `pulumi:"pkcs12"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+	Pkcs12Password pulumi.StringPtrOutput `pulumi:"pkcs12Password"`
 	// Public certificate used for message security.
 	PublicCertificate pulumi.StringOutput `pulumi:"publicCertificate"`
 	// Issuer of public certificate used for message security.
@@ -101,7 +107,7 @@ type As2Partner struct {
 	PublicCertificateSubject pulumi.StringOutput `pulumi:"publicCertificateSubject"`
 	// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
 	ServerCertificate pulumi.StringOutput `pulumi:"serverCertificate"`
-	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 	SignatureValidationLevel pulumi.StringOutput `pulumi:"signatureValidationLevel"`
 	// Public URI where we will send the AS2 messages (via HTTP/HTTPS).
 	Uri pulumi.StringOutput `pulumi:"uri"`
@@ -119,17 +125,22 @@ func NewAs2Partner(ctx *pulumi.Context,
 	if args.As2StationId == nil {
 		return nil, errors.New("invalid value for required argument 'As2StationId'")
 	}
-	if args.PublicCertificate == nil {
-		return nil, errors.New("invalid value for required argument 'PublicCertificate'")
-	}
 	if args.Uri == nil {
 		return nil, errors.New("invalid value for required argument 'Uri'")
 	}
 	if args.HttpAuthPassword != nil {
 		args.HttpAuthPassword = pulumi.ToSecret(args.HttpAuthPassword).(pulumi.StringPtrInput)
 	}
+	if args.Pkcs12 != nil {
+		args.Pkcs12 = pulumi.ToSecret(args.Pkcs12).(pulumi.StringPtrInput)
+	}
+	if args.Pkcs12Password != nil {
+		args.Pkcs12Password = pulumi.ToSecret(args.Pkcs12Password).(pulumi.StringPtrInput)
+	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"httpAuthPassword",
+		"pkcs12",
+		"pkcs12Password",
 	})
 	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
@@ -174,6 +185,12 @@ type as2PartnerState struct {
 	MdnValidationLevel *string `pulumi:"mdnValidationLevel"`
 	// The partner's formal AS2 name.
 	Name *string `pulumi:"name"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+	Pkcs12 *string `pulumi:"pkcs12"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+	Pkcs12Password *string `pulumi:"pkcs12Password"`
 	// Public certificate used for message security.
 	PublicCertificate *string `pulumi:"publicCertificate"`
 	// Issuer of public certificate used for message security.
@@ -190,7 +207,7 @@ type as2PartnerState struct {
 	PublicCertificateSubject *string `pulumi:"publicCertificateSubject"`
 	// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
 	ServerCertificate *string `pulumi:"serverCertificate"`
-	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 	SignatureValidationLevel *string `pulumi:"signatureValidationLevel"`
 	// Public URI where we will send the AS2 messages (via HTTP/HTTPS).
 	Uri *string `pulumi:"uri"`
@@ -218,6 +235,12 @@ type As2PartnerState struct {
 	MdnValidationLevel pulumi.StringPtrInput
 	// The partner's formal AS2 name.
 	Name pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+	Pkcs12 pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+	Pkcs12Password pulumi.StringPtrInput
 	// Public certificate used for message security.
 	PublicCertificate pulumi.StringPtrInput
 	// Issuer of public certificate used for message security.
@@ -234,7 +257,7 @@ type As2PartnerState struct {
 	PublicCertificateSubject pulumi.StringPtrInput
 	// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
 	ServerCertificate pulumi.StringPtrInput
-	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 	SignatureValidationLevel pulumi.StringPtrInput
 	// Public URI where we will send the AS2 messages (via HTTP/HTTPS).
 	Uri pulumi.StringPtrInput
@@ -264,11 +287,17 @@ type as2PartnerArgs struct {
 	MdnValidationLevel *string `pulumi:"mdnValidationLevel"`
 	// The partner's formal AS2 name.
 	Name *string `pulumi:"name"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+	Pkcs12 *string `pulumi:"pkcs12"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+	Pkcs12Password *string `pulumi:"pkcs12Password"`
 	// Public certificate used for message security.
-	PublicCertificate string `pulumi:"publicCertificate"`
+	PublicCertificate *string `pulumi:"publicCertificate"`
 	// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
 	ServerCertificate *string `pulumi:"serverCertificate"`
-	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 	SignatureValidationLevel *string `pulumi:"signatureValidationLevel"`
 	// Public URI where we will send the AS2 messages (via HTTP/HTTPS).
 	Uri string `pulumi:"uri"`
@@ -293,11 +322,17 @@ type As2PartnerArgs struct {
 	MdnValidationLevel pulumi.StringPtrInput
 	// The partner's formal AS2 name.
 	Name pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+	Pkcs12 pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+	Pkcs12Password pulumi.StringPtrInput
 	// Public certificate used for message security.
-	PublicCertificate pulumi.StringInput
+	PublicCertificate pulumi.StringPtrInput
 	// Should we require that the remote HTTP server have a valid SSL Certificate for HTTPS? (This only applies to Outgoing AS2 message from Files.com to a Partner.)
 	ServerCertificate pulumi.StringPtrInput
-	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+	// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 	SignatureValidationLevel pulumi.StringPtrInput
 	// Public URI where we will send the AS2 messages (via HTTP/HTTPS).
 	Uri pulumi.StringInput
@@ -436,6 +471,18 @@ func (o As2PartnerOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Partner) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Base64-encoded PKCS#12 (.pfx or .p12) file containing the partner's public certificate. Provide this instead of public_certificate. Any private key in the file is discarded. A public-only file must contain exactly one certificate.
+func (o As2PartnerOutput) Pkcs12() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *As2Partner) pulumi.StringPtrOutput { return v.Pkcs12 }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Password for pkcs12. The file and password are used only for import; the extracted public certificate is stored as PEM.
+func (o As2PartnerOutput) Pkcs12Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *As2Partner) pulumi.StringPtrOutput { return v.Pkcs12Password }).(pulumi.StringPtrOutput)
+}
+
 // Public certificate used for message security.
 func (o As2PartnerOutput) PublicCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Partner) pulumi.StringOutput { return v.PublicCertificate }).(pulumi.StringOutput)
@@ -476,7 +523,7 @@ func (o As2PartnerOutput) ServerCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Partner) pulumi.StringOutput { return v.ServerCertificate }).(pulumi.StringOutput)
 }
 
-// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: Automatically set the correct value for this setting based on next message received.
+// Should Files.com require signatures on incoming AS2 messages?  <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span>: require that incoming messages are signed with a valid matching signature. <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span>: Unsigned incoming messages are allowed. <span pulumi-lang-nodejs="`auto`" pulumi-lang-dotnet="`Auto`" pulumi-lang-go="`auto`" pulumi-lang-python="`auto`" pulumi-lang-yaml="`auto`" pulumi-lang-java="`auto`" pulumi-lang-hcl="`auto`">`auto`</span>: A one-time starting state. The next message received is always accepted and switches this to <span pulumi-lang-nodejs="`normal`" pulumi-lang-dotnet="`Normal`" pulumi-lang-go="`normal`" pulumi-lang-python="`normal`" pulumi-lang-yaml="`normal`" pulumi-lang-java="`normal`" pulumi-lang-hcl="`normal`">`normal`</span> if it carries a valid signature, or <span pulumi-lang-nodejs="`none`" pulumi-lang-dotnet="`None`" pulumi-lang-go="`none`" pulumi-lang-python="`none`" pulumi-lang-yaml="`none`" pulumi-lang-java="`none`" pulumi-lang-hcl="`none`">`none`</span> if it does not.
 func (o As2PartnerOutput) SignatureValidationLevel() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Partner) pulumi.StringOutput { return v.SignatureValidationLevel }).(pulumi.StringOutput)
 }

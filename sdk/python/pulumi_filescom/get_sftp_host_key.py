@@ -26,10 +26,13 @@ class GetSftpHostKeyResult:
     """
     A collection of values returned by getSftpHostKey.
     """
-    def __init__(__self__, active=None, fingerprint_md5=None, fingerprint_sha256=None, id=None, key_type=None, name=None):
+    def __init__(__self__, active=None, custom_domain_id=None, fingerprint_md5=None, fingerprint_sha256=None, id=None, key_type=None, name=None):
         if active and not isinstance(active, bool):
             raise TypeError("Expected argument 'active' to be a bool")
         pulumi.set(__self__, "active", active)
+        if custom_domain_id and not isinstance(custom_domain_id, int):
+            raise TypeError("Expected argument 'custom_domain_id' to be a int")
+        pulumi.set(__self__, "custom_domain_id", custom_domain_id)
         if fingerprint_md5 and not isinstance(fingerprint_md5, str):
             raise TypeError("Expected argument 'fingerprint_md5' to be a str")
         pulumi.set(__self__, "fingerprint_md5", fingerprint_md5)
@@ -53,6 +56,14 @@ class GetSftpHostKeyResult:
         If true, use this SFTP Host Key.
         """
         return pulumi.get(self, "active")
+
+    @_builtins.property
+    @pulumi.getter(name="customDomainId")
+    def custom_domain_id(self) -> _builtins.int:
+        """
+        Custom Domain ID. If set, this key is used only for that Custom Domain.
+        """
+        return pulumi.get(self, "custom_domain_id")
 
     @_builtins.property
     @pulumi.getter(name="fingerprintMd5")
@@ -102,6 +113,7 @@ class AwaitableGetSftpHostKeyResult(GetSftpHostKeyResult):
             yield self
         return GetSftpHostKeyResult(
             active=self.active,
+            custom_domain_id=self.custom_domain_id,
             fingerprint_md5=self.fingerprint_md5,
             fingerprint_sha256=self.fingerprint_sha256,
             id=self.id,
@@ -137,6 +149,7 @@ def get_sftp_host_key(id: Optional[_builtins.int] = None,
 
     return AwaitableGetSftpHostKeyResult(
         active=pulumi.get(__ret__, 'active'),
+        custom_domain_id=pulumi.get(__ret__, 'custom_domain_id'),
         fingerprint_md5=pulumi.get(__ret__, 'fingerprint_md5'),
         fingerprint_sha256=pulumi.get(__ret__, 'fingerprint_sha256'),
         id=pulumi.get(__ret__, 'id'),
@@ -169,6 +182,7 @@ def get_sftp_host_key_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getSftpHostKey:getSftpHostKey', __args__, opts=opts, typ=GetSftpHostKeyResult)
     return __ret__.apply(lambda __response__: GetSftpHostKeyResult(
         active=pulumi.get(__response__, 'active'),
+        custom_domain_id=pulumi.get(__response__, 'custom_domain_id'),
         fingerprint_md5=pulumi.get(__response__, 'fingerprint_md5'),
         fingerprint_sha256=pulumi.get(__response__, 'fingerprint_sha256'),
         id=pulumi.get(__response__, 'id'),

@@ -26,6 +26,8 @@ namespace Jschady.Filescom
     /// {
     ///     var exampleCustomDomain = new Filescom.CustomDomain("example_custom_domain", new()
     ///     {
+    ///         AvailableToAllWorkspaces = false,
+    ///         WorkspaceId = 0,
     ///         Destination = "site_alias",
     ///         FolderBehaviorId = 1,
     ///         SslCertificateId = 1,
@@ -49,6 +51,12 @@ namespace Jschady.Filescom
     [FilescomResourceType("filescom:index/customDomain:CustomDomain")]
     public partial class CustomDomain : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Allow all workspaces to use this default-workspace Custom Domain.
+        /// </summary>
+        [Output("availableToAllWorkspaces")]
+        public Output<bool> AvailableToAllWorkspaces { get; private set; } = null!;
+
         /// <summary>
         /// Is this domain's SSL certificate automatically managed and renewed by Files.com?
         /// </summary>
@@ -86,6 +94,18 @@ namespace Jschady.Filescom
         public Output<int> FolderBehaviorId { get; private set; } = null!;
 
         /// <summary>
+        /// Dedicated public IP addresses allocated to this Custom Domain.
+        /// </summary>
+        [Output("ipAddresses")]
+        public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
+
+        /// <summary>
+        /// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        /// </summary>
+        [Output("outboundIpAddresses")]
+        public Output<ImmutableArray<string>> OutboundIpAddresses { get; private set; } = null!;
+
+        /// <summary>
         /// Current SSL certificate ID.
         /// </summary>
         [Output("sslCertificateId")]
@@ -96,6 +116,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("updatedAt")]
         public Output<string> UpdatedAt { get; private set; } = null!;
+
+        /// <summary>
+        /// Workspace ID (0 for the default workspace).
+        /// </summary>
+        [Output("workspaceId")]
+        public Output<int> WorkspaceId { get; private set; } = null!;
 
 
         /// <summary>
@@ -145,6 +171,12 @@ namespace Jschady.Filescom
     public sealed class CustomDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Allow all workspaces to use this default-workspace Custom Domain.
+        /// </summary>
+        [Input("availableToAllWorkspaces")]
+        public Input<bool>? AvailableToAllWorkspaces { get; set; }
+
+        /// <summary>
         /// Where this custom domain routes. Can be &lt;span pulumi-lang-nodejs="`siteAlias`" pulumi-lang-dotnet="`SiteAlias`" pulumi-lang-go="`siteAlias`" pulumi-lang-python="`site_alias`" pulumi-lang-yaml="`siteAlias`" pulumi-lang-java="`siteAlias`" pulumi-lang-hcl="`site_alias`"&gt;`siteAlias`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`"&gt;`publicHosting`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`s3Endpoint`" pulumi-lang-dotnet="`S3Endpoint`" pulumi-lang-go="`s3Endpoint`" pulumi-lang-python="`s3_endpoint`" pulumi-lang-yaml="`s3Endpoint`" pulumi-lang-java="`s3Endpoint`" pulumi-lang-hcl="`s3_endpoint`"&gt;`s3Endpoint`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`"&gt;`unassigned`&lt;/span&gt; (not routing traffic). Set to &lt;span pulumi-lang-nodejs="`unassigned`" pulumi-lang-dotnet="`Unassigned`" pulumi-lang-go="`unassigned`" pulumi-lang-python="`unassigned`" pulumi-lang-yaml="`unassigned`" pulumi-lang-java="`unassigned`" pulumi-lang-hcl="`unassigned`"&gt;`unassigned`&lt;/span&gt; automatically when a bound &lt;span pulumi-lang-nodejs="`publicHosting`" pulumi-lang-dotnet="`PublicHosting`" pulumi-lang-go="`publicHosting`" pulumi-lang-python="`public_hosting`" pulumi-lang-yaml="`publicHosting`" pulumi-lang-java="`publicHosting`" pulumi-lang-hcl="`public_hosting`"&gt;`publicHosting`&lt;/span&gt; folder behavior is deleted, and can be set manually via the API for any reason.
         /// </summary>
         [Input("destination")]
@@ -168,6 +200,12 @@ namespace Jschady.Filescom
         [Input("sslCertificateId")]
         public Input<int>? SslCertificateId { get; set; }
 
+        /// <summary>
+        /// Workspace ID (0 for the default workspace).
+        /// </summary>
+        [Input("workspaceId")]
+        public Input<int>? WorkspaceId { get; set; }
+
         public CustomDomainArgs()
         {
         }
@@ -176,6 +214,12 @@ namespace Jschady.Filescom
 
     public sealed class CustomDomainState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Allow all workspaces to use this default-workspace Custom Domain.
+        /// </summary>
+        [Input("availableToAllWorkspaces")]
+        public Input<bool>? AvailableToAllWorkspaces { get; set; }
+
         /// <summary>
         /// Is this domain's SSL certificate automatically managed and renewed by Files.com?
         /// </summary>
@@ -212,6 +256,30 @@ namespace Jschady.Filescom
         [Input("folderBehaviorId")]
         public Input<int>? FolderBehaviorId { get; set; }
 
+        [Input("ipAddresses")]
+        private InputList<string>? _ipAddresses;
+
+        /// <summary>
+        /// Dedicated public IP addresses allocated to this Custom Domain.
+        /// </summary>
+        public InputList<string> IpAddresses
+        {
+            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
+            set => _ipAddresses = value;
+        }
+
+        [Input("outboundIpAddresses")]
+        private InputList<string>? _outboundIpAddresses;
+
+        /// <summary>
+        /// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+        /// </summary>
+        public InputList<string> OutboundIpAddresses
+        {
+            get => _outboundIpAddresses ?? (_outboundIpAddresses = new InputList<string>());
+            set => _outboundIpAddresses = value;
+        }
+
         /// <summary>
         /// Current SSL certificate ID.
         /// </summary>
@@ -223,6 +291,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Workspace ID (0 for the default workspace).
+        /// </summary>
+        [Input("workspaceId")]
+        public Input<int>? WorkspaceId { get; set; }
 
         public CustomDomainState()
         {

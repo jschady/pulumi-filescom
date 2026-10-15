@@ -14,7 +14,6 @@ namespace Jschady.Filescom
     {
         /// <summary>
         /// A SyncRun represents a single execution (run) of a Sync job.
-        /// 
         /// It tracks status, statistics, logs, and timing for each sync operation.
         /// 
         /// ## Example Usage
@@ -125,7 +124,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A SyncRun represents a single execution (run) of a Sync job.
-        /// 
         /// It tracks status, statistics, logs, and timing for each sync operation.
         /// 
         /// ## Example Usage
@@ -236,7 +234,6 @@ namespace Jschady.Filescom
 
         /// <summary>
         /// A SyncRun represents a single execution (run) of a Sync job.
-        /// 
         /// It tracks status, statistics, logs, and timing for each sync operation.
         /// 
         /// ## Example Usage

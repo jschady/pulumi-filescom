@@ -59,6 +59,7 @@ class SiteArgs:
                  calculate_file_checksums_md5: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha1: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha256: pulumi.Input[Optional[_builtins.bool]] = None,
+                 child_site_folder_admins_can_see_parent_site_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  color2_left: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_link: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_text: pulumi.Input[Optional[_builtins.str]] = None,
@@ -83,6 +84,8 @@ class SiteArgs:
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -106,6 +109,7 @@ class SiteArgs:
                  ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
                  ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
@@ -147,6 +151,7 @@ class SiteArgs:
                  restrict_root_folder_behaviors_to_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
                  revoke_bundle_access_on_disable_or_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  root_folder_behaviors_apply_to_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  session_expiry_minutes: pulumi.Input[Optional[_builtins.int]] = None,
                  sftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_finalize_partial_uploads: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -165,6 +170,7 @@ class SiteArgs:
                  smtp_authentication: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_from: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_port: pulumi.Input[Optional[_builtins.int]] = None,
+                 smtp_ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_username: pulumi.Input[Optional[_builtins.str]] = None,
                  snapshot_sharing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -186,7 +192,8 @@ class SiteArgs:
                  welcome_email_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  welcome_email_subject: pulumi.Input[Optional[_builtins.str]] = None,
                  welcome_screen: pulumi.Input[Optional[_builtins.str]] = None,
-                 windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None):
+                 windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workspace_folder_admins_can_see_default_workspace_directory: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Site resource.
 
@@ -194,7 +201,7 @@ class SiteArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
-        :param Any ai_feature_availability: Availability settings for AI features by user class
+        :param Any ai_feature_availability: Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
@@ -230,6 +237,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_md5: Calculate MD5 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha1: Calculate SHA1 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha256: Calculate SHA256 checksums for files?
+        :param pulumi.Input[_builtins.bool] child_site_folder_admins_can_see_parent_site_directory: If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
         :param pulumi.Input[_builtins.str] color2_left: Page link and button color
         :param pulumi.Input[_builtins.str] color2_link: Top bar link color
         :param pulumi.Input[_builtins.str] color2_text: Page link and button color
@@ -252,8 +260,10 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] domain_hsts_header: Send HSTS (HTTP Strict Transport Security) header when visitors access the site via a custom domain?
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
-        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
+        :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
@@ -277,6 +287,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
         :param pulumi.Input[_builtins.int] ldap_port: LDAP port
         :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
+        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
         :param pulumi.Input[_builtins.str] ldap_type: LDAP type
         :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
         :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
@@ -318,6 +329,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] restrict_root_folder_behaviors_to_site_admins: If true, only site admins may create, modify, or delete any behavior at the site root, or a skip that would disable one.
         :param pulumi.Input[_builtins.bool] revoke_bundle_access_on_disable_or_delete: Auto-removes bundles for disabled/deleted users and enforces bundle expiry within user access period.
         :param pulumi.Input[_builtins.bool] root_folder_behaviors_apply_to_workspaces: If true, supported protective behaviors at the site root also apply within named workspaces. Requires restrict*root*folder*behaviors*to*site*admins to be enabled.
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_enabled: Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
         :param pulumi.Input[_builtins.int] session_expiry_minutes: Session expiry in minutes
         :param pulumi.Input[_builtins.bool] sftp_enabled: Is SFTP enabled?
         :param pulumi.Input[_builtins.bool] sftp_finalize_partial_uploads: Finalize partial SFTP uploads from interrupted connections? Default: true.
@@ -336,11 +348,12 @@ class SiteArgs:
         :param pulumi.Input[_builtins.str] smtp_authentication: SMTP server authentication type
         :param pulumi.Input[_builtins.str] smtp_from: From address to use when mailing through custom SMTP
         :param pulumi.Input[_builtins.int] smtp_port: SMTP server port
+        :param pulumi.Input[_builtins.str] smtp_ssl: Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
         :param pulumi.Input[_builtins.str] smtp_username: SMTP server username
         :param pulumi.Input[_builtins.bool] snapshot_sharing_enabled: Allow snapshot share links creation
         :param pulumi.Input[_builtins.bool] ssl_required: Is SSL required?  Disabling this is insecure.
         :param pulumi.Input[_builtins.str] subdomain: Site subdomain
-        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         :param pulumi.Input[_builtins.bool] use_dedicated_ips_for_smtp: If using custom SMTP, should we use dedicated IPs to deliver emails?
         :param pulumi.Input[_builtins.bool] use_provided_modified_at: Allow uploaders to set <span pulumi-lang-nodejs="`providedModifiedAt`" pulumi-lang-dotnet="`ProvidedModifiedAt`" pulumi-lang-go="`providedModifiedAt`" pulumi-lang-python="`provided_modified_at`" pulumi-lang-yaml="`providedModifiedAt`" pulumi-lang-java="`providedModifiedAt`" pulumi-lang-hcl="`provided_modified_at`">`providedModifiedAt`</span> for uploaded files?
         :param pulumi.Input[_builtins.bool] user_lockout: Will users be locked out after incorrect login attempts?
@@ -358,6 +371,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.str] welcome_email_subject: Include this email subject in welcome emails if enabled
         :param pulumi.Input[_builtins.str] welcome_screen: Does the welcome screen appear?
         :param pulumi.Input[_builtins.bool] windows_mode_ftp: Does FTP user Windows emulation mode?
+        :param pulumi.Input[_builtins.bool] workspace_folder_admins_can_see_default_workspace_directory: If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
         """
         if active_sftp_host_key_id is not None:
             pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
@@ -439,6 +453,8 @@ class SiteArgs:
             pulumi.set(__self__, "calculate_file_checksums_sha1", calculate_file_checksums_sha1)
         if calculate_file_checksums_sha256 is not None:
             pulumi.set(__self__, "calculate_file_checksums_sha256", calculate_file_checksums_sha256)
+        if child_site_folder_admins_can_see_parent_site_directory is not None:
+            pulumi.set(__self__, "child_site_folder_admins_can_see_parent_site_directory", child_site_folder_admins_can_see_parent_site_directory)
         if color2_left is not None:
             pulumi.set(__self__, "color2_left", color2_left)
         if color2_link is not None:
@@ -487,6 +503,10 @@ class SiteArgs:
             pulumi.set(__self__, "email_footer_custom_text", email_footer_custom_text)
         if fedramp is not None:
             pulumi.set(__self__, "fedramp", fedramp)
+        if file_activity_events_enabled is not None:
+            pulumi.set(__self__, "file_activity_events_enabled", file_activity_events_enabled)
+        if files_com_remote_server_enabled is not None:
+            pulumi.set(__self__, "files_com_remote_server_enabled", files_com_remote_server_enabled)
         if folder_permissions_groups_only is not None:
             pulumi.set(__self__, "folder_permissions_groups_only", folder_permissions_groups_only)
         if ftp_enabled is not None:
@@ -533,6 +553,8 @@ class SiteArgs:
             pulumi.set(__self__, "ldap_port", ldap_port)
         if ldap_secure is not None:
             pulumi.set(__self__, "ldap_secure", ldap_secure)
+        if ldap_server_certificate is not None:
+            pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
         if ldap_type is not None:
             pulumi.set(__self__, "ldap_type", ldap_type)
         if ldap_user_action is not None:
@@ -615,6 +637,8 @@ class SiteArgs:
             pulumi.set(__self__, "revoke_bundle_access_on_disable_or_delete", revoke_bundle_access_on_disable_or_delete)
         if root_folder_behaviors_apply_to_workspaces is not None:
             pulumi.set(__self__, "root_folder_behaviors_apply_to_workspaces", root_folder_behaviors_apply_to_workspaces)
+        if s3_compatible_endpoint_enabled is not None:
+            pulumi.set(__self__, "s3_compatible_endpoint_enabled", s3_compatible_endpoint_enabled)
         if session_expiry_minutes is not None:
             pulumi.set(__self__, "session_expiry_minutes", session_expiry_minutes)
         if sftp_enabled is not None:
@@ -651,6 +675,8 @@ class SiteArgs:
             pulumi.set(__self__, "smtp_from", smtp_from)
         if smtp_port is not None:
             pulumi.set(__self__, "smtp_port", smtp_port)
+        if smtp_ssl is not None:
+            pulumi.set(__self__, "smtp_ssl", smtp_ssl)
         if smtp_username is not None:
             pulumi.set(__self__, "smtp_username", smtp_username)
         if snapshot_sharing_enabled is not None:
@@ -695,6 +721,8 @@ class SiteArgs:
             pulumi.set(__self__, "welcome_screen", welcome_screen)
         if windows_mode_ftp is not None:
             pulumi.set(__self__, "windows_mode_ftp", windows_mode_ftp)
+        if workspace_folder_admins_can_see_default_workspace_directory is not None:
+            pulumi.set(__self__, "workspace_folder_admins_can_see_default_workspace_directory", workspace_folder_admins_can_see_default_workspace_directory)
 
     @_builtins.property
     @pulumi.getter(name="activeSftpHostKeyId")
@@ -748,7 +776,7 @@ class SiteArgs:
     @pulumi.getter(name="aiFeatureAvailability")
     def ai_feature_availability(self) -> Optional[Any]:
         """
-        Availability settings for AI features by user class
+        Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         """
         return pulumi.get(self, "ai_feature_availability")
 
@@ -1177,6 +1205,18 @@ class SiteArgs:
         pulumi.set(self, "calculate_file_checksums_sha256", value)
 
     @_builtins.property
+    @pulumi.getter(name="childSiteFolderAdminsCanSeeParentSiteDirectory")
+    def child_site_folder_admins_can_see_parent_site_directory(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        """
+        return pulumi.get(self, "child_site_folder_admins_can_see_parent_site_directory")
+
+    @child_site_folder_admins_can_see_parent_site_directory.setter
+    def child_site_folder_admins_can_see_parent_site_directory(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "child_site_folder_admins_can_see_parent_site_directory", value)
+
+    @_builtins.property
     @pulumi.getter(name="color2Left")
     def color2_left(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -1444,7 +1484,7 @@ class SiteArgs:
     @pulumi.getter(name="emailFooterCustomText")
     def email_footer_custom_text(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         """
         return pulumi.get(self, "email_footer_custom_text")
 
@@ -1463,6 +1503,30 @@ class SiteArgs:
     @fedramp.setter
     def fedramp(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "fedramp", value)
+
+    @_builtins.property
+    @pulumi.getter(name="fileActivityEventsEnabled")
+    def file_activity_events_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        """
+        return pulumi.get(self, "file_activity_events_enabled")
+
+    @file_activity_events_enabled.setter
+    def file_activity_events_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "file_activity_events_enabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="filesComRemoteServerEnabled")
+    def files_com_remote_server_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        """
+        return pulumi.get(self, "files_com_remote_server_enabled")
+
+    @files_com_remote_server_enabled.setter
+    def files_com_remote_server_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "files_com_remote_server_enabled", value)
 
     @_builtins.property
     @pulumi.getter(name="folderPermissionsGroupsOnly")
@@ -1739,6 +1803,18 @@ class SiteArgs:
     @ldap_secure.setter
     def ldap_secure(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ldap_secure", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ldapServerCertificate")
+    def ldap_server_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+        """
+        return pulumi.get(self, "ldap_server_certificate")
+
+    @ldap_server_certificate.setter
+    def ldap_server_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ldap_server_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="ldapType")
@@ -2233,6 +2309,18 @@ class SiteArgs:
         pulumi.set(self, "root_folder_behaviors_apply_to_workspaces", value)
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointEnabled")
+    def s3_compatible_endpoint_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_enabled")
+
+    @s3_compatible_endpoint_enabled.setter
+    def s3_compatible_endpoint_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "s3_compatible_endpoint_enabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="sessionExpiryMinutes")
     def session_expiry_minutes(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -2449,6 +2537,18 @@ class SiteArgs:
         pulumi.set(self, "smtp_port", value)
 
     @_builtins.property
+    @pulumi.getter(name="smtpSsl")
+    def smtp_ssl(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        """
+        return pulumi.get(self, "smtp_ssl")
+
+    @smtp_ssl.setter
+    def smtp_ssl(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "smtp_ssl", value)
+
+    @_builtins.property
     @pulumi.getter(name="smtpUsername")
     def smtp_username(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -2500,7 +2600,7 @@ class SiteArgs:
     @pulumi.getter(name="uploadsViaEmailAuthentication")
     def uploads_via_email_authentication(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         """
         return pulumi.get(self, "uploads_via_email_authentication")
 
@@ -2712,6 +2812,18 @@ class SiteArgs:
     def windows_mode_ftp(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "windows_mode_ftp", value)
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")
+    def workspace_folder_admins_can_see_default_workspace_directory(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        """
+        return pulumi.get(self, "workspace_folder_admins_can_see_default_workspace_directory")
+
+    @workspace_folder_admins_can_see_default_workspace_directory.setter
+    def workspace_folder_admins_can_see_default_workspace_directory(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "workspace_folder_admins_can_see_default_workspace_directory", value)
+
 
 @pulumi.input_type
 class _SiteState:
@@ -2758,6 +2870,7 @@ class _SiteState:
                  calculate_file_checksums_md5: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha1: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha256: pulumi.Input[Optional[_builtins.bool]] = None,
+                 child_site_folder_admins_can_see_parent_site_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  color2_left: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_link: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_text: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2786,6 +2899,8 @@ class _SiteState:
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2815,6 +2930,7 @@ class _SiteState:
                  ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
                  ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2865,6 +2981,7 @@ class _SiteState:
                  restrict_root_folder_behaviors_to_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
                  revoke_bundle_access_on_disable_or_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  root_folder_behaviors_apply_to_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  session: pulumi.Input[Optional[_builtins.str]] = None,
                  session_expiry_minutes: pulumi.Input[Optional[_builtins.int]] = None,
                  sftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2884,6 +3001,7 @@ class _SiteState:
                  smtp_authentication: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_from: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_port: pulumi.Input[Optional[_builtins.int]] = None,
+                 smtp_ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_username: pulumi.Input[Optional[_builtins.str]] = None,
                  snapshot_sharing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2909,7 +3027,8 @@ class _SiteState:
                  welcome_email_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  welcome_email_subject: pulumi.Input[Optional[_builtins.str]] = None,
                  welcome_screen: pulumi.Input[Optional[_builtins.str]] = None,
-                 windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None):
+                 windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workspace_folder_admins_can_see_default_workspace_directory: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering Site resources.
 
@@ -2918,7 +3037,7 @@ class _SiteState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.int] admin_user_id: User ID for the main site administrator
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
-        :param Any ai_feature_availability: Availability settings for AI features by user class
+        :param Any ai_feature_availability: Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
@@ -2955,6 +3074,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_md5: Calculate MD5 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha1: Calculate SHA1 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha256: Calculate SHA256 checksums for files?
+        :param pulumi.Input[_builtins.bool] child_site_folder_admins_can_see_parent_site_directory: If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
         :param pulumi.Input[_builtins.str] color2_left: Page link and button color
         :param pulumi.Input[_builtins.str] color2_link: Top bar link color
         :param pulumi.Input[_builtins.str] color2_text: Page link and button color
@@ -2981,8 +3101,10 @@ class _SiteState:
         :param pulumi.Input[_builtins.bool] domain_hsts_header: Send HSTS (HTTP Strict Transport Security) header when visitors access the site via a custom domain?
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
-        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
+        :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
@@ -3012,6 +3134,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
         :param pulumi.Input[_builtins.int] ldap_port: LDAP port
         :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
+        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
         :param pulumi.Input[_builtins.str] ldap_type: LDAP type
         :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
         :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
@@ -3021,7 +3144,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.str] login_page_background_image: Branded login page background
         :param pulumi.Input[_builtins.str] logo: Branded logo
-        :param Any managed_site_settings: List of site settings managed by the parent site
+        :param Any managed_site_settings: Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         :param pulumi.Input[_builtins.int] max_prior_passwords: Number of prior passwords to disallow
         :param pulumi.Input[_builtins.bool] mcp_dcr_enabled: Is OAuth DCR (dynamic client registration) for MCP enabled?
         :param pulumi.Input[_builtins.bool] migrate_remote_server_sync_to_sync: If true, we will migrate all remote server syncs to the new Sync model.
@@ -3062,6 +3185,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.bool] restrict_root_folder_behaviors_to_site_admins: If true, only site admins may create, modify, or delete any behavior at the site root, or a skip that would disable one.
         :param pulumi.Input[_builtins.bool] revoke_bundle_access_on_disable_or_delete: Auto-removes bundles for disabled/deleted users and enforces bundle expiry within user access period.
         :param pulumi.Input[_builtins.bool] root_folder_behaviors_apply_to_workspaces: If true, supported protective behaviors at the site root also apply within named workspaces. Requires restrict*root*folder*behaviors*to*site*admins to be enabled.
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_enabled: Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
         :param pulumi.Input[_builtins.str] session: Current session
         :param pulumi.Input[_builtins.int] session_expiry_minutes: Session expiry in minutes
         :param pulumi.Input[_builtins.bool] sftp_enabled: Is SFTP enabled?
@@ -3081,6 +3205,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] smtp_authentication: SMTP server authentication type
         :param pulumi.Input[_builtins.str] smtp_from: From address to use when mailing through custom SMTP
         :param pulumi.Input[_builtins.int] smtp_port: SMTP server port
+        :param pulumi.Input[_builtins.str] smtp_ssl: Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
         :param pulumi.Input[_builtins.str] smtp_username: SMTP server username
         :param pulumi.Input[_builtins.bool] snapshot_sharing_enabled: Allow snapshot share links creation
         :param pulumi.Input[_builtins.bool] ssl_required: Is SSL required?  Disabling this is insecure.
@@ -3088,7 +3213,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] switch_to_plan_date: If switching plans, when does the new plan take effect?
         :param pulumi.Input[_builtins.int] trial_days_left: Number of days left in trial
         :param pulumi.Input[_builtins.str] trial_until: When does this Site trial expire?
-        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         :param pulumi.Input[_builtins.bool] use_dedicated_ips_for_smtp: If using custom SMTP, should we use dedicated IPs to deliver emails?
         :param pulumi.Input[_builtins.bool] use_provided_modified_at: Allow uploaders to set <span pulumi-lang-nodejs="`providedModifiedAt`" pulumi-lang-dotnet="`ProvidedModifiedAt`" pulumi-lang-go="`providedModifiedAt`" pulumi-lang-python="`provided_modified_at`" pulumi-lang-yaml="`providedModifiedAt`" pulumi-lang-java="`providedModifiedAt`" pulumi-lang-hcl="`provided_modified_at`">`providedModifiedAt`</span> for uploaded files?
         :param pulumi.Input[_builtins.str] user: User of current session
@@ -3107,6 +3232,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] welcome_email_subject: Include this email subject in welcome emails if enabled
         :param pulumi.Input[_builtins.str] welcome_screen: Does the welcome screen appear?
         :param pulumi.Input[_builtins.bool] windows_mode_ftp: Does FTP user Windows emulation mode?
+        :param pulumi.Input[_builtins.bool] workspace_folder_admins_can_see_default_workspace_directory: If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
         """
         if active_sftp_host_key_id is not None:
             pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
@@ -3192,6 +3318,8 @@ class _SiteState:
             pulumi.set(__self__, "calculate_file_checksums_sha1", calculate_file_checksums_sha1)
         if calculate_file_checksums_sha256 is not None:
             pulumi.set(__self__, "calculate_file_checksums_sha256", calculate_file_checksums_sha256)
+        if child_site_folder_admins_can_see_parent_site_directory is not None:
+            pulumi.set(__self__, "child_site_folder_admins_can_see_parent_site_directory", child_site_folder_admins_can_see_parent_site_directory)
         if color2_left is not None:
             pulumi.set(__self__, "color2_left", color2_left)
         if color2_link is not None:
@@ -3248,6 +3376,10 @@ class _SiteState:
             pulumi.set(__self__, "email_footer_custom_text", email_footer_custom_text)
         if fedramp is not None:
             pulumi.set(__self__, "fedramp", fedramp)
+        if file_activity_events_enabled is not None:
+            pulumi.set(__self__, "file_activity_events_enabled", file_activity_events_enabled)
+        if files_com_remote_server_enabled is not None:
+            pulumi.set(__self__, "files_com_remote_server_enabled", files_com_remote_server_enabled)
         if folder_permissions_groups_only is not None:
             pulumi.set(__self__, "folder_permissions_groups_only", folder_permissions_groups_only)
         if ftp_enabled is not None:
@@ -3306,6 +3438,8 @@ class _SiteState:
             pulumi.set(__self__, "ldap_port", ldap_port)
         if ldap_secure is not None:
             pulumi.set(__self__, "ldap_secure", ldap_secure)
+        if ldap_server_certificate is not None:
+            pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
         if ldap_type is not None:
             pulumi.set(__self__, "ldap_type", ldap_type)
         if ldap_user_action is not None:
@@ -3406,6 +3540,8 @@ class _SiteState:
             pulumi.set(__self__, "revoke_bundle_access_on_disable_or_delete", revoke_bundle_access_on_disable_or_delete)
         if root_folder_behaviors_apply_to_workspaces is not None:
             pulumi.set(__self__, "root_folder_behaviors_apply_to_workspaces", root_folder_behaviors_apply_to_workspaces)
+        if s3_compatible_endpoint_enabled is not None:
+            pulumi.set(__self__, "s3_compatible_endpoint_enabled", s3_compatible_endpoint_enabled)
         if session is not None:
             pulumi.set(__self__, "session", session)
         if session_expiry_minutes is not None:
@@ -3444,6 +3580,8 @@ class _SiteState:
             pulumi.set(__self__, "smtp_from", smtp_from)
         if smtp_port is not None:
             pulumi.set(__self__, "smtp_port", smtp_port)
+        if smtp_ssl is not None:
+            pulumi.set(__self__, "smtp_ssl", smtp_ssl)
         if smtp_username is not None:
             pulumi.set(__self__, "smtp_username", smtp_username)
         if snapshot_sharing_enabled is not None:
@@ -3496,6 +3634,8 @@ class _SiteState:
             pulumi.set(__self__, "welcome_screen", welcome_screen)
         if windows_mode_ftp is not None:
             pulumi.set(__self__, "windows_mode_ftp", windows_mode_ftp)
+        if workspace_folder_admins_can_see_default_workspace_directory is not None:
+            pulumi.set(__self__, "workspace_folder_admins_can_see_default_workspace_directory", workspace_folder_admins_can_see_default_workspace_directory)
 
     @_builtins.property
     @pulumi.getter(name="activeSftpHostKeyId")
@@ -3561,7 +3701,7 @@ class _SiteState:
     @pulumi.getter(name="aiFeatureAvailability")
     def ai_feature_availability(self) -> Optional[Any]:
         """
-        Availability settings for AI features by user class
+        Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         """
         return pulumi.get(self, "ai_feature_availability")
 
@@ -4002,6 +4142,18 @@ class _SiteState:
         pulumi.set(self, "calculate_file_checksums_sha256", value)
 
     @_builtins.property
+    @pulumi.getter(name="childSiteFolderAdminsCanSeeParentSiteDirectory")
+    def child_site_folder_admins_can_see_parent_site_directory(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        """
+        return pulumi.get(self, "child_site_folder_admins_can_see_parent_site_directory")
+
+    @child_site_folder_admins_can_see_parent_site_directory.setter
+    def child_site_folder_admins_can_see_parent_site_directory(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "child_site_folder_admins_can_see_parent_site_directory", value)
+
+    @_builtins.property
     @pulumi.getter(name="color2Left")
     def color2_left(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -4317,7 +4469,7 @@ class _SiteState:
     @pulumi.getter(name="emailFooterCustomText")
     def email_footer_custom_text(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         """
         return pulumi.get(self, "email_footer_custom_text")
 
@@ -4336,6 +4488,30 @@ class _SiteState:
     @fedramp.setter
     def fedramp(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "fedramp", value)
+
+    @_builtins.property
+    @pulumi.getter(name="fileActivityEventsEnabled")
+    def file_activity_events_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        """
+        return pulumi.get(self, "file_activity_events_enabled")
+
+    @file_activity_events_enabled.setter
+    def file_activity_events_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "file_activity_events_enabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="filesComRemoteServerEnabled")
+    def files_com_remote_server_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        """
+        return pulumi.get(self, "files_com_remote_server_enabled")
+
+    @files_com_remote_server_enabled.setter
+    def files_com_remote_server_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "files_com_remote_server_enabled", value)
 
     @_builtins.property
     @pulumi.getter(name="folderPermissionsGroupsOnly")
@@ -4686,6 +4862,18 @@ class _SiteState:
         pulumi.set(self, "ldap_secure", value)
 
     @_builtins.property
+    @pulumi.getter(name="ldapServerCertificate")
+    def ldap_server_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+        """
+        return pulumi.get(self, "ldap_server_certificate")
+
+    @ldap_server_certificate.setter
+    def ldap_server_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ldap_server_certificate", value)
+
+    @_builtins.property
     @pulumi.getter(name="ldapType")
     def ldap_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -4797,7 +4985,7 @@ class _SiteState:
     @pulumi.getter(name="managedSiteSettings")
     def managed_site_settings(self) -> Optional[Any]:
         """
-        List of site settings managed by the parent site
+        Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         """
         return pulumi.get(self, "managed_site_settings")
 
@@ -5286,6 +5474,18 @@ class _SiteState:
         pulumi.set(self, "root_folder_behaviors_apply_to_workspaces", value)
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointEnabled")
+    def s3_compatible_endpoint_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_enabled")
+
+    @s3_compatible_endpoint_enabled.setter
+    def s3_compatible_endpoint_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "s3_compatible_endpoint_enabled", value)
+
+    @_builtins.property
     @pulumi.getter
     def session(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -5514,6 +5714,18 @@ class _SiteState:
         pulumi.set(self, "smtp_port", value)
 
     @_builtins.property
+    @pulumi.getter(name="smtpSsl")
+    def smtp_ssl(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        """
+        return pulumi.get(self, "smtp_ssl")
+
+    @smtp_ssl.setter
+    def smtp_ssl(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "smtp_ssl", value)
+
+    @_builtins.property
     @pulumi.getter(name="smtpUsername")
     def smtp_username(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -5601,7 +5813,7 @@ class _SiteState:
     @pulumi.getter(name="uploadsViaEmailAuthentication")
     def uploads_via_email_authentication(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         """
         return pulumi.get(self, "uploads_via_email_authentication")
 
@@ -5825,6 +6037,18 @@ class _SiteState:
     def windows_mode_ftp(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "windows_mode_ftp", value)
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")
+    def workspace_folder_admins_can_see_default_workspace_directory(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        """
+        return pulumi.get(self, "workspace_folder_admins_can_see_default_workspace_directory")
+
+    @workspace_folder_admins_can_see_default_workspace_directory.setter
+    def workspace_folder_admins_can_see_default_workspace_directory(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "workspace_folder_admins_can_see_default_workspace_directory", value)
+
 
 @pulumi.type_token("filescom:index/site:Site")
 class Site(pulumi.CustomResource):
@@ -5872,6 +6096,7 @@ class Site(pulumi.CustomResource):
                  calculate_file_checksums_md5: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha1: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha256: pulumi.Input[Optional[_builtins.bool]] = None,
+                 child_site_folder_admins_can_see_parent_site_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  color2_left: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_link: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_text: pulumi.Input[Optional[_builtins.str]] = None,
@@ -5896,6 +6121,8 @@ class Site(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -5919,6 +6146,7 @@ class Site(pulumi.CustomResource):
                  ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
                  ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
@@ -5960,6 +6188,7 @@ class Site(pulumi.CustomResource):
                  restrict_root_folder_behaviors_to_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
                  revoke_bundle_access_on_disable_or_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  root_folder_behaviors_apply_to_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  session_expiry_minutes: pulumi.Input[Optional[_builtins.int]] = None,
                  sftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_finalize_partial_uploads: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -5978,6 +6207,7 @@ class Site(pulumi.CustomResource):
                  smtp_authentication: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_from: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_port: pulumi.Input[Optional[_builtins.int]] = None,
+                 smtp_ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_username: pulumi.Input[Optional[_builtins.str]] = None,
                  snapshot_sharing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6000,6 +6230,7 @@ class Site(pulumi.CustomResource):
                  welcome_email_subject: pulumi.Input[Optional[_builtins.str]] = None,
                  welcome_screen: pulumi.Input[Optional[_builtins.str]] = None,
                  windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workspace_folder_admins_can_see_default_workspace_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         A Site is the place you'll come to update site settings, as well as manage site-wide API keys.
@@ -6053,7 +6284,12 @@ class Site(pulumi.CustomResource):
                     "siteAdmins": True,
                     "workspaceAdmins": True,
                     "folderAdmins": True,
-                    "allUsers": True,
+                    "allUsers": False,
+                    "selectedGroupMembers": True,
+                    "groupIds": [
+                        1,
+                        2,
+                    ],
                 },
             },
             mcp_dcr_enabled=False,
@@ -6068,6 +6304,7 @@ class Site(pulumi.CustomResource):
             legacy_checksums_mode=False,
             migrate_remote_server_sync_to_sync=False,
             as2_message_retention_days=1,
+            file_activity_events_enabled=False,
             username_display="username_only",
             session_expiry_minutes=1,
             ssl_required=False,
@@ -6123,7 +6360,9 @@ class Site(pulumi.CustomResource):
             user_requests_enabled=False,
             user_requests_notify_admins=False,
             dav_enabled=False,
+            files_com_remote_server_enabled=False,
             ftp_enabled=False,
+            s3_compatible_endpoint_enabled=False,
             sftp_enabled=False,
             sftp_finalize_partial_uploads=False,
             users_can_create_api_keys=False,
@@ -6134,9 +6373,6 @@ class Site(pulumi.CustomResource):
             active_sftp_host_key_ids=[1],
             protocol_access_groups_only=False,
             revoke_bundle_access_on_disable_or_delete=False,
-            bundle_watermark_value={
-                "key": "example value",
-            },
             group_admins_can_add_users=False,
             group_admins_can_manage_group_memberships=False,
             group_admins_can_delete_users=False,
@@ -6145,6 +6381,8 @@ class Site(pulumi.CustomResource):
             group_admins_can_bypass_user_lifecycle_rules=False,
             group_admins_can_reset_passwords=False,
             group_admins_can_set_user_password=False,
+            child_site_folder_admins_can_see_parent_site_directory=False,
+            workspace_folder_admins_can_see_default_workspace_directory=False,
             bundle_recipient_blacklist_free_email_domains=False,
             bundle_recipient_blacklist_domains=["example"],
             admins_bypass_locked_subfolders=False,
@@ -6175,6 +6413,7 @@ class Site(pulumi.CustomResource):
             smtp_from="me@my-mail-server.com",
             smtp_username="mail",
             smtp_port=1,
+            smtp_ssl="require",
             ldap_enabled=False,
             ldap_type="open_ldap",
             ldap_host="ldap.site.com",
@@ -6182,6 +6421,7 @@ class Site(pulumi.CustomResource):
             ldap_host3="ldap3.site.com",
             ldap_port=1,
             ldap_secure=False,
+            ldap_server_certificate="require_match",
             ldap_username="[ldap username]",
             ldap_username_field="sAMAccountName",
             ldap_domain="mysite.com",
@@ -6192,6 +6432,11 @@ class Site(pulumi.CustomResource):
             ldap_group_inclusion="example",
             ldap_base_dn="example",
             uploads_via_email_authentication=False,
+            bundle_watermark_value={
+                "gravity": "SouthWest",
+                "maxHeightOrWidth": 20,
+                "transparency": 25,
+            },
             icon16_delete=False,
             icon32_delete=False,
             icon48_delete=False,
@@ -6221,7 +6466,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] active_sftp_host_key_ids: Ids of the selected custom SFTP Host Keys
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
-        :param Any ai_feature_availability: Availability settings for AI features by user class
+        :param Any ai_feature_availability: Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
@@ -6257,6 +6502,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_md5: Calculate MD5 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha1: Calculate SHA1 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha256: Calculate SHA256 checksums for files?
+        :param pulumi.Input[_builtins.bool] child_site_folder_admins_can_see_parent_site_directory: If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
         :param pulumi.Input[_builtins.str] color2_left: Page link and button color
         :param pulumi.Input[_builtins.str] color2_link: Top bar link color
         :param pulumi.Input[_builtins.str] color2_text: Page link and button color
@@ -6279,8 +6525,10 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] domain_hsts_header: Send HSTS (HTTP Strict Transport Security) header when visitors access the site via a custom domain?
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
-        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
+        :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
@@ -6304,6 +6552,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
         :param pulumi.Input[_builtins.int] ldap_port: LDAP port
         :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
+        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
         :param pulumi.Input[_builtins.str] ldap_type: LDAP type
         :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
         :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
@@ -6345,6 +6594,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] restrict_root_folder_behaviors_to_site_admins: If true, only site admins may create, modify, or delete any behavior at the site root, or a skip that would disable one.
         :param pulumi.Input[_builtins.bool] revoke_bundle_access_on_disable_or_delete: Auto-removes bundles for disabled/deleted users and enforces bundle expiry within user access period.
         :param pulumi.Input[_builtins.bool] root_folder_behaviors_apply_to_workspaces: If true, supported protective behaviors at the site root also apply within named workspaces. Requires restrict*root*folder*behaviors*to*site*admins to be enabled.
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_enabled: Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
         :param pulumi.Input[_builtins.int] session_expiry_minutes: Session expiry in minutes
         :param pulumi.Input[_builtins.bool] sftp_enabled: Is SFTP enabled?
         :param pulumi.Input[_builtins.bool] sftp_finalize_partial_uploads: Finalize partial SFTP uploads from interrupted connections? Default: true.
@@ -6363,11 +6613,12 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] smtp_authentication: SMTP server authentication type
         :param pulumi.Input[_builtins.str] smtp_from: From address to use when mailing through custom SMTP
         :param pulumi.Input[_builtins.int] smtp_port: SMTP server port
+        :param pulumi.Input[_builtins.str] smtp_ssl: Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
         :param pulumi.Input[_builtins.str] smtp_username: SMTP server username
         :param pulumi.Input[_builtins.bool] snapshot_sharing_enabled: Allow snapshot share links creation
         :param pulumi.Input[_builtins.bool] ssl_required: Is SSL required?  Disabling this is insecure.
         :param pulumi.Input[_builtins.str] subdomain: Site subdomain
-        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         :param pulumi.Input[_builtins.bool] use_dedicated_ips_for_smtp: If using custom SMTP, should we use dedicated IPs to deliver emails?
         :param pulumi.Input[_builtins.bool] use_provided_modified_at: Allow uploaders to set <span pulumi-lang-nodejs="`providedModifiedAt`" pulumi-lang-dotnet="`ProvidedModifiedAt`" pulumi-lang-go="`providedModifiedAt`" pulumi-lang-python="`provided_modified_at`" pulumi-lang-yaml="`providedModifiedAt`" pulumi-lang-java="`providedModifiedAt`" pulumi-lang-hcl="`provided_modified_at`">`providedModifiedAt`</span> for uploaded files?
         :param pulumi.Input[_builtins.bool] user_lockout: Will users be locked out after incorrect login attempts?
@@ -6385,6 +6636,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] welcome_email_subject: Include this email subject in welcome emails if enabled
         :param pulumi.Input[_builtins.str] welcome_screen: Does the welcome screen appear?
         :param pulumi.Input[_builtins.bool] windows_mode_ftp: Does FTP user Windows emulation mode?
+        :param pulumi.Input[_builtins.bool] workspace_folder_admins_can_see_default_workspace_directory: If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
         """
         ...
     @overload
@@ -6444,7 +6696,12 @@ class Site(pulumi.CustomResource):
                     "siteAdmins": True,
                     "workspaceAdmins": True,
                     "folderAdmins": True,
-                    "allUsers": True,
+                    "allUsers": False,
+                    "selectedGroupMembers": True,
+                    "groupIds": [
+                        1,
+                        2,
+                    ],
                 },
             },
             mcp_dcr_enabled=False,
@@ -6459,6 +6716,7 @@ class Site(pulumi.CustomResource):
             legacy_checksums_mode=False,
             migrate_remote_server_sync_to_sync=False,
             as2_message_retention_days=1,
+            file_activity_events_enabled=False,
             username_display="username_only",
             session_expiry_minutes=1,
             ssl_required=False,
@@ -6514,7 +6772,9 @@ class Site(pulumi.CustomResource):
             user_requests_enabled=False,
             user_requests_notify_admins=False,
             dav_enabled=False,
+            files_com_remote_server_enabled=False,
             ftp_enabled=False,
+            s3_compatible_endpoint_enabled=False,
             sftp_enabled=False,
             sftp_finalize_partial_uploads=False,
             users_can_create_api_keys=False,
@@ -6525,9 +6785,6 @@ class Site(pulumi.CustomResource):
             active_sftp_host_key_ids=[1],
             protocol_access_groups_only=False,
             revoke_bundle_access_on_disable_or_delete=False,
-            bundle_watermark_value={
-                "key": "example value",
-            },
             group_admins_can_add_users=False,
             group_admins_can_manage_group_memberships=False,
             group_admins_can_delete_users=False,
@@ -6536,6 +6793,8 @@ class Site(pulumi.CustomResource):
             group_admins_can_bypass_user_lifecycle_rules=False,
             group_admins_can_reset_passwords=False,
             group_admins_can_set_user_password=False,
+            child_site_folder_admins_can_see_parent_site_directory=False,
+            workspace_folder_admins_can_see_default_workspace_directory=False,
             bundle_recipient_blacklist_free_email_domains=False,
             bundle_recipient_blacklist_domains=["example"],
             admins_bypass_locked_subfolders=False,
@@ -6566,6 +6825,7 @@ class Site(pulumi.CustomResource):
             smtp_from="me@my-mail-server.com",
             smtp_username="mail",
             smtp_port=1,
+            smtp_ssl="require",
             ldap_enabled=False,
             ldap_type="open_ldap",
             ldap_host="ldap.site.com",
@@ -6573,6 +6833,7 @@ class Site(pulumi.CustomResource):
             ldap_host3="ldap3.site.com",
             ldap_port=1,
             ldap_secure=False,
+            ldap_server_certificate="require_match",
             ldap_username="[ldap username]",
             ldap_username_field="sAMAccountName",
             ldap_domain="mysite.com",
@@ -6583,6 +6844,11 @@ class Site(pulumi.CustomResource):
             ldap_group_inclusion="example",
             ldap_base_dn="example",
             uploads_via_email_authentication=False,
+            bundle_watermark_value={
+                "gravity": "SouthWest",
+                "maxHeightOrWidth": 20,
+                "transparency": 25,
+            },
             icon16_delete=False,
             icon32_delete=False,
             icon48_delete=False,
@@ -6661,6 +6927,7 @@ class Site(pulumi.CustomResource):
                  calculate_file_checksums_md5: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha1: pulumi.Input[Optional[_builtins.bool]] = None,
                  calculate_file_checksums_sha256: pulumi.Input[Optional[_builtins.bool]] = None,
+                 child_site_folder_admins_can_see_parent_site_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  color2_left: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_link: pulumi.Input[Optional[_builtins.str]] = None,
                  color2_text: pulumi.Input[Optional[_builtins.str]] = None,
@@ -6685,6 +6952,8 @@ class Site(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6708,6 +6977,7 @@ class Site(pulumi.CustomResource):
                  ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
                  ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
                  ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
@@ -6749,6 +7019,7 @@ class Site(pulumi.CustomResource):
                  restrict_root_folder_behaviors_to_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
                  revoke_bundle_access_on_disable_or_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  root_folder_behaviors_apply_to_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_compatible_endpoint_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  session_expiry_minutes: pulumi.Input[Optional[_builtins.int]] = None,
                  sftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  sftp_finalize_partial_uploads: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6767,6 +7038,7 @@ class Site(pulumi.CustomResource):
                  smtp_authentication: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_from: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_port: pulumi.Input[Optional[_builtins.int]] = None,
+                 smtp_ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  smtp_username: pulumi.Input[Optional[_builtins.str]] = None,
                  snapshot_sharing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6789,6 +7061,7 @@ class Site(pulumi.CustomResource):
                  welcome_email_subject: pulumi.Input[Optional[_builtins.str]] = None,
                  welcome_screen: pulumi.Input[Optional[_builtins.str]] = None,
                  windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workspace_folder_admins_can_see_default_workspace_directory: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -6838,6 +7111,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["calculate_file_checksums_md5"] = calculate_file_checksums_md5
             __props__.__dict__["calculate_file_checksums_sha1"] = calculate_file_checksums_sha1
             __props__.__dict__["calculate_file_checksums_sha256"] = calculate_file_checksums_sha256
+            __props__.__dict__["child_site_folder_admins_can_see_parent_site_directory"] = child_site_folder_admins_can_see_parent_site_directory
             __props__.__dict__["color2_left"] = color2_left
             __props__.__dict__["color2_link"] = color2_link
             __props__.__dict__["color2_text"] = color2_text
@@ -6862,6 +7136,8 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["email"] = email
             __props__.__dict__["email_footer_custom_text"] = email_footer_custom_text
             __props__.__dict__["fedramp"] = fedramp
+            __props__.__dict__["file_activity_events_enabled"] = file_activity_events_enabled
+            __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
             __props__.__dict__["folder_permissions_groups_only"] = folder_permissions_groups_only
             __props__.__dict__["ftp_enabled"] = ftp_enabled
             __props__.__dict__["group_admins_can_add_users"] = group_admins_can_add_users
@@ -6885,6 +7161,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["ldap_host3"] = ldap_host3
             __props__.__dict__["ldap_port"] = ldap_port
             __props__.__dict__["ldap_secure"] = ldap_secure
+            __props__.__dict__["ldap_server_certificate"] = ldap_server_certificate
             __props__.__dict__["ldap_type"] = ldap_type
             __props__.__dict__["ldap_user_action"] = ldap_user_action
             __props__.__dict__["ldap_user_include_groups"] = ldap_user_include_groups
@@ -6926,6 +7203,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["restrict_root_folder_behaviors_to_site_admins"] = restrict_root_folder_behaviors_to_site_admins
             __props__.__dict__["revoke_bundle_access_on_disable_or_delete"] = revoke_bundle_access_on_disable_or_delete
             __props__.__dict__["root_folder_behaviors_apply_to_workspaces"] = root_folder_behaviors_apply_to_workspaces
+            __props__.__dict__["s3_compatible_endpoint_enabled"] = s3_compatible_endpoint_enabled
             __props__.__dict__["session_expiry_minutes"] = session_expiry_minutes
             __props__.__dict__["sftp_enabled"] = sftp_enabled
             __props__.__dict__["sftp_finalize_partial_uploads"] = sftp_finalize_partial_uploads
@@ -6944,6 +7222,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["smtp_authentication"] = smtp_authentication
             __props__.__dict__["smtp_from"] = smtp_from
             __props__.__dict__["smtp_port"] = smtp_port
+            __props__.__dict__["smtp_ssl"] = smtp_ssl
             __props__.__dict__["smtp_username"] = smtp_username
             __props__.__dict__["snapshot_sharing_enabled"] = snapshot_sharing_enabled
             __props__.__dict__["ssl_required"] = ssl_required
@@ -6966,6 +7245,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["welcome_email_subject"] = welcome_email_subject
             __props__.__dict__["welcome_screen"] = welcome_screen
             __props__.__dict__["windows_mode_ftp"] = windows_mode_ftp
+            __props__.__dict__["workspace_folder_admins_can_see_default_workspace_directory"] = workspace_folder_admins_can_see_default_workspace_directory
             __props__.__dict__["admin_user_id"] = None
             __props__.__dict__["bundle_watermark_attachment"] = None
             __props__.__dict__["contact_name"] = None
@@ -7044,6 +7324,7 @@ class Site(pulumi.CustomResource):
             calculate_file_checksums_md5: pulumi.Input[Optional[_builtins.bool]] = None,
             calculate_file_checksums_sha1: pulumi.Input[Optional[_builtins.bool]] = None,
             calculate_file_checksums_sha256: pulumi.Input[Optional[_builtins.bool]] = None,
+            child_site_folder_admins_can_see_parent_site_directory: pulumi.Input[Optional[_builtins.bool]] = None,
             color2_left: pulumi.Input[Optional[_builtins.str]] = None,
             color2_link: pulumi.Input[Optional[_builtins.str]] = None,
             color2_text: pulumi.Input[Optional[_builtins.str]] = None,
@@ -7072,6 +7353,8 @@ class Site(pulumi.CustomResource):
             email: pulumi.Input[Optional[_builtins.str]] = None,
             email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
             fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
+            file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
             ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7101,6 +7384,7 @@ class Site(pulumi.CustomResource):
             ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
             ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
             ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
+            ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
             ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
             ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
             ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
@@ -7151,6 +7435,7 @@ class Site(pulumi.CustomResource):
             restrict_root_folder_behaviors_to_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
             revoke_bundle_access_on_disable_or_delete: pulumi.Input[Optional[_builtins.bool]] = None,
             root_folder_behaviors_apply_to_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            s3_compatible_endpoint_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             session: pulumi.Input[Optional[_builtins.str]] = None,
             session_expiry_minutes: pulumi.Input[Optional[_builtins.int]] = None,
             sftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7170,6 +7455,7 @@ class Site(pulumi.CustomResource):
             smtp_authentication: pulumi.Input[Optional[_builtins.str]] = None,
             smtp_from: pulumi.Input[Optional[_builtins.str]] = None,
             smtp_port: pulumi.Input[Optional[_builtins.int]] = None,
+            smtp_ssl: pulumi.Input[Optional[_builtins.str]] = None,
             smtp_username: pulumi.Input[Optional[_builtins.str]] = None,
             snapshot_sharing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             ssl_required: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7195,7 +7481,8 @@ class Site(pulumi.CustomResource):
             welcome_email_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             welcome_email_subject: pulumi.Input[Optional[_builtins.str]] = None,
             welcome_screen: pulumi.Input[Optional[_builtins.str]] = None,
-            windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None) -> 'Site':
+            windows_mode_ftp: pulumi.Input[Optional[_builtins.bool]] = None,
+            workspace_folder_admins_can_see_default_workspace_directory: pulumi.Input[Optional[_builtins.bool]] = None) -> 'Site':
         """
         Get an existing Site resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -7208,7 +7495,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] additional_text_file_types: Additional extensions that are considered text files
         :param pulumi.Input[_builtins.int] admin_user_id: User ID for the main site administrator
         :param pulumi.Input[_builtins.bool] admins_bypass_locked_subfolders: Allow admins to bypass the locked subfolders setting.
-        :param Any ai_feature_availability: Availability settings for AI features by user class
+        :param Any ai_feature_availability: Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
@@ -7245,6 +7532,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_md5: Calculate MD5 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha1: Calculate SHA1 checksums for files?
         :param pulumi.Input[_builtins.bool] calculate_file_checksums_sha256: Calculate SHA256 checksums for files?
+        :param pulumi.Input[_builtins.bool] child_site_folder_admins_can_see_parent_site_directory: If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
         :param pulumi.Input[_builtins.str] color2_left: Page link and button color
         :param pulumi.Input[_builtins.str] color2_link: Top bar link color
         :param pulumi.Input[_builtins.str] color2_text: Page link and button color
@@ -7271,8 +7559,10 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] domain_hsts_header: Send HSTS (HTTP Strict Transport Security) header when visitors access the site via a custom domain?
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
-        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
+        :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
@@ -7302,6 +7592,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
         :param pulumi.Input[_builtins.int] ldap_port: LDAP port
         :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
+        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
         :param pulumi.Input[_builtins.str] ldap_type: LDAP type
         :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
         :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
@@ -7311,7 +7602,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.str] login_page_background_image: Branded login page background
         :param pulumi.Input[_builtins.str] logo: Branded logo
-        :param Any managed_site_settings: List of site settings managed by the parent site
+        :param Any managed_site_settings: Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         :param pulumi.Input[_builtins.int] max_prior_passwords: Number of prior passwords to disallow
         :param pulumi.Input[_builtins.bool] mcp_dcr_enabled: Is OAuth DCR (dynamic client registration) for MCP enabled?
         :param pulumi.Input[_builtins.bool] migrate_remote_server_sync_to_sync: If true, we will migrate all remote server syncs to the new Sync model.
@@ -7352,6 +7643,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] restrict_root_folder_behaviors_to_site_admins: If true, only site admins may create, modify, or delete any behavior at the site root, or a skip that would disable one.
         :param pulumi.Input[_builtins.bool] revoke_bundle_access_on_disable_or_delete: Auto-removes bundles for disabled/deleted users and enforces bundle expiry within user access period.
         :param pulumi.Input[_builtins.bool] root_folder_behaviors_apply_to_workspaces: If true, supported protective behaviors at the site root also apply within named workspaces. Requires restrict*root*folder*behaviors*to*site*admins to be enabled.
+        :param pulumi.Input[_builtins.bool] s3_compatible_endpoint_enabled: Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
         :param pulumi.Input[_builtins.str] session: Current session
         :param pulumi.Input[_builtins.int] session_expiry_minutes: Session expiry in minutes
         :param pulumi.Input[_builtins.bool] sftp_enabled: Is SFTP enabled?
@@ -7371,6 +7663,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] smtp_authentication: SMTP server authentication type
         :param pulumi.Input[_builtins.str] smtp_from: From address to use when mailing through custom SMTP
         :param pulumi.Input[_builtins.int] smtp_port: SMTP server port
+        :param pulumi.Input[_builtins.str] smtp_ssl: Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
         :param pulumi.Input[_builtins.str] smtp_username: SMTP server username
         :param pulumi.Input[_builtins.bool] snapshot_sharing_enabled: Allow snapshot share links creation
         :param pulumi.Input[_builtins.bool] ssl_required: Is SSL required?  Disabling this is insecure.
@@ -7378,7 +7671,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] switch_to_plan_date: If switching plans, when does the new plan take effect?
         :param pulumi.Input[_builtins.int] trial_days_left: Number of days left in trial
         :param pulumi.Input[_builtins.str] trial_until: When does this Site trial expire?
-        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        :param pulumi.Input[_builtins.bool] uploads_via_email_authentication: Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         :param pulumi.Input[_builtins.bool] use_dedicated_ips_for_smtp: If using custom SMTP, should we use dedicated IPs to deliver emails?
         :param pulumi.Input[_builtins.bool] use_provided_modified_at: Allow uploaders to set <span pulumi-lang-nodejs="`providedModifiedAt`" pulumi-lang-dotnet="`ProvidedModifiedAt`" pulumi-lang-go="`providedModifiedAt`" pulumi-lang-python="`provided_modified_at`" pulumi-lang-yaml="`providedModifiedAt`" pulumi-lang-java="`providedModifiedAt`" pulumi-lang-hcl="`provided_modified_at`">`providedModifiedAt`</span> for uploaded files?
         :param pulumi.Input[_builtins.str] user: User of current session
@@ -7397,6 +7690,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] welcome_email_subject: Include this email subject in welcome emails if enabled
         :param pulumi.Input[_builtins.str] welcome_screen: Does the welcome screen appear?
         :param pulumi.Input[_builtins.bool] windows_mode_ftp: Does FTP user Windows emulation mode?
+        :param pulumi.Input[_builtins.bool] workspace_folder_admins_can_see_default_workspace_directory: If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -7444,6 +7738,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["calculate_file_checksums_md5"] = calculate_file_checksums_md5
         __props__.__dict__["calculate_file_checksums_sha1"] = calculate_file_checksums_sha1
         __props__.__dict__["calculate_file_checksums_sha256"] = calculate_file_checksums_sha256
+        __props__.__dict__["child_site_folder_admins_can_see_parent_site_directory"] = child_site_folder_admins_can_see_parent_site_directory
         __props__.__dict__["color2_left"] = color2_left
         __props__.__dict__["color2_link"] = color2_link
         __props__.__dict__["color2_text"] = color2_text
@@ -7472,6 +7767,8 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["email"] = email
         __props__.__dict__["email_footer_custom_text"] = email_footer_custom_text
         __props__.__dict__["fedramp"] = fedramp
+        __props__.__dict__["file_activity_events_enabled"] = file_activity_events_enabled
+        __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
         __props__.__dict__["folder_permissions_groups_only"] = folder_permissions_groups_only
         __props__.__dict__["ftp_enabled"] = ftp_enabled
         __props__.__dict__["group_admins_can_add_users"] = group_admins_can_add_users
@@ -7501,6 +7798,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["ldap_host3"] = ldap_host3
         __props__.__dict__["ldap_port"] = ldap_port
         __props__.__dict__["ldap_secure"] = ldap_secure
+        __props__.__dict__["ldap_server_certificate"] = ldap_server_certificate
         __props__.__dict__["ldap_type"] = ldap_type
         __props__.__dict__["ldap_user_action"] = ldap_user_action
         __props__.__dict__["ldap_user_include_groups"] = ldap_user_include_groups
@@ -7551,6 +7849,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["restrict_root_folder_behaviors_to_site_admins"] = restrict_root_folder_behaviors_to_site_admins
         __props__.__dict__["revoke_bundle_access_on_disable_or_delete"] = revoke_bundle_access_on_disable_or_delete
         __props__.__dict__["root_folder_behaviors_apply_to_workspaces"] = root_folder_behaviors_apply_to_workspaces
+        __props__.__dict__["s3_compatible_endpoint_enabled"] = s3_compatible_endpoint_enabled
         __props__.__dict__["session"] = session
         __props__.__dict__["session_expiry_minutes"] = session_expiry_minutes
         __props__.__dict__["sftp_enabled"] = sftp_enabled
@@ -7570,6 +7869,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["smtp_authentication"] = smtp_authentication
         __props__.__dict__["smtp_from"] = smtp_from
         __props__.__dict__["smtp_port"] = smtp_port
+        __props__.__dict__["smtp_ssl"] = smtp_ssl
         __props__.__dict__["smtp_username"] = smtp_username
         __props__.__dict__["snapshot_sharing_enabled"] = snapshot_sharing_enabled
         __props__.__dict__["ssl_required"] = ssl_required
@@ -7596,6 +7896,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["welcome_email_subject"] = welcome_email_subject
         __props__.__dict__["welcome_screen"] = welcome_screen
         __props__.__dict__["windows_mode_ftp"] = windows_mode_ftp
+        __props__.__dict__["workspace_folder_admins_can_see_default_workspace_directory"] = workspace_folder_admins_can_see_default_workspace_directory
         return Site(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -7642,7 +7943,7 @@ class Site(pulumi.CustomResource):
     @pulumi.getter(name="aiFeatureAvailability")
     def ai_feature_availability(self) -> pulumi.Output[Any]:
         """
-        Availability settings for AI features by user class
+        Availability settings for AI features. Each feature requires the site*admins, workspace*admins, folder*admins, and all*users keys. Optional selected*group*members defaults to false; when true, members of at least one group in group*ids get access regardless of the other options. All availability options are additive: any enabled option matching the user grants access. Optional group*ids is an array of integer IDs of active groups on this site, from any workspace. Omitted or empty group*ids grants no access through selected*group_members and does not affect other options. Disabling all AI features overrides these settings.
         """
         return pulumi.get(self, "ai_feature_availability")
 
@@ -7935,6 +8236,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "calculate_file_checksums_sha256")
 
     @_builtins.property
+    @pulumi.getter(name="childSiteFolderAdminsCanSeeParentSiteDirectory")
+    def child_site_folder_admins_can_see_parent_site_directory(self) -> pulumi.Output[_builtins.bool]:
+        """
+        If true, administrators on this site's Child Sites, including Folder Admins, can list this site's Default Workspace users and groups and grant them folder permissions and notifications on Child Site paths.
+        """
+        return pulumi.get(self, "child_site_folder_admins_can_see_parent_site_directory")
+
+    @_builtins.property
     @pulumi.getter(name="color2Left")
     def color2_left(self) -> pulumi.Output[_builtins.str]:
         """
@@ -8146,7 +8455,7 @@ class Site(pulumi.CustomResource):
     @pulumi.getter(name="emailFooterCustomText")
     def email_footer_custom_text(self) -> pulumi.Output[_builtins.str]:
         """
-        Custom footer text for system-generated emails. Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
         """
         return pulumi.get(self, "email_footer_custom_text")
 
@@ -8157,6 +8466,22 @@ class Site(pulumi.CustomResource):
         Are FedRAMP security restrictions enabled for this site?
         """
         return pulumi.get(self, "fedramp")
+
+    @_builtins.property
+    @pulumi.getter(name="fileActivityEventsEnabled")
+    def file_activity_events_enabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
+        """
+        return pulumi.get(self, "file_activity_events_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="filesComRemoteServerEnabled")
+    def files_com_remote_server_enabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
+        """
+        return pulumi.get(self, "files_com_remote_server_enabled")
 
     @_builtins.property
     @pulumi.getter(name="folderPermissionsGroupsOnly")
@@ -8391,6 +8716,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "ldap_secure")
 
     @_builtins.property
+    @pulumi.getter(name="ldapServerCertificate")
+    def ldap_server_certificate(self) -> pulumi.Output[_builtins.str]:
+        """
+        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
+        """
+        return pulumi.get(self, "ldap_server_certificate")
+
+    @_builtins.property
     @pulumi.getter(name="ldapType")
     def ldap_type(self) -> pulumi.Output[_builtins.str]:
         """
@@ -8466,7 +8799,7 @@ class Site(pulumi.CustomResource):
     @pulumi.getter(name="managedSiteSettings")
     def managed_site_settings(self) -> pulumi.Output[Any]:
         """
-        List of site settings managed by the parent site
+        Site settings managed by the parent site. Each key identifies a managed setting, with a null value. Non-secret effective values are returned in their own Site settings fields.
         """
         return pulumi.get(self, "managed_site_settings")
 
@@ -8791,6 +9124,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "root_folder_behaviors_apply_to_workspaces")
 
     @_builtins.property
+    @pulumi.getter(name="s3CompatibleEndpointEnabled")
+    def s3_compatible_endpoint_enabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Is the S3-compatible endpoint enabled for all users and workspaces on this site? Defaults to true. When false, user and group S3 permissions do not allow access.
+        """
+        return pulumi.get(self, "s3_compatible_endpoint_enabled")
+
+    @_builtins.property
     @pulumi.getter
     def session(self) -> pulumi.Output[_builtins.str]:
         """
@@ -8943,6 +9284,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "smtp_port")
 
     @_builtins.property
+    @pulumi.getter(name="smtpSsl")
+    def smtp_ssl(self) -> pulumi.Output[_builtins.str]:
+        """
+        Custom SMTP encryption mode: if*available (default) uses STARTTLS when offered and otherwise sends credentials and messages unencrypted. A certificate-verified STARTTLS connection automatically changes if*available to require unless smtp*ssl is managed by a parent policy. require requires STARTTLS before authentication; require*implicit uses TLS from connection start; never disables TLS. TLS verifies the server certificate against smtp_address. Encryption is never automatically downgraded.
+        """
+        return pulumi.get(self, "smtp_ssl")
+
+    @_builtins.property
     @pulumi.getter(name="smtpUsername")
     def smtp_username(self) -> pulumi.Output[_builtins.str]:
         """
@@ -9002,7 +9351,7 @@ class Site(pulumi.CustomResource):
     @pulumi.getter(name="uploadsViaEmailAuthentication")
     def uploads_via_email_authentication(self) -> pulumi.Output[_builtins.bool]:
         """
-        Do incoming emails in the Inboxes require checking for SPF/DKIM/DMARC?
+        Require email authentication, virus, and spam checks for incoming emails to Inboxes and Incoming Email Automations in every Workspace on this site?
         """
         return pulumi.get(self, "uploads_via_email_authentication")
 
@@ -9149,4 +9498,12 @@ class Site(pulumi.CustomResource):
         Does FTP user Windows emulation mode?
         """
         return pulumi.get(self, "windows_mode_ftp")
+
+    @_builtins.property
+    @pulumi.getter(name="workspaceFolderAdminsCanSeeDefaultWorkspaceDirectory")
+    def workspace_folder_admins_can_see_default_workspace_directory(self) -> pulumi.Output[_builtins.bool]:
+        """
+        If true, Workspace Administrators and Folder Admins in a Custom Workspace can list the Default Workspace users and groups that have permissions in that Workspace and choose them as Email Notification recipients.
+        """
+        return pulumi.get(self, "workspace_folder_admins_can_see_default_workspace_directory")
 

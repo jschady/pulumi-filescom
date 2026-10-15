@@ -963,9 +963,7 @@ class Sync(pulumi.CustomResource):
                  __props__=None):
         """
         A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
-
         It can be scheduled, run manually, or triggered by custom logic.
-
         Syncs track their runs, status, and configuration.
 
         ## Example Usage
@@ -1059,9 +1057,7 @@ class Sync(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
-
         It can be scheduled, run manually, or triggered by custom logic.
-
         Syncs track their runs, status, and configuration.
 
         ## Example Usage

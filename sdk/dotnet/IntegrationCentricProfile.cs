@@ -31,7 +31,11 @@ namespace Jschady.Filescom
     ///         Name = "Business Systems Onboarding",
     ///         ExpectedRemoteServers = new[]
     ///         {
-    ///             "example",
+    ///             
+    ///             {
+    ///                 { "serverType", "dropbox" },
+    ///                 { "name", "Dropbox" },
+    ///             },
     ///         },
     ///         WorkspaceId = 1,
     ///         UseForAllUsers = false,

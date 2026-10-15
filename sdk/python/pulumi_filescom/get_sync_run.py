@@ -317,7 +317,6 @@ def get_sync_run(id: Optional[_builtins.int] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSyncRunResult:
     """
     A SyncRun represents a single execution (run) of a Sync job.
-
     It tracks status, statistics, logs, and timing for each sync operation.
 
     ## Example Usage
@@ -367,7 +366,6 @@ def get_sync_run_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSyncRunResult]:
     """
     A SyncRun represents a single execution (run) of a Sync job.
-
     It tracks status, statistics, logs, and timing for each sync operation.
 
     ## Example Usage

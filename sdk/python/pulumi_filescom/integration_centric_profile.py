@@ -186,7 +186,10 @@ class IntegrationCentricProfile(pulumi.CustomResource):
 
         example_integration_centric_profile = filescom.IntegrationCentricProfile("example_integration_centric_profile",
             name="Business Systems Onboarding",
-            expected_remote_servers=["example"],
+            expected_remote_servers=[{
+                "serverType": "dropbox",
+                "name": "Dropbox",
+            }],
             workspace_id=1,
             use_for_all_users=False)
         ```
@@ -230,7 +233,10 @@ class IntegrationCentricProfile(pulumi.CustomResource):
 
         example_integration_centric_profile = filescom.IntegrationCentricProfile("example_integration_centric_profile",
             name="Business Systems Onboarding",
-            expected_remote_servers=["example"],
+            expected_remote_servers=[{
+                "serverType": "dropbox",
+                "name": "Dropbox",
+            }],
             workspace_id=1,
             use_for_all_users=False)
         ```

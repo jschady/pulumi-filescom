@@ -17,7 +17,7 @@ namespace Jschady.Filescom.Outputs
         /// <summary>
         /// Configuration fields for this node type.
         /// </summary>
-        public readonly Outputs.AutomationDefinitionNodeRunSyncConfig? Config;
+        public readonly Outputs.AutomationDefinitionNodeRunSyncConfig Config;
         /// <summary>
         /// Unique node ID within the graph.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Jschady.Filescom.Outputs
 
         [OutputConstructor]
         private AutomationDefinitionNodeRunSync(
-            Outputs.AutomationDefinitionNodeRunSyncConfig? config,
+            Outputs.AutomationDefinitionNodeRunSyncConfig config,
 
             string id,
 

@@ -48,6 +48,7 @@ class BundleArgs:
                  snapshot_id: pulumi.Input[Optional[_builtins.int]] = None,
                  start_access_on_date: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 watermark_value: Optional[Any] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a Bundle resource.
@@ -60,7 +61,7 @@ class BundleArgs:
                If true, create a snapshot of this bundle's contents.
         :param pulumi.Input[_builtins.str] description: Public description
         :param pulumi.Input[_builtins.bool] dont_separate_submissions_by_folder: Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
-        :param pulumi.Input[_builtins.str] expires_at: Bundle expiration date/time
+        :param pulumi.Input[_builtins.str] expires_at: Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         :param pulumi.Input[_builtins.bool] finalize_snapshot: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
         :param pulumi.Input[_builtins.int] form_field_set_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -85,6 +86,7 @@ class BundleArgs:
         :param pulumi.Input[_builtins.int] snapshot_id: ID of the snapshot containing this bundle's contents.
         :param pulumi.Input[_builtins.str] start_access_on_date: Date when share will start to be accessible. If <span pulumi-lang-nodejs="`nil`" pulumi-lang-dotnet="`Nil`" pulumi-lang-go="`nil`" pulumi-lang-python="`nil`" pulumi-lang-yaml="`nil`" pulumi-lang-java="`nil`" pulumi-lang-hcl="`nil`">`nil`</span> access granted right after create.
         :param pulumi.Input[_builtins.int] user_id: Bundle creator user ID
+        :param Any watermark_value: Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
         :param pulumi.Input[_builtins.int] workspace_id: Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
         """
         pulumi.set(__self__, "paths", paths)
@@ -144,6 +146,8 @@ class BundleArgs:
             pulumi.set(__self__, "start_access_on_date", start_access_on_date)
         if user_id is not None:
             pulumi.set(__self__, "user_id", user_id)
+        if watermark_value is not None:
+            pulumi.set(__self__, "watermark_value", watermark_value)
         if workspace_id is not None:
             pulumi.set(__self__, "workspace_id", workspace_id)
 
@@ -236,7 +240,7 @@ class BundleArgs:
     @pulumi.getter(name="expiresAt")
     def expires_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Bundle expiration date/time
+        Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         """
         return pulumi.get(self, "expires_at")
 
@@ -500,6 +504,18 @@ class BundleArgs:
         pulumi.set(self, "user_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="watermarkValue")
+    def watermark_value(self) -> Optional[Any]:
+        """
+        Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
+        """
+        return pulumi.get(self, "watermark_value")
+
+    @watermark_value.setter
+    def watermark_value(self, value: Optional[Any]):
+        pulumi.set(self, "watermark_value", value)
+
+    @_builtins.property
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -532,6 +548,7 @@ class _BundleState:
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  dont_allow_folders_in_uploads: pulumi.Input[Optional[_builtins.bool]] = None,
                  dont_separate_submissions_by_folder: pulumi.Input[Optional[_builtins.bool]] = None,
+                 effective_expires_at: pulumi.Input[Optional[_builtins.str]] = None,
                  expires_at: pulumi.Input[Optional[_builtins.str]] = None,
                  finalize_snapshot: pulumi.Input[Optional[_builtins.bool]] = None,
                  form_field_set: pulumi.Input[Optional[_builtins.str]] = None,
@@ -587,7 +604,8 @@ class _BundleState:
         :param pulumi.Input[_builtins.str] description: Public description
         :param pulumi.Input[_builtins.bool] dont_allow_folders_in_uploads: Should folder uploads be prevented?
         :param pulumi.Input[_builtins.bool] dont_separate_submissions_by_folder: Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
-        :param pulumi.Input[_builtins.str] expires_at: Bundle expiration date/time
+        :param pulumi.Input[_builtins.str] effective_expires_at: Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        :param pulumi.Input[_builtins.str] expires_at: Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         :param pulumi.Input[_builtins.bool] finalize_snapshot: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
         :param pulumi.Input[_builtins.str] form_field_set: Custom Form to use
@@ -658,6 +676,8 @@ class _BundleState:
             pulumi.set(__self__, "dont_allow_folders_in_uploads", dont_allow_folders_in_uploads)
         if dont_separate_submissions_by_folder is not None:
             pulumi.set(__self__, "dont_separate_submissions_by_folder", dont_separate_submissions_by_folder)
+        if effective_expires_at is not None:
+            pulumi.set(__self__, "effective_expires_at", effective_expires_at)
         if expires_at is not None:
             pulumi.set(__self__, "expires_at", expires_at)
         if finalize_snapshot is not None:
@@ -933,10 +953,22 @@ class _BundleState:
         pulumi.set(self, "dont_separate_submissions_by_folder", value)
 
     @_builtins.property
+    @pulumi.getter(name="effectiveExpiresAt")
+    def effective_expires_at(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        """
+        return pulumi.get(self, "effective_expires_at")
+
+    @effective_expires_at.setter
+    def effective_expires_at(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "effective_expires_at", value)
+
+    @_builtins.property
     @pulumi.getter(name="expiresAt")
     def expires_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Bundle expiration date/time
+        Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         """
         return pulumi.get(self, "expires_at")
 
@@ -1376,11 +1408,11 @@ class Bundle(pulumi.CustomResource):
                  snapshot_id: pulumi.Input[Optional[_builtins.int]] = None,
                  start_access_on_date: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 watermark_value: Optional[Any] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
         A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-
         The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 
         Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -1422,7 +1454,12 @@ class Bundle(pulumi.CustomResource):
             skip_company=True,
             start_access_on_date="2000-01-01T01:00:00Z",
             snapshot_id=1,
-            workspace_id=1)
+            workspace_id=1,
+            watermark_value={
+                "gravity": "SouthWest",
+                "maxHeightOrWidth": 20,
+                "transparency": 25,
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1446,7 +1483,7 @@ class Bundle(pulumi.CustomResource):
                If true, create a snapshot of this bundle's contents.
         :param pulumi.Input[_builtins.str] description: Public description
         :param pulumi.Input[_builtins.bool] dont_separate_submissions_by_folder: Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
-        :param pulumi.Input[_builtins.str] expires_at: Bundle expiration date/time
+        :param pulumi.Input[_builtins.str] expires_at: Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         :param pulumi.Input[_builtins.bool] finalize_snapshot: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
         :param pulumi.Input[_builtins.int] form_field_set_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -1472,6 +1509,7 @@ class Bundle(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] snapshot_id: ID of the snapshot containing this bundle's contents.
         :param pulumi.Input[_builtins.str] start_access_on_date: Date when share will start to be accessible. If <span pulumi-lang-nodejs="`nil`" pulumi-lang-dotnet="`Nil`" pulumi-lang-go="`nil`" pulumi-lang-python="`nil`" pulumi-lang-yaml="`nil`" pulumi-lang-java="`nil`" pulumi-lang-hcl="`nil`">`nil`</span> access granted right after create.
         :param pulumi.Input[_builtins.int] user_id: Bundle creator user ID
+        :param Any watermark_value: Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
         :param pulumi.Input[_builtins.int] workspace_id: Workspace ID. <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> means the default workspace.
         """
         ...
@@ -1482,7 +1520,6 @@ class Bundle(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-
         The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 
         Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -1524,7 +1561,12 @@ class Bundle(pulumi.CustomResource):
             skip_company=True,
             start_access_on_date="2000-01-01T01:00:00Z",
             snapshot_id=1,
-            workspace_id=1)
+            workspace_id=1,
+            watermark_value={
+                "gravity": "SouthWest",
+                "maxHeightOrWidth": 20,
+                "transparency": 25,
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1583,6 +1625,7 @@ class Bundle(pulumi.CustomResource):
                  snapshot_id: pulumi.Input[Optional[_builtins.int]] = None,
                  start_access_on_date: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 watermark_value: Optional[Any] = None,
                  workspace_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -1624,6 +1667,7 @@ class Bundle(pulumi.CustomResource):
             __props__.__dict__["snapshot_id"] = snapshot_id
             __props__.__dict__["start_access_on_date"] = start_access_on_date
             __props__.__dict__["user_id"] = user_id
+            __props__.__dict__["watermark_value"] = watermark_value
             __props__.__dict__["workspace_id"] = workspace_id
             __props__.__dict__["bundlepaths"] = None
             __props__.__dict__["clickwrap_body"] = None
@@ -1636,6 +1680,7 @@ class Bundle(pulumi.CustomResource):
             __props__.__dict__["deleted"] = None
             __props__.__dict__["deleted_at"] = None
             __props__.__dict__["dont_allow_folders_in_uploads"] = None
+            __props__.__dict__["effective_expires_at"] = None
             __props__.__dict__["form_field_set"] = None
             __props__.__dict__["has_inbox"] = None
             __props__.__dict__["password_protected"] = None
@@ -1645,7 +1690,6 @@ class Bundle(pulumi.CustomResource):
             __props__.__dict__["url"] = None
             __props__.__dict__["username"] = None
             __props__.__dict__["watermark_attachment"] = None
-            __props__.__dict__["watermark_value"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["createSnapshot", "finalizeSnapshot", "formFieldSetId", "password"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Bundle, __self__).__init__(
@@ -1675,6 +1719,7 @@ class Bundle(pulumi.CustomResource):
             description: pulumi.Input[Optional[_builtins.str]] = None,
             dont_allow_folders_in_uploads: pulumi.Input[Optional[_builtins.bool]] = None,
             dont_separate_submissions_by_folder: pulumi.Input[Optional[_builtins.bool]] = None,
+            effective_expires_at: pulumi.Input[Optional[_builtins.str]] = None,
             expires_at: pulumi.Input[Optional[_builtins.str]] = None,
             finalize_snapshot: pulumi.Input[Optional[_builtins.bool]] = None,
             form_field_set: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1734,7 +1779,8 @@ class Bundle(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Public description
         :param pulumi.Input[_builtins.bool] dont_allow_folders_in_uploads: Should folder uploads be prevented?
         :param pulumi.Input[_builtins.bool] dont_separate_submissions_by_folder: Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
-        :param pulumi.Input[_builtins.str] expires_at: Bundle expiration date/time
+        :param pulumi.Input[_builtins.str] effective_expires_at: Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        :param pulumi.Input[_builtins.str] expires_at: Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         :param pulumi.Input[_builtins.bool] finalize_snapshot: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                If true, finalize the snapshot of this bundle's contents. Note that <span pulumi-lang-nodejs="`createSnapshot`" pulumi-lang-dotnet="`CreateSnapshot`" pulumi-lang-go="`createSnapshot`" pulumi-lang-python="`create_snapshot`" pulumi-lang-yaml="`createSnapshot`" pulumi-lang-java="`createSnapshot`" pulumi-lang-hcl="`create_snapshot`">`createSnapshot`</span> must also be true.
         :param pulumi.Input[_builtins.str] form_field_set: Custom Form to use
@@ -1792,6 +1838,7 @@ class Bundle(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["dont_allow_folders_in_uploads"] = dont_allow_folders_in_uploads
         __props__.__dict__["dont_separate_submissions_by_folder"] = dont_separate_submissions_by_folder
+        __props__.__dict__["effective_expires_at"] = effective_expires_at
         __props__.__dict__["expires_at"] = expires_at
         __props__.__dict__["finalize_snapshot"] = finalize_snapshot
         __props__.__dict__["form_field_set"] = form_field_set
@@ -1966,10 +2013,18 @@ class Bundle(pulumi.CustomResource):
         return pulumi.get(self, "dont_separate_submissions_by_folder")
 
     @_builtins.property
+    @pulumi.getter(name="effectiveExpiresAt")
+    def effective_expires_at(self) -> pulumi.Output[_builtins.str]:
+        """
+        Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        """
+        return pulumi.get(self, "effective_expires_at")
+
+    @_builtins.property
     @pulumi.getter(name="expiresAt")
     def expires_at(self) -> pulumi.Output[_builtins.str]:
         """
-        Bundle expiration date/time
+        Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         """
         return pulumi.get(self, "expires_at")
 

@@ -58,6 +58,8 @@ type LookupCustomDomainArgs struct {
 
 // A collection of values returned by getCustomDomain.
 type LookupCustomDomainResult struct {
+	// Allow all workspaces to use this default-workspace Custom Domain.
+	AvailableToAllWorkspaces bool `pulumi:"availableToAllWorkspaces"`
 	// Is this domain's SSL certificate automatically managed and renewed by Files.com?
 	BrickManaged bool `pulumi:"brickManaged"`
 	// When this Custom Domain was created.
@@ -72,10 +74,16 @@ type LookupCustomDomainResult struct {
 	FolderBehaviorId int `pulumi:"folderBehaviorId"`
 	// Custom Domain ID.
 	Id int `pulumi:"id"`
+	// Dedicated public IP addresses allocated to this Custom Domain.
+	IpAddresses []string `pulumi:"ipAddresses"`
+	// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+	OutboundIpAddresses []string `pulumi:"outboundIpAddresses"`
 	// Current SSL certificate ID.
 	SslCertificateId int `pulumi:"sslCertificateId"`
 	// When this Custom Domain was last updated.
 	UpdatedAt string `pulumi:"updatedAt"`
+	// Workspace ID (0 for the default workspace).
+	WorkspaceId int `pulumi:"workspaceId"`
 }
 
 func LookupCustomDomainOutput(ctx *pulumi.Context, args LookupCustomDomainOutputArgs, opts ...pulumi.InvokeOption) LookupCustomDomainResultOutput {
@@ -106,6 +114,11 @@ func (o LookupCustomDomainResultOutput) ToLookupCustomDomainResultOutput() Looku
 
 func (o LookupCustomDomainResultOutput) ToLookupCustomDomainResultOutputWithContext(ctx context.Context) LookupCustomDomainResultOutput {
 	return o
+}
+
+// Allow all workspaces to use this default-workspace Custom Domain.
+func (o LookupCustomDomainResultOutput) AvailableToAllWorkspaces() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupCustomDomainResult) bool { return v.AvailableToAllWorkspaces }).(pulumi.BoolOutput)
 }
 
 // Is this domain's SSL certificate automatically managed and renewed by Files.com?
@@ -143,6 +156,16 @@ func (o LookupCustomDomainResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupCustomDomainResult) int { return v.Id }).(pulumi.IntOutput)
 }
 
+// Dedicated public IP addresses allocated to this Custom Domain.
+func (o LookupCustomDomainResultOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupCustomDomainResult) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Eligible public IP addresses for Remote Server outbound connections. Empty when this Custom Domain is not eligible for outbound selection.
+func (o LookupCustomDomainResultOutput) OutboundIpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupCustomDomainResult) []string { return v.OutboundIpAddresses }).(pulumi.StringArrayOutput)
+}
+
 // Current SSL certificate ID.
 func (o LookupCustomDomainResultOutput) SslCertificateId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupCustomDomainResult) int { return v.SslCertificateId }).(pulumi.IntOutput)
@@ -151,6 +174,11 @@ func (o LookupCustomDomainResultOutput) SslCertificateId() pulumi.IntOutput {
 // When this Custom Domain was last updated.
 func (o LookupCustomDomainResultOutput) UpdatedAt() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCustomDomainResult) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+// Workspace ID (0 for the default workspace).
+func (o LookupCustomDomainResultOutput) WorkspaceId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupCustomDomainResult) int { return v.WorkspaceId }).(pulumi.IntOutput)
 }
 
 func init() {

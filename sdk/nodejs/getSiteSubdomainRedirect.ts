@@ -6,7 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * A SiteSubdomainRedirect object represents an old Files.com subdomain that continues to work after the site's Files.com subdomain changes.
- *
  * HTTPS requests redirect to the current subdomain, and other protocols such as FTP and SFTP are routed through DNS.
  *
  * ## Example Usage
@@ -62,7 +61,6 @@ export interface GetSiteSubdomainRedirectResult {
 }
 /**
  * A SiteSubdomainRedirect object represents an old Files.com subdomain that continues to work after the site's Files.com subdomain changes.
- *
  * HTTPS requests redirect to the current subdomain, and other protocols such as FTP and SFTP are routed through DNS.
  *
  * ## Example Usage

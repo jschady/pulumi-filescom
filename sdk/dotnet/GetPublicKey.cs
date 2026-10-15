@@ -15,19 +15,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A PublicKey is used to authenticate to Files.com via SFTP (SSH File Transfer Protocol). This method of authentication allows users to use their private key (which is never shared with Files.com) to authenticate themselves against the PublicKey stored on Files.com.
         /// 
-        /// 
-        /// 
         /// When a user configures their PublicKey, it allows them to bypass traditional password-based authentication, leveraging the security of key-based authentication instead.
-        /// 
-        /// 
         /// 
         /// Note that Files.com's SSH support is limited to file operations only. While users can securely transfer files and manage their data via SFTP, they do not have access to a full shell environment for executing arbitrary commands.
         /// 
-        /// 
-        /// 
         /// When generating new SSH keys, here are the available options: Files.com supports multiple SSH key algorithms: RSA (default 4096 bits, range 1024-4096 in 8-bit increments), DSA (1024 bits only), Ed25519 (256 bits), and ECDSA (256, 384, or 521 bits). When generating keys, the system uses these default lengths unless a specific length is specified.
-        /// 
-        /// 
         /// 
         /// Files.com also supports importing additional key types that cannot be generated: security key types (sk-ecdsa-sha2-nistp256, sk-ssh-ed25519). RSA keys up to 8192 bits are also supported for import.
         /// 
@@ -140,19 +132,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A PublicKey is used to authenticate to Files.com via SFTP (SSH File Transfer Protocol). This method of authentication allows users to use their private key (which is never shared with Files.com) to authenticate themselves against the PublicKey stored on Files.com.
         /// 
-        /// 
-        /// 
         /// When a user configures their PublicKey, it allows them to bypass traditional password-based authentication, leveraging the security of key-based authentication instead.
-        /// 
-        /// 
         /// 
         /// Note that Files.com's SSH support is limited to file operations only. While users can securely transfer files and manage their data via SFTP, they do not have access to a full shell environment for executing arbitrary commands.
         /// 
-        /// 
-        /// 
         /// When generating new SSH keys, here are the available options: Files.com supports multiple SSH key algorithms: RSA (default 4096 bits, range 1024-4096 in 8-bit increments), DSA (1024 bits only), Ed25519 (256 bits), and ECDSA (256, 384, or 521 bits). When generating keys, the system uses these default lengths unless a specific length is specified.
-        /// 
-        /// 
         /// 
         /// Files.com also supports importing additional key types that cannot be generated: security key types (sk-ecdsa-sha2-nistp256, sk-ssh-ed25519). RSA keys up to 8192 bits are also supported for import.
         /// 
@@ -265,19 +249,11 @@ namespace Jschady.Filescom
         /// <summary>
         /// A PublicKey is used to authenticate to Files.com via SFTP (SSH File Transfer Protocol). This method of authentication allows users to use their private key (which is never shared with Files.com) to authenticate themselves against the PublicKey stored on Files.com.
         /// 
-        /// 
-        /// 
         /// When a user configures their PublicKey, it allows them to bypass traditional password-based authentication, leveraging the security of key-based authentication instead.
-        /// 
-        /// 
         /// 
         /// Note that Files.com's SSH support is limited to file operations only. While users can securely transfer files and manage their data via SFTP, they do not have access to a full shell environment for executing arbitrary commands.
         /// 
-        /// 
-        /// 
         /// When generating new SSH keys, here are the available options: Files.com supports multiple SSH key algorithms: RSA (default 4096 bits, range 1024-4096 in 8-bit increments), DSA (1024 bits only), Ed25519 (256 bits), and ECDSA (256, 384, or 521 bits). When generating keys, the system uses these default lengths unless a specific length is specified.
-        /// 
-        /// 
         /// 
         /// Files.com also supports importing additional key types that cannot be generated: security key types (sk-ecdsa-sha2-nistp256, sk-ssh-ed25519). RSA keys up to 8192 bits are also supported for import.
         /// 

@@ -15,13 +15,13 @@ namespace Jschady.Filescom.Outputs
     public sealed class AutomationDefinitionNodeImportFileConfig
     {
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         public readonly string? Content;
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// One or more destination path templates.
         /// </summary>
-        public readonly string? Destination;
+        public readonly ImmutableArray<string> Destinations;
         public readonly ImmutableDictionary<string, string>? Headers;
         public readonly string? Method;
         /// <summary>
@@ -29,7 +29,7 @@ namespace Jschady.Filescom.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.AutomationDefinitionNodeImportFileConfigOnError> OnErrors;
         /// <summary>
-        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+        /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
         public readonly string Url;
 
@@ -37,7 +37,7 @@ namespace Jschady.Filescom.Outputs
         private AutomationDefinitionNodeImportFileConfig(
             string? content,
 
-            string? destination,
+            ImmutableArray<string> destinations,
 
             ImmutableDictionary<string, string>? headers,
 
@@ -48,7 +48,7 @@ namespace Jschady.Filescom.Outputs
             string url)
         {
             Content = content;
-            Destination = destination;
+            Destinations = destinations;
             Headers = headers;
             Method = method;
             OnErrors = onErrors;

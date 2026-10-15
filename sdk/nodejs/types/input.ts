@@ -64,6 +64,7 @@ export interface AutomationDefinitionNode {
     transform?: pulumi.Input<inputs.AutomationDefinitionNodeTransform | undefined>;
     triggerAction?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerAction | undefined>;
     triggerEmail?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerEmail | undefined>;
+    triggerFolderCreation?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerFolderCreation | undefined>;
     triggerManual?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerManual | undefined>;
     triggerScheduled?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerScheduled | undefined>;
     triggerWebhook?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerWebhook | undefined>;
@@ -291,7 +292,7 @@ export interface AutomationDefinitionNodeDocumentConvert {
 
 export interface AutomationDefinitionNodeDocumentConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     /**
@@ -365,6 +366,7 @@ export interface AutomationDefinitionNodeFilterConfig {
      * A bare Files TransformScript expression, no braces.
      */
     condition: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
@@ -396,7 +398,7 @@ export interface AutomationDefinitionNodeGpgDecrypt {
 
 export interface AutomationDefinitionNodeGpgDecryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     gpgKeyId: pulumi.Input<number>;
@@ -432,7 +434,7 @@ export interface AutomationDefinitionNodeGpgEncrypt {
 
 export interface AutomationDefinitionNodeGpgEncryptConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     gpgKeyId: pulumi.Input<number>;
@@ -502,7 +504,7 @@ export interface AutomationDefinitionNodeImageConvert {
 
 export interface AutomationDefinitionNodeImageConvertConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     height?: pulumi.Input<number | undefined>;
@@ -540,13 +542,13 @@ export interface AutomationDefinitionNodeImportFile {
 
 export interface AutomationDefinitionNodeImportFileConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     content?: pulumi.Input<string | undefined>;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * One or more destination path templates.
      */
-    destination?: pulumi.Input<string | undefined>;
+    destinations?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     method?: pulumi.Input<string | undefined>;
     /**
@@ -554,7 +556,7 @@ export interface AutomationDefinitionNodeImportFileConfig {
      */
     onErrors?: pulumi.Input<pulumi.Input<inputs.AutomationDefinitionNodeImportFileConfigOnError>[] | undefined>;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     url: pulumi.Input<string>;
 }
@@ -682,7 +684,7 @@ export interface AutomationDefinitionNodeRunSync {
     /**
      * Configuration fields for this node type.
      */
-    config?: pulumi.Input<inputs.AutomationDefinitionNodeRunSyncConfig | undefined>;
+    config: pulumi.Input<inputs.AutomationDefinitionNodeRunSyncConfig>;
     /**
      * Unique node ID within the graph.
      */
@@ -694,12 +696,11 @@ export interface AutomationDefinitionNodeRunSync {
 }
 
 export interface AutomationDefinitionNodeRunSyncConfig {
-    legacySyncIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
     onErrors?: pulumi.Input<pulumi.Input<inputs.AutomationDefinitionNodeRunSyncConfigOnError>[] | undefined>;
-    syncIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    syncIds: pulumi.Input<pulumi.Input<number>[]>;
 }
 
 export interface AutomationDefinitionNodeRunSyncConfigOnError {
@@ -729,12 +730,12 @@ export interface AutomationDefinitionNodeSendEmailConfig {
     attachments?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     bccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     body?: pulumi.Input<string | undefined>;
     ccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     from?: pulumi.Input<string | undefined>;
     /**
@@ -742,7 +743,7 @@ export interface AutomationDefinitionNodeSendEmailConfig {
      */
     onErrors?: pulumi.Input<pulumi.Input<inputs.AutomationDefinitionNodeSendEmailConfigOnError>[] | undefined>;
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     subject?: pulumi.Input<string | undefined>;
     tos: pulumi.Input<pulumi.Input<string>[]>;
@@ -819,7 +820,7 @@ export interface AutomationDefinitionNodeSwitchConfigCase {
      */
     condition: pulumi.Input<string>;
     /**
-     * Identifier used to connect nodes and named inputs or outputs.
+     * Case-sensitive output name. Use 1-64 letters, numbers, underscores, or hyphens.
      */
     name: pulumi.Input<string>;
 }
@@ -849,7 +850,7 @@ export interface AutomationDefinitionNodeTransform {
 
 export interface AutomationDefinitionNodeTransformConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     fts: pulumi.Input<string>;
@@ -880,6 +881,7 @@ export interface AutomationDefinitionNodeTriggerAction {
 
 export interface AutomationDefinitionNodeTriggerActionConfig {
     excludePattern?: pulumi.Input<string | undefined>;
+    kind?: pulumi.Input<string | undefined>;
     path?: pulumi.Input<string | undefined>;
     pathTimeZone?: pulumi.Input<string | undefined>;
     source?: pulumi.Input<string | undefined>;
@@ -906,6 +908,24 @@ export interface AutomationDefinitionNodeTriggerEmailConfig {
     source?: pulumi.Input<string | undefined>;
 }
 
+export interface AutomationDefinitionNodeTriggerFolderCreation {
+    /**
+     * Configuration fields for this node type.
+     */
+    config?: pulumi.Input<inputs.AutomationDefinitionNodeTriggerFolderCreationConfig | undefined>;
+    /**
+     * Unique node ID within the graph.
+     */
+    id: pulumi.Input<string>;
+}
+
+export interface AutomationDefinitionNodeTriggerFolderCreationConfig {
+    excludePattern?: pulumi.Input<string | undefined>;
+    path?: pulumi.Input<string | undefined>;
+    pathTimeZone?: pulumi.Input<string | undefined>;
+    source?: pulumi.Input<string | undefined>;
+}
+
 export interface AutomationDefinitionNodeTriggerManual {
     /**
      * Configuration fields for this node type.
@@ -922,6 +942,9 @@ export interface AutomationDefinitionNodeTriggerManualConfig {
     limit?: pulumi.Input<number | undefined>;
     path?: pulumi.Input<string | undefined>;
     pathTimeZone?: pulumi.Input<string | undefined>;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: pulumi.Input<string | undefined>;
 }
 
@@ -949,6 +972,9 @@ export interface AutomationDefinitionNodeTriggerScheduledConfig {
     scheduleId?: pulumi.Input<number | undefined>;
     scheduleTimeZone?: pulumi.Input<string | undefined>;
     scheduleTimesOfDays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: pulumi.Input<string | undefined>;
 }
 
@@ -968,6 +994,9 @@ export interface AutomationDefinitionNodeTriggerWebhookConfig {
     limit?: pulumi.Input<number | undefined>;
     path?: pulumi.Input<string | undefined>;
     pathTimeZone?: pulumi.Input<string | undefined>;
+    /**
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
+     */
     source?: pulumi.Input<string | undefined>;
 }
 
@@ -988,7 +1017,7 @@ export interface AutomationDefinitionNodeUnzip {
 
 export interface AutomationDefinitionNodeUnzipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination?: pulumi.Input<string | undefined>;
     /**
@@ -1054,7 +1083,7 @@ export interface AutomationDefinitionNodeZip {
 
 export interface AutomationDefinitionNodeZipConfig {
     /**
-     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time.
+     * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
     destination: pulumi.Input<string>;
     /**

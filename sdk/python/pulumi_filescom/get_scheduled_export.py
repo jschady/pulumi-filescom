@@ -26,7 +26,7 @@ class GetScheduledExportResult:
     """
     A collection of values returned by getScheduledExport.
     """
-    def __init__(__self__, created_at=None, disabled=None, export_options=None, export_type=None, holiday_region=None, human_readable_schedule=None, id=None, interval=None, last_export_id=None, last_run_at=None, name=None, recurring_day=None, recurring_days=None, report_name=None, schedule_days_of_weeks=None, schedule_id=None, schedule_time_zone=None, schedule_times_of_days=None, trigger=None, updated_at=None, user_id=None):
+    def __init__(__self__, created_at=None, disabled=None, export_options=None, export_type=None, holiday_region=None, human_readable_schedule=None, id=None, interval=None, last_error=None, last_export_id=None, last_run_at=None, name=None, recurring_day=None, recurring_days=None, report_name=None, schedule_days_of_weeks=None, schedule_id=None, schedule_time_zone=None, schedule_times_of_days=None, trigger=None, updated_at=None, user_id=None):
         if created_at and not isinstance(created_at, str):
             raise TypeError("Expected argument 'created_at' to be a str")
         pulumi.set(__self__, "created_at", created_at)
@@ -51,6 +51,9 @@ class GetScheduledExportResult:
         if interval and not isinstance(interval, str):
             raise TypeError("Expected argument 'interval' to be a str")
         pulumi.set(__self__, "interval", interval)
+        if last_error and not isinstance(last_error, str):
+            raise TypeError("Expected argument 'last_error' to be a str")
+        pulumi.set(__self__, "last_error", last_error)
         if last_export_id and not isinstance(last_export_id, int):
             raise TypeError("Expected argument 'last_export_id' to be a int")
         pulumi.set(__self__, "last_export_id", last_export_id)
@@ -156,6 +159,14 @@ class GetScheduledExportResult:
         return pulumi.get(self, "interval")
 
     @_builtins.property
+    @pulumi.getter(name="lastError")
+    def last_error(self) -> _builtins.str:
+        """
+        Validation error from the most recent scheduled attempt. The schedule remains enabled and retries at its next scheduled time. Cleared when an export is successfully created; does not describe errors during export generation.
+        """
+        return pulumi.get(self, "last_error")
+
+    @_builtins.property
     @pulumi.getter(name="lastExportId")
     def last_export_id(self) -> _builtins.int:
         """
@@ -167,7 +178,7 @@ class GetScheduledExportResult:
     @pulumi.getter(name="lastRunAt")
     def last_run_at(self) -> _builtins.str:
         """
-        Most recent scheduled run time.
+        Most recent scheduled attempt time, including attempts that failed validation.
         """
         return pulumi.get(self, "last_run_at")
 
@@ -274,6 +285,7 @@ class AwaitableGetScheduledExportResult(GetScheduledExportResult):
             human_readable_schedule=self.human_readable_schedule,
             id=self.id,
             interval=self.interval,
+            last_error=self.last_error,
             last_export_id=self.last_export_id,
             last_run_at=self.last_run_at,
             name=self.name,
@@ -322,6 +334,7 @@ def get_scheduled_export(id: Optional[_builtins.int] = None,
         human_readable_schedule=pulumi.get(__ret__, 'human_readable_schedule'),
         id=pulumi.get(__ret__, 'id'),
         interval=pulumi.get(__ret__, 'interval'),
+        last_error=pulumi.get(__ret__, 'last_error'),
         last_export_id=pulumi.get(__ret__, 'last_export_id'),
         last_run_at=pulumi.get(__ret__, 'last_run_at'),
         name=pulumi.get(__ret__, 'name'),
@@ -367,6 +380,7 @@ def get_scheduled_export_output(id: pulumi.Input[Optional[_builtins.int]] = None
         human_readable_schedule=pulumi.get(__response__, 'human_readable_schedule'),
         id=pulumi.get(__response__, 'id'),
         interval=pulumi.get(__response__, 'interval'),
+        last_error=pulumi.get(__response__, 'last_error'),
         last_export_id=pulumi.get(__response__, 'last_export_id'),
         last_run_at=pulumi.get(__response__, 'last_run_at'),
         name=pulumi.get(__response__, 'name'),

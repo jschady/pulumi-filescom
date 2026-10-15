@@ -26,7 +26,7 @@ class GetPartnerChannelResult:
     """
     A collection of values returned by getPartnerChannel.
     """
-    def __init__(__self__, channel_path=None, direction=None, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_folder_path=None, from_partner_managed_folder_paths=None, from_partner_route_path=None, id=None, partner_channel_template_id=None, partner_id=None, path=None, to_partner_folder_name=None, to_partner_folder_path=None, to_partner_managed_folder_paths=None, to_partner_route_path=None, workspace_id=None):
+    def __init__(__self__, channel_path=None, direction=None, effective_from_partner_folder_name=None, effective_to_partner_folder_name=None, from_partner_folder_name=None, from_partner_folder_path=None, from_partner_managed_folder_paths=None, from_partner_route_path=None, id=None, partner_channel_template_id=None, partner_id=None, path=None, to_partner_folder_name=None, to_partner_folder_path=None, to_partner_managed_folder_paths=None, to_partner_route_path=None, use_channel_root=None, workspace_id=None):
         if channel_path and not isinstance(channel_path, str):
             raise TypeError("Expected argument 'channel_path' to be a str")
         pulumi.set(__self__, "channel_path", channel_path)
@@ -75,6 +75,9 @@ class GetPartnerChannelResult:
         if to_partner_route_path and not isinstance(to_partner_route_path, str):
             raise TypeError("Expected argument 'to_partner_route_path' to be a str")
         pulumi.set(__self__, "to_partner_route_path", to_partner_route_path)
+        if use_channel_root and not isinstance(use_channel_root, bool):
+            raise TypeError("Expected argument 'use_channel_root' to be a bool")
+        pulumi.set(__self__, "use_channel_root", use_channel_root)
         if workspace_id and not isinstance(workspace_id, int):
             raise TypeError("Expected argument 'workspace_id' to be a int")
         pulumi.set(__self__, "workspace_id", workspace_id)
@@ -99,7 +102,7 @@ class GetPartnerChannelResult:
     @pulumi.getter(name="effectiveFromPartnerFolderName")
     def effective_from_partner_folder_name(self) -> _builtins.str:
         """
-        Resolved from-Partner folder name after Channel override and default.
+        Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_from_partner_folder_name")
 
@@ -107,7 +110,7 @@ class GetPartnerChannelResult:
     @pulumi.getter(name="effectiveToPartnerFolderName")
     def effective_to_partner_folder_name(self) -> _builtins.str:
         """
-        Resolved to-Partner folder name after Channel override and default.
+        Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
         """
         return pulumi.get(self, "effective_to_partner_folder_name")
 
@@ -208,6 +211,14 @@ class GetPartnerChannelResult:
         return pulumi.get(self, "to_partner_route_path")
 
     @_builtins.property
+    @pulumi.getter(name="useChannelRoot")
+    def use_channel_root(self) -> _builtins.bool:
+        """
+        Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+        """
+        return pulumi.get(self, "use_channel_root")
+
+    @_builtins.property
     @pulumi.getter(name="workspaceId")
     def workspace_id(self) -> _builtins.int:
         """
@@ -238,6 +249,7 @@ class AwaitableGetPartnerChannelResult(GetPartnerChannelResult):
             to_partner_folder_path=self.to_partner_folder_path,
             to_partner_managed_folder_paths=self.to_partner_managed_folder_paths,
             to_partner_route_path=self.to_partner_route_path,
+            use_channel_root=self.use_channel_root,
             workspace_id=self.workspace_id)
 
 
@@ -282,6 +294,7 @@ def get_partner_channel(id: Optional[_builtins.int] = None,
         to_partner_folder_path=pulumi.get(__ret__, 'to_partner_folder_path'),
         to_partner_managed_folder_paths=pulumi.get(__ret__, 'to_partner_managed_folder_paths'),
         to_partner_route_path=pulumi.get(__ret__, 'to_partner_route_path'),
+        use_channel_root=pulumi.get(__ret__, 'use_channel_root'),
         workspace_id=pulumi.get(__ret__, 'workspace_id'))
 def get_partner_channel_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                                opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPartnerChannelResult]:
@@ -323,4 +336,5 @@ def get_partner_channel_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         to_partner_folder_path=pulumi.get(__response__, 'to_partner_folder_path'),
         to_partner_managed_folder_paths=pulumi.get(__response__, 'to_partner_managed_folder_paths'),
         to_partner_route_path=pulumi.get(__response__, 'to_partner_route_path'),
+        use_channel_root=pulumi.get(__response__, 'use_channel_root'),
         workspace_id=pulumi.get(__response__, 'workspace_id')))

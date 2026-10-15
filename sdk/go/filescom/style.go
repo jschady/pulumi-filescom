@@ -13,11 +13,8 @@ import (
 )
 
 // A Style is a custom set of branding that can be applied on a per-folder basis.
-//
 // Currently these support a logo per folder and an optional click-through URL for public visitors.
-//
 // In the future we may extend these to also support colors.
-//
 // If you want to see that, please let us know so we can add your vote to the list.
 //
 // ## Example Usage

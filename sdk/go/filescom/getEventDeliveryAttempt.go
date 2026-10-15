@@ -58,6 +58,8 @@ type GetEventDeliveryAttemptArgs struct {
 
 // A collection of values returned by getEventDeliveryAttempt.
 type GetEventDeliveryAttemptResult struct {
+	// Shared summary ID when this event is delivered in a Slack or Teams subfolder summary. All events in a summary share its delivery outcome.
+	ActivityNotificationBatchId int `pulumi:"activityNotificationBatchId"`
 	// Number of delivery attempts made.
 	AttemptNumber int `pulumi:"attemptNumber"`
 	// Delivery Attempt create date/time.
@@ -118,6 +120,11 @@ func (o GetEventDeliveryAttemptResultOutput) ToGetEventDeliveryAttemptResultOutp
 
 func (o GetEventDeliveryAttemptResultOutput) ToGetEventDeliveryAttemptResultOutputWithContext(ctx context.Context) GetEventDeliveryAttemptResultOutput {
 	return o
+}
+
+// Shared summary ID when this event is delivered in a Slack or Teams subfolder summary. All events in a summary share its delivery outcome.
+func (o GetEventDeliveryAttemptResultOutput) ActivityNotificationBatchId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetEventDeliveryAttemptResult) int { return v.ActivityNotificationBatchId }).(pulumi.IntOutput)
 }
 
 // Number of delivery attempts made.

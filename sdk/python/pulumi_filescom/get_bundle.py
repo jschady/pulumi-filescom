@@ -26,7 +26,7 @@ class GetBundleResult:
     """
     A collection of values returned by getBundle.
     """
-    def __init__(__self__, bundlepaths=None, bypasses_site_expiration_rules=None, clickwrap_body=None, clickwrap_id=None, code=None, color_left=None, color_link=None, color_text=None, color_top=None, color_top_text=None, created_at=None, deleted=None, deleted_at=None, description=None, dont_allow_folders_in_uploads=None, dont_separate_submissions_by_folder=None, expires_at=None, form_field_set=None, group_id=None, has_inbox=None, id=None, inbox_id=None, internal_name=None, max_uses=None, note=None, password_protected=None, path_template=None, path_template_time_zone=None, paths=None, permissions=None, preview_only=None, requested_upload_slots=None, require_logout=None, require_registration=None, require_share_recipient=None, send_email_receipt_to_uploader=None, send_one_time_password_to_recipient_at_registration=None, skip_company=None, skip_email=None, skip_name=None, snapshot_id=None, start_access_on_date=None, url=None, user_id=None, username=None, watermark_attachment=None, watermark_value=None, workspace_id=None):
+    def __init__(__self__, bundlepaths=None, bypasses_site_expiration_rules=None, clickwrap_body=None, clickwrap_id=None, code=None, color_left=None, color_link=None, color_text=None, color_top=None, color_top_text=None, created_at=None, deleted=None, deleted_at=None, description=None, dont_allow_folders_in_uploads=None, dont_separate_submissions_by_folder=None, effective_expires_at=None, expires_at=None, form_field_set=None, group_id=None, has_inbox=None, id=None, inbox_id=None, internal_name=None, max_uses=None, note=None, password_protected=None, path_template=None, path_template_time_zone=None, paths=None, permissions=None, preview_only=None, requested_upload_slots=None, require_logout=None, require_registration=None, require_share_recipient=None, send_email_receipt_to_uploader=None, send_one_time_password_to_recipient_at_registration=None, skip_company=None, skip_email=None, skip_name=None, snapshot_id=None, start_access_on_date=None, url=None, user_id=None, username=None, watermark_attachment=None, watermark_value=None, workspace_id=None):
         if bundlepaths and not isinstance(bundlepaths, dict):
             raise TypeError("Expected argument 'bundlepaths' to be a dict")
         pulumi.set(__self__, "bundlepaths", bundlepaths)
@@ -75,6 +75,9 @@ class GetBundleResult:
         if dont_separate_submissions_by_folder and not isinstance(dont_separate_submissions_by_folder, bool):
             raise TypeError("Expected argument 'dont_separate_submissions_by_folder' to be a bool")
         pulumi.set(__self__, "dont_separate_submissions_by_folder", dont_separate_submissions_by_folder)
+        if effective_expires_at and not isinstance(effective_expires_at, str):
+            raise TypeError("Expected argument 'effective_expires_at' to be a str")
+        pulumi.set(__self__, "effective_expires_at", effective_expires_at)
         if expires_at and not isinstance(expires_at, str):
             raise TypeError("Expected argument 'expires_at' to be a str")
         pulumi.set(__self__, "expires_at", expires_at)
@@ -301,10 +304,18 @@ class GetBundleResult:
         return pulumi.get(self, "dont_separate_submissions_by_folder")
 
     @_builtins.property
+    @pulumi.getter(name="effectiveExpiresAt")
+    def effective_expires_at(self) -> _builtins.str:
+        """
+        Read-only expiration date/time, using the explicit expiration or the site-wide setting when applicable. Null when the Share Link does not expire.
+        """
+        return pulumi.get(self, "effective_expires_at")
+
+    @_builtins.property
     @pulumi.getter(name="expiresAt")
     def expires_at(self) -> _builtins.str:
         """
-        Bundle expiration date/time
+        Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.
         """
         return pulumi.get(self, "expires_at")
 
@@ -576,6 +587,7 @@ class AwaitableGetBundleResult(GetBundleResult):
             description=self.description,
             dont_allow_folders_in_uploads=self.dont_allow_folders_in_uploads,
             dont_separate_submissions_by_folder=self.dont_separate_submissions_by_folder,
+            effective_expires_at=self.effective_expires_at,
             expires_at=self.expires_at,
             form_field_set=self.form_field_set,
             group_id=self.group_id,
@@ -614,7 +626,6 @@ def get_bundle(id: Optional[_builtins.int] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetBundleResult:
     """
     A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-
     The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 
     Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -655,6 +666,7 @@ def get_bundle(id: Optional[_builtins.int] = None,
         description=pulumi.get(__ret__, 'description'),
         dont_allow_folders_in_uploads=pulumi.get(__ret__, 'dont_allow_folders_in_uploads'),
         dont_separate_submissions_by_folder=pulumi.get(__ret__, 'dont_separate_submissions_by_folder'),
+        effective_expires_at=pulumi.get(__ret__, 'effective_expires_at'),
         expires_at=pulumi.get(__ret__, 'expires_at'),
         form_field_set=pulumi.get(__ret__, 'form_field_set'),
         group_id=pulumi.get(__ret__, 'group_id'),
@@ -691,7 +703,6 @@ def get_bundle_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetBundleResult]:
     """
     A Bundle is the API/SDK term for the feature called Share Links in the web interface.
-
     The API provides the full set of actions related to Share Links, including sending them via E-Mail.
 
     Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
@@ -731,6 +742,7 @@ def get_bundle_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         description=pulumi.get(__response__, 'description'),
         dont_allow_folders_in_uploads=pulumi.get(__response__, 'dont_allow_folders_in_uploads'),
         dont_separate_submissions_by_folder=pulumi.get(__response__, 'dont_separate_submissions_by_folder'),
+        effective_expires_at=pulumi.get(__response__, 'effective_expires_at'),
         expires_at=pulumi.get(__response__, 'expires_at'),
         form_field_set=pulumi.get(__response__, 'form_field_set'),
         group_id=pulumi.get(__response__, 'group_id'),

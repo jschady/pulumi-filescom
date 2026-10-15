@@ -34,7 +34,10 @@ import (
 //			_, err := filescom.NewIntegrationCentricProfile(ctx, "example_integration_centric_profile", &filescom.IntegrationCentricProfileArgs{
 //				Name: pulumi.String("Business Systems Onboarding"),
 //				ExpectedRemoteServers: pulumi.Any{
-//					"example",
+//					map[string]string{
+//						"serverType": "dropbox",
+//						"name":       "Dropbox",
+//					},
 //				},
 //				WorkspaceId:    pulumi.Int(1),
 //				UseForAllUsers: pulumi.Bool(false),

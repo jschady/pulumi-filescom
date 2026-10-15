@@ -16,6 +16,7 @@ import * as utilities from "./utilities";
  *
  * const examplePartnerChannel = new filescom.PartnerChannel("example_partner_channel", {
  *     direction: "two_way",
+ *     useChannelRoot: false,
  *     fromPartnerFolderName: "incoming",
  *     fromPartnerManagedFolderPaths: ["claims/received"],
  *     fromPartnerRoutePath: "processing/from-partner",
@@ -76,11 +77,11 @@ export class PartnerChannel extends pulumi.CustomResource {
      */
     declare public readonly direction: pulumi.Output<string>;
     /**
-     * Resolved from-Partner folder name after Channel override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     declare public /*out*/ readonly effectiveFromPartnerFolderName: pulumi.Output<string>;
     /**
-     * Resolved to-Partner folder name after Channel override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     declare public /*out*/ readonly effectiveToPartnerFolderName: pulumi.Output<string>;
     /**
@@ -128,6 +129,10 @@ export class PartnerChannel extends pulumi.CustomResource {
      */
     declare public readonly toPartnerRoutePath: pulumi.Output<string>;
     /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+     */
+    declare public readonly useChannelRoot: pulumi.Output<boolean>;
+    /**
      * ID of the Workspace associated with this Partner Channel.
      */
     declare public readonly workspaceId: pulumi.Output<number>;
@@ -160,6 +165,7 @@ export class PartnerChannel extends pulumi.CustomResource {
             resourceInputs["toPartnerFolderPath"] = state?.toPartnerFolderPath;
             resourceInputs["toPartnerManagedFolderPaths"] = state?.toPartnerManagedFolderPaths;
             resourceInputs["toPartnerRoutePath"] = state?.toPartnerRoutePath;
+            resourceInputs["useChannelRoot"] = state?.useChannelRoot;
             resourceInputs["workspaceId"] = state?.workspaceId;
         } else {
             const args = argsOrState as PartnerChannelArgs | undefined;
@@ -178,6 +184,7 @@ export class PartnerChannel extends pulumi.CustomResource {
             resourceInputs["toPartnerFolderName"] = args?.toPartnerFolderName;
             resourceInputs["toPartnerManagedFolderPaths"] = args?.toPartnerManagedFolderPaths;
             resourceInputs["toPartnerRoutePath"] = args?.toPartnerRoutePath;
+            resourceInputs["useChannelRoot"] = args?.useChannelRoot;
             resourceInputs["workspaceId"] = args?.workspaceId;
             resourceInputs["channelPath"] = undefined /*out*/;
             resourceInputs["effectiveFromPartnerFolderName"] = undefined /*out*/;
@@ -204,11 +211,11 @@ export interface PartnerChannelState {
      */
     direction?: pulumi.Input<string | undefined>;
     /**
-     * Resolved from-Partner folder name after Channel override and default.
+     * Resolved from-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     effectiveFromPartnerFolderName?: pulumi.Input<string | undefined>;
     /**
-     * Resolved to-Partner folder name after Channel override and default.
+     * Resolved to-Partner subfolder name. Null when the direction is disabled or uses the Channel folder directly.
      */
     effectiveToPartnerFolderName?: pulumi.Input<string | undefined>;
     /**
@@ -256,6 +263,10 @@ export interface PartnerChannelState {
      */
     toPartnerRoutePath?: pulumi.Input<string | undefined>;
     /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+     */
+    useChannelRoot?: pulumi.Input<boolean | undefined>;
+    /**
      * ID of the Workspace associated with this Partner Channel.
      */
     workspaceId?: pulumi.Input<number | undefined>;
@@ -301,6 +312,10 @@ export interface PartnerChannelArgs {
      * Optional route path for files delivered to the Partner.
      */
     toPartnerRoutePath?: pulumi.Input<string | undefined>;
+    /**
+     * Use the Channel folder directly for a one-way exchange. Defaults to false. Cannot be changed after creation. Folder name overrides must be blank when enabled, and the Channel must remain one-way.
+     */
+    useChannelRoot?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the Workspace associated with this Partner Channel.
      */

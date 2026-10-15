@@ -5,6 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
+ * A File object represents a file or folder on your Files.com site. The <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> field is <span pulumi-lang-nodejs="`file`" pulumi-lang-dotnet="`File`" pulumi-lang-go="`file`" pulumi-lang-python="`file`" pulumi-lang-yaml="`file`" pulumi-lang-java="`file`" pulumi-lang-hcl="`file`">`file`</span> for files and <span pulumi-lang-nodejs="`directory`" pulumi-lang-dotnet="`Directory`" pulumi-lang-go="`directory`" pulumi-lang-python="`directory`" pulumi-lang-yaml="`directory`" pulumi-lang-java="`directory`" pulumi-lang-hcl="`directory`">`directory`</span> for folders.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -17,7 +19,7 @@ import * as utilities from "./utilities";
  *     mkdirParents: false,
  *     providedMtime: "2000-01-01T01:00:00Z",
  *     customMetadata: {
- *         key: "value",
+ *         department: "finance",
  *     },
  *     priorityColor: "red",
  * });

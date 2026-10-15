@@ -29,7 +29,7 @@ namespace Jschady.Filescom
     ///         Name = "North America Desktop Profile",
     ///         MountMappings = new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             ["key"] = "example value",
+    ///             ["W"] = "Americas",
     ///         },
     ///         WorkspaceId = 1,
     ///         UseForAllUsers = false,

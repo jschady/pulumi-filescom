@@ -32,7 +32,7 @@ import (
 //			_, err := filescom.NewDesktopConfigurationProfile(ctx, "example_desktop_configuration_profile", &filescom.DesktopConfigurationProfileArgs{
 //				Name: pulumi.String("North America Desktop Profile"),
 //				MountMappings: pulumi.Any(map[string]interface{}{
-//					"key": "example value",
+//					"W": "Americas",
 //				}),
 //				WorkspaceId:          pulumi.Int(1),
 //				UseForAllUsers:       pulumi.Bool(false),
