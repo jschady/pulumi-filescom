@@ -3,7 +3,7 @@ module github.com/Files-com/terraform-provider-files/shim
 go 1.27.2
 
 require (
-	github.com/Files-com/terraform-provider-files v0.1.1293
+	github.com/Files-com/terraform-provider-files v0.1.1306
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 )
 
@@ -25,7 +25,7 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/panjf2000/ants/v2 v2.11.3 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
-	github.com/quic-go/quic-go v0.63.0 // indirect
+	github.com/quic-go/quic-go v0.64.1 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect
 	github.com/samber/lo v1.53.0 // indirect
 	github.com/stretchr/testify v1.12.1 // indirect

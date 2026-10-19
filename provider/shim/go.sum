@@ -1,7 +1,7 @@
 github.com/Files-com/files-sdk-go/v3 v3.3.319 h1:FL/ifDkgwO0D0jl+SxUkXeJeP9sEoQkOdI2MSKI/T2c=
 github.com/Files-com/files-sdk-go/v3 v3.3.319/go.mod h1:GvrE+OilEeJenbuwVpY6Ur5IrBAQjyd12GTgShZJmK8=
-github.com/Files-com/terraform-provider-files v0.1.1293 h1:58c84hKp6XRcxw3oIYS/GiKgdyIZR49Ls9zMG2zhc+k=
-github.com/Files-com/terraform-provider-files v0.1.1293/go.mod h1:gy0WIhMtoSnQGIaH0/EdXcW5dF3UXEy9zjXJrlx9qho=
+github.com/Files-com/terraform-provider-files v0.1.1306 h1:drQ3e9bQ1OuzlB7Sr4uOY2j9Xt/VgfTbCaW0btMbkVU=
+github.com/Files-com/terraform-provider-files v0.1.1306/go.mod h1:xr5GbDWmlY+aRySy1cEMVMwjNzHHtRVNHeDK/tQS94o=
 github.com/ProtonMail/go-crypto v1.4.1 h1:9RfcZHqEQUvP8RzecWEUafnZVtEvrBVL9BiF67IQOfM=
 github.com/ProtonMail/go-crypto v1.4.1/go.mod h1:e1OaTyu5SYVrO9gKOEhTc+5UcXtTUa+P3uLudwcgPqo=
 github.com/agext/levenshtein v1.2.3 h1:YB2fHEn0UJagG8T1rrWknE3ZQzWM06O8AMAatNn7lmo=
@@ -137,8 +137,8 @@ github.com/quic-go/go-ossfuzz-seeds v0.1.0 h1:APacT+iIaNF6fd8AGEiN3bT/Jtkd2jz4v4
 github.com/quic-go/go-ossfuzz-seeds v0.1.0/go.mod h1:3IOHRbJIc+L6YKMwfDtJAM9Vj9k0YY4muhuyUYk5tbk=
 github.com/quic-go/qpack v0.6.0 h1:g7W+BMYynC1LbYLSqRt8PBg5Tgwxn214ZZR34VIOjz8=
 github.com/quic-go/qpack v0.6.0/go.mod h1:lUpLKChi8njB4ty2bFLX2x4gzDqXwUpaO1DP9qMDZII=
-github.com/quic-go/quic-go v0.63.0 h1:LIFGHI4PFUhhw2dDD1ARHdCff143ffMHwZtbnbuJ78A=
-github.com/quic-go/quic-go v0.63.0/go.mod h1:RAro2j2yN9a9EiPACLHT9IB2NXCvGQmmo/alT0yYI0w=
+github.com/quic-go/quic-go v0.64.1 h1:BCNTP+6x6++OPKrGST2FR3f1tycx8O3QOA3QQv09g70=
+github.com/quic-go/quic-go v0.64.1/go.mod h1:RAro2j2yN9a9EiPACLHT9IB2NXCvGQmmo/alT0yYI0w=
 github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 h1:OkMGxebDjyw0ULyrTYWeN0UNCCkmCWfjPnIA2W6oviI=
 github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06/go.mod h1:+ePHsJ1keEjQtpvf9HHw0f4ZeJ0TLRsxhunSI2hYJSs=
 github.com/samber/lo v1.53.0 h1:t975lj2py4kJPQ6haz1QMgtId2gtmfktACxIXArw3HM=
