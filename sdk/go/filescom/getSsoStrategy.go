@@ -130,13 +130,13 @@ type GetSsoStrategyResult struct {
 	ProvisionGroupRequired string `pulumi:"provisionGroupRequired"`
 	// Auto-provision group membership based on group memberships on the SSO side?
 	ProvisionGroups bool `pulumi:"provisionGroups"`
-	// Comma-separated list of group names whose members will be created as Read-Only Site Admins.
+	// Comma-separated list of group names used to grant or remove Read-Only Site Admin access for users on this SSO provider. When this list is nonempty and a directory sync changes a user's group membership, membership in at least one listed group grants this access; membership in none removes it, including access granted manually. Directory syncs include SCIM requests from any provider on the site, LDAP syncs, and sign-ins that set the user's groups from the identity provider. Membership changes made any other way, including through the web app, API, SDKs, or CLI, do not affect administrator access.
 	ProvisionReadonlySiteAdminGroups string `pulumi:"provisionReadonlySiteAdminGroups"`
 	// 2FA required setting for auto provisioned users. <span pulumi-lang-nodejs="`useSystemSetting`" pulumi-lang-dotnet="`UseSystemSetting`" pulumi-lang-go="`useSystemSetting`" pulumi-lang-python="`use_system_setting`" pulumi-lang-yaml="`useSystemSetting`" pulumi-lang-java="`useSystemSetting`" pulumi-lang-hcl="`use_system_setting`">`useSystemSetting`</span> uses the site-wide setting, including SSO exemptions. <span pulumi-lang-nodejs="`alwaysRequire`" pulumi-lang-dotnet="`AlwaysRequire`" pulumi-lang-go="`alwaysRequire`" pulumi-lang-python="`always_require`" pulumi-lang-yaml="`alwaysRequire`" pulumi-lang-java="`alwaysRequire`" pulumi-lang-hcl="`always_require`">`alwaysRequire`</span> and <span pulumi-lang-nodejs="`neverRequire`" pulumi-lang-dotnet="`NeverRequire`" pulumi-lang-go="`neverRequire`" pulumi-lang-python="`never_require`" pulumi-lang-yaml="`neverRequire`" pulumi-lang-java="`neverRequire`" pulumi-lang-hcl="`never_require`">`neverRequire`</span> override the site-wide setting when user-level overrides are allowed.
 	ProvisionRequire2fa string `pulumi:"provisionRequire2fa"`
 	// Auto-provisioned users get SFTP permission?
 	ProvisionSftpPermission bool `pulumi:"provisionSftpPermission"`
-	// Comma-separated list of group names whose members will be created as Site Admins.
+	// Comma-separated list of group names used to grant or remove Site Admin access for users on this SSO provider. When this list is nonempty and a directory sync changes a user's group membership, membership in at least one listed group grants this access; membership in none removes it, including access granted manually. Directory syncs include SCIM requests from any provider on the site, LDAP syncs, and sign-ins that set the user's groups from the identity provider. Membership changes made any other way, including through the web app, API, SDKs, or CLI, do not affect administrator access.
 	ProvisionSiteAdminGroups string `pulumi:"provisionSiteAdminGroups"`
 	// Default time zone for auto provisioned users.
 	ProvisionTimeZone string `pulumi:"provisionTimeZone"`
@@ -372,7 +372,7 @@ func (o GetSsoStrategyResultOutput) ProvisionGroups() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetSsoStrategyResult) bool { return v.ProvisionGroups }).(pulumi.BoolOutput)
 }
 
-// Comma-separated list of group names whose members will be created as Read-Only Site Admins.
+// Comma-separated list of group names used to grant or remove Read-Only Site Admin access for users on this SSO provider. When this list is nonempty and a directory sync changes a user's group membership, membership in at least one listed group grants this access; membership in none removes it, including access granted manually. Directory syncs include SCIM requests from any provider on the site, LDAP syncs, and sign-ins that set the user's groups from the identity provider. Membership changes made any other way, including through the web app, API, SDKs, or CLI, do not affect administrator access.
 func (o GetSsoStrategyResultOutput) ProvisionReadonlySiteAdminGroups() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSsoStrategyResult) string { return v.ProvisionReadonlySiteAdminGroups }).(pulumi.StringOutput)
 }
@@ -387,7 +387,7 @@ func (o GetSsoStrategyResultOutput) ProvisionSftpPermission() pulumi.BoolOutput 
 	return o.ApplyT(func(v GetSsoStrategyResult) bool { return v.ProvisionSftpPermission }).(pulumi.BoolOutput)
 }
 
-// Comma-separated list of group names whose members will be created as Site Admins.
+// Comma-separated list of group names used to grant or remove Site Admin access for users on this SSO provider. When this list is nonempty and a directory sync changes a user's group membership, membership in at least one listed group grants this access; membership in none removes it, including access granted manually. Directory syncs include SCIM requests from any provider on the site, LDAP syncs, and sign-ins that set the user's groups from the identity provider. Membership changes made any other way, including through the web app, API, SDKs, or CLI, do not affect administrator access.
 func (o GetSsoStrategyResultOutput) ProvisionSiteAdminGroups() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSsoStrategyResult) string { return v.ProvisionSiteAdminGroups }).(pulumi.StringOutput)
 }
