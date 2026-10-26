@@ -43,6 +43,12 @@ the latest tag would fail most weeks. The job runs these steps instead:
 The worktree check after each commit fails when the generation changed a file outside `provider/`
 or `sdk/`. Such a file would otherwise drop out of the pull request unseen.
 
+The job lets `go` download a newer toolchain. When a release names a newer Go than `provider/go.mod`
+does, `go mod tidy` raises the `go` line in `provider/go.mod`, `provider/shim/go.mod`, and
+`examples/go.mod`. Then `make generate_go` copies it into `sdk/go/filescom/go.mod`. The job does not
+touch `.tool-versions`, `CONTRIBUTING.md`, or `examples/basic-go/go.mod`. Raise the same version in
+those 3 files on the branch before you merge.
+
 The pull request body links the upstream compare view and says whether the schema changed. Most
 upstream releases change only the version of the Files.com SDK, and the schema stays the same. A
 later run with the same branch open rewrites the branch and the body. GitHub starts no checks on a
@@ -173,7 +179,7 @@ a pinned release inside a `run` step. The `ACTIONLINT_VERSION` and `ACTIONLINT_S
 | Yarn | 1.22.22 |
 | Python | 3.11 |
 | .NET SDK | 8.0.x |
-| Go | The version `provider/go.mod` names |
+| Go | The version `provider/go.mod` names. The `upstream_update` job can download a newer one. |
 
 ## What the check script asserts
 

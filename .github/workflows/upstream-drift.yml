@@ -64,6 +64,12 @@ jobs:
         with:
           go-version-file: provider/go.mod
           cache-dependency-path: provider/go.sum
+      # setup-go sets GOTOOLCHAIN=local. An upstream release can name a newer Go than provider/go.mod
+      # does, and that setting then fails go mod tidy. With auto, go downloads the toolchain the
+      # release names, tidy raises the go line, and the pull request carries the change.
+      - name: Let Go download the toolchain a release names
+        if: steps.upstream.outputs.stale == 'true'
+        run: echo "GOTOOLCHAIN=auto" >> "$GITHUB_ENV"
       - name: Install the pinned Pulumi CLI
         if: steps.upstream.outputs.stale == 'true'
         run: |
