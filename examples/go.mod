@@ -3,7 +3,7 @@ module github.com/jschady/pulumi-filescom/examples
 go 1.27.3
 
 require (
-	github.com/Files-com/files-sdk-go/v3 v3.3.319
+	github.com/Files-com/files-sdk-go/v3 v3.3.324
 	github.com/jschady/pulumi-filescom/provider v0.0.0
 	github.com/pulumi/providertest v0.7.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.137.0
@@ -33,7 +33,7 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal v1.2.0 // indirect
 	github.com/AzureAD/microsoft-authentication-library-for-go v1.7.2 // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/Files-com/terraform-provider-files v0.1.1306 // indirect
+	github.com/Files-com/terraform-provider-files v0.1.1351 // indirect
 	github.com/Files-com/terraform-provider-files/shim v0.0.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.35.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.59.0 // indirect

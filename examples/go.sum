@@ -42,10 +42,10 @@ github.com/AzureAD/microsoft-authentication-library-for-go v1.7.2 h1:RHK7bS+HQMs
 github.com/AzureAD/microsoft-authentication-library-for-go v1.7.2/go.mod h1:HKpQxkWaGLJ+D/5H8QRpyQXA1eKjxkFlOMwck5+33Jk=
 github.com/BurntSushi/toml v1.6.0 h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk=
 github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
-github.com/Files-com/files-sdk-go/v3 v3.3.319 h1:FL/ifDkgwO0D0jl+SxUkXeJeP9sEoQkOdI2MSKI/T2c=
-github.com/Files-com/files-sdk-go/v3 v3.3.319/go.mod h1:GvrE+OilEeJenbuwVpY6Ur5IrBAQjyd12GTgShZJmK8=
-github.com/Files-com/terraform-provider-files v0.1.1306 h1:drQ3e9bQ1OuzlB7Sr4uOY2j9Xt/VgfTbCaW0btMbkVU=
-github.com/Files-com/terraform-provider-files v0.1.1306/go.mod h1:xr5GbDWmlY+aRySy1cEMVMwjNzHHtRVNHeDK/tQS94o=
+github.com/Files-com/files-sdk-go/v3 v3.3.324 h1:FNXTqkpN5YFY1EOkRklnV6Lm2AMnZalCkoUgQtmIsII=
+github.com/Files-com/files-sdk-go/v3 v3.3.324/go.mod h1:o1UsIp/aNAIm2e19QPCsRJ+s+x8BndOJD//qg4YSBU4=
+github.com/Files-com/terraform-provider-files v0.1.1351 h1:CvJJL5yFXTfYvqY8T6NUcsHLptsdSECPpPg+zgnJo6k=
+github.com/Files-com/terraform-provider-files v0.1.1351/go.mod h1:7htUlaPqrZg3uAZkFQQKhvtTvMDihcAflkr15S0tQk4=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.35.0 h1:bN1gA3of5bXtbnLsRPrwfmbbe7A5UWFlcTHseujLnpc=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.35.0/go.mod h1:Yj5vHEz/aAepZGliRJsA6uvHAVAQyEwajq9ORCHPxzM=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.59.0 h1:c/Ivw7FuawPLfrr+zB0LZKeCchO2cAHQpF2qZ6OV7rQ=

@@ -1,7 +1,7 @@
-github.com/Files-com/files-sdk-go/v3 v3.3.319 h1:FL/ifDkgwO0D0jl+SxUkXeJeP9sEoQkOdI2MSKI/T2c=
-github.com/Files-com/files-sdk-go/v3 v3.3.319/go.mod h1:GvrE+OilEeJenbuwVpY6Ur5IrBAQjyd12GTgShZJmK8=
-github.com/Files-com/terraform-provider-files v0.1.1306 h1:drQ3e9bQ1OuzlB7Sr4uOY2j9Xt/VgfTbCaW0btMbkVU=
-github.com/Files-com/terraform-provider-files v0.1.1306/go.mod h1:xr5GbDWmlY+aRySy1cEMVMwjNzHHtRVNHeDK/tQS94o=
+github.com/Files-com/files-sdk-go/v3 v3.3.324 h1:FNXTqkpN5YFY1EOkRklnV6Lm2AMnZalCkoUgQtmIsII=
+github.com/Files-com/files-sdk-go/v3 v3.3.324/go.mod h1:o1UsIp/aNAIm2e19QPCsRJ+s+x8BndOJD//qg4YSBU4=
+github.com/Files-com/terraform-provider-files v0.1.1351 h1:CvJJL5yFXTfYvqY8T6NUcsHLptsdSECPpPg+zgnJo6k=
+github.com/Files-com/terraform-provider-files v0.1.1351/go.mod h1:7htUlaPqrZg3uAZkFQQKhvtTvMDihcAflkr15S0tQk4=
 github.com/ProtonMail/go-crypto v1.4.1 h1:9RfcZHqEQUvP8RzecWEUafnZVtEvrBVL9BiF67IQOfM=
 github.com/ProtonMail/go-crypto v1.4.1/go.mod h1:e1OaTyu5SYVrO9gKOEhTc+5UcXtTUa+P3uLudwcgPqo=
 github.com/agext/levenshtein v1.2.3 h1:YB2fHEn0UJagG8T1rrWknE3ZQzWM06O8AMAatNn7lmo=
