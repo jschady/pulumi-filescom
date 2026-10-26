@@ -1,6 +1,6 @@
 module github.com/jschady/pulumi-filescom/examples
 
-go 1.27.2
+go 1.27.3
 
 require (
 	github.com/Files-com/files-sdk-go/v3 v3.3.319
