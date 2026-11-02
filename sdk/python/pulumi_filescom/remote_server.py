@@ -95,6 +95,7 @@ class RemoteServerArgs:
                  sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_site_url: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  ssl_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  upload_staging_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -204,12 +205,12 @@ class RemoteServerArgs:
                SharePoint: Microsoft Entra application client secret for app-only authentication.
         :param pulumi.Input[_builtins.str] sharepoint_site_url: SharePoint: Site URL to scope app-only authentication to a single site. Leave blank to browse all sites.
         :param pulumi.Input[_builtins.str] sharepoint_tenant_id: SharePoint: Microsoft Entra tenant ID for app-only authentication.
+        :param pulumi.Input[_builtins.bool] site_admin_access: Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
         :param pulumi.Input[_builtins.str] ssl: Should we require SSL?
         :param pulumi.Input[_builtins.str] ssl_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                SSL client certificate.
         :param pulumi.Input[_builtins.str] upload_staging_path: Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
-        :param pulumi.Input[_builtins.int] user_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        :param pulumi.Input[_builtins.int] user_id: ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         :param pulumi.Input[_builtins.str] username: Remote server username.
         :param pulumi.Input[_builtins.str] wasabi_access_key: Wasabi: Access Key.
         :param pulumi.Input[_builtins.str] wasabi_bucket: Wasabi: Bucket name
@@ -370,6 +371,8 @@ class RemoteServerArgs:
             pulumi.set(__self__, "sharepoint_site_url", sharepoint_site_url)
         if sharepoint_tenant_id is not None:
             pulumi.set(__self__, "sharepoint_tenant_id", sharepoint_tenant_id)
+        if site_admin_access is not None:
+            pulumi.set(__self__, "site_admin_access", site_admin_access)
         if ssl is not None:
             pulumi.set(__self__, "ssl", ssl)
         if ssl_certificate is not None:
@@ -1324,6 +1327,18 @@ class RemoteServerArgs:
         pulumi.set(self, "sharepoint_tenant_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="siteAdminAccess")
+    def site_admin_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        """
+        return pulumi.get(self, "site_admin_access")
+
+    @site_admin_access.setter
+    def site_admin_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "site_admin_access", value)
+
+    @_builtins.property
     @pulumi.getter
     def ssl(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -1364,8 +1379,7 @@ class RemoteServerArgs:
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         """
         return pulumi.get(self, "user_id")
 
@@ -1481,6 +1495,7 @@ class _RemoteServerState:
                  direct_transfer_available: pulumi.Input[Optional[_builtins.bool]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  dropbox_teams: pulumi.Input[Optional[_builtins.bool]] = None,
+                 effective_site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_dedicated_ips: pulumi.Input[Optional[_builtins.bool]] = None,
                  filebase_access_key: pulumi.Input[Optional[_builtins.str]] = None,
                  filebase_bucket: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1541,6 +1556,7 @@ class _RemoteServerState:
                  sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_site_url: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  ssl_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  supports_versioning: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1594,6 +1610,7 @@ class _RemoteServerState:
         :param pulumi.Input[_builtins.bool] direct_transfer_available: Whether the Files Agent Proxy recently validated a direct transfer connection. <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> means a direct connection was recently validated (actual availability can vary by client network), <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> means direct transfers are enabled but not currently available, and <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span> means direct transfers are disabled or unsupported. Only provided for a connected Files Agent when showing a single Remote Server.
         :param pulumi.Input[_builtins.bool] disabled: If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
         :param pulumi.Input[_builtins.bool] dropbox_teams: Dropbox: If true, list Team folders in root?
+        :param pulumi.Input[_builtins.bool] effective_site_admin_access: Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
         :param pulumi.Input[_builtins.bool] enable_dedicated_ips: <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
         :param pulumi.Input[_builtins.str] filebase_access_key: Filebase: Access Key.
         :param pulumi.Input[_builtins.str] filebase_bucket: Filebase: Bucket name
@@ -1666,13 +1683,13 @@ class _RemoteServerState:
                SharePoint: Microsoft Entra application client secret for app-only authentication.
         :param pulumi.Input[_builtins.str] sharepoint_site_url: SharePoint: Site URL to scope app-only authentication to a single site. Leave blank to browse all sites.
         :param pulumi.Input[_builtins.str] sharepoint_tenant_id: SharePoint: Microsoft Entra tenant ID for app-only authentication.
+        :param pulumi.Input[_builtins.bool] site_admin_access: Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
         :param pulumi.Input[_builtins.str] ssl: Should we require SSL?
         :param pulumi.Input[_builtins.str] ssl_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                SSL client certificate.
         :param pulumi.Input[_builtins.bool] supports_versioning: If true, this remote server supports file versioning. This value is determined automatically by Files.com.
         :param pulumi.Input[_builtins.str] upload_staging_path: Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
-        :param pulumi.Input[_builtins.int] user_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        :param pulumi.Input[_builtins.int] user_id: ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         :param pulumi.Input[_builtins.str] username: Remote server username.
         :param pulumi.Input[_builtins.str] wasabi_access_key: Wasabi: Access Key.
         :param pulumi.Input[_builtins.str] wasabi_bucket: Wasabi: Bucket name
@@ -1743,6 +1760,8 @@ class _RemoteServerState:
             pulumi.set(__self__, "disabled", disabled)
         if dropbox_teams is not None:
             pulumi.set(__self__, "dropbox_teams", dropbox_teams)
+        if effective_site_admin_access is not None:
+            pulumi.set(__self__, "effective_site_admin_access", effective_site_admin_access)
         if enable_dedicated_ips is not None:
             pulumi.set(__self__, "enable_dedicated_ips", enable_dedicated_ips)
         if filebase_access_key is not None:
@@ -1863,6 +1882,8 @@ class _RemoteServerState:
             pulumi.set(__self__, "sharepoint_site_url", sharepoint_site_url)
         if sharepoint_tenant_id is not None:
             pulumi.set(__self__, "sharepoint_tenant_id", sharepoint_tenant_id)
+        if site_admin_access is not None:
+            pulumi.set(__self__, "site_admin_access", site_admin_access)
         if ssl is not None:
             pulumi.set(__self__, "ssl", ssl)
         if ssl_certificate is not None:
@@ -2265,6 +2286,18 @@ class _RemoteServerState:
     @dropbox_teams.setter
     def dropbox_teams(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "dropbox_teams", value)
+
+    @_builtins.property
+    @pulumi.getter(name="effectiveSiteAdminAccess")
+    def effective_site_admin_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        """
+        return pulumi.get(self, "effective_site_admin_access")
+
+    @effective_site_admin_access.setter
+    def effective_site_admin_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "effective_site_admin_access", value)
 
     @_builtins.property
     @pulumi.getter(name="enableDedicatedIps")
@@ -2999,6 +3032,18 @@ class _RemoteServerState:
         pulumi.set(self, "sharepoint_tenant_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="siteAdminAccess")
+    def site_admin_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        """
+        return pulumi.get(self, "site_admin_access")
+
+    @site_admin_access.setter
+    def site_admin_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "site_admin_access", value)
+
+    @_builtins.property
     @pulumi.getter
     def ssl(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -3051,8 +3096,7 @@ class _RemoteServerState:
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         """
         return pulumi.get(self, "user_id")
 
@@ -3216,6 +3260,7 @@ class RemoteServer(pulumi.CustomResource):
                  sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_site_url: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  ssl_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  upload_staging_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3294,7 +3339,7 @@ class RemoteServer(pulumi.CustomResource):
             azure_files_storage_share_name="share-name",
             backblaze_b2_bucket="my-bucket",
             backblaze_b2_s3_endpoint="s3.us-west-001.backblazeb2.com",
-            buffer_uploads="example",
+            buffer_uploads="auto",
             cloudflare_access_key="example",
             cloudflare_bucket="my-bucket",
             cloudflare_endpoint="https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
@@ -3337,6 +3382,7 @@ class RemoteServer(pulumi.CustomResource):
             server_certificate="require_match",
             server_host_key="[public key]",
             server_type="s3",
+            site_admin_access=True,
             sharepoint_client_id="00000000-0000-0000-0000-000000000000",
             sharepoint_site_url="https://example.sharepoint.com/sites/accounting",
             sharepoint_tenant_id="00000000-0000-0000-0000-000000000000",
@@ -3458,12 +3504,12 @@ class RemoteServer(pulumi.CustomResource):
                SharePoint: Microsoft Entra application client secret for app-only authentication.
         :param pulumi.Input[_builtins.str] sharepoint_site_url: SharePoint: Site URL to scope app-only authentication to a single site. Leave blank to browse all sites.
         :param pulumi.Input[_builtins.str] sharepoint_tenant_id: SharePoint: Microsoft Entra tenant ID for app-only authentication.
+        :param pulumi.Input[_builtins.bool] site_admin_access: Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
         :param pulumi.Input[_builtins.str] ssl: Should we require SSL?
         :param pulumi.Input[_builtins.str] ssl_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                SSL client certificate.
         :param pulumi.Input[_builtins.str] upload_staging_path: Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
-        :param pulumi.Input[_builtins.int] user_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        :param pulumi.Input[_builtins.int] user_id: ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         :param pulumi.Input[_builtins.str] username: Remote server username.
         :param pulumi.Input[_builtins.str] wasabi_access_key: Wasabi: Access Key.
         :param pulumi.Input[_builtins.str] wasabi_bucket: Wasabi: Bucket name
@@ -3545,7 +3591,7 @@ class RemoteServer(pulumi.CustomResource):
             azure_files_storage_share_name="share-name",
             backblaze_b2_bucket="my-bucket",
             backblaze_b2_s3_endpoint="s3.us-west-001.backblazeb2.com",
-            buffer_uploads="example",
+            buffer_uploads="auto",
             cloudflare_access_key="example",
             cloudflare_bucket="my-bucket",
             cloudflare_endpoint="https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
@@ -3588,6 +3634,7 @@ class RemoteServer(pulumi.CustomResource):
             server_certificate="require_match",
             server_host_key="[public key]",
             server_type="s3",
+            site_admin_access=True,
             sharepoint_client_id="00000000-0000-0000-0000-000000000000",
             sharepoint_site_url="https://example.sharepoint.com/sites/accounting",
             sharepoint_tenant_id="00000000-0000-0000-0000-000000000000",
@@ -3702,6 +3749,7 @@ class RemoteServer(pulumi.CustomResource):
                  sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_site_url: pulumi.Input[Optional[_builtins.str]] = None,
                  sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl: pulumi.Input[Optional[_builtins.str]] = None,
                  ssl_certificate: pulumi.Input[Optional[_builtins.str]] = None,
                  upload_staging_path: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3797,10 +3845,11 @@ class RemoteServer(pulumi.CustomResource):
             __props__.__dict__["sharepoint_client_secret"] = None if sharepoint_client_secret is None else pulumi.Output.secret(sharepoint_client_secret)
             __props__.__dict__["sharepoint_site_url"] = sharepoint_site_url
             __props__.__dict__["sharepoint_tenant_id"] = sharepoint_tenant_id
+            __props__.__dict__["site_admin_access"] = site_admin_access
             __props__.__dict__["ssl"] = ssl
             __props__.__dict__["ssl_certificate"] = None if ssl_certificate is None else pulumi.Output.secret(ssl_certificate)
             __props__.__dict__["upload_staging_path"] = upload_staging_path
-            __props__.__dict__["user_id"] = None if user_id is None else pulumi.Output.secret(user_id)
+            __props__.__dict__["user_id"] = user_id
             __props__.__dict__["username"] = username
             __props__.__dict__["wasabi_access_key"] = wasabi_access_key
             __props__.__dict__["wasabi_bucket"] = wasabi_bucket
@@ -3812,6 +3861,7 @@ class RemoteServer(pulumi.CustomResource):
             __props__.__dict__["authentication_method"] = None
             __props__.__dict__["direct_transfer_available"] = None
             __props__.__dict__["disabled"] = None
+            __props__.__dict__["effective_site_admin_access"] = None
             __props__.__dict__["files_agent_latest_version"] = None
             __props__.__dict__["files_agent_supports_push_updates"] = None
             __props__.__dict__["files_agent_up_to_date"] = None
@@ -3823,7 +3873,7 @@ class RemoteServer(pulumi.CustomResource):
             __props__.__dict__["sharepoint_app_authentication"] = None
             __props__.__dict__["sharepoint_app_credential_type"] = None
             __props__.__dict__["supports_versioning"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["awsSecretKey", "azureBlobStorageAccessKey", "azureBlobStorageSasToken", "azureFilesStorageAccessKey", "azureFilesStorageSasToken", "backblazeB2ApplicationKey", "backblazeB2KeyId", "cloudflareSecretKey", "filebaseSecretKey", "filesApiKey", "googleCloudStorageCredentialsJson", "googleCloudStorageS3CompatibleSecretKey", "linodeSecretKey", "password", "privateKey", "privateKeyPassphrase", "resetAuthentication", "s3CompatibleSecretKey", "sharepointClientCertificate", "sharepointClientSecret", "sslCertificate", "userId", "wasabiSecretKey"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["awsSecretKey", "azureBlobStorageAccessKey", "azureBlobStorageSasToken", "azureFilesStorageAccessKey", "azureFilesStorageSasToken", "backblazeB2ApplicationKey", "backblazeB2KeyId", "cloudflareSecretKey", "filebaseSecretKey", "filesApiKey", "googleCloudStorageCredentialsJson", "googleCloudStorageS3CompatibleSecretKey", "linodeSecretKey", "password", "privateKey", "privateKeyPassphrase", "resetAuthentication", "s3CompatibleSecretKey", "sharepointClientCertificate", "sharepointClientSecret", "sslCertificate", "wasabiSecretKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(RemoteServer, __self__).__init__(
             'filescom:index/remoteServer:RemoteServer',
@@ -3866,6 +3916,7 @@ class RemoteServer(pulumi.CustomResource):
             direct_transfer_available: pulumi.Input[Optional[_builtins.bool]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             dropbox_teams: pulumi.Input[Optional[_builtins.bool]] = None,
+            effective_site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
             enable_dedicated_ips: pulumi.Input[Optional[_builtins.bool]] = None,
             filebase_access_key: pulumi.Input[Optional[_builtins.str]] = None,
             filebase_bucket: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3926,6 +3977,7 @@ class RemoteServer(pulumi.CustomResource):
             sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             sharepoint_site_url: pulumi.Input[Optional[_builtins.str]] = None,
             sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+            site_admin_access: pulumi.Input[Optional[_builtins.bool]] = None,
             ssl: pulumi.Input[Optional[_builtins.str]] = None,
             ssl_certificate: pulumi.Input[Optional[_builtins.str]] = None,
             supports_versioning: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -3983,6 +4035,7 @@ class RemoteServer(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] direct_transfer_available: Whether the Files Agent Proxy recently validated a direct transfer connection. <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> means a direct connection was recently validated (actual availability can vary by client network), <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> means direct transfers are enabled but not currently available, and <span pulumi-lang-nodejs="`null`" pulumi-lang-dotnet="`Null`" pulumi-lang-go="`null`" pulumi-lang-python="`null`" pulumi-lang-yaml="`null`" pulumi-lang-java="`null`" pulumi-lang-hcl="`null`">`null`</span> means direct transfers are disabled or unsupported. Only provided for a connected Files Agent when showing a single Remote Server.
         :param pulumi.Input[_builtins.bool] disabled: If true, this Remote Server is disabled. Updating it clears this flag, except for retired Agent v1 records, which remain disabled.
         :param pulumi.Input[_builtins.bool] dropbox_teams: Dropbox: If true, list Team folders in root?
+        :param pulumi.Input[_builtins.bool] effective_site_admin_access: Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
         :param pulumi.Input[_builtins.bool] enable_dedicated_ips: <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
         :param pulumi.Input[_builtins.str] filebase_access_key: Filebase: Access Key.
         :param pulumi.Input[_builtins.str] filebase_bucket: Filebase: Bucket name
@@ -4055,13 +4108,13 @@ class RemoteServer(pulumi.CustomResource):
                SharePoint: Microsoft Entra application client secret for app-only authentication.
         :param pulumi.Input[_builtins.str] sharepoint_site_url: SharePoint: Site URL to scope app-only authentication to a single site. Leave blank to browse all sites.
         :param pulumi.Input[_builtins.str] sharepoint_tenant_id: SharePoint: Microsoft Entra tenant ID for app-only authentication.
+        :param pulumi.Input[_builtins.bool] site_admin_access: Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
         :param pulumi.Input[_builtins.str] ssl: Should we require SSL?
         :param pulumi.Input[_builtins.str] ssl_certificate: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                SSL client certificate.
         :param pulumi.Input[_builtins.bool] supports_versioning: If true, this remote server supports file versioning. This value is determined automatically by Files.com.
         :param pulumi.Input[_builtins.str] upload_staging_path: Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
-        :param pulumi.Input[_builtins.int] user_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-               User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        :param pulumi.Input[_builtins.int] user_id: ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         :param pulumi.Input[_builtins.str] username: Remote server username.
         :param pulumi.Input[_builtins.str] wasabi_access_key: Wasabi: Access Key.
         :param pulumi.Input[_builtins.str] wasabi_bucket: Wasabi: Bucket name
@@ -4105,6 +4158,7 @@ class RemoteServer(pulumi.CustomResource):
         __props__.__dict__["direct_transfer_available"] = direct_transfer_available
         __props__.__dict__["disabled"] = disabled
         __props__.__dict__["dropbox_teams"] = dropbox_teams
+        __props__.__dict__["effective_site_admin_access"] = effective_site_admin_access
         __props__.__dict__["enable_dedicated_ips"] = enable_dedicated_ips
         __props__.__dict__["filebase_access_key"] = filebase_access_key
         __props__.__dict__["filebase_bucket"] = filebase_bucket
@@ -4165,6 +4219,7 @@ class RemoteServer(pulumi.CustomResource):
         __props__.__dict__["sharepoint_client_secret"] = sharepoint_client_secret
         __props__.__dict__["sharepoint_site_url"] = sharepoint_site_url
         __props__.__dict__["sharepoint_tenant_id"] = sharepoint_tenant_id
+        __props__.__dict__["site_admin_access"] = site_admin_access
         __props__.__dict__["ssl"] = ssl
         __props__.__dict__["ssl_certificate"] = ssl_certificate
         __props__.__dict__["supports_versioning"] = supports_versioning
@@ -4433,6 +4488,14 @@ class RemoteServer(pulumi.CustomResource):
         Dropbox: If true, list Team folders in root?
         """
         return pulumi.get(self, "dropbox_teams")
+
+    @_builtins.property
+    @pulumi.getter(name="effectiveSiteAdminAccess")
+    def effective_site_admin_access(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        """
+        return pulumi.get(self, "effective_site_admin_access")
 
     @_builtins.property
     @pulumi.getter(name="enableDedicatedIps")
@@ -4927,6 +4990,14 @@ class RemoteServer(pulumi.CustomResource):
         return pulumi.get(self, "sharepoint_tenant_id")
 
     @_builtins.property
+    @pulumi.getter(name="siteAdminAccess")
+    def site_admin_access(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        """
+        return pulumi.get(self, "site_admin_access")
+
+    @_builtins.property
     @pulumi.getter
     def ssl(self) -> pulumi.Output[_builtins.str]:
         """
@@ -4961,10 +5032,9 @@ class RemoteServer(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="userId")
-    def user_id(self) -> pulumi.Output[Optional[_builtins.int]]:
+    def user_id(self) -> pulumi.Output[_builtins.int]:
         """
-        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+        ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         """
         return pulumi.get(self, "user_id")
 

@@ -33,6 +33,12 @@ namespace Jschady.Filescom.Inputs
         [Input("saveBody")]
         public Input<bool>? SaveBody { get; set; }
 
+        [Input("saveHtmlBody")]
+        public Input<bool>? SaveHtmlBody { get; set; }
+
+        [Input("saveRawMessage")]
+        public Input<bool>? SaveRawMessage { get; set; }
+
         [Input("source")]
         public Input<string>? Source { get; set; }
 

@@ -30,13 +30,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleChildSiteManagementPolicy = filescom.getChildSiteManagementPolicy({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1)
+        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -49,6 +51,7 @@ namespace Jschady.Filescom
         ///     var exampleChildSiteManagementPolicy = Filescom.GetChildSiteManagementPolicy.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -64,7 +67,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetChildSiteManagementPolicy(ctx, &amp;filescom.LookupChildSiteManagementPolicyArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -83,7 +87,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getchildsitemanagementpolicy" "exampleChildSiteManagementPolicy" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -109,6 +114,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleChildSiteManagementPolicy = FilescomFunctions.getChildSiteManagementPolicy(GetChildSiteManagementPolicyArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -121,6 +127,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getChildSiteManagementPolicy
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -145,13 +152,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleChildSiteManagementPolicy = filescom.getChildSiteManagementPolicy({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1)
+        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -164,6 +173,7 @@ namespace Jschady.Filescom
         ///     var exampleChildSiteManagementPolicy = Filescom.GetChildSiteManagementPolicy.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -179,7 +189,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetChildSiteManagementPolicy(ctx, &amp;filescom.LookupChildSiteManagementPolicyArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -198,7 +209,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getchildsitemanagementpolicy" "exampleChildSiteManagementPolicy" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -224,6 +236,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleChildSiteManagementPolicy = FilescomFunctions.getChildSiteManagementPolicy(GetChildSiteManagementPolicyArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -236,6 +249,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getChildSiteManagementPolicy
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -260,13 +274,15 @@ namespace Jschady.Filescom
         /// 
         /// const exampleChildSiteManagementPolicy = filescom.getChildSiteManagementPolicy({
         ///     id: 1,
+        ///     valueFormat: "typed",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1)
+        /// example_child_site_management_policy = filescom.get_child_site_management_policy(id=1,
+        ///     value_format="typed")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -279,6 +295,7 @@ namespace Jschady.Filescom
         ///     var exampleChildSiteManagementPolicy = Filescom.GetChildSiteManagementPolicy.Invoke(new()
         ///     {
         ///         Id = 1,
+        ///         ValueFormat = "typed",
         ///     });
         /// 
         /// });
@@ -294,7 +311,8 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetChildSiteManagementPolicy(ctx, &amp;filescom.LookupChildSiteManagementPolicyArgs{
-        /// 			Id: 1,
+        /// 			Id:          1,
+        /// 			ValueFormat: pulumi.StringRef("typed"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -313,7 +331,8 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getchildsitemanagementpolicy" "exampleChildSiteManagementPolicy" {
-        ///   id = 1
+        ///   id           = 1
+        ///   value_format = "typed"
         /// }
         /// ```
         /// ```java
@@ -339,6 +358,7 @@ namespace Jschady.Filescom
         ///     public static void stack(Context ctx) {
         ///         final var exampleChildSiteManagementPolicy = FilescomFunctions.getChildSiteManagementPolicy(GetChildSiteManagementPolicyArgs.builder()
         ///             .id(1)
+        ///             .valueFormat("typed")
         ///             .build());
         /// 
         ///     }
@@ -351,6 +371,7 @@ namespace Jschady.Filescom
         ///       function: filescom:getChildSiteManagementPolicy
         ///       arguments:
         ///         id: 1
+        ///         valueFormat: typed
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -367,6 +388,12 @@ namespace Jschady.Filescom
         [Input("id", required: true)]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+        /// </summary>
+        [Input("valueFormat")]
+        public string? ValueFormat { get; set; }
+
         public GetChildSiteManagementPolicyArgs()
         {
         }
@@ -380,6 +407,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("id", required: true)]
         public Input<int> Id { get; set; } = null!;
+
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+        /// </summary>
+        [Input("valueFormat")]
+        public Input<string>? ValueFormat { get; set; }
 
         public GetChildSiteManagementPolicyInvokeArgs()
         {
@@ -432,9 +465,13 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string UpdatedAt;
         /// <summary>
-        /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        /// Policy value. Set &lt;span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format "&gt;`valueFormat &lt;/span&gt;= "typed"` to return each&lt;span pulumi-lang-nodejs=" folderBehaviors " pulumi-lang-dotnet=" FolderBehaviors " pulumi-lang-go=" folderBehaviors " pulumi-lang-python=" folder_behaviors " pulumi-lang-yaml=" folderBehaviors " pulumi-lang-java=" folderBehaviors " pulumi-lang-hcl=" folder_behaviors "&gt; folderBehaviors &lt;/span&gt;item under the name in its behavior field, as the typed schema does.
         /// </summary>
         public readonly object Value;
+        /// <summary>
+        /// Set to &lt;span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`"&gt;`typed`&lt;/span&gt; to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+        /// </summary>
+        public readonly string? ValueFormat;
 
         [OutputConstructor]
         private GetChildSiteManagementPolicyResult(
@@ -458,7 +495,9 @@ namespace Jschady.Filescom
 
             string updatedAt,
 
-            object value)
+            object value,
+
+            string? valueFormat)
         {
             AppliedChildSiteIds = appliedChildSiteIds;
             ChildSiteIds = childSiteIds;
@@ -471,6 +510,7 @@ namespace Jschady.Filescom
             SkipChildSiteIds = skipChildSiteIds;
             UpdatedAt = updatedAt;
             Value = value;
+            ValueFormat = valueFormat;
         }
     }
 }

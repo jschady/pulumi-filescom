@@ -382,7 +382,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool Disabled;
         /// <summary>
-        /// Report-specific options. &lt;span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`"&gt;`permissionAudit`&lt;/span&gt; supports &lt;span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`"&gt;`groupBy`&lt;/span&gt; with &lt;span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`"&gt;`user`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;.
+        /// Options for the report selected by export_type.
         /// </summary>
         public readonly object ExportOptions;
         /// <summary>

@@ -338,6 +338,13 @@ class ChildSiteManagementPolicy(pulumi.CustomResource):
         example_child_site_management_policy = filescom.ChildSiteManagementPolicy("example_child_site_management_policy",
             value={
                 "color2Left": "#000000",
+                "folderBehaviors": [{
+                    "fileExpiration": {
+                        "value": {
+                            "daysToRetain": 30,
+                        },
+                    },
+                }],
             },
             skip_child_site_ids=[
                 1,
@@ -400,6 +407,13 @@ class ChildSiteManagementPolicy(pulumi.CustomResource):
         example_child_site_management_policy = filescom.ChildSiteManagementPolicy("example_child_site_management_policy",
             value={
                 "color2Left": "#000000",
+                "folderBehaviors": [{
+                    "fileExpiration": {
+                        "value": {
+                            "daysToRetain": 30,
+                        },
+                    },
+                }],
             },
             skip_child_site_ids=[
                 1,
@@ -466,10 +480,12 @@ class ChildSiteManagementPolicy(pulumi.CustomResource):
                 raise TypeError("Missing required property 'policy_type'")
             __props__.__dict__["policy_type"] = policy_type
             __props__.__dict__["skip_child_site_ids"] = skip_child_site_ids
-            __props__.__dict__["value"] = value
+            __props__.__dict__["value"] = None if value is None else pulumi.Output.secret(value)
             __props__.__dict__["applied_child_site_ids"] = None
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["value"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ChildSiteManagementPolicy, __self__).__init__(
             'filescom:index/childSiteManagementPolicy:ChildSiteManagementPolicy',
             resource_name,

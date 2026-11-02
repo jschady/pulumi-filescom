@@ -378,7 +378,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool ApplyToAllWorkspaces;
         /// <summary>
-        /// Event Target configuration. Folder targets accept path and format (json or csv).
+        /// Event Target configuration. Fields depend on target_type.
         /// </summary>
         public readonly object Config;
         /// <summary>

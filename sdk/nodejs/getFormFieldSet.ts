@@ -54,7 +54,7 @@ export interface GetFormFieldSetArgs {
  */
 export interface GetFormFieldSetResult {
     /**
-     * Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+     * Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
      */
     readonly formFields: any;
     /**

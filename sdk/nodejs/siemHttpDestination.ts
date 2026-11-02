@@ -22,9 +22,9 @@ import * as utilities from "./utilities";
  *         authorization: "Bearer YOUR_TOKEN",
  *     },
  *     sendingActive: true,
- *     genericPayloadType: "example",
+ *     genericPayloadType: "json_newline",
  *     fileDestinationPath: "example",
- *     fileFormat: "example",
+ *     fileFormat: "json",
  *     fileIntervalMinutes: 1,
  *     azureDcrImmutableId: "example",
  *     azureStreamName: "example",
@@ -43,7 +43,7 @@ import * as utilities from "./utilities";
  *     emailSendEnabled: true,
  *     exavaultApiRequestSendEnabled: true,
  *     settingsChangeSendEnabled: true,
- *     destinationType: "example",
+ *     destinationType: "generic",
  *     destinationUrl: "example",
  * });
  * ```

@@ -82,7 +82,7 @@ type ScheduledExport struct {
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// If true, this scheduled export will not run.
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
-	// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+	// Options for the report selected by export_type.
 	ExportOptions pulumi.AnyOutput `pulumi:"exportOptions"`
 	// Export report type. Valid values: folder*size*audit, group*membership*audit, permission*audit, share*link_audit
 	ExportType pulumi.StringOutput `pulumi:"exportType"`
@@ -159,7 +159,7 @@ type scheduledExportState struct {
 	CreatedAt *string `pulumi:"createdAt"`
 	// If true, this scheduled export will not run.
 	Disabled *bool `pulumi:"disabled"`
-	// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+	// Options for the report selected by export_type.
 	ExportOptions interface{} `pulumi:"exportOptions"`
 	// Export report type. Valid values: folder*size*audit, group*membership*audit, permission*audit, share*link_audit
 	ExportType *string `pulumi:"exportType"`
@@ -204,7 +204,7 @@ type ScheduledExportState struct {
 	CreatedAt pulumi.StringPtrInput
 	// If true, this scheduled export will not run.
 	Disabled pulumi.BoolPtrInput
-	// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+	// Options for the report selected by export_type.
 	ExportOptions pulumi.Input
 	// Export report type. Valid values: folder*size*audit, group*membership*audit, permission*audit, share*link_audit
 	ExportType pulumi.StringPtrInput
@@ -251,7 +251,7 @@ func (ScheduledExportState) ElementType() reflect.Type {
 type scheduledExportArgs struct {
 	// If true, this scheduled export will not run.
 	Disabled *bool `pulumi:"disabled"`
-	// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+	// Options for the report selected by export_type.
 	ExportOptions interface{} `pulumi:"exportOptions"`
 	// Export report type. Valid values: folder*size*audit, group*membership*audit, permission*audit, share*link_audit
 	ExportType string `pulumi:"exportType"`
@@ -283,7 +283,7 @@ type scheduledExportArgs struct {
 type ScheduledExportArgs struct {
 	// If true, this scheduled export will not run.
 	Disabled pulumi.BoolPtrInput
-	// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+	// Options for the report selected by export_type.
 	ExportOptions pulumi.Input
 	// Export report type. Valid values: folder*size*audit, group*membership*audit, permission*audit, share*link_audit
 	ExportType pulumi.StringInput
@@ -408,7 +408,7 @@ func (o ScheduledExportOutput) Disabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v *ScheduledExport) pulumi.BoolOutput { return v.Disabled }).(pulumi.BoolOutput)
 }
 
-// Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+// Options for the report selected by export_type.
 func (o ScheduledExportOutput) ExportOptions() pulumi.AnyOutput {
 	return o.ApplyT(func(v *ScheduledExport) pulumi.AnyOutput { return v.ExportOptions }).(pulumi.AnyOutput)
 }

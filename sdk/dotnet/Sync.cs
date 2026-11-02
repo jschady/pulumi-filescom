@@ -67,7 +67,7 @@ namespace Jschady.Filescom
     ///         SrcPath = "example",
     ///         SrcRemoteServerId = 1,
     ///         SyncIntervalMinutes = 1,
-    ///         Trigger = "example",
+    ///         Trigger = "daily",
     ///         TriggerFile = "example",
     ///         AlwaysWriteTriggerFile = true,
     ///         WorkspaceId = 1,

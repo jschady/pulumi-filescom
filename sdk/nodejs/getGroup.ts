@@ -19,15 +19,17 @@ import * as utilities from "./utilities";
  * import * as filescom from "pulumi-filescom";
  *
  * const exampleGroup = filescom.getGroup({
- *     id: 1,
+ *     name: "owners",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
-export function getGroup(args: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
+export function getGroup(args?: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("filescom:index/getGroup:getGroup", {
         "id": args.id,
+        "name": args.name,
     }, opts);
 }
 
@@ -36,9 +38,13 @@ export function getGroup(args: GetGroupArgs, opts?: pulumi.InvokeOptions): Promi
  */
 export interface GetGroupArgs {
     /**
-     * Group ID
+     * Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
      */
-    id: number;
+    id?: number;
+    /**
+     * Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+     */
+    name?: string;
 }
 
 /**
@@ -70,7 +76,7 @@ export interface GetGroupResult {
      */
     readonly ftpPermission: boolean;
     /**
-     * Group ID
+     * Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
      */
     readonly id: number;
     /**
@@ -78,7 +84,7 @@ export interface GetGroupResult {
      */
     readonly integrationCentricProfileId: number;
     /**
-     * Group name
+     * Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
      */
     readonly name: string;
     /**
@@ -129,15 +135,17 @@ export interface GetGroupResult {
  * import * as filescom from "pulumi-filescom";
  *
  * const exampleGroup = filescom.getGroup({
- *     id: 1,
+ *     name: "owners",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
-export function getGroupOutput(args: GetGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupResult> {
+export function getGroupOutput(args?: GetGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("filescom:index/getGroup:getGroup", {
         "id": args.id,
+        "name": args.name,
     }, opts);
 }
 
@@ -146,7 +154,11 @@ export function getGroupOutput(args: GetGroupOutputArgs, opts?: pulumi.InvokeOut
  */
 export interface GetGroupOutputArgs {
     /**
-     * Group ID
+     * Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
      */
-    id: pulumi.Input<number>;
+    id?: pulumi.Input<number | undefined>;
+    /**
+     * Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+     */
+    name?: pulumi.Input<string | undefined>;
 }

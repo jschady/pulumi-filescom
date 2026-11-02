@@ -38,6 +38,15 @@ import (
 //			_, err := filescom.NewChildSiteManagementPolicy(ctx, "example_child_site_management_policy", &filescom.ChildSiteManagementPolicyArgs{
 //				Value: pulumi.Any(map[string]interface{}{
 //					"color2Left": "#000000",
+//					"folderBehaviors": []map[string]map[string]map[string]int{
+//						{
+//							"fileExpiration": {
+//								"value": {
+//									"daysToRetain": 30,
+//								},
+//							},
+//						},
+//					},
 //				}),
 //				SkipChildSiteIds: pulumi.IntArray{
 //					pulumi.Int(1),
@@ -106,6 +115,13 @@ func NewChildSiteManagementPolicy(ctx *pulumi.Context,
 	if args.PolicyType == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyType'")
 	}
+	if args.Value != nil {
+		args.Value = pulumi.ToSecret(args.Value).(pulumi.Input)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"value",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ChildSiteManagementPolicy
 	err := ctx.RegisterResource("filescom:index/childSiteManagementPolicy:ChildSiteManagementPolicy", name, args, &resource, opts...)

@@ -595,6 +595,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool DropboxTeams;
         /// <summary>
+        /// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        /// </summary>
+        public readonly bool EffectiveSiteAdminAccess;
+        /// <summary>
         /// &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; if remote server only accepts connections from dedicated IPs
         /// </summary>
         public readonly bool EnableDedicatedIps;
@@ -791,6 +795,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string SharepointTenantId;
         /// <summary>
+        /// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        /// </summary>
+        public readonly bool SiteAdminAccess;
+        /// <summary>
         /// Should we require SSL?
         /// </summary>
         public readonly string Ssl;
@@ -802,6 +810,10 @@ namespace Jschady.Filescom
         /// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
         /// </summary>
         public readonly string UploadStagingPath;
+        /// <summary>
+        /// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+        /// </summary>
+        public readonly int UserId;
         /// <summary>
         /// Remote server username.
         /// </summary>
@@ -870,6 +882,8 @@ namespace Jschady.Filescom
             bool disabled,
 
             bool dropboxTeams,
+
+            bool effectiveSiteAdminAccess,
 
             bool enableDedicatedIps,
 
@@ -969,11 +983,15 @@ namespace Jschady.Filescom
 
             string sharepointTenantId,
 
+            bool siteAdminAccess,
+
             string ssl,
 
             bool supportsVersioning,
 
             string uploadStagingPath,
+
+            int userId,
 
             string username,
 
@@ -1008,6 +1026,7 @@ namespace Jschady.Filescom
             DirectTransferAvailable = directTransferAvailable;
             Disabled = disabled;
             DropboxTeams = dropboxTeams;
+            EffectiveSiteAdminAccess = effectiveSiteAdminAccess;
             EnableDedicatedIps = enableDedicatedIps;
             FilebaseAccessKey = filebaseAccessKey;
             FilebaseBucket = filebaseBucket;
@@ -1057,9 +1076,11 @@ namespace Jschady.Filescom
             SharepointClientId = sharepointClientId;
             SharepointSiteUrl = sharepointSiteUrl;
             SharepointTenantId = sharepointTenantId;
+            SiteAdminAccess = siteAdminAccess;
             Ssl = ssl;
             SupportsVersioning = supportsVersioning;
             UploadStagingPath = uploadStagingPath;
+            UserId = userId;
             Username = username;
             WasabiAccessKey = wasabiAccessKey;
             WasabiBucket = wasabiBucket;

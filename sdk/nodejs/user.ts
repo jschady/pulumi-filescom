@@ -84,7 +84,6 @@ import * as utilities from "./utilities";
  *     skipWelcomeScreen: true,
  *     sslRequired: "always_require",
  *     ssoStrategyId: 1,
- *     subscribeToNewsletter: true,
  *     require2fa: "always_require",
  *     tags: "example",
  *     timeZone: "Pacific Time (US & Canada)",
@@ -493,10 +492,6 @@ export class User extends pulumi.CustomResource {
      */
     declare public readonly ssoStrategyId: pulumi.Output<number>;
     /**
-     * Is the user subscribed to the newsletter?
-     */
-    declare public readonly subscribeToNewsletter: pulumi.Output<boolean>;
-    /**
      * Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
      */
     declare public readonly tags: pulumi.Output<string>;
@@ -633,7 +628,6 @@ export class User extends pulumi.CustomResource {
             resourceInputs["skipWelcomeScreen"] = state?.skipWelcomeScreen;
             resourceInputs["sslRequired"] = state?.sslRequired;
             resourceInputs["ssoStrategyId"] = state?.ssoStrategyId;
-            resourceInputs["subscribeToNewsletter"] = state?.subscribeToNewsletter;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["timeZone"] = state?.timeZone;
             resourceInputs["typeOf2fa"] = state?.typeOf2fa;
@@ -708,7 +702,6 @@ export class User extends pulumi.CustomResource {
             resourceInputs["skipWelcomeScreen"] = args?.skipWelcomeScreen;
             resourceInputs["sslRequired"] = args?.sslRequired;
             resourceInputs["ssoStrategyId"] = args?.ssoStrategyId;
-            resourceInputs["subscribeToNewsletter"] = args?.subscribeToNewsletter;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["timeZone"] = args?.timeZone;
             resourceInputs["userHome"] = args?.userHome;
@@ -1115,10 +1108,6 @@ export interface UserState {
      */
     ssoStrategyId?: pulumi.Input<number | undefined>;
     /**
-     * Is the user subscribed to the newsletter?
-     */
-    subscribeToNewsletter?: pulumi.Input<boolean | undefined>;
-    /**
      * Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
      */
     tags?: pulumi.Input<string | undefined>;
@@ -1409,10 +1398,6 @@ export interface UserArgs {
      * SSO (Single Sign On) strategy ID for the user, if applicable.
      */
     ssoStrategyId?: pulumi.Input<number | undefined>;
-    /**
-     * Is the user subscribed to the newsletter?
-     */
-    subscribeToNewsletter?: pulumi.Input<boolean | undefined>;
     /**
      * Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
      */

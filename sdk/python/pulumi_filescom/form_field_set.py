@@ -30,7 +30,7 @@ class FormFieldSetArgs:
         """
         The set of arguments for constructing a FormFieldSet resource.
 
-        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param Any form_fields: Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
@@ -62,7 +62,7 @@ class FormFieldSetArgs:
     @pulumi.getter(name="formFields")
     def form_fields(self) -> Optional[Any]:
         """
-        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         """
         return pulumi.get(self, "form_fields")
 
@@ -173,7 +173,7 @@ class _FormFieldSetState:
         """
         Input properties used for looking up and filtering FormFieldSet resources.
 
-        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param Any form_fields: Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] form_layouts: Layout of the form
         :param pulumi.Input[_builtins.bool] in_use: Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
         :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
@@ -211,7 +211,7 @@ class _FormFieldSetState:
     @pulumi.getter(name="formFields")
     def form_fields(self) -> Optional[Any]:
         """
-        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         """
         return pulumi.get(self, "form_fields")
 
@@ -376,17 +376,13 @@ class FormFieldSet(pulumi.CustomResource):
             skip_name=False,
             skip_company=False,
             form_fields=[{
-                "label": "Sample Label",
+                "label": "Department",
+                "fieldType": "dropdown",
                 "required": True,
-                "helpText": "Help Text",
-                "fieldType": "text",
                 "optionsForSelect": [
-                    "red",
-                    "green",
-                    "blue",
+                    "Finance",
+                    "Sales",
                 ],
-                "defaultOption": "red",
-                "formFieldSetId": 1,
             }])
         ```
         <!--End PulumiCodeChooser -->
@@ -404,7 +400,7 @@ class FormFieldSet(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param Any form_fields: Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
         :param pulumi.Input[_builtins.bool] skip_company: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
         :param pulumi.Input[_builtins.bool] skip_email: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
@@ -452,17 +448,13 @@ class FormFieldSet(pulumi.CustomResource):
             skip_name=False,
             skip_company=False,
             form_fields=[{
-                "label": "Sample Label",
+                "label": "Department",
+                "fieldType": "dropdown",
                 "required": True,
-                "helpText": "Help Text",
-                "fieldType": "text",
                 "optionsForSelect": [
-                    "red",
-                    "green",
-                    "blue",
+                    "Finance",
+                    "Sales",
                 ],
-                "defaultOption": "red",
-                "formFieldSetId": 1,
             }])
         ```
         <!--End PulumiCodeChooser -->
@@ -549,7 +541,7 @@ class FormFieldSet(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param Any form_fields: Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        :param Any form_fields: Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] form_layouts: Layout of the form
         :param pulumi.Input[_builtins.bool] in_use: Form Field Set is in use by an active Inbox / Bundle / Inbox Registration / Bundle Registration
         :param pulumi.Input[_builtins.bool] require_complete_metadata_capture: Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
@@ -582,7 +574,7 @@ class FormFieldSet(pulumi.CustomResource):
     @pulumi.getter(name="formFields")
     def form_fields(self) -> pulumi.Output[Any]:
         """
-        Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+        Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         """
         return pulumi.get(self, "form_fields")
 

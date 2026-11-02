@@ -19,9 +19,21 @@ import * as utilities from "./utilities";
  *     workspaceId: 1,
  *     applyToAllWorkspaces: true,
  *     enabled: true,
- *     config: "example",
- *     deliveryPolicy: "example",
- *     targetType: "example",
+ *     config: {
+ *         url: "https://example.com/files-events",
+ *         headers: {
+ *             "x-Example": "value",
+ *         },
+ *         useDedicatedIps: false,
+ *     },
+ *     deliveryPolicy: {
+ *         maxAttempts: 3,
+ *         retryDelayMinutes: [
+ *             1,
+ *             10,
+ *         ],
+ *     },
+ *     targetType: "webhook",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -69,7 +81,7 @@ export class EventTarget extends pulumi.CustomResource {
      */
     declare public readonly applyToAllWorkspaces: pulumi.Output<boolean>;
     /**
-     * Event Target configuration. Folder targets accept path and format (json or csv).
+     * Event Target configuration. Fields depend on target_type.
      */
     declare public readonly config: pulumi.Output<any>;
     /**
@@ -132,7 +144,7 @@ export class EventTarget extends pulumi.CustomResource {
                 throw new Error("Missing required property 'targetType'");
             }
             resourceInputs["applyToAllWorkspaces"] = args?.applyToAllWorkspaces;
-            resourceInputs["config"] = args?.config;
+            resourceInputs["config"] = args?.config ? pulumi.secret(args.config) : undefined;
             resourceInputs["deliveryPolicy"] = args?.deliveryPolicy;
             resourceInputs["enabled"] = args?.enabled;
             resourceInputs["name"] = args?.name;
@@ -142,6 +154,8 @@ export class EventTarget extends pulumi.CustomResource {
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["config"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(EventTarget.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -155,7 +169,7 @@ export interface EventTargetState {
      */
     applyToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
-     * Event Target configuration. Folder targets accept path and format (json or csv).
+     * Event Target configuration. Fields depend on target_type.
      */
     config?: any | undefined;
     /**
@@ -197,7 +211,7 @@ export interface EventTargetArgs {
      */
     applyToAllWorkspaces?: pulumi.Input<boolean | undefined>;
     /**
-     * Event Target configuration. Folder targets accept path and format (json or csv).
+     * Event Target configuration. Fields depend on target_type.
      */
     config: any;
     /**

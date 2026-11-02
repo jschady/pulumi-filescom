@@ -4996,6 +4996,8 @@ class AutomationDefinitionNodeTriggerEmailConfigArgsDict(TypedDict):
     limit: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     path_time_zone: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     save_body: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    save_html_body: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    save_raw_message: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     source: NotRequired[pulumi.Input[Optional[_builtins.str]]]
 
 @pulumi.input_type
@@ -5006,6 +5008,8 @@ class AutomationDefinitionNodeTriggerEmailConfigArgs:
                  limit: pulumi.Input[Optional[_builtins.int]] = None,
                  path_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  save_body: pulumi.Input[Optional[_builtins.bool]] = None,
+                 save_html_body: pulumi.Input[Optional[_builtins.bool]] = None,
+                 save_raw_message: pulumi.Input[Optional[_builtins.bool]] = None,
                  source: pulumi.Input[Optional[_builtins.str]] = None):
         if allowed_senders is not None:
             pulumi.set(__self__, "allowed_senders", allowed_senders)
@@ -5017,6 +5021,10 @@ class AutomationDefinitionNodeTriggerEmailConfigArgs:
             pulumi.set(__self__, "path_time_zone", path_time_zone)
         if save_body is not None:
             pulumi.set(__self__, "save_body", save_body)
+        if save_html_body is not None:
+            pulumi.set(__self__, "save_html_body", save_html_body)
+        if save_raw_message is not None:
+            pulumi.set(__self__, "save_raw_message", save_raw_message)
         if source is not None:
             pulumi.set(__self__, "source", source)
 
@@ -5064,6 +5072,24 @@ class AutomationDefinitionNodeTriggerEmailConfigArgs:
     @save_body.setter
     def save_body(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "save_body", value)
+
+    @_builtins.property
+    @pulumi.getter(name="saveHtmlBody")
+    def save_html_body(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        return pulumi.get(self, "save_html_body")
+
+    @save_html_body.setter
+    def save_html_body(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "save_html_body", value)
+
+    @_builtins.property
+    @pulumi.getter(name="saveRawMessage")
+    def save_raw_message(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        return pulumi.get(self, "save_raw_message")
+
+    @save_raw_message.setter
+    def save_raw_message(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "save_raw_message", value)
 
     @_builtins.property
     @pulumi.getter

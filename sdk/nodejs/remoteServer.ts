@@ -71,7 +71,7 @@ import * as utilities from "./utilities";
  *     azureFilesStorageShareName: "share-name",
  *     backblazeB2Bucket: "my-bucket",
  *     backblazeB2S3Endpoint: "s3.us-west-001.backblazeb2.com",
- *     bufferUploads: "example",
+ *     bufferUploads: "auto",
  *     cloudflareAccessKey: "example",
  *     cloudflareBucket: "my-bucket",
  *     cloudflareEndpoint: "https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
@@ -114,6 +114,7 @@ import * as utilities from "./utilities";
  *     serverCertificate: "require_match",
  *     serverHostKey: "[public key]",
  *     serverType: "s3",
+ *     siteAdminAccess: true,
  *     sharepointClientId: "00000000-0000-0000-0000-000000000000",
  *     sharepointSiteUrl: "https://example.sharepoint.com/sites/accounting",
  *     sharepointTenantId: "00000000-0000-0000-0000-000000000000",
@@ -297,6 +298,10 @@ export class RemoteServer extends pulumi.CustomResource {
      * Dropbox: If true, list Team folders in root?
      */
     declare public readonly dropboxTeams: pulumi.Output<boolean>;
+    /**
+     * Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+     */
+    declare public /*out*/ readonly effectiveSiteAdminAccess: pulumi.Output<boolean>;
     /**
      * <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
      */
@@ -550,6 +555,10 @@ export class RemoteServer extends pulumi.CustomResource {
      */
     declare public readonly sharepointTenantId: pulumi.Output<string>;
     /**
+     * Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+     */
+    declare public readonly siteAdminAccess: pulumi.Output<boolean>;
+    /**
      * Should we require SSL?
      */
     declare public readonly ssl: pulumi.Output<string>;
@@ -567,10 +576,9 @@ export class RemoteServer extends pulumi.CustomResource {
      */
     declare public readonly uploadStagingPath: pulumi.Output<string>;
     /**
-     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-     * User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+     * ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
      */
-    declare public readonly userId: pulumi.Output<number | undefined>;
+    declare public readonly userId: pulumi.Output<number>;
     /**
      * Remote server username.
      */
@@ -641,6 +649,7 @@ export class RemoteServer extends pulumi.CustomResource {
             resourceInputs["directTransferAvailable"] = state?.directTransferAvailable;
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["dropboxTeams"] = state?.dropboxTeams;
+            resourceInputs["effectiveSiteAdminAccess"] = state?.effectiveSiteAdminAccess;
             resourceInputs["enableDedicatedIps"] = state?.enableDedicatedIps;
             resourceInputs["filebaseAccessKey"] = state?.filebaseAccessKey;
             resourceInputs["filebaseBucket"] = state?.filebaseBucket;
@@ -701,6 +710,7 @@ export class RemoteServer extends pulumi.CustomResource {
             resourceInputs["sharepointClientSecret"] = state?.sharepointClientSecret;
             resourceInputs["sharepointSiteUrl"] = state?.sharepointSiteUrl;
             resourceInputs["sharepointTenantId"] = state?.sharepointTenantId;
+            resourceInputs["siteAdminAccess"] = state?.siteAdminAccess;
             resourceInputs["ssl"] = state?.ssl;
             resourceInputs["sslCertificate"] = state?.sslCertificate;
             resourceInputs["supportsVersioning"] = state?.supportsVersioning;
@@ -790,10 +800,11 @@ export class RemoteServer extends pulumi.CustomResource {
             resourceInputs["sharepointClientSecret"] = args?.sharepointClientSecret ? pulumi.secret(args.sharepointClientSecret) : undefined;
             resourceInputs["sharepointSiteUrl"] = args?.sharepointSiteUrl;
             resourceInputs["sharepointTenantId"] = args?.sharepointTenantId;
+            resourceInputs["siteAdminAccess"] = args?.siteAdminAccess;
             resourceInputs["ssl"] = args?.ssl;
             resourceInputs["sslCertificate"] = args?.sslCertificate ? pulumi.secret(args.sslCertificate) : undefined;
             resourceInputs["uploadStagingPath"] = args?.uploadStagingPath;
-            resourceInputs["userId"] = args?.userId ? pulumi.secret(args.userId) : undefined;
+            resourceInputs["userId"] = args?.userId;
             resourceInputs["username"] = args?.username;
             resourceInputs["wasabiAccessKey"] = args?.wasabiAccessKey;
             resourceInputs["wasabiBucket"] = args?.wasabiBucket;
@@ -805,6 +816,7 @@ export class RemoteServer extends pulumi.CustomResource {
             resourceInputs["authenticationMethod"] = undefined /*out*/;
             resourceInputs["directTransferAvailable"] = undefined /*out*/;
             resourceInputs["disabled"] = undefined /*out*/;
+            resourceInputs["effectiveSiteAdminAccess"] = undefined /*out*/;
             resourceInputs["filesAgentLatestVersion"] = undefined /*out*/;
             resourceInputs["filesAgentSupportsPushUpdates"] = undefined /*out*/;
             resourceInputs["filesAgentUpToDate"] = undefined /*out*/;
@@ -818,7 +830,7 @@ export class RemoteServer extends pulumi.CustomResource {
             resourceInputs["supportsVersioning"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["awsSecretKey", "azureBlobStorageAccessKey", "azureBlobStorageSasToken", "azureFilesStorageAccessKey", "azureFilesStorageSasToken", "backblazeB2ApplicationKey", "backblazeB2KeyId", "cloudflareSecretKey", "filebaseSecretKey", "filesApiKey", "googleCloudStorageCredentialsJson", "googleCloudStorageS3CompatibleSecretKey", "linodeSecretKey", "password", "privateKey", "privateKeyPassphrase", "resetAuthentication", "s3CompatibleSecretKey", "sharepointClientCertificate", "sharepointClientSecret", "sslCertificate", "userId", "wasabiSecretKey"] };
+        const secretOpts = { additionalSecretOutputs: ["awsSecretKey", "azureBlobStorageAccessKey", "azureBlobStorageSasToken", "azureFilesStorageAccessKey", "azureFilesStorageSasToken", "backblazeB2ApplicationKey", "backblazeB2KeyId", "cloudflareSecretKey", "filebaseSecretKey", "filesApiKey", "googleCloudStorageCredentialsJson", "googleCloudStorageS3CompatibleSecretKey", "linodeSecretKey", "password", "privateKey", "privateKeyPassphrase", "resetAuthentication", "s3CompatibleSecretKey", "sharepointClientCertificate", "sharepointClientSecret", "sslCertificate", "wasabiSecretKey"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(RemoteServer.__pulumiType, name, resourceInputs, opts);
     }
@@ -960,6 +972,10 @@ export interface RemoteServerState {
      * Dropbox: If true, list Team folders in root?
      */
     dropboxTeams?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+     */
+    effectiveSiteAdminAccess?: pulumi.Input<boolean | undefined>;
     /**
      * <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
      */
@@ -1213,6 +1229,10 @@ export interface RemoteServerState {
      */
     sharepointTenantId?: pulumi.Input<string | undefined>;
     /**
+     * Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+     */
+    siteAdminAccess?: pulumi.Input<boolean | undefined>;
+    /**
      * Should we require SSL?
      */
     ssl?: pulumi.Input<string | undefined>;
@@ -1230,8 +1250,7 @@ export interface RemoteServerState {
      */
     uploadStagingPath?: pulumi.Input<string | undefined>;
     /**
-     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-     * User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+     * ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
      */
     userId?: pulumi.Input<number | undefined>;
     /**
@@ -1590,6 +1609,10 @@ export interface RemoteServerArgs {
      */
     sharepointTenantId?: pulumi.Input<string | undefined>;
     /**
+     * Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+     */
+    siteAdminAccess?: pulumi.Input<boolean | undefined>;
+    /**
      * Should we require SSL?
      */
     ssl?: pulumi.Input<string | undefined>;
@@ -1603,8 +1626,7 @@ export interface RemoteServerArgs {
      */
     uploadStagingPath?: pulumi.Input<string | undefined>;
     /**
-     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-     * User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+     * ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
      */
     userId?: pulumi.Input<number | undefined>;
     /**

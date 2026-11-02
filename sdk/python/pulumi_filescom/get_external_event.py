@@ -26,7 +26,7 @@ class GetExternalEventResult:
     """
     A collection of values returned by getExternalEvent.
     """
-    def __init__(__self__, body=None, body_url=None, created_at=None, event_type=None, id=None, status=None):
+    def __init__(__self__, body=None, body_url=None, created_at=None, event_type=None, id=None, status=None, workspace_id=None):
         if body and not isinstance(body, str):
             raise TypeError("Expected argument 'body' to be a str")
         pulumi.set(__self__, "body", body)
@@ -45,6 +45,9 @@ class GetExternalEventResult:
         if status and not isinstance(status, str):
             raise TypeError("Expected argument 'status' to be a str")
         pulumi.set(__self__, "status", status)
+        if workspace_id and not isinstance(workspace_id, int):
+            raise TypeError("Expected argument 'workspace_id' to be a int")
+        pulumi.set(__self__, "workspace_id", workspace_id)
 
     @_builtins.property
     @pulumi.getter
@@ -94,6 +97,14 @@ class GetExternalEventResult:
         """
         return pulumi.get(self, "status")
 
+    @_builtins.property
+    @pulumi.getter(name="workspaceId")
+    def workspace_id(self) -> _builtins.int:
+        """
+        Workspace ID
+        """
+        return pulumi.get(self, "workspace_id")
+
 
 class AwaitableGetExternalEventResult(GetExternalEventResult):
     # pylint: disable=using-constant-test
@@ -106,7 +117,8 @@ class AwaitableGetExternalEventResult(GetExternalEventResult):
             created_at=self.created_at,
             event_type=self.event_type,
             id=self.id,
-            status=self.status)
+            status=self.status,
+            workspace_id=self.workspace_id)
 
 
 def get_external_event(id: Optional[_builtins.int] = None,
@@ -139,7 +151,8 @@ def get_external_event(id: Optional[_builtins.int] = None,
         created_at=pulumi.get(__ret__, 'created_at'),
         event_type=pulumi.get(__ret__, 'event_type'),
         id=pulumi.get(__ret__, 'id'),
-        status=pulumi.get(__ret__, 'status'))
+        status=pulumi.get(__ret__, 'status'),
+        workspace_id=pulumi.get(__ret__, 'workspace_id'))
 def get_external_event_output(id: pulumi.Input[Optional[_builtins.int]] = None,
                               opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExternalEventResult]:
     """
@@ -169,4 +182,5 @@ def get_external_event_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         created_at=pulumi.get(__response__, 'created_at'),
         event_type=pulumi.get(__response__, 'event_type'),
         id=pulumi.get(__response__, 'id'),
-        status=pulumi.get(__response__, 'status')))
+        status=pulumi.get(__response__, 'status'),
+        workspace_id=pulumi.get(__response__, 'workspace_id')))

@@ -905,6 +905,8 @@ export interface AutomationDefinitionNodeTriggerEmailConfig {
     limit?: number;
     pathTimeZone?: string;
     saveBody?: boolean;
+    saveHtmlBody?: boolean;
+    saveRawMessage?: boolean;
     source?: string;
 }
 
@@ -2001,6 +2003,8 @@ export interface GetAutomationDefinitionNodeTriggerEmailConfig {
     limit: number;
     pathTimeZone: string;
     saveBody: boolean;
+    saveHtmlBody: boolean;
+    saveRawMessage: boolean;
     source: string;
 }
 

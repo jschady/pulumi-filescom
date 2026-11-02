@@ -95,7 +95,6 @@ namespace Jschady.Filescom
     ///         SkipWelcomeScreen = true,
     ///         SslRequired = "always_require",
     ///         SsoStrategyId = 1,
-    ///         SubscribeToNewsletter = true,
     ///         Require2fa = "always_require",
     ///         Tags = "example",
     ///         TimeZone = "Pacific Time (US &amp; Canada)",
@@ -653,12 +652,6 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("ssoStrategyId")]
         public Output<int> SsoStrategyId { get; private set; } = null!;
-
-        /// <summary>
-        /// Is the user subscribed to the newsletter?
-        /// </summary>
-        [Output("subscribeToNewsletter")]
-        public Output<bool> SubscribeToNewsletter { get; private set; } = null!;
 
         /// <summary>
         /// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
@@ -1231,12 +1224,6 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ssoStrategyId")]
         public Input<int>? SsoStrategyId { get; set; }
-
-        /// <summary>
-        /// Is the user subscribed to the newsletter?
-        /// </summary>
-        [Input("subscribeToNewsletter")]
-        public Input<bool>? SubscribeToNewsletter { get; set; }
 
         /// <summary>
         /// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
@@ -1914,12 +1901,6 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ssoStrategyId")]
         public Input<int>? SsoStrategyId { get; set; }
-
-        /// <summary>
-        /// Is the user subscribed to the newsletter?
-        /// </summary>
-        [Input("subscribeToNewsletter")]
-        public Input<bool>? SubscribeToNewsletter { get; set; }
 
         /// <summary>
         /// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.

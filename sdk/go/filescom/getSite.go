@@ -192,6 +192,8 @@ type LookupSiteResult struct {
 	Email string `pulumi:"email"`
 	// Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
 	EmailFooterCustomText string `pulumi:"emailFooterCustomText"`
+	// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+	EnforceParentSiteUserIpRestrictions bool `pulumi:"enforceParentSiteUserIpRestrictions"`
 	// Are FedRAMP security restrictions enabled for this site?
 	Fedramp bool `pulumi:"fedramp"`
 	// If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
@@ -234,44 +236,16 @@ type LookupSiteResult struct {
 	ImmutableFilesSetAt string `pulumi:"immutableFilesSetAt"`
 	// Include password in emails to new users?
 	IncludePasswordInWelcomeEmail bool `pulumi:"includePasswordInWelcomeEmail"`
+	// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+	IntegrationCentricRemoteServerAdminAccess string `pulumi:"integrationCentricRemoteServerAdminAccess"`
 	// Site default language
 	Language string `pulumi:"language"`
-	// Base DN for looking up users in LDAP server
-	LdapBaseDn string `pulumi:"ldapBaseDn"`
-	// Domain name that will be appended to usernames
-	LdapDomain string `pulumi:"ldapDomain"`
-	// Main LDAP setting: is LDAP enabled?
-	LdapEnabled bool `pulumi:"ldapEnabled"`
-	// Should we sync groups from LDAP server?
-	LdapGroupAction string `pulumi:"ldapGroupAction"`
-	// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-	LdapGroupExclusion string `pulumi:"ldapGroupExclusion"`
-	// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-	LdapGroupInclusion string `pulumi:"ldapGroupInclusion"`
-	// LDAP host
-	LdapHost string `pulumi:"ldapHost"`
-	// LDAP backup host
-	LdapHost2 string `pulumi:"ldapHost2"`
-	// LDAP backup host
-	LdapHost3 string `pulumi:"ldapHost3"`
-	// LDAP port
-	LdapPort int `pulumi:"ldapPort"`
-	// Use secure LDAP?
-	LdapSecure bool `pulumi:"ldapSecure"`
-	// How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-	LdapServerCertificate string `pulumi:"ldapServerCertificate"`
-	// LDAP type
-	LdapType string `pulumi:"ldapType"`
-	// Should we sync users from LDAP server?
-	LdapUserAction string `pulumi:"ldapUserAction"`
-	// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-	LdapUserIncludeGroups string `pulumi:"ldapUserIncludeGroups"`
-	// Username for signing in to LDAP server.
-	LdapUsername string `pulumi:"ldapUsername"`
-	// LDAP username field
-	LdapUsernameField string `pulumi:"ldapUsernameField"`
+	// Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
+	LastPairingAt string `pulumi:"lastPairingAt"`
 	// Use legacy checksums mode?
 	LegacyChecksumsMode bool `pulumi:"legacyChecksumsMode"`
+	// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+	LegacyPairingEnabled bool `pulumi:"legacyPairingEnabled"`
 	// Login help text
 	LoginHelpText string `pulumi:"loginHelpText"`
 	// Branded login page background
@@ -828,6 +802,11 @@ func (o LookupSiteResultOutput) EmailFooterCustomText() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.EmailFooterCustomText }).(pulumi.StringOutput)
 }
 
+// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+func (o LookupSiteResultOutput) EnforceParentSiteUserIpRestrictions() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.EnforceParentSiteUserIpRestrictions }).(pulumi.BoolOutput)
+}
+
 // Are FedRAMP security restrictions enabled for this site?
 func (o LookupSiteResultOutput) Fedramp() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.Fedramp }).(pulumi.BoolOutput)
@@ -933,99 +912,29 @@ func (o LookupSiteResultOutput) IncludePasswordInWelcomeEmail() pulumi.BoolOutpu
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.IncludePasswordInWelcomeEmail }).(pulumi.BoolOutput)
 }
 
+// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+func (o LookupSiteResultOutput) IntegrationCentricRemoteServerAdminAccess() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.IntegrationCentricRemoteServerAdminAccess }).(pulumi.StringOutput)
+}
+
 // Site default language
 func (o LookupSiteResultOutput) Language() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Language }).(pulumi.StringOutput)
 }
 
-// Base DN for looking up users in LDAP server
-func (o LookupSiteResultOutput) LdapBaseDn() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapBaseDn }).(pulumi.StringOutput)
-}
-
-// Domain name that will be appended to usernames
-func (o LookupSiteResultOutput) LdapDomain() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapDomain }).(pulumi.StringOutput)
-}
-
-// Main LDAP setting: is LDAP enabled?
-func (o LookupSiteResultOutput) LdapEnabled() pulumi.BoolOutput {
-	return o.ApplyT(func(v LookupSiteResult) bool { return v.LdapEnabled }).(pulumi.BoolOutput)
-}
-
-// Should we sync groups from LDAP server?
-func (o LookupSiteResultOutput) LdapGroupAction() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapGroupAction }).(pulumi.StringOutput)
-}
-
-// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-func (o LookupSiteResultOutput) LdapGroupExclusion() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapGroupExclusion }).(pulumi.StringOutput)
-}
-
-// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-func (o LookupSiteResultOutput) LdapGroupInclusion() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapGroupInclusion }).(pulumi.StringOutput)
-}
-
-// LDAP host
-func (o LookupSiteResultOutput) LdapHost() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapHost }).(pulumi.StringOutput)
-}
-
-// LDAP backup host
-func (o LookupSiteResultOutput) LdapHost2() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapHost2 }).(pulumi.StringOutput)
-}
-
-// LDAP backup host
-func (o LookupSiteResultOutput) LdapHost3() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapHost3 }).(pulumi.StringOutput)
-}
-
-// LDAP port
-func (o LookupSiteResultOutput) LdapPort() pulumi.IntOutput {
-	return o.ApplyT(func(v LookupSiteResult) int { return v.LdapPort }).(pulumi.IntOutput)
-}
-
-// Use secure LDAP?
-func (o LookupSiteResultOutput) LdapSecure() pulumi.BoolOutput {
-	return o.ApplyT(func(v LookupSiteResult) bool { return v.LdapSecure }).(pulumi.BoolOutput)
-}
-
-// How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-func (o LookupSiteResultOutput) LdapServerCertificate() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapServerCertificate }).(pulumi.StringOutput)
-}
-
-// LDAP type
-func (o LookupSiteResultOutput) LdapType() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapType }).(pulumi.StringOutput)
-}
-
-// Should we sync users from LDAP server?
-func (o LookupSiteResultOutput) LdapUserAction() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapUserAction }).(pulumi.StringOutput)
-}
-
-// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-func (o LookupSiteResultOutput) LdapUserIncludeGroups() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapUserIncludeGroups }).(pulumi.StringOutput)
-}
-
-// Username for signing in to LDAP server.
-func (o LookupSiteResultOutput) LdapUsername() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapUsername }).(pulumi.StringOutput)
-}
-
-// LDAP username field
-func (o LookupSiteResultOutput) LdapUsernameField() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupSiteResult) string { return v.LdapUsernameField }).(pulumi.StringOutput)
+// Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
+func (o LookupSiteResultOutput) LastPairingAt() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.LastPairingAt }).(pulumi.StringOutput)
 }
 
 // Use legacy checksums mode?
 func (o LookupSiteResultOutput) LegacyChecksumsMode() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.LegacyChecksumsMode }).(pulumi.BoolOutput)
+}
+
+// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+func (o LookupSiteResultOutput) LegacyPairingEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.LegacyPairingEnabled }).(pulumi.BoolOutput)
 }
 
 // Login help text

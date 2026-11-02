@@ -67,7 +67,7 @@ func LookupBehavior(ctx *pulumi.Context, args *LookupBehaviorArgs, opts ...pulum
 type LookupBehaviorArgs struct {
 	// Folder behavior ID
 	Id int `pulumi:"id"`
-	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	// Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.
 	ValueFormat *string `pulumi:"valueFormat"`
 }
 
@@ -97,9 +97,9 @@ type LookupBehaviorResult struct {
 	Recursive bool `pulumi:"recursive"`
 	// If true, this behavior may only be modified by a site admin because it is at the site root or disables a root behavior.
 	RootBehaviorSiteAdminOnly bool `pulumi:"rootBehaviorSiteAdminOnly"`
-	// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat`" pulumi-lang-dotnet="`ValueFormat`" pulumi-lang-go="`valueFormat`" pulumi-lang-python="`value_format`" pulumi-lang-yaml="`valueFormat`" pulumi-lang-java="`valueFormat`" pulumi-lang-hcl="`value_format`">`valueFormat`</span> to `"typed"` to return it wrapped under the behavior name.
+	// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format ">`valueFormat </span>= "typed"` to return them under the selected behavior name, as the typed schema does.
 	Value interface{} `pulumi:"value"`
-	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	// Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.
 	ValueFormat *string `pulumi:"valueFormat"`
 }
 
@@ -112,7 +112,7 @@ func LookupBehaviorOutput(ctx *pulumi.Context, args LookupBehaviorOutputArgs, op
 type LookupBehaviorOutputArgs struct {
 	// Folder behavior ID
 	Id pulumi.IntInput `pulumi:"id"`
-	// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+	// Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.
 	ValueFormat pulumi.StringPtrInput `pulumi:"valueFormat"`
 }
 
@@ -195,12 +195,12 @@ func (o LookupBehaviorResultOutput) RootBehaviorSiteAdminOnly() pulumi.BoolOutpu
 	return o.ApplyT(func(v LookupBehaviorResult) bool { return v.RootBehaviorSiteAdminOnly }).(pulumi.BoolOutput)
 }
 
-// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat`" pulumi-lang-dotnet="`ValueFormat`" pulumi-lang-go="`valueFormat`" pulumi-lang-python="`value_format`" pulumi-lang-yaml="`valueFormat`" pulumi-lang-java="`valueFormat`" pulumi-lang-hcl="`value_format`">`valueFormat`</span> to `"typed"` to return it wrapped under the behavior name.
+// Settings for this behavior. Set <span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format ">`valueFormat </span>= "typed"` to return them under the selected behavior name, as the typed schema does.
 func (o LookupBehaviorResultOutput) Value() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupBehaviorResult) interface{} { return v.Value }).(pulumi.AnyOutput)
 }
 
-// Set to `"typed"` to return <span pulumi-lang-nodejs="`value`" pulumi-lang-dotnet="`Value`" pulumi-lang-go="`value`" pulumi-lang-python="`value`" pulumi-lang-yaml="`value`" pulumi-lang-java="`value`" pulumi-lang-hcl="`value`">`value`</span> wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.
+// Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.
 func (o LookupBehaviorResultOutput) ValueFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupBehaviorResult) *string { return v.ValueFormat }).(pulumi.StringPtrOutput)
 }

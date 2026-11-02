@@ -80,7 +80,6 @@ class UserArgs:
                  skip_welcome_screen: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.str]] = None,
                  sso_strategy_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 subscribe_to_newsletter: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[_builtins.str]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  user_home: pulumi.Input[Optional[_builtins.str]] = None,
@@ -160,7 +159,6 @@ class UserArgs:
         :param pulumi.Input[_builtins.bool] skip_welcome_screen: Skip Welcome page in the UI?
         :param pulumi.Input[_builtins.str] ssl_required: SSL required setting
         :param pulumi.Input[_builtins.int] sso_strategy_id: SSO (Single Sign On) strategy ID for the user, if applicable.
-        :param pulumi.Input[_builtins.bool] subscribe_to_newsletter: Is the user subscribed to the newsletter?
         :param pulumi.Input[_builtins.str] tags: Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
         :param pulumi.Input[_builtins.str] time_zone: User time zone
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
@@ -289,8 +287,6 @@ class UserArgs:
             pulumi.set(__self__, "ssl_required", ssl_required)
         if sso_strategy_id is not None:
             pulumi.set(__self__, "sso_strategy_id", sso_strategy_id)
-        if subscribe_to_newsletter is not None:
-            pulumi.set(__self__, "subscribe_to_newsletter", subscribe_to_newsletter)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if time_zone is not None:
@@ -1046,18 +1042,6 @@ class UserArgs:
         pulumi.set(self, "sso_strategy_id", value)
 
     @_builtins.property
-    @pulumi.getter(name="subscribeToNewsletter")
-    def subscribe_to_newsletter(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Is the user subscribed to the newsletter?
-        """
-        return pulumi.get(self, "subscribe_to_newsletter")
-
-    @subscribe_to_newsletter.setter
-    def subscribe_to_newsletter(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "subscribe_to_newsletter", value)
-
-    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -1220,7 +1204,6 @@ class _UserState:
                  skip_welcome_screen: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.str]] = None,
                  sso_strategy_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 subscribe_to_newsletter: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[_builtins.str]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  type_of2fa: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1329,7 +1312,6 @@ class _UserState:
         :param pulumi.Input[_builtins.bool] skip_welcome_screen: Skip Welcome page in the UI?
         :param pulumi.Input[_builtins.str] ssl_required: SSL required setting
         :param pulumi.Input[_builtins.int] sso_strategy_id: SSO (Single Sign On) strategy ID for the user, if applicable.
-        :param pulumi.Input[_builtins.bool] subscribe_to_newsletter: Is the user subscribed to the newsletter?
         :param pulumi.Input[_builtins.str] tags: Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
         :param pulumi.Input[_builtins.str] time_zone: User time zone
         :param pulumi.Input[_builtins.str] type_of2fa: Type(s) of 2FA methods in use, for programmatic use.  Will be either <span pulumi-lang-nodejs="`sms`" pulumi-lang-dotnet="`Sms`" pulumi-lang-go="`sms`" pulumi-lang-python="`sms`" pulumi-lang-yaml="`sms`" pulumi-lang-java="`sms`" pulumi-lang-hcl="`sms`">`sms`</span>, <span pulumi-lang-nodejs="`totp`" pulumi-lang-dotnet="`Totp`" pulumi-lang-go="`totp`" pulumi-lang-python="`totp`" pulumi-lang-yaml="`totp`" pulumi-lang-java="`totp`" pulumi-lang-hcl="`totp`">`totp`</span>, <span pulumi-lang-nodejs="`webauthn`" pulumi-lang-dotnet="`Webauthn`" pulumi-lang-go="`webauthn`" pulumi-lang-python="`webauthn`" pulumi-lang-yaml="`webauthn`" pulumi-lang-java="`webauthn`" pulumi-lang-hcl="`webauthn`">`webauthn`</span>, <span pulumi-lang-nodejs="`yubi`" pulumi-lang-dotnet="`Yubi`" pulumi-lang-go="`yubi`" pulumi-lang-python="`yubi`" pulumi-lang-yaml="`yubi`" pulumi-lang-java="`yubi`" pulumi-lang-hcl="`yubi`">`yubi`</span>, <span pulumi-lang-nodejs="`email`" pulumi-lang-dotnet="`Email`" pulumi-lang-go="`email`" pulumi-lang-python="`email`" pulumi-lang-yaml="`email`" pulumi-lang-java="`email`" pulumi-lang-hcl="`email`">`email`</span>, or multiple values sorted alphabetically and joined by an underscore.  Does not specify whether user has more than one of a given method.
@@ -1514,8 +1496,6 @@ class _UserState:
             pulumi.set(__self__, "ssl_required", ssl_required)
         if sso_strategy_id is not None:
             pulumi.set(__self__, "sso_strategy_id", sso_strategy_id)
-        if subscribe_to_newsletter is not None:
-            pulumi.set(__self__, "subscribe_to_newsletter", subscribe_to_newsletter)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if time_zone is not None:
@@ -2589,18 +2569,6 @@ class _UserState:
         pulumi.set(self, "sso_strategy_id", value)
 
     @_builtins.property
-    @pulumi.getter(name="subscribeToNewsletter")
-    def subscribe_to_newsletter(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Is the user subscribed to the newsletter?
-        """
-        return pulumi.get(self, "subscribe_to_newsletter")
-
-    @subscribe_to_newsletter.setter
-    def subscribe_to_newsletter(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "subscribe_to_newsletter", value)
-
-    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -2775,7 +2743,6 @@ class User(pulumi.CustomResource):
                  skip_welcome_screen: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.str]] = None,
                  sso_strategy_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 subscribe_to_newsletter: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[_builtins.str]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  user_home: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2864,7 +2831,6 @@ class User(pulumi.CustomResource):
             skip_welcome_screen=True,
             ssl_required="always_require",
             sso_strategy_id=1,
-            subscribe_to_newsletter=True,
             require2fa="always_require",
             tags="example",
             time_zone="Pacific Time (US & Canada)",
@@ -2958,7 +2924,6 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] skip_welcome_screen: Skip Welcome page in the UI?
         :param pulumi.Input[_builtins.str] ssl_required: SSL required setting
         :param pulumi.Input[_builtins.int] sso_strategy_id: SSO (Single Sign On) strategy ID for the user, if applicable.
-        :param pulumi.Input[_builtins.bool] subscribe_to_newsletter: Is the user subscribed to the newsletter?
         :param pulumi.Input[_builtins.str] tags: Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
         :param pulumi.Input[_builtins.str] time_zone: User time zone
         :param pulumi.Input[_builtins.str] user_home: Home folder for FTP/SFTP. For users with the<span pulumi-lang-nodejs=" partnerRoot " pulumi-lang-dotnet=" PartnerRoot " pulumi-lang-go=" partnerRoot " pulumi-lang-python=" partner_root " pulumi-lang-yaml=" partnerRoot " pulumi-lang-java=" partnerRoot " pulumi-lang-hcl=" partner_root "> partnerRoot </span>filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.
@@ -3053,7 +3018,6 @@ class User(pulumi.CustomResource):
             skip_welcome_screen=True,
             ssl_required="always_require",
             sso_strategy_id=1,
-            subscribe_to_newsletter=True,
             require2fa="always_require",
             tags="example",
             time_zone="Pacific Time (US & Canada)",
@@ -3151,7 +3115,6 @@ class User(pulumi.CustomResource):
                  skip_welcome_screen: pulumi.Input[Optional[_builtins.bool]] = None,
                  ssl_required: pulumi.Input[Optional[_builtins.str]] = None,
                  sso_strategy_id: pulumi.Input[Optional[_builtins.int]] = None,
-                 subscribe_to_newsletter: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[_builtins.str]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  user_home: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3228,7 +3191,6 @@ class User(pulumi.CustomResource):
             __props__.__dict__["skip_welcome_screen"] = skip_welcome_screen
             __props__.__dict__["ssl_required"] = ssl_required
             __props__.__dict__["sso_strategy_id"] = sso_strategy_id
-            __props__.__dict__["subscribe_to_newsletter"] = subscribe_to_newsletter
             __props__.__dict__["tags"] = tags
             __props__.__dict__["time_zone"] = time_zone
             __props__.__dict__["user_home"] = user_home
@@ -3366,7 +3328,6 @@ class User(pulumi.CustomResource):
             skip_welcome_screen: pulumi.Input[Optional[_builtins.bool]] = None,
             ssl_required: pulumi.Input[Optional[_builtins.str]] = None,
             sso_strategy_id: pulumi.Input[Optional[_builtins.int]] = None,
-            subscribe_to_newsletter: pulumi.Input[Optional[_builtins.bool]] = None,
             tags: pulumi.Input[Optional[_builtins.str]] = None,
             time_zone: pulumi.Input[Optional[_builtins.str]] = None,
             type_of2fa: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3479,7 +3440,6 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] skip_welcome_screen: Skip Welcome page in the UI?
         :param pulumi.Input[_builtins.str] ssl_required: SSL required setting
         :param pulumi.Input[_builtins.int] sso_strategy_id: SSO (Single Sign On) strategy ID for the user, if applicable.
-        :param pulumi.Input[_builtins.bool] subscribe_to_newsletter: Is the user subscribed to the newsletter?
         :param pulumi.Input[_builtins.str] tags: Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
         :param pulumi.Input[_builtins.str] time_zone: User time zone
         :param pulumi.Input[_builtins.str] type_of2fa: Type(s) of 2FA methods in use, for programmatic use.  Will be either <span pulumi-lang-nodejs="`sms`" pulumi-lang-dotnet="`Sms`" pulumi-lang-go="`sms`" pulumi-lang-python="`sms`" pulumi-lang-yaml="`sms`" pulumi-lang-java="`sms`" pulumi-lang-hcl="`sms`">`sms`</span>, <span pulumi-lang-nodejs="`totp`" pulumi-lang-dotnet="`Totp`" pulumi-lang-go="`totp`" pulumi-lang-python="`totp`" pulumi-lang-yaml="`totp`" pulumi-lang-java="`totp`" pulumi-lang-hcl="`totp`">`totp`</span>, <span pulumi-lang-nodejs="`webauthn`" pulumi-lang-dotnet="`Webauthn`" pulumi-lang-go="`webauthn`" pulumi-lang-python="`webauthn`" pulumi-lang-yaml="`webauthn`" pulumi-lang-java="`webauthn`" pulumi-lang-hcl="`webauthn`">`webauthn`</span>, <span pulumi-lang-nodejs="`yubi`" pulumi-lang-dotnet="`Yubi`" pulumi-lang-go="`yubi`" pulumi-lang-python="`yubi`" pulumi-lang-yaml="`yubi`" pulumi-lang-java="`yubi`" pulumi-lang-hcl="`yubi`">`yubi`</span>, <span pulumi-lang-nodejs="`email`" pulumi-lang-dotnet="`Email`" pulumi-lang-go="`email`" pulumi-lang-python="`email`" pulumi-lang-yaml="`email`" pulumi-lang-java="`email`" pulumi-lang-hcl="`email`">`email`</span>, or multiple values sorted alphabetically and joined by an underscore.  Does not specify whether user has more than one of a given method.
@@ -3581,7 +3541,6 @@ class User(pulumi.CustomResource):
         __props__.__dict__["skip_welcome_screen"] = skip_welcome_screen
         __props__.__dict__["ssl_required"] = ssl_required
         __props__.__dict__["sso_strategy_id"] = sso_strategy_id
-        __props__.__dict__["subscribe_to_newsletter"] = subscribe_to_newsletter
         __props__.__dict__["tags"] = tags
         __props__.__dict__["time_zone"] = time_zone
         __props__.__dict__["type_of2fa"] = type_of2fa
@@ -4297,14 +4256,6 @@ class User(pulumi.CustomResource):
         SSO (Single Sign On) strategy ID for the user, if applicable.
         """
         return pulumi.get(self, "sso_strategy_id")
-
-    @_builtins.property
-    @pulumi.getter(name="subscribeToNewsletter")
-    def subscribe_to_newsletter(self) -> pulumi.Output[_builtins.bool]:
-        """
-        Is the user subscribed to the newsletter?
-        """
-        return pulumi.get(self, "subscribe_to_newsletter")
 
     @_builtins.property
     @pulumi.getter

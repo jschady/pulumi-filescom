@@ -83,6 +83,7 @@ class SiteArgs:
                  domain_letsencrypt_chain: pulumi.Input[Optional[_builtins.str]] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
+                 enforce_parent_site_user_ip_restrictions: pulumi.Input[Optional[_builtins.bool]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
                  file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -97,25 +98,10 @@ class SiteArgs:
                  group_admins_can_reset_passwords: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_set_user_password: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_password_in_welcome_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 integration_centric_remote_server_admin_access: pulumi.Input[Optional[_builtins.str]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_base_dn: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_domain: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_group_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_exclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_inclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host2: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
-                 ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username_field: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_checksums_mode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 legacy_pairing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_help_text: pulumi.Input[Optional[_builtins.str]] = None,
                  max_prior_passwords: pulumi.Input[Optional[_builtins.int]] = None,
                  mcp_dcr_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -261,6 +247,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
         :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.bool] enforce_parent_site_user_ip_restrictions: Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
         :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
@@ -275,25 +262,10 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] group_admins_can_reset_passwords: Allow group admins to reset passwords for users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_set_user_password: Allow group admins to set password authentication method
         :param pulumi.Input[_builtins.bool] include_password_in_welcome_email: Include password in emails to new users?
+        :param pulumi.Input[_builtins.str] integration_centric_remote_server_admin_access: Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
         :param pulumi.Input[_builtins.str] language: Site default language
-        :param pulumi.Input[_builtins.str] ldap_base_dn: Base DN for looking up users in LDAP server
-        :param pulumi.Input[_builtins.str] ldap_domain: Domain name that will be appended to usernames
-        :param pulumi.Input[_builtins.bool] ldap_enabled: Main LDAP setting: is LDAP enabled?
-        :param pulumi.Input[_builtins.str] ldap_group_action: Should we sync groups from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_group_exclusion: Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        :param pulumi.Input[_builtins.str] ldap_group_inclusion: Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        :param pulumi.Input[_builtins.str] ldap_host: LDAP host
-        :param pulumi.Input[_builtins.str] ldap_host2: LDAP backup host
-        :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
-        :param pulumi.Input[_builtins.int] ldap_port: LDAP port
-        :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
-        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        :param pulumi.Input[_builtins.str] ldap_type: LDAP type
-        :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        :param pulumi.Input[_builtins.str] ldap_username: Username for signing in to LDAP server.
-        :param pulumi.Input[_builtins.str] ldap_username_field: LDAP username field
         :param pulumi.Input[_builtins.bool] legacy_checksums_mode: Use legacy checksums mode?
+        :param pulumi.Input[_builtins.bool] legacy_pairing_enabled: Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.int] max_prior_passwords: Number of prior passwords to disallow
         :param pulumi.Input[_builtins.bool] mcp_dcr_enabled: Is OAuth DCR (dynamic client registration) for MCP enabled?
@@ -501,6 +473,8 @@ class SiteArgs:
             pulumi.set(__self__, "email", email)
         if email_footer_custom_text is not None:
             pulumi.set(__self__, "email_footer_custom_text", email_footer_custom_text)
+        if enforce_parent_site_user_ip_restrictions is not None:
+            pulumi.set(__self__, "enforce_parent_site_user_ip_restrictions", enforce_parent_site_user_ip_restrictions)
         if fedramp is not None:
             pulumi.set(__self__, "fedramp", fedramp)
         if file_activity_events_enabled is not None:
@@ -529,44 +503,14 @@ class SiteArgs:
             pulumi.set(__self__, "group_admins_can_set_user_password", group_admins_can_set_user_password)
         if include_password_in_welcome_email is not None:
             pulumi.set(__self__, "include_password_in_welcome_email", include_password_in_welcome_email)
+        if integration_centric_remote_server_admin_access is not None:
+            pulumi.set(__self__, "integration_centric_remote_server_admin_access", integration_centric_remote_server_admin_access)
         if language is not None:
             pulumi.set(__self__, "language", language)
-        if ldap_base_dn is not None:
-            pulumi.set(__self__, "ldap_base_dn", ldap_base_dn)
-        if ldap_domain is not None:
-            pulumi.set(__self__, "ldap_domain", ldap_domain)
-        if ldap_enabled is not None:
-            pulumi.set(__self__, "ldap_enabled", ldap_enabled)
-        if ldap_group_action is not None:
-            pulumi.set(__self__, "ldap_group_action", ldap_group_action)
-        if ldap_group_exclusion is not None:
-            pulumi.set(__self__, "ldap_group_exclusion", ldap_group_exclusion)
-        if ldap_group_inclusion is not None:
-            pulumi.set(__self__, "ldap_group_inclusion", ldap_group_inclusion)
-        if ldap_host is not None:
-            pulumi.set(__self__, "ldap_host", ldap_host)
-        if ldap_host2 is not None:
-            pulumi.set(__self__, "ldap_host2", ldap_host2)
-        if ldap_host3 is not None:
-            pulumi.set(__self__, "ldap_host3", ldap_host3)
-        if ldap_port is not None:
-            pulumi.set(__self__, "ldap_port", ldap_port)
-        if ldap_secure is not None:
-            pulumi.set(__self__, "ldap_secure", ldap_secure)
-        if ldap_server_certificate is not None:
-            pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
-        if ldap_type is not None:
-            pulumi.set(__self__, "ldap_type", ldap_type)
-        if ldap_user_action is not None:
-            pulumi.set(__self__, "ldap_user_action", ldap_user_action)
-        if ldap_user_include_groups is not None:
-            pulumi.set(__self__, "ldap_user_include_groups", ldap_user_include_groups)
-        if ldap_username is not None:
-            pulumi.set(__self__, "ldap_username", ldap_username)
-        if ldap_username_field is not None:
-            pulumi.set(__self__, "ldap_username_field", ldap_username_field)
         if legacy_checksums_mode is not None:
             pulumi.set(__self__, "legacy_checksums_mode", legacy_checksums_mode)
+        if legacy_pairing_enabled is not None:
+            pulumi.set(__self__, "legacy_pairing_enabled", legacy_pairing_enabled)
         if login_help_text is not None:
             pulumi.set(__self__, "login_help_text", login_help_text)
         if max_prior_passwords is not None:
@@ -1493,6 +1437,18 @@ class SiteArgs:
         pulumi.set(self, "email_footer_custom_text", value)
 
     @_builtins.property
+    @pulumi.getter(name="enforceParentSiteUserIpRestrictions")
+    def enforce_parent_site_user_ip_restrictions(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        """
+        return pulumi.get(self, "enforce_parent_site_user_ip_restrictions")
+
+    @enforce_parent_site_user_ip_restrictions.setter
+    def enforce_parent_site_user_ip_restrictions(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enforce_parent_site_user_ip_restrictions", value)
+
+    @_builtins.property
     @pulumi.getter
     def fedramp(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -1661,6 +1617,18 @@ class SiteArgs:
         pulumi.set(self, "include_password_in_welcome_email", value)
 
     @_builtins.property
+    @pulumi.getter(name="integrationCentricRemoteServerAdminAccess")
+    def integration_centric_remote_server_admin_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        """
+        return pulumi.get(self, "integration_centric_remote_server_admin_access")
+
+    @integration_centric_remote_server_admin_access.setter
+    def integration_centric_remote_server_admin_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "integration_centric_remote_server_admin_access", value)
+
+    @_builtins.property
     @pulumi.getter
     def language(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -1673,210 +1641,6 @@ class SiteArgs:
         pulumi.set(self, "language", value)
 
     @_builtins.property
-    @pulumi.getter(name="ldapBaseDn")
-    def ldap_base_dn(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Base DN for looking up users in LDAP server
-        """
-        return pulumi.get(self, "ldap_base_dn")
-
-    @ldap_base_dn.setter
-    def ldap_base_dn(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_base_dn", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapDomain")
-    def ldap_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Domain name that will be appended to usernames
-        """
-        return pulumi.get(self, "ldap_domain")
-
-    @ldap_domain.setter
-    def ldap_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_domain", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapEnabled")
-    def ldap_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Main LDAP setting: is LDAP enabled?
-        """
-        return pulumi.get(self, "ldap_enabled")
-
-    @ldap_enabled.setter
-    def ldap_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "ldap_enabled", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupAction")
-    def ldap_group_action(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Should we sync groups from LDAP server?
-        """
-        return pulumi.get(self, "ldap_group_action")
-
-    @ldap_group_action.setter
-    def ldap_group_action(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_action", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupExclusion")
-    def ldap_group_exclusion(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        """
-        return pulumi.get(self, "ldap_group_exclusion")
-
-    @ldap_group_exclusion.setter
-    def ldap_group_exclusion(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_exclusion", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupInclusion")
-    def ldap_group_inclusion(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        """
-        return pulumi.get(self, "ldap_group_inclusion")
-
-    @ldap_group_inclusion.setter
-    def ldap_group_inclusion(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_inclusion", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost")
-    def ldap_host(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP host
-        """
-        return pulumi.get(self, "ldap_host")
-
-    @ldap_host.setter
-    def ldap_host(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost2")
-    def ldap_host2(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host2")
-
-    @ldap_host2.setter
-    def ldap_host2(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host2", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost3")
-    def ldap_host3(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host3")
-
-    @ldap_host3.setter
-    def ldap_host3(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host3", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapPort")
-    def ldap_port(self) -> pulumi.Input[Optional[_builtins.int]]:
-        """
-        LDAP port
-        """
-        return pulumi.get(self, "ldap_port")
-
-    @ldap_port.setter
-    def ldap_port(self, value: pulumi.Input[Optional[_builtins.int]]):
-        pulumi.set(self, "ldap_port", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapSecure")
-    def ldap_secure(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Use secure LDAP?
-        """
-        return pulumi.get(self, "ldap_secure")
-
-    @ldap_secure.setter
-    def ldap_secure(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "ldap_secure", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapServerCertificate")
-    def ldap_server_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        """
-        return pulumi.get(self, "ldap_server_certificate")
-
-    @ldap_server_certificate.setter
-    def ldap_server_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_server_certificate", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapType")
-    def ldap_type(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP type
-        """
-        return pulumi.get(self, "ldap_type")
-
-    @ldap_type.setter
-    def ldap_type(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_type", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserAction")
-    def ldap_user_action(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Should we sync users from LDAP server?
-        """
-        return pulumi.get(self, "ldap_user_action")
-
-    @ldap_user_action.setter
-    def ldap_user_action(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_user_action", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserIncludeGroups")
-    def ldap_user_include_groups(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        """
-        return pulumi.get(self, "ldap_user_include_groups")
-
-    @ldap_user_include_groups.setter
-    def ldap_user_include_groups(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_user_include_groups", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsername")
-    def ldap_username(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Username for signing in to LDAP server.
-        """
-        return pulumi.get(self, "ldap_username")
-
-    @ldap_username.setter
-    def ldap_username(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_username", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsernameField")
-    def ldap_username_field(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP username field
-        """
-        return pulumi.get(self, "ldap_username_field")
-
-    @ldap_username_field.setter
-    def ldap_username_field(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_username_field", value)
-
-    @_builtins.property
     @pulumi.getter(name="legacyChecksumsMode")
     def legacy_checksums_mode(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -1887,6 +1651,18 @@ class SiteArgs:
     @legacy_checksums_mode.setter
     def legacy_checksums_mode(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "legacy_checksums_mode", value)
+
+    @_builtins.property
+    @pulumi.getter(name="legacyPairingEnabled")
+    def legacy_pairing_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        """
+        return pulumi.get(self, "legacy_pairing_enabled")
+
+    @legacy_pairing_enabled.setter
+    def legacy_pairing_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "legacy_pairing_enabled", value)
 
     @_builtins.property
     @pulumi.getter(name="loginHelpText")
@@ -2898,6 +2674,7 @@ class _SiteState:
                  domain_letsencrypt_chain: pulumi.Input[Optional[_builtins.str]] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
+                 enforce_parent_site_user_ip_restrictions: pulumi.Input[Optional[_builtins.bool]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
                  file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2918,25 +2695,11 @@ class _SiteState:
                  icon48: pulumi.Input[Optional[_builtins.str]] = None,
                  immutable_files_set_at: pulumi.Input[Optional[_builtins.str]] = None,
                  include_password_in_welcome_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 integration_centric_remote_server_admin_access: pulumi.Input[Optional[_builtins.str]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_base_dn: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_domain: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_group_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_exclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_inclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host2: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
-                 ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username_field: pulumi.Input[Optional[_builtins.str]] = None,
+                 last_pairing_at: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_checksums_mode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 legacy_pairing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_help_text: pulumi.Input[Optional[_builtins.str]] = None,
                  login_page_background_image: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3102,6 +2865,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
         :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.bool] enforce_parent_site_user_ip_restrictions: Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
         :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
@@ -3122,25 +2886,11 @@ class _SiteState:
         :param pulumi.Input[_builtins.str] icon48: Branded icon 48x48
         :param pulumi.Input[_builtins.str] immutable_files_set_at: Can files be modified?
         :param pulumi.Input[_builtins.bool] include_password_in_welcome_email: Include password in emails to new users?
+        :param pulumi.Input[_builtins.str] integration_centric_remote_server_admin_access: Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
         :param pulumi.Input[_builtins.str] language: Site default language
-        :param pulumi.Input[_builtins.str] ldap_base_dn: Base DN for looking up users in LDAP server
-        :param pulumi.Input[_builtins.str] ldap_domain: Domain name that will be appended to usernames
-        :param pulumi.Input[_builtins.bool] ldap_enabled: Main LDAP setting: is LDAP enabled?
-        :param pulumi.Input[_builtins.str] ldap_group_action: Should we sync groups from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_group_exclusion: Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        :param pulumi.Input[_builtins.str] ldap_group_inclusion: Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        :param pulumi.Input[_builtins.str] ldap_host: LDAP host
-        :param pulumi.Input[_builtins.str] ldap_host2: LDAP backup host
-        :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
-        :param pulumi.Input[_builtins.int] ldap_port: LDAP port
-        :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
-        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        :param pulumi.Input[_builtins.str] ldap_type: LDAP type
-        :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        :param pulumi.Input[_builtins.str] ldap_username: Username for signing in to LDAP server.
-        :param pulumi.Input[_builtins.str] ldap_username_field: LDAP username field
+        :param pulumi.Input[_builtins.str] last_pairing_at: Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         :param pulumi.Input[_builtins.bool] legacy_checksums_mode: Use legacy checksums mode?
+        :param pulumi.Input[_builtins.bool] legacy_pairing_enabled: Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.str] login_page_background_image: Branded login page background
         :param pulumi.Input[_builtins.str] logo: Branded logo
@@ -3374,6 +3124,8 @@ class _SiteState:
             pulumi.set(__self__, "email", email)
         if email_footer_custom_text is not None:
             pulumi.set(__self__, "email_footer_custom_text", email_footer_custom_text)
+        if enforce_parent_site_user_ip_restrictions is not None:
+            pulumi.set(__self__, "enforce_parent_site_user_ip_restrictions", enforce_parent_site_user_ip_restrictions)
         if fedramp is not None:
             pulumi.set(__self__, "fedramp", fedramp)
         if file_activity_events_enabled is not None:
@@ -3414,44 +3166,16 @@ class _SiteState:
             pulumi.set(__self__, "immutable_files_set_at", immutable_files_set_at)
         if include_password_in_welcome_email is not None:
             pulumi.set(__self__, "include_password_in_welcome_email", include_password_in_welcome_email)
+        if integration_centric_remote_server_admin_access is not None:
+            pulumi.set(__self__, "integration_centric_remote_server_admin_access", integration_centric_remote_server_admin_access)
         if language is not None:
             pulumi.set(__self__, "language", language)
-        if ldap_base_dn is not None:
-            pulumi.set(__self__, "ldap_base_dn", ldap_base_dn)
-        if ldap_domain is not None:
-            pulumi.set(__self__, "ldap_domain", ldap_domain)
-        if ldap_enabled is not None:
-            pulumi.set(__self__, "ldap_enabled", ldap_enabled)
-        if ldap_group_action is not None:
-            pulumi.set(__self__, "ldap_group_action", ldap_group_action)
-        if ldap_group_exclusion is not None:
-            pulumi.set(__self__, "ldap_group_exclusion", ldap_group_exclusion)
-        if ldap_group_inclusion is not None:
-            pulumi.set(__self__, "ldap_group_inclusion", ldap_group_inclusion)
-        if ldap_host is not None:
-            pulumi.set(__self__, "ldap_host", ldap_host)
-        if ldap_host2 is not None:
-            pulumi.set(__self__, "ldap_host2", ldap_host2)
-        if ldap_host3 is not None:
-            pulumi.set(__self__, "ldap_host3", ldap_host3)
-        if ldap_port is not None:
-            pulumi.set(__self__, "ldap_port", ldap_port)
-        if ldap_secure is not None:
-            pulumi.set(__self__, "ldap_secure", ldap_secure)
-        if ldap_server_certificate is not None:
-            pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
-        if ldap_type is not None:
-            pulumi.set(__self__, "ldap_type", ldap_type)
-        if ldap_user_action is not None:
-            pulumi.set(__self__, "ldap_user_action", ldap_user_action)
-        if ldap_user_include_groups is not None:
-            pulumi.set(__self__, "ldap_user_include_groups", ldap_user_include_groups)
-        if ldap_username is not None:
-            pulumi.set(__self__, "ldap_username", ldap_username)
-        if ldap_username_field is not None:
-            pulumi.set(__self__, "ldap_username_field", ldap_username_field)
+        if last_pairing_at is not None:
+            pulumi.set(__self__, "last_pairing_at", last_pairing_at)
         if legacy_checksums_mode is not None:
             pulumi.set(__self__, "legacy_checksums_mode", legacy_checksums_mode)
+        if legacy_pairing_enabled is not None:
+            pulumi.set(__self__, "legacy_pairing_enabled", legacy_pairing_enabled)
         if login_help_text is not None:
             pulumi.set(__self__, "login_help_text", login_help_text)
         if login_page_background_image is not None:
@@ -4478,6 +4202,18 @@ class _SiteState:
         pulumi.set(self, "email_footer_custom_text", value)
 
     @_builtins.property
+    @pulumi.getter(name="enforceParentSiteUserIpRestrictions")
+    def enforce_parent_site_user_ip_restrictions(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        """
+        return pulumi.get(self, "enforce_parent_site_user_ip_restrictions")
+
+    @enforce_parent_site_user_ip_restrictions.setter
+    def enforce_parent_site_user_ip_restrictions(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enforce_parent_site_user_ip_restrictions", value)
+
+    @_builtins.property
     @pulumi.getter
     def fedramp(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -4718,6 +4454,18 @@ class _SiteState:
         pulumi.set(self, "include_password_in_welcome_email", value)
 
     @_builtins.property
+    @pulumi.getter(name="integrationCentricRemoteServerAdminAccess")
+    def integration_centric_remote_server_admin_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        """
+        return pulumi.get(self, "integration_centric_remote_server_admin_access")
+
+    @integration_centric_remote_server_admin_access.setter
+    def integration_centric_remote_server_admin_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "integration_centric_remote_server_admin_access", value)
+
+    @_builtins.property
     @pulumi.getter
     def language(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -4730,208 +4478,16 @@ class _SiteState:
         pulumi.set(self, "language", value)
 
     @_builtins.property
-    @pulumi.getter(name="ldapBaseDn")
-    def ldap_base_dn(self) -> pulumi.Input[Optional[_builtins.str]]:
+    @pulumi.getter(name="lastPairingAt")
+    def last_pairing_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Base DN for looking up users in LDAP server
+        Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         """
-        return pulumi.get(self, "ldap_base_dn")
+        return pulumi.get(self, "last_pairing_at")
 
-    @ldap_base_dn.setter
-    def ldap_base_dn(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_base_dn", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapDomain")
-    def ldap_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Domain name that will be appended to usernames
-        """
-        return pulumi.get(self, "ldap_domain")
-
-    @ldap_domain.setter
-    def ldap_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_domain", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapEnabled")
-    def ldap_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Main LDAP setting: is LDAP enabled?
-        """
-        return pulumi.get(self, "ldap_enabled")
-
-    @ldap_enabled.setter
-    def ldap_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "ldap_enabled", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupAction")
-    def ldap_group_action(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Should we sync groups from LDAP server?
-        """
-        return pulumi.get(self, "ldap_group_action")
-
-    @ldap_group_action.setter
-    def ldap_group_action(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_action", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupExclusion")
-    def ldap_group_exclusion(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        """
-        return pulumi.get(self, "ldap_group_exclusion")
-
-    @ldap_group_exclusion.setter
-    def ldap_group_exclusion(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_exclusion", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupInclusion")
-    def ldap_group_inclusion(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        """
-        return pulumi.get(self, "ldap_group_inclusion")
-
-    @ldap_group_inclusion.setter
-    def ldap_group_inclusion(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_group_inclusion", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost")
-    def ldap_host(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP host
-        """
-        return pulumi.get(self, "ldap_host")
-
-    @ldap_host.setter
-    def ldap_host(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost2")
-    def ldap_host2(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host2")
-
-    @ldap_host2.setter
-    def ldap_host2(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host2", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost3")
-    def ldap_host3(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host3")
-
-    @ldap_host3.setter
-    def ldap_host3(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_host3", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapPort")
-    def ldap_port(self) -> pulumi.Input[Optional[_builtins.int]]:
-        """
-        LDAP port
-        """
-        return pulumi.get(self, "ldap_port")
-
-    @ldap_port.setter
-    def ldap_port(self, value: pulumi.Input[Optional[_builtins.int]]):
-        pulumi.set(self, "ldap_port", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapSecure")
-    def ldap_secure(self) -> pulumi.Input[Optional[_builtins.bool]]:
-        """
-        Use secure LDAP?
-        """
-        return pulumi.get(self, "ldap_secure")
-
-    @ldap_secure.setter
-    def ldap_secure(self, value: pulumi.Input[Optional[_builtins.bool]]):
-        pulumi.set(self, "ldap_secure", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapServerCertificate")
-    def ldap_server_certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        """
-        return pulumi.get(self, "ldap_server_certificate")
-
-    @ldap_server_certificate.setter
-    def ldap_server_certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_server_certificate", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapType")
-    def ldap_type(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP type
-        """
-        return pulumi.get(self, "ldap_type")
-
-    @ldap_type.setter
-    def ldap_type(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_type", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserAction")
-    def ldap_user_action(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Should we sync users from LDAP server?
-        """
-        return pulumi.get(self, "ldap_user_action")
-
-    @ldap_user_action.setter
-    def ldap_user_action(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_user_action", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserIncludeGroups")
-    def ldap_user_include_groups(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        """
-        return pulumi.get(self, "ldap_user_include_groups")
-
-    @ldap_user_include_groups.setter
-    def ldap_user_include_groups(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_user_include_groups", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsername")
-    def ldap_username(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        Username for signing in to LDAP server.
-        """
-        return pulumi.get(self, "ldap_username")
-
-    @ldap_username.setter
-    def ldap_username(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_username", value)
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsernameField")
-    def ldap_username_field(self) -> pulumi.Input[Optional[_builtins.str]]:
-        """
-        LDAP username field
-        """
-        return pulumi.get(self, "ldap_username_field")
-
-    @ldap_username_field.setter
-    def ldap_username_field(self, value: pulumi.Input[Optional[_builtins.str]]):
-        pulumi.set(self, "ldap_username_field", value)
+    @last_pairing_at.setter
+    def last_pairing_at(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "last_pairing_at", value)
 
     @_builtins.property
     @pulumi.getter(name="legacyChecksumsMode")
@@ -4944,6 +4500,18 @@ class _SiteState:
     @legacy_checksums_mode.setter
     def legacy_checksums_mode(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "legacy_checksums_mode", value)
+
+    @_builtins.property
+    @pulumi.getter(name="legacyPairingEnabled")
+    def legacy_pairing_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        """
+        return pulumi.get(self, "legacy_pairing_enabled")
+
+    @legacy_pairing_enabled.setter
+    def legacy_pairing_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "legacy_pairing_enabled", value)
 
     @_builtins.property
     @pulumi.getter(name="loginHelpText")
@@ -6120,6 +5688,7 @@ class Site(pulumi.CustomResource):
                  domain_letsencrypt_chain: pulumi.Input[Optional[_builtins.str]] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
+                 enforce_parent_site_user_ip_restrictions: pulumi.Input[Optional[_builtins.bool]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
                  file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6134,25 +5703,10 @@ class Site(pulumi.CustomResource):
                  group_admins_can_reset_passwords: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_set_user_password: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_password_in_welcome_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 integration_centric_remote_server_admin_access: pulumi.Input[Optional[_builtins.str]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_base_dn: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_domain: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_group_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_exclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_inclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host2: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
-                 ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username_field: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_checksums_mode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 legacy_pairing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_help_text: pulumi.Input[Optional[_builtins.str]] = None,
                  max_prior_passwords: pulumi.Input[Optional[_builtins.int]] = None,
                  mcp_dcr_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6249,7 +5803,7 @@ class Site(pulumi.CustomResource):
             subdomain="mysite",
             domain="my-custom-domain.com",
             domain_hsts_header=False,
-            domain_letsencrypt_chain="example",
+            domain_letsencrypt_chain="default",
             email="john.doe@files.com",
             reply_to_email="jane.doe@files.com",
             allow_bundle_names=False,
@@ -6271,9 +5825,9 @@ class Site(pulumi.CustomResource):
             mobile_app_session_ip_pinning=False,
             mobile_app_session_lifetime=1,
             folder_permissions_groups_only=False,
-            welcome_screen="user_controlled",
+            welcome_screen="enabled",
             office_integration_available=False,
-            office_integration_type="example",
+            office_integration_type="only_office",
             pin_all_remote_servers_to_site_region=False,
             motd_text="example",
             motd_use_for_ftp=False,
@@ -6285,11 +5839,7 @@ class Site(pulumi.CustomResource):
                     "workspaceAdmins": True,
                     "folderAdmins": True,
                     "allUsers": False,
-                    "selectedGroupMembers": True,
-                    "groupIds": [
-                        1,
-                        2,
-                    ],
+                    "selectedGroupMembers": False,
                 },
             },
             mcp_dcr_enabled=False,
@@ -6306,7 +5856,9 @@ class Site(pulumi.CustomResource):
             as2_message_retention_days=1,
             file_activity_events_enabled=False,
             username_display="username_only",
+            integration_centric_remote_server_admin_access="always_visible",
             session_expiry_minutes=1,
+            legacy_pairing_enabled=False,
             ssl_required=False,
             sftp_insecure_ciphers=False,
             sftp_insecure_diffie_hellman=False,
@@ -6322,6 +5874,7 @@ class Site(pulumi.CustomResource):
             allow_user_level2fa_override=False,
             allow_user_level_allowed_ip_override=False,
             allow_user_level_ssl_override=False,
+            enforce_parent_site_user_ip_restrictions=False,
             disallowed_countries="US,DE",
             days_to_retain_backups=1,
             max_prior_passwords=1,
@@ -6336,7 +5889,6 @@ class Site(pulumi.CustomResource):
             dav_user_root_enabled=False,
             sftp_user_root_enabled=False,
             disable_password_reset=False,
-            immutable_files=False,
             bundle_not_found_message="example",
             bundle_password_required=False,
             bundle_require_registration=False,
@@ -6395,7 +5947,7 @@ class Site(pulumi.CustomResource):
             allowed2fa_method_bypass_for_ftp_sftp_dav=False,
             require2fa=False,
             require2fa_exempt_all_sso_users=False,
-            require2fa_user_type="`site_admins`",
+            require2fa_user_type="all",
             color2_top="#000000",
             color2_left="#0066a7",
             color2_link="#d34f5d",
@@ -6414,38 +5966,12 @@ class Site(pulumi.CustomResource):
             smtp_username="mail",
             smtp_port=1,
             smtp_ssl="require",
-            ldap_enabled=False,
-            ldap_type="open_ldap",
-            ldap_host="ldap.site.com",
-            ldap_host2="ldap2.site.com",
-            ldap_host3="ldap3.site.com",
-            ldap_port=1,
-            ldap_secure=False,
-            ldap_server_certificate="require_match",
-            ldap_username="[ldap username]",
-            ldap_username_field="sAMAccountName",
-            ldap_domain="mysite.com",
-            ldap_user_action="disabled",
-            ldap_group_action="disabled",
-            ldap_user_include_groups="example",
-            ldap_group_exclusion="example",
-            ldap_group_inclusion="example",
-            ldap_base_dn="example",
             uploads_via_email_authentication=False,
             bundle_watermark_value={
                 "gravity": "SouthWest",
                 "maxHeightOrWidth": 20,
                 "transparency": 25,
-            },
-            icon16_delete=False,
-            icon32_delete=False,
-            icon48_delete=False,
-            icon128_delete=False,
-            logo_delete=False,
-            bundle_watermark_attachment_delete=False,
-            login_page_background_image_delete=False,
-            disable2fa_with_delay=False,
-            redirect_old_subdomain=False)
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -6526,6 +6052,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
         :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.bool] enforce_parent_site_user_ip_restrictions: Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
         :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
@@ -6540,25 +6067,10 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] group_admins_can_reset_passwords: Allow group admins to reset passwords for users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_set_user_password: Allow group admins to set password authentication method
         :param pulumi.Input[_builtins.bool] include_password_in_welcome_email: Include password in emails to new users?
+        :param pulumi.Input[_builtins.str] integration_centric_remote_server_admin_access: Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
         :param pulumi.Input[_builtins.str] language: Site default language
-        :param pulumi.Input[_builtins.str] ldap_base_dn: Base DN for looking up users in LDAP server
-        :param pulumi.Input[_builtins.str] ldap_domain: Domain name that will be appended to usernames
-        :param pulumi.Input[_builtins.bool] ldap_enabled: Main LDAP setting: is LDAP enabled?
-        :param pulumi.Input[_builtins.str] ldap_group_action: Should we sync groups from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_group_exclusion: Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        :param pulumi.Input[_builtins.str] ldap_group_inclusion: Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        :param pulumi.Input[_builtins.str] ldap_host: LDAP host
-        :param pulumi.Input[_builtins.str] ldap_host2: LDAP backup host
-        :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
-        :param pulumi.Input[_builtins.int] ldap_port: LDAP port
-        :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
-        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        :param pulumi.Input[_builtins.str] ldap_type: LDAP type
-        :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        :param pulumi.Input[_builtins.str] ldap_username: Username for signing in to LDAP server.
-        :param pulumi.Input[_builtins.str] ldap_username_field: LDAP username field
         :param pulumi.Input[_builtins.bool] legacy_checksums_mode: Use legacy checksums mode?
+        :param pulumi.Input[_builtins.bool] legacy_pairing_enabled: Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.int] max_prior_passwords: Number of prior passwords to disallow
         :param pulumi.Input[_builtins.bool] mcp_dcr_enabled: Is OAuth DCR (dynamic client registration) for MCP enabled?
@@ -6661,7 +6173,7 @@ class Site(pulumi.CustomResource):
             subdomain="mysite",
             domain="my-custom-domain.com",
             domain_hsts_header=False,
-            domain_letsencrypt_chain="example",
+            domain_letsencrypt_chain="default",
             email="john.doe@files.com",
             reply_to_email="jane.doe@files.com",
             allow_bundle_names=False,
@@ -6683,9 +6195,9 @@ class Site(pulumi.CustomResource):
             mobile_app_session_ip_pinning=False,
             mobile_app_session_lifetime=1,
             folder_permissions_groups_only=False,
-            welcome_screen="user_controlled",
+            welcome_screen="enabled",
             office_integration_available=False,
-            office_integration_type="example",
+            office_integration_type="only_office",
             pin_all_remote_servers_to_site_region=False,
             motd_text="example",
             motd_use_for_ftp=False,
@@ -6697,11 +6209,7 @@ class Site(pulumi.CustomResource):
                     "workspaceAdmins": True,
                     "folderAdmins": True,
                     "allUsers": False,
-                    "selectedGroupMembers": True,
-                    "groupIds": [
-                        1,
-                        2,
-                    ],
+                    "selectedGroupMembers": False,
                 },
             },
             mcp_dcr_enabled=False,
@@ -6718,7 +6226,9 @@ class Site(pulumi.CustomResource):
             as2_message_retention_days=1,
             file_activity_events_enabled=False,
             username_display="username_only",
+            integration_centric_remote_server_admin_access="always_visible",
             session_expiry_minutes=1,
+            legacy_pairing_enabled=False,
             ssl_required=False,
             sftp_insecure_ciphers=False,
             sftp_insecure_diffie_hellman=False,
@@ -6734,6 +6244,7 @@ class Site(pulumi.CustomResource):
             allow_user_level2fa_override=False,
             allow_user_level_allowed_ip_override=False,
             allow_user_level_ssl_override=False,
+            enforce_parent_site_user_ip_restrictions=False,
             disallowed_countries="US,DE",
             days_to_retain_backups=1,
             max_prior_passwords=1,
@@ -6748,7 +6259,6 @@ class Site(pulumi.CustomResource):
             dav_user_root_enabled=False,
             sftp_user_root_enabled=False,
             disable_password_reset=False,
-            immutable_files=False,
             bundle_not_found_message="example",
             bundle_password_required=False,
             bundle_require_registration=False,
@@ -6807,7 +6317,7 @@ class Site(pulumi.CustomResource):
             allowed2fa_method_bypass_for_ftp_sftp_dav=False,
             require2fa=False,
             require2fa_exempt_all_sso_users=False,
-            require2fa_user_type="`site_admins`",
+            require2fa_user_type="all",
             color2_top="#000000",
             color2_left="#0066a7",
             color2_link="#d34f5d",
@@ -6826,38 +6336,12 @@ class Site(pulumi.CustomResource):
             smtp_username="mail",
             smtp_port=1,
             smtp_ssl="require",
-            ldap_enabled=False,
-            ldap_type="open_ldap",
-            ldap_host="ldap.site.com",
-            ldap_host2="ldap2.site.com",
-            ldap_host3="ldap3.site.com",
-            ldap_port=1,
-            ldap_secure=False,
-            ldap_server_certificate="require_match",
-            ldap_username="[ldap username]",
-            ldap_username_field="sAMAccountName",
-            ldap_domain="mysite.com",
-            ldap_user_action="disabled",
-            ldap_group_action="disabled",
-            ldap_user_include_groups="example",
-            ldap_group_exclusion="example",
-            ldap_group_inclusion="example",
-            ldap_base_dn="example",
             uploads_via_email_authentication=False,
             bundle_watermark_value={
                 "gravity": "SouthWest",
                 "maxHeightOrWidth": 20,
                 "transparency": 25,
-            },
-            icon16_delete=False,
-            icon32_delete=False,
-            icon48_delete=False,
-            icon128_delete=False,
-            logo_delete=False,
-            bundle_watermark_attachment_delete=False,
-            login_page_background_image_delete=False,
-            disable2fa_with_delay=False,
-            redirect_old_subdomain=False)
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -6951,6 +6435,7 @@ class Site(pulumi.CustomResource):
                  domain_letsencrypt_chain: pulumi.Input[Optional[_builtins.str]] = None,
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
+                 enforce_parent_site_user_ip_restrictions: pulumi.Input[Optional[_builtins.bool]] = None,
                  fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
                  file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6965,25 +6450,10 @@ class Site(pulumi.CustomResource):
                  group_admins_can_reset_passwords: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_set_user_password: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_password_in_welcome_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 integration_centric_remote_server_admin_access: pulumi.Input[Optional[_builtins.str]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_base_dn: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_domain: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_group_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_exclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_group_inclusion: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host2: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
-                 ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
-                 ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username: pulumi.Input[Optional[_builtins.str]] = None,
-                 ldap_username_field: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_checksums_mode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 legacy_pairing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_help_text: pulumi.Input[Optional[_builtins.str]] = None,
                  max_prior_passwords: pulumi.Input[Optional[_builtins.int]] = None,
                  mcp_dcr_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7135,6 +6605,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["domain_letsencrypt_chain"] = domain_letsencrypt_chain
             __props__.__dict__["email"] = email
             __props__.__dict__["email_footer_custom_text"] = email_footer_custom_text
+            __props__.__dict__["enforce_parent_site_user_ip_restrictions"] = enforce_parent_site_user_ip_restrictions
             __props__.__dict__["fedramp"] = fedramp
             __props__.__dict__["file_activity_events_enabled"] = file_activity_events_enabled
             __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
@@ -7149,25 +6620,10 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["group_admins_can_reset_passwords"] = group_admins_can_reset_passwords
             __props__.__dict__["group_admins_can_set_user_password"] = group_admins_can_set_user_password
             __props__.__dict__["include_password_in_welcome_email"] = include_password_in_welcome_email
+            __props__.__dict__["integration_centric_remote_server_admin_access"] = integration_centric_remote_server_admin_access
             __props__.__dict__["language"] = language
-            __props__.__dict__["ldap_base_dn"] = ldap_base_dn
-            __props__.__dict__["ldap_domain"] = ldap_domain
-            __props__.__dict__["ldap_enabled"] = ldap_enabled
-            __props__.__dict__["ldap_group_action"] = ldap_group_action
-            __props__.__dict__["ldap_group_exclusion"] = ldap_group_exclusion
-            __props__.__dict__["ldap_group_inclusion"] = ldap_group_inclusion
-            __props__.__dict__["ldap_host"] = ldap_host
-            __props__.__dict__["ldap_host2"] = ldap_host2
-            __props__.__dict__["ldap_host3"] = ldap_host3
-            __props__.__dict__["ldap_port"] = ldap_port
-            __props__.__dict__["ldap_secure"] = ldap_secure
-            __props__.__dict__["ldap_server_certificate"] = ldap_server_certificate
-            __props__.__dict__["ldap_type"] = ldap_type
-            __props__.__dict__["ldap_user_action"] = ldap_user_action
-            __props__.__dict__["ldap_user_include_groups"] = ldap_user_include_groups
-            __props__.__dict__["ldap_username"] = ldap_username
-            __props__.__dict__["ldap_username_field"] = ldap_username_field
             __props__.__dict__["legacy_checksums_mode"] = legacy_checksums_mode
+            __props__.__dict__["legacy_pairing_enabled"] = legacy_pairing_enabled
             __props__.__dict__["login_help_text"] = login_help_text
             __props__.__dict__["max_prior_passwords"] = max_prior_passwords
             __props__.__dict__["mcp_dcr_enabled"] = mcp_dcr_enabled
@@ -7258,6 +6714,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["icon32"] = None
             __props__.__dict__["icon48"] = None
             __props__.__dict__["immutable_files_set_at"] = None
+            __props__.__dict__["last_pairing_at"] = None
             __props__.__dict__["login_page_background_image"] = None
             __props__.__dict__["logo"] = None
             __props__.__dict__["managed_site_settings"] = None
@@ -7352,6 +6809,7 @@ class Site(pulumi.CustomResource):
             domain_letsencrypt_chain: pulumi.Input[Optional[_builtins.str]] = None,
             email: pulumi.Input[Optional[_builtins.str]] = None,
             email_footer_custom_text: pulumi.Input[Optional[_builtins.str]] = None,
+            enforce_parent_site_user_ip_restrictions: pulumi.Input[Optional[_builtins.bool]] = None,
             fedramp: pulumi.Input[Optional[_builtins.bool]] = None,
             file_activity_events_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7372,25 +6830,11 @@ class Site(pulumi.CustomResource):
             icon48: pulumi.Input[Optional[_builtins.str]] = None,
             immutable_files_set_at: pulumi.Input[Optional[_builtins.str]] = None,
             include_password_in_welcome_email: pulumi.Input[Optional[_builtins.bool]] = None,
+            integration_centric_remote_server_admin_access: pulumi.Input[Optional[_builtins.str]] = None,
             language: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_base_dn: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_domain: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            ldap_group_action: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_group_exclusion: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_group_inclusion: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_host: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_host2: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_host3: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_port: pulumi.Input[Optional[_builtins.int]] = None,
-            ldap_secure: pulumi.Input[Optional[_builtins.bool]] = None,
-            ldap_server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_type: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_user_action: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_user_include_groups: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_username: pulumi.Input[Optional[_builtins.str]] = None,
-            ldap_username_field: pulumi.Input[Optional[_builtins.str]] = None,
+            last_pairing_at: pulumi.Input[Optional[_builtins.str]] = None,
             legacy_checksums_mode: pulumi.Input[Optional[_builtins.bool]] = None,
+            legacy_pairing_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             login_help_text: pulumi.Input[Optional[_builtins.str]] = None,
             login_page_background_image: pulumi.Input[Optional[_builtins.str]] = None,
             logo: pulumi.Input[Optional[_builtins.str]] = None,
@@ -7560,6 +7004,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] domain_letsencrypt_chain: Letsencrypt chain to use when registering SSL Certificate for domain. No longer used as of 2026.
         :param pulumi.Input[_builtins.str] email: Main email for this site
         :param pulumi.Input[_builtins.str] email_footer_custom_text: Custom footer text for system-generated emails (as Markdown). Supports standard strftime date/time patterns like %Y (4-digit year), %m (month), %d (day).
+        :param pulumi.Input[_builtins.bool] enforce_parent_site_user_ip_restrictions: Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
         :param pulumi.Input[_builtins.bool] fedramp: Are FedRAMP security restrictions enabled for this site?
         :param pulumi.Input[_builtins.bool] file_activity_events_enabled: If true, file operations produce file_action.activity.v1 EventChannel events in all workspaces. Defaults to false; subscription filters and workspace access still control delivery.
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
@@ -7580,25 +7025,11 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] icon48: Branded icon 48x48
         :param pulumi.Input[_builtins.str] immutable_files_set_at: Can files be modified?
         :param pulumi.Input[_builtins.bool] include_password_in_welcome_email: Include password in emails to new users?
+        :param pulumi.Input[_builtins.str] integration_centric_remote_server_admin_access: Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
         :param pulumi.Input[_builtins.str] language: Site default language
-        :param pulumi.Input[_builtins.str] ldap_base_dn: Base DN for looking up users in LDAP server
-        :param pulumi.Input[_builtins.str] ldap_domain: Domain name that will be appended to usernames
-        :param pulumi.Input[_builtins.bool] ldap_enabled: Main LDAP setting: is LDAP enabled?
-        :param pulumi.Input[_builtins.str] ldap_group_action: Should we sync groups from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_group_exclusion: Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        :param pulumi.Input[_builtins.str] ldap_group_inclusion: Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        :param pulumi.Input[_builtins.str] ldap_host: LDAP host
-        :param pulumi.Input[_builtins.str] ldap_host2: LDAP backup host
-        :param pulumi.Input[_builtins.str] ldap_host3: LDAP backup host
-        :param pulumi.Input[_builtins.int] ldap_port: LDAP port
-        :param pulumi.Input[_builtins.bool] ldap_secure: Use secure LDAP?
-        :param pulumi.Input[_builtins.str] ldap_server_certificate: How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        :param pulumi.Input[_builtins.str] ldap_type: LDAP type
-        :param pulumi.Input[_builtins.str] ldap_user_action: Should we sync users from LDAP server?
-        :param pulumi.Input[_builtins.str] ldap_user_include_groups: Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        :param pulumi.Input[_builtins.str] ldap_username: Username for signing in to LDAP server.
-        :param pulumi.Input[_builtins.str] ldap_username_field: LDAP username field
+        :param pulumi.Input[_builtins.str] last_pairing_at: Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         :param pulumi.Input[_builtins.bool] legacy_checksums_mode: Use legacy checksums mode?
+        :param pulumi.Input[_builtins.bool] legacy_pairing_enabled: Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
         :param pulumi.Input[_builtins.str] login_help_text: Login help text
         :param pulumi.Input[_builtins.str] login_page_background_image: Branded login page background
         :param pulumi.Input[_builtins.str] logo: Branded logo
@@ -7766,6 +7197,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["domain_letsencrypt_chain"] = domain_letsencrypt_chain
         __props__.__dict__["email"] = email
         __props__.__dict__["email_footer_custom_text"] = email_footer_custom_text
+        __props__.__dict__["enforce_parent_site_user_ip_restrictions"] = enforce_parent_site_user_ip_restrictions
         __props__.__dict__["fedramp"] = fedramp
         __props__.__dict__["file_activity_events_enabled"] = file_activity_events_enabled
         __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
@@ -7786,25 +7218,11 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["icon48"] = icon48
         __props__.__dict__["immutable_files_set_at"] = immutable_files_set_at
         __props__.__dict__["include_password_in_welcome_email"] = include_password_in_welcome_email
+        __props__.__dict__["integration_centric_remote_server_admin_access"] = integration_centric_remote_server_admin_access
         __props__.__dict__["language"] = language
-        __props__.__dict__["ldap_base_dn"] = ldap_base_dn
-        __props__.__dict__["ldap_domain"] = ldap_domain
-        __props__.__dict__["ldap_enabled"] = ldap_enabled
-        __props__.__dict__["ldap_group_action"] = ldap_group_action
-        __props__.__dict__["ldap_group_exclusion"] = ldap_group_exclusion
-        __props__.__dict__["ldap_group_inclusion"] = ldap_group_inclusion
-        __props__.__dict__["ldap_host"] = ldap_host
-        __props__.__dict__["ldap_host2"] = ldap_host2
-        __props__.__dict__["ldap_host3"] = ldap_host3
-        __props__.__dict__["ldap_port"] = ldap_port
-        __props__.__dict__["ldap_secure"] = ldap_secure
-        __props__.__dict__["ldap_server_certificate"] = ldap_server_certificate
-        __props__.__dict__["ldap_type"] = ldap_type
-        __props__.__dict__["ldap_user_action"] = ldap_user_action
-        __props__.__dict__["ldap_user_include_groups"] = ldap_user_include_groups
-        __props__.__dict__["ldap_username"] = ldap_username
-        __props__.__dict__["ldap_username_field"] = ldap_username_field
+        __props__.__dict__["last_pairing_at"] = last_pairing_at
         __props__.__dict__["legacy_checksums_mode"] = legacy_checksums_mode
+        __props__.__dict__["legacy_pairing_enabled"] = legacy_pairing_enabled
         __props__.__dict__["login_help_text"] = login_help_text
         __props__.__dict__["login_page_background_image"] = login_page_background_image
         __props__.__dict__["logo"] = logo
@@ -8460,6 +7878,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "email_footer_custom_text")
 
     @_builtins.property
+    @pulumi.getter(name="enforceParentSiteUserIpRestrictions")
+    def enforce_parent_site_user_ip_restrictions(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        """
+        return pulumi.get(self, "enforce_parent_site_user_ip_restrictions")
+
+    @_builtins.property
     @pulumi.getter
     def fedramp(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -8620,6 +8046,14 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "include_password_in_welcome_email")
 
     @_builtins.property
+    @pulumi.getter(name="integrationCentricRemoteServerAdminAccess")
+    def integration_centric_remote_server_admin_access(self) -> pulumi.Output[_builtins.str]:
+        """
+        Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        """
+        return pulumi.get(self, "integration_centric_remote_server_admin_access")
+
+    @_builtins.property
     @pulumi.getter
     def language(self) -> pulumi.Output[_builtins.str]:
         """
@@ -8628,140 +8062,12 @@ class Site(pulumi.CustomResource):
         return pulumi.get(self, "language")
 
     @_builtins.property
-    @pulumi.getter(name="ldapBaseDn")
-    def ldap_base_dn(self) -> pulumi.Output[_builtins.str]:
+    @pulumi.getter(name="lastPairingAt")
+    def last_pairing_at(self) -> pulumi.Output[_builtins.str]:
         """
-        Base DN for looking up users in LDAP server
+        Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         """
-        return pulumi.get(self, "ldap_base_dn")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapDomain")
-    def ldap_domain(self) -> pulumi.Output[_builtins.str]:
-        """
-        Domain name that will be appended to usernames
-        """
-        return pulumi.get(self, "ldap_domain")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapEnabled")
-    def ldap_enabled(self) -> pulumi.Output[_builtins.bool]:
-        """
-        Main LDAP setting: is LDAP enabled?
-        """
-        return pulumi.get(self, "ldap_enabled")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupAction")
-    def ldap_group_action(self) -> pulumi.Output[_builtins.str]:
-        """
-        Should we sync groups from LDAP server?
-        """
-        return pulumi.get(self, "ldap_group_action")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupExclusion")
-    def ldap_group_exclusion(self) -> pulumi.Output[_builtins.str]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        """
-        return pulumi.get(self, "ldap_group_exclusion")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupInclusion")
-    def ldap_group_inclusion(self) -> pulumi.Output[_builtins.str]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        """
-        return pulumi.get(self, "ldap_group_inclusion")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost")
-    def ldap_host(self) -> pulumi.Output[_builtins.str]:
-        """
-        LDAP host
-        """
-        return pulumi.get(self, "ldap_host")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost2")
-    def ldap_host2(self) -> pulumi.Output[_builtins.str]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host2")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost3")
-    def ldap_host3(self) -> pulumi.Output[_builtins.str]:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host3")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapPort")
-    def ldap_port(self) -> pulumi.Output[_builtins.int]:
-        """
-        LDAP port
-        """
-        return pulumi.get(self, "ldap_port")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapSecure")
-    def ldap_secure(self) -> pulumi.Output[_builtins.bool]:
-        """
-        Use secure LDAP?
-        """
-        return pulumi.get(self, "ldap_secure")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapServerCertificate")
-    def ldap_server_certificate(self) -> pulumi.Output[_builtins.str]:
-        """
-        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        """
-        return pulumi.get(self, "ldap_server_certificate")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapType")
-    def ldap_type(self) -> pulumi.Output[_builtins.str]:
-        """
-        LDAP type
-        """
-        return pulumi.get(self, "ldap_type")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserAction")
-    def ldap_user_action(self) -> pulumi.Output[_builtins.str]:
-        """
-        Should we sync users from LDAP server?
-        """
-        return pulumi.get(self, "ldap_user_action")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserIncludeGroups")
-    def ldap_user_include_groups(self) -> pulumi.Output[_builtins.str]:
-        """
-        Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        """
-        return pulumi.get(self, "ldap_user_include_groups")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsername")
-    def ldap_username(self) -> pulumi.Output[_builtins.str]:
-        """
-        Username for signing in to LDAP server.
-        """
-        return pulumi.get(self, "ldap_username")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsernameField")
-    def ldap_username_field(self) -> pulumi.Output[_builtins.str]:
-        """
-        LDAP username field
-        """
-        return pulumi.get(self, "ldap_username_field")
+        return pulumi.get(self, "last_pairing_at")
 
     @_builtins.property
     @pulumi.getter(name="legacyChecksumsMode")
@@ -8770,6 +8076,14 @@ class Site(pulumi.CustomResource):
         Use legacy checksums mode?
         """
         return pulumi.get(self, "legacy_checksums_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="legacyPairingEnabled")
+    def legacy_pairing_enabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        """
+        return pulumi.get(self, "legacy_pairing_enabled")
 
     @_builtins.property
     @pulumi.getter(name="loginHelpText")

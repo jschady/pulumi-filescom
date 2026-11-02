@@ -905,6 +905,8 @@ export interface AutomationDefinitionNodeTriggerEmailConfig {
     limit?: pulumi.Input<number | undefined>;
     pathTimeZone?: pulumi.Input<string | undefined>;
     saveBody?: pulumi.Input<boolean | undefined>;
+    saveHtmlBody?: pulumi.Input<boolean | undefined>;
+    saveRawMessage?: pulumi.Input<boolean | undefined>;
     source?: pulumi.Input<string | undefined>;
 }
 

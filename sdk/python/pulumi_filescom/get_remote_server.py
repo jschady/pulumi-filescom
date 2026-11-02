@@ -26,7 +26,7 @@ class GetRemoteServerResult:
     """
     A collection of values returned by getRemoteServer.
     """
-    def __init__(__self__, allow_relative_paths=None, auth_account_name=None, auth_status=None, authentication_method=None, aws_access_key=None, azure_blob_storage_account=None, azure_blob_storage_container=None, azure_blob_storage_dns_suffix=None, azure_blob_storage_hierarchical_namespace=None, azure_files_storage_account=None, azure_files_storage_dns_suffix=None, azure_files_storage_share_name=None, backblaze_b2_bucket=None, backblaze_b2_s3_endpoint=None, buffer_uploads=None, cloudflare_access_key=None, cloudflare_bucket=None, cloudflare_endpoint=None, custom_domain_id=None, description=None, direct_transfer_available=None, disabled=None, dropbox_teams=None, enable_dedicated_ips=None, filebase_access_key=None, filebase_bucket=None, files_agent_latest_version=None, files_agent_permission_set=None, files_agent_root=None, files_agent_supports_push_updates=None, files_agent_up_to_date=None, files_agent_version=None, files_api_key_prefix=None, google_cloud_storage_authentication_method=None, google_cloud_storage_bucket=None, google_cloud_storage_oauth_scope=None, google_cloud_storage_project_id=None, google_cloud_storage_s3_compatible_access_key=None, hostname=None, id=None, linode_access_key=None, linode_bucket=None, linode_region=None, max_connections=None, name=None, one_drive_account_type=None, outbound_agent_id=None, outbound_ip_addresses=None, pin_to_site_region=None, pinned_region=None, port=None, remote_home_path=None, remote_server_credential_id=None, s3_assume_role_arn=None, s3_assume_role_duration_seconds=None, s3_assume_role_external_id=None, s3_bucket=None, s3_compatible_access_key=None, s3_compatible_bucket=None, s3_compatible_endpoint=None, s3_compatible_region=None, s3_compatible_virtual_hosted_style=None, s3_kms_key_id=None, s3_region=None, server_certificate=None, server_host_key=None, server_type=None, sharepoint_app_authentication=None, sharepoint_app_credential_type=None, sharepoint_client_id=None, sharepoint_site_url=None, sharepoint_tenant_id=None, ssl=None, supports_versioning=None, upload_staging_path=None, username=None, wasabi_access_key=None, wasabi_bucket=None, wasabi_region=None, workspace_id=None):
+    def __init__(__self__, allow_relative_paths=None, auth_account_name=None, auth_status=None, authentication_method=None, aws_access_key=None, azure_blob_storage_account=None, azure_blob_storage_container=None, azure_blob_storage_dns_suffix=None, azure_blob_storage_hierarchical_namespace=None, azure_files_storage_account=None, azure_files_storage_dns_suffix=None, azure_files_storage_share_name=None, backblaze_b2_bucket=None, backblaze_b2_s3_endpoint=None, buffer_uploads=None, cloudflare_access_key=None, cloudflare_bucket=None, cloudflare_endpoint=None, custom_domain_id=None, description=None, direct_transfer_available=None, disabled=None, dropbox_teams=None, effective_site_admin_access=None, enable_dedicated_ips=None, filebase_access_key=None, filebase_bucket=None, files_agent_latest_version=None, files_agent_permission_set=None, files_agent_root=None, files_agent_supports_push_updates=None, files_agent_up_to_date=None, files_agent_version=None, files_api_key_prefix=None, google_cloud_storage_authentication_method=None, google_cloud_storage_bucket=None, google_cloud_storage_oauth_scope=None, google_cloud_storage_project_id=None, google_cloud_storage_s3_compatible_access_key=None, hostname=None, id=None, linode_access_key=None, linode_bucket=None, linode_region=None, max_connections=None, name=None, one_drive_account_type=None, outbound_agent_id=None, outbound_ip_addresses=None, pin_to_site_region=None, pinned_region=None, port=None, remote_home_path=None, remote_server_credential_id=None, s3_assume_role_arn=None, s3_assume_role_duration_seconds=None, s3_assume_role_external_id=None, s3_bucket=None, s3_compatible_access_key=None, s3_compatible_bucket=None, s3_compatible_endpoint=None, s3_compatible_region=None, s3_compatible_virtual_hosted_style=None, s3_kms_key_id=None, s3_region=None, server_certificate=None, server_host_key=None, server_type=None, sharepoint_app_authentication=None, sharepoint_app_credential_type=None, sharepoint_client_id=None, sharepoint_site_url=None, sharepoint_tenant_id=None, site_admin_access=None, ssl=None, supports_versioning=None, upload_staging_path=None, user_id=None, username=None, wasabi_access_key=None, wasabi_bucket=None, wasabi_region=None, workspace_id=None):
         if allow_relative_paths and not isinstance(allow_relative_paths, bool):
             raise TypeError("Expected argument 'allow_relative_paths' to be a bool")
         pulumi.set(__self__, "allow_relative_paths", allow_relative_paths)
@@ -96,6 +96,9 @@ class GetRemoteServerResult:
         if dropbox_teams and not isinstance(dropbox_teams, bool):
             raise TypeError("Expected argument 'dropbox_teams' to be a bool")
         pulumi.set(__self__, "dropbox_teams", dropbox_teams)
+        if effective_site_admin_access and not isinstance(effective_site_admin_access, bool):
+            raise TypeError("Expected argument 'effective_site_admin_access' to be a bool")
+        pulumi.set(__self__, "effective_site_admin_access", effective_site_admin_access)
         if enable_dedicated_ips and not isinstance(enable_dedicated_ips, bool):
             raise TypeError("Expected argument 'enable_dedicated_ips' to be a bool")
         pulumi.set(__self__, "enable_dedicated_ips", enable_dedicated_ips)
@@ -243,6 +246,9 @@ class GetRemoteServerResult:
         if sharepoint_tenant_id and not isinstance(sharepoint_tenant_id, str):
             raise TypeError("Expected argument 'sharepoint_tenant_id' to be a str")
         pulumi.set(__self__, "sharepoint_tenant_id", sharepoint_tenant_id)
+        if site_admin_access and not isinstance(site_admin_access, bool):
+            raise TypeError("Expected argument 'site_admin_access' to be a bool")
+        pulumi.set(__self__, "site_admin_access", site_admin_access)
         if ssl and not isinstance(ssl, str):
             raise TypeError("Expected argument 'ssl' to be a str")
         pulumi.set(__self__, "ssl", ssl)
@@ -252,6 +258,9 @@ class GetRemoteServerResult:
         if upload_staging_path and not isinstance(upload_staging_path, str):
             raise TypeError("Expected argument 'upload_staging_path' to be a str")
         pulumi.set(__self__, "upload_staging_path", upload_staging_path)
+        if user_id and not isinstance(user_id, int):
+            raise TypeError("Expected argument 'user_id' to be a int")
+        pulumi.set(__self__, "user_id", user_id)
         if username and not isinstance(username, str):
             raise TypeError("Expected argument 'username' to be a str")
         pulumi.set(__self__, "username", username)
@@ -451,6 +460,14 @@ class GetRemoteServerResult:
         Dropbox: If true, list Team folders in root?
         """
         return pulumi.get(self, "dropbox_teams")
+
+    @_builtins.property
+    @pulumi.getter(name="effectiveSiteAdminAccess")
+    def effective_site_admin_access(self) -> _builtins.bool:
+        """
+        Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        """
+        return pulumi.get(self, "effective_site_admin_access")
 
     @_builtins.property
     @pulumi.getter(name="enableDedicatedIps")
@@ -845,6 +862,14 @@ class GetRemoteServerResult:
         return pulumi.get(self, "sharepoint_tenant_id")
 
     @_builtins.property
+    @pulumi.getter(name="siteAdminAccess")
+    def site_admin_access(self) -> _builtins.bool:
+        """
+        Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        """
+        return pulumi.get(self, "site_admin_access")
+
+    @_builtins.property
     @pulumi.getter
     def ssl(self) -> _builtins.str:
         """
@@ -867,6 +892,14 @@ class GetRemoteServerResult:
         Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
         """
         return pulumi.get(self, "upload_staging_path")
+
+    @_builtins.property
+    @pulumi.getter(name="userId")
+    def user_id(self) -> _builtins.int:
+        """
+        ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+        """
+        return pulumi.get(self, "user_id")
 
     @_builtins.property
     @pulumi.getter
@@ -938,6 +971,7 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             direct_transfer_available=self.direct_transfer_available,
             disabled=self.disabled,
             dropbox_teams=self.dropbox_teams,
+            effective_site_admin_access=self.effective_site_admin_access,
             enable_dedicated_ips=self.enable_dedicated_ips,
             filebase_access_key=self.filebase_access_key,
             filebase_bucket=self.filebase_bucket,
@@ -987,9 +1021,11 @@ class AwaitableGetRemoteServerResult(GetRemoteServerResult):
             sharepoint_client_id=self.sharepoint_client_id,
             sharepoint_site_url=self.sharepoint_site_url,
             sharepoint_tenant_id=self.sharepoint_tenant_id,
+            site_admin_access=self.site_admin_access,
             ssl=self.ssl,
             supports_versioning=self.supports_versioning,
             upload_staging_path=self.upload_staging_path,
+            user_id=self.user_id,
             username=self.username,
             wasabi_access_key=self.wasabi_access_key,
             wasabi_bucket=self.wasabi_bucket,
@@ -1088,6 +1124,7 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         direct_transfer_available=pulumi.get(__ret__, 'direct_transfer_available'),
         disabled=pulumi.get(__ret__, 'disabled'),
         dropbox_teams=pulumi.get(__ret__, 'dropbox_teams'),
+        effective_site_admin_access=pulumi.get(__ret__, 'effective_site_admin_access'),
         enable_dedicated_ips=pulumi.get(__ret__, 'enable_dedicated_ips'),
         filebase_access_key=pulumi.get(__ret__, 'filebase_access_key'),
         filebase_bucket=pulumi.get(__ret__, 'filebase_bucket'),
@@ -1137,9 +1174,11 @@ def get_remote_server(id: Optional[_builtins.int] = None,
         sharepoint_client_id=pulumi.get(__ret__, 'sharepoint_client_id'),
         sharepoint_site_url=pulumi.get(__ret__, 'sharepoint_site_url'),
         sharepoint_tenant_id=pulumi.get(__ret__, 'sharepoint_tenant_id'),
+        site_admin_access=pulumi.get(__ret__, 'site_admin_access'),
         ssl=pulumi.get(__ret__, 'ssl'),
         supports_versioning=pulumi.get(__ret__, 'supports_versioning'),
         upload_staging_path=pulumi.get(__ret__, 'upload_staging_path'),
+        user_id=pulumi.get(__ret__, 'user_id'),
         username=pulumi.get(__ret__, 'username'),
         wasabi_access_key=pulumi.get(__ret__, 'wasabi_access_key'),
         wasabi_bucket=pulumi.get(__ret__, 'wasabi_bucket'),
@@ -1235,6 +1274,7 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         direct_transfer_available=pulumi.get(__response__, 'direct_transfer_available'),
         disabled=pulumi.get(__response__, 'disabled'),
         dropbox_teams=pulumi.get(__response__, 'dropbox_teams'),
+        effective_site_admin_access=pulumi.get(__response__, 'effective_site_admin_access'),
         enable_dedicated_ips=pulumi.get(__response__, 'enable_dedicated_ips'),
         filebase_access_key=pulumi.get(__response__, 'filebase_access_key'),
         filebase_bucket=pulumi.get(__response__, 'filebase_bucket'),
@@ -1284,9 +1324,11 @@ def get_remote_server_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         sharepoint_client_id=pulumi.get(__response__, 'sharepoint_client_id'),
         sharepoint_site_url=pulumi.get(__response__, 'sharepoint_site_url'),
         sharepoint_tenant_id=pulumi.get(__response__, 'sharepoint_tenant_id'),
+        site_admin_access=pulumi.get(__response__, 'site_admin_access'),
         ssl=pulumi.get(__response__, 'ssl'),
         supports_versioning=pulumi.get(__response__, 'supports_versioning'),
         upload_staging_path=pulumi.get(__response__, 'upload_staging_path'),
+        user_id=pulumi.get(__response__, 'user_id'),
         username=pulumi.get(__response__, 'username'),
         wasabi_access_key=pulumi.get(__response__, 'wasabi_access_key'),
         wasabi_bucket=pulumi.get(__response__, 'wasabi_bucket'),

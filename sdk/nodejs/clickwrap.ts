@@ -24,9 +24,9 @@ import * as utilities from "./utilities";
  * const exampleClickwrap = new filescom.Clickwrap("example_clickwrap", {
  *     name: "Example Site NDA for Files.com Use",
  *     body: "[Legal body text]",
- *     useWithBundles: "example",
- *     useWithInboxes: "example",
- *     useWithUsers: "example",
+ *     useWithBundles: "none",
+ *     useWithInboxes: "none",
+ *     useWithUsers: "none",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

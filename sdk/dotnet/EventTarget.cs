@@ -30,9 +30,25 @@ namespace Jschady.Filescom
     ///         WorkspaceId = 1,
     ///         ApplyToAllWorkspaces = true,
     ///         Enabled = true,
-    ///         Config = "example",
-    ///         DeliveryPolicy = "example",
-    ///         TargetType = "example",
+    ///         Config = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["url"] = "https://example.com/files-events",
+    ///             ["headers"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["x-Example"] = "value",
+    ///             },
+    ///             ["useDedicatedIps"] = false,
+    ///         },
+    ///         DeliveryPolicy = new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["maxAttempts"] = 3,
+    ///             ["retryDelayMinutes"] = new object?[]
+    ///             {
+    ///                 1,
+    ///                 10,
+    ///             },
+    ///         },
+    ///         TargetType = "webhook",
     ///     });
     /// 
     /// });
@@ -59,7 +75,7 @@ namespace Jschady.Filescom
         public Output<bool> ApplyToAllWorkspaces { get; private set; } = null!;
 
         /// <summary>
-        /// Event Target configuration. Folder targets accept path and format (json or csv).
+        /// Event Target configuration. Fields depend on target_type.
         /// </summary>
         [Output("config")]
         public Output<object> Config { get; private set; } = null!;
@@ -130,6 +146,10 @@ namespace Jschady.Filescom
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/jschady/pulumi-filescom",
+                AdditionalSecretOutputs =
+                {
+                    "config",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -159,11 +179,21 @@ namespace Jschady.Filescom
         [Input("applyToAllWorkspaces")]
         public Input<bool>? ApplyToAllWorkspaces { get; set; }
 
-        /// <summary>
-        /// Event Target configuration. Folder targets accept path and format (json or csv).
-        /// </summary>
         [Input("config", required: true)]
-        public Input<object> Config { get; set; } = null!;
+        private Input<object>? _config;
+
+        /// <summary>
+        /// Event Target configuration. Fields depend on target_type.
+        /// </summary>
+        public Input<object>? Config
+        {
+            get => _config;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _config = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
@@ -209,11 +239,21 @@ namespace Jschady.Filescom
         [Input("applyToAllWorkspaces")]
         public Input<bool>? ApplyToAllWorkspaces { get; set; }
 
-        /// <summary>
-        /// Event Target configuration. Folder targets accept path and format (json or csv).
-        /// </summary>
         [Input("config")]
-        public Input<object>? Config { get; set; }
+        private Input<object>? _config;
+
+        /// <summary>
+        /// Event Target configuration. Fields depend on target_type.
+        /// </summary>
+        public Input<object>? Config
+        {
+            get => _config;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _config = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Event Target create date/time.

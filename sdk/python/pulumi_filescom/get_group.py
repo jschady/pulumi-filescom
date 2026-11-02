@@ -131,7 +131,7 @@ class GetGroupResult:
     @pulumi.getter
     def id(self) -> _builtins.int:
         """
-        Group ID
+        Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
         """
         return pulumi.get(self, "id")
 
@@ -147,7 +147,7 @@ class GetGroupResult:
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
-        Group name
+        Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
         """
         return pulumi.get(self, "name")
 
@@ -242,6 +242,7 @@ class AwaitableGetGroupResult(GetGroupResult):
 
 
 def get_group(id: Optional[_builtins.int] = None,
+              name: Optional[_builtins.str] = None,
               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetGroupResult:
     """
     A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
@@ -257,15 +258,17 @@ def get_group(id: Optional[_builtins.int] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_group = filescom.get_group(id=1)
+    example_group = filescom.get_group(name="owners")
     ```
     <!--End PulumiCodeChooser -->
 
 
-    :param _builtins.int id: Group ID
+    :param _builtins.int id: Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+    :param _builtins.str name: Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['name'] = name
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('filescom:index/getGroup:getGroup', __args__, opts=opts, typ=GetGroupResult).value
 
@@ -287,7 +290,8 @@ def get_group(id: Optional[_builtins.int] = None,
         user_ids=pulumi.get(__ret__, 'user_ids'),
         usernames=pulumi.get(__ret__, 'usernames'),
         workspace_id=pulumi.get(__ret__, 'workspace_id'))
-def get_group_output(id: pulumi.Input[Optional[_builtins.int]] = None,
+def get_group_output(id: pulumi.Input[Optional[Optional[_builtins.int]]] = None,
+                     name: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetGroupResult]:
     """
     A Group is a powerful tool for permissions and user management on Files.com.  Users can belong to multiple groups.
@@ -303,15 +307,17 @@ def get_group_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_group = filescom.get_group(id=1)
+    example_group = filescom.get_group(name="owners")
     ```
     <!--End PulumiCodeChooser -->
 
 
-    :param _builtins.int id: Group ID
+    :param _builtins.int id: Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+    :param _builtins.str name: Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['name'] = name
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getGroup:getGroup', __args__, opts=opts, typ=GetGroupResult)
     return __ret__.apply(lambda __response__: GetGroupResult(

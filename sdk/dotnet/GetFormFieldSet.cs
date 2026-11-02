@@ -410,7 +410,7 @@ namespace Jschady.Filescom
     public sealed class GetFormFieldSetResult
     {
         /// <summary>
-        /// Associated form field definitions; authenticated form field set responses include historical definitions, while&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;identifies current fields
+        /// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         /// </summary>
         public readonly object FormFields;
         /// <summary>

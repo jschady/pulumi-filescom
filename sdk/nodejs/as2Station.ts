@@ -69,7 +69,7 @@ export class As2Station extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly hexPublicCertificateSerial: pulumi.Output<string>;
     /**
-     * The station's formal AS2 name.
+     * The station's formal AS2 name, unique across all Workspaces on the Site.
      */
     declare public readonly name: pulumi.Output<string>;
     /**
@@ -209,7 +209,7 @@ export interface As2StationState {
      */
     hexPublicCertificateSerial?: pulumi.Input<string | undefined>;
     /**
-     * The station's formal AS2 name.
+     * The station's formal AS2 name, unique across all Workspaces on the Site.
      */
     name?: pulumi.Input<string | undefined>;
     /**
@@ -283,7 +283,7 @@ export interface As2StationState {
  */
 export interface As2StationArgs {
     /**
-     * The station's formal AS2 name.
+     * The station's formal AS2 name, unique across all Workspaces on the Site.
      */
     name?: pulumi.Input<string | undefined>;
     /**

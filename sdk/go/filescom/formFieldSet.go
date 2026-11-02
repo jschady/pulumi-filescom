@@ -50,17 +50,13 @@ import (
 //				SkipCompany:                    pulumi.Bool(false),
 //				FormFields: pulumi.Any{
 //					map[string]interface{}{
-//						"label":     "Sample Label",
+//						"label":     "Department",
+//						"fieldType": "dropdown",
 //						"required":  true,
-//						"helpText":  "Help Text",
-//						"fieldType": "text",
 //						"optionsForSelect": []string{
-//							"red",
-//							"green",
-//							"blue",
+//							"Finance",
+//							"Sales",
 //						},
-//						"defaultOption":  "red",
-//						"formFieldSetId": 1,
 //					},
 //				},
 //			})
@@ -86,7 +82,7 @@ import (
 type FormFieldSet struct {
 	pulumi.CustomResourceState
 
-	// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields pulumi.AnyOutput `pulumi:"formFields"`
 	// Layout of the form
 	FormLayouts pulumi.IntArrayOutput `pulumi:"formLayouts"`
@@ -151,7 +147,7 @@ func GetFormFieldSet(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FormFieldSet resources.
 type formFieldSetState struct {
-	// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields interface{} `pulumi:"formFields"`
 	// Layout of the form
 	FormLayouts []int `pulumi:"formLayouts"`
@@ -176,7 +172,7 @@ type formFieldSetState struct {
 }
 
 type FormFieldSetState struct {
-	// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields pulumi.Input
 	// Layout of the form
 	FormLayouts pulumi.IntArrayInput
@@ -205,7 +201,7 @@ func (FormFieldSetState) ElementType() reflect.Type {
 }
 
 type formFieldSetArgs struct {
-	// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields interface{} `pulumi:"formFields"`
 	// Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
 	RequireCompleteMetadataCapture *bool `pulumi:"requireCompleteMetadataCapture"`
@@ -227,7 +223,7 @@ type formFieldSetArgs struct {
 
 // The set of arguments for constructing a FormFieldSet resource.
 type FormFieldSetArgs struct {
-	// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields pulumi.Input
 	// Reject answers over 1024 characters or more than 32 answered custom fields to ensure complete file metadata capture
 	RequireCompleteMetadataCapture pulumi.BoolPtrInput
@@ -334,7 +330,7 @@ func (o FormFieldSetOutput) ToFormFieldSetOutputWithContext(ctx context.Context)
 	return o
 }
 
-// Associated form field definitions; authenticated form field set responses include historical definitions, while<span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "> formLayout </span>identifies current fields
+// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 func (o FormFieldSetOutput) FormFields() pulumi.AnyOutput {
 	return o.ApplyT(func(v *FormFieldSet) pulumi.AnyOutput { return v.FormFields }).(pulumi.AnyOutput)
 }

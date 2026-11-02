@@ -37,9 +37,9 @@ import (
 //					"authorization": "Bearer YOUR_TOKEN",
 //				}),
 //				SendingActive:                       pulumi.Bool(true),
-//				GenericPayloadType:                  pulumi.String("example"),
+//				GenericPayloadType:                  pulumi.String("json_newline"),
 //				FileDestinationPath:                 pulumi.String("example"),
-//				FileFormat:                          pulumi.String("example"),
+//				FileFormat:                          pulumi.String("json"),
 //				FileIntervalMinutes:                 pulumi.Int(1),
 //				AzureDcrImmutableId:                 pulumi.String("example"),
 //				AzureStreamName:                     pulumi.String("example"),
@@ -58,7 +58,7 @@ import (
 //				EmailSendEnabled:                    pulumi.Bool(true),
 //				ExavaultApiRequestSendEnabled:       pulumi.Bool(true),
 //				SettingsChangeSendEnabled:           pulumi.Bool(true),
-//				DestinationType:                     pulumi.String("example"),
+//				DestinationType:                     pulumi.String("generic"),
 //				DestinationUrl:                      pulumi.String("example"),
 //			})
 //			if err != nil {

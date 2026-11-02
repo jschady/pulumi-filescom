@@ -46,7 +46,7 @@ export interface GetEventTargetResult {
      */
     readonly applyToAllWorkspaces: boolean;
     /**
-     * Event Target configuration. Folder targets accept path and format (json or csv).
+     * Event Target configuration. Fields depend on target_type.
      */
     readonly config: any;
     /**

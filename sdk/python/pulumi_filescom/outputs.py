@@ -4125,6 +4125,10 @@ class AutomationDefinitionNodeTriggerEmailConfig(dict):
             suggest = "path_time_zone"
         elif key == "saveBody":
             suggest = "save_body"
+        elif key == "saveHtmlBody":
+            suggest = "save_html_body"
+        elif key == "saveRawMessage":
+            suggest = "save_raw_message"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in AutomationDefinitionNodeTriggerEmailConfig. Access the value via the '{suggest}' property getter instead.")
@@ -4143,6 +4147,8 @@ class AutomationDefinitionNodeTriggerEmailConfig(dict):
                  limit: Optional[_builtins.int] = None,
                  path_time_zone: Optional[_builtins.str] = None,
                  save_body: Optional[_builtins.bool] = None,
+                 save_html_body: Optional[_builtins.bool] = None,
+                 save_raw_message: Optional[_builtins.bool] = None,
                  source: Optional[_builtins.str] = None):
         if allowed_senders is not None:
             pulumi.set(__self__, "allowed_senders", allowed_senders)
@@ -4154,6 +4160,10 @@ class AutomationDefinitionNodeTriggerEmailConfig(dict):
             pulumi.set(__self__, "path_time_zone", path_time_zone)
         if save_body is not None:
             pulumi.set(__self__, "save_body", save_body)
+        if save_html_body is not None:
+            pulumi.set(__self__, "save_html_body", save_html_body)
+        if save_raw_message is not None:
+            pulumi.set(__self__, "save_raw_message", save_raw_message)
         if source is not None:
             pulumi.set(__self__, "source", source)
 
@@ -4181,6 +4191,16 @@ class AutomationDefinitionNodeTriggerEmailConfig(dict):
     @pulumi.getter(name="saveBody")
     def save_body(self) -> Optional[_builtins.bool]:
         return pulumi.get(self, "save_body")
+
+    @_builtins.property
+    @pulumi.getter(name="saveHtmlBody")
+    def save_html_body(self) -> Optional[_builtins.bool]:
+        return pulumi.get(self, "save_html_body")
+
+    @_builtins.property
+    @pulumi.getter(name="saveRawMessage")
+    def save_raw_message(self) -> Optional[_builtins.bool]:
+        return pulumi.get(self, "save_raw_message")
 
     @_builtins.property
     @pulumi.getter
@@ -8553,12 +8573,16 @@ class GetAutomationDefinitionNodeTriggerEmailConfigResult(dict):
                  limit: _builtins.int,
                  path_time_zone: _builtins.str,
                  save_body: _builtins.bool,
+                 save_html_body: _builtins.bool,
+                 save_raw_message: _builtins.bool,
                  source: _builtins.str):
         pulumi.set(__self__, "allowed_senders", allowed_senders)
         pulumi.set(__self__, "exclude_pattern", exclude_pattern)
         pulumi.set(__self__, "limit", limit)
         pulumi.set(__self__, "path_time_zone", path_time_zone)
         pulumi.set(__self__, "save_body", save_body)
+        pulumi.set(__self__, "save_html_body", save_html_body)
+        pulumi.set(__self__, "save_raw_message", save_raw_message)
         pulumi.set(__self__, "source", source)
 
     @_builtins.property
@@ -8585,6 +8609,16 @@ class GetAutomationDefinitionNodeTriggerEmailConfigResult(dict):
     @pulumi.getter(name="saveBody")
     def save_body(self) -> _builtins.bool:
         return pulumi.get(self, "save_body")
+
+    @_builtins.property
+    @pulumi.getter(name="saveHtmlBody")
+    def save_html_body(self) -> _builtins.bool:
+        return pulumi.get(self, "save_html_body")
+
+    @_builtins.property
+    @pulumi.getter(name="saveRawMessage")
+    def save_raw_message(self) -> _builtins.bool:
+        return pulumi.get(self, "save_raw_message")
 
     @_builtins.property
     @pulumi.getter

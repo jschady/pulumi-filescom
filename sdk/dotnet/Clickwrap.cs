@@ -35,9 +35,9 @@ namespace Jschady.Filescom
     ///     {
     ///         Name = "Example Site NDA for Files.com Use",
     ///         Body = "[Legal body text]",
-    ///         UseWithBundles = "example",
-    ///         UseWithInboxes = "example",
-    ///         UseWithUsers = "example",
+    ///         UseWithBundles = "none",
+    ///         UseWithInboxes = "none",
+    ///         UseWithUsers = "none",
     ///     });
     /// 
     /// });

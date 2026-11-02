@@ -54,7 +54,7 @@ export interface GetAs2StationResult {
      */
     readonly id: number;
     /**
-     * The station's formal AS2 name.
+     * The station's formal AS2 name, unique across all Workspaces on the Site.
      */
     readonly name: string;
     /**

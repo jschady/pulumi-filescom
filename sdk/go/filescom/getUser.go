@@ -44,7 +44,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.GetUser(ctx, &filescom.LookupUserArgs{
-//				Id: 1,
+//				Username: pulumi.StringRef("user"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -67,8 +67,10 @@ func LookupUser(ctx *pulumi.Context, args *LookupUserArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getUser.
 type LookupUserArgs struct {
-	// User ID
-	Id int `pulumi:"id"`
+	// User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+	Id *int `pulumi:"id"`
+	// User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+	Username *string `pulumi:"username"`
 }
 
 // A collection of values returned by getUser.
@@ -129,7 +131,7 @@ type LookupUserResult struct {
 	GroupIds string `pulumi:"groupIds"`
 	// Text to display to the user in the header of the UI
 	HeaderText string `pulumi:"headerText"`
-	// User ID
+	// User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
 	Id int `pulumi:"id"`
 	// Integration Centric Profile ID assigned directly to this user, if any.
 	IntegrationCentricProfileId int `pulumi:"integrationCentricProfileId"`
@@ -231,8 +233,6 @@ type LookupUserResult struct {
 	SslRequired string `pulumi:"sslRequired"`
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId int `pulumi:"ssoStrategyId"`
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter bool `pulumi:"subscribeToNewsletter"`
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags string `pulumi:"tags"`
 	// User time zone
@@ -245,7 +245,7 @@ type LookupUserResult struct {
 	UserHome string `pulumi:"userHome"`
 	// If filesystem layout is user*root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site*root or partner*root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner*root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.
 	UserRoot string `pulumi:"userRoot"`
-	// User's username
+	// User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
 	Username string `pulumi:"username"`
 	// Whether the user is an administrator of their own Custom Workspace. Does not reflect administration granted through Permissions.
 	WorkspaceAdmin bool `pulumi:"workspaceAdmin"`
@@ -260,8 +260,10 @@ func LookupUserOutput(ctx *pulumi.Context, args LookupUserOutputArgs, opts ...pu
 
 // A collection of arguments for invoking getUser.
 type LookupUserOutputArgs struct {
-	// User ID
-	Id pulumi.IntInput `pulumi:"id"`
+	// User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+	Username pulumi.StringPtrInput `pulumi:"username"`
 }
 
 func (LookupUserOutputArgs) ElementType() reflect.Type {
@@ -423,7 +425,7 @@ func (o LookupUserResultOutput) HeaderText() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.HeaderText }).(pulumi.StringOutput)
 }
 
-// User ID
+// User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
 func (o LookupUserResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupUserResult) int { return v.Id }).(pulumi.IntOutput)
 }
@@ -678,11 +680,6 @@ func (o LookupUserResultOutput) SsoStrategyId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupUserResult) int { return v.SsoStrategyId }).(pulumi.IntOutput)
 }
 
-// Is the user subscribed to the newsletter?
-func (o LookupUserResultOutput) SubscribeToNewsletter() pulumi.BoolOutput {
-	return o.ApplyT(func(v LookupUserResult) bool { return v.SubscribeToNewsletter }).(pulumi.BoolOutput)
-}
-
 // Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 func (o LookupUserResultOutput) Tags() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Tags }).(pulumi.StringOutput)
@@ -713,7 +710,7 @@ func (o LookupUserResultOutput) UserRoot() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.UserRoot }).(pulumi.StringOutput)
 }
 
-// User's username
+// User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
 func (o LookupUserResultOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Username }).(pulumi.StringOutput)
 }

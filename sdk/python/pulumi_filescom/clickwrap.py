@@ -226,9 +226,9 @@ class Clickwrap(pulumi.CustomResource):
         example_clickwrap = filescom.Clickwrap("example_clickwrap",
             name="Example Site NDA for Files.com Use",
             body="[Legal body text]",
-            use_with_bundles="example",
-            use_with_inboxes="example",
-            use_with_users="example")
+            use_with_bundles="none",
+            use_with_inboxes="none",
+            use_with_users="none")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -277,9 +277,9 @@ class Clickwrap(pulumi.CustomResource):
         example_clickwrap = filescom.Clickwrap("example_clickwrap",
             name="Example Site NDA for Files.com Use",
             body="[Legal body text]",
-            use_with_bundles="example",
-            use_with_inboxes="example",
-            use_with_users="example")
+            use_with_bundles="none",
+            use_with_inboxes="none",
+            use_with_users="none")
         ```
         <!--End PulumiCodeChooser -->
 

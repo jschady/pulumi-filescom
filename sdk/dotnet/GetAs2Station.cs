@@ -386,7 +386,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int Id;
         /// <summary>
-        /// The station's formal AS2 name.
+        /// The station's formal AS2 name, unique across all Workspaces on the Site.
         /// </summary>
         public readonly string Name;
         /// <summary>

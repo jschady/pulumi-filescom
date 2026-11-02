@@ -397,6 +397,10 @@ namespace Jschady.Filescom
         /// Status of event.
         /// </summary>
         public readonly string Status;
+        /// <summary>
+        /// Workspace ID
+        /// </summary>
+        public readonly int WorkspaceId;
 
         [OutputConstructor]
         private GetExternalEventResult(
@@ -410,7 +414,9 @@ namespace Jschady.Filescom
 
             int id,
 
-            string status)
+            string status,
+
+            int workspaceId)
         {
             Body = body;
             BodyUrl = bodyUrl;
@@ -418,6 +424,7 @@ namespace Jschady.Filescom
             EventType = eventType;
             Id = id;
             Status = status;
+            WorkspaceId = workspaceId;
         }
     }
 }

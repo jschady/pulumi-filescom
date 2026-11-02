@@ -23,6 +23,13 @@ import * as utilities from "./utilities";
  * const exampleChildSiteManagementPolicy = new filescom.ChildSiteManagementPolicy("example_child_site_management_policy", {
  *     value: {
  *         color2Left: "#000000",
+ *         folderBehaviors: [{
+ *             fileExpiration: {
+ *                 value: {
+ *                     daysToRetain: 30,
+ *                 },
+ *             },
+ *         }],
  *     },
  *     skipChildSiteIds: [
  *         1,
@@ -153,12 +160,14 @@ export class ChildSiteManagementPolicy extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["policyType"] = args?.policyType;
             resourceInputs["skipChildSiteIds"] = args?.skipChildSiteIds;
-            resourceInputs["value"] = args?.value;
+            resourceInputs["value"] = args?.value ? pulumi.secret(args.value) : undefined;
             resourceInputs["appliedChildSiteIds"] = undefined /*out*/;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["value"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ChildSiteManagementPolicy.__pulumiType, name, resourceInputs, opts);
     }
 }

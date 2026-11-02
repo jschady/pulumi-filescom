@@ -285,8 +285,8 @@ import (
 //				ImportUrls: pulumi.Any{
 //					map[string]interface{}{
 //						"name":   "users.json",
-//						"url":    "http://example.com/users",
-//						"method": "POST",
+//						"url":    "https://example.com/users",
+//						"method": "post",
 //						"headers": map[string]string{
 //							"content-Type": "application/json",
 //						},
