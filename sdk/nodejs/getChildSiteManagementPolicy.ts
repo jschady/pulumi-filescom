@@ -22,6 +22,7 @@ import * as utilities from "./utilities";
  *
  * const exampleChildSiteManagementPolicy = filescom.getChildSiteManagementPolicy({
  *     id: 1,
+ *     valueFormat: "typed",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -30,6 +31,7 @@ export function getChildSiteManagementPolicy(args: GetChildSiteManagementPolicyA
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("filescom:index/getChildSiteManagementPolicy:getChildSiteManagementPolicy", {
         "id": args.id,
+        "valueFormat": args.valueFormat,
     }, opts);
 }
 
@@ -41,6 +43,10 @@ export interface GetChildSiteManagementPolicyArgs {
      * Policy ID.
      */
     id: number;
+    /**
+     * Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+     */
+    valueFormat?: string;
 }
 
 /**
@@ -88,9 +94,13 @@ export interface GetChildSiteManagementPolicyResult {
      */
     readonly updatedAt: string;
     /**
-     * Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+     * Policy value. Set <span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format ">`valueFormat </span>= "typed"` to return each<span pulumi-lang-nodejs=" folderBehaviors " pulumi-lang-dotnet=" FolderBehaviors " pulumi-lang-go=" folderBehaviors " pulumi-lang-python=" folder_behaviors " pulumi-lang-yaml=" folderBehaviors " pulumi-lang-java=" folderBehaviors " pulumi-lang-hcl=" folder_behaviors "> folderBehaviors </span>item under the name in its behavior field, as the typed schema does.
      */
     readonly value: any;
+    /**
+     * Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+     */
+    readonly valueFormat?: string;
 }
 /**
  * A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
@@ -110,6 +120,7 @@ export interface GetChildSiteManagementPolicyResult {
  *
  * const exampleChildSiteManagementPolicy = filescom.getChildSiteManagementPolicy({
  *     id: 1,
+ *     valueFormat: "typed",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -118,6 +129,7 @@ export function getChildSiteManagementPolicyOutput(args: GetChildSiteManagementP
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("filescom:index/getChildSiteManagementPolicy:getChildSiteManagementPolicy", {
         "id": args.id,
+        "valueFormat": args.valueFormat,
     }, opts);
 }
 
@@ -129,4 +141,8 @@ export interface GetChildSiteManagementPolicyOutputArgs {
      * Policy ID.
      */
     id: pulumi.Input<number>;
+    /**
+     * Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+     */
+    valueFormat?: pulumi.Input<string | undefined>;
 }

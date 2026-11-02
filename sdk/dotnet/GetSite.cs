@@ -595,6 +595,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string EmailFooterCustomText;
         /// <summary>
+        /// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        /// </summary>
+        public readonly bool EnforceParentSiteUserIpRestrictions;
+        /// <summary>
         /// Are FedRAMP security restrictions enabled for this site?
         /// </summary>
         public readonly bool Fedramp;
@@ -679,81 +683,25 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool IncludePasswordInWelcomeEmail;
         /// <summary>
+        /// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        /// </summary>
+        public readonly string IntegrationCentricRemoteServerAdminAccess;
+        /// <summary>
         /// Site default language
         /// </summary>
         public readonly string Language;
         /// <summary>
-        /// Base DN for looking up users in LDAP server
+        /// Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         /// </summary>
-        public readonly string LdapBaseDn;
-        /// <summary>
-        /// Domain name that will be appended to usernames
-        /// </summary>
-        public readonly string LdapDomain;
-        /// <summary>
-        /// Main LDAP setting: is LDAP enabled?
-        /// </summary>
-        public readonly bool LdapEnabled;
-        /// <summary>
-        /// Should we sync groups from LDAP server?
-        /// </summary>
-        public readonly string LdapGroupAction;
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        /// </summary>
-        public readonly string LdapGroupExclusion;
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        /// </summary>
-        public readonly string LdapGroupInclusion;
-        /// <summary>
-        /// LDAP host
-        /// </summary>
-        public readonly string LdapHost;
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        public readonly string LdapHost2;
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        public readonly string LdapHost3;
-        /// <summary>
-        /// LDAP port
-        /// </summary>
-        public readonly int LdapPort;
-        /// <summary>
-        /// Use secure LDAP?
-        /// </summary>
-        public readonly bool LdapSecure;
-        /// <summary>
-        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
-        /// </summary>
-        public readonly string LdapServerCertificate;
-        /// <summary>
-        /// LDAP type
-        /// </summary>
-        public readonly string LdapType;
-        /// <summary>
-        /// Should we sync users from LDAP server?
-        /// </summary>
-        public readonly string LdapUserAction;
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        /// </summary>
-        public readonly string LdapUserIncludeGroups;
-        /// <summary>
-        /// Username for signing in to LDAP server.
-        /// </summary>
-        public readonly string LdapUsername;
-        /// <summary>
-        /// LDAP username field
-        /// </summary>
-        public readonly string LdapUsernameField;
+        public readonly string LastPairingAt;
         /// <summary>
         /// Use legacy checksums mode?
         /// </summary>
         public readonly bool LegacyChecksumsMode;
+        /// <summary>
+        /// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        /// </summary>
+        public readonly bool LegacyPairingEnabled;
         /// <summary>
         /// Login help text
         /// </summary>
@@ -1265,6 +1213,8 @@ namespace Jschady.Filescom
 
             string emailFooterCustomText,
 
+            bool enforceParentSiteUserIpRestrictions,
+
             bool fedramp,
 
             bool fileActivityEventsEnabled,
@@ -1307,43 +1257,15 @@ namespace Jschady.Filescom
 
             bool includePasswordInWelcomeEmail,
 
+            string integrationCentricRemoteServerAdminAccess,
+
             string language,
 
-            string ldapBaseDn,
-
-            string ldapDomain,
-
-            bool ldapEnabled,
-
-            string ldapGroupAction,
-
-            string ldapGroupExclusion,
-
-            string ldapGroupInclusion,
-
-            string ldapHost,
-
-            string ldapHost2,
-
-            string ldapHost3,
-
-            int ldapPort,
-
-            bool ldapSecure,
-
-            string ldapServerCertificate,
-
-            string ldapType,
-
-            string ldapUserAction,
-
-            string ldapUserIncludeGroups,
-
-            string ldapUsername,
-
-            string ldapUsernameField,
+            string lastPairingAt,
 
             bool legacyChecksumsMode,
+
+            bool legacyPairingEnabled,
 
             string loginHelpText,
 
@@ -1599,6 +1521,7 @@ namespace Jschady.Filescom
             DomainLetsencryptChain = domainLetsencryptChain;
             Email = email;
             EmailFooterCustomText = emailFooterCustomText;
+            EnforceParentSiteUserIpRestrictions = enforceParentSiteUserIpRestrictions;
             Fedramp = fedramp;
             FileActivityEventsEnabled = fileActivityEventsEnabled;
             FilesComRemoteServerEnabled = filesComRemoteServerEnabled;
@@ -1620,25 +1543,11 @@ namespace Jschady.Filescom
             Id = id;
             ImmutableFilesSetAt = immutableFilesSetAt;
             IncludePasswordInWelcomeEmail = includePasswordInWelcomeEmail;
+            IntegrationCentricRemoteServerAdminAccess = integrationCentricRemoteServerAdminAccess;
             Language = language;
-            LdapBaseDn = ldapBaseDn;
-            LdapDomain = ldapDomain;
-            LdapEnabled = ldapEnabled;
-            LdapGroupAction = ldapGroupAction;
-            LdapGroupExclusion = ldapGroupExclusion;
-            LdapGroupInclusion = ldapGroupInclusion;
-            LdapHost = ldapHost;
-            LdapHost2 = ldapHost2;
-            LdapHost3 = ldapHost3;
-            LdapPort = ldapPort;
-            LdapSecure = ldapSecure;
-            LdapServerCertificate = ldapServerCertificate;
-            LdapType = ldapType;
-            LdapUserAction = ldapUserAction;
-            LdapUserIncludeGroups = ldapUserIncludeGroups;
-            LdapUsername = ldapUsername;
-            LdapUsernameField = ldapUsernameField;
+            LastPairingAt = lastPairingAt;
             LegacyChecksumsMode = legacyChecksumsMode;
+            LegacyPairingEnabled = legacyPairingEnabled;
             LoginHelpText = loginHelpText;
             LoginPageBackgroundImage = loginPageBackgroundImage;
             Logo = logo;

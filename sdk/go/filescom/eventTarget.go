@@ -34,9 +34,21 @@ import (
 //				WorkspaceId:          pulumi.Int(1),
 //				ApplyToAllWorkspaces: pulumi.Bool(true),
 //				Enabled:              pulumi.Bool(true),
-//				Config:               pulumi.Any("example"),
-//				DeliveryPolicy:       pulumi.Any("example"),
-//				TargetType:           pulumi.String("example"),
+//				Config: pulumi.Any(map[string]interface{}{
+//					"url": "https://example.com/files-events",
+//					"headers": map[string]string{
+//						"x-Example": "value",
+//					},
+//					"useDedicatedIps": false,
+//				}),
+//				DeliveryPolicy: pulumi.Any(map[string]interface{}{
+//					"maxAttempts": 3,
+//					"retryDelayMinutes": []int{
+//						1,
+//						10,
+//					},
+//				}),
+//				TargetType: pulumi.String("webhook"),
 //			})
 //			if err != nil {
 //				return err
@@ -62,7 +74,7 @@ type EventTarget struct {
 
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces pulumi.BoolOutput `pulumi:"applyToAllWorkspaces"`
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config pulumi.AnyOutput `pulumi:"config"`
 	// Event Target create date/time.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
@@ -93,6 +105,13 @@ func NewEventTarget(ctx *pulumi.Context,
 	if args.TargetType == nil {
 		return nil, errors.New("invalid value for required argument 'TargetType'")
 	}
+	if args.Config != nil {
+		args.Config = pulumi.ToSecret(args.Config).(pulumi.Input)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"config",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EventTarget
 	err := ctx.RegisterResource("filescom:index/eventTarget:EventTarget", name, args, &resource, opts...)
@@ -118,7 +137,7 @@ func GetEventTarget(ctx *pulumi.Context,
 type eventTargetState struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces *bool `pulumi:"applyToAllWorkspaces"`
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config interface{} `pulumi:"config"`
 	// Event Target create date/time.
 	CreatedAt *string `pulumi:"createdAt"`
@@ -139,7 +158,7 @@ type eventTargetState struct {
 type EventTargetState struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces pulumi.BoolPtrInput
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config pulumi.Input
 	// Event Target create date/time.
 	CreatedAt pulumi.StringPtrInput
@@ -164,7 +183,7 @@ func (EventTargetState) ElementType() reflect.Type {
 type eventTargetArgs struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces *bool `pulumi:"applyToAllWorkspaces"`
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config interface{} `pulumi:"config"`
 	// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
 	DeliveryPolicy interface{} `pulumi:"deliveryPolicy"`
@@ -182,7 +201,7 @@ type eventTargetArgs struct {
 type EventTargetArgs struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces pulumi.BoolPtrInput
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config pulumi.Input
 	// Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
 	DeliveryPolicy pulumi.Input
@@ -288,7 +307,7 @@ func (o EventTargetOutput) ApplyToAllWorkspaces() pulumi.BoolOutput {
 	return o.ApplyT(func(v *EventTarget) pulumi.BoolOutput { return v.ApplyToAllWorkspaces }).(pulumi.BoolOutput)
 }
 
-// Event Target configuration. Folder targets accept path and format (json or csv).
+// Event Target configuration. Fields depend on target_type.
 func (o EventTargetOutput) Config() pulumi.AnyOutput {
 	return o.ApplyT(func(v *EventTarget) pulumi.AnyOutput { return v.Config }).(pulumi.AnyOutput)
 }

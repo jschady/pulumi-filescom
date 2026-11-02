@@ -38,9 +38,9 @@ import (
 //			_, err := filescom.NewClickwrap(ctx, "example_clickwrap", &filescom.ClickwrapArgs{
 //				Name:           pulumi.String("Example Site NDA for Files.com Use"),
 //				Body:           pulumi.String("[Legal body text]"),
-//				UseWithBundles: pulumi.String("example"),
-//				UseWithInboxes: pulumi.String("example"),
-//				UseWithUsers:   pulumi.String("example"),
+//				UseWithBundles: pulumi.String("none"),
+//				UseWithInboxes: pulumi.String("none"),
+//				UseWithUsers:   pulumi.String("none"),
 //			})
 //			if err != nil {
 //				return err

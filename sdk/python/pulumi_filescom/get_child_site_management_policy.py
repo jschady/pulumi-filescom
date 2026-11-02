@@ -26,7 +26,7 @@ class GetChildSiteManagementPolicyResult:
     """
     A collection of values returned by getChildSiteManagementPolicy.
     """
-    def __init__(__self__, applied_child_site_ids=None, child_site_ids=None, created_at=None, default_policy=None, description=None, id=None, name=None, policy_type=None, skip_child_site_ids=None, updated_at=None, value=None):
+    def __init__(__self__, applied_child_site_ids=None, child_site_ids=None, created_at=None, default_policy=None, description=None, id=None, name=None, policy_type=None, skip_child_site_ids=None, updated_at=None, value=None, value_format=None):
         if applied_child_site_ids and not isinstance(applied_child_site_ids, list):
             raise TypeError("Expected argument 'applied_child_site_ids' to be a list")
         pulumi.set(__self__, "applied_child_site_ids", applied_child_site_ids)
@@ -60,6 +60,9 @@ class GetChildSiteManagementPolicyResult:
         if value and not isinstance(value, dict):
             raise TypeError("Expected argument 'value' to be a dict")
         pulumi.set(__self__, "value", value)
+        if value_format and not isinstance(value_format, str):
+            raise TypeError("Expected argument 'value_format' to be a str")
+        pulumi.set(__self__, "value_format", value_format)
 
     @_builtins.property
     @pulumi.getter(name="appliedChildSiteIds")
@@ -145,9 +148,17 @@ class GetChildSiteManagementPolicyResult:
     @pulumi.getter
     def value(self) -> Any:
         """
-        Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional <span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`">`folderBehaviors`</span> array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
+        Policy value. Set <span pulumi-lang-nodejs="`valueFormat " pulumi-lang-dotnet="`ValueFormat " pulumi-lang-go="`valueFormat " pulumi-lang-python="`value_format " pulumi-lang-yaml="`valueFormat " pulumi-lang-java="`valueFormat " pulumi-lang-hcl="`value_format ">`valueFormat </span>= "typed"` to return each<span pulumi-lang-nodejs=" folderBehaviors " pulumi-lang-dotnet=" FolderBehaviors " pulumi-lang-go=" folderBehaviors " pulumi-lang-python=" folder_behaviors " pulumi-lang-yaml=" folderBehaviors " pulumi-lang-java=" folderBehaviors " pulumi-lang-hcl=" folder_behaviors "> folderBehaviors </span>item under the name in its behavior field, as the typed schema does.
         """
         return pulumi.get(self, "value")
+
+    @_builtins.property
+    @pulumi.getter(name="valueFormat")
+    def value_format(self) -> Optional[_builtins.str]:
+        """
+        Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
+        """
+        return pulumi.get(self, "value_format")
 
 
 class AwaitableGetChildSiteManagementPolicyResult(GetChildSiteManagementPolicyResult):
@@ -166,10 +177,12 @@ class AwaitableGetChildSiteManagementPolicyResult(GetChildSiteManagementPolicyRe
             policy_type=self.policy_type,
             skip_child_site_ids=self.skip_child_site_ids,
             updated_at=self.updated_at,
-            value=self.value)
+            value=self.value,
+            value_format=self.value_format)
 
 
 def get_child_site_management_policy(id: Optional[_builtins.int] = None,
+                                     value_format: Optional[_builtins.str] = None,
                                      opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetChildSiteManagementPolicyResult:
     """
     A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
@@ -187,15 +200,18 @@ def get_child_site_management_policy(id: Optional[_builtins.int] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_child_site_management_policy = filescom.get_child_site_management_policy(id=1)
+    example_child_site_management_policy = filescom.get_child_site_management_policy(id=1,
+        value_format="typed")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param _builtins.int id: Policy ID.
+    :param _builtins.str value_format: Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['valueFormat'] = value_format
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('filescom:index/getChildSiteManagementPolicy:getChildSiteManagementPolicy', __args__, opts=opts, typ=GetChildSiteManagementPolicyResult).value
 
@@ -210,8 +226,10 @@ def get_child_site_management_policy(id: Optional[_builtins.int] = None,
         policy_type=pulumi.get(__ret__, 'policy_type'),
         skip_child_site_ids=pulumi.get(__ret__, 'skip_child_site_ids'),
         updated_at=pulumi.get(__ret__, 'updated_at'),
-        value=pulumi.get(__ret__, 'value'))
+        value=pulumi.get(__ret__, 'value'),
+        value_format=pulumi.get(__ret__, 'value_format'))
 def get_child_site_management_policy_output(id: pulumi.Input[Optional[_builtins.int]] = None,
+                                            value_format: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                                             opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetChildSiteManagementPolicyResult]:
     """
     A Child Site Management Policy is a centralized policy defined by a parent site to enforce consistent configurations across child sites. These policies allow parent sites to maintain control over specific aspects of their child sites' functionality and appearance.
@@ -229,15 +247,18 @@ def get_child_site_management_policy_output(id: pulumi.Input[Optional[_builtins.
     import pulumi
     import pulumi_filescom as filescom
 
-    example_child_site_management_policy = filescom.get_child_site_management_policy(id=1)
+    example_child_site_management_policy = filescom.get_child_site_management_policy(id=1,
+        value_format="typed")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param _builtins.int id: Policy ID.
+    :param _builtins.str value_format: Set to <span pulumi-lang-nodejs="`typed`" pulumi-lang-dotnet="`Typed`" pulumi-lang-go="`typed`" pulumi-lang-python="`typed`" pulumi-lang-yaml="`typed`" pulumi-lang-java="`typed`" pulumi-lang-hcl="`typed`">`typed`</span> to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['valueFormat'] = value_format
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getChildSiteManagementPolicy:getChildSiteManagementPolicy', __args__, opts=opts, typ=GetChildSiteManagementPolicyResult)
     return __ret__.apply(lambda __response__: GetChildSiteManagementPolicyResult(
@@ -251,4 +272,5 @@ def get_child_site_management_policy_output(id: pulumi.Input[Optional[_builtins.
         policy_type=pulumi.get(__response__, 'policy_type'),
         skip_child_site_ids=pulumi.get(__response__, 'skip_child_site_ids'),
         updated_at=pulumi.get(__response__, 'updated_at'),
-        value=pulumi.get(__response__, 'value')))
+        value=pulumi.get(__response__, 'value'),
+        value_format=pulumi.get(__response__, 'value_format')))

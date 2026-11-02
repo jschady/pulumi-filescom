@@ -35,7 +35,7 @@ namespace Jschady.Filescom
     ///             {
     ///                 { "name", "John Doe" },
     ///                 { "company", "Acme Ltd" },
-    ///                 { "email", "johndoe@gmail.com" },
+    ///                 { "email", "johndoe@example.com" },
     ///             },
     ///         },
     ///     });

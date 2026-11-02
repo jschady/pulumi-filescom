@@ -101,7 +101,7 @@ class GetAs2StationResult:
     @pulumi.getter
     def name(self) -> _builtins.str:
         """
-        The station's formal AS2 name.
+        The station's formal AS2 name, unique across all Workspaces on the Site.
         """
         return pulumi.get(self, "name")
 

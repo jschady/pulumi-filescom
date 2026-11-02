@@ -189,7 +189,7 @@ class ShareGroup(pulumi.CustomResource):
             members=[{
                 "name": "John Doe",
                 "company": "Acme Ltd",
-                "email": "johndoe@gmail.com",
+                "email": "johndoe@example.com",
             }])
         ```
         <!--End PulumiCodeChooser -->
@@ -235,7 +235,7 @@ class ShareGroup(pulumi.CustomResource):
             members=[{
                 "name": "John Doe",
                 "company": "Acme Ltd",
-                "email": "johndoe@gmail.com",
+                "email": "johndoe@example.com",
             }])
         ```
         <!--End PulumiCodeChooser -->

@@ -32,7 +32,7 @@ namespace Jschady.Filescom
     ///         Subdomain = "mysite",
     ///         Domain = "my-custom-domain.com",
     ///         DomainHstsHeader = false,
-    ///         DomainLetsencryptChain = "example",
+    ///         DomainLetsencryptChain = "default",
     ///         Email = "john.doe@files.com",
     ///         ReplyToEmail = "jane.doe@files.com",
     ///         AllowBundleNames = false,
@@ -54,9 +54,9 @@ namespace Jschady.Filescom
     ///         MobileAppSessionIpPinning = false,
     ///         MobileAppSessionLifetime = 1,
     ///         FolderPermissionsGroupsOnly = false,
-    ///         WelcomeScreen = "user_controlled",
+    ///         WelcomeScreen = "enabled",
     ///         OfficeIntegrationAvailable = false,
-    ///         OfficeIntegrationType = "example",
+    ///         OfficeIntegrationType = "only_office",
     ///         PinAllRemoteServersToSiteRegion = false,
     ///         MotdText = "example",
     ///         MotdUseForFtp = false,
@@ -70,12 +70,7 @@ namespace Jschady.Filescom
     ///                 ["workspaceAdmins"] = true,
     ///                 ["folderAdmins"] = true,
     ///                 ["allUsers"] = false,
-    ///                 ["selectedGroupMembers"] = true,
-    ///                 ["groupIds"] = new object?[]
-    ///                 {
-    ///                     1,
-    ///                     2,
-    ///                 },
+    ///                 ["selectedGroupMembers"] = false,
     ///             },
     ///         },
     ///         McpDcrEnabled = false,
@@ -95,7 +90,9 @@ namespace Jschady.Filescom
     ///         As2MessageRetentionDays = 1,
     ///         FileActivityEventsEnabled = false,
     ///         UsernameDisplay = "username_only",
+    ///         IntegrationCentricRemoteServerAdminAccess = "always_visible",
     ///         SessionExpiryMinutes = 1,
+    ///         LegacyPairingEnabled = false,
     ///         SslRequired = false,
     ///         SftpInsecureCiphers = false,
     ///         SftpInsecureDiffieHellman = false,
@@ -111,6 +108,7 @@ namespace Jschady.Filescom
     ///         AllowUserLevel2faOverride = false,
     ///         AllowUserLevelAllowedIpOverride = false,
     ///         AllowUserLevelSslOverride = false,
+    ///         EnforceParentSiteUserIpRestrictions = false,
     ///         DisallowedCountries = "US,DE",
     ///         DaysToRetainBackups = 1,
     ///         MaxPriorPasswords = 1,
@@ -125,7 +123,6 @@ namespace Jschady.Filescom
     ///         DavUserRootEnabled = false,
     ///         SftpUserRootEnabled = false,
     ///         DisablePasswordReset = false,
-    ///         ImmutableFiles = false,
     ///         BundleNotFoundMessage = "example",
     ///         BundlePasswordRequired = false,
     ///         BundleRequireRegistration = false,
@@ -190,7 +187,7 @@ namespace Jschady.Filescom
     ///         Allowed2faMethodBypassForFtpSftpDav = false,
     ///         Require2fa = false,
     ///         Require2faExemptAllSsoUsers = false,
-    ///         Require2faUserType = "`site_admins`",
+    ///         Require2faUserType = "all",
     ///         Color2Top = "#000000",
     ///         Color2Left = "#0066a7",
     ///         Color2Link = "#d34f5d",
@@ -209,23 +206,6 @@ namespace Jschady.Filescom
     ///         SmtpUsername = "mail",
     ///         SmtpPort = 1,
     ///         SmtpSsl = "require",
-    ///         LdapEnabled = false,
-    ///         LdapType = "open_ldap",
-    ///         LdapHost = "ldap.site.com",
-    ///         LdapHost2 = "ldap2.site.com",
-    ///         LdapHost3 = "ldap3.site.com",
-    ///         LdapPort = 1,
-    ///         LdapSecure = false,
-    ///         LdapServerCertificate = "require_match",
-    ///         LdapUsername = "[ldap username]",
-    ///         LdapUsernameField = "sAMAccountName",
-    ///         LdapDomain = "mysite.com",
-    ///         LdapUserAction = "disabled",
-    ///         LdapGroupAction = "disabled",
-    ///         LdapUserIncludeGroups = "example",
-    ///         LdapGroupExclusion = "example",
-    ///         LdapGroupInclusion = "example",
-    ///         LdapBaseDn = "example",
     ///         UploadsViaEmailAuthentication = false,
     ///         BundleWatermarkValue = new Dictionary&lt;string, object?&gt;
     ///         {
@@ -233,15 +213,6 @@ namespace Jschady.Filescom
     ///             ["maxHeightOrWidth"] = 20,
     ///             ["transparency"] = 25,
     ///         },
-    ///         Icon16Delete = false,
-    ///         Icon32Delete = false,
-    ///         Icon48Delete = false,
-    ///         Icon128Delete = false,
-    ///         LogoDelete = false,
-    ///         BundleWatermarkAttachmentDelete = false,
-    ///         LoginPageBackgroundImageDelete = false,
-    ///         Disable2faWithDelay = false,
-    ///         RedirectOldSubdomain = false,
     ///     });
     /// 
     /// });
@@ -682,6 +653,12 @@ namespace Jschady.Filescom
         public Output<string> EmailFooterCustomText { get; private set; } = null!;
 
         /// <summary>
+        /// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        /// </summary>
+        [Output("enforceParentSiteUserIpRestrictions")]
+        public Output<bool> EnforceParentSiteUserIpRestrictions { get; private set; } = null!;
+
+        /// <summary>
         /// Are FedRAMP security restrictions enabled for this site?
         /// </summary>
         [Output("fedramp")]
@@ -802,118 +779,34 @@ namespace Jschady.Filescom
         public Output<bool> IncludePasswordInWelcomeEmail { get; private set; } = null!;
 
         /// <summary>
+        /// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        /// </summary>
+        [Output("integrationCentricRemoteServerAdminAccess")]
+        public Output<string> IntegrationCentricRemoteServerAdminAccess { get; private set; } = null!;
+
+        /// <summary>
         /// Site default language
         /// </summary>
         [Output("language")]
         public Output<string> Language { get; private set; } = null!;
 
         /// <summary>
-        /// Base DN for looking up users in LDAP server
+        /// Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         /// </summary>
-        [Output("ldapBaseDn")]
-        public Output<string> LdapBaseDn { get; private set; } = null!;
-
-        /// <summary>
-        /// Domain name that will be appended to usernames
-        /// </summary>
-        [Output("ldapDomain")]
-        public Output<string> LdapDomain { get; private set; } = null!;
-
-        /// <summary>
-        /// Main LDAP setting: is LDAP enabled?
-        /// </summary>
-        [Output("ldapEnabled")]
-        public Output<bool> LdapEnabled { get; private set; } = null!;
-
-        /// <summary>
-        /// Should we sync groups from LDAP server?
-        /// </summary>
-        [Output("ldapGroupAction")]
-        public Output<string> LdapGroupAction { get; private set; } = null!;
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        /// </summary>
-        [Output("ldapGroupExclusion")]
-        public Output<string> LdapGroupExclusion { get; private set; } = null!;
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        /// </summary>
-        [Output("ldapGroupInclusion")]
-        public Output<string> LdapGroupInclusion { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP host
-        /// </summary>
-        [Output("ldapHost")]
-        public Output<string> LdapHost { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Output("ldapHost2")]
-        public Output<string> LdapHost2 { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Output("ldapHost3")]
-        public Output<string> LdapHost3 { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP port
-        /// </summary>
-        [Output("ldapPort")]
-        public Output<int> LdapPort { get; private set; } = null!;
-
-        /// <summary>
-        /// Use secure LDAP?
-        /// </summary>
-        [Output("ldapSecure")]
-        public Output<bool> LdapSecure { get; private set; } = null!;
-
-        /// <summary>
-        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
-        /// </summary>
-        [Output("ldapServerCertificate")]
-        public Output<string> LdapServerCertificate { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP type
-        /// </summary>
-        [Output("ldapType")]
-        public Output<string> LdapType { get; private set; } = null!;
-
-        /// <summary>
-        /// Should we sync users from LDAP server?
-        /// </summary>
-        [Output("ldapUserAction")]
-        public Output<string> LdapUserAction { get; private set; } = null!;
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        /// </summary>
-        [Output("ldapUserIncludeGroups")]
-        public Output<string> LdapUserIncludeGroups { get; private set; } = null!;
-
-        /// <summary>
-        /// Username for signing in to LDAP server.
-        /// </summary>
-        [Output("ldapUsername")]
-        public Output<string> LdapUsername { get; private set; } = null!;
-
-        /// <summary>
-        /// LDAP username field
-        /// </summary>
-        [Output("ldapUsernameField")]
-        public Output<string> LdapUsernameField { get; private set; } = null!;
+        [Output("lastPairingAt")]
+        public Output<string> LastPairingAt { get; private set; } = null!;
 
         /// <summary>
         /// Use legacy checksums mode?
         /// </summary>
         [Output("legacyChecksumsMode")]
         public Output<bool> LegacyChecksumsMode { get; private set; } = null!;
+
+        /// <summary>
+        /// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        /// </summary>
+        [Output("legacyPairingEnabled")]
+        public Output<bool> LegacyPairingEnabled { get; private set; } = null!;
 
         /// <summary>
         /// Login help text
@@ -1917,6 +1810,12 @@ namespace Jschady.Filescom
         public Input<string>? EmailFooterCustomText { get; set; }
 
         /// <summary>
+        /// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        /// </summary>
+        [Input("enforceParentSiteUserIpRestrictions")]
+        public Input<bool>? EnforceParentSiteUserIpRestrictions { get; set; }
+
+        /// <summary>
         /// Are FedRAMP security restrictions enabled for this site?
         /// </summary>
         [Input("fedramp")]
@@ -2001,118 +1900,28 @@ namespace Jschady.Filescom
         public Input<bool>? IncludePasswordInWelcomeEmail { get; set; }
 
         /// <summary>
+        /// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        /// </summary>
+        [Input("integrationCentricRemoteServerAdminAccess")]
+        public Input<string>? IntegrationCentricRemoteServerAdminAccess { get; set; }
+
+        /// <summary>
         /// Site default language
         /// </summary>
         [Input("language")]
         public Input<string>? Language { get; set; }
 
         /// <summary>
-        /// Base DN for looking up users in LDAP server
-        /// </summary>
-        [Input("ldapBaseDn")]
-        public Input<string>? LdapBaseDn { get; set; }
-
-        /// <summary>
-        /// Domain name that will be appended to usernames
-        /// </summary>
-        [Input("ldapDomain")]
-        public Input<string>? LdapDomain { get; set; }
-
-        /// <summary>
-        /// Main LDAP setting: is LDAP enabled?
-        /// </summary>
-        [Input("ldapEnabled")]
-        public Input<bool>? LdapEnabled { get; set; }
-
-        /// <summary>
-        /// Should we sync groups from LDAP server?
-        /// </summary>
-        [Input("ldapGroupAction")]
-        public Input<string>? LdapGroupAction { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        /// </summary>
-        [Input("ldapGroupExclusion")]
-        public Input<string>? LdapGroupExclusion { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        /// </summary>
-        [Input("ldapGroupInclusion")]
-        public Input<string>? LdapGroupInclusion { get; set; }
-
-        /// <summary>
-        /// LDAP host
-        /// </summary>
-        [Input("ldapHost")]
-        public Input<string>? LdapHost { get; set; }
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Input("ldapHost2")]
-        public Input<string>? LdapHost2 { get; set; }
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Input("ldapHost3")]
-        public Input<string>? LdapHost3 { get; set; }
-
-        /// <summary>
-        /// LDAP port
-        /// </summary>
-        [Input("ldapPort")]
-        public Input<int>? LdapPort { get; set; }
-
-        /// <summary>
-        /// Use secure LDAP?
-        /// </summary>
-        [Input("ldapSecure")]
-        public Input<bool>? LdapSecure { get; set; }
-
-        /// <summary>
-        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
-        /// </summary>
-        [Input("ldapServerCertificate")]
-        public Input<string>? LdapServerCertificate { get; set; }
-
-        /// <summary>
-        /// LDAP type
-        /// </summary>
-        [Input("ldapType")]
-        public Input<string>? LdapType { get; set; }
-
-        /// <summary>
-        /// Should we sync users from LDAP server?
-        /// </summary>
-        [Input("ldapUserAction")]
-        public Input<string>? LdapUserAction { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        /// </summary>
-        [Input("ldapUserIncludeGroups")]
-        public Input<string>? LdapUserIncludeGroups { get; set; }
-
-        /// <summary>
-        /// Username for signing in to LDAP server.
-        /// </summary>
-        [Input("ldapUsername")]
-        public Input<string>? LdapUsername { get; set; }
-
-        /// <summary>
-        /// LDAP username field
-        /// </summary>
-        [Input("ldapUsernameField")]
-        public Input<string>? LdapUsernameField { get; set; }
-
-        /// <summary>
         /// Use legacy checksums mode?
         /// </summary>
         [Input("legacyChecksumsMode")]
         public Input<bool>? LegacyChecksumsMode { get; set; }
+
+        /// <summary>
+        /// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        /// </summary>
+        [Input("legacyPairingEnabled")]
+        public Input<bool>? LegacyPairingEnabled { get; set; }
 
         /// <summary>
         /// Login help text
@@ -3029,6 +2838,12 @@ namespace Jschady.Filescom
         public Input<string>? EmailFooterCustomText { get; set; }
 
         /// <summary>
+        /// Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        /// </summary>
+        [Input("enforceParentSiteUserIpRestrictions")]
+        public Input<bool>? EnforceParentSiteUserIpRestrictions { get; set; }
+
+        /// <summary>
         /// Are FedRAMP security restrictions enabled for this site?
         /// </summary>
         [Input("fedramp")]
@@ -3149,118 +2964,34 @@ namespace Jschady.Filescom
         public Input<bool>? IncludePasswordInWelcomeEmail { get; set; }
 
         /// <summary>
+        /// Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        /// </summary>
+        [Input("integrationCentricRemoteServerAdminAccess")]
+        public Input<string>? IntegrationCentricRemoteServerAdminAccess { get; set; }
+
+        /// <summary>
         /// Site default language
         /// </summary>
         [Input("language")]
         public Input<string>? Language { get; set; }
 
         /// <summary>
-        /// Base DN for looking up users in LDAP server
+        /// Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         /// </summary>
-        [Input("ldapBaseDn")]
-        public Input<string>? LdapBaseDn { get; set; }
-
-        /// <summary>
-        /// Domain name that will be appended to usernames
-        /// </summary>
-        [Input("ldapDomain")]
-        public Input<string>? LdapDomain { get; set; }
-
-        /// <summary>
-        /// Main LDAP setting: is LDAP enabled?
-        /// </summary>
-        [Input("ldapEnabled")]
-        public Input<bool>? LdapEnabled { get; set; }
-
-        /// <summary>
-        /// Should we sync groups from LDAP server?
-        /// </summary>
-        [Input("ldapGroupAction")]
-        public Input<string>? LdapGroupAction { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        /// </summary>
-        [Input("ldapGroupExclusion")]
-        public Input<string>? LdapGroupExclusion { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        /// </summary>
-        [Input("ldapGroupInclusion")]
-        public Input<string>? LdapGroupInclusion { get; set; }
-
-        /// <summary>
-        /// LDAP host
-        /// </summary>
-        [Input("ldapHost")]
-        public Input<string>? LdapHost { get; set; }
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Input("ldapHost2")]
-        public Input<string>? LdapHost2 { get; set; }
-
-        /// <summary>
-        /// LDAP backup host
-        /// </summary>
-        [Input("ldapHost3")]
-        public Input<string>? LdapHost3 { get; set; }
-
-        /// <summary>
-        /// LDAP port
-        /// </summary>
-        [Input("ldapPort")]
-        public Input<int>? LdapPort { get; set; }
-
-        /// <summary>
-        /// Use secure LDAP?
-        /// </summary>
-        [Input("ldapSecure")]
-        public Input<bool>? LdapSecure { get; set; }
-
-        /// <summary>
-        /// How to validate the LDAP server certificate. &lt;span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`"&gt;`requireMatch`&lt;/span&gt; validates the certificate chain and hostname; &lt;span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`"&gt;`allowAny`&lt;/span&gt; disables certificate validation.
-        /// </summary>
-        [Input("ldapServerCertificate")]
-        public Input<string>? LdapServerCertificate { get; set; }
-
-        /// <summary>
-        /// LDAP type
-        /// </summary>
-        [Input("ldapType")]
-        public Input<string>? LdapType { get; set; }
-
-        /// <summary>
-        /// Should we sync users from LDAP server?
-        /// </summary>
-        [Input("ldapUserAction")]
-        public Input<string>? LdapUserAction { get; set; }
-
-        /// <summary>
-        /// Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        /// </summary>
-        [Input("ldapUserIncludeGroups")]
-        public Input<string>? LdapUserIncludeGroups { get; set; }
-
-        /// <summary>
-        /// Username for signing in to LDAP server.
-        /// </summary>
-        [Input("ldapUsername")]
-        public Input<string>? LdapUsername { get; set; }
-
-        /// <summary>
-        /// LDAP username field
-        /// </summary>
-        [Input("ldapUsernameField")]
-        public Input<string>? LdapUsernameField { get; set; }
+        [Input("lastPairingAt")]
+        public Input<string>? LastPairingAt { get; set; }
 
         /// <summary>
         /// Use legacy checksums mode?
         /// </summary>
         [Input("legacyChecksumsMode")]
         public Input<bool>? LegacyChecksumsMode { get; set; }
+
+        /// <summary>
+        /// Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        /// </summary>
+        [Input("legacyPairingEnabled")]
+        public Input<bool>? LegacyPairingEnabled { get; set; }
 
         /// <summary>
         /// Login help text

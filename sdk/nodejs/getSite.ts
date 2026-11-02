@@ -311,6 +311,10 @@ export interface GetSiteResult {
      */
     readonly emailFooterCustomText: string;
     /**
+     * Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+     */
+    readonly enforceParentSiteUserIpRestrictions: boolean;
+    /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     readonly fedramp: boolean;
@@ -395,81 +399,25 @@ export interface GetSiteResult {
      */
     readonly includePasswordInWelcomeEmail: boolean;
     /**
+     * Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+     */
+    readonly integrationCentricRemoteServerAdminAccess: string;
+    /**
      * Site default language
      */
     readonly language: string;
     /**
-     * Base DN for looking up users in LDAP server
+     * Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
      */
-    readonly ldapBaseDn: string;
-    /**
-     * Domain name that will be appended to usernames
-     */
-    readonly ldapDomain: string;
-    /**
-     * Main LDAP setting: is LDAP enabled?
-     */
-    readonly ldapEnabled: boolean;
-    /**
-     * Should we sync groups from LDAP server?
-     */
-    readonly ldapGroupAction: string;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-     */
-    readonly ldapGroupExclusion: string;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-     */
-    readonly ldapGroupInclusion: string;
-    /**
-     * LDAP host
-     */
-    readonly ldapHost: string;
-    /**
-     * LDAP backup host
-     */
-    readonly ldapHost2: string;
-    /**
-     * LDAP backup host
-     */
-    readonly ldapHost3: string;
-    /**
-     * LDAP port
-     */
-    readonly ldapPort: number;
-    /**
-     * Use secure LDAP?
-     */
-    readonly ldapSecure: boolean;
-    /**
-     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-     */
-    readonly ldapServerCertificate: string;
-    /**
-     * LDAP type
-     */
-    readonly ldapType: string;
-    /**
-     * Should we sync users from LDAP server?
-     */
-    readonly ldapUserAction: string;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-     */
-    readonly ldapUserIncludeGroups: string;
-    /**
-     * Username for signing in to LDAP server.
-     */
-    readonly ldapUsername: string;
-    /**
-     * LDAP username field
-     */
-    readonly ldapUsernameField: string;
+    readonly lastPairingAt: string;
     /**
      * Use legacy checksums mode?
      */
     readonly legacyChecksumsMode: boolean;
+    /**
+     * Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+     */
+    readonly legacyPairingEnabled: boolean;
     /**
      * Login help text
      */

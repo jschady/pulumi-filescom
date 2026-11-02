@@ -82,7 +82,7 @@ namespace Jschady.Filescom
     ///         AzureFilesStorageShareName = "share-name",
     ///         BackblazeB2Bucket = "my-bucket",
     ///         BackblazeB2S3Endpoint = "s3.us-west-001.backblazeb2.com",
-    ///         BufferUploads = "example",
+    ///         BufferUploads = "auto",
     ///         CloudflareAccessKey = "example",
     ///         CloudflareBucket = "my-bucket",
     ///         CloudflareEndpoint = "https://&lt;ACCOUNT_ID&gt;.r2.cloudflarestorage.com",
@@ -125,6 +125,7 @@ namespace Jschady.Filescom
     ///         ServerCertificate = "require_match",
     ///         ServerHostKey = "[public key]",
     ///         ServerType = "s3",
+    ///         SiteAdminAccess = true,
     ///         SharepointClientId = "00000000-0000-0000-0000-000000000000",
     ///         SharepointSiteUrl = "https://example.sharepoint.com/sites/accounting",
     ///         SharepointTenantId = "00000000-0000-0000-0000-000000000000",
@@ -346,6 +347,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("dropboxTeams")]
         public Output<bool> DropboxTeams { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        /// </summary>
+        [Output("effectiveSiteAdminAccess")]
+        public Output<bool> EffectiveSiteAdminAccess { get; private set; } = null!;
 
         /// <summary>
         /// &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; if remote server only accepts connections from dedicated IPs
@@ -720,6 +727,12 @@ namespace Jschady.Filescom
         public Output<string> SharepointTenantId { get; private set; } = null!;
 
         /// <summary>
+        /// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        /// </summary>
+        [Output("siteAdminAccess")]
+        public Output<bool> SiteAdminAccess { get; private set; } = null!;
+
+        /// <summary>
         /// Should we require SSL?
         /// </summary>
         [Output("ssl")]
@@ -745,11 +758,10 @@ namespace Jschady.Filescom
         public Output<string> UploadStagingPath { get; private set; } = null!;
 
         /// <summary>
-        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// User ID.  Provide a value of &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; to operate the current session's user.
+        /// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         /// </summary>
         [Output("userId")]
-        public Output<int?> UserId { get; private set; } = null!;
+        public Output<int> UserId { get; private set; } = null!;
 
         /// <summary>
         /// Remote server username.
@@ -835,7 +847,6 @@ namespace Jschady.Filescom
                     "sharepointClientCertificate",
                     "sharepointClientSecret",
                     "sslCertificate",
-                    "userId",
                     "wasabiSecretKey",
                 },
             };
@@ -1538,6 +1549,12 @@ namespace Jschady.Filescom
         public Input<string>? SharepointTenantId { get; set; }
 
         /// <summary>
+        /// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        /// </summary>
+        [Input("siteAdminAccess")]
+        public Input<bool>? SiteAdminAccess { get; set; }
+
+        /// <summary>
         /// Should we require SSL?
         /// </summary>
         [Input("ssl")]
@@ -1566,22 +1583,11 @@ namespace Jschady.Filescom
         [Input("uploadStagingPath")]
         public Input<string>? UploadStagingPath { get; set; }
 
-        [Input("userId")]
-        private Input<int>? _userId;
-
         /// <summary>
-        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// User ID.  Provide a value of &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; to operate the current session's user.
+        /// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         /// </summary>
-        public Input<int>? UserId
-        {
-            get => _userId;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _userId = Output.Tuple<Input<int>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
-        }
+        [Input("userId")]
+        public Input<int>? UserId { get; set; }
 
         /// <summary>
         /// Remote server username.
@@ -1911,6 +1917,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("dropboxTeams")]
         public Input<bool>? DropboxTeams { get; set; }
+
+        /// <summary>
+        /// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+        /// </summary>
+        [Input("effectiveSiteAdminAccess")]
+        public Input<bool>? EffectiveSiteAdminAccess { get; set; }
 
         /// <summary>
         /// &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; if remote server only accepts connections from dedicated IPs
@@ -2411,6 +2423,12 @@ namespace Jschady.Filescom
         public Input<string>? SharepointTenantId { get; set; }
 
         /// <summary>
+        /// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+        /// </summary>
+        [Input("siteAdminAccess")]
+        public Input<bool>? SiteAdminAccess { get; set; }
+
+        /// <summary>
         /// Should we require SSL?
         /// </summary>
         [Input("ssl")]
@@ -2445,22 +2463,11 @@ namespace Jschady.Filescom
         [Input("uploadStagingPath")]
         public Input<string>? UploadStagingPath { get; set; }
 
-        [Input("userId")]
-        private Input<int>? _userId;
-
         /// <summary>
-        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// User ID.  Provide a value of &lt;span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`"&gt;`0`&lt;/span&gt; to operate the current session's user.
+        /// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
         /// </summary>
-        public Input<int>? UserId
-        {
-            get => _userId;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _userId = Output.Tuple<Input<int>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
-        }
+        [Input("userId")]
+        public Input<int>? UserId { get; set; }
 
         /// <summary>
         /// Remote server username.

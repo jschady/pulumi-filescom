@@ -70,6 +70,8 @@ type GetExternalEventResult struct {
 	Id int `pulumi:"id"`
 	// Status of event.
 	Status string `pulumi:"status"`
+	// Workspace ID
+	WorkspaceId int `pulumi:"workspaceId"`
 }
 
 func GetExternalEventOutput(ctx *pulumi.Context, args GetExternalEventOutputArgs, opts ...pulumi.InvokeOption) GetExternalEventResultOutput {
@@ -130,6 +132,11 @@ func (o GetExternalEventResultOutput) Id() pulumi.IntOutput {
 // Status of event.
 func (o GetExternalEventResultOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetExternalEventResult) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Workspace ID
+func (o GetExternalEventResultOutput) WorkspaceId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExternalEventResult) int { return v.WorkspaceId }).(pulumi.IntOutput)
 }
 
 func init() {

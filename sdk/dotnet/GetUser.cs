@@ -39,14 +39,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleUser = filescom.getUser({
-        ///     id: 1,
+        ///     username: "user",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_user = filescom.get_user(id=1)
+        /// example_user = filescom.get_user(username="user")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -58,7 +58,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleUser = Filescom.GetUser.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Username = "user",
         ///     });
         /// 
         /// });
@@ -74,7 +74,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetUser(ctx, &amp;filescom.LookupUserArgs{
-        /// 			Id: 1,
+        /// 			Username: pulumi.StringRef("user"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -93,7 +93,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getuser" "exampleUser" {
-        ///   id = 1
+        ///   username = "user"
         /// }
         /// ```
         /// ```java
@@ -118,7 +118,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleUser = FilescomFunctions.getUser(GetUserArgs.builder()
-        ///             .id(1)
+        ///             .username("user")
         ///             .build());
         /// 
         ///     }
@@ -130,11 +130,11 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getUser
         ///       arguments:
-        ///         id: 1
+        ///         username: user
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Task<GetUserResult> InvokeAsync(GetUserArgs args, InvokeOptions? options = null)
+        public static Task<GetUserResult> InvokeAsync(GetUserArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserResult>("filescom:index/getUser:getUser", args ?? new GetUserArgs(), options.WithDefaults());
 
         /// <summary>
@@ -164,14 +164,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleUser = filescom.getUser({
-        ///     id: 1,
+        ///     username: "user",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_user = filescom.get_user(id=1)
+        /// example_user = filescom.get_user(username="user")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -183,7 +183,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleUser = Filescom.GetUser.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Username = "user",
         ///     });
         /// 
         /// });
@@ -199,7 +199,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetUser(ctx, &amp;filescom.LookupUserArgs{
-        /// 			Id: 1,
+        /// 			Username: pulumi.StringRef("user"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -218,7 +218,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getuser" "exampleUser" {
-        ///   id = 1
+        ///   username = "user"
         /// }
         /// ```
         /// ```java
@@ -243,7 +243,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleUser = FilescomFunctions.getUser(GetUserArgs.builder()
-        ///             .id(1)
+        ///             .username("user")
         ///             .build());
         /// 
         ///     }
@@ -255,11 +255,11 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getUser
         ///       arguments:
-        ///         id: 1
+        ///         username: user
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Output<GetUserResult> Invoke(GetUserInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetUserResult> Invoke(GetUserInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserResult>("filescom:index/getUser:getUser", args ?? new GetUserInvokeArgs(), options.WithDefaults());
 
         /// <summary>
@@ -289,14 +289,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleUser = filescom.getUser({
-        ///     id: 1,
+        ///     username: "user",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_user = filescom.get_user(id=1)
+        /// example_user = filescom.get_user(username="user")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -308,7 +308,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleUser = Filescom.GetUser.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Username = "user",
         ///     });
         /// 
         /// });
@@ -324,7 +324,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetUser(ctx, &amp;filescom.LookupUserArgs{
-        /// 			Id: 1,
+        /// 			Username: pulumi.StringRef("user"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -343,7 +343,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getuser" "exampleUser" {
-        ///   id = 1
+        ///   username = "user"
         /// }
         /// ```
         /// ```java
@@ -368,7 +368,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleUser = FilescomFunctions.getUser(GetUserArgs.builder()
-        ///             .id(1)
+        ///             .username("user")
         ///             .build());
         /// 
         ///     }
@@ -380,7 +380,7 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getUser
         ///       arguments:
-        ///         id: 1
+        ///         username: user
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -392,10 +392,16 @@ namespace Jschady.Filescom
     public sealed class GetUserArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// User ID
+        /// User ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
         /// </summary>
-        [Input("id", required: true)]
-        public int Id { get; set; }
+        [Input("id")]
+        public int? Id { get; set; }
+
+        /// <summary>
+        /// User's username. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
+        /// </summary>
+        [Input("username")]
+        public string? Username { get; set; }
 
         public GetUserArgs()
         {
@@ -406,10 +412,16 @@ namespace Jschady.Filescom
     public sealed class GetUserInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// User ID
+        /// User ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
         /// </summary>
-        [Input("id", required: true)]
-        public Input<int> Id { get; set; } = null!;
+        [Input("id")]
+        public Input<int>? Id { get; set; }
+
+        /// <summary>
+        /// User's username. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
+        /// </summary>
+        [Input("username")]
+        public Input<string>? Username { get; set; }
 
         public GetUserInvokeArgs()
         {
@@ -534,7 +546,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string HeaderText;
         /// <summary>
-        /// User ID
+        /// User ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
         /// </summary>
         public readonly int Id;
         /// <summary>
@@ -738,10 +750,6 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int SsoStrategyId;
         /// <summary>
-        /// Is the user subscribed to the newsletter?
-        /// </summary>
-        public readonly bool SubscribeToNewsletter;
-        /// <summary>
         /// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
         /// </summary>
         public readonly string Tags;
@@ -766,7 +774,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string UserRoot;
         /// <summary>
-        /// User's username
+        /// User's username. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`"&gt;`username`&lt;/span&gt;.
         /// </summary>
         public readonly string Username;
         /// <summary>
@@ -938,8 +946,6 @@ namespace Jschady.Filescom
 
             int ssoStrategyId,
 
-            bool subscribeToNewsletter,
-
             string tags,
 
             string timeZone,
@@ -1037,7 +1043,6 @@ namespace Jschady.Filescom
             SkipWelcomeScreen = skipWelcomeScreen;
             SslRequired = sslRequired;
             SsoStrategyId = ssoStrategyId;
-            SubscribeToNewsletter = subscribeToNewsletter;
             Tags = tags;
             TimeZone = timeZone;
             TypeOf2fa = typeOf2fa;

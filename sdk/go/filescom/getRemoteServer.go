@@ -147,6 +147,8 @@ type LookupRemoteServerResult struct {
 	Disabled bool `pulumi:"disabled"`
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams bool `pulumi:"dropboxTeams"`
+	// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+	EffectiveSiteAdminAccess bool `pulumi:"effectiveSiteAdminAccess"`
 	// <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
 	EnableDedicatedIps bool `pulumi:"enableDedicatedIps"`
 	// Filebase: Access Key.
@@ -245,12 +247,16 @@ type LookupRemoteServerResult struct {
 	SharepointSiteUrl string `pulumi:"sharepointSiteUrl"`
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId string `pulumi:"sharepointTenantId"`
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess bool `pulumi:"siteAdminAccess"`
 	// Should we require SSL?
 	Ssl string `pulumi:"ssl"`
 	// If true, this remote server supports file versioning. This value is determined automatically by Files.com.
 	SupportsVersioning bool `pulumi:"supportsVersioning"`
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath string `pulumi:"uploadStagingPath"`
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+	UserId int `pulumi:"userId"`
 	// Remote server username.
 	Username string `pulumi:"username"`
 	// Wasabi: Access Key.
@@ -406,6 +412,11 @@ func (o LookupRemoteServerResultOutput) Disabled() pulumi.BoolOutput {
 // Dropbox: If true, list Team folders in root?
 func (o LookupRemoteServerResultOutput) DropboxTeams() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupRemoteServerResult) bool { return v.DropboxTeams }).(pulumi.BoolOutput)
+}
+
+// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+func (o LookupRemoteServerResultOutput) EffectiveSiteAdminAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupRemoteServerResult) bool { return v.EffectiveSiteAdminAccess }).(pulumi.BoolOutput)
 }
 
 // <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
@@ -653,6 +664,11 @@ func (o LookupRemoteServerResultOutput) SharepointTenantId() pulumi.StringOutput
 	return o.ApplyT(func(v LookupRemoteServerResult) string { return v.SharepointTenantId }).(pulumi.StringOutput)
 }
 
+// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+func (o LookupRemoteServerResultOutput) SiteAdminAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupRemoteServerResult) bool { return v.SiteAdminAccess }).(pulumi.BoolOutput)
+}
+
 // Should we require SSL?
 func (o LookupRemoteServerResultOutput) Ssl() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupRemoteServerResult) string { return v.Ssl }).(pulumi.StringOutput)
@@ -666,6 +682,11 @@ func (o LookupRemoteServerResultOutput) SupportsVersioning() pulumi.BoolOutput {
 // Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 func (o LookupRemoteServerResultOutput) UploadStagingPath() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupRemoteServerResult) string { return v.UploadStagingPath }).(pulumi.StringOutput)
+}
+
+// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+func (o LookupRemoteServerResultOutput) UserId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupRemoteServerResult) int { return v.UserId }).(pulumi.IntOutput)
 }
 
 // Remote server username.

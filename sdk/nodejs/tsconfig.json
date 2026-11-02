@@ -46,6 +46,7 @@
         "getAiAssistantPersonality.ts",
         "getAiTask.ts",
         "getApiKey.ts",
+        "getAs2IncomingMessage.ts",
         "getAs2Partner.ts",
         "getAs2Station.ts",
         "getAutomation.ts",

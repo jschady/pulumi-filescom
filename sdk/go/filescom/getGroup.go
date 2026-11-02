@@ -33,7 +33,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := filescom.GetGroup(ctx, &filescom.LookupGroupArgs{
-//				Id: 1,
+//				Name: pulumi.StringRef("owners"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -56,8 +56,10 @@ func LookupGroup(ctx *pulumi.Context, args *LookupGroupArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupArgs struct {
-	// Group ID
-	Id int `pulumi:"id"`
+	// Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+	Id *int `pulumi:"id"`
+	// Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+	Name *string `pulumi:"name"`
 }
 
 // A collection of values returned by getGroup.
@@ -74,11 +76,11 @@ type LookupGroupResult struct {
 	DesktopConfigurationProfileId int `pulumi:"desktopConfigurationProfileId"`
 	// If true, users in this group can use FTP to login.  This will override a false value of <span pulumi-lang-nodejs="`ftpPermission`" pulumi-lang-dotnet="`FtpPermission`" pulumi-lang-go="`ftpPermission`" pulumi-lang-python="`ftp_permission`" pulumi-lang-yaml="`ftpPermission`" pulumi-lang-java="`ftpPermission`" pulumi-lang-hcl="`ftp_permission`">`ftpPermission`</span> on the user level.
 	FtpPermission bool `pulumi:"ftpPermission"`
-	// Group ID
+	// Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
 	Id int `pulumi:"id"`
 	// Integration Centric Profile ID assigned to this Group, if any. Users in the Group inherit it unless a direct per-user assignment overrides it.
 	IntegrationCentricProfileId int `pulumi:"integrationCentricProfileId"`
-	// Group name
+	// Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
 	Name string `pulumi:"name"`
 	// Notes about this group
 	Notes string `pulumi:"notes"`
@@ -105,8 +107,10 @@ func LookupGroupOutput(ctx *pulumi.Context, args LookupGroupOutputArgs, opts ...
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupOutputArgs struct {
-	// Group ID
-	Id pulumi.IntInput `pulumi:"id"`
+	// Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
+	Name pulumi.StringPtrInput `pulumi:"name"`
 }
 
 func (LookupGroupOutputArgs) ElementType() reflect.Type {
@@ -158,7 +162,7 @@ func (o LookupGroupResultOutput) FtpPermission() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupGroupResult) bool { return v.FtpPermission }).(pulumi.BoolOutput)
 }
 
-// Group ID
+// Group ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
 func (o LookupGroupResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupGroupResult) int { return v.Id }).(pulumi.IntOutput)
 }
@@ -168,7 +172,7 @@ func (o LookupGroupResultOutput) IntegrationCentricProfileId() pulumi.IntOutput 
 	return o.ApplyT(func(v LookupGroupResult) int { return v.IntegrationCentricProfileId }).(pulumi.IntOutput)
 }
 
-// Group name
+// Group name. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
 func (o LookupGroupResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Name }).(pulumi.StringOutput)
 }

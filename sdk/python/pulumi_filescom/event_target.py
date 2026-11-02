@@ -29,7 +29,7 @@ class EventTargetArgs:
         """
         The set of arguments for constructing a EventTarget resource.
 
-        :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
+        :param Any config: Event Target configuration. Fields depend on target_type.
         :param pulumi.Input[_builtins.str] target_type: Event Target type.
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
         :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
@@ -54,7 +54,7 @@ class EventTargetArgs:
     @pulumi.getter
     def config(self) -> Any:
         """
-        Event Target configuration. Folder targets accept path and format (json or csv).
+        Event Target configuration. Fields depend on target_type.
         """
         return pulumi.get(self, "config")
 
@@ -151,7 +151,7 @@ class _EventTargetState:
         Input properties used for looking up and filtering EventTarget resources.
 
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
-        :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
+        :param Any config: Event Target configuration. Fields depend on target_type.
         :param pulumi.Input[_builtins.str] created_at: Event Target create date/time.
         :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
@@ -195,7 +195,7 @@ class _EventTargetState:
     @pulumi.getter
     def config(self) -> Optional[Any]:
         """
-        Event Target configuration. Folder targets accept path and format (json or csv).
+        Event Target configuration. Fields depend on target_type.
         """
         return pulumi.get(self, "config")
 
@@ -317,9 +317,21 @@ class EventTarget(pulumi.CustomResource):
             workspace_id=1,
             apply_to_all_workspaces=True,
             enabled=True,
-            config="example",
-            delivery_policy="example",
-            target_type="example")
+            config={
+                "url": "https://example.com/files-events",
+                "headers": {
+                    "x-Example": "value",
+                },
+                "useDedicatedIps": False,
+            },
+            delivery_policy={
+                "maxAttempts": 3,
+                "retryDelayMinutes": [
+                    1,
+                    10,
+                ],
+            },
+            target_type="webhook")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -337,7 +349,7 @@ class EventTarget(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
-        :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
+        :param Any config: Event Target configuration. Fields depend on target_type.
         :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
         :param pulumi.Input[_builtins.str] name: Event Target name.
@@ -365,9 +377,21 @@ class EventTarget(pulumi.CustomResource):
             workspace_id=1,
             apply_to_all_workspaces=True,
             enabled=True,
-            config="example",
-            delivery_policy="example",
-            target_type="example")
+            config={
+                "url": "https://example.com/files-events",
+                "headers": {
+                    "x-Example": "value",
+                },
+                "useDedicatedIps": False,
+            },
+            delivery_policy={
+                "maxAttempts": 3,
+                "retryDelayMinutes": [
+                    1,
+                    10,
+                ],
+            },
+            target_type="webhook")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -416,7 +440,7 @@ class EventTarget(pulumi.CustomResource):
             __props__.__dict__["apply_to_all_workspaces"] = apply_to_all_workspaces
             if config is None and not opts.urn:
                 raise TypeError("Missing required property 'config'")
-            __props__.__dict__["config"] = config
+            __props__.__dict__["config"] = None if config is None else pulumi.Output.secret(config)
             __props__.__dict__["delivery_policy"] = delivery_policy
             __props__.__dict__["enabled"] = enabled
             __props__.__dict__["name"] = name
@@ -426,6 +450,8 @@ class EventTarget(pulumi.CustomResource):
             __props__.__dict__["workspace_id"] = workspace_id
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["config"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(EventTarget, __self__).__init__(
             'filescom:index/eventTarget:EventTarget',
             resource_name,
@@ -453,7 +479,7 @@ class EventTarget(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] apply_to_all_workspaces: If true, this default-workspace target can receive events from all workspaces.
-        :param Any config: Event Target configuration. Folder targets accept path and format (json or csv).
+        :param Any config: Event Target configuration. Fields depend on target_type.
         :param pulumi.Input[_builtins.str] created_at: Event Target create date/time.
         :param Any delivery_policy: Event Target delivery policy. Email and folder targets support batch*interval in seconds, between 600 and 86400. Slack and Teams support delivery*mode (immediate or subfolder*summary), summary*path (empty string means root), and summary*delay (15–300 seconds, default 60). The summary applies to matching file activity under summary*path; other matching events retain immediate delivery.
         :param pulumi.Input[_builtins.bool] enabled: Whether this Event Target can receive events.
@@ -489,7 +515,7 @@ class EventTarget(pulumi.CustomResource):
     @pulumi.getter
     def config(self) -> pulumi.Output[Any]:
         """
-        Event Target configuration. Folder targets accept path and format (json or csv).
+        Event Target configuration. Fields depend on target_type.
         """
         return pulumi.get(self, "config")
 

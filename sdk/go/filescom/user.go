@@ -98,7 +98,6 @@ import (
 //				SkipWelcomeScreen:                      pulumi.Bool(true),
 //				SslRequired:                            pulumi.String("always_require"),
 //				SsoStrategyId:                          pulumi.Int(1),
-//				SubscribeToNewsletter:                  pulumi.Bool(true),
 //				Require2fa:                             pulumi.String("always_require"),
 //				Tags:                                   pulumi.String("example"),
 //				TimeZone:                               pulumi.String("Pacific Time (US & Canada)"),
@@ -313,8 +312,6 @@ type User struct {
 	SslRequired pulumi.StringOutput `pulumi:"sslRequired"`
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId pulumi.IntOutput `pulumi:"ssoStrategyId"`
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter pulumi.BoolOutput `pulumi:"subscribeToNewsletter"`
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags pulumi.StringOutput `pulumi:"tags"`
 	// User time zone
@@ -590,8 +587,6 @@ type userState struct {
 	SslRequired *string `pulumi:"sslRequired"`
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId *int `pulumi:"ssoStrategyId"`
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter *bool `pulumi:"subscribeToNewsletter"`
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags *string `pulumi:"tags"`
 	// User time zone
@@ -796,8 +791,6 @@ type UserState struct {
 	SslRequired pulumi.StringPtrInput
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId pulumi.IntPtrInput
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter pulumi.BoolPtrInput
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags pulumi.StringPtrInput
 	// User time zone
@@ -952,8 +945,6 @@ type userArgs struct {
 	SslRequired *string `pulumi:"sslRequired"`
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId *int `pulumi:"ssoStrategyId"`
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter *bool `pulumi:"subscribeToNewsletter"`
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags *string `pulumi:"tags"`
 	// User time zone
@@ -1101,8 +1092,6 @@ type UserArgs struct {
 	SslRequired pulumi.StringPtrInput
 	// SSO (Single Sign On) strategy ID for the user, if applicable.
 	SsoStrategyId pulumi.IntPtrInput
-	// Is the user subscribed to the newsletter?
-	SubscribeToNewsletter pulumi.BoolPtrInput
 	// Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
 	Tags pulumi.StringPtrInput
 	// User time zone
@@ -1648,11 +1637,6 @@ func (o UserOutput) SslRequired() pulumi.StringOutput {
 // SSO (Single Sign On) strategy ID for the user, if applicable.
 func (o UserOutput) SsoStrategyId() pulumi.IntOutput {
 	return o.ApplyT(func(v *User) pulumi.IntOutput { return v.SsoStrategyId }).(pulumi.IntOutput)
-}
-
-// Is the user subscribed to the newsletter?
-func (o UserOutput) SubscribeToNewsletter() pulumi.BoolOutput {
-	return o.ApplyT(func(v *User) pulumi.BoolOutput { return v.SubscribeToNewsletter }).(pulumi.BoolOutput)
 }
 
 // Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.

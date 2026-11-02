@@ -21,7 +21,7 @@ import * as utilities from "./utilities";
  *     subdomain: "mysite",
  *     domain: "my-custom-domain.com",
  *     domainHstsHeader: false,
- *     domainLetsencryptChain: "example",
+ *     domainLetsencryptChain: "default",
  *     email: "john.doe@files.com",
  *     replyToEmail: "jane.doe@files.com",
  *     allowBundleNames: false,
@@ -43,9 +43,9 @@ import * as utilities from "./utilities";
  *     mobileAppSessionIpPinning: false,
  *     mobileAppSessionLifetime: 1,
  *     folderPermissionsGroupsOnly: false,
- *     welcomeScreen: "user_controlled",
+ *     welcomeScreen: "enabled",
  *     officeIntegrationAvailable: false,
- *     officeIntegrationType: "example",
+ *     officeIntegrationType: "only_office",
  *     pinAllRemoteServersToSiteRegion: false,
  *     motdText: "example",
  *     motdUseForFtp: false,
@@ -57,11 +57,7 @@ import * as utilities from "./utilities";
  *             workspaceAdmins: true,
  *             folderAdmins: true,
  *             allUsers: false,
- *             selectedGroupMembers: true,
- *             groupIds: [
- *                 1,
- *                 2,
- *             ],
+ *             selectedGroupMembers: false,
  *         },
  *     },
  *     mcpDcrEnabled: false,
@@ -78,7 +74,9 @@ import * as utilities from "./utilities";
  *     as2MessageRetentionDays: 1,
  *     fileActivityEventsEnabled: false,
  *     usernameDisplay: "username_only",
+ *     integrationCentricRemoteServerAdminAccess: "always_visible",
  *     sessionExpiryMinutes: 1,
+ *     legacyPairingEnabled: false,
  *     sslRequired: false,
  *     sftpInsecureCiphers: false,
  *     sftpInsecureDiffieHellman: false,
@@ -94,6 +92,7 @@ import * as utilities from "./utilities";
  *     allowUserLevel2faOverride: false,
  *     allowUserLevelAllowedIpOverride: false,
  *     allowUserLevelSslOverride: false,
+ *     enforceParentSiteUserIpRestrictions: false,
  *     disallowedCountries: "US,DE",
  *     daysToRetainBackups: 1,
  *     maxPriorPasswords: 1,
@@ -108,7 +107,6 @@ import * as utilities from "./utilities";
  *     davUserRootEnabled: false,
  *     sftpUserRootEnabled: false,
  *     disablePasswordReset: false,
- *     immutableFiles: false,
  *     bundleNotFoundMessage: "example",
  *     bundlePasswordRequired: false,
  *     bundleRequireRegistration: false,
@@ -167,7 +165,7 @@ import * as utilities from "./utilities";
  *     allowed2faMethodBypassForFtpSftpDav: false,
  *     require2fa: false,
  *     require2faExemptAllSsoUsers: false,
- *     require2faUserType: "`site_admins`",
+ *     require2faUserType: "all",
  *     color2Top: "#000000",
  *     color2Left: "#0066a7",
  *     color2Link: "#d34f5d",
@@ -186,38 +184,12 @@ import * as utilities from "./utilities";
  *     smtpUsername: "mail",
  *     smtpPort: 1,
  *     smtpSsl: "require",
- *     ldapEnabled: false,
- *     ldapType: "open_ldap",
- *     ldapHost: "ldap.site.com",
- *     ldapHost2: "ldap2.site.com",
- *     ldapHost3: "ldap3.site.com",
- *     ldapPort: 1,
- *     ldapSecure: false,
- *     ldapServerCertificate: "require_match",
- *     ldapUsername: "[ldap username]",
- *     ldapUsernameField: "sAMAccountName",
- *     ldapDomain: "mysite.com",
- *     ldapUserAction: "disabled",
- *     ldapGroupAction: "disabled",
- *     ldapUserIncludeGroups: "example",
- *     ldapGroupExclusion: "example",
- *     ldapGroupInclusion: "example",
- *     ldapBaseDn: "example",
  *     uploadsViaEmailAuthentication: false,
  *     bundleWatermarkValue: {
  *         gravity: "SouthWest",
  *         maxHeightOrWidth: 20,
  *         transparency: 25,
  *     },
- *     icon16Delete: false,
- *     icon32Delete: false,
- *     icon48Delete: false,
- *     icon128Delete: false,
- *     logoDelete: false,
- *     bundleWatermarkAttachmentDelete: false,
- *     loginPageBackgroundImageDelete: false,
- *     disable2faWithDelay: false,
- *     redirectOldSubdomain: false,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -541,6 +513,10 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly emailFooterCustomText: pulumi.Output<string>;
     /**
+     * Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+     */
+    declare public readonly enforceParentSiteUserIpRestrictions: pulumi.Output<boolean>;
+    /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     declare public readonly fedramp: pulumi.Output<boolean>;
@@ -621,81 +597,25 @@ export class Site extends pulumi.CustomResource {
      */
     declare public readonly includePasswordInWelcomeEmail: pulumi.Output<boolean>;
     /**
+     * Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+     */
+    declare public readonly integrationCentricRemoteServerAdminAccess: pulumi.Output<string>;
+    /**
      * Site default language
      */
     declare public readonly language: pulumi.Output<string>;
     /**
-     * Base DN for looking up users in LDAP server
+     * Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
      */
-    declare public readonly ldapBaseDn: pulumi.Output<string>;
-    /**
-     * Domain name that will be appended to usernames
-     */
-    declare public readonly ldapDomain: pulumi.Output<string>;
-    /**
-     * Main LDAP setting: is LDAP enabled?
-     */
-    declare public readonly ldapEnabled: pulumi.Output<boolean>;
-    /**
-     * Should we sync groups from LDAP server?
-     */
-    declare public readonly ldapGroupAction: pulumi.Output<string>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-     */
-    declare public readonly ldapGroupExclusion: pulumi.Output<string>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-     */
-    declare public readonly ldapGroupInclusion: pulumi.Output<string>;
-    /**
-     * LDAP host
-     */
-    declare public readonly ldapHost: pulumi.Output<string>;
-    /**
-     * LDAP backup host
-     */
-    declare public readonly ldapHost2: pulumi.Output<string>;
-    /**
-     * LDAP backup host
-     */
-    declare public readonly ldapHost3: pulumi.Output<string>;
-    /**
-     * LDAP port
-     */
-    declare public readonly ldapPort: pulumi.Output<number>;
-    /**
-     * Use secure LDAP?
-     */
-    declare public readonly ldapSecure: pulumi.Output<boolean>;
-    /**
-     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-     */
-    declare public readonly ldapServerCertificate: pulumi.Output<string>;
-    /**
-     * LDAP type
-     */
-    declare public readonly ldapType: pulumi.Output<string>;
-    /**
-     * Should we sync users from LDAP server?
-     */
-    declare public readonly ldapUserAction: pulumi.Output<string>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-     */
-    declare public readonly ldapUserIncludeGroups: pulumi.Output<string>;
-    /**
-     * Username for signing in to LDAP server.
-     */
-    declare public readonly ldapUsername: pulumi.Output<string>;
-    /**
-     * LDAP username field
-     */
-    declare public readonly ldapUsernameField: pulumi.Output<string>;
+    declare public /*out*/ readonly lastPairingAt: pulumi.Output<string>;
     /**
      * Use legacy checksums mode?
      */
     declare public readonly legacyChecksumsMode: pulumi.Output<boolean>;
+    /**
+     * Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+     */
+    declare public readonly legacyPairingEnabled: pulumi.Output<boolean>;
     /**
      * Login help text
      */
@@ -1148,6 +1068,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["domainLetsencryptChain"] = state?.domainLetsencryptChain;
             resourceInputs["email"] = state?.email;
             resourceInputs["emailFooterCustomText"] = state?.emailFooterCustomText;
+            resourceInputs["enforceParentSiteUserIpRestrictions"] = state?.enforceParentSiteUserIpRestrictions;
             resourceInputs["fedramp"] = state?.fedramp;
             resourceInputs["fileActivityEventsEnabled"] = state?.fileActivityEventsEnabled;
             resourceInputs["filesComRemoteServerEnabled"] = state?.filesComRemoteServerEnabled;
@@ -1168,25 +1089,11 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["icon48"] = state?.icon48;
             resourceInputs["immutableFilesSetAt"] = state?.immutableFilesSetAt;
             resourceInputs["includePasswordInWelcomeEmail"] = state?.includePasswordInWelcomeEmail;
+            resourceInputs["integrationCentricRemoteServerAdminAccess"] = state?.integrationCentricRemoteServerAdminAccess;
             resourceInputs["language"] = state?.language;
-            resourceInputs["ldapBaseDn"] = state?.ldapBaseDn;
-            resourceInputs["ldapDomain"] = state?.ldapDomain;
-            resourceInputs["ldapEnabled"] = state?.ldapEnabled;
-            resourceInputs["ldapGroupAction"] = state?.ldapGroupAction;
-            resourceInputs["ldapGroupExclusion"] = state?.ldapGroupExclusion;
-            resourceInputs["ldapGroupInclusion"] = state?.ldapGroupInclusion;
-            resourceInputs["ldapHost"] = state?.ldapHost;
-            resourceInputs["ldapHost2"] = state?.ldapHost2;
-            resourceInputs["ldapHost3"] = state?.ldapHost3;
-            resourceInputs["ldapPort"] = state?.ldapPort;
-            resourceInputs["ldapSecure"] = state?.ldapSecure;
-            resourceInputs["ldapServerCertificate"] = state?.ldapServerCertificate;
-            resourceInputs["ldapType"] = state?.ldapType;
-            resourceInputs["ldapUserAction"] = state?.ldapUserAction;
-            resourceInputs["ldapUserIncludeGroups"] = state?.ldapUserIncludeGroups;
-            resourceInputs["ldapUsername"] = state?.ldapUsername;
-            resourceInputs["ldapUsernameField"] = state?.ldapUsernameField;
+            resourceInputs["lastPairingAt"] = state?.lastPairingAt;
             resourceInputs["legacyChecksumsMode"] = state?.legacyChecksumsMode;
+            resourceInputs["legacyPairingEnabled"] = state?.legacyPairingEnabled;
             resourceInputs["loginHelpText"] = state?.loginHelpText;
             resourceInputs["loginPageBackgroundImage"] = state?.loginPageBackgroundImage;
             resourceInputs["logo"] = state?.logo;
@@ -1345,6 +1252,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["domainLetsencryptChain"] = args?.domainLetsencryptChain;
             resourceInputs["email"] = args?.email;
             resourceInputs["emailFooterCustomText"] = args?.emailFooterCustomText;
+            resourceInputs["enforceParentSiteUserIpRestrictions"] = args?.enforceParentSiteUserIpRestrictions;
             resourceInputs["fedramp"] = args?.fedramp;
             resourceInputs["fileActivityEventsEnabled"] = args?.fileActivityEventsEnabled;
             resourceInputs["filesComRemoteServerEnabled"] = args?.filesComRemoteServerEnabled;
@@ -1359,25 +1267,10 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["groupAdminsCanResetPasswords"] = args?.groupAdminsCanResetPasswords;
             resourceInputs["groupAdminsCanSetUserPassword"] = args?.groupAdminsCanSetUserPassword;
             resourceInputs["includePasswordInWelcomeEmail"] = args?.includePasswordInWelcomeEmail;
+            resourceInputs["integrationCentricRemoteServerAdminAccess"] = args?.integrationCentricRemoteServerAdminAccess;
             resourceInputs["language"] = args?.language;
-            resourceInputs["ldapBaseDn"] = args?.ldapBaseDn;
-            resourceInputs["ldapDomain"] = args?.ldapDomain;
-            resourceInputs["ldapEnabled"] = args?.ldapEnabled;
-            resourceInputs["ldapGroupAction"] = args?.ldapGroupAction;
-            resourceInputs["ldapGroupExclusion"] = args?.ldapGroupExclusion;
-            resourceInputs["ldapGroupInclusion"] = args?.ldapGroupInclusion;
-            resourceInputs["ldapHost"] = args?.ldapHost;
-            resourceInputs["ldapHost2"] = args?.ldapHost2;
-            resourceInputs["ldapHost3"] = args?.ldapHost3;
-            resourceInputs["ldapPort"] = args?.ldapPort;
-            resourceInputs["ldapSecure"] = args?.ldapSecure;
-            resourceInputs["ldapServerCertificate"] = args?.ldapServerCertificate;
-            resourceInputs["ldapType"] = args?.ldapType;
-            resourceInputs["ldapUserAction"] = args?.ldapUserAction;
-            resourceInputs["ldapUserIncludeGroups"] = args?.ldapUserIncludeGroups;
-            resourceInputs["ldapUsername"] = args?.ldapUsername;
-            resourceInputs["ldapUsernameField"] = args?.ldapUsernameField;
             resourceInputs["legacyChecksumsMode"] = args?.legacyChecksumsMode;
+            resourceInputs["legacyPairingEnabled"] = args?.legacyPairingEnabled;
             resourceInputs["loginHelpText"] = args?.loginHelpText;
             resourceInputs["maxPriorPasswords"] = args?.maxPriorPasswords;
             resourceInputs["mcpDcrEnabled"] = args?.mcpDcrEnabled;
@@ -1468,6 +1361,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["icon32"] = undefined /*out*/;
             resourceInputs["icon48"] = undefined /*out*/;
             resourceInputs["immutableFilesSetAt"] = undefined /*out*/;
+            resourceInputs["lastPairingAt"] = undefined /*out*/;
             resourceInputs["loginPageBackgroundImage"] = undefined /*out*/;
             resourceInputs["logo"] = undefined /*out*/;
             resourceInputs["managedSiteSettings"] = undefined /*out*/;
@@ -1773,6 +1667,10 @@ export interface SiteState {
      */
     emailFooterCustomText?: pulumi.Input<string | undefined>;
     /**
+     * Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+     */
+    enforceParentSiteUserIpRestrictions?: pulumi.Input<boolean | undefined>;
+    /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     fedramp?: pulumi.Input<boolean | undefined>;
@@ -1853,81 +1751,25 @@ export interface SiteState {
      */
     includePasswordInWelcomeEmail?: pulumi.Input<boolean | undefined>;
     /**
+     * Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+     */
+    integrationCentricRemoteServerAdminAccess?: pulumi.Input<string | undefined>;
+    /**
      * Site default language
      */
     language?: pulumi.Input<string | undefined>;
     /**
-     * Base DN for looking up users in LDAP server
+     * Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
      */
-    ldapBaseDn?: pulumi.Input<string | undefined>;
-    /**
-     * Domain name that will be appended to usernames
-     */
-    ldapDomain?: pulumi.Input<string | undefined>;
-    /**
-     * Main LDAP setting: is LDAP enabled?
-     */
-    ldapEnabled?: pulumi.Input<boolean | undefined>;
-    /**
-     * Should we sync groups from LDAP server?
-     */
-    ldapGroupAction?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-     */
-    ldapGroupExclusion?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-     */
-    ldapGroupInclusion?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP host
-     */
-    ldapHost?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP backup host
-     */
-    ldapHost2?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP backup host
-     */
-    ldapHost3?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP port
-     */
-    ldapPort?: pulumi.Input<number | undefined>;
-    /**
-     * Use secure LDAP?
-     */
-    ldapSecure?: pulumi.Input<boolean | undefined>;
-    /**
-     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-     */
-    ldapServerCertificate?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP type
-     */
-    ldapType?: pulumi.Input<string | undefined>;
-    /**
-     * Should we sync users from LDAP server?
-     */
-    ldapUserAction?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-     */
-    ldapUserIncludeGroups?: pulumi.Input<string | undefined>;
-    /**
-     * Username for signing in to LDAP server.
-     */
-    ldapUsername?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP username field
-     */
-    ldapUsernameField?: pulumi.Input<string | undefined>;
+    lastPairingAt?: pulumi.Input<string | undefined>;
     /**
      * Use legacy checksums mode?
      */
     legacyChecksumsMode?: pulumi.Input<boolean | undefined>;
+    /**
+     * Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+     */
+    legacyPairingEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Login help text
      */
@@ -2559,6 +2401,10 @@ export interface SiteArgs {
      */
     emailFooterCustomText?: pulumi.Input<string | undefined>;
     /**
+     * Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+     */
+    enforceParentSiteUserIpRestrictions?: pulumi.Input<boolean | undefined>;
+    /**
      * Are FedRAMP security restrictions enabled for this site?
      */
     fedramp?: pulumi.Input<boolean | undefined>;
@@ -2615,81 +2461,21 @@ export interface SiteArgs {
      */
     includePasswordInWelcomeEmail?: pulumi.Input<boolean | undefined>;
     /**
+     * Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+     */
+    integrationCentricRemoteServerAdminAccess?: pulumi.Input<string | undefined>;
+    /**
      * Site default language
      */
     language?: pulumi.Input<string | undefined>;
     /**
-     * Base DN for looking up users in LDAP server
-     */
-    ldapBaseDn?: pulumi.Input<string | undefined>;
-    /**
-     * Domain name that will be appended to usernames
-     */
-    ldapDomain?: pulumi.Input<string | undefined>;
-    /**
-     * Main LDAP setting: is LDAP enabled?
-     */
-    ldapEnabled?: pulumi.Input<boolean | undefined>;
-    /**
-     * Should we sync groups from LDAP server?
-     */
-    ldapGroupAction?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-     */
-    ldapGroupExclusion?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-     */
-    ldapGroupInclusion?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP host
-     */
-    ldapHost?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP backup host
-     */
-    ldapHost2?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP backup host
-     */
-    ldapHost3?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP port
-     */
-    ldapPort?: pulumi.Input<number | undefined>;
-    /**
-     * Use secure LDAP?
-     */
-    ldapSecure?: pulumi.Input<boolean | undefined>;
-    /**
-     * How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-     */
-    ldapServerCertificate?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP type
-     */
-    ldapType?: pulumi.Input<string | undefined>;
-    /**
-     * Should we sync users from LDAP server?
-     */
-    ldapUserAction?: pulumi.Input<string | undefined>;
-    /**
-     * Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-     */
-    ldapUserIncludeGroups?: pulumi.Input<string | undefined>;
-    /**
-     * Username for signing in to LDAP server.
-     */
-    ldapUsername?: pulumi.Input<string | undefined>;
-    /**
-     * LDAP username field
-     */
-    ldapUsernameField?: pulumi.Input<string | undefined>;
-    /**
      * Use legacy checksums mode?
      */
     legacyChecksumsMode?: pulumi.Input<boolean | undefined>;
+    /**
+     * Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+     */
+    legacyPairingEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Login help text
      */

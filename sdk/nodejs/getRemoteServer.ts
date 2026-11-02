@@ -177,6 +177,10 @@ export interface GetRemoteServerResult {
      */
     readonly dropboxTeams: boolean;
     /**
+     * Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+     */
+    readonly effectiveSiteAdminAccess: boolean;
+    /**
      * <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
      */
     readonly enableDedicatedIps: boolean;
@@ -373,6 +377,10 @@ export interface GetRemoteServerResult {
      */
     readonly sharepointTenantId: string;
     /**
+     * Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+     */
+    readonly siteAdminAccess: boolean;
+    /**
      * Should we require SSL?
      */
     readonly ssl: string;
@@ -384,6 +392,10 @@ export interface GetRemoteServerResult {
      * Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
      */
     readonly uploadStagingPath: string;
+    /**
+     * ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+     */
+    readonly userId: number;
     /**
      * Remote server username.
      */

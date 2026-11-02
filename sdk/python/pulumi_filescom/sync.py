@@ -1004,7 +1004,7 @@ class Sync(pulumi.CustomResource):
             src_path="example",
             src_remote_server_id=1,
             sync_interval_minutes=1,
-            trigger="example",
+            trigger="daily",
             trigger_file="example",
             always_write_trigger_file=True,
             workspace_id=1)
@@ -1098,7 +1098,7 @@ class Sync(pulumi.CustomResource):
             src_path="example",
             src_remote_server_id=1,
             sync_interval_minutes=1,
-            trigger="example",
+            trigger="daily",
             trigger_file="example",
             always_write_trigger_file=True,
             workspace_id=1)

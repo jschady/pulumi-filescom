@@ -89,7 +89,7 @@ export class ScheduledExport extends pulumi.CustomResource {
      */
     declare public readonly disabled: pulumi.Output<boolean>;
     /**
-     * Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+     * Options for the report selected by export_type.
      */
     declare public readonly exportOptions: pulumi.Output<any>;
     /**
@@ -244,7 +244,7 @@ export interface ScheduledExportState {
      */
     disabled?: pulumi.Input<boolean | undefined>;
     /**
-     * Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+     * Options for the report selected by export_type.
      */
     exportOptions?: any | undefined;
     /**
@@ -330,7 +330,7 @@ export interface ScheduledExportArgs {
      */
     disabled?: pulumi.Input<boolean | undefined>;
     /**
-     * Report-specific options. <span pulumi-lang-nodejs="`permissionAudit`" pulumi-lang-dotnet="`PermissionAudit`" pulumi-lang-go="`permissionAudit`" pulumi-lang-python="`permission_audit`" pulumi-lang-yaml="`permissionAudit`" pulumi-lang-java="`permissionAudit`" pulumi-lang-hcl="`permission_audit`">`permissionAudit`</span> supports <span pulumi-lang-nodejs="`groupBy`" pulumi-lang-dotnet="`GroupBy`" pulumi-lang-go="`groupBy`" pulumi-lang-python="`group_by`" pulumi-lang-yaml="`groupBy`" pulumi-lang-java="`groupBy`" pulumi-lang-hcl="`group_by`">`groupBy`</span> with <span pulumi-lang-nodejs="`user`" pulumi-lang-dotnet="`User`" pulumi-lang-go="`user`" pulumi-lang-python="`user`" pulumi-lang-yaml="`user`" pulumi-lang-java="`user`" pulumi-lang-hcl="`user`">`user`</span> or <span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`">`path`</span>.
+     * Options for the report selected by export_type.
      */
     exportOptions?: any | undefined;
     /**

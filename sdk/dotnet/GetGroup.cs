@@ -27,14 +27,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleGroup = filescom.getGroup({
-        ///     id: 1,
+        ///     name: "owners",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_group = filescom.get_group(id=1)
+        /// example_group = filescom.get_group(name="owners")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -46,7 +46,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleGroup = Filescom.GetGroup.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Name = "owners",
         ///     });
         /// 
         /// });
@@ -62,7 +62,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetGroup(ctx, &amp;filescom.LookupGroupArgs{
-        /// 			Id: 1,
+        /// 			Name: pulumi.StringRef("owners"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -81,7 +81,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getgroup" "exampleGroup" {
-        ///   id = 1
+        ///   name = "owners"
         /// }
         /// ```
         /// ```java
@@ -106,7 +106,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleGroup = FilescomFunctions.getGroup(GetGroupArgs.builder()
-        ///             .id(1)
+        ///             .name("owners")
         ///             .build());
         /// 
         ///     }
@@ -118,11 +118,11 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getGroup
         ///       arguments:
-        ///         id: 1
+        ///         name: owners
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Task<GetGroupResult> InvokeAsync(GetGroupArgs args, InvokeOptions? options = null)
+        public static Task<GetGroupResult> InvokeAsync(GetGroupArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupResult>("filescom:index/getGroup:getGroup", args ?? new GetGroupArgs(), options.WithDefaults());
 
         /// <summary>
@@ -140,14 +140,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleGroup = filescom.getGroup({
-        ///     id: 1,
+        ///     name: "owners",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_group = filescom.get_group(id=1)
+        /// example_group = filescom.get_group(name="owners")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -159,7 +159,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleGroup = Filescom.GetGroup.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Name = "owners",
         ///     });
         /// 
         /// });
@@ -175,7 +175,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetGroup(ctx, &amp;filescom.LookupGroupArgs{
-        /// 			Id: 1,
+        /// 			Name: pulumi.StringRef("owners"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -194,7 +194,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getgroup" "exampleGroup" {
-        ///   id = 1
+        ///   name = "owners"
         /// }
         /// ```
         /// ```java
@@ -219,7 +219,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleGroup = FilescomFunctions.getGroup(GetGroupArgs.builder()
-        ///             .id(1)
+        ///             .name("owners")
         ///             .build());
         /// 
         ///     }
@@ -231,11 +231,11 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getGroup
         ///       arguments:
-        ///         id: 1
+        ///         name: owners
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("filescom:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());
 
         /// <summary>
@@ -253,14 +253,14 @@ namespace Jschady.Filescom
         /// import * as filescom from "pulumi-filescom";
         /// 
         /// const exampleGroup = filescom.getGroup({
-        ///     id: 1,
+        ///     name: "owners",
         /// });
         /// ```
         /// ```python
         /// import pulumi
         /// import pulumi_filescom as filescom
         /// 
-        /// example_group = filescom.get_group(id=1)
+        /// example_group = filescom.get_group(name="owners")
         /// ```
         /// ```csharp
         /// using System.Collections.Generic;
@@ -272,7 +272,7 @@ namespace Jschady.Filescom
         /// {
         ///     var exampleGroup = Filescom.GetGroup.Invoke(new()
         ///     {
-        ///         Id = 1,
+        ///         Name = "owners",
         ///     });
         /// 
         /// });
@@ -288,7 +288,7 @@ namespace Jschady.Filescom
         /// func main() {
         /// 	pulumi.Run(func(ctx *pulumi.Context) error {
         /// 		_, err := filescom.GetGroup(ctx, &amp;filescom.LookupGroupArgs{
-        /// 			Id: 1,
+        /// 			Name: pulumi.StringRef("owners"),
         /// 		}, nil)
         /// 		if err != nil {
         /// 			return err
@@ -307,7 +307,7 @@ namespace Jschady.Filescom
         /// }
         /// 
         /// data "filescom_getgroup" "exampleGroup" {
-        ///   id = 1
+        ///   name = "owners"
         /// }
         /// ```
         /// ```java
@@ -332,7 +332,7 @@ namespace Jschady.Filescom
         /// 
         ///     public static void stack(Context ctx) {
         ///         final var exampleGroup = FilescomFunctions.getGroup(GetGroupArgs.builder()
-        ///             .id(1)
+        ///             .name("owners")
         ///             .build());
         /// 
         ///     }
@@ -344,7 +344,7 @@ namespace Jschady.Filescom
         ///     fn::invoke:
         ///       function: filescom:getGroup
         ///       arguments:
-        ///         id: 1
+        ///         name: owners
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
@@ -356,10 +356,16 @@ namespace Jschady.Filescom
     public sealed class GetGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Group ID
+        /// Group ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
         /// </summary>
-        [Input("id", required: true)]
-        public int Id { get; set; }
+        [Input("id")]
+        public int? Id { get; set; }
+
+        /// <summary>
+        /// Group name. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
+        /// </summary>
+        [Input("name")]
+        public string? Name { get; set; }
 
         public GetGroupArgs()
         {
@@ -370,10 +376,16 @@ namespace Jschady.Filescom
     public sealed class GetGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Group ID
+        /// Group ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
         /// </summary>
-        [Input("id", required: true)]
-        public Input<int> Id { get; set; } = null!;
+        [Input("id")]
+        public Input<int>? Id { get; set; }
+
+        /// <summary>
+        /// Group name. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         public GetGroupInvokeArgs()
         {
@@ -410,7 +422,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool FtpPermission;
         /// <summary>
-        /// Group ID
+        /// Group ID. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
         /// </summary>
         public readonly int Id;
         /// <summary>
@@ -418,7 +430,7 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly int IntegrationCentricProfileId;
         /// <summary>
-        /// Group name
+        /// Group name. Provide &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`"&gt;`name`&lt;/span&gt;.
         /// </summary>
         public readonly string Name;
         /// <summary>

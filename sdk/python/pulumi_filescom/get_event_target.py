@@ -70,7 +70,7 @@ class GetEventTargetResult:
     @pulumi.getter
     def config(self) -> Any:
         """
-        Event Target configuration. Folder targets accept path and format (json or csv).
+        Event Target configuration. Fields depend on target_type.
         """
         return pulumi.get(self, "config")
 

@@ -11489,6 +11489,8 @@ type AutomationDefinitionNodeTriggerEmailConfig struct {
 	Limit          *int     `pulumi:"limit"`
 	PathTimeZone   *string  `pulumi:"pathTimeZone"`
 	SaveBody       *bool    `pulumi:"saveBody"`
+	SaveHtmlBody   *bool    `pulumi:"saveHtmlBody"`
+	SaveRawMessage *bool    `pulumi:"saveRawMessage"`
 	Source         *string  `pulumi:"source"`
 }
 
@@ -11509,6 +11511,8 @@ type AutomationDefinitionNodeTriggerEmailConfigArgs struct {
 	Limit          pulumi.IntPtrInput      `pulumi:"limit"`
 	PathTimeZone   pulumi.StringPtrInput   `pulumi:"pathTimeZone"`
 	SaveBody       pulumi.BoolPtrInput     `pulumi:"saveBody"`
+	SaveHtmlBody   pulumi.BoolPtrInput     `pulumi:"saveHtmlBody"`
+	SaveRawMessage pulumi.BoolPtrInput     `pulumi:"saveRawMessage"`
 	Source         pulumi.StringPtrInput   `pulumi:"source"`
 }
 
@@ -11609,6 +11613,14 @@ func (o AutomationDefinitionNodeTriggerEmailConfigOutput) SaveBody() pulumi.Bool
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerEmailConfig) *bool { return v.SaveBody }).(pulumi.BoolPtrOutput)
 }
 
+func (o AutomationDefinitionNodeTriggerEmailConfigOutput) SaveHtmlBody() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerEmailConfig) *bool { return v.SaveHtmlBody }).(pulumi.BoolPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerEmailConfigOutput) SaveRawMessage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTriggerEmailConfig) *bool { return v.SaveRawMessage }).(pulumi.BoolPtrOutput)
+}
+
 func (o AutomationDefinitionNodeTriggerEmailConfigOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeTriggerEmailConfig) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -11679,6 +11691,24 @@ func (o AutomationDefinitionNodeTriggerEmailConfigPtrOutput) SaveBody() pulumi.B
 			return nil
 		}
 		return v.SaveBody
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerEmailConfigPtrOutput) SaveHtmlBody() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerEmailConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SaveHtmlBody
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o AutomationDefinitionNodeTriggerEmailConfigPtrOutput) SaveRawMessage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTriggerEmailConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SaveRawMessage
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -22549,6 +22579,8 @@ type GetAutomationDefinitionNodeTriggerEmailConfig struct {
 	Limit          int      `pulumi:"limit"`
 	PathTimeZone   string   `pulumi:"pathTimeZone"`
 	SaveBody       bool     `pulumi:"saveBody"`
+	SaveHtmlBody   bool     `pulumi:"saveHtmlBody"`
+	SaveRawMessage bool     `pulumi:"saveRawMessage"`
 	Source         string   `pulumi:"source"`
 }
 
@@ -22569,6 +22601,8 @@ type GetAutomationDefinitionNodeTriggerEmailConfigArgs struct {
 	Limit          pulumi.IntInput         `pulumi:"limit"`
 	PathTimeZone   pulumi.StringInput      `pulumi:"pathTimeZone"`
 	SaveBody       pulumi.BoolInput        `pulumi:"saveBody"`
+	SaveHtmlBody   pulumi.BoolInput        `pulumi:"saveHtmlBody"`
+	SaveRawMessage pulumi.BoolInput        `pulumi:"saveRawMessage"`
 	Source         pulumi.StringInput      `pulumi:"source"`
 }
 
@@ -22616,6 +22650,14 @@ func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) PathTimeZone() pulu
 
 func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) SaveBody() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerEmailConfig) bool { return v.SaveBody }).(pulumi.BoolOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) SaveHtmlBody() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerEmailConfig) bool { return v.SaveHtmlBody }).(pulumi.BoolOutput)
+}
+
+func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) SaveRawMessage() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTriggerEmailConfig) bool { return v.SaveRawMessage }).(pulumi.BoolOutput)
 }
 
 func (o GetAutomationDefinitionNodeTriggerEmailConfigOutput) Source() pulumi.StringOutput {

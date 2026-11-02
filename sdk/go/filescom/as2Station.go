@@ -59,7 +59,7 @@ type As2Station struct {
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// Serial of public certificate used for message security in hex format.
 	HexPublicCertificateSerial pulumi.StringOutput `pulumi:"hexPublicCertificateSerial"`
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
@@ -150,7 +150,7 @@ type as2StationState struct {
 	Domain *string `pulumi:"domain"`
 	// Serial of public certificate used for message security in hex format.
 	HexPublicCertificateSerial *string `pulumi:"hexPublicCertificateSerial"`
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
@@ -193,7 +193,7 @@ type As2StationState struct {
 	Domain pulumi.StringPtrInput
 	// Serial of public certificate used for message security in hex format.
 	HexPublicCertificateSerial pulumi.StringPtrInput
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
@@ -236,7 +236,7 @@ func (As2StationState) ElementType() reflect.Type {
 }
 
 type as2StationArgs struct {
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name *string `pulumi:"name"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
@@ -258,7 +258,7 @@ type as2StationArgs struct {
 
 // The set of arguments for constructing a As2Station resource.
 type As2StationArgs struct {
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
@@ -375,7 +375,7 @@ func (o As2StationOutput) HexPublicCertificateSerial() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Station) pulumi.StringOutput { return v.HexPublicCertificateSerial }).(pulumi.StringOutput)
 }
 
-// The station's formal AS2 name.
+// The station's formal AS2 name, unique across all Workspaces on the Site.
 func (o As2StationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *As2Station) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

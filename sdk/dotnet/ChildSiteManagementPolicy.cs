@@ -35,6 +35,19 @@ namespace Jschady.Filescom
     ///         Value = new Dictionary&lt;string, object?&gt;
     ///         {
     ///             ["color2Left"] = "#000000",
+    ///             ["folderBehaviors"] = new[]
+    ///             {
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["fileExpiration"] = new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["value"] = new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             ["daysToRetain"] = 30,
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
     ///         },
     ///         SkipChildSiteIds = new[]
     ///         {
@@ -153,6 +166,10 @@ namespace Jschady.Filescom
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/jschady/pulumi-filescom",
+                AdditionalSecretOutputs =
+                {
+                    "value",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -224,11 +241,21 @@ namespace Jschady.Filescom
             set => _skipChildSiteIds = value;
         }
 
+        [Input("value")]
+        private Input<object>? _value;
+
         /// <summary>
         /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
-        [Input("value")]
-        public Input<object>? Value { get; set; }
+        public Input<object>? Value
+        {
+            get => _value;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _value = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ChildSiteManagementPolicyArgs()
         {
@@ -310,11 +337,21 @@ namespace Jschady.Filescom
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
+        [Input("value")]
+        private Input<object>? _value;
+
         /// <summary>
         /// Policy configuration data. On a Child Site, contains only managed setting names with null values. Settings policies accept site settings plus an optional &lt;span pulumi-lang-nodejs="`folderBehaviors`" pulumi-lang-dotnet="`FolderBehaviors`" pulumi-lang-go="`folderBehaviors`" pulumi-lang-python="`folder_behaviors`" pulumi-lang-yaml="`folderBehaviors`" pulumi-lang-java="`folderBehaviors`" pulumi-lang-hcl="`folder_behaviors`"&gt;`folderBehaviors`&lt;/span&gt; array for parent-managed root behaviors on child sites. For more information, refer to the Value Hash section of the developer documentation.
         /// </summary>
-        [Input("value")]
-        public Input<object>? Value { get; set; }
+        public Input<object>? Value
+        {
+            get => _value;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _value = Output.Tuple<Input<object>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ChildSiteManagementPolicyState()
         {

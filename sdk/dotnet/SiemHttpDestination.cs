@@ -34,9 +34,9 @@ namespace Jschady.Filescom
     ///             ["authorization"] = "Bearer YOUR_TOKEN",
     ///         },
     ///         SendingActive = true,
-    ///         GenericPayloadType = "example",
+    ///         GenericPayloadType = "json_newline",
     ///         FileDestinationPath = "example",
-    ///         FileFormat = "example",
+    ///         FileFormat = "json",
     ///         FileIntervalMinutes = 1,
     ///         AzureDcrImmutableId = "example",
     ///         AzureStreamName = "example",
@@ -55,7 +55,7 @@ namespace Jschady.Filescom
     ///         EmailSendEnabled = true,
     ///         ExavaultApiRequestSendEnabled = true,
     ///         SettingsChangeSendEnabled = true,
-    ///         DestinationType = "example",
+    ///         DestinationType = "generic",
     ///         DestinationUrl = "example",
     ///     });
     /// 

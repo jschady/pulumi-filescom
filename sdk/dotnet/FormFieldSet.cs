@@ -49,18 +49,14 @@ namespace Jschady.Filescom
     ///         {
     ///             
     ///             {
-    ///                 { "label", "Sample Label" },
+    ///                 { "label", "Department" },
+    ///                 { "fieldType", "dropdown" },
     ///                 { "required", true },
-    ///                 { "helpText", "Help Text" },
-    ///                 { "fieldType", "text" },
     ///                 { "optionsForSelect", new[]
     ///                 {
-    ///                     "red",
-    ///                     "green",
-    ///                     "blue",
+    ///                     "Finance",
+    ///                     "Sales",
     ///                 } },
-    ///                 { "defaultOption", "red" },
-    ///                 { "formFieldSetId", 1 },
     ///             },
     ///         },
     ///     });
@@ -83,7 +79,7 @@ namespace Jschady.Filescom
     public partial class FormFieldSet : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Associated form field definitions; authenticated form field set responses include historical definitions, while&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;identifies current fields
+        /// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         /// </summary>
         [Output("formFields")]
         public Output<object> FormFields { get; private set; } = null!;
@@ -197,7 +193,7 @@ namespace Jschady.Filescom
     public sealed class FormFieldSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Associated form field definitions; authenticated form field set responses include historical definitions, while&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;identifies current fields
+        /// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         /// </summary>
         [Input("formFields")]
         public Input<object>? FormFields { get; set; }
@@ -275,7 +271,7 @@ namespace Jschady.Filescom
     public sealed class FormFieldSetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Associated form field definitions; authenticated form field set responses include historical definitions, while&lt;span pulumi-lang-nodejs=" formLayout " pulumi-lang-dotnet=" FormLayout " pulumi-lang-go=" formLayout " pulumi-lang-python=" form_layout " pulumi-lang-yaml=" formLayout " pulumi-lang-java=" formLayout " pulumi-lang-hcl=" form_layout "&gt; formLayout &lt;/span&gt;identifies current fields
+        /// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
         /// </summary>
         [Input("formFields")]
         public Input<object>? FormFields { get; set; }

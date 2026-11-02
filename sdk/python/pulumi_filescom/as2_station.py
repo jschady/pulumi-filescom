@@ -29,7 +29,7 @@ class As2StationArgs:
         """
         The set of arguments for constructing a As2Station resource.
 
-        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name, unique across all Workspaces on the Site.
         :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
         :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -60,7 +60,7 @@ class As2StationArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The station's formal AS2 name.
+        The station's formal AS2 name, unique across all Workspaces on the Site.
         """
         return pulumi.get(self, "name")
 
@@ -171,7 +171,7 @@ class _As2StationState:
 
         :param pulumi.Input[_builtins.str] domain: The station's AS2 domain name.
         :param pulumi.Input[_builtins.str] hex_public_certificate_serial: Serial of public certificate used for message security in hex format.
-        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name, unique across all Workspaces on the Site.
         :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
         :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -257,7 +257,7 @@ class _As2StationState:
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The station's formal AS2 name.
+        The station's formal AS2 name, unique across all Workspaces on the Site.
         """
         return pulumi.get(self, "name")
 
@@ -494,7 +494,7 @@ class As2Station(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name, unique across all Workspaces on the Site.
         :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
         :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -628,7 +628,7 @@ class As2Station(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] domain: The station's AS2 domain name.
         :param pulumi.Input[_builtins.str] hex_public_certificate_serial: Serial of public certificate used for message security in hex format.
-        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name.
+        :param pulumi.Input[_builtins.str] name: The station's formal AS2 name, unique across all Workspaces on the Site.
         :param pulumi.Input[_builtins.str] pkcs12: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Base64-encoded PKCS#12 (.pfx or .p12) file containing the identity's certificate and private key. Provide this instead of<span pulumi-lang-nodejs=" publicCertificate " pulumi-lang-dotnet=" PublicCertificate " pulumi-lang-go=" publicCertificate " pulumi-lang-python=" public_certificate " pulumi-lang-yaml=" publicCertificate " pulumi-lang-java=" publicCertificate " pulumi-lang-hcl=" public_certificate "> publicCertificate </span>and private_key.
         :param pulumi.Input[_builtins.str] pkcs12_password: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -693,7 +693,7 @@ class As2Station(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
-        The station's formal AS2 name.
+        The station's formal AS2 name, unique across all Workspaces on the Site.
         """
         return pulumi.get(self, "name")
 

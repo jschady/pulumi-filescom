@@ -26,7 +26,7 @@ class GetSiteResult:
     """
     A collection of values returned by getSite.
     """
-    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, child_site_folder_admins_can_see_parent_site_directory=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, fedramp=None, file_activity_events_enabled=None, files_com_remote_server_enabled=None, folder_permissions_groups_only=None, ftp_enabled=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, language=None, ldap_base_dn=None, ldap_domain=None, ldap_enabled=None, ldap_group_action=None, ldap_group_exclusion=None, ldap_group_inclusion=None, ldap_host=None, ldap_host2=None, ldap_host3=None, ldap_port=None, ldap_secure=None, ldap_server_certificate=None, ldap_type=None, ldap_user_action=None, ldap_user_include_groups=None, ldap_username=None, ldap_username_field=None, legacy_checksums_mode=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, s3_compatible_endpoint_enabled=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_ssl=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None, workspace_folder_admins_can_see_default_workspace_directory=None):
+    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, child_site_folder_admins_can_see_parent_site_directory=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, enforce_parent_site_user_ip_restrictions=None, fedramp=None, file_activity_events_enabled=None, files_com_remote_server_enabled=None, folder_permissions_groups_only=None, ftp_enabled=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, integration_centric_remote_server_admin_access=None, language=None, last_pairing_at=None, legacy_checksums_mode=None, legacy_pairing_enabled=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, s3_compatible_endpoint_enabled=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_ssl=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None, workspace_folder_admins_can_see_default_workspace_directory=None):
         if active_sftp_host_key_id and not isinstance(active_sftp_host_key_id, int):
             raise TypeError("Expected argument 'active_sftp_host_key_id' to be a int")
         pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
@@ -237,6 +237,9 @@ class GetSiteResult:
         if email_footer_custom_text and not isinstance(email_footer_custom_text, str):
             raise TypeError("Expected argument 'email_footer_custom_text' to be a str")
         pulumi.set(__self__, "email_footer_custom_text", email_footer_custom_text)
+        if enforce_parent_site_user_ip_restrictions and not isinstance(enforce_parent_site_user_ip_restrictions, bool):
+            raise TypeError("Expected argument 'enforce_parent_site_user_ip_restrictions' to be a bool")
+        pulumi.set(__self__, "enforce_parent_site_user_ip_restrictions", enforce_parent_site_user_ip_restrictions)
         if fedramp and not isinstance(fedramp, bool):
             raise TypeError("Expected argument 'fedramp' to be a bool")
         pulumi.set(__self__, "fedramp", fedramp)
@@ -300,63 +303,21 @@ class GetSiteResult:
         if include_password_in_welcome_email and not isinstance(include_password_in_welcome_email, bool):
             raise TypeError("Expected argument 'include_password_in_welcome_email' to be a bool")
         pulumi.set(__self__, "include_password_in_welcome_email", include_password_in_welcome_email)
+        if integration_centric_remote_server_admin_access and not isinstance(integration_centric_remote_server_admin_access, str):
+            raise TypeError("Expected argument 'integration_centric_remote_server_admin_access' to be a str")
+        pulumi.set(__self__, "integration_centric_remote_server_admin_access", integration_centric_remote_server_admin_access)
         if language and not isinstance(language, str):
             raise TypeError("Expected argument 'language' to be a str")
         pulumi.set(__self__, "language", language)
-        if ldap_base_dn and not isinstance(ldap_base_dn, str):
-            raise TypeError("Expected argument 'ldap_base_dn' to be a str")
-        pulumi.set(__self__, "ldap_base_dn", ldap_base_dn)
-        if ldap_domain and not isinstance(ldap_domain, str):
-            raise TypeError("Expected argument 'ldap_domain' to be a str")
-        pulumi.set(__self__, "ldap_domain", ldap_domain)
-        if ldap_enabled and not isinstance(ldap_enabled, bool):
-            raise TypeError("Expected argument 'ldap_enabled' to be a bool")
-        pulumi.set(__self__, "ldap_enabled", ldap_enabled)
-        if ldap_group_action and not isinstance(ldap_group_action, str):
-            raise TypeError("Expected argument 'ldap_group_action' to be a str")
-        pulumi.set(__self__, "ldap_group_action", ldap_group_action)
-        if ldap_group_exclusion and not isinstance(ldap_group_exclusion, str):
-            raise TypeError("Expected argument 'ldap_group_exclusion' to be a str")
-        pulumi.set(__self__, "ldap_group_exclusion", ldap_group_exclusion)
-        if ldap_group_inclusion and not isinstance(ldap_group_inclusion, str):
-            raise TypeError("Expected argument 'ldap_group_inclusion' to be a str")
-        pulumi.set(__self__, "ldap_group_inclusion", ldap_group_inclusion)
-        if ldap_host and not isinstance(ldap_host, str):
-            raise TypeError("Expected argument 'ldap_host' to be a str")
-        pulumi.set(__self__, "ldap_host", ldap_host)
-        if ldap_host2 and not isinstance(ldap_host2, str):
-            raise TypeError("Expected argument 'ldap_host2' to be a str")
-        pulumi.set(__self__, "ldap_host2", ldap_host2)
-        if ldap_host3 and not isinstance(ldap_host3, str):
-            raise TypeError("Expected argument 'ldap_host3' to be a str")
-        pulumi.set(__self__, "ldap_host3", ldap_host3)
-        if ldap_port and not isinstance(ldap_port, int):
-            raise TypeError("Expected argument 'ldap_port' to be a int")
-        pulumi.set(__self__, "ldap_port", ldap_port)
-        if ldap_secure and not isinstance(ldap_secure, bool):
-            raise TypeError("Expected argument 'ldap_secure' to be a bool")
-        pulumi.set(__self__, "ldap_secure", ldap_secure)
-        if ldap_server_certificate and not isinstance(ldap_server_certificate, str):
-            raise TypeError("Expected argument 'ldap_server_certificate' to be a str")
-        pulumi.set(__self__, "ldap_server_certificate", ldap_server_certificate)
-        if ldap_type and not isinstance(ldap_type, str):
-            raise TypeError("Expected argument 'ldap_type' to be a str")
-        pulumi.set(__self__, "ldap_type", ldap_type)
-        if ldap_user_action and not isinstance(ldap_user_action, str):
-            raise TypeError("Expected argument 'ldap_user_action' to be a str")
-        pulumi.set(__self__, "ldap_user_action", ldap_user_action)
-        if ldap_user_include_groups and not isinstance(ldap_user_include_groups, str):
-            raise TypeError("Expected argument 'ldap_user_include_groups' to be a str")
-        pulumi.set(__self__, "ldap_user_include_groups", ldap_user_include_groups)
-        if ldap_username and not isinstance(ldap_username, str):
-            raise TypeError("Expected argument 'ldap_username' to be a str")
-        pulumi.set(__self__, "ldap_username", ldap_username)
-        if ldap_username_field and not isinstance(ldap_username_field, str):
-            raise TypeError("Expected argument 'ldap_username_field' to be a str")
-        pulumi.set(__self__, "ldap_username_field", ldap_username_field)
+        if last_pairing_at and not isinstance(last_pairing_at, str):
+            raise TypeError("Expected argument 'last_pairing_at' to be a str")
+        pulumi.set(__self__, "last_pairing_at", last_pairing_at)
         if legacy_checksums_mode and not isinstance(legacy_checksums_mode, bool):
             raise TypeError("Expected argument 'legacy_checksums_mode' to be a bool")
         pulumi.set(__self__, "legacy_checksums_mode", legacy_checksums_mode)
+        if legacy_pairing_enabled and not isinstance(legacy_pairing_enabled, bool):
+            raise TypeError("Expected argument 'legacy_pairing_enabled' to be a bool")
+        pulumi.set(__self__, "legacy_pairing_enabled", legacy_pairing_enabled)
         if login_help_text and not isinstance(login_help_text, str):
             raise TypeError("Expected argument 'login_help_text' to be a str")
         pulumi.set(__self__, "login_help_text", login_help_text)
@@ -1195,6 +1156,14 @@ class GetSiteResult:
         return pulumi.get(self, "email_footer_custom_text")
 
     @_builtins.property
+    @pulumi.getter(name="enforceParentSiteUserIpRestrictions")
+    def enforce_parent_site_user_ip_restrictions(self) -> _builtins.bool:
+        """
+        Require Parent Site users entering this Child Site to match its allowed IP addresses in addition to their existing IP restrictions. Applies to all Workspaces. Defaults to false.
+        """
+        return pulumi.get(self, "enforce_parent_site_user_ip_restrictions")
+
+    @_builtins.property
     @pulumi.getter
     def fedramp(self) -> _builtins.bool:
         """
@@ -1363,6 +1332,14 @@ class GetSiteResult:
         return pulumi.get(self, "include_password_in_welcome_email")
 
     @_builtins.property
+    @pulumi.getter(name="integrationCentricRemoteServerAdminAccess")
+    def integration_centric_remote_server_admin_access(self) -> _builtins.str:
+        """
+        Administrator access to user-owned Remote Servers in every Workspace: always*visible (default), never*visible, user*choice*default*visible, or user*choice*default*personal. Forced modes override owner preferences; choice modes use the preference or their default.
+        """
+        return pulumi.get(self, "integration_centric_remote_server_admin_access")
+
+    @_builtins.property
     @pulumi.getter
     def language(self) -> _builtins.str:
         """
@@ -1371,140 +1348,12 @@ class GetSiteResult:
         return pulumi.get(self, "language")
 
     @_builtins.property
-    @pulumi.getter(name="ldapBaseDn")
-    def ldap_base_dn(self) -> _builtins.str:
+    @pulumi.getter(name="lastPairingAt")
+    def last_pairing_at(self) -> _builtins.str:
         """
-        Base DN for looking up users in LDAP server
+        Time of the last completed legacy app pairing across all workspaces. Failed or incomplete attempts do not count. Read-only; empty until a pairing completes after tracking begins.
         """
-        return pulumi.get(self, "ldap_base_dn")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapDomain")
-    def ldap_domain(self) -> _builtins.str:
-        """
-        Domain name that will be appended to usernames
-        """
-        return pulumi.get(self, "ldap_domain")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapEnabled")
-    def ldap_enabled(self) -> _builtins.bool:
-        """
-        Main LDAP setting: is LDAP enabled?
-        """
-        return pulumi.get(self, "ldap_enabled")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupAction")
-    def ldap_group_action(self) -> _builtins.str:
-        """
-        Should we sync groups from LDAP server?
-        """
-        return pulumi.get(self, "ldap_group_action")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupExclusion")
-    def ldap_group_exclusion(self) -> _builtins.str:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to exclude when syncing.
-        """
-        return pulumi.get(self, "ldap_group_exclusion")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapGroupInclusion")
-    def ldap_group_inclusion(self) -> _builtins.str:
-        """
-        Comma or newline separated list of group names (with optional wildcards) to include when syncing.
-        """
-        return pulumi.get(self, "ldap_group_inclusion")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost")
-    def ldap_host(self) -> _builtins.str:
-        """
-        LDAP host
-        """
-        return pulumi.get(self, "ldap_host")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost2")
-    def ldap_host2(self) -> _builtins.str:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host2")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapHost3")
-    def ldap_host3(self) -> _builtins.str:
-        """
-        LDAP backup host
-        """
-        return pulumi.get(self, "ldap_host3")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapPort")
-    def ldap_port(self) -> _builtins.int:
-        """
-        LDAP port
-        """
-        return pulumi.get(self, "ldap_port")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapSecure")
-    def ldap_secure(self) -> _builtins.bool:
-        """
-        Use secure LDAP?
-        """
-        return pulumi.get(self, "ldap_secure")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapServerCertificate")
-    def ldap_server_certificate(self) -> _builtins.str:
-        """
-        How to validate the LDAP server certificate. <span pulumi-lang-nodejs="`requireMatch`" pulumi-lang-dotnet="`RequireMatch`" pulumi-lang-go="`requireMatch`" pulumi-lang-python="`require_match`" pulumi-lang-yaml="`requireMatch`" pulumi-lang-java="`requireMatch`" pulumi-lang-hcl="`require_match`">`requireMatch`</span> validates the certificate chain and hostname; <span pulumi-lang-nodejs="`allowAny`" pulumi-lang-dotnet="`AllowAny`" pulumi-lang-go="`allowAny`" pulumi-lang-python="`allow_any`" pulumi-lang-yaml="`allowAny`" pulumi-lang-java="`allowAny`" pulumi-lang-hcl="`allow_any`">`allowAny`</span> disables certificate validation.
-        """
-        return pulumi.get(self, "ldap_server_certificate")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapType")
-    def ldap_type(self) -> _builtins.str:
-        """
-        LDAP type
-        """
-        return pulumi.get(self, "ldap_type")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserAction")
-    def ldap_user_action(self) -> _builtins.str:
-        """
-        Should we sync users from LDAP server?
-        """
-        return pulumi.get(self, "ldap_user_action")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUserIncludeGroups")
-    def ldap_user_include_groups(self) -> _builtins.str:
-        """
-        Comma or newline separated list of group names (with optional wildcards) - if provided, only users in these groups will be added or synced.
-        """
-        return pulumi.get(self, "ldap_user_include_groups")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsername")
-    def ldap_username(self) -> _builtins.str:
-        """
-        Username for signing in to LDAP server.
-        """
-        return pulumi.get(self, "ldap_username")
-
-    @_builtins.property
-    @pulumi.getter(name="ldapUsernameField")
-    def ldap_username_field(self) -> _builtins.str:
-        """
-        LDAP username field
-        """
-        return pulumi.get(self, "ldap_username_field")
+        return pulumi.get(self, "last_pairing_at")
 
     @_builtins.property
     @pulumi.getter(name="legacyChecksumsMode")
@@ -1513,6 +1362,14 @@ class GetSiteResult:
         Use legacy checksums mode?
         """
         return pulumi.get(self, "legacy_checksums_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="legacyPairingEnabled")
+    def legacy_pairing_enabled(self) -> _builtins.bool:
+        """
+        Allow legacy app pairing in all workspaces? Disabled for new sites; existing sites remain enabled until changed. Disabling blocks new pairing exchanges without revoking existing app credentials or affecting OAuth sign-in. Site administrators can re-enable it.
+        """
+        return pulumi.get(self, "legacy_pairing_enabled")
 
     @_builtins.property
     @pulumi.getter(name="loginHelpText")
@@ -2327,6 +2184,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             domain_letsencrypt_chain=self.domain_letsencrypt_chain,
             email=self.email,
             email_footer_custom_text=self.email_footer_custom_text,
+            enforce_parent_site_user_ip_restrictions=self.enforce_parent_site_user_ip_restrictions,
             fedramp=self.fedramp,
             file_activity_events_enabled=self.file_activity_events_enabled,
             files_com_remote_server_enabled=self.files_com_remote_server_enabled,
@@ -2348,25 +2206,11 @@ class AwaitableGetSiteResult(GetSiteResult):
             id=self.id,
             immutable_files_set_at=self.immutable_files_set_at,
             include_password_in_welcome_email=self.include_password_in_welcome_email,
+            integration_centric_remote_server_admin_access=self.integration_centric_remote_server_admin_access,
             language=self.language,
-            ldap_base_dn=self.ldap_base_dn,
-            ldap_domain=self.ldap_domain,
-            ldap_enabled=self.ldap_enabled,
-            ldap_group_action=self.ldap_group_action,
-            ldap_group_exclusion=self.ldap_group_exclusion,
-            ldap_group_inclusion=self.ldap_group_inclusion,
-            ldap_host=self.ldap_host,
-            ldap_host2=self.ldap_host2,
-            ldap_host3=self.ldap_host3,
-            ldap_port=self.ldap_port,
-            ldap_secure=self.ldap_secure,
-            ldap_server_certificate=self.ldap_server_certificate,
-            ldap_type=self.ldap_type,
-            ldap_user_action=self.ldap_user_action,
-            ldap_user_include_groups=self.ldap_user_include_groups,
-            ldap_username=self.ldap_username,
-            ldap_username_field=self.ldap_username_field,
+            last_pairing_at=self.last_pairing_at,
             legacy_checksums_mode=self.legacy_checksums_mode,
+            legacy_pairing_enabled=self.legacy_pairing_enabled,
             login_help_text=self.login_help_text,
             login_page_background_image=self.login_page_background_image,
             logo=self.logo,
@@ -2553,6 +2397,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         domain_letsencrypt_chain=pulumi.get(__ret__, 'domain_letsencrypt_chain'),
         email=pulumi.get(__ret__, 'email'),
         email_footer_custom_text=pulumi.get(__ret__, 'email_footer_custom_text'),
+        enforce_parent_site_user_ip_restrictions=pulumi.get(__ret__, 'enforce_parent_site_user_ip_restrictions'),
         fedramp=pulumi.get(__ret__, 'fedramp'),
         file_activity_events_enabled=pulumi.get(__ret__, 'file_activity_events_enabled'),
         files_com_remote_server_enabled=pulumi.get(__ret__, 'files_com_remote_server_enabled'),
@@ -2574,25 +2419,11 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         id=pulumi.get(__ret__, 'id'),
         immutable_files_set_at=pulumi.get(__ret__, 'immutable_files_set_at'),
         include_password_in_welcome_email=pulumi.get(__ret__, 'include_password_in_welcome_email'),
+        integration_centric_remote_server_admin_access=pulumi.get(__ret__, 'integration_centric_remote_server_admin_access'),
         language=pulumi.get(__ret__, 'language'),
-        ldap_base_dn=pulumi.get(__ret__, 'ldap_base_dn'),
-        ldap_domain=pulumi.get(__ret__, 'ldap_domain'),
-        ldap_enabled=pulumi.get(__ret__, 'ldap_enabled'),
-        ldap_group_action=pulumi.get(__ret__, 'ldap_group_action'),
-        ldap_group_exclusion=pulumi.get(__ret__, 'ldap_group_exclusion'),
-        ldap_group_inclusion=pulumi.get(__ret__, 'ldap_group_inclusion'),
-        ldap_host=pulumi.get(__ret__, 'ldap_host'),
-        ldap_host2=pulumi.get(__ret__, 'ldap_host2'),
-        ldap_host3=pulumi.get(__ret__, 'ldap_host3'),
-        ldap_port=pulumi.get(__ret__, 'ldap_port'),
-        ldap_secure=pulumi.get(__ret__, 'ldap_secure'),
-        ldap_server_certificate=pulumi.get(__ret__, 'ldap_server_certificate'),
-        ldap_type=pulumi.get(__ret__, 'ldap_type'),
-        ldap_user_action=pulumi.get(__ret__, 'ldap_user_action'),
-        ldap_user_include_groups=pulumi.get(__ret__, 'ldap_user_include_groups'),
-        ldap_username=pulumi.get(__ret__, 'ldap_username'),
-        ldap_username_field=pulumi.get(__ret__, 'ldap_username_field'),
+        last_pairing_at=pulumi.get(__ret__, 'last_pairing_at'),
         legacy_checksums_mode=pulumi.get(__ret__, 'legacy_checksums_mode'),
+        legacy_pairing_enabled=pulumi.get(__ret__, 'legacy_pairing_enabled'),
         login_help_text=pulumi.get(__ret__, 'login_help_text'),
         login_page_background_image=pulumi.get(__ret__, 'login_page_background_image'),
         logo=pulumi.get(__ret__, 'logo'),
@@ -2776,6 +2607,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         domain_letsencrypt_chain=pulumi.get(__response__, 'domain_letsencrypt_chain'),
         email=pulumi.get(__response__, 'email'),
         email_footer_custom_text=pulumi.get(__response__, 'email_footer_custom_text'),
+        enforce_parent_site_user_ip_restrictions=pulumi.get(__response__, 'enforce_parent_site_user_ip_restrictions'),
         fedramp=pulumi.get(__response__, 'fedramp'),
         file_activity_events_enabled=pulumi.get(__response__, 'file_activity_events_enabled'),
         files_com_remote_server_enabled=pulumi.get(__response__, 'files_com_remote_server_enabled'),
@@ -2797,25 +2629,11 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         id=pulumi.get(__response__, 'id'),
         immutable_files_set_at=pulumi.get(__response__, 'immutable_files_set_at'),
         include_password_in_welcome_email=pulumi.get(__response__, 'include_password_in_welcome_email'),
+        integration_centric_remote_server_admin_access=pulumi.get(__response__, 'integration_centric_remote_server_admin_access'),
         language=pulumi.get(__response__, 'language'),
-        ldap_base_dn=pulumi.get(__response__, 'ldap_base_dn'),
-        ldap_domain=pulumi.get(__response__, 'ldap_domain'),
-        ldap_enabled=pulumi.get(__response__, 'ldap_enabled'),
-        ldap_group_action=pulumi.get(__response__, 'ldap_group_action'),
-        ldap_group_exclusion=pulumi.get(__response__, 'ldap_group_exclusion'),
-        ldap_group_inclusion=pulumi.get(__response__, 'ldap_group_inclusion'),
-        ldap_host=pulumi.get(__response__, 'ldap_host'),
-        ldap_host2=pulumi.get(__response__, 'ldap_host2'),
-        ldap_host3=pulumi.get(__response__, 'ldap_host3'),
-        ldap_port=pulumi.get(__response__, 'ldap_port'),
-        ldap_secure=pulumi.get(__response__, 'ldap_secure'),
-        ldap_server_certificate=pulumi.get(__response__, 'ldap_server_certificate'),
-        ldap_type=pulumi.get(__response__, 'ldap_type'),
-        ldap_user_action=pulumi.get(__response__, 'ldap_user_action'),
-        ldap_user_include_groups=pulumi.get(__response__, 'ldap_user_include_groups'),
-        ldap_username=pulumi.get(__response__, 'ldap_username'),
-        ldap_username_field=pulumi.get(__response__, 'ldap_username_field'),
+        last_pairing_at=pulumi.get(__response__, 'last_pairing_at'),
         legacy_checksums_mode=pulumi.get(__response__, 'legacy_checksums_mode'),
+        legacy_pairing_enabled=pulumi.get(__response__, 'legacy_pairing_enabled'),
         login_help_text=pulumi.get(__response__, 'login_help_text'),
         login_page_background_image=pulumi.get(__response__, 'login_page_background_image'),
         logo=pulumi.get(__response__, 'logo'),

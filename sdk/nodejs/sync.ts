@@ -47,7 +47,7 @@ import * as utilities from "./utilities";
  *     srcPath: "example",
  *     srcRemoteServerId: 1,
  *     syncIntervalMinutes: 1,
- *     trigger: "example",
+ *     trigger: "daily",
  *     triggerFile: "example",
  *     alwaysWriteTriggerFile: true,
  *     workspaceId: 1,

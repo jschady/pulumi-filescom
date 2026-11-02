@@ -65,7 +65,7 @@ import (
 //				SrcPath:                pulumi.String("example"),
 //				SrcRemoteServerId:      pulumi.Int(1),
 //				SyncIntervalMinutes:    pulumi.Int(1),
-//				Trigger:                pulumi.String("example"),
+//				Trigger:                pulumi.String("daily"),
 //				TriggerFile:            pulumi.String("example"),
 //				AlwaysWriteTriggerFile: pulumi.Bool(true),
 //				WorkspaceId:            pulumi.Int(1),

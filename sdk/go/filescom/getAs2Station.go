@@ -64,7 +64,7 @@ type LookupAs2StationResult struct {
 	HexPublicCertificateSerial string `pulumi:"hexPublicCertificateSerial"`
 	// Id of the AS2 Station.
 	Id int `pulumi:"id"`
-	// The station's formal AS2 name.
+	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name string `pulumi:"name"`
 	// MD5 hash of private key used for message security.
 	PrivateKeyMd5 string `pulumi:"privateKeyMd5"`
@@ -135,7 +135,7 @@ func (o LookupAs2StationResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupAs2StationResult) int { return v.Id }).(pulumi.IntOutput)
 }
 
-// The station's formal AS2 name.
+// The station's formal AS2 name, unique across all Workspaces on the Site.
 func (o LookupAs2StationResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAs2StationResult) string { return v.Name }).(pulumi.StringOutput)
 }

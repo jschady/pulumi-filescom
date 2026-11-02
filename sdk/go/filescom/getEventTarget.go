@@ -60,7 +60,7 @@ type LookupEventTargetArgs struct {
 type LookupEventTargetResult struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces bool `pulumi:"applyToAllWorkspaces"`
-	// Event Target configuration. Folder targets accept path and format (json or csv).
+	// Event Target configuration. Fields depend on target_type.
 	Config interface{} `pulumi:"config"`
 	// Event Target create date/time.
 	CreatedAt string `pulumi:"createdAt"`
@@ -115,7 +115,7 @@ func (o LookupEventTargetResultOutput) ApplyToAllWorkspaces() pulumi.BoolOutput 
 	return o.ApplyT(func(v LookupEventTargetResult) bool { return v.ApplyToAllWorkspaces }).(pulumi.BoolOutput)
 }
 
-// Event Target configuration. Folder targets accept path and format (json or csv).
+// Event Target configuration. Fields depend on target_type.
 func (o LookupEventTargetResultOutput) Config() pulumi.AnyOutput {
 	return o.ApplyT(func(v LookupEventTargetResult) interface{} { return v.Config }).(pulumi.AnyOutput)
 }

@@ -30,15 +30,17 @@ import * as utilities from "./utilities";
  * import * as filescom from "pulumi-filescom";
  *
  * const exampleUser = filescom.getUser({
- *     id: 1,
+ *     username: "user",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
-export function getUser(args: GetUserArgs, opts?: pulumi.InvokeOptions): Promise<GetUserResult> {
+export function getUser(args?: GetUserArgs, opts?: pulumi.InvokeOptions): Promise<GetUserResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("filescom:index/getUser:getUser", {
         "id": args.id,
+        "username": args.username,
     }, opts);
 }
 
@@ -47,9 +49,13 @@ export function getUser(args: GetUserArgs, opts?: pulumi.InvokeOptions): Promise
  */
 export interface GetUserArgs {
     /**
-     * User ID
+     * User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
      */
-    id: number;
+    id?: number;
+    /**
+     * User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+     */
+    username?: string;
 }
 
 /**
@@ -169,7 +175,7 @@ export interface GetUserResult {
      */
     readonly headerText: string;
     /**
-     * User ID
+     * User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
      */
     readonly id: number;
     /**
@@ -373,10 +379,6 @@ export interface GetUserResult {
      */
     readonly ssoStrategyId: number;
     /**
-     * Is the user subscribed to the newsletter?
-     */
-    readonly subscribeToNewsletter: boolean;
-    /**
      * Comma-separated list of Tags for this user. Tags are used for other features, such as UserLifecycleRules, which can target specific tags.  Tags must only contain lowercase letters, numbers, and hyphens.
      */
     readonly tags: string;
@@ -401,7 +403,7 @@ export interface GetUserResult {
      */
     readonly userRoot: string;
     /**
-     * User's username
+     * User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
      */
     readonly username: string;
     /**
@@ -439,15 +441,17 @@ export interface GetUserResult {
  * import * as filescom from "pulumi-filescom";
  *
  * const exampleUser = filescom.getUser({
- *     id: 1,
+ *     username: "user",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
-export function getUserOutput(args: GetUserOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserResult> {
+export function getUserOutput(args?: GetUserOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("filescom:index/getUser:getUser", {
         "id": args.id,
+        "username": args.username,
     }, opts);
 }
 
@@ -456,7 +460,11 @@ export function getUserOutput(args: GetUserOutputArgs, opts?: pulumi.InvokeOutpu
  */
 export interface GetUserOutputArgs {
     /**
-     * User ID
+     * User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
      */
-    id: pulumi.Input<number>;
+    id?: pulumi.Input<number | undefined>;
+    /**
+     * User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+     */
+    username?: pulumi.Input<string | undefined>;
 }

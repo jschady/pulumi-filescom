@@ -1623,9 +1623,9 @@ class SiemHttpDestination(pulumi.CustomResource):
                 "authorization": "Bearer YOUR_TOKEN",
             },
             sending_active=True,
-            generic_payload_type="example",
+            generic_payload_type="json_newline",
             file_destination_path="example",
-            file_format="example",
+            file_format="json",
             file_interval_minutes=1,
             azure_dcr_immutable_id="example",
             azure_stream_name="example",
@@ -1644,7 +1644,7 @@ class SiemHttpDestination(pulumi.CustomResource):
             email_send_enabled=True,
             exavault_api_request_send_enabled=True,
             settings_change_send_enabled=True,
-            destination_type="example",
+            destination_type="generic",
             destination_url="example")
         ```
         <!--End PulumiCodeChooser -->
@@ -1727,9 +1727,9 @@ class SiemHttpDestination(pulumi.CustomResource):
                 "authorization": "Bearer YOUR_TOKEN",
             },
             sending_active=True,
-            generic_payload_type="example",
+            generic_payload_type="json_newline",
             file_destination_path="example",
-            file_format="example",
+            file_format="json",
             file_interval_minutes=1,
             azure_dcr_immutable_id="example",
             azure_stream_name="example",
@@ -1748,7 +1748,7 @@ class SiemHttpDestination(pulumi.CustomResource):
             email_send_enabled=True,
             exavault_api_request_send_enabled=True,
             settings_change_send_enabled=True,
-            destination_type="example",
+            destination_type="generic",
             destination_url="example")
         ```
         <!--End PulumiCodeChooser -->

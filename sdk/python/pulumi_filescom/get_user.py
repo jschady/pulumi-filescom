@@ -26,7 +26,7 @@ class GetUserResult:
     """
     A collection of values returned by getUser.
     """
-    def __init__(__self__, active2fa=None, admin_group_ids=None, ai_assistant_personality_id=None, allowed_ips=None, api_keys_count=None, attachments_permission=None, authenticate_until=None, authentication_method=None, avatar_url=None, billable=None, billing_permission=None, bypass_site_allowed_ips=None, bypass_user_lifecycle_rules=None, company=None, created_at=None, dav_permission=None, days_remaining_until_password_expire=None, default_workspace_id=None, desktop_configuration_profile_id=None, disabled=None, disabled_expired_or_inactive=None, email=None, externally_managed=None, filesystem_layout=None, first_login_at=None, ftp_permission=None, group_ids=None, header_text=None, id=None, integration_centric_profile_id=None, language=None, last_active_at=None, last_api_use_at=None, last_dav_login_at=None, last_desktop_login_at=None, last_ftp_login_at=None, last_login_at=None, last_protocol_cipher=None, last_restapi_login_at=None, last_sftp_login_at=None, last_web_login_at=None, lockout_expires=None, name=None, notes=None, notification_daily_send_time=None, notify_on_all_automation_failures=None, notify_on_all_expectation_failures=None, notify_on_all_pending_work_failures=None, notify_on_all_siem_http_destination_failures=None, notify_on_all_site_warnings=None, notify_on_all_sso_failures=None, notify_on_all_sync_failures=None, notify_on_all_user_security_events=None, office_integration_enabled=None, partner_admin=None, partner_id=None, partner_name=None, password_expire_at=None, password_expired=None, password_set_at=None, password_validity_days=None, primary_group_id=None, public_keys_count=None, readonly_site_admin=None, receive_admin_alerts=None, require2fa=None, require_login_by=None, require_password_change=None, responsible_group_id=None, responsible_user_id=None, restapi_permission=None, s3_compatible_endpoint_permission=None, self_managed=None, sftp_permission=None, site_admin=None, site_id=None, skip_welcome_screen=None, ssl_required=None, sso_strategy_id=None, subscribe_to_newsletter=None, tags=None, time_zone=None, type_of2fa=None, type_of2fa_for_display=None, user_home=None, user_root=None, username=None, workspace_admin=None, workspace_id=None):
+    def __init__(__self__, active2fa=None, admin_group_ids=None, ai_assistant_personality_id=None, allowed_ips=None, api_keys_count=None, attachments_permission=None, authenticate_until=None, authentication_method=None, avatar_url=None, billable=None, billing_permission=None, bypass_site_allowed_ips=None, bypass_user_lifecycle_rules=None, company=None, created_at=None, dav_permission=None, days_remaining_until_password_expire=None, default_workspace_id=None, desktop_configuration_profile_id=None, disabled=None, disabled_expired_or_inactive=None, email=None, externally_managed=None, filesystem_layout=None, first_login_at=None, ftp_permission=None, group_ids=None, header_text=None, id=None, integration_centric_profile_id=None, language=None, last_active_at=None, last_api_use_at=None, last_dav_login_at=None, last_desktop_login_at=None, last_ftp_login_at=None, last_login_at=None, last_protocol_cipher=None, last_restapi_login_at=None, last_sftp_login_at=None, last_web_login_at=None, lockout_expires=None, name=None, notes=None, notification_daily_send_time=None, notify_on_all_automation_failures=None, notify_on_all_expectation_failures=None, notify_on_all_pending_work_failures=None, notify_on_all_siem_http_destination_failures=None, notify_on_all_site_warnings=None, notify_on_all_sso_failures=None, notify_on_all_sync_failures=None, notify_on_all_user_security_events=None, office_integration_enabled=None, partner_admin=None, partner_id=None, partner_name=None, password_expire_at=None, password_expired=None, password_set_at=None, password_validity_days=None, primary_group_id=None, public_keys_count=None, readonly_site_admin=None, receive_admin_alerts=None, require2fa=None, require_login_by=None, require_password_change=None, responsible_group_id=None, responsible_user_id=None, restapi_permission=None, s3_compatible_endpoint_permission=None, self_managed=None, sftp_permission=None, site_admin=None, site_id=None, skip_welcome_screen=None, ssl_required=None, sso_strategy_id=None, tags=None, time_zone=None, type_of2fa=None, type_of2fa_for_display=None, user_home=None, user_root=None, username=None, workspace_admin=None, workspace_id=None):
         if active2fa and not isinstance(active2fa, bool):
             raise TypeError("Expected argument 'active2fa' to be a bool")
         pulumi.set(__self__, "active2fa", active2fa)
@@ -264,9 +264,6 @@ class GetUserResult:
         if sso_strategy_id and not isinstance(sso_strategy_id, int):
             raise TypeError("Expected argument 'sso_strategy_id' to be a int")
         pulumi.set(__self__, "sso_strategy_id", sso_strategy_id)
-        if subscribe_to_newsletter and not isinstance(subscribe_to_newsletter, bool):
-            raise TypeError("Expected argument 'subscribe_to_newsletter' to be a bool")
-        pulumi.set(__self__, "subscribe_to_newsletter", subscribe_to_newsletter)
         if tags and not isinstance(tags, str):
             raise TypeError("Expected argument 'tags' to be a str")
         pulumi.set(__self__, "tags", tags)
@@ -523,7 +520,7 @@ class GetUserResult:
     @pulumi.getter
     def id(self) -> _builtins.int:
         """
-        User ID
+        User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
         """
         return pulumi.get(self, "id")
 
@@ -928,14 +925,6 @@ class GetUserResult:
         return pulumi.get(self, "sso_strategy_id")
 
     @_builtins.property
-    @pulumi.getter(name="subscribeToNewsletter")
-    def subscribe_to_newsletter(self) -> _builtins.bool:
-        """
-        Is the user subscribed to the newsletter?
-        """
-        return pulumi.get(self, "subscribe_to_newsletter")
-
-    @_builtins.property
     @pulumi.getter
     def tags(self) -> _builtins.str:
         """
@@ -987,7 +976,7 @@ class GetUserResult:
     @pulumi.getter
     def username(self) -> _builtins.str:
         """
-        User's username
+        User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
         """
         return pulumi.get(self, "username")
 
@@ -1093,7 +1082,6 @@ class AwaitableGetUserResult(GetUserResult):
             skip_welcome_screen=self.skip_welcome_screen,
             ssl_required=self.ssl_required,
             sso_strategy_id=self.sso_strategy_id,
-            subscribe_to_newsletter=self.subscribe_to_newsletter,
             tags=self.tags,
             time_zone=self.time_zone,
             type_of2fa=self.type_of2fa,
@@ -1106,6 +1094,7 @@ class AwaitableGetUserResult(GetUserResult):
 
 
 def get_user(id: Optional[_builtins.int] = None,
+             username: Optional[_builtins.str] = None,
              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetUserResult:
     """
     A User represents a human or system/service user with the ability to connect to Files.com via any of the available connectivity methods (unless restricted to specific protocols).
@@ -1132,15 +1121,17 @@ def get_user(id: Optional[_builtins.int] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_user = filescom.get_user(id=1)
+    example_user = filescom.get_user(username="user")
     ```
     <!--End PulumiCodeChooser -->
 
 
-    :param _builtins.int id: User ID
+    :param _builtins.int id: User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+    :param _builtins.str username: User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['username'] = username
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('filescom:index/getUser:getUser', __args__, opts=opts, typ=GetUserResult).value
 
@@ -1224,7 +1215,6 @@ def get_user(id: Optional[_builtins.int] = None,
         skip_welcome_screen=pulumi.get(__ret__, 'skip_welcome_screen'),
         ssl_required=pulumi.get(__ret__, 'ssl_required'),
         sso_strategy_id=pulumi.get(__ret__, 'sso_strategy_id'),
-        subscribe_to_newsletter=pulumi.get(__ret__, 'subscribe_to_newsletter'),
         tags=pulumi.get(__ret__, 'tags'),
         time_zone=pulumi.get(__ret__, 'time_zone'),
         type_of2fa=pulumi.get(__ret__, 'type_of2fa'),
@@ -1234,7 +1224,8 @@ def get_user(id: Optional[_builtins.int] = None,
         username=pulumi.get(__ret__, 'username'),
         workspace_admin=pulumi.get(__ret__, 'workspace_admin'),
         workspace_id=pulumi.get(__ret__, 'workspace_id'))
-def get_user_output(id: pulumi.Input[Optional[_builtins.int]] = None,
+def get_user_output(id: pulumi.Input[Optional[Optional[_builtins.int]]] = None,
+                    username: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetUserResult]:
     """
     A User represents a human or system/service user with the ability to connect to Files.com via any of the available connectivity methods (unless restricted to specific protocols).
@@ -1261,15 +1252,17 @@ def get_user_output(id: pulumi.Input[Optional[_builtins.int]] = None,
     import pulumi
     import pulumi_filescom as filescom
 
-    example_user = filescom.get_user(id=1)
+    example_user = filescom.get_user(username="user")
     ```
     <!--End PulumiCodeChooser -->
 
 
-    :param _builtins.int id: User ID
+    :param _builtins.int id: User ID. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
+    :param _builtins.str username: User's username. Provide <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> or <span pulumi-lang-nodejs="`username`" pulumi-lang-dotnet="`Username`" pulumi-lang-go="`username`" pulumi-lang-python="`username`" pulumi-lang-yaml="`username`" pulumi-lang-java="`username`" pulumi-lang-hcl="`username`">`username`</span>.
     """
     __args__ = dict()
     __args__['id'] = id
+    __args__['username'] = username
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('filescom:index/getUser:getUser', __args__, opts=opts, typ=GetUserResult)
     return __ret__.apply(lambda __response__: GetUserResult(
@@ -1352,7 +1345,6 @@ def get_user_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         skip_welcome_screen=pulumi.get(__response__, 'skip_welcome_screen'),
         ssl_required=pulumi.get(__response__, 'ssl_required'),
         sso_strategy_id=pulumi.get(__response__, 'sso_strategy_id'),
-        subscribe_to_newsletter=pulumi.get(__response__, 'subscribe_to_newsletter'),
         tags=pulumi.get(__response__, 'tags'),
         time_zone=pulumi.get(__response__, 'time_zone'),
         type_of2fa=pulumi.get(__response__, 'type_of2fa'),

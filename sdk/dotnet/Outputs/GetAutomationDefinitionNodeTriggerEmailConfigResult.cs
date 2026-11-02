@@ -19,6 +19,8 @@ namespace Jschady.Filescom.Outputs
         public readonly int Limit;
         public readonly string PathTimeZone;
         public readonly bool SaveBody;
+        public readonly bool SaveHtmlBody;
+        public readonly bool SaveRawMessage;
         public readonly string Source;
 
         [OutputConstructor]
@@ -33,6 +35,10 @@ namespace Jschady.Filescom.Outputs
 
             bool saveBody,
 
+            bool saveHtmlBody,
+
+            bool saveRawMessage,
+
             string source)
         {
             AllowedSenders = allowedSenders;
@@ -40,6 +46,8 @@ namespace Jschady.Filescom.Outputs
             Limit = limit;
             PathTimeZone = pathTimeZone;
             SaveBody = saveBody;
+            SaveHtmlBody = saveHtmlBody;
+            SaveRawMessage = saveRawMessage;
             Source = source;
         }
     }

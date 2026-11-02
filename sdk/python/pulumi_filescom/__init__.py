@@ -31,6 +31,7 @@ from .get_action_notification_export import *
 from .get_ai_assistant_personality import *
 from .get_ai_task import *
 from .get_api_key import *
+from .get_as2_incoming_message import *
 from .get_as2_partner import *
 from .get_as2_station import *
 from .get_automation import *

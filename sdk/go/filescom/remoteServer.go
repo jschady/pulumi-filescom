@@ -85,7 +85,7 @@ import (
 //				AzureFilesStorageShareName:              pulumi.String("share-name"),
 //				BackblazeB2Bucket:                       pulumi.String("my-bucket"),
 //				BackblazeB2S3Endpoint:                   pulumi.String("s3.us-west-001.backblazeb2.com"),
-//				BufferUploads:                           pulumi.String("example"),
+//				BufferUploads:                           pulumi.String("auto"),
 //				CloudflareAccessKey:                     pulumi.String("example"),
 //				CloudflareBucket:                        pulumi.String("my-bucket"),
 //				CloudflareEndpoint:                      pulumi.String("https://<ACCOUNT_ID>.r2.cloudflarestorage.com"),
@@ -128,6 +128,7 @@ import (
 //				ServerCertificate:                       pulumi.String("require_match"),
 //				ServerHostKey:                           pulumi.String("[public key]"),
 //				ServerType:                              pulumi.String("s3"),
+//				SiteAdminAccess:                         pulumi.Bool(true),
 //				SharepointClientId:                      pulumi.String("00000000-0000-0000-0000-000000000000"),
 //				SharepointSiteUrl:                       pulumi.String("https://example.sharepoint.com/sites/accounting"),
 //				SharepointTenantId:                      pulumi.String("00000000-0000-0000-0000-000000000000"),
@@ -230,6 +231,8 @@ type RemoteServer struct {
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams pulumi.BoolOutput `pulumi:"dropboxTeams"`
+	// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+	EffectiveSiteAdminAccess pulumi.BoolOutput `pulumi:"effectiveSiteAdminAccess"`
 	// <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
 	EnableDedicatedIps pulumi.BoolOutput `pulumi:"enableDedicatedIps"`
 	// Filebase: Access Key.
@@ -362,6 +365,8 @@ type RemoteServer struct {
 	SharepointSiteUrl pulumi.StringOutput `pulumi:"sharepointSiteUrl"`
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId pulumi.StringOutput `pulumi:"sharepointTenantId"`
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess pulumi.BoolOutput `pulumi:"siteAdminAccess"`
 	// Should we require SSL?
 	Ssl pulumi.StringOutput `pulumi:"ssl"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -371,9 +376,8 @@ type RemoteServer struct {
 	SupportsVersioning pulumi.BoolOutput `pulumi:"supportsVersioning"`
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath pulumi.StringOutput `pulumi:"uploadStagingPath"`
-	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
-	UserId pulumi.IntPtrOutput `pulumi:"userId"`
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+	UserId pulumi.IntOutput `pulumi:"userId"`
 	// Remote server username.
 	Username pulumi.StringOutput `pulumi:"username"`
 	// Wasabi: Access Key.
@@ -459,9 +463,6 @@ func NewRemoteServer(ctx *pulumi.Context,
 	if args.SslCertificate != nil {
 		args.SslCertificate = pulumi.ToSecret(args.SslCertificate).(pulumi.StringPtrInput)
 	}
-	if args.UserId != nil {
-		args.UserId = pulumi.ToSecret(args.UserId).(pulumi.IntPtrInput)
-	}
 	if args.WasabiSecretKey != nil {
 		args.WasabiSecretKey = pulumi.ToSecret(args.WasabiSecretKey).(pulumi.StringPtrInput)
 	}
@@ -487,7 +488,6 @@ func NewRemoteServer(ctx *pulumi.Context,
 		"sharepointClientCertificate",
 		"sharepointClientSecret",
 		"sslCertificate",
-		"userId",
 		"wasabiSecretKey",
 	})
 	opts = append(opts, secrets)
@@ -584,6 +584,8 @@ type remoteServerState struct {
 	Disabled *bool `pulumi:"disabled"`
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams *bool `pulumi:"dropboxTeams"`
+	// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+	EffectiveSiteAdminAccess *bool `pulumi:"effectiveSiteAdminAccess"`
 	// <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
 	EnableDedicatedIps *bool `pulumi:"enableDedicatedIps"`
 	// Filebase: Access Key.
@@ -716,6 +718,8 @@ type remoteServerState struct {
 	SharepointSiteUrl *string `pulumi:"sharepointSiteUrl"`
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId *string `pulumi:"sharepointTenantId"`
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess *bool `pulumi:"siteAdminAccess"`
 	// Should we require SSL?
 	Ssl *string `pulumi:"ssl"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -725,8 +729,7 @@ type remoteServerState struct {
 	SupportsVersioning *bool `pulumi:"supportsVersioning"`
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath *string `pulumi:"uploadStagingPath"`
-	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
 	UserId *int `pulumi:"userId"`
 	// Remote server username.
 	Username *string `pulumi:"username"`
@@ -814,6 +817,8 @@ type RemoteServerState struct {
 	Disabled pulumi.BoolPtrInput
 	// Dropbox: If true, list Team folders in root?
 	DropboxTeams pulumi.BoolPtrInput
+	// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+	EffectiveSiteAdminAccess pulumi.BoolPtrInput
 	// <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
 	EnableDedicatedIps pulumi.BoolPtrInput
 	// Filebase: Access Key.
@@ -946,6 +951,8 @@ type RemoteServerState struct {
 	SharepointSiteUrl pulumi.StringPtrInput
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId pulumi.StringPtrInput
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess pulumi.BoolPtrInput
 	// Should we require SSL?
 	Ssl pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -955,8 +962,7 @@ type RemoteServerState struct {
 	SupportsVersioning pulumi.BoolPtrInput
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath pulumi.StringPtrInput
-	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
 	UserId pulumi.IntPtrInput
 	// Remote server username.
 	Username pulumi.StringPtrInput
@@ -1150,6 +1156,8 @@ type remoteServerArgs struct {
 	SharepointSiteUrl *string `pulumi:"sharepointSiteUrl"`
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId *string `pulumi:"sharepointTenantId"`
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess *bool `pulumi:"siteAdminAccess"`
 	// Should we require SSL?
 	Ssl *string `pulumi:"ssl"`
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -1157,8 +1165,7 @@ type remoteServerArgs struct {
 	SslCertificate *string `pulumi:"sslCertificate"`
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath *string `pulumi:"uploadStagingPath"`
-	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
 	UserId *int `pulumi:"userId"`
 	// Remote server username.
 	Username *string `pulumi:"username"`
@@ -1349,6 +1356,8 @@ type RemoteServerArgs struct {
 	SharepointSiteUrl pulumi.StringPtrInput
 	// SharePoint: Microsoft Entra tenant ID for app-only authentication.
 	SharepointTenantId pulumi.StringPtrInput
+	// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+	SiteAdminAccess pulumi.BoolPtrInput
 	// Should we require SSL?
 	Ssl pulumi.StringPtrInput
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -1356,8 +1365,7 @@ type RemoteServerArgs struct {
 	SslCertificate pulumi.StringPtrInput
 	// Upload staging path.  Applies to SFTP only.  If a path is provided here, files will first be uploaded to this path on the remote folder and the moved into the final correct path via an SFTP move command.  This is required by some remote MFT systems to emulate atomic uploads, which are otherwise not supoprted by SFTP.
 	UploadStagingPath pulumi.StringPtrInput
-	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-	// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
+	// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
 	UserId pulumi.IntPtrInput
 	// Remote server username.
 	Username pulumi.StringPtrInput
@@ -1622,6 +1630,11 @@ func (o RemoteServerOutput) Disabled() pulumi.BoolOutput {
 // Dropbox: If true, list Team folders in root?
 func (o RemoteServerOutput) DropboxTeams() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.DropboxTeams }).(pulumi.BoolOutput)
+}
+
+// Whether Site and Workspace Administrators can access this Remote Server under the current Site policy.
+func (o RemoteServerOutput) EffectiveSiteAdminAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.EffectiveSiteAdminAccess }).(pulumi.BoolOutput)
 }
 
 // <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> if remote server only accepts connections from dedicated IPs
@@ -1936,6 +1949,11 @@ func (o RemoteServerOutput) SharepointTenantId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.SharepointTenantId }).(pulumi.StringOutput)
 }
 
+// Owner's preference for administrator access to this user-owned Remote Server. Null uses the Site policy's default. Only the owner may change it when the Site policy allows user choice.
+func (o RemoteServerOutput) SiteAdminAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.BoolOutput { return v.SiteAdminAccess }).(pulumi.BoolOutput)
+}
+
 // Should we require SSL?
 func (o RemoteServerOutput) Ssl() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.Ssl }).(pulumi.StringOutput)
@@ -1957,10 +1975,9 @@ func (o RemoteServerOutput) UploadStagingPath() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteServer) pulumi.StringOutput { return v.UploadStagingPath }).(pulumi.StringOutput)
 }
 
-// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-// User ID.  Provide a value of <span pulumi-lang-nodejs="`0`" pulumi-lang-dotnet="`0`" pulumi-lang-go="`0`" pulumi-lang-python="`0`" pulumi-lang-yaml="`0`" pulumi-lang-java="`0`" pulumi-lang-hcl="`0`">`0`</span> to operate the current session's user.
-func (o RemoteServerOutput) UserId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *RemoteServer) pulumi.IntPtrOutput { return v.UserId }).(pulumi.IntPtrOutput)
+// ID of the Integration-Centric user who owns this personal Remote Server, if any. Connections created by Site and Workspace Administrators have no owner.
+func (o RemoteServerOutput) UserId() pulumi.IntOutput {
+	return o.ApplyT(func(v *RemoteServer) pulumi.IntOutput { return v.UserId }).(pulumi.IntOutput)
 }
 
 // Remote server username.

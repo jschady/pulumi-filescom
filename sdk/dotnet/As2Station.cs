@@ -61,7 +61,7 @@ namespace Jschady.Filescom
         public Output<string> HexPublicCertificateSerial { get; private set; } = null!;
 
         /// <summary>
-        /// The station's formal AS2 name.
+        /// The station's formal AS2 name, unique across all Workspaces on the Site.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -215,7 +215,7 @@ namespace Jschady.Filescom
     public sealed class As2StationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The station's formal AS2 name.
+        /// The station's formal AS2 name, unique across all Workspaces on the Site.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -321,7 +321,7 @@ namespace Jschady.Filescom
         public Input<string>? HexPublicCertificateSerial { get; set; }
 
         /// <summary>
-        /// The station's formal AS2 name.
+        /// The station's formal AS2 name, unique across all Workspaces on the Site.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

@@ -130,6 +130,11 @@ export const getApiKey: typeof import("./getApiKey").getApiKey = null as any;
 export const getApiKeyOutput: typeof import("./getApiKey").getApiKeyOutput = null as any;
 utilities.lazyLoad(exports, ["getApiKey","getApiKeyOutput"], () => require("./getApiKey"));
 
+export { GetAs2IncomingMessageArgs, GetAs2IncomingMessageResult, GetAs2IncomingMessageOutputArgs } from "./getAs2IncomingMessage";
+export const getAs2IncomingMessage: typeof import("./getAs2IncomingMessage").getAs2IncomingMessage = null as any;
+export const getAs2IncomingMessageOutput: typeof import("./getAs2IncomingMessage").getAs2IncomingMessageOutput = null as any;
+utilities.lazyLoad(exports, ["getAs2IncomingMessage","getAs2IncomingMessageOutput"], () => require("./getAs2IncomingMessage"));
+
 export { GetAs2PartnerArgs, GetAs2PartnerResult, GetAs2PartnerOutputArgs } from "./getAs2Partner";
 export const getAs2Partner: typeof import("./getAs2Partner").getAs2Partner = null as any;
 export const getAs2PartnerOutput: typeof import("./getAs2Partner").getAs2PartnerOutput = null as any;

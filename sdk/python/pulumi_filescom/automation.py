@@ -1619,8 +1619,8 @@ class Automation(pulumi.CustomResource):
             exclude_pattern="path/to/exclude/*",
             import_urls=[{
                 "name": "users.json",
-                "url": "http://example.com/users",
-                "method": "POST",
+                "url": "https://example.com/users",
+                "method": "post",
                 "headers": {
                     "content-Type": "application/json",
                 },
@@ -1968,8 +1968,8 @@ class Automation(pulumi.CustomResource):
             exclude_pattern="path/to/exclude/*",
             import_urls=[{
                 "name": "users.json",
-                "url": "http://example.com/users",
-                "method": "POST",
+                "url": "https://example.com/users",
+                "method": "post",
                 "headers": {
                     "content-Type": "application/json",
                 },

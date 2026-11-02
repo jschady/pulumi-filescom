@@ -65,6 +65,10 @@ export interface GetExternalEventResult {
      * Status of event.
      */
     readonly status: string;
+    /**
+     * Workspace ID
+     */
+    readonly workspaceId: number;
 }
 /**
  * An ExternalEvent is a log that is sent to the cloud from a client application such as the Files.com CLI.
