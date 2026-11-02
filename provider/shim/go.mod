@@ -3,12 +3,12 @@ module github.com/Files-com/terraform-provider-files/shim
 go 1.27.3
 
 require (
-	github.com/Files-com/terraform-provider-files v0.1.1351
+	github.com/Files-com/terraform-provider-files v0.1.1399
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 )
 
 require (
-	github.com/Files-com/files-sdk-go/v3 v3.3.324 // indirect
+	github.com/Files-com/files-sdk-go/v3 v3.3.341 // indirect
 	github.com/appscode/go-querystring v0.0.0-20170504095604-0126cfb3f1dc // indirect
 	github.com/chilts/sid v0.0.0-20190607042430-660e94789ec9 // indirect
 	github.com/fatih/color v1.18.0 // indirect
@@ -31,9 +31,9 @@ require (
 	github.com/stretchr/testify v1.12.1 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	go.yaml.in/yaml/v3 v3.0.5 // indirect
+	go.yaml.in/yaml/v3 v3.0.6 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
-	golang.org/x/net v0.61.0 // indirect
+	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
