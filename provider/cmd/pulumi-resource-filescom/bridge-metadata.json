@@ -825,6 +825,9 @@
             "files_api_key": {
                 "current": "filescom:index/getApiKey:getApiKey"
             },
+            "files_as2_incoming_message": {
+                "current": "filescom:index/getAs2IncomingMessage:getAs2IncomingMessage"
+            },
             "files_as2_partner": {
                 "current": "filescom:index/getAs2Partner:getAs2Partner"
             },
