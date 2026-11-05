@@ -22423,7 +22423,7 @@
                     },
                     "valueFormat": {
                         "type": "string",
-                        "description": "Set to \u003cspan pulumi-lang-nodejs=\"`typed`\" pulumi-lang-dotnet=\"`Typed`\" pulumi-lang-go=\"`typed`\" pulumi-lang-python=\"`typed`\" pulumi-lang-yaml=\"`typed`\" pulumi-lang-java=\"`typed`\" pulumi-lang-hcl=\"`typed`\"\u003e`typed`\u003c/span\u003e to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.\n"
+                        "description": "Set to `\"typed\"` to return \u003cspan pulumi-lang-nodejs=\"`value`\" pulumi-lang-dotnet=\"`Value`\" pulumi-lang-go=\"`value`\" pulumi-lang-python=\"`value`\" pulumi-lang-yaml=\"`value`\" pulumi-lang-java=\"`value`\" pulumi-lang-hcl=\"`value`\"\u003e`value`\u003c/span\u003e wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.\n"
                     }
                 },
                 "type": "object",
@@ -22484,10 +22484,10 @@
                     },
                     "value": {
                         "$ref": "pulumi.json#/Any",
-                        "description": "Settings for this behavior. Set \u003cspan pulumi-lang-nodejs=\"`valueFormat \" pulumi-lang-dotnet=\"`ValueFormat \" pulumi-lang-go=\"`valueFormat \" pulumi-lang-python=\"`value_format \" pulumi-lang-yaml=\"`valueFormat \" pulumi-lang-java=\"`valueFormat \" pulumi-lang-hcl=\"`value_format \"\u003e`valueFormat \u003c/span\u003e= \"typed\"` to return them under the selected behavior name, as the typed schema does.\n"
+                        "description": "Settings for this behavior. Set \u003cspan pulumi-lang-nodejs=\"`valueFormat`\" pulumi-lang-dotnet=\"`ValueFormat`\" pulumi-lang-go=\"`valueFormat`\" pulumi-lang-python=\"`value_format`\" pulumi-lang-yaml=\"`valueFormat`\" pulumi-lang-java=\"`valueFormat`\" pulumi-lang-hcl=\"`value_format`\"\u003e`valueFormat`\u003c/span\u003e to `\"typed\"` to return it wrapped under the behavior name.\n"
                     },
                     "valueFormat": {
-                        "description": "Set to \u003cspan pulumi-lang-nodejs=\"`typed`\" pulumi-lang-dotnet=\"`Typed`\" pulumi-lang-go=\"`typed`\" pulumi-lang-python=\"`typed`\" pulumi-lang-yaml=\"`typed`\" pulumi-lang-java=\"`typed`\" pulumi-lang-hcl=\"`typed`\"\u003e`typed`\u003c/span\u003e to return files*behavior.value under the selected behavior name, as it will be returned on March 1, 2027. Older stored forms are also returned in their documented shape: a value stored as JSON text is decoded, and an older value that is not an object moves under its field, such as a number of days under file*expiration.days*to*retain or webhook URLs under webhook.urls. Settings stored as numeric or true/false strings stay strings, and only stored fields are returned. The typed release returns those strings as numbers and booleans, and returns every field of the typed schema, with null for fields that are not set. Omit this attribute to keep the current output until then.\n",
+                        "description": "Set to `\"typed\"` to return \u003cspan pulumi-lang-nodejs=\"`value`\" pulumi-lang-dotnet=\"`Value`\" pulumi-lang-go=\"`value`\" pulumi-lang-python=\"`value`\" pulumi-lang-yaml=\"`value`\" pulumi-lang-java=\"`value`\" pulumi-lang-hcl=\"`value`\"\u003e`value`\u003c/span\u003e wrapped under the behavior name. Files.com plans to make this the default on March 1, 2027.\n",
                         "type": "string"
                     }
                 },
@@ -22914,7 +22914,7 @@
                     },
                     "valueFormat": {
                         "type": "string",
-                        "description": "Set to \u003cspan pulumi-lang-nodejs=\"`typed`\" pulumi-lang-dotnet=\"`Typed`\" pulumi-lang-go=\"`typed`\" pulumi-lang-python=\"`typed`\" pulumi-lang-yaml=\"`typed`\" pulumi-lang-java=\"`typed`\" pulumi-lang-hcl=\"`typed`\"\u003e`typed`\u003c/span\u003e to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.\n"
+                        "description": "Set to `\"typed\"` to return each folder behavior in \u003cspan pulumi-lang-nodejs=\"`value`\" pulumi-lang-dotnet=\"`Value`\" pulumi-lang-go=\"`value`\" pulumi-lang-python=\"`value`\" pulumi-lang-yaml=\"`value`\" pulumi-lang-java=\"`value`\" pulumi-lang-hcl=\"`value`\"\u003e`value`\u003c/span\u003e under its behavior name. Files.com plans to make this the default on March 1, 2027.\n"
                     }
                 },
                 "type": "object",
@@ -22976,11 +22976,11 @@
                     },
                     "value": {
                         "$ref": "pulumi.json#/Any",
-                        "description": "Policy value. Set \u003cspan pulumi-lang-nodejs=\"`valueFormat \" pulumi-lang-dotnet=\"`ValueFormat \" pulumi-lang-go=\"`valueFormat \" pulumi-lang-python=\"`value_format \" pulumi-lang-yaml=\"`valueFormat \" pulumi-lang-java=\"`valueFormat \" pulumi-lang-hcl=\"`value_format \"\u003e`valueFormat \u003c/span\u003e= \"typed\"` to return each\u003cspan pulumi-lang-nodejs=\" folderBehaviors \" pulumi-lang-dotnet=\" FolderBehaviors \" pulumi-lang-go=\" folderBehaviors \" pulumi-lang-python=\" folder_behaviors \" pulumi-lang-yaml=\" folderBehaviors \" pulumi-lang-java=\" folderBehaviors \" pulumi-lang-hcl=\" folder_behaviors \"\u003e folderBehaviors \u003c/span\u003eitem under the name in its behavior field, as the typed schema does.\n",
+                        "description": "Policy value. Set \u003cspan pulumi-lang-nodejs=\"`valueFormat`\" pulumi-lang-dotnet=\"`ValueFormat`\" pulumi-lang-go=\"`valueFormat`\" pulumi-lang-python=\"`value_format`\" pulumi-lang-yaml=\"`valueFormat`\" pulumi-lang-java=\"`valueFormat`\" pulumi-lang-hcl=\"`value_format`\"\u003e`valueFormat`\u003c/span\u003e to `\"typed\"` to return each folder behavior under its behavior name.\n",
                         "secret": true
                     },
                     "valueFormat": {
-                        "description": "Set to \u003cspan pulumi-lang-nodejs=\"`typed`\" pulumi-lang-dotnet=\"`Typed`\" pulumi-lang-go=\"`typed`\" pulumi-lang-python=\"`typed`\" pulumi-lang-yaml=\"`typed`\" pulumi-lang-java=\"`typed`\" pulumi-lang-hcl=\"`typed`\"\u003e`typed`\u003c/span\u003e to return each folder*behaviors item under the name in its behavior field, as files*child*site*management_policy.value will on March 1, 2027. Only that nesting changes. The typed release also returns settings stored as numeric or true/false strings as numbers and booleans, and returns every setting, with null for settings that the policy does not manage. Omit this attribute to keep the current output until then.\n",
+                        "description": "Set to `\"typed\"` to return each folder behavior in \u003cspan pulumi-lang-nodejs=\"`value`\" pulumi-lang-dotnet=\"`Value`\" pulumi-lang-go=\"`value`\" pulumi-lang-python=\"`value`\" pulumi-lang-yaml=\"`value`\" pulumi-lang-java=\"`value`\" pulumi-lang-hcl=\"`value`\"\u003e`value`\u003c/span\u003e under its behavior name. Files.com plans to make this the default on March 1, 2027.\n",
                         "type": "string"
                     }
                 },
