@@ -12,6 +12,7 @@ env:
   PROVIDER: filescom
   PULUMI_VERSION: 3.274.0
   PULUMICTL_VERSION: v0.0.50
+  PULUMICTL_SHA256: a988418240d3a985bdcb9753b7c65ba4b06608deb359dc2942cb8c9374abc164
   PULUMI_BACKEND_URL: file://~
   PULUMI_CONFIG_PASSPHRASE: ci-local-passphrase
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
@@ -107,8 +108,13 @@ jobs:
           echo "/tmp/pulumi" >> "$GITHUB_PATH"
       - name: Install pulumictl
         run: |
-          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          bin="$RUNNER_TEMP/pulumictl-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/pulumictl.tar.gz" \
+            "https://github.com/pulumi/pulumictl/releases/download/${PULUMICTL_VERSION}/pulumictl-${PULUMICTL_VERSION}-linux-amd64.tar.gz"
+          echo "${PULUMICTL_SHA256}  $bin/pulumictl.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/pulumictl.tar.gz" -C "$bin" pulumictl
+          echo "$bin" >> "$GITHUB_PATH"
       # provider-version-action reads a push or pull-request context, and an issue_comment run
       # carries neither, so the Makefile's dev default versions this non-publishing build.
       - name: Prepare the local workspace

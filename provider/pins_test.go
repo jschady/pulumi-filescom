@@ -235,3 +235,34 @@ func TestTheToolchainGoVersionMatchesTheGoDirective(t *testing.T) {
 			toolchain, installed, module, directive)
 	}
 }
+
+// TestOnePulumictlDigestReachesEveryPin reads the digest beside the version. The install step
+// checks the tarball against the digest, so a workflow that names the version and not the digest
+// installs nothing, and so does a digest that disagrees with the rest.
+func TestOnePulumictlDigestReachesEveryPin(t *testing.T) {
+	versions := pinsWorkflowEnv(t, "PULUMICTL_VERSION")
+	digests := pinsWorkflowEnv(t, "PULUMICTL_SHA256")
+
+	var read, disagree []string
+	for _, path := range slices.Sorted(maps.Keys(versions)) {
+		digest, found := digests[path]
+		if !found {
+			t.Errorf("%s pins PULUMICTL_VERSION and no PULUMICTL_SHA256", path)
+			continue
+		}
+		if len(digest) != 64 {
+			t.Errorf("%s pins the pulumictl digest %q, and a sha256 digest has 64 hex digits", path, digest)
+		}
+		read = append(read, path)
+		if len(read) > 1 && digest != digests[read[0]] {
+			disagree = append(disagree, path+" pins "+digest)
+		}
+	}
+	if len(read) == 0 {
+		t.Fatal("no workflow pins both PULUMICTL_VERSION and PULUMICTL_SHA256")
+	}
+	if len(disagree) > 0 {
+		t.Errorf("%s pins the pulumictl digest %s, and %s. The copies must agree. The test read %s.",
+			read[0], digests[read[0]], strings.Join(disagree, "; "), strings.Join(read, ", "))
+	}
+}
