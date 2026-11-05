@@ -12,6 +12,7 @@ env:
   PROVIDER: filescom
   PULUMI_VERSION: 3.274.0
   PULUMICTL_VERSION: v0.0.50
+  PULUMICTL_SHA256: a988418240d3a985bdcb9753b7c65ba4b06608deb359dc2942cb8c9374abc164
   ACTIONLINT_VERSION: 1.7.12
   ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
   PULUMI_BACKEND_URL: file://~
@@ -41,8 +42,13 @@ jobs:
           echo "/tmp/pulumi" >> "$GITHUB_PATH"
       - name: Install pulumictl
         run: |
-          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          bin="$RUNNER_TEMP/pulumictl-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/pulumictl.tar.gz" \
+            "https://github.com/pulumi/pulumictl/releases/download/${PULUMICTL_VERSION}/pulumictl-${PULUMICTL_VERSION}-linux-amd64.tar.gz"
+          echo "${PULUMICTL_SHA256}  $bin/pulumictl.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/pulumictl.tar.gz" -C "$bin" pulumictl
+          echo "$bin" >> "$GITHUB_PATH"
       - name: Set the provider version
         id: version
         uses: pulumi/provider-version-action@v2.0.0
@@ -114,8 +120,13 @@ jobs:
           echo "/tmp/pulumi" >> "$GITHUB_PATH"
       - name: Install pulumictl
         run: |
-          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          bin="$RUNNER_TEMP/pulumictl-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/pulumictl.tar.gz" \
+            "https://github.com/pulumi/pulumictl/releases/download/${PULUMICTL_VERSION}/pulumictl-${PULUMICTL_VERSION}-linux-amd64.tar.gz"
+          echo "${PULUMICTL_SHA256}  $bin/pulumictl.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/pulumictl.tar.gz" -C "$bin" pulumictl
+          echo "$bin" >> "$GITHUB_PATH"
       - name: Set the provider version
         id: version
         uses: pulumi/provider-version-action@v2.0.0
@@ -159,22 +170,31 @@ jobs:
 
   unit:
     name: unit
-    needs: build_sdks
+    # The tests read no artifact, so they run beside the schema job rather than after the SDKs.
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7.0.1
         with:
           submodules: recursive
+      # The race build this job makes shares no key with the other jobs, so the cache it saves
+      # holds that build and the next run reads it back.
       - name: Set up the Go toolchain
         uses: actions/setup-go@v7.0.0
         with:
           go-version-file: provider/go.mod
-          cache-dependency-path: provider/go.sum
+          cache-dependency-path: |
+            provider/go.sum
+            provider/shim/go.sum
       - name: Install pulumictl
         run: |
-          go install "github.com/pulumi/pulumictl/cmd/pulumictl@${PULUMICTL_VERSION}"
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          bin="$RUNNER_TEMP/pulumictl-bin"
+          mkdir -p "$bin"
+          curl -fsSL -o "$bin/pulumictl.tar.gz" \
+            "https://github.com/pulumi/pulumictl/releases/download/${PULUMICTL_VERSION}/pulumictl-${PULUMICTL_VERSION}-linux-amd64.tar.gz"
+          echo "${PULUMICTL_SHA256}  $bin/pulumictl.tar.gz" | sha256sum -c -
+          tar -xzf "$bin/pulumictl.tar.gz" -C "$bin" pulumictl
+          echo "$bin" >> "$GITHUB_PATH"
       - name: Install actionlint
         run: |
           bin="$RUNNER_TEMP/actionlint-bin"

@@ -7,7 +7,7 @@ These 6 workflows are hand-written. No generator owns them. If you change a work
 
 | Workflow | Trigger | Jobs |
 | --- | --- | --- |
-| `pull-request.yml` | A pull request that touches a file other than `CHANGELOG.md`, a new label on one, or a manual run | `prerequisites`, `build_sdks`, `compile_examples`, `examples`, `test_examples`, `test_examples_live`, `lint`, `unit`, `sentinel` |
+| `pull-request.yml` | A pull request that touches a file other than `CHANGELOG.md`, a new label on one, or a manual run | `prerequisites`, `build_sdks`, `examples`, `test_examples`, `test_examples_live`, `lint`, `unit`, `sentinel` |
 | `main.yml` | A push to `main` that touches a file other than `CHANGELOG.md`, or a manual run | The pull request jobs plus `snapshot` |
 | `release.yml` | A push of a `v*.*.*` tag | `prerequisites`, `build_sdks`, `unit`, `confirm_sdks`, `publish_provider`, `publish_sdks`, `publish_go_sdk` |
 | `upstream-drift.yml` | The schedule `17 6 * * 1`, or a manual run | `upstream_update` |
@@ -58,24 +58,28 @@ pull request that `GITHUB_TOKEN` opens. Close it and open it again to start them
 
 1. The `prerequisites` job generates the schema and builds the provider. Then it uploads
    `provider.tar.gz`.
-2. The `build_sdks` job downloads that artifact, asks the binary for its schema, then generates
-   and builds one SDK per language.
-3. The `compile_examples` job compiles one example program per language against the built SDK.
-4. The `examples` job runs the tests in `examples/` that read no API key. It needs no build.
-5. The `test_examples` job deploys the example programs from the recorded cassettes. It reads no
-   API key.
-6. The `test_examples_live` job deploys the same programs against the account. This job spends
+2. The `build_sdks` job downloads that artifact and asks the binary for its schema. Then it
+   generates and builds one SDK per language, installs it, and compiles the example program of
+   that language.
+3. The `examples` job runs the tests in `examples/` that read no API key. It needs no build.
+4. The `test_examples` job downloads the provider artifact and installs the 4 SDKs. Then it
+   deploys the example programs from the recorded cassettes. It reads no API key, and it waits
+   for no SDK job.
+5. The `test_examples_live` job deploys the same programs against the account. This job spends
    money, so a gate guards it.
-7. The `lint` job runs 4 checks. See the section below.
-8. The `unit` job runs `make test_provider`.
-9. The `sentinel` job fails when a job above it failed. Make it the required check.
+6. The `lint` job runs 4 checks. See the section below.
+7. The `unit` job runs `make test_provider`.
+8. The `sentinel` job fails when a job above it failed. Make it the required check.
 
-Every generation job carries 2 steps that check the worktree is clean. Each one runs
+The replay job waits for the provider alone, so the SDK jobs and the replay run side by side. The
+`prerequisites` job and the `build_sdks` job each carry a step that checks the worktree is clean.
+Each one runs
 `./scripts/check-worktree-clean.sh`, which is the only copy of that comparison. A generated file
 that is not committed fails the run. Keep both checks.
 
 In `release.yml` the `confirm_sdks` job reads the 4 SDK artifacts before `publish_provider` runs.
-A binary on the release page that no SDK can be published against is what that order prevents.
+A binary on the release page that no SDK can be published against is what that order prevents. The
+`unit` job runs beside `prerequisites`, and `publish_provider` waits for both.
 
 ## API key gate
 
@@ -167,7 +171,7 @@ the check script fails instead of skipping.
 
 Every action carries an exact version. The Pulumi CLI, `pulumictl`, and `golangci-lint` install from
 a pinned release inside a `run` step. The `ACTIONLINT_VERSION` and `ACTIONLINT_SHA256` variables pin
-`actionlint`.
+`actionlint`. The `PULUMICTL_VERSION` and `PULUMICTL_SHA256` variables pin `pulumictl` the same way.
 
 | Tool | Version |
 | --- | --- |
@@ -210,6 +214,6 @@ is `nodejs`, `python`, `dotnet`, or `go`.
 
 | Call | Job |
 | --- | --- |
-| `make compile_examples LANGUAGE=<language>` | `compile_examples` |
+| `make compile_examples LANGUAGE=<language>` | `build_sdks` |
 | `make test_examples TESTTAGS=<language>` | `test_examples` |
 | `make test_examples_live TESTTAGS=<language>` | `test_examples_live` |
