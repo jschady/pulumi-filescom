@@ -359,11 +359,16 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      # The 6 cross-compiled builds share no compiled package with the host build the other
+      # jobs cache, so this key of its own keeps all 6 across runs. The snapshot job and the
+      # release publish job read the same key.
       - name: Set up the Go toolchain
         uses: actions/setup-go@v7.0.0
         with:
           go-version-file: provider/go.mod
-          cache-dependency-path: provider/go.sum
+          cache-dependency-path: |
+            provider/go.sum
+            .goreleaser.yml
       - name: Set the provider version
         id: version
         uses: pulumi/provider-version-action@v2.0.0
@@ -383,7 +388,8 @@ jobs:
         uses: goreleaser/goreleaser-action@v7.2.3
         with:
           version: "~> v2"
-          args: release --snapshot --clean --timeout 60m0s --parallelism 1
+          # 3 builds at a time: one finishing link leaves the other cores to the next compile.
+          args: release --snapshot --clean --timeout 60m0s --parallelism 3
       - name: Check the release archives
         # The plugin loader reads the archive name, so a template change breaks every
         # install. Nothing else exercises the names before a real release.
