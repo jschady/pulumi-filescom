@@ -212,6 +212,12 @@ func (RemoteMountBackendState) ElementType() reflect.Type {
 	return reflect.TypeOf((*remoteMountBackendState)(nil)).Elem()
 }
 
+// RemoteMountBackendExists checks whether an existing RemoteMountBackend resource with the given ID exists.
+func RemoteMountBackendExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *RemoteMountBackendState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/remoteMountBackend:RemoteMountBackend", id, state, "", opts...)
+}
+
 type remoteMountBackendArgs struct {
 	// Path to the canary file used for health checks.
 	CanaryFilePath string `pulumi:"canaryFilePath"`

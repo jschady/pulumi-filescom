@@ -394,6 +394,26 @@ class AiAssistantPersonality(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return AiAssistantPersonality(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            apply_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            system_prompt: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            use_by_default: pulumi.Input[Optional[_builtins.bool]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["applyToAllWorkspaces"] = apply_to_all_workspaces
+        __props__["createdAt"] = created_at
+        __props__["name"] = name
+        __props__["systemPrompt"] = system_prompt
+        __props__["updatedAt"] = updated_at
+        __props__["useByDefault"] = use_by_default
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/aiAssistantPersonality:AiAssistantPersonality', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="applyToAllWorkspaces")
     def apply_to_all_workspaces(self) -> pulumi.Output[_builtins.bool]:

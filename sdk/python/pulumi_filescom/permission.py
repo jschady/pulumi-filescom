@@ -635,6 +635,36 @@ class Permission(pulumi.CustomResource):
         __props__.__dict__["username"] = username
         return Permission(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            group_id: pulumi.Input[Optional[_builtins.int]] = None,
+            group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            group_name: pulumi.Input[Optional[_builtins.str]] = None,
+            group_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            partner_id: pulumi.Input[Optional[_builtins.int]] = None,
+            partner_name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            permission: pulumi.Input[Optional[_builtins.str]] = None,
+            recursive: pulumi.Input[Optional[_builtins.bool]] = None,
+            site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["groupId"] = group_id
+        __props__["groupIds"] = group_ids
+        __props__["groupName"] = group_name
+        __props__["groupNames"] = group_names
+        __props__["partnerId"] = partner_id
+        __props__["partnerName"] = partner_name
+        __props__["path"] = path
+        __props__["permission"] = permission
+        __props__["recursive"] = recursive
+        __props__["siteId"] = site_id
+        __props__["userId"] = user_id
+        __props__["username"] = username
+        return pulumi.runtime.exists_resource(None, 'filescom:index/permission:Permission', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="groupId")
     def group_id(self) -> pulumi.Output[_builtins.int]:

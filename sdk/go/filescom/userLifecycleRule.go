@@ -201,6 +201,12 @@ func (UserLifecycleRuleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*userLifecycleRuleState)(nil)).Elem()
 }
 
+// UserLifecycleRuleExists checks whether an existing UserLifecycleRule resource with the given ID exists.
+func UserLifecycleRuleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *UserLifecycleRuleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/userLifecycleRule:UserLifecycleRule", id, state, "", opts...)
+}
+
 type userLifecycleRuleArgs struct {
 	// Action to take on inactive users (disable or delete)
 	Action *string `pulumi:"action"`

@@ -134,6 +134,12 @@ func (DesktopConfigurationProfileState) ElementType() reflect.Type {
 	return reflect.TypeOf((*desktopConfigurationProfileState)(nil)).Elem()
 }
 
+// DesktopConfigurationProfileExists checks whether an existing DesktopConfigurationProfile resource with the given ID exists.
+func DesktopConfigurationProfileExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *DesktopConfigurationProfileState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/desktopConfigurationProfile:DesktopConfigurationProfile", id, state, "", opts...)
+}
+
 type desktopConfigurationProfileArgs struct {
 	// Whether the desktop app should hide drive mounting, prevent new drive mounts, and unmount active drive mounts for users with this profile
 	DisableDriveMounting *bool `pulumi:"disableDriveMounting"`

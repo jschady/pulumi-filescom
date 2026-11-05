@@ -1324,7 +1324,7 @@ class Automation(pulumi.CustomResource):
                  always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
                  automation: pulumi.Input[Optional[_builtins.str]] = None,
-                 definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict']]] = None,
+                 definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  destination_replace_from: pulumi.Input[Optional[_builtins.str]] = None,
                  destination_replace_to: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1667,7 +1667,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] always_overwrite_size_matching_files: Ordinarily, files with identical size in the source and destination will be skipped from copy operations to prevent wasted transfer.  If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will overwrite the destination file always.  Note that this may cause large amounts of wasted transfer usage.  This setting has no effect unless <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> is also set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
         :param pulumi.Input[_builtins.bool] always_serialize_jobs: Ordinarily, we will allow automation runs to run in parallel for non-scheduled automations. If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will force automation runs to be serialized (run one at a time, one after another). This can resolve some issues with race conditions on remote systems at the cost of some performance.
         :param pulumi.Input[_builtins.str] automation: Automation type
-        :param pulumi.Input[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict']] definition: Automation v2 graph definition.
+        :param pulumi.Input[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']] definition: Automation v2 graph definition.
         :param pulumi.Input[_builtins.str] description: Description for the this Automation.
         :param pulumi.Input[_builtins.str] destination_replace_from: If set, this string in the destination path will be replaced with the value in <span pulumi-lang-nodejs="`destinationReplaceTo`" pulumi-lang-dotnet="`DestinationReplaceTo`" pulumi-lang-go="`destinationReplaceTo`" pulumi-lang-python="`destination_replace_to`" pulumi-lang-yaml="`destinationReplaceTo`" pulumi-lang-java="`destinationReplaceTo`" pulumi-lang-hcl="`destination_replace_to`">`destinationReplaceTo`</span>.
         :param pulumi.Input[_builtins.str] destination_replace_to: If set, this string will replace the value <span pulumi-lang-nodejs="`destinationReplaceFrom`" pulumi-lang-dotnet="`DestinationReplaceFrom`" pulumi-lang-go="`destinationReplaceFrom`" pulumi-lang-python="`destination_replace_from`" pulumi-lang-yaml="`destinationReplaceFrom`" pulumi-lang-java="`destinationReplaceFrom`" pulumi-lang-hcl="`destination_replace_from`">`destinationReplaceFrom`</span> in the destination filename. You can use special patterns here.
@@ -2029,7 +2029,7 @@ class Automation(pulumi.CustomResource):
                  always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
                  automation: pulumi.Input[Optional[_builtins.str]] = None,
-                 definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict']]] = None,
+                 definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  destination_replace_from: pulumi.Input[Optional[_builtins.str]] = None,
                  destination_replace_to: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2130,7 +2130,7 @@ class Automation(pulumi.CustomResource):
             always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
             always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
             automation: pulumi.Input[Optional[_builtins.str]] = None,
-            definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict']]] = None,
+            definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
             deleted: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             destination_replace_from: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2181,7 +2181,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] always_overwrite_size_matching_files: Ordinarily, files with identical size in the source and destination will be skipped from copy operations to prevent wasted transfer.  If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will overwrite the destination file always.  Note that this may cause large amounts of wasted transfer usage.  This setting has no effect unless <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> is also set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
         :param pulumi.Input[_builtins.bool] always_serialize_jobs: Ordinarily, we will allow automation runs to run in parallel for non-scheduled automations. If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will force automation runs to be serialized (run one at a time, one after another). This can resolve some issues with race conditions on remote systems at the cost of some performance.
         :param pulumi.Input[_builtins.str] automation: Automation type
-        :param pulumi.Input[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict']] definition: Automation v2 graph definition.
+        :param pulumi.Input[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']] definition: Automation v2 graph definition.
         :param pulumi.Input[_builtins.bool] deleted: Indicates if the automation has been deleted.
         :param pulumi.Input[_builtins.str] description: Description for the this Automation.
         :param pulumi.Input[_builtins.str] destination_replace_from: If set, this string in the destination path will be replaced with the value in <span pulumi-lang-nodejs="`destinationReplaceTo`" pulumi-lang-dotnet="`DestinationReplaceTo`" pulumi-lang-go="`destinationReplaceTo`" pulumi-lang-python="`destination_replace_to`" pulumi-lang-yaml="`destinationReplaceTo`" pulumi-lang-java="`destinationReplaceTo`" pulumi-lang-hcl="`destination_replace_to`">`destinationReplaceTo`</span>.
@@ -2272,6 +2272,100 @@ class Automation(pulumi.CustomResource):
         __props__.__dict__["webhook_url"] = webhook_url
         __props__.__dict__["workspace_id"] = workspace_id
         return Automation(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
+            always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
+            automation: pulumi.Input[Optional[_builtins.str]] = None,
+            definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
+            deleted: pulumi.Input[Optional[_builtins.bool]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            destination_replace_from: pulumi.Input[Optional[_builtins.str]] = None,
+            destination_replace_to: pulumi.Input[Optional[_builtins.str]] = None,
+            destinations: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            exclude_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+            flatten_destination_structure: pulumi.Input[Optional[_builtins.bool]] = None,
+            group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
+            human_readable_schedule: pulumi.Input[Optional[_builtins.str]] = None,
+            ignore_locked_folders: pulumi.Input[Optional[_builtins.bool]] = None,
+            import_urls: Optional[Any] = None,
+            inbound_email_address: pulumi.Input[Optional[_builtins.str]] = None,
+            interval: pulumi.Input[Optional[_builtins.str]] = None,
+            last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
+            legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            path_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            recurring_day: pulumi.Input[Optional[_builtins.int]] = None,
+            recurring_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            retry_on_failure_interval_in_minutes: pulumi.Input[Optional[_builtins.int]] = None,
+            retry_on_failure_number_of_attempts: pulumi.Input[Optional[_builtins.int]] = None,
+            schedule: Optional[Any] = None,
+            schedule_days_of_weeks: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_id: pulumi.Input[Optional[_builtins.int]] = None,
+            schedule_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            schedule_times_of_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            source: pulumi.Input[Optional[_builtins.str]] = None,
+            sync_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            trigger: pulumi.Input[Optional[_builtins.str]] = None,
+            trigger_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            user_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            value: Optional[Any] = None,
+            version: pulumi.Input[Optional[_builtins.int]] = None,
+            webhook_url: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["alwaysOverwriteSizeMatchingFiles"] = always_overwrite_size_matching_files
+        __props__["alwaysSerializeJobs"] = always_serialize_jobs
+        __props__["automation"] = automation
+        __props__["definition"] = definition
+        __props__["deleted"] = deleted
+        __props__["description"] = description
+        __props__["destinationReplaceFrom"] = destination_replace_from
+        __props__["destinationReplaceTo"] = destination_replace_to
+        __props__["destinations"] = destinations
+        __props__["disabled"] = disabled
+        __props__["excludePattern"] = exclude_pattern
+        __props__["flattenDestinationStructure"] = flatten_destination_structure
+        __props__["groupIds"] = group_ids
+        __props__["holidayRegion"] = holiday_region
+        __props__["humanReadableSchedule"] = human_readable_schedule
+        __props__["ignoreLockedFolders"] = ignore_locked_folders
+        __props__["importUrls"] = import_urls
+        __props__["inboundEmailAddress"] = inbound_email_address
+        __props__["interval"] = interval
+        __props__["lastModifiedAt"] = last_modified_at
+        __props__["legacyFolderMatching"] = legacy_folder_matching
+        __props__["name"] = name
+        __props__["overwriteFiles"] = overwrite_files
+        __props__["path"] = path
+        __props__["pathTimeZone"] = path_time_zone
+        __props__["recurringDay"] = recurring_day
+        __props__["recurringDays"] = recurring_days
+        __props__["retryOnFailureIntervalInMinutes"] = retry_on_failure_interval_in_minutes
+        __props__["retryOnFailureNumberOfAttempts"] = retry_on_failure_number_of_attempts
+        __props__["schedule"] = schedule
+        __props__["scheduleDaysOfWeeks"] = schedule_days_of_weeks
+        __props__["scheduleId"] = schedule_id
+        __props__["scheduleTimeZone"] = schedule_time_zone
+        __props__["scheduleTimesOfDays"] = schedule_times_of_days
+        __props__["source"] = source
+        __props__["syncIds"] = sync_ids
+        __props__["trigger"] = trigger
+        __props__["triggerActions"] = trigger_actions
+        __props__["userId"] = user_id
+        __props__["userIds"] = user_ids
+        __props__["value"] = value
+        __props__["version"] = version
+        __props__["webhookUrl"] = webhook_url
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/automation:Automation', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="alwaysOverwriteSizeMatchingFiles")

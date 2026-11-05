@@ -277,6 +277,20 @@ class Style(pulumi.CustomResource):
         __props__.__dict__["thumbnail"] = thumbnail
         return Style(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            logo: pulumi.Input[Optional[_builtins.str]] = None,
+            logo_click_href: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            thumbnail: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["logo"] = logo
+        __props__["logoClickHref"] = logo_click_href
+        __props__["path"] = path
+        __props__["thumbnail"] = thumbnail
+        return pulumi.runtime.exists_resource(None, 'filescom:index/style:Style', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def logo(self) -> pulumi.Output[_builtins.str]:

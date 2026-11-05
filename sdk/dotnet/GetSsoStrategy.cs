@@ -71,7 +71,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -79,7 +79,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getssostrategy" "exampleSsoStrategy" {
+        /// data "filescom_sso_strategy" "exampleSsoStrategy" {
         ///   id = 1
         /// }
         /// ```
@@ -183,7 +183,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -191,7 +191,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getssostrategy" "exampleSsoStrategy" {
+        /// data "filescom_sso_strategy" "exampleSsoStrategy" {
         ///   id = 1
         /// }
         /// ```
@@ -295,7 +295,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -303,7 +303,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getssostrategy" "exampleSsoStrategy" {
+        /// data "filescom_sso_strategy" "exampleSsoStrategy" {
         ///   id = 1
         /// }
         /// ```

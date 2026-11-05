@@ -13,8 +13,8 @@ namespace Jschady.Filescom
     public static class GetSync
     {
         /// <summary>
-        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// It can be scheduled, run manually, or triggered by custom logic. 
+        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
+        /// It can be scheduled, run manually, or triggered by custom logic.
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage
@@ -70,7 +70,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -78,7 +78,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsync" "exampleSync" {
+        /// data "filescom_sync" "exampleSync" {
         ///   id = 1
         /// }
         /// ```
@@ -124,8 +124,8 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSyncResult>("filescom:index/getSync:getSync", args ?? new GetSyncArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// It can be scheduled, run manually, or triggered by custom logic. 
+        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
+        /// It can be scheduled, run manually, or triggered by custom logic.
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage
@@ -181,7 +181,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -189,7 +189,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsync" "exampleSync" {
+        /// data "filescom_sync" "exampleSync" {
         ///   id = 1
         /// }
         /// ```
@@ -235,8 +235,8 @@ namespace Jschady.Filescom
             => global::Pulumi.Deployment.Instance.Invoke<GetSyncResult>("filescom:index/getSync:getSync", args ?? new GetSyncInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc). 
-        /// It can be scheduled, run manually, or triggered by custom logic. 
+        /// A Sync represents a file synchronization job between two locations (local-remote, remote-remote, local-child_site, etc).
+        /// It can be scheduled, run manually, or triggered by custom logic.
         /// Syncs track their runs, status, and configuration.
         /// 
         /// ## Example Usage
@@ -292,7 +292,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -300,7 +300,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsync" "exampleSync" {
+        /// data "filescom_sync" "exampleSync" {
         ///   id = 1
         /// }
         /// ```

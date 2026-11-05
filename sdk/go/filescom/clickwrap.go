@@ -135,6 +135,12 @@ func (ClickwrapState) ElementType() reflect.Type {
 	return reflect.TypeOf((*clickwrapState)(nil)).Elem()
 }
 
+// ClickwrapExists checks whether an existing Clickwrap resource with the given ID exists.
+func ClickwrapExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ClickwrapState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/clickwrap:Clickwrap", id, state, "", opts...)
+}
+
 type clickwrapArgs struct {
 	// Body text of Clickwrap (supports Markdown formatting).
 	Body *string `pulumi:"body"`

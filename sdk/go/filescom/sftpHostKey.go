@@ -150,6 +150,12 @@ func (SftpHostKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*sftpHostKeyState)(nil)).Elem()
 }
 
+// SftpHostKeyExists checks whether an existing SftpHostKey resource with the given ID exists.
+func SftpHostKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SftpHostKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/sftpHostKey:SftpHostKey", id, state, "", opts...)
+}
+
 type sftpHostKeyArgs struct {
 	// If true, use this SFTP Host Key.
 	Active *bool `pulumi:"active"`

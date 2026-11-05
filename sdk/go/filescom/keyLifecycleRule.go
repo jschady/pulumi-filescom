@@ -137,6 +137,12 @@ func (KeyLifecycleRuleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*keyLifecycleRuleState)(nil)).Elem()
 }
 
+// KeyLifecycleRuleExists checks whether an existing KeyLifecycleRule resource with the given ID exists.
+func KeyLifecycleRuleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *KeyLifecycleRuleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/keyLifecycleRule:KeyLifecycleRule", id, state, "", opts...)
+}
+
 type keyLifecycleRuleArgs struct {
 	// If true, a default-workspace rule also applies to keys in all workspaces.
 	ApplyToAllWorkspaces *bool `pulumi:"applyToAllWorkspaces"`

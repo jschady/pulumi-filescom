@@ -17,7 +17,6 @@ namespace Jschady.Filescom
         /// 
         /// Users are associated with API Keys, SSH (SFTP) Keys, Notifications, Permissions, and Group memberships.
         /// 
-        /// 
         /// ## Authentication
         /// 
         /// The &lt;span pulumi-lang-nodejs="`authenticationMethod`" pulumi-lang-dotnet="`AuthenticationMethod`" pulumi-lang-go="`authenticationMethod`" pulumi-lang-python="`authentication_method`" pulumi-lang-yaml="`authenticationMethod`" pulumi-lang-java="`authenticationMethod`" pulumi-lang-hcl="`authentication_method`"&gt;`authenticationMethod`&lt;/span&gt; property on a User determines exactly how that user can login and authenticate to their Files.com account. Files.com offers a variety of authentication methods to ensure flexibility, security, migration, and compliance.
@@ -84,7 +83,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -92,7 +91,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuser" "exampleUser" {
+        /// data "filescom_user" "exampleUser" {
         ///   username = "user"
         /// }
         /// ```
@@ -142,7 +141,6 @@ namespace Jschady.Filescom
         /// 
         /// Users are associated with API Keys, SSH (SFTP) Keys, Notifications, Permissions, and Group memberships.
         /// 
-        /// 
         /// ## Authentication
         /// 
         /// The &lt;span pulumi-lang-nodejs="`authenticationMethod`" pulumi-lang-dotnet="`AuthenticationMethod`" pulumi-lang-go="`authenticationMethod`" pulumi-lang-python="`authentication_method`" pulumi-lang-yaml="`authenticationMethod`" pulumi-lang-java="`authenticationMethod`" pulumi-lang-hcl="`authentication_method`"&gt;`authenticationMethod`&lt;/span&gt; property on a User determines exactly how that user can login and authenticate to their Files.com account. Files.com offers a variety of authentication methods to ensure flexibility, security, migration, and compliance.
@@ -209,7 +207,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -217,7 +215,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuser" "exampleUser" {
+        /// data "filescom_user" "exampleUser" {
         ///   username = "user"
         /// }
         /// ```
@@ -267,7 +265,6 @@ namespace Jschady.Filescom
         /// 
         /// Users are associated with API Keys, SSH (SFTP) Keys, Notifications, Permissions, and Group memberships.
         /// 
-        /// 
         /// ## Authentication
         /// 
         /// The &lt;span pulumi-lang-nodejs="`authenticationMethod`" pulumi-lang-dotnet="`AuthenticationMethod`" pulumi-lang-go="`authenticationMethod`" pulumi-lang-python="`authentication_method`" pulumi-lang-yaml="`authenticationMethod`" pulumi-lang-java="`authenticationMethod`" pulumi-lang-hcl="`authentication_method`"&gt;`authenticationMethod`&lt;/span&gt; property on a User determines exactly how that user can login and authenticate to their Files.com account. Files.com offers a variety of authentication methods to ensure flexibility, security, migration, and compliance.
@@ -334,7 +331,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -342,7 +339,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuser" "exampleUser" {
+        /// data "filescom_user" "exampleUser" {
         ///   username = "user"
         /// }
         /// ```

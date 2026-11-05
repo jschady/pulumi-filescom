@@ -130,6 +130,12 @@ func (FileCommentState) ElementType() reflect.Type {
 	return reflect.TypeOf((*fileCommentState)(nil)).Elem()
 }
 
+// FileCommentExists checks whether an existing FileComment resource with the given ID exists.
+func FileCommentExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *FileCommentState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/fileComment:FileComment", id, state, "", opts...)
+}
+
 type fileCommentArgs struct {
 	// Comment body.
 	Body string `pulumi:"body"`

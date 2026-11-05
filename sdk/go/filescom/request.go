@@ -146,6 +146,12 @@ func (RequestState) ElementType() reflect.Type {
 	return reflect.TypeOf((*requestState)(nil)).Elem()
 }
 
+// RequestExists checks whether an existing Request resource with the given ID exists.
+func RequestExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *RequestState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/request:Request", id, state, "", opts...)
+}
+
 type requestArgs struct {
 	// Destination filename
 	Destination string `pulumi:"destination"`

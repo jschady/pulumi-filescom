@@ -264,6 +264,12 @@ func (AiTaskState) ElementType() reflect.Type {
 	return reflect.TypeOf((*aiTaskState)(nil)).Elem()
 }
 
+// AiTaskExists checks whether an existing AiTask resource with the given ID exists.
+func AiTaskExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *AiTaskState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/aiTask:AiTask", id, state, "", opts...)
+}
+
 type aiTaskArgs struct {
 	// AI Task description.
 	Description *string `pulumi:"description"`

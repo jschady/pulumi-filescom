@@ -744,6 +744,44 @@ class RemoteMountBackend(pulumi.CustomResource):
         __props__.__dict__["undergoing_maintenance"] = undergoing_maintenance
         return RemoteMountBackend(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            canary_file_path: pulumi.Input[Optional[_builtins.str]] = None,
+            enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            fall: pulumi.Input[Optional[_builtins.int]] = None,
+            health_check_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            health_check_results: Optional[Any] = None,
+            health_check_type: pulumi.Input[Optional[_builtins.str]] = None,
+            interval: pulumi.Input[Optional[_builtins.int]] = None,
+            min_free_cpu: pulumi.Input[Optional[_builtins.str]] = None,
+            min_free_mem: pulumi.Input[Optional[_builtins.str]] = None,
+            priority: pulumi.Input[Optional[_builtins.int]] = None,
+            remote_path: pulumi.Input[Optional[_builtins.str]] = None,
+            remote_server_id: pulumi.Input[Optional[_builtins.int]] = None,
+            remote_server_mount_id: pulumi.Input[Optional[_builtins.int]] = None,
+            rise: pulumi.Input[Optional[_builtins.int]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            undergoing_maintenance: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["canaryFilePath"] = canary_file_path
+        __props__["enabled"] = enabled
+        __props__["fall"] = fall
+        __props__["healthCheckEnabled"] = health_check_enabled
+        __props__["healthCheckResults"] = health_check_results
+        __props__["healthCheckType"] = health_check_type
+        __props__["interval"] = interval
+        __props__["minFreeCpu"] = min_free_cpu
+        __props__["minFreeMem"] = min_free_mem
+        __props__["priority"] = priority
+        __props__["remotePath"] = remote_path
+        __props__["remoteServerId"] = remote_server_id
+        __props__["remoteServerMountId"] = remote_server_mount_id
+        __props__["rise"] = rise
+        __props__["status"] = status
+        __props__["undergoingMaintenance"] = undergoing_maintenance
+        return pulumi.runtime.exists_resource(None, 'filescom:index/remoteMountBackend:RemoteMountBackend', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="canaryFilePath")
     def canary_file_path(self) -> pulumi.Output[_builtins.str]:

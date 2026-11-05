@@ -372,6 +372,12 @@ func (ExpectationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*expectationState)(nil)).Elem()
 }
 
+// ExpectationExists checks whether an existing Expectation resource with the given ID exists.
+func ExpectationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ExpectationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/expectation:Expectation", id, state, "", opts...)
+}
+
 type expectationArgs struct {
 	// Versioned success criteria definition for the expectation. Criteria v2 supports optional FTS content validation.
 	Criteria interface{} `pulumi:"criteria"`

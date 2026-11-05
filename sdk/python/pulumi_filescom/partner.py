@@ -906,6 +906,52 @@ class Partner(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Partner(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            ai_assistant_personality_id: pulumi.Input[Optional[_builtins.int]] = None,
+            allow_bypassing2fa_policies: pulumi.Input[Optional[_builtins.bool]] = None,
+            allow_credential_changes: pulumi.Input[Optional[_builtins.bool]] = None,
+            allow_providing_gpg_keys: pulumi.Input[Optional[_builtins.bool]] = None,
+            allow_user_creation: pulumi.Input[Optional[_builtins.bool]] = None,
+            allowed_ips: pulumi.Input[Optional[_builtins.str]] = None,
+            cc_emails_to_responsible_party: pulumi.Input[Optional[_builtins.bool]] = None,
+            connections: Optional[Any] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            notes: pulumi.Input[Optional[_builtins.str]] = None,
+            partner_admin_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            partner_channel_template_id: pulumi.Input[Optional[_builtins.int]] = None,
+            partnership_role: pulumi.Input[Optional[_builtins.str]] = None,
+            responsible_group_id: pulumi.Input[Optional[_builtins.int]] = None,
+            responsible_user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            root_folder: pulumi.Input[Optional[_builtins.str]] = None,
+            show_partner_channel_home_page: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[_builtins.str]] = None,
+            user_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["aiAssistantPersonalityId"] = ai_assistant_personality_id
+        __props__["allowBypassing2faPolicies"] = allow_bypassing2fa_policies
+        __props__["allowCredentialChanges"] = allow_credential_changes
+        __props__["allowProvidingGpgKeys"] = allow_providing_gpg_keys
+        __props__["allowUserCreation"] = allow_user_creation
+        __props__["allowedIps"] = allowed_ips
+        __props__["ccEmailsToResponsibleParty"] = cc_emails_to_responsible_party
+        __props__["connections"] = connections
+        __props__["name"] = name
+        __props__["notes"] = notes
+        __props__["partnerAdminIds"] = partner_admin_ids
+        __props__["partnerChannelTemplateId"] = partner_channel_template_id
+        __props__["partnershipRole"] = partnership_role
+        __props__["responsibleGroupId"] = responsible_group_id
+        __props__["responsibleUserId"] = responsible_user_id
+        __props__["rootFolder"] = root_folder
+        __props__["showPartnerChannelHomePage"] = show_partner_channel_home_page
+        __props__["tags"] = tags
+        __props__["userIds"] = user_ids
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/partner:Partner', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="aiAssistantPersonalityId")
     def ai_assistant_personality_id(self) -> pulumi.Output[_builtins.int]:

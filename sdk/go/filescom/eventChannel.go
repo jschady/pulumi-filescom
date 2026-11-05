@@ -140,6 +140,12 @@ func (EventChannelState) ElementType() reflect.Type {
 	return reflect.TypeOf((*eventChannelState)(nil)).Elem()
 }
 
+// EventChannelExists checks whether an existing EventChannel resource with the given ID exists.
+func EventChannelExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *EventChannelState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/eventChannel:EventChannel", id, state, "", opts...)
+}
+
 type eventChannelArgs struct {
 	// Whether this Event Channel is the default destination for newly published events.
 	DefaultChannel *bool `pulumi:"defaultChannel"`

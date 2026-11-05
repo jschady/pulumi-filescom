@@ -336,6 +336,12 @@ func (FolderState) ElementType() reflect.Type {
 	return reflect.TypeOf((*folderState)(nil)).Elem()
 }
 
+// FolderExists checks whether an existing Folder resource with the given ID exists.
+func FolderExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *FolderState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/folder:Folder", id, state, "", opts...)
+}
+
 type folderArgs struct {
 	// Custom metadata map of keys and values. Limited to 32 keys, 256 characters per key and 1024 characters per value.
 	CustomMetadata interface{} `pulumi:"customMetadata"`

@@ -194,6 +194,12 @@ func (ChildSiteManagementPolicyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*childSiteManagementPolicyState)(nil)).Elem()
 }
 
+// ChildSiteManagementPolicyExists checks whether an existing ChildSiteManagementPolicy resource with the given ID exists.
+func ChildSiteManagementPolicyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ChildSiteManagementPolicyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/childSiteManagementPolicy:ChildSiteManagementPolicy", id, state, "", opts...)
+}
+
 type childSiteManagementPolicyArgs struct {
 	// IDs of child sites explicitly assigned to this non-default policy.
 	ChildSiteIds []int `pulumi:"childSiteIds"`

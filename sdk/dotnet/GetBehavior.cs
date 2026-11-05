@@ -15,7 +15,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level.
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
@@ -84,7 +84,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -92,7 +92,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getbehavior" "exampleBehavior" {
+        /// data "filescom_behavior" "exampleBehavior" {
         ///   id           = 1
         ///   value_format = "typed"
         /// }
@@ -143,7 +143,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level.
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
@@ -212,7 +212,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -220,7 +220,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getbehavior" "exampleBehavior" {
+        /// data "filescom_behavior" "exampleBehavior" {
         ///   id           = 1
         ///   value_format = "typed"
         /// }
@@ -271,7 +271,7 @@ namespace Jschady.Filescom
         /// <summary>
         /// A Behavior is an API resource for what are also known as Folder Settings.  Every behavior is associated with a folder.
         /// 
-        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level. 
+        /// Depending on the behavior, it may also operate on child folders.  It may be overridable at the child folder level or maybe can be added to at the child folder level.
         /// 
         /// Each behavior type also has a recursion mode in the behavior type documentation. &lt;span pulumi-lang-nodejs="`always`" pulumi-lang-dotnet="`Always`" pulumi-lang-go="`always`" pulumi-lang-python="`always`" pulumi-lang-yaml="`always`" pulumi-lang-java="`always`" pulumi-lang-hcl="`always`"&gt;`always`&lt;/span&gt; means the behavior is always recursive, &lt;span pulumi-lang-nodejs="`never`" pulumi-lang-dotnet="`Never`" pulumi-lang-go="`never`" pulumi-lang-python="`never`" pulumi-lang-yaml="`never`" pulumi-lang-java="`never`" pulumi-lang-hcl="`never`"&gt;`never`&lt;/span&gt; means it is never recursive, and &lt;span pulumi-lang-nodejs="`sometimes`" pulumi-lang-dotnet="`Sometimes`" pulumi-lang-go="`sometimes`" pulumi-lang-python="`sometimes`" pulumi-lang-yaml="`sometimes`" pulumi-lang-java="`sometimes`" pulumi-lang-hcl="`sometimes`"&gt;`sometimes`&lt;/span&gt; means callers may choose the value of the &lt;span pulumi-lang-nodejs="`recursive`" pulumi-lang-dotnet="`Recursive`" pulumi-lang-go="`recursive`" pulumi-lang-python="`recursive`" pulumi-lang-yaml="`recursive`" pulumi-lang-java="`recursive`" pulumi-lang-hcl="`recursive`"&gt;`recursive`&lt;/span&gt; field.
         /// 
@@ -340,7 +340,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -348,7 +348,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getbehavior" "exampleBehavior" {
+        /// data "filescom_behavior" "exampleBehavior" {
         ///   id           = 1
         ///   value_format = "typed"
         /// }

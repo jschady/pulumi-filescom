@@ -154,6 +154,12 @@ func (BundleNotificationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*bundleNotificationState)(nil)).Elem()
 }
 
+// BundleNotificationExists checks whether an existing BundleNotification resource with the given ID exists.
+func BundleNotificationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *BundleNotificationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/bundleNotification:BundleNotification", id, state, "", opts...)
+}
+
 type bundleNotificationArgs struct {
 	// Bundle ID to notify on
 	BundleId int `pulumi:"bundleId"`

@@ -772,6 +772,44 @@ class Group(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Group(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            admin_ids: pulumi.Input[Optional[_builtins.str]] = None,
+            ai_assistant_personality_id: pulumi.Input[Optional[_builtins.int]] = None,
+            allowed_ips: pulumi.Input[Optional[_builtins.str]] = None,
+            dav_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            desktop_configuration_profile_id: pulumi.Input[Optional[_builtins.int]] = None,
+            ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            integration_centric_profile_id: pulumi.Input[Optional[_builtins.int]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            notes: pulumi.Input[Optional[_builtins.str]] = None,
+            restapi_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            s3_compatible_endpoint_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            sftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            user_ids: pulumi.Input[Optional[_builtins.str]] = None,
+            usernames: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["adminIds"] = admin_ids
+        __props__["aiAssistantPersonalityId"] = ai_assistant_personality_id
+        __props__["allowedIps"] = allowed_ips
+        __props__["davPermission"] = dav_permission
+        __props__["desktopConfigurationProfileId"] = desktop_configuration_profile_id
+        __props__["ftpPermission"] = ftp_permission
+        __props__["integrationCentricProfileId"] = integration_centric_profile_id
+        __props__["name"] = name
+        __props__["notes"] = notes
+        __props__["restapiPermission"] = restapi_permission
+        __props__["s3CompatibleEndpointPermission"] = s3_compatible_endpoint_permission
+        __props__["sftpPermission"] = sftp_permission
+        __props__["siteId"] = site_id
+        __props__["userIds"] = user_ids
+        __props__["usernames"] = usernames
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/group:Group', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="adminIds")
     def admin_ids(self) -> pulumi.Output[_builtins.str]:

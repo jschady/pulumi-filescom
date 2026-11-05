@@ -549,6 +549,12 @@ func (SiemHttpDestinationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*siemHttpDestinationState)(nil)).Elem()
 }
 
+// SiemHttpDestinationExists checks whether an existing SiemHttpDestination resource with the given ID exists.
+func SiemHttpDestinationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SiemHttpDestinationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/siemHttpDestination:SiemHttpDestination", id, state, "", opts...)
+}
+
 type siemHttpDestinationArgs struct {
 	// Whether or not sending is enabled for action logs.
 	ActionSendEnabled *bool `pulumi:"actionSendEnabled"`

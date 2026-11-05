@@ -138,6 +138,12 @@ func (GroupUserState) ElementType() reflect.Type {
 	return reflect.TypeOf((*groupUserState)(nil)).Elem()
 }
 
+// GroupUserExists checks whether an existing GroupUser resource with the given ID exists.
+func GroupUserExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *GroupUserState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/groupUser:GroupUser", id, state, "", opts...)
+}
+
 type groupUserArgs struct {
 	// Is this user an administrator of this group?
 	Admin *bool `pulumi:"admin"`

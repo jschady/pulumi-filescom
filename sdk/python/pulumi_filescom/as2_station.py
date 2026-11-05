@@ -673,6 +673,48 @@ class As2Station(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return As2Station(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            domain: pulumi.Input[Optional[_builtins.str]] = None,
+            hex_public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_password_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_not_after: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_not_before: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_subject: pulumi.Input[Optional[_builtins.str]] = None,
+            uri: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["domain"] = domain
+        __props__["hexPublicCertificateSerial"] = hex_public_certificate_serial
+        __props__["name"] = name
+        __props__["pkcs12"] = pkcs12
+        __props__["pkcs12Password"] = pkcs12_password
+        __props__["privateKey"] = private_key
+        __props__["privateKeyMd5"] = private_key_md5
+        __props__["privateKeyPassword"] = private_key_password
+        __props__["privateKeyPasswordMd5"] = private_key_password_md5
+        __props__["publicCertificate"] = public_certificate
+        __props__["publicCertificateIssuer"] = public_certificate_issuer
+        __props__["publicCertificateMd5"] = public_certificate_md5
+        __props__["publicCertificateNotAfter"] = public_certificate_not_after
+        __props__["publicCertificateNotBefore"] = public_certificate_not_before
+        __props__["publicCertificateSerial"] = public_certificate_serial
+        __props__["publicCertificateSubject"] = public_certificate_subject
+        __props__["uri"] = uri
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/as2Station:As2Station', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def domain(self) -> pulumi.Output[_builtins.str]:

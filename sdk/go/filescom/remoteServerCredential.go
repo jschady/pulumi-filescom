@@ -483,6 +483,12 @@ func (RemoteServerCredentialState) ElementType() reflect.Type {
 	return reflect.TypeOf((*remoteServerCredentialState)(nil)).Elem()
 }
 
+// RemoteServerCredentialExists checks whether an existing RemoteServerCredential resource with the given ID exists.
+func RemoteServerCredentialExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *RemoteServerCredentialState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/remoteServerCredential:RemoteServerCredential", id, state, "", opts...)
+}
+
 type remoteServerCredentialArgs struct {
 	// AWS Access Key.
 	AwsAccessKey *string `pulumi:"awsAccessKey"`

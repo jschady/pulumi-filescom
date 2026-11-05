@@ -648,6 +648,12 @@ func (AutomationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*automationState)(nil)).Elem()
 }
 
+// AutomationExists checks whether an existing Automation resource with the given ID exists.
+func AutomationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *AutomationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/automation:Automation", id, state, "", opts...)
+}
+
 type automationArgs struct {
 	// Ordinarily, files with identical size in the source and destination will be skipped from copy operations to prevent wasted transfer.  If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will overwrite the destination file always.  Note that this may cause large amounts of wasted transfer usage.  This setting has no effect unless <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> is also set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
 	AlwaysOverwriteSizeMatchingFiles *bool `pulumi:"alwaysOverwriteSizeMatchingFiles"`

@@ -702,6 +702,48 @@ class ApiKey(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return ApiKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aws_access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_style_credentials: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            descriptive_label: pulumi.Input[Optional[_builtins.str]] = None,
+            expires_at: pulumi.Input[Optional[_builtins.str]] = None,
+            key: pulumi.Input[Optional[_builtins.str]] = None,
+            last_use_at: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            permission_set: pulumi.Input[Optional[_builtins.str]] = None,
+            platform: pulumi.Input[Optional[_builtins.str]] = None,
+            site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            site_name: pulumi.Input[Optional[_builtins.str]] = None,
+            url: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["awsAccessKeyId"] = aws_access_key_id
+        __props__["awsSecretKey"] = aws_secret_key
+        __props__["awsStyleCredentials"] = aws_style_credentials
+        __props__["createdAt"] = created_at
+        __props__["description"] = description
+        __props__["descriptiveLabel"] = descriptive_label
+        __props__["expiresAt"] = expires_at
+        __props__["key"] = key
+        __props__["lastUseAt"] = last_use_at
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["permissionSet"] = permission_set
+        __props__["platform"] = platform
+        __props__["siteId"] = site_id
+        __props__["siteName"] = site_name
+        __props__["url"] = url
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/apiKey:ApiKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="awsAccessKeyId")
     def aws_access_key_id(self) -> pulumi.Output[_builtins.str]:

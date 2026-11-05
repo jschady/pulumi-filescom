@@ -121,6 +121,12 @@ func (UserAdditionalEmailRecipientState) ElementType() reflect.Type {
 	return reflect.TypeOf((*userAdditionalEmailRecipientState)(nil)).Elem()
 }
 
+// UserAdditionalEmailRecipientExists checks whether an existing UserAdditionalEmailRecipient resource with the given ID exists.
+func UserAdditionalEmailRecipientExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *UserAdditionalEmailRecipientState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/userAdditionalEmailRecipient:UserAdditionalEmailRecipient", id, state, "", opts...)
+}
+
 type userAdditionalEmailRecipientArgs struct {
 	// Additional email recipient address
 	Email string `pulumi:"email"`

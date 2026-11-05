@@ -702,6 +702,48 @@ class PublicKey(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return PublicKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            expired: pulumi.Input[Optional[_builtins.bool]] = None,
+            expires_at: pulumi.Input[Optional[_builtins.str]] = None,
+            fingerprint: pulumi.Input[Optional[_builtins.str]] = None,
+            fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_keypair: pulumi.Input[Optional[_builtins.bool]] = None,
+            generate_length: pulumi.Input[Optional[_builtins.int]] = None,
+            generate_private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
+            generated_private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            generated_public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            last_login_at: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            title: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["expired"] = expired
+        __props__["expiresAt"] = expires_at
+        __props__["fingerprint"] = fingerprint
+        __props__["fingerprintSha256"] = fingerprint_sha256
+        __props__["generateAlgorithm"] = generate_algorithm
+        __props__["generateKeypair"] = generate_keypair
+        __props__["generateLength"] = generate_length
+        __props__["generatePrivateKeyPassword"] = generate_private_key_password
+        __props__["generatedPrivateKey"] = generated_private_key
+        __props__["generatedPublicKey"] = generated_public_key
+        __props__["lastLoginAt"] = last_login_at
+        __props__["publicKey"] = public_key
+        __props__["status"] = status
+        __props__["title"] = title
+        __props__["userId"] = user_id
+        __props__["username"] = username
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/publicKey:PublicKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[_builtins.str]:
