@@ -120,6 +120,12 @@ func (MetadataCategoryState) ElementType() reflect.Type {
 	return reflect.TypeOf((*metadataCategoryState)(nil)).Elem()
 }
 
+// MetadataCategoryExists checks whether an existing MetadataCategory resource with the given ID exists.
+func MetadataCategoryExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *MetadataCategoryState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/metadataCategory:MetadataCategory", id, state, "", opts...)
+}
+
 type metadataCategoryArgs struct {
 	// Metadata keys that should appear as columns in the UI by default.
 	DefaultColumns []string `pulumi:"defaultColumns"`

@@ -983,6 +983,12 @@ func (RemoteServerState) ElementType() reflect.Type {
 	return reflect.TypeOf((*remoteServerState)(nil)).Elem()
 }
 
+// RemoteServerExists checks whether an existing RemoteServer resource with the given ID exists.
+func RemoteServerExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *RemoteServerState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/remoteServer:RemoteServer", id, state, "", opts...)
+}
+
 type remoteServerArgs struct {
 	// Allow relative paths in SFTP. If true, paths will not be forced to be absolute, allowing operations relative to the user's home directory.
 	AllowRelativePaths *bool `pulumi:"allowRelativePaths"`

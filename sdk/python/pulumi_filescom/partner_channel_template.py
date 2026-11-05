@@ -652,6 +652,38 @@ class PartnerChannelTemplate(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return PartnerChannelTemplate(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            direction: pulumi.Input[Optional[_builtins.str]] = None,
+            effective_from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
+            effective_to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
+            from_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
+            from_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            from_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            to_partner_folder_name: pulumi.Input[Optional[_builtins.str]] = None,
+            to_partner_managed_folder_paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            to_partner_route_path_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+            use_channel_root: pulumi.Input[Optional[_builtins.bool]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["direction"] = direction
+        __props__["effectiveFromPartnerFolderName"] = effective_from_partner_folder_name
+        __props__["effectiveToPartnerFolderName"] = effective_to_partner_folder_name
+        __props__["fromPartnerFolderName"] = from_partner_folder_name
+        __props__["fromPartnerManagedFolderPaths"] = from_partner_managed_folder_paths
+        __props__["fromPartnerRoutePathPattern"] = from_partner_route_path_pattern
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["toPartnerFolderName"] = to_partner_folder_name
+        __props__["toPartnerManagedFolderPaths"] = to_partner_managed_folder_paths
+        __props__["toPartnerRoutePathPattern"] = to_partner_route_path_pattern
+        __props__["useChannelRoot"] = use_channel_root
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/partnerChannelTemplate:PartnerChannelTemplate', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def direction(self) -> pulumi.Output[_builtins.str]:

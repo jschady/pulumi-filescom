@@ -477,6 +477,12 @@ func (BundleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*bundleState)(nil)).Elem()
 }
 
+// BundleExists checks whether an existing Bundle resource with the given ID exists.
+func BundleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *BundleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/bundle:Bundle", id, state, "", opts...)
+}
+
 type bundleArgs struct {
 	// If true, this Share Link bypasses site-wide expiration rules. Only site admins may set this.
 	BypassesSiteExpirationRules *bool `pulumi:"bypassesSiteExpirationRules"`

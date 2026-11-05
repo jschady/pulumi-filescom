@@ -180,6 +180,12 @@ func (EventTargetState) ElementType() reflect.Type {
 	return reflect.TypeOf((*eventTargetState)(nil)).Elem()
 }
 
+// EventTargetExists checks whether an existing EventTarget resource with the given ID exists.
+func EventTargetExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *EventTargetState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/eventTarget:EventTarget", id, state, "", opts...)
+}
+
 type eventTargetArgs struct {
 	// If true, this default-workspace target can receive events from all workspaces.
 	ApplyToAllWorkspaces *bool `pulumi:"applyToAllWorkspaces"`

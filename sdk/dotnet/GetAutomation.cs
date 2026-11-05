@@ -130,11 +130,9 @@ namespace Jschady.Filescom
         /// 
         /// For example, if the &lt;span pulumi-lang-nodejs="`destinationReplaceFrom`" pulumi-lang-dotnet="`DestinationReplaceFrom`" pulumi-lang-go="`destinationReplaceFrom`" pulumi-lang-python="`destination_replace_from`" pulumi-lang-yaml="`destinationReplaceFrom`" pulumi-lang-java="`destinationReplaceFrom`" pulumi-lang-hcl="`destination_replace_from`"&gt;`destinationReplaceFrom`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`incoming`" pulumi-lang-dotnet="`Incoming`" pulumi-lang-go="`incoming`" pulumi-lang-python="`incoming`" pulumi-lang-yaml="`incoming`" pulumi-lang-java="`incoming`" pulumi-lang-hcl="`incoming`"&gt;`incoming`&lt;/span&gt; and the &lt;span pulumi-lang-nodejs="`destinationReplaceTo`" pulumi-lang-dotnet="`DestinationReplaceTo`" pulumi-lang-go="`destinationReplaceTo`" pulumi-lang-python="`destination_replace_to`" pulumi-lang-yaml="`destinationReplaceTo`" pulumi-lang-java="`destinationReplaceTo`" pulumi-lang-hcl="`destination_replace_to`"&gt;`destinationReplaceTo`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`outgoing`" pulumi-lang-dotnet="`Outgoing`" pulumi-lang-go="`outgoing`" pulumi-lang-python="`outgoing`" pulumi-lang-yaml="`outgoing`" pulumi-lang-java="`outgoing`" pulumi-lang-hcl="`outgoing`"&gt;`outgoing`&lt;/span&gt;, then `path/to/incoming.txt` will translate to `path/to/outgoing.txt`.
         /// 
-        /// 
         /// ## Automation Types
         /// 
         /// There are several types of automations:  Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
-        /// 
         /// 
         /// ### Create Folder
         /// 
@@ -153,18 +151,15 @@ namespace Jschady.Filescom
         /// 
         /// Note this assumes you have folders in `AccountingAndTax/SalesTax/State/` already created for each state, e.g. `AccountingAndTax/SalesTax/State/CA/`.
         /// 
-        /// 
         /// ### Delete File
         /// 
         /// Deletes the file with path matching &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed) in the path named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;.
-        /// 
         /// 
         /// ### Copy File
         /// 
         /// Copies files in the folder named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt; to the path specified in &lt;span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`"&gt;`destinations`&lt;/span&gt;.
         /// The automation will only fire on files matching the &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only copy the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
-        /// 
         /// 
         /// ### Move File
         /// 
@@ -173,14 +168,12 @@ namespace Jschady.Filescom
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only move the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
         /// Note that for a move with multiple destinations, all but one destination is treated as a copy.
         /// 
-        /// 
         /// ### Run Remote Server Sync
         /// 
         /// The Run Remote Server Sync automation runs the remote server syncs specified by the &lt;span pulumi-lang-nodejs="`syncIds`" pulumi-lang-dotnet="`SyncIds`" pulumi-lang-go="`syncIds`" pulumi-lang-python="`sync_ids`" pulumi-lang-yaml="`syncIds`" pulumi-lang-java="`syncIds`" pulumi-lang-hcl="`sync_ids`"&gt;`syncIds`&lt;/span&gt;.
         /// 
         /// Typically when this automation is used, the remote server syncs in question are set to the manual
         /// scheduling mode (&lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; to &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; via the API) to disable the built in sync scheduler.
-        /// 
         /// 
         /// ### Import File
         /// 
@@ -210,12 +203,10 @@ namespace Jschady.Filescom
         /// * &lt;span pulumi-lang-nodejs="`headers`" pulumi-lang-dotnet="`Headers`" pulumi-lang-go="`headers`" pulumi-lang-python="`headers`" pulumi-lang-yaml="`headers`" pulumi-lang-java="`headers`" pulumi-lang-hcl="`headers`"&gt;`headers`&lt;/span&gt;: Optional headers to be included in the request. `%` tokens in the values will be replaced as described under Formatting Parameters.
         /// * &lt;span pulumi-lang-nodejs="`content`" pulumi-lang-dotnet="`Content`" pulumi-lang-go="`content`" pulumi-lang-python="`content`" pulumi-lang-yaml="`content`" pulumi-lang-java="`content`" pulumi-lang-hcl="`content`"&gt;`content`&lt;/span&gt;: Optional body to send for POST request. If supplied as a string, `%` tokens will be expanded. If supplied as a JSON Object, `%` tokens will be expanded for top-level values. Other JSON types will be sent as-is.
         /// 
-        /// 
         /// ### Help us build the future of Automations
         /// 
         /// Do you have an idea for something that would work well as a Files.com Automation?  Let us know!
         /// We are actively improving the types of automations offered on our platform.
-        /// 
         /// 
         /// ## Retrying Failures
         /// 
@@ -278,7 +269,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -286,7 +277,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getautomation" "exampleAutomation" {
+        /// data "filescom_automation" "exampleAutomation" {
         ///   id = 1
         /// }
         /// ```
@@ -449,11 +440,9 @@ namespace Jschady.Filescom
         /// 
         /// For example, if the &lt;span pulumi-lang-nodejs="`destinationReplaceFrom`" pulumi-lang-dotnet="`DestinationReplaceFrom`" pulumi-lang-go="`destinationReplaceFrom`" pulumi-lang-python="`destination_replace_from`" pulumi-lang-yaml="`destinationReplaceFrom`" pulumi-lang-java="`destinationReplaceFrom`" pulumi-lang-hcl="`destination_replace_from`"&gt;`destinationReplaceFrom`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`incoming`" pulumi-lang-dotnet="`Incoming`" pulumi-lang-go="`incoming`" pulumi-lang-python="`incoming`" pulumi-lang-yaml="`incoming`" pulumi-lang-java="`incoming`" pulumi-lang-hcl="`incoming`"&gt;`incoming`&lt;/span&gt; and the &lt;span pulumi-lang-nodejs="`destinationReplaceTo`" pulumi-lang-dotnet="`DestinationReplaceTo`" pulumi-lang-go="`destinationReplaceTo`" pulumi-lang-python="`destination_replace_to`" pulumi-lang-yaml="`destinationReplaceTo`" pulumi-lang-java="`destinationReplaceTo`" pulumi-lang-hcl="`destination_replace_to`"&gt;`destinationReplaceTo`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`outgoing`" pulumi-lang-dotnet="`Outgoing`" pulumi-lang-go="`outgoing`" pulumi-lang-python="`outgoing`" pulumi-lang-yaml="`outgoing`" pulumi-lang-java="`outgoing`" pulumi-lang-hcl="`outgoing`"&gt;`outgoing`&lt;/span&gt;, then `path/to/incoming.txt` will translate to `path/to/outgoing.txt`.
         /// 
-        /// 
         /// ## Automation Types
         /// 
         /// There are several types of automations:  Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
-        /// 
         /// 
         /// ### Create Folder
         /// 
@@ -472,18 +461,15 @@ namespace Jschady.Filescom
         /// 
         /// Note this assumes you have folders in `AccountingAndTax/SalesTax/State/` already created for each state, e.g. `AccountingAndTax/SalesTax/State/CA/`.
         /// 
-        /// 
         /// ### Delete File
         /// 
         /// Deletes the file with path matching &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed) in the path named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;.
-        /// 
         /// 
         /// ### Copy File
         /// 
         /// Copies files in the folder named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt; to the path specified in &lt;span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`"&gt;`destinations`&lt;/span&gt;.
         /// The automation will only fire on files matching the &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only copy the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
-        /// 
         /// 
         /// ### Move File
         /// 
@@ -492,14 +478,12 @@ namespace Jschady.Filescom
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only move the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
         /// Note that for a move with multiple destinations, all but one destination is treated as a copy.
         /// 
-        /// 
         /// ### Run Remote Server Sync
         /// 
         /// The Run Remote Server Sync automation runs the remote server syncs specified by the &lt;span pulumi-lang-nodejs="`syncIds`" pulumi-lang-dotnet="`SyncIds`" pulumi-lang-go="`syncIds`" pulumi-lang-python="`sync_ids`" pulumi-lang-yaml="`syncIds`" pulumi-lang-java="`syncIds`" pulumi-lang-hcl="`sync_ids`"&gt;`syncIds`&lt;/span&gt;.
         /// 
         /// Typically when this automation is used, the remote server syncs in question are set to the manual
         /// scheduling mode (&lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; to &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; via the API) to disable the built in sync scheduler.
-        /// 
         /// 
         /// ### Import File
         /// 
@@ -529,12 +513,10 @@ namespace Jschady.Filescom
         /// * &lt;span pulumi-lang-nodejs="`headers`" pulumi-lang-dotnet="`Headers`" pulumi-lang-go="`headers`" pulumi-lang-python="`headers`" pulumi-lang-yaml="`headers`" pulumi-lang-java="`headers`" pulumi-lang-hcl="`headers`"&gt;`headers`&lt;/span&gt;: Optional headers to be included in the request. `%` tokens in the values will be replaced as described under Formatting Parameters.
         /// * &lt;span pulumi-lang-nodejs="`content`" pulumi-lang-dotnet="`Content`" pulumi-lang-go="`content`" pulumi-lang-python="`content`" pulumi-lang-yaml="`content`" pulumi-lang-java="`content`" pulumi-lang-hcl="`content`"&gt;`content`&lt;/span&gt;: Optional body to send for POST request. If supplied as a string, `%` tokens will be expanded. If supplied as a JSON Object, `%` tokens will be expanded for top-level values. Other JSON types will be sent as-is.
         /// 
-        /// 
         /// ### Help us build the future of Automations
         /// 
         /// Do you have an idea for something that would work well as a Files.com Automation?  Let us know!
         /// We are actively improving the types of automations offered on our platform.
-        /// 
         /// 
         /// ## Retrying Failures
         /// 
@@ -597,7 +579,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -605,7 +587,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getautomation" "exampleAutomation" {
+        /// data "filescom_automation" "exampleAutomation" {
         ///   id = 1
         /// }
         /// ```
@@ -768,11 +750,9 @@ namespace Jschady.Filescom
         /// 
         /// For example, if the &lt;span pulumi-lang-nodejs="`destinationReplaceFrom`" pulumi-lang-dotnet="`DestinationReplaceFrom`" pulumi-lang-go="`destinationReplaceFrom`" pulumi-lang-python="`destination_replace_from`" pulumi-lang-yaml="`destinationReplaceFrom`" pulumi-lang-java="`destinationReplaceFrom`" pulumi-lang-hcl="`destination_replace_from`"&gt;`destinationReplaceFrom`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`incoming`" pulumi-lang-dotnet="`Incoming`" pulumi-lang-go="`incoming`" pulumi-lang-python="`incoming`" pulumi-lang-yaml="`incoming`" pulumi-lang-java="`incoming`" pulumi-lang-hcl="`incoming`"&gt;`incoming`&lt;/span&gt; and the &lt;span pulumi-lang-nodejs="`destinationReplaceTo`" pulumi-lang-dotnet="`DestinationReplaceTo`" pulumi-lang-go="`destinationReplaceTo`" pulumi-lang-python="`destination_replace_to`" pulumi-lang-yaml="`destinationReplaceTo`" pulumi-lang-java="`destinationReplaceTo`" pulumi-lang-hcl="`destination_replace_to`"&gt;`destinationReplaceTo`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`outgoing`" pulumi-lang-dotnet="`Outgoing`" pulumi-lang-go="`outgoing`" pulumi-lang-python="`outgoing`" pulumi-lang-yaml="`outgoing`" pulumi-lang-java="`outgoing`" pulumi-lang-hcl="`outgoing`"&gt;`outgoing`&lt;/span&gt;, then `path/to/incoming.txt` will translate to `path/to/outgoing.txt`.
         /// 
-        /// 
         /// ## Automation Types
         /// 
         /// There are several types of automations:  Create Folder, Copy File, Move File, Delete File and, Run Remote Server Sync.
-        /// 
         /// 
         /// ### Create Folder
         /// 
@@ -791,18 +771,15 @@ namespace Jschady.Filescom
         /// 
         /// Note this assumes you have folders in `AccountingAndTax/SalesTax/State/` already created for each state, e.g. `AccountingAndTax/SalesTax/State/CA/`.
         /// 
-        /// 
         /// ### Delete File
         /// 
         /// Deletes the file with path matching &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed) in the path named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt;.
-        /// 
         /// 
         /// ### Copy File
         /// 
         /// Copies files in the folder named by &lt;span pulumi-lang-nodejs="`path`" pulumi-lang-dotnet="`Path`" pulumi-lang-go="`path`" pulumi-lang-python="`path`" pulumi-lang-yaml="`path`" pulumi-lang-java="`path`" pulumi-lang-hcl="`path`"&gt;`path`&lt;/span&gt; to the path specified in &lt;span pulumi-lang-nodejs="`destinations`" pulumi-lang-dotnet="`Destinations`" pulumi-lang-go="`destinations`" pulumi-lang-python="`destinations`" pulumi-lang-yaml="`destinations`" pulumi-lang-java="`destinations`" pulumi-lang-hcl="`destinations`"&gt;`destinations`&lt;/span&gt;.
         /// The automation will only fire on files matching the &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; (wildcards allowed). In the case of an action-triggered automation, it will only operate on the actual file that triggered the automation.
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only copy the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
-        /// 
         /// 
         /// ### Move File
         /// 
@@ -811,14 +788,12 @@ namespace Jschady.Filescom
         /// If the parameter &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; exists, the automation will only move the newest &lt;span pulumi-lang-nodejs="`limit`" pulumi-lang-dotnet="`Limit`" pulumi-lang-go="`limit`" pulumi-lang-python="`limit`" pulumi-lang-yaml="`limit`" pulumi-lang-java="`limit`" pulumi-lang-hcl="`limit`"&gt;`limit`&lt;/span&gt; files in each matching folder.
         /// Note that for a move with multiple destinations, all but one destination is treated as a copy.
         /// 
-        /// 
         /// ### Run Remote Server Sync
         /// 
         /// The Run Remote Server Sync automation runs the remote server syncs specified by the &lt;span pulumi-lang-nodejs="`syncIds`" pulumi-lang-dotnet="`SyncIds`" pulumi-lang-go="`syncIds`" pulumi-lang-python="`sync_ids`" pulumi-lang-yaml="`syncIds`" pulumi-lang-java="`syncIds`" pulumi-lang-hcl="`sync_ids`"&gt;`syncIds`&lt;/span&gt;.
         /// 
         /// Typically when this automation is used, the remote server syncs in question are set to the manual
         /// scheduling mode (&lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; to &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; via the API) to disable the built in sync scheduler.
-        /// 
         /// 
         /// ### Import File
         /// 
@@ -848,12 +823,10 @@ namespace Jschady.Filescom
         /// * &lt;span pulumi-lang-nodejs="`headers`" pulumi-lang-dotnet="`Headers`" pulumi-lang-go="`headers`" pulumi-lang-python="`headers`" pulumi-lang-yaml="`headers`" pulumi-lang-java="`headers`" pulumi-lang-hcl="`headers`"&gt;`headers`&lt;/span&gt;: Optional headers to be included in the request. `%` tokens in the values will be replaced as described under Formatting Parameters.
         /// * &lt;span pulumi-lang-nodejs="`content`" pulumi-lang-dotnet="`Content`" pulumi-lang-go="`content`" pulumi-lang-python="`content`" pulumi-lang-yaml="`content`" pulumi-lang-java="`content`" pulumi-lang-hcl="`content`"&gt;`content`&lt;/span&gt;: Optional body to send for POST request. If supplied as a string, `%` tokens will be expanded. If supplied as a JSON Object, `%` tokens will be expanded for top-level values. Other JSON types will be sent as-is.
         /// 
-        /// 
         /// ### Help us build the future of Automations
         /// 
         /// Do you have an idea for something that would work well as a Files.com Automation?  Let us know!
         /// We are actively improving the types of automations offered on our platform.
-        /// 
         /// 
         /// ## Retrying Failures
         /// 
@@ -916,7 +889,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -924,7 +897,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getautomation" "exampleAutomation" {
+        /// data "filescom_automation" "exampleAutomation" {
         ///   id = 1
         /// }
         /// ```

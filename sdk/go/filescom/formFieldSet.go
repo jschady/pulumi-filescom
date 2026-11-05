@@ -200,6 +200,12 @@ func (FormFieldSetState) ElementType() reflect.Type {
 	return reflect.TypeOf((*formFieldSetState)(nil)).Elem()
 }
 
+// FormFieldSetExists checks whether an existing FormFieldSet resource with the given ID exists.
+func FormFieldSetExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *FormFieldSetState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/formFieldSet:FormFieldSet", id, state, "", opts...)
+}
+
 type formFieldSetArgs struct {
 	// Form fields in display order. Managed state contains the current fields listed in form_layout. The data source also returns historical definitions.
 	FormFields interface{} `pulumi:"formFields"`

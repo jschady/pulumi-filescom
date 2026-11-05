@@ -128,6 +128,12 @@ func (UserRequestState) ElementType() reflect.Type {
 	return reflect.TypeOf((*userRequestState)(nil)).Elem()
 }
 
+// UserRequestExists checks whether an existing UserRequest resource with the given ID exists.
+func UserRequestExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *UserRequestState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/userRequest:UserRequest", id, state, "", opts...)
+}
+
 type userRequestArgs struct {
 	// User's company name
 	Company *string `pulumi:"company"`

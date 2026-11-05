@@ -374,6 +374,26 @@ class Request(pulumi.CustomResource):
         __props__.__dict__["user_ids"] = user_ids
         return Request(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            automation_id: pulumi.Input[Optional[_builtins.int]] = None,
+            destination: pulumi.Input[Optional[_builtins.str]] = None,
+            group_ids: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            source: pulumi.Input[Optional[_builtins.str]] = None,
+            user_display_name: pulumi.Input[Optional[_builtins.str]] = None,
+            user_ids: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["automationId"] = automation_id
+        __props__["destination"] = destination
+        __props__["groupIds"] = group_ids
+        __props__["path"] = path
+        __props__["source"] = source
+        __props__["userDisplayName"] = user_display_name
+        __props__["userIds"] = user_ids
+        return pulumi.runtime.exists_resource(None, 'filescom:index/request:Request', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="automationId")
     def automation_id(self) -> pulumi.Output[_builtins.int]:

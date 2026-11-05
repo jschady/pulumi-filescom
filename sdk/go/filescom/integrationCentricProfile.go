@@ -132,6 +132,12 @@ func (IntegrationCentricProfileState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationCentricProfileState)(nil)).Elem()
 }
 
+// IntegrationCentricProfileExists checks whether an existing IntegrationCentricProfile resource with the given ID exists.
+func IntegrationCentricProfileExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationCentricProfileState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/integrationCentricProfile:IntegrationCentricProfile", id, state, "", opts...)
+}
+
 type integrationCentricProfileArgs struct {
 	// Remote Server integrations the user is expected to add and connect. Each entry requires <span pulumi-lang-nodejs="`serverType`" pulumi-lang-dotnet="`ServerType`" pulumi-lang-go="`serverType`" pulumi-lang-python="`server_type`" pulumi-lang-yaml="`serverType`" pulumi-lang-java="`serverType`" pulumi-lang-hcl="`server_type`">`serverType`</span> and may include a display <span pulumi-lang-nodejs="`name`" pulumi-lang-dotnet="`Name`" pulumi-lang-go="`name`" pulumi-lang-python="`name`" pulumi-lang-yaml="`name`" pulumi-lang-java="`name`" pulumi-lang-hcl="`name`">`name`</span>.
 	ExpectedRemoteServers interface{} `pulumi:"expectedRemoteServers"`

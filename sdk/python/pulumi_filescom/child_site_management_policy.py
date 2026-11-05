@@ -540,6 +540,32 @@ class ChildSiteManagementPolicy(pulumi.CustomResource):
         __props__.__dict__["value"] = value
         return ChildSiteManagementPolicy(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            applied_child_site_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            child_site_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            default_policy: pulumi.Input[Optional[_builtins.bool]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            policy_type: pulumi.Input[Optional[_builtins.str]] = None,
+            skip_child_site_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            value: Optional[Any] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["appliedChildSiteIds"] = applied_child_site_ids
+        __props__["childSiteIds"] = child_site_ids
+        __props__["createdAt"] = created_at
+        __props__["defaultPolicy"] = default_policy
+        __props__["description"] = description
+        __props__["name"] = name
+        __props__["policyType"] = policy_type
+        __props__["skipChildSiteIds"] = skip_child_site_ids
+        __props__["updatedAt"] = updated_at
+        __props__["value"] = value
+        return pulumi.runtime.exists_resource(None, 'filescom:index/childSiteManagementPolicy:ChildSiteManagementPolicy', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="appliedChildSiteIds")
     def applied_child_site_ids(self) -> pulumi.Output[Sequence[_builtins.int]]:

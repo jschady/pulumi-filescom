@@ -1076,6 +1076,62 @@ class Notification(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Notification(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            group_id: pulumi.Input[Optional[_builtins.int]] = None,
+            group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            group_name: pulumi.Input[Optional[_builtins.str]] = None,
+            group_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            message: pulumi.Input[Optional[_builtins.str]] = None,
+            notify_on_copy: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_download: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_move: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_upload: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_user_actions: pulumi.Input[Optional[_builtins.bool]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            recursive: pulumi.Input[Optional[_builtins.bool]] = None,
+            send_interval: pulumi.Input[Optional[_builtins.str]] = None,
+            subject: pulumi.Input[Optional[_builtins.str]] = None,
+            suppressed_email: pulumi.Input[Optional[_builtins.bool]] = None,
+            trigger_by_share_recipients: pulumi.Input[Optional[_builtins.bool]] = None,
+            triggering_filenames: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            triggering_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            triggering_user_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            unsubscribed: pulumi.Input[Optional[_builtins.bool]] = None,
+            unsubscribed_reason: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["groupId"] = group_id
+        __props__["groupIds"] = group_ids
+        __props__["groupName"] = group_name
+        __props__["groupNames"] = group_names
+        __props__["message"] = message
+        __props__["notifyOnCopy"] = notify_on_copy
+        __props__["notifyOnDelete"] = notify_on_delete
+        __props__["notifyOnDownload"] = notify_on_download
+        __props__["notifyOnMove"] = notify_on_move
+        __props__["notifyOnUpload"] = notify_on_upload
+        __props__["notifyUserActions"] = notify_user_actions
+        __props__["path"] = path
+        __props__["recursive"] = recursive
+        __props__["sendInterval"] = send_interval
+        __props__["subject"] = subject
+        __props__["suppressedEmail"] = suppressed_email
+        __props__["triggerByShareRecipients"] = trigger_by_share_recipients
+        __props__["triggeringFilenames"] = triggering_filenames
+        __props__["triggeringGroupIds"] = triggering_group_ids
+        __props__["triggeringUserIds"] = triggering_user_ids
+        __props__["unsubscribed"] = unsubscribed
+        __props__["unsubscribedReason"] = unsubscribed_reason
+        __props__["userId"] = user_id
+        __props__["username"] = username
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/notification:Notification', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="groupId")
     def group_id(self) -> pulumi.Output[_builtins.int]:

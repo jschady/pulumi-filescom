@@ -595,6 +595,12 @@ func (BehaviorState) ElementType() reflect.Type {
 	return reflect.TypeOf((*behaviorState)(nil)).Elem()
 }
 
+// BehaviorExists checks whether an existing Behavior resource with the given ID exists.
+func BehaviorExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *BehaviorState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/behavior:Behavior", id, state, "", opts...)
+}
+
 type behaviorArgs struct {
 	// Behavior type.
 	Behavior string `pulumi:"behavior"`

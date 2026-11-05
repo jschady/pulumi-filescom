@@ -570,6 +570,32 @@ class FormFieldSet(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return FormFieldSet(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            form_fields: Optional[Any] = None,
+            form_layouts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            in_use: pulumi.Input[Optional[_builtins.bool]] = None,
+            require_complete_metadata_capture: pulumi.Input[Optional[_builtins.bool]] = None,
+            skip_company: pulumi.Input[Optional[_builtins.bool]] = None,
+            skip_email: pulumi.Input[Optional[_builtins.bool]] = None,
+            skip_name: pulumi.Input[Optional[_builtins.bool]] = None,
+            title: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["formFields"] = form_fields
+        __props__["formLayouts"] = form_layouts
+        __props__["inUse"] = in_use
+        __props__["requireCompleteMetadataCapture"] = require_complete_metadata_capture
+        __props__["skipCompany"] = skip_company
+        __props__["skipEmail"] = skip_email
+        __props__["skipName"] = skip_name
+        __props__["title"] = title
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/formFieldSet:FormFieldSet', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="formFields")
     def form_fields(self) -> pulumi.Output[Any]:

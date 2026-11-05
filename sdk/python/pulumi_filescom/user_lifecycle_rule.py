@@ -723,6 +723,40 @@ class UserLifecycleRule(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return UserLifecycleRule(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            action: pulumi.Input[Optional[_builtins.str]] = None,
+            apply_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            authentication_method: pulumi.Input[Optional[_builtins.str]] = None,
+            group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            inactivity_days: pulumi.Input[Optional[_builtins.int]] = None,
+            include_folder_admins: pulumi.Input[Optional[_builtins.bool]] = None,
+            include_site_admins: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            notify_users: pulumi.Input[Optional[_builtins.bool]] = None,
+            partner_tag: pulumi.Input[Optional[_builtins.str]] = None,
+            site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            user_state: pulumi.Input[Optional[_builtins.str]] = None,
+            user_tag: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["action"] = action
+        __props__["applyToAllWorkspaces"] = apply_to_all_workspaces
+        __props__["authenticationMethod"] = authentication_method
+        __props__["groupIds"] = group_ids
+        __props__["inactivityDays"] = inactivity_days
+        __props__["includeFolderAdmins"] = include_folder_admins
+        __props__["includeSiteAdmins"] = include_site_admins
+        __props__["name"] = name
+        __props__["notifyUsers"] = notify_users
+        __props__["partnerTag"] = partner_tag
+        __props__["siteId"] = site_id
+        __props__["userState"] = user_state
+        __props__["userTag"] = user_tag
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/userLifecycleRule:UserLifecycleRule', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def action(self) -> pulumi.Output[_builtins.str]:

@@ -358,6 +358,22 @@ class DesktopConfigurationProfile(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return DesktopConfigurationProfile(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            disable_drive_mounting: pulumi.Input[Optional[_builtins.bool]] = None,
+            mount_mappings: Optional[Any] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            use_for_all_users: pulumi.Input[Optional[_builtins.bool]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["disableDriveMounting"] = disable_drive_mounting
+        __props__["mountMappings"] = mount_mappings
+        __props__["name"] = name
+        __props__["useForAllUsers"] = use_for_all_users
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/desktopConfigurationProfile:DesktopConfigurationProfile', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="disableDriveMounting")
     def disable_drive_mounting(self) -> pulumi.Output[_builtins.bool]:

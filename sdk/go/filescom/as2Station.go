@@ -235,6 +235,12 @@ func (As2StationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*as2StationState)(nil)).Elem()
 }
 
+// As2StationExists checks whether an existing As2Station resource with the given ID exists.
+func As2StationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *As2StationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/as2Station:As2Station", id, state, "", opts...)
+}
+
 type as2StationArgs struct {
 	// The station's formal AS2 name, unique across all Workspaces on the Site.
 	Name *string `pulumi:"name"`

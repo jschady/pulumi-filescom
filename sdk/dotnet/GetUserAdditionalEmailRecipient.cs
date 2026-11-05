@@ -66,7 +66,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -74,7 +74,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuseradditionalemailrecipient" "exampleUserAdditionalEmailRecipient" {
+        /// data "filescom_user_additional_email_recipient" "exampleUserAdditionalEmailRecipient" {
         ///   id = 1
         /// }
         /// ```
@@ -173,7 +173,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -181,7 +181,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuseradditionalemailrecipient" "exampleUserAdditionalEmailRecipient" {
+        /// data "filescom_user_additional_email_recipient" "exampleUserAdditionalEmailRecipient" {
         ///   id = 1
         /// }
         /// ```
@@ -280,7 +280,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -288,7 +288,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getuseradditionalemailrecipient" "exampleUserAdditionalEmailRecipient" {
+        /// data "filescom_user_additional_email_recipient" "exampleUserAdditionalEmailRecipient" {
         ///   id = 1
         /// }
         /// ```

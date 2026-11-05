@@ -146,6 +146,12 @@ func (PartnerSiteRequestState) ElementType() reflect.Type {
 	return reflect.TypeOf((*partnerSiteRequestState)(nil)).Elem()
 }
 
+// PartnerSiteRequestExists checks whether an existing PartnerSiteRequest resource with the given ID exists.
+func PartnerSiteRequestExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PartnerSiteRequestState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/partnerSiteRequest:PartnerSiteRequest", id, state, "", opts...)
+}
+
 type partnerSiteRequestArgs struct {
 	// Guest Site URL
 	GuestSiteUrl string `pulumi:"guestSiteUrl"`

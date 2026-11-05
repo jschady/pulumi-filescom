@@ -131,6 +131,12 @@ func (ShareGroupState) ElementType() reflect.Type {
 	return reflect.TypeOf((*shareGroupState)(nil)).Elem()
 }
 
+// ShareGroupExists checks whether an existing ShareGroup resource with the given ID exists.
+func ShareGroupExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ShareGroupState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/shareGroup:ShareGroup", id, state, "", opts...)
+}
+
 type shareGroupArgs struct {
 	// A list of share group members
 	Members interface{} `pulumi:"members"`

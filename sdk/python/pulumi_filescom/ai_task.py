@@ -1001,6 +1001,58 @@ class AiTask(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return AiTask(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
+            human_readable_schedule: pulumi.Input[Optional[_builtins.str]] = None,
+            interval: pulumi.Input[Optional[_builtins.str]] = None,
+            last_run_at: pulumi.Input[Optional[_builtins.str]] = None,
+            master_admin_user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            permission_set: pulumi.Input[Optional[_builtins.str]] = None,
+            prompt: pulumi.Input[Optional[_builtins.str]] = None,
+            recurring_day: pulumi.Input[Optional[_builtins.int]] = None,
+            recurring_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_days_of_weeks: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_id: pulumi.Input[Optional[_builtins.int]] = None,
+            schedule_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            schedule_times_of_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            source: pulumi.Input[Optional[_builtins.str]] = None,
+            trigger: pulumi.Input[Optional[_builtins.str]] = None,
+            trigger_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["description"] = description
+        __props__["disabled"] = disabled
+        __props__["holidayRegion"] = holiday_region
+        __props__["humanReadableSchedule"] = human_readable_schedule
+        __props__["interval"] = interval
+        __props__["lastRunAt"] = last_run_at
+        __props__["masterAdminUserId"] = master_admin_user_id
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["permissionSet"] = permission_set
+        __props__["prompt"] = prompt
+        __props__["recurringDay"] = recurring_day
+        __props__["recurringDays"] = recurring_days
+        __props__["scheduleDaysOfWeeks"] = schedule_days_of_weeks
+        __props__["scheduleId"] = schedule_id
+        __props__["scheduleTimeZone"] = schedule_time_zone
+        __props__["scheduleTimesOfDays"] = schedule_times_of_days
+        __props__["source"] = source
+        __props__["trigger"] = trigger
+        __props__["triggerActions"] = trigger_actions
+        __props__["updatedAt"] = updated_at
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/aiTask:AiTask', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[_builtins.str]:

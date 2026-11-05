@@ -325,6 +325,12 @@ func (SyncState) ElementType() reflect.Type {
 	return reflect.TypeOf((*syncState)(nil)).Elem()
 }
 
+// SyncExists checks whether an existing Sync resource with the given ID exists.
+func SyncExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SyncState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/sync:Sync", id, state, "", opts...)
+}
+
 type syncArgs struct {
 	// If true, the trigger file will be sent at the end of a successful sync even when no files were transferred.
 	AlwaysWriteTriggerFile *bool `pulumi:"alwaysWriteTriggerFile"`

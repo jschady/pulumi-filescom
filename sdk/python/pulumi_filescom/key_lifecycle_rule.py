@@ -398,6 +398,24 @@ class KeyLifecycleRule(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return KeyLifecycleRule(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            apply_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            expiration_days: pulumi.Input[Optional[_builtins.int]] = None,
+            inactivity_days: pulumi.Input[Optional[_builtins.int]] = None,
+            key_type: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["applyToAllWorkspaces"] = apply_to_all_workspaces
+        __props__["expirationDays"] = expiration_days
+        __props__["inactivityDays"] = inactivity_days
+        __props__["keyType"] = key_type
+        __props__["name"] = name
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/keyLifecycleRule:KeyLifecycleRule', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="applyToAllWorkspaces")
     def apply_to_all_workspaces(self) -> pulumi.Output[_builtins.bool]:

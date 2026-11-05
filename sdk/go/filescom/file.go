@@ -330,6 +330,12 @@ func (FileState) ElementType() reflect.Type {
 	return reflect.TypeOf((*fileState)(nil)).Elem()
 }
 
+// FileExists checks whether an existing File resource with the given ID exists.
+func FileExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *FileState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/file:File", id, state, "", opts...)
+}
+
 type fileArgs struct {
 	// Custom metadata map of keys and values. Limited to 32 keys, 256 characters per key and 1024 characters per value.
 	CustomMetadata interface{} `pulumi:"customMetadata"`

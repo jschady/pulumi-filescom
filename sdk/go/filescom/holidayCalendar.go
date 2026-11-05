@@ -173,6 +173,12 @@ func (HolidayCalendarState) ElementType() reflect.Type {
 	return reflect.TypeOf((*holidayCalendarState)(nil)).Elem()
 }
 
+// HolidayCalendarExists checks whether an existing HolidayCalendar resource with the given ID exists.
+func HolidayCalendarExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *HolidayCalendarState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/holidayCalendar:HolidayCalendar", id, state, "", opts...)
+}
+
 type holidayCalendarArgs struct {
 	// Holiday rules for the calendar.
 	Definition HolidayCalendarDefinition `pulumi:"definition"`

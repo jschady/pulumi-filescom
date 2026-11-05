@@ -230,6 +230,12 @@ func (ApiKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*apiKeyState)(nil)).Elem()
 }
 
+// ApiKeyExists checks whether an existing ApiKey resource with the given ID exists.
+func ApiKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ApiKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/apiKey:ApiKey", id, state, "", opts...)
+}
+
 type apiKeyArgs struct {
 	// If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, this API key will be usable with AWS-compatible endpoints, such as our Inbound S3-compatible endpoint.
 	AwsStyleCredentials *bool `pulumi:"awsStyleCredentials"`

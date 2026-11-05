@@ -175,6 +175,12 @@ func (CustomDomainState) ElementType() reflect.Type {
 	return reflect.TypeOf((*customDomainState)(nil)).Elem()
 }
 
+// CustomDomainExists checks whether an existing CustomDomain resource with the given ID exists.
+func CustomDomainExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *CustomDomainState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/customDomain:CustomDomain", id, state, "", opts...)
+}
+
 type customDomainArgs struct {
 	// Allow all workspaces to use this default-workspace Custom Domain.
 	AvailableToAllWorkspaces *bool `pulumi:"availableToAllWorkspaces"`

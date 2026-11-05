@@ -63,7 +63,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -71,7 +71,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsite" "exampleSite" {
+        /// data "filescom_site" "exampleSite" {
         /// }
         /// ```
         /// ```java
@@ -162,7 +162,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -170,7 +170,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsite" "exampleSite" {
+        /// data "filescom_site" "exampleSite" {
         /// }
         /// ```
         /// ```java
@@ -261,7 +261,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -269,7 +269,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getsite" "exampleSite" {
+        /// data "filescom_site" "exampleSite" {
         /// }
         /// ```
         /// ```java

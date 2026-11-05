@@ -580,6 +580,38 @@ class Lock(pulumi.CustomResource):
         __props__.__dict__["username"] = username
         return Lock(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            allow_access_by_any_user: pulumi.Input[Optional[_builtins.bool]] = None,
+            depth: pulumi.Input[Optional[_builtins.str]] = None,
+            exclusive: pulumi.Input[Optional[_builtins.bool]] = None,
+            expected_token: pulumi.Input[Optional[_builtins.str]] = None,
+            owner: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            recursive: pulumi.Input[Optional[_builtins.bool]] = None,
+            scope: pulumi.Input[Optional[_builtins.str]] = None,
+            timeout: pulumi.Input[Optional[_builtins.int]] = None,
+            token: pulumi.Input[Optional[_builtins.str]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["allowAccessByAnyUser"] = allow_access_by_any_user
+        __props__["depth"] = depth
+        __props__["exclusive"] = exclusive
+        __props__["expectedToken"] = expected_token
+        __props__["owner"] = owner
+        __props__["path"] = path
+        __props__["recursive"] = recursive
+        __props__["scope"] = scope
+        __props__["timeout"] = timeout
+        __props__["token"] = token
+        __props__["type"] = type
+        __props__["userId"] = user_id
+        __props__["username"] = username
+        return pulumi.runtime.exists_resource(None, 'filescom:index/lock:Lock', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="allowAccessByAnyUser")
     def allow_access_by_any_user(self) -> pulumi.Output[_builtins.bool]:

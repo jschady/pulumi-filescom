@@ -785,6 +785,48 @@ class GpgKey(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return GpgKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            expires_at: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_email: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_expires_at: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_full_name: pulumi.Input[Optional[_builtins.str]] = None,
+            generate_keypair: pulumi.Input[Optional[_builtins.bool]] = None,
+            generated_private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            generated_public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            partner_id: pulumi.Input[Optional[_builtins.int]] = None,
+            partner_name: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_password: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_password_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["expiresAt"] = expires_at
+        __props__["generateEmail"] = generate_email
+        __props__["generateExpiresAt"] = generate_expires_at
+        __props__["generateFullName"] = generate_full_name
+        __props__["generateKeypair"] = generate_keypair
+        __props__["generatedPrivateKey"] = generated_private_key
+        __props__["generatedPublicKey"] = generated_public_key
+        __props__["name"] = name
+        __props__["partnerId"] = partner_id
+        __props__["partnerName"] = partner_name
+        __props__["privateKey"] = private_key
+        __props__["privateKeyMd5"] = private_key_md5
+        __props__["privateKeyPassword"] = private_key_password
+        __props__["privateKeyPasswordMd5"] = private_key_password_md5
+        __props__["publicKey"] = public_key
+        __props__["publicKeyMd5"] = public_key_md5
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/gpgKey:GpgKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="expiresAt")
     def expires_at(self) -> pulumi.Output[_builtins.str]:

@@ -266,6 +266,12 @@ func (GpgKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*gpgKeyState)(nil)).Elem()
 }
 
+// GpgKeyExists checks whether an existing GpgKey resource with the given ID exists.
+func GpgKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *GpgKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/gpgKey:GpgKey", id, state, "", opts...)
+}
+
 type gpgKeyArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Email address of the key owner. Used for the generation of the key. Will be ignored if <span pulumi-lang-nodejs="`generateKeypair`" pulumi-lang-dotnet="`GenerateKeypair`" pulumi-lang-go="`generateKeypair`" pulumi-lang-python="`generate_keypair`" pulumi-lang-yaml="`generateKeypair`" pulumi-lang-java="`generateKeypair`" pulumi-lang-hcl="`generate_keypair`">`generateKeypair`</span> is false.

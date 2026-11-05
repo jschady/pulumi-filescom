@@ -248,6 +248,12 @@ func (ScheduledExportState) ElementType() reflect.Type {
 	return reflect.TypeOf((*scheduledExportState)(nil)).Elem()
 }
 
+// ScheduledExportExists checks whether an existing ScheduledExport resource with the given ID exists.
+func ScheduledExportExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ScheduledExportState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/scheduledExport:ScheduledExport", id, state, "", opts...)
+}
+
 type scheduledExportArgs struct {
 	// If true, this scheduled export will not run.
 	Disabled *bool `pulumi:"disabled"`

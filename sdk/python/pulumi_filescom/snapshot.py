@@ -382,6 +382,26 @@ class Snapshot(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Snapshot(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            bundle_id: pulumi.Input[Optional[_builtins.int]] = None,
+            expires_at: pulumi.Input[Optional[_builtins.str]] = None,
+            finalized_at: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["bundleId"] = bundle_id
+        __props__["expiresAt"] = expires_at
+        __props__["finalizedAt"] = finalized_at
+        __props__["name"] = name
+        __props__["paths"] = paths
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/snapshot:Snapshot', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="bundleId")
     def bundle_id(self) -> pulumi.Output[_builtins.int]:

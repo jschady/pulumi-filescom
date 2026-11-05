@@ -273,6 +273,12 @@ func (NotificationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*notificationState)(nil)).Elem()
 }
 
+// NotificationExists checks whether an existing Notification resource with the given ID exists.
+func NotificationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *NotificationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/notification:Notification", id, state, "", opts...)
+}
+
 type notificationArgs struct {
 	// ID of Group to receive notifications
 	GroupId *int `pulumi:"groupId"`

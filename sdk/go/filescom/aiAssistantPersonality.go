@@ -144,6 +144,12 @@ func (AiAssistantPersonalityState) ElementType() reflect.Type {
 	return reflect.TypeOf((*aiAssistantPersonalityState)(nil)).Elem()
 }
 
+// AiAssistantPersonalityExists checks whether an existing AiAssistantPersonality resource with the given ID exists.
+func AiAssistantPersonalityExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *AiAssistantPersonalityState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/aiAssistantPersonality:AiAssistantPersonality", id, state, "", opts...)
+}
+
 type aiAssistantPersonalityArgs struct {
 	// If true, this default-workspace personality can apply to users in all workspaces.
 	ApplyToAllWorkspaces *bool `pulumi:"applyToAllWorkspaces"`

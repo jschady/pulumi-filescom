@@ -126,6 +126,12 @@ func (StyleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*styleState)(nil)).Elem()
 }
 
+// StyleExists checks whether an existing Style resource with the given ID exists.
+func StyleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *StyleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/style:Style", id, state, "", opts...)
+}
+
 type styleArgs struct {
 	// URL to open when a public visitor clicks the logo
 	LogoClickHref *string `pulumi:"logoClickHref"`

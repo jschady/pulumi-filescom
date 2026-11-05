@@ -515,6 +515,36 @@ class CustomDomain(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return CustomDomain(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            available_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            brick_managed: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            destination: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_status: pulumi.Input[Optional[_builtins.str]] = None,
+            domain: pulumi.Input[Optional[_builtins.str]] = None,
+            folder_behavior_id: pulumi.Input[Optional[_builtins.int]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            outbound_ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            ssl_certificate_id: pulumi.Input[Optional[_builtins.int]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["availableToAllWorkspaces"] = available_to_all_workspaces
+        __props__["brickManaged"] = brick_managed
+        __props__["createdAt"] = created_at
+        __props__["destination"] = destination
+        __props__["dnsStatus"] = dns_status
+        __props__["domain"] = domain
+        __props__["folderBehaviorId"] = folder_behavior_id
+        __props__["ipAddresses"] = ip_addresses
+        __props__["outboundIpAddresses"] = outbound_ip_addresses
+        __props__["sslCertificateId"] = ssl_certificate_id
+        __props__["updatedAt"] = updated_at
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/customDomain:CustomDomain', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="availableToAllWorkspaces")
     def available_to_all_workspaces(self) -> pulumi.Output[_builtins.bool]:

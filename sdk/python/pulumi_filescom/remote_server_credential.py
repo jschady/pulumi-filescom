@@ -1752,6 +1752,88 @@ class RemoteServerCredential(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return RemoteServerCredential(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aws_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_blob_storage_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_blob_storage_sas_token: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_files_storage_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_files_storage_sas_token: pulumi.Input[Optional[_builtins.str]] = None,
+            backblaze_b2_application_key: pulumi.Input[Optional[_builtins.str]] = None,
+            backblaze_b2_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            cloudflare_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            cloudflare_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            copy_values_from_credential_id: pulumi.Input[Optional[_builtins.int]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            filebase_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            filebase_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            google_cloud_storage_credentials_json: pulumi.Input[Optional[_builtins.str]] = None,
+            google_cloud_storage_s3_compatible_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            google_cloud_storage_s3_compatible_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            linode_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            linode_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            password: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_passphrase: pulumi.Input[Optional[_builtins.str]] = None,
+            s3_assume_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            s3_assume_role_duration_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+            s3_assume_role_external_id: pulumi.Input[Optional[_builtins.str]] = None,
+            s3_compatible_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            s3_compatible_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            server_type: pulumi.Input[Optional[_builtins.str]] = None,
+            sharepoint_app_credential_type: pulumi.Input[Optional[_builtins.str]] = None,
+            sharepoint_client_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            sharepoint_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            sharepoint_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            sharepoint_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None,
+            wasabi_access_key: pulumi.Input[Optional[_builtins.str]] = None,
+            wasabi_secret_key: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["awsAccessKey"] = aws_access_key
+        __props__["awsSecretKey"] = aws_secret_key
+        __props__["azureBlobStorageAccessKey"] = azure_blob_storage_access_key
+        __props__["azureBlobStorageSasToken"] = azure_blob_storage_sas_token
+        __props__["azureFilesStorageAccessKey"] = azure_files_storage_access_key
+        __props__["azureFilesStorageSasToken"] = azure_files_storage_sas_token
+        __props__["backblazeB2ApplicationKey"] = backblaze_b2_application_key
+        __props__["backblazeB2KeyId"] = backblaze_b2_key_id
+        __props__["cloudflareAccessKey"] = cloudflare_access_key
+        __props__["cloudflareSecretKey"] = cloudflare_secret_key
+        __props__["copyValuesFromCredentialId"] = copy_values_from_credential_id
+        __props__["description"] = description
+        __props__["filebaseAccessKey"] = filebase_access_key
+        __props__["filebaseSecretKey"] = filebase_secret_key
+        __props__["googleCloudStorageCredentialsJson"] = google_cloud_storage_credentials_json
+        __props__["googleCloudStorageS3CompatibleAccessKey"] = google_cloud_storage_s3_compatible_access_key
+        __props__["googleCloudStorageS3CompatibleSecretKey"] = google_cloud_storage_s3_compatible_secret_key
+        __props__["linodeAccessKey"] = linode_access_key
+        __props__["linodeSecretKey"] = linode_secret_key
+        __props__["name"] = name
+        __props__["password"] = password
+        __props__["privateKey"] = private_key
+        __props__["privateKeyPassphrase"] = private_key_passphrase
+        __props__["s3AssumeRoleArn"] = s3_assume_role_arn
+        __props__["s3AssumeRoleDurationSeconds"] = s3_assume_role_duration_seconds
+        __props__["s3AssumeRoleExternalId"] = s3_assume_role_external_id
+        __props__["s3CompatibleAccessKey"] = s3_compatible_access_key
+        __props__["s3CompatibleSecretKey"] = s3_compatible_secret_key
+        __props__["serverType"] = server_type
+        __props__["sharepointAppCredentialType"] = sharepoint_app_credential_type
+        __props__["sharepointClientCertificate"] = sharepoint_client_certificate
+        __props__["sharepointClientId"] = sharepoint_client_id
+        __props__["sharepointClientSecret"] = sharepoint_client_secret
+        __props__["sharepointTenantId"] = sharepoint_tenant_id
+        __props__["username"] = username
+        __props__["wasabiAccessKey"] = wasabi_access_key
+        __props__["wasabiSecretKey"] = wasabi_secret_key
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/remoteServerCredential:RemoteServerCredential', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="awsAccessKey")
     def aws_access_key(self) -> pulumi.Output[_builtins.str]:

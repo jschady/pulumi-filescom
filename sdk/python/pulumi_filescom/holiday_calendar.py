@@ -137,7 +137,7 @@ class HolidayCalendar(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict']]] = None,
+                 definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -209,7 +209,7 @@ class HolidayCalendar(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict']] definition: Holiday rules for the calendar.
+        :param pulumi.Input[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']] definition: Holiday rules for the calendar.
         :param pulumi.Input[_builtins.str] name: Holiday Calendar name.
         """
         ...
@@ -300,7 +300,7 @@ class HolidayCalendar(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict']]] = None,
+                 definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -328,7 +328,7 @@ class HolidayCalendar(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
-            definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict']]] = None,
+            definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'HolidayCalendar':
         """
@@ -339,7 +339,7 @@ class HolidayCalendar(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] created_at: Creation time.
-        :param pulumi.Input[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict']] definition: Holiday rules for the calendar.
+        :param pulumi.Input[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']] definition: Holiday rules for the calendar.
         :param pulumi.Input[_builtins.str] name: Holiday Calendar name.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -352,6 +352,20 @@ class HolidayCalendar(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["updated_at"] = updated_at
         return HolidayCalendar(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            definition: pulumi.Input[Optional[Union['HolidayCalendarDefinitionArgs', 'HolidayCalendarDefinitionArgsDict', 'outputs.HolidayCalendarDefinition']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["definition"] = definition
+        __props__["name"] = name
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'filescom:index/holidayCalendar:HolidayCalendar', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="createdAt")

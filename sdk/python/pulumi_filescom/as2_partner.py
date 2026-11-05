@@ -902,6 +902,56 @@ class As2Partner(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return As2Partner(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            additional_http_headers: Optional[Any] = None,
+            as2_station_id: pulumi.Input[Optional[_builtins.int]] = None,
+            default_mime_type: pulumi.Input[Optional[_builtins.str]] = None,
+            enable_dedicated_ips: pulumi.Input[Optional[_builtins.bool]] = None,
+            hex_public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
+            http_auth_password: pulumi.Input[Optional[_builtins.str]] = None,
+            http_auth_username: pulumi.Input[Optional[_builtins.str]] = None,
+            mdn_validation_level: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12: pulumi.Input[Optional[_builtins.str]] = None,
+            pkcs12_password: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_not_after: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_not_before: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_serial: pulumi.Input[Optional[_builtins.str]] = None,
+            public_certificate_subject: pulumi.Input[Optional[_builtins.str]] = None,
+            server_certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            signature_validation_level: pulumi.Input[Optional[_builtins.str]] = None,
+            uri: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["additionalHttpHeaders"] = additional_http_headers
+        __props__["as2StationId"] = as2_station_id
+        __props__["defaultMimeType"] = default_mime_type
+        __props__["enableDedicatedIps"] = enable_dedicated_ips
+        __props__["hexPublicCertificateSerial"] = hex_public_certificate_serial
+        __props__["httpAuthPassword"] = http_auth_password
+        __props__["httpAuthUsername"] = http_auth_username
+        __props__["mdnValidationLevel"] = mdn_validation_level
+        __props__["name"] = name
+        __props__["pkcs12"] = pkcs12
+        __props__["pkcs12Password"] = pkcs12_password
+        __props__["publicCertificate"] = public_certificate
+        __props__["publicCertificateIssuer"] = public_certificate_issuer
+        __props__["publicCertificateMd5"] = public_certificate_md5
+        __props__["publicCertificateNotAfter"] = public_certificate_not_after
+        __props__["publicCertificateNotBefore"] = public_certificate_not_before
+        __props__["publicCertificateSerial"] = public_certificate_serial
+        __props__["publicCertificateSubject"] = public_certificate_subject
+        __props__["serverCertificate"] = server_certificate
+        __props__["signatureValidationLevel"] = signature_validation_level
+        __props__["uri"] = uri
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/as2Partner:As2Partner', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="additionalHttpHeaders")
     def additional_http_headers(self) -> pulumi.Output[Any]:

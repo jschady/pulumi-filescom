@@ -111,7 +111,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -119,7 +119,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getremoteserver" "exampleRemoteServer" {
+        /// data "filescom_remote_server" "exampleRemoteServer" {
         ///   id = 1
         /// }
         /// ```
@@ -263,7 +263,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -271,7 +271,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getremoteserver" "exampleRemoteServer" {
+        /// data "filescom_remote_server" "exampleRemoteServer" {
         ///   id = 1
         /// }
         /// ```
@@ -415,7 +415,7 @@ namespace Jschady.Filescom
         /// }
         /// ```
         /// ```hcl
-        /// pulumi {
+        /// terraform {
         ///   required_providers {
         ///     filescom = {
         ///       source = "pulumi/filescom"
@@ -423,7 +423,7 @@ namespace Jschady.Filescom
         ///   }
         /// }
         /// 
-        /// data "filescom_getremoteserver" "exampleRemoteServer" {
+        /// data "filescom_remote_server" "exampleRemoteServer" {
         ///   id = 1
         /// }
         /// ```

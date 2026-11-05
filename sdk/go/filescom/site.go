@@ -1402,6 +1402,12 @@ func (SiteState) ElementType() reflect.Type {
 	return reflect.TypeOf((*siteState)(nil)).Elem()
 }
 
+// SiteExists checks whether an existing Site resource with the given ID exists.
+func SiteExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SiteState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/site:Site", id, state, "", opts...)
+}
+
 type siteArgs struct {
 	// Id of the currently selected custom SFTP Host Key
 	ActiveSftpHostKeyId *int `pulumi:"activeSftpHostKeyId"`

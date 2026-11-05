@@ -258,6 +258,12 @@ func (PublicKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*publicKeyState)(nil)).Elem()
 }
 
+// PublicKeyExists checks whether an existing PublicKey resource with the given ID exists.
+func PublicKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PublicKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/publicKey:PublicKey", id, state, "", opts...)
+}
+
 type publicKeyArgs struct {
 	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
 	// Type of key to generate.  One of rsa, dsa, ecdsa, ed25519. Used for the generation of the key. Will be ignored if <span pulumi-lang-nodejs="`generateKeypair`" pulumi-lang-dotnet="`GenerateKeypair`" pulumi-lang-go="`generateKeypair`" pulumi-lang-python="`generate_keypair`" pulumi-lang-yaml="`generateKeypair`" pulumi-lang-java="`generateKeypair`" pulumi-lang-hcl="`generate_keypair`">`generateKeypair`</span> is false.

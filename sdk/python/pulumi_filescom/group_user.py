@@ -323,6 +323,22 @@ class GroupUser(pulumi.CustomResource):
         __props__.__dict__["username"] = username
         return GroupUser(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            admin: pulumi.Input[Optional[_builtins.bool]] = None,
+            group_id: pulumi.Input[Optional[_builtins.int]] = None,
+            group_name: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            username: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["admin"] = admin
+        __props__["groupId"] = group_id
+        __props__["groupName"] = group_name
+        __props__["userId"] = user_id
+        __props__["username"] = username
+        return pulumi.runtime.exists_resource(None, 'filescom:index/groupUser:GroupUser', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def admin(self) -> pulumi.Output[_builtins.bool]:

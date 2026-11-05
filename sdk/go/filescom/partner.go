@@ -233,6 +233,12 @@ func (PartnerState) ElementType() reflect.Type {
 	return reflect.TypeOf((*partnerState)(nil)).Elem()
 }
 
+// PartnerExists checks whether an existing Partner resource with the given ID exists.
+func PartnerExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PartnerState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/partner:Partner", id, state, "", opts...)
+}
+
 type partnerArgs struct {
 	// AI Assistant Personality ID assigned to this Partner, if any. Users in the Partner inherit it unless a direct per-user assignment overrides it.
 	AiAssistantPersonalityId *int `pulumi:"aiAssistantPersonalityId"`

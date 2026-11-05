@@ -1316,6 +1316,76 @@ class Sync(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Sync(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            always_write_trigger_file: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            delete_empty_folders: pulumi.Input[Optional[_builtins.bool]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            dest_path: pulumi.Input[Optional[_builtins.str]] = None,
+            dest_remote_server_id: pulumi.Input[Optional[_builtins.int]] = None,
+            dest_site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            exclude_patterns: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
+            include_patterns: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            interval: pulumi.Input[Optional[_builtins.str]] = None,
+            keep_after_copy: pulumi.Input[Optional[_builtins.bool]] = None,
+            latest_sync_run: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            recurring_day: pulumi.Input[Optional[_builtins.int]] = None,
+            recurring_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_days_of_weeks: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_id: pulumi.Input[Optional[_builtins.int]] = None,
+            schedule_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            schedule_times_of_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            src_path: pulumi.Input[Optional[_builtins.str]] = None,
+            src_remote_server_id: pulumi.Input[Optional[_builtins.int]] = None,
+            src_site_id: pulumi.Input[Optional[_builtins.int]] = None,
+            sync_interval_minutes: pulumi.Input[Optional[_builtins.int]] = None,
+            trigger: pulumi.Input[Optional[_builtins.str]] = None,
+            trigger_file: pulumi.Input[Optional[_builtins.str]] = None,
+            two_way: pulumi.Input[Optional[_builtins.bool]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["alwaysWriteTriggerFile"] = always_write_trigger_file
+        __props__["createdAt"] = created_at
+        __props__["deleteEmptyFolders"] = delete_empty_folders
+        __props__["description"] = description
+        __props__["destPath"] = dest_path
+        __props__["destRemoteServerId"] = dest_remote_server_id
+        __props__["destSiteId"] = dest_site_id
+        __props__["disabled"] = disabled
+        __props__["excludePatterns"] = exclude_patterns
+        __props__["holidayRegion"] = holiday_region
+        __props__["includePatterns"] = include_patterns
+        __props__["interval"] = interval
+        __props__["keepAfterCopy"] = keep_after_copy
+        __props__["latestSyncRun"] = latest_sync_run
+        __props__["name"] = name
+        __props__["recurringDay"] = recurring_day
+        __props__["recurringDays"] = recurring_days
+        __props__["scheduleDaysOfWeeks"] = schedule_days_of_weeks
+        __props__["scheduleId"] = schedule_id
+        __props__["scheduleTimeZone"] = schedule_time_zone
+        __props__["scheduleTimesOfDays"] = schedule_times_of_days
+        __props__["siteId"] = site_id
+        __props__["srcPath"] = src_path
+        __props__["srcRemoteServerId"] = src_remote_server_id
+        __props__["srcSiteId"] = src_site_id
+        __props__["syncIntervalMinutes"] = sync_interval_minutes
+        __props__["trigger"] = trigger
+        __props__["triggerFile"] = trigger_file
+        __props__["twoWay"] = two_way
+        __props__["updatedAt"] = updated_at
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/sync:Sync', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="alwaysWriteTriggerFile")
     def always_write_trigger_file(self) -> pulumi.Output[_builtins.bool]:

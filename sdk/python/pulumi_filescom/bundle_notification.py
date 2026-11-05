@@ -402,6 +402,26 @@ class BundleNotification(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return BundleNotification(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            bundle_id: pulumi.Input[Optional[_builtins.int]] = None,
+            notify_current_user: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_registration: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_on_upload: pulumi.Input[Optional[_builtins.bool]] = None,
+            notify_user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            user_id: pulumi.Input[Optional[_builtins.int]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["bundleId"] = bundle_id
+        __props__["notifyCurrentUser"] = notify_current_user
+        __props__["notifyOnRegistration"] = notify_on_registration
+        __props__["notifyOnUpload"] = notify_on_upload
+        __props__["notifyUserId"] = notify_user_id
+        __props__["userId"] = user_id
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/bundleNotification:BundleNotification', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="bundleId")
     def bundle_id(self) -> pulumi.Output[_builtins.int]:

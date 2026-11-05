@@ -1039,6 +1039,86 @@ class File(pulumi.CustomResource):
         __props__.__dict__["type"] = type
         return File(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            crc32: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            created_by_api_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_as2_incoming_message_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_bundle_registration_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_inbox_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_remote_server_id: pulumi.Input[Optional[_builtins.int]] = None,
+            created_by_sync_id: pulumi.Input[Optional[_builtins.int]] = None,
+            custom_metadata: Optional[Any] = None,
+            direct_connection_info: pulumi.Input[Optional[_builtins.str]] = None,
+            display_name: pulumi.Input[Optional[_builtins.str]] = None,
+            download_uri: pulumi.Input[Optional[_builtins.str]] = None,
+            is_locked: pulumi.Input[Optional[_builtins.bool]] = None,
+            last_modified_by_api_key_id: pulumi.Input[Optional[_builtins.int]] = None,
+            last_modified_by_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
+            last_modified_by_bundle_registration_id: pulumi.Input[Optional[_builtins.int]] = None,
+            last_modified_by_id: pulumi.Input[Optional[_builtins.int]] = None,
+            last_modified_by_remote_server_id: pulumi.Input[Optional[_builtins.int]] = None,
+            last_modified_by_sync_id: pulumi.Input[Optional[_builtins.int]] = None,
+            md5: pulumi.Input[Optional[_builtins.str]] = None,
+            mime_type: pulumi.Input[Optional[_builtins.str]] = None,
+            mtime: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            permissions: pulumi.Input[Optional[_builtins.str]] = None,
+            preview: pulumi.Input[Optional[_builtins.str]] = None,
+            preview_id: pulumi.Input[Optional[_builtins.int]] = None,
+            priority_color: pulumi.Input[Optional[_builtins.str]] = None,
+            provided_mtime: pulumi.Input[Optional[_builtins.str]] = None,
+            region: pulumi.Input[Optional[_builtins.str]] = None,
+            sha1: pulumi.Input[Optional[_builtins.str]] = None,
+            sha256: pulumi.Input[Optional[_builtins.str]] = None,
+            size: pulumi.Input[Optional[_builtins.int]] = None,
+            source: pulumi.Input[Optional[_builtins.str]] = None,
+            subfolders_locked: pulumi.Input[Optional[_builtins.bool]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["crc32"] = crc32
+        __props__["createdAt"] = created_at
+        __props__["createdByApiKeyId"] = created_by_api_key_id
+        __props__["createdByAs2IncomingMessageId"] = created_by_as2_incoming_message_id
+        __props__["createdByAutomationId"] = created_by_automation_id
+        __props__["createdByBundleRegistrationId"] = created_by_bundle_registration_id
+        __props__["createdById"] = created_by_id
+        __props__["createdByInboxId"] = created_by_inbox_id
+        __props__["createdByRemoteServerId"] = created_by_remote_server_id
+        __props__["createdBySyncId"] = created_by_sync_id
+        __props__["customMetadata"] = custom_metadata
+        __props__["directConnectionInfo"] = direct_connection_info
+        __props__["displayName"] = display_name
+        __props__["downloadUri"] = download_uri
+        __props__["isLocked"] = is_locked
+        __props__["lastModifiedByApiKeyId"] = last_modified_by_api_key_id
+        __props__["lastModifiedByAutomationId"] = last_modified_by_automation_id
+        __props__["lastModifiedByBundleRegistrationId"] = last_modified_by_bundle_registration_id
+        __props__["lastModifiedById"] = last_modified_by_id
+        __props__["lastModifiedByRemoteServerId"] = last_modified_by_remote_server_id
+        __props__["lastModifiedBySyncId"] = last_modified_by_sync_id
+        __props__["md5"] = md5
+        __props__["mimeType"] = mime_type
+        __props__["mtime"] = mtime
+        __props__["path"] = path
+        __props__["permissions"] = permissions
+        __props__["preview"] = preview
+        __props__["previewId"] = preview_id
+        __props__["priorityColor"] = priority_color
+        __props__["providedMtime"] = provided_mtime
+        __props__["region"] = region
+        __props__["sha1"] = sha1
+        __props__["sha256"] = sha256
+        __props__["size"] = size
+        __props__["source"] = source
+        __props__["subfoldersLocked"] = subfolders_locked
+        __props__["type"] = type
+        return pulumi.runtime.exists_resource(None, 'filescom:index/file:File', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def crc32(self) -> pulumi.Output[_builtins.str]:

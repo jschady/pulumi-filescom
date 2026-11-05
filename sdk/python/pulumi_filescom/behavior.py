@@ -1105,6 +1105,36 @@ class Behavior(pulumi.CustomResource):
         __props__.__dict__["value"] = value
         return Behavior(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            attachment_url: pulumi.Input[Optional[_builtins.str]] = None,
+            behavior: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            disable_parent_folder_behavior: pulumi.Input[Optional[_builtins.bool]] = None,
+            inherited: pulumi.Input[Optional[_builtins.bool]] = None,
+            managed: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            public_hosting_url: pulumi.Input[Optional[_builtins.str]] = None,
+            recursive: pulumi.Input[Optional[_builtins.bool]] = None,
+            root_behavior_site_admin_only: pulumi.Input[Optional[_builtins.bool]] = None,
+            value: Optional[Any] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["attachmentUrl"] = attachment_url
+        __props__["behavior"] = behavior
+        __props__["description"] = description
+        __props__["disableParentFolderBehavior"] = disable_parent_folder_behavior
+        __props__["inherited"] = inherited
+        __props__["managed"] = managed
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["publicHostingUrl"] = public_hosting_url
+        __props__["recursive"] = recursive
+        __props__["rootBehaviorSiteAdminOnly"] = root_behavior_site_admin_only
+        __props__["value"] = value
+        return pulumi.runtime.exists_resource(None, 'filescom:index/behavior:Behavior', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="attachmentUrl")
     def attachment_url(self) -> pulumi.Output[_builtins.str]:

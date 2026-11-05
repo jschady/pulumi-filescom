@@ -1321,6 +1321,68 @@ class Expectation(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return Expectation(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            criteria: Optional[Any] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            exclude_pattern: pulumi.Input[Optional[_builtins.str]] = None,
+            expectations_version: pulumi.Input[Optional[_builtins.int]] = None,
+            holiday_region: pulumi.Input[Optional[_builtins.str]] = None,
+            inactivity_interval: pulumi.Input[Optional[_builtins.int]] = None,
+            interval: pulumi.Input[Optional[_builtins.str]] = None,
+            last_evaluated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            last_failure_at: pulumi.Input[Optional[_builtins.str]] = None,
+            last_result: pulumi.Input[Optional[_builtins.str]] = None,
+            last_success_at: pulumi.Input[Optional[_builtins.str]] = None,
+            late_acceptance_interval: pulumi.Input[Optional[_builtins.int]] = None,
+            lookback_interval: pulumi.Input[Optional[_builtins.int]] = None,
+            max_open_interval: pulumi.Input[Optional[_builtins.int]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            recurring_day: pulumi.Input[Optional[_builtins.int]] = None,
+            recurring_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_days_of_weeks: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            schedule_id: pulumi.Input[Optional[_builtins.int]] = None,
+            schedule_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            schedule_times_of_days: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            source: pulumi.Input[Optional[_builtins.str]] = None,
+            trigger: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["criteria"] = criteria
+        __props__["description"] = description
+        __props__["disabled"] = disabled
+        __props__["excludePattern"] = exclude_pattern
+        __props__["expectationsVersion"] = expectations_version
+        __props__["holidayRegion"] = holiday_region
+        __props__["inactivityInterval"] = inactivity_interval
+        __props__["interval"] = interval
+        __props__["lastEvaluatedAt"] = last_evaluated_at
+        __props__["lastFailureAt"] = last_failure_at
+        __props__["lastResult"] = last_result
+        __props__["lastSuccessAt"] = last_success_at
+        __props__["lateAcceptanceInterval"] = late_acceptance_interval
+        __props__["lookbackInterval"] = lookback_interval
+        __props__["maxOpenInterval"] = max_open_interval
+        __props__["name"] = name
+        __props__["path"] = path
+        __props__["recurringDay"] = recurring_day
+        __props__["recurringDays"] = recurring_days
+        __props__["scheduleDaysOfWeeks"] = schedule_days_of_weeks
+        __props__["scheduleId"] = schedule_id
+        __props__["scheduleTimeZone"] = schedule_time_zone
+        __props__["scheduleTimesOfDays"] = schedule_times_of_days
+        __props__["source"] = source
+        __props__["trigger"] = trigger
+        __props__["updatedAt"] = updated_at
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/expectation:Expectation', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[_builtins.str]:

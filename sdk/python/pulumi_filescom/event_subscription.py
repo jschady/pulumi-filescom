@@ -706,6 +706,40 @@ class EventSubscription(pulumi.CustomResource):
         __props__.__dict__["workspace_id"] = workspace_id
         return EventSubscription(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            apply_to_all_workspaces: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            delivery_policy: Optional[Any] = None,
+            enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            event_channel_id: pulumi.Input[Optional[_builtins.int]] = None,
+            event_target_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            event_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            filter: Optional[Any] = None,
+            message: pulumi.Input[Optional[_builtins.str]] = None,
+            message_only: pulumi.Input[Optional[_builtins.bool]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            subject: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            workspace_id: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["applyToAllWorkspaces"] = apply_to_all_workspaces
+        __props__["createdAt"] = created_at
+        __props__["deliveryPolicy"] = delivery_policy
+        __props__["enabled"] = enabled
+        __props__["eventChannelId"] = event_channel_id
+        __props__["eventTargetIds"] = event_target_ids
+        __props__["eventTypes"] = event_types
+        __props__["filter"] = filter
+        __props__["message"] = message
+        __props__["messageOnly"] = message_only
+        __props__["name"] = name
+        __props__["subject"] = subject
+        __props__["updatedAt"] = updated_at
+        __props__["workspaceId"] = workspace_id
+        return pulumi.runtime.exists_resource(None, 'filescom:index/eventSubscription:EventSubscription', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="applyToAllWorkspaces")
     def apply_to_all_workspaces(self) -> pulumi.Output[_builtins.bool]:

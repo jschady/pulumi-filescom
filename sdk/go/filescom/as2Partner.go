@@ -269,6 +269,12 @@ func (As2PartnerState) ElementType() reflect.Type {
 	return reflect.TypeOf((*as2PartnerState)(nil)).Elem()
 }
 
+// As2PartnerExists checks whether an existing As2Partner resource with the given ID exists.
+func As2PartnerExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *As2PartnerState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("filescom:index/as2Partner:As2Partner", id, state, "", opts...)
+}
+
 type as2PartnerArgs struct {
 	// Additional HTTP Headers for outgoing message sent to this partner.
 	AdditionalHttpHeaders interface{} `pulumi:"additionalHttpHeaders"`

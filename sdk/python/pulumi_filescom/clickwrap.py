@@ -367,6 +367,22 @@ class Clickwrap(pulumi.CustomResource):
         __props__.__dict__["use_with_users"] = use_with_users
         return Clickwrap(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            body: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            use_with_bundles: pulumi.Input[Optional[_builtins.str]] = None,
+            use_with_inboxes: pulumi.Input[Optional[_builtins.str]] = None,
+            use_with_users: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["body"] = body
+        __props__["name"] = name
+        __props__["useWithBundles"] = use_with_bundles
+        __props__["useWithInboxes"] = use_with_inboxes
+        __props__["useWithUsers"] = use_with_users
+        return pulumi.runtime.exists_resource(None, 'filescom:index/clickwrap:Clickwrap', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def body(self) -> pulumi.Output[_builtins.str]:
