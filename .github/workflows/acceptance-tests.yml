@@ -10,7 +10,7 @@ permissions:
 
 env:
   PROVIDER: filescom
-  PULUMI_VERSION: 3.258.0
+  PULUMI_VERSION: 3.274.0
   PULUMICTL_VERSION: v0.0.50
   PULUMI_BACKEND_URL: file://~
   PULUMI_CONFIG_PASSPHRASE: ci-local-passphrase
