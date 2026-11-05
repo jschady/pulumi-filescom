@@ -1,3 +1,0 @@
-[submodule "upstream"]
-	path = upstream
-	url = https://github.com/Files-com/terraform-provider-files.git
