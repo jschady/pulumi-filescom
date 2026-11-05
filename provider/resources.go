@@ -48,6 +48,7 @@ const (
 	upstreamRepoSuffix = "files"
 	lockDocPage        = "lock.md"
 	behaviorDocPage    = "behavior.md"
+	policyDocPage      = "child_site_management_policy.md"
 	credentialDocPage  = "remote_server_credential.md"
 )
 
@@ -97,6 +98,8 @@ func Provider() tfbridge.ProviderInfo {
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: describeBehaviorValueFormat},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: quoteBehaviorValueKeys},
 					tfbridge.DocsEdit{Path: behaviorDocPage, Edit: cautionBehaviorImportOfANestedValue},
+					tfbridge.DocsEdit{Path: policyDocPage, Edit: repairPolicyValueFormatSpan},
+					tfbridge.DocsEdit{Path: policyDocPage, Edit: describePolicyValueFormat},
 					tfbridge.DocsEdit{Path: credentialDocPage, Edit: dropCredentialTerraformMention},
 				)
 			},
@@ -305,19 +308,54 @@ func pointBehaviorValueAtTheExamples(_ string, content []byte) ([]byte, error) {
 // opening backtick and leaves the closing one outside. The rewrite also says the shape the way
 // the value_format description does.
 func repairBehaviorValueFormatSpan(_ string, content []byte) ([]byte, error) {
-	const setting = "Set `value_format = \"typed\"` to return the future typed shape under the " +
-		"selected behavior name."
+	const setting = "Set `value_format = \"typed\"` to return them under the selected behavior " +
+		"name, as the typed schema does."
 	const split = "Set `value_format` to `\"typed\"` to return it wrapped under the behavior name."
 	return bytes.ReplaceAll(content, []byte(setting), []byte(split)), nil
 }
 
-// The upstream value_format description names the Terraform path files_behavior.value. A bare
-// `typed` becomes `Typed` in .NET. The date is a Files.com plan; upstream checks no date.
+// The upstream value_format description names the Terraform path files_behavior.value and the
+// API key path file_expiration.days_to_retain, and the bridge turns the underscores of both into
+// asterisks. A bare `typed` becomes `Typed` in .NET. The date is a Files.com plan; upstream
+// checks no date.
 func describeBehaviorValueFormat(_ string, content []byte) ([]byte, error) {
-	const format = "Set to `typed` to return the future files_behavior.value output shape before it " +
-		"becomes the default on March 1, 2027. Omit this attribute to keep the current output until then."
+	const format = "Set to `typed` to return files_behavior.value under the selected behavior name, " +
+		"as it will be returned on March 1, 2027. Older stored forms are also returned in their " +
+		"documented shape: a value stored as JSON text is decoded, and an older value that is not " +
+		"an object moves under its field, such as a number of days under " +
+		"file_expiration.days_to_retain or webhook URLs under webhook.urls. Settings stored as " +
+		"numeric or true/false strings stay strings, and only stored fields are returned. The typed " +
+		"release returns those strings as numbers and booleans, and returns every field of the typed " +
+		"schema, with null for fields that are not set. Omit this attribute to keep the current " +
+		"output until then."
 	const typed = "Set to `\"typed\"` to return `value` wrapped under the behavior name. " +
 		"Files.com plans to make this the default on March 1, 2027."
+	return bytes.ReplaceAll(content, []byte(format), []byte(typed)), nil
+}
+
+// The data-sources/child_site_management_policy.md page has the same split span as the behavior
+// page: `value_format ` inside a code span becomes a span of its own. The rewrite names no
+// snake_case key, because the bridge renames a key of the Dynamic value for each language.
+func repairPolicyValueFormatSpan(_ string, content []byte) ([]byte, error) {
+	const setting = "Set `value_format = \"typed\"` to return each folder_behaviors item under the " +
+		"name in its behavior field, as the typed schema does."
+	const split = "Set `value_format` to `\"typed\"` to return each folder behavior under its " +
+		"behavior name."
+	return bytes.ReplaceAll(content, []byte(setting), []byte(split)), nil
+}
+
+// The upstream value_format description names the Terraform path
+// files_child_site_management_policy.value and the key folder_behaviors, and the bridge turns the
+// underscores of both into asterisks. A bare `typed` becomes `Typed` in .NET.
+func describePolicyValueFormat(_ string, content []byte) ([]byte, error) {
+	const format = "Set to `typed` to return each folder_behaviors item under the name in its " +
+		"behavior field, as files_child_site_management_policy.value will on March 1, 2027. Only " +
+		"that nesting changes. The typed release also returns settings stored as numeric or " +
+		"true/false strings as numbers and booleans, and returns every setting, with null for " +
+		"settings that the policy does not manage. Omit this attribute to keep the current output " +
+		"until then."
+	const typed = "Set to `\"typed\"` to return each folder behavior in `value` under its behavior " +
+		"name. Files.com plans to make this the default on March 1, 2027."
 	return bytes.ReplaceAll(content, []byte(format), []byte(typed)), nil
 }
 
