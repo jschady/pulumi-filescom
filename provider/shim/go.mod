@@ -3,12 +3,12 @@ module github.com/Files-com/terraform-provider-files/shim
 go 1.27.3
 
 require (
-	github.com/Files-com/terraform-provider-files v0.1.1399
+	github.com/Files-com/terraform-provider-files v0.1.1440
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 )
 
 require (
-	github.com/Files-com/files-sdk-go/v3 v3.3.341 // indirect
+	github.com/Files-com/files-sdk-go/v3 v3.3.353 // indirect
 	github.com/appscode/go-querystring v0.0.0-20170504095604-0126cfb3f1dc // indirect
 	github.com/chilts/sid v0.0.0-20190607042430-660e94789ec9 // indirect
 	github.com/fatih/color v1.18.0 // indirect
@@ -25,7 +25,7 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/panjf2000/ants/v2 v2.11.3 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
-	github.com/quic-go/quic-go v0.64.1 // indirect
+	github.com/quic-go/quic-go v0.65.0 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect
 	github.com/samber/lo v1.53.0 // indirect
 	github.com/stretchr/testify v1.12.1 // indirect
@@ -35,7 +35,7 @@ require (
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
-	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
 	moul.io/http2curl/v2 v2.3.0 // indirect
 )
