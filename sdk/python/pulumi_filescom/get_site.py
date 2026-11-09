@@ -26,7 +26,7 @@ class GetSiteResult:
     """
     A collection of values returned by getSite.
     """
-    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, child_site_folder_admins_can_see_parent_site_directory=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, enforce_parent_site_user_ip_restrictions=None, fedramp=None, file_activity_events_enabled=None, files_com_remote_server_enabled=None, folder_permissions_groups_only=None, ftp_enabled=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, integration_centric_remote_server_admin_access=None, language=None, last_pairing_at=None, legacy_checksums_mode=None, legacy_pairing_enabled=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, s3_compatible_endpoint_enabled=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_ssl=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None, workspace_folder_admins_can_see_default_workspace_directory=None):
+    def __init__(__self__, active_sftp_host_key_id=None, active_sftp_host_key_ids=None, additional_text_file_types=None, admin_user_id=None, admins_bypass_locked_subfolders=None, ai_feature_availability=None, allow_bundle_names=None, allow_user_level2fa_override=None, allow_user_level_allowed_ip_override=None, allow_user_level_ftp_tls_session_reuse_override=None, allow_user_level_ssl_override=None, allowed2fa_method_bypass_for_ftp_sftp_dav=None, allowed2fa_method_email=None, allowed2fa_method_sms=None, allowed2fa_method_static=None, allowed2fa_method_totp=None, allowed2fa_method_webauthn=None, allowed2fa_method_yubi=None, allowed_countries=None, allowed_ips=None, always_mkdir_parents=None, as2_message_retention_days=None, ask_about_overwrites=None, bundle_activity_notifications=None, bundle_expiration=None, bundle_not_found_message=None, bundle_password_required=None, bundle_recipient_blacklist_domains=None, bundle_recipient_blacklist_free_email_domains=None, bundle_registration_notifications=None, bundle_require_note=None, bundle_require_registration=None, bundle_require_share_recipient=None, bundle_send_one_time_password_to_recipient_at_registration=None, bundle_send_shared_receipts=None, bundle_upload_receipt_notifications=None, bundle_watermark_attachment=None, bundle_watermark_value=None, bundles_default_owned_by_primary_group=None, calculate_file_checksums_crc32=None, calculate_file_checksums_md5=None, calculate_file_checksums_sha1=None, calculate_file_checksums_sha256=None, child_site_folder_admins_can_see_parent_site_directory=None, color2_left=None, color2_link=None, color2_text=None, color2_top=None, color2_top_text=None, contact_name=None, created_at=None, currency=None, custom_namespace=None, dav_enabled=None, dav_user_root_enabled=None, days_to_retain_backups=None, default_time_zone=None, desktop_app=None, desktop_app_session_ip_pinning=None, desktop_app_session_lifetime=None, disable_all_ai_features=None, disable_files_certificate_generation=None, disable_notifications=None, disable_password_reset=None, disallowed_countries=None, document_edits_in_bundle_allowed=None, domain=None, domain_hsts_header=None, domain_letsencrypt_chain=None, email=None, email_footer_custom_text=None, enforce_parent_site_user_ip_restrictions=None, fedramp=None, file_activity_events_enabled=None, files_com_remote_server_enabled=None, folder_permissions_groups_only=None, ftp_enabled=None, ftp_tls_session_reuse_required=None, group_admins_can_add_users=None, group_admins_can_bypass_user_lifecycle_rules=None, group_admins_can_delete_users=None, group_admins_can_enable_disable_users=None, group_admins_can_manage_group_memberships=None, group_admins_can_modify_users=None, group_admins_can_reset_passwords=None, group_admins_can_set_user_password=None, hipaa=None, icon128=None, icon16=None, icon32=None, icon48=None, id=None, immutable_files_set_at=None, include_password_in_welcome_email=None, integration_centric_remote_server_admin_access=None, language=None, last_pairing_at=None, legacy_checksums_mode=None, legacy_pairing_enabled=None, login_help_text=None, login_page_background_image=None, logo=None, managed_site_settings=None, max_prior_passwords=None, mcp_dcr_enabled=None, migrate_remote_server_sync_to_sync=None, mobile_app=None, mobile_app_session_ip_pinning=None, mobile_app_session_lifetime=None, motd_text=None, motd_use_for_ftp=None, motd_use_for_sftp=None, name=None, next_billing_amount=None, next_billing_date=None, non_sso_groups_allowed=None, non_sso_users_allowed=None, office_integration_available=None, office_integration_type=None, oncehub_link=None, opt_out_global=None, overdue=None, password_min_length=None, password_require_letter=None, password_require_mixed=None, password_require_number=None, password_require_special=None, password_require_unbreached=None, password_requirements_apply_to_bundles=None, password_validity_days=None, phone=None, pin_all_remote_servers_to_site_region=None, prevent_root_permissions_for_non_site_admins=None, protocol_access_groups_only=None, reply_to_email=None, require2fa=None, require2fa_exempt_all_sso_users=None, require2fa_stop_time=None, require2fa_user_type=None, require_logout_from_bundles_and_inboxes=None, restrict_root_folder_behaviors_to_site_admins=None, revoke_bundle_access_on_disable_or_delete=None, root_folder_behaviors_apply_to_workspaces=None, s3_compatible_endpoint_enabled=None, session=None, session_expiry_minutes=None, sftp_enabled=None, sftp_finalize_partial_uploads=None, sftp_host_key_type=None, sftp_insecure_ciphers=None, sftp_insecure_diffie_hellman=None, sftp_user_root_enabled=None, sharing_enabled=None, show_request_access_link=None, show_user_notifications_log_in_link=None, site_footer=None, site_header=None, site_public_footer=None, site_public_header=None, smtp_address=None, smtp_authentication=None, smtp_from=None, smtp_port=None, smtp_ssl=None, smtp_username=None, snapshot_sharing_enabled=None, ssl_required=None, subdomain=None, switch_to_plan_date=None, trial_days_left=None, trial_until=None, uploads_via_email_authentication=None, use_dedicated_ips_for_smtp=None, use_provided_modified_at=None, user=None, user_lockout=None, user_lockout_lock_period=None, user_lockout_tries=None, user_lockout_within=None, user_requests_enabled=None, user_requests_notify_admins=None, username_display=None, users_can_create_api_keys=None, users_can_create_ssh_keys=None, welcome_custom_text=None, welcome_email_cc=None, welcome_email_enabled=None, welcome_email_subject=None, welcome_screen=None, windows_mode_ftp=None, workspace_folder_admins_can_see_default_workspace_directory=None):
         if active_sftp_host_key_id and not isinstance(active_sftp_host_key_id, int):
             raise TypeError("Expected argument 'active_sftp_host_key_id' to be a int")
         pulumi.set(__self__, "active_sftp_host_key_id", active_sftp_host_key_id)
@@ -54,6 +54,9 @@ class GetSiteResult:
         if allow_user_level_allowed_ip_override and not isinstance(allow_user_level_allowed_ip_override, bool):
             raise TypeError("Expected argument 'allow_user_level_allowed_ip_override' to be a bool")
         pulumi.set(__self__, "allow_user_level_allowed_ip_override", allow_user_level_allowed_ip_override)
+        if allow_user_level_ftp_tls_session_reuse_override and not isinstance(allow_user_level_ftp_tls_session_reuse_override, bool):
+            raise TypeError("Expected argument 'allow_user_level_ftp_tls_session_reuse_override' to be a bool")
+        pulumi.set(__self__, "allow_user_level_ftp_tls_session_reuse_override", allow_user_level_ftp_tls_session_reuse_override)
         if allow_user_level_ssl_override and not isinstance(allow_user_level_ssl_override, bool):
             raise TypeError("Expected argument 'allow_user_level_ssl_override' to be a bool")
         pulumi.set(__self__, "allow_user_level_ssl_override", allow_user_level_ssl_override)
@@ -255,6 +258,9 @@ class GetSiteResult:
         if ftp_enabled and not isinstance(ftp_enabled, bool):
             raise TypeError("Expected argument 'ftp_enabled' to be a bool")
         pulumi.set(__self__, "ftp_enabled", ftp_enabled)
+        if ftp_tls_session_reuse_required and not isinstance(ftp_tls_session_reuse_required, bool):
+            raise TypeError("Expected argument 'ftp_tls_session_reuse_required' to be a bool")
+        pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if group_admins_can_add_users and not isinstance(group_admins_can_add_users, bool):
             raise TypeError("Expected argument 'group_admins_can_add_users' to be a bool")
         pulumi.set(__self__, "group_admins_can_add_users", group_admins_can_add_users)
@@ -666,6 +672,14 @@ class GetSiteResult:
         Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
         """
         return pulumi.get(self, "allow_user_level_allowed_ip_override")
+
+    @_builtins.property
+    @pulumi.getter(name="allowUserLevelFtpTlsSessionReuseOverride")
+    def allow_user_level_ftp_tls_session_reuse_override(self) -> _builtins.bool:
+        """
+        Allow per-user overrides of the FTP TLS session reuse requirement?
+        """
+        return pulumi.get(self, "allow_user_level_ftp_tls_session_reuse_override")
 
     @_builtins.property
     @pulumi.getter(name="allowUserLevelSslOverride")
@@ -1202,6 +1216,14 @@ class GetSiteResult:
         Is FTP enabled?
         """
         return pulumi.get(self, "ftp_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> _builtins.bool:
+        """
+        Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
 
     @_builtins.property
     @pulumi.getter(name="groupAdminsCanAddUsers")
@@ -2123,6 +2145,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             allow_bundle_names=self.allow_bundle_names,
             allow_user_level2fa_override=self.allow_user_level2fa_override,
             allow_user_level_allowed_ip_override=self.allow_user_level_allowed_ip_override,
+            allow_user_level_ftp_tls_session_reuse_override=self.allow_user_level_ftp_tls_session_reuse_override,
             allow_user_level_ssl_override=self.allow_user_level_ssl_override,
             allowed2fa_method_bypass_for_ftp_sftp_dav=self.allowed2fa_method_bypass_for_ftp_sftp_dav,
             allowed2fa_method_email=self.allowed2fa_method_email,
@@ -2190,6 +2213,7 @@ class AwaitableGetSiteResult(GetSiteResult):
             files_com_remote_server_enabled=self.files_com_remote_server_enabled,
             folder_permissions_groups_only=self.folder_permissions_groups_only,
             ftp_enabled=self.ftp_enabled,
+            ftp_tls_session_reuse_required=self.ftp_tls_session_reuse_required,
             group_admins_can_add_users=self.group_admins_can_add_users,
             group_admins_can_bypass_user_lifecycle_rules=self.group_admins_can_bypass_user_lifecycle_rules,
             group_admins_can_delete_users=self.group_admins_can_delete_users,
@@ -2336,6 +2360,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         allow_bundle_names=pulumi.get(__ret__, 'allow_bundle_names'),
         allow_user_level2fa_override=pulumi.get(__ret__, 'allow_user_level2fa_override'),
         allow_user_level_allowed_ip_override=pulumi.get(__ret__, 'allow_user_level_allowed_ip_override'),
+        allow_user_level_ftp_tls_session_reuse_override=pulumi.get(__ret__, 'allow_user_level_ftp_tls_session_reuse_override'),
         allow_user_level_ssl_override=pulumi.get(__ret__, 'allow_user_level_ssl_override'),
         allowed2fa_method_bypass_for_ftp_sftp_dav=pulumi.get(__ret__, 'allowed2fa_method_bypass_for_ftp_sftp_dav'),
         allowed2fa_method_email=pulumi.get(__ret__, 'allowed2fa_method_email'),
@@ -2403,6 +2428,7 @@ def get_site(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSiteRes
         files_com_remote_server_enabled=pulumi.get(__ret__, 'files_com_remote_server_enabled'),
         folder_permissions_groups_only=pulumi.get(__ret__, 'folder_permissions_groups_only'),
         ftp_enabled=pulumi.get(__ret__, 'ftp_enabled'),
+        ftp_tls_session_reuse_required=pulumi.get(__ret__, 'ftp_tls_session_reuse_required'),
         group_admins_can_add_users=pulumi.get(__ret__, 'group_admins_can_add_users'),
         group_admins_can_bypass_user_lifecycle_rules=pulumi.get(__ret__, 'group_admins_can_bypass_user_lifecycle_rules'),
         group_admins_can_delete_users=pulumi.get(__ret__, 'group_admins_can_delete_users'),
@@ -2546,6 +2572,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         allow_bundle_names=pulumi.get(__response__, 'allow_bundle_names'),
         allow_user_level2fa_override=pulumi.get(__response__, 'allow_user_level2fa_override'),
         allow_user_level_allowed_ip_override=pulumi.get(__response__, 'allow_user_level_allowed_ip_override'),
+        allow_user_level_ftp_tls_session_reuse_override=pulumi.get(__response__, 'allow_user_level_ftp_tls_session_reuse_override'),
         allow_user_level_ssl_override=pulumi.get(__response__, 'allow_user_level_ssl_override'),
         allowed2fa_method_bypass_for_ftp_sftp_dav=pulumi.get(__response__, 'allowed2fa_method_bypass_for_ftp_sftp_dav'),
         allowed2fa_method_email=pulumi.get(__response__, 'allowed2fa_method_email'),
@@ -2613,6 +2640,7 @@ def get_site_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutp
         files_com_remote_server_enabled=pulumi.get(__response__, 'files_com_remote_server_enabled'),
         folder_permissions_groups_only=pulumi.get(__response__, 'folder_permissions_groups_only'),
         ftp_enabled=pulumi.get(__response__, 'ftp_enabled'),
+        ftp_tls_session_reuse_required=pulumi.get(__response__, 'ftp_tls_session_reuse_required'),
         group_admins_can_add_users=pulumi.get(__response__, 'group_admins_can_add_users'),
         group_admins_can_bypass_user_lifecycle_rules=pulumi.get(__response__, 'group_admins_can_bypass_user_lifecycle_rules'),
         group_admins_can_delete_users=pulumi.get(__response__, 'group_admins_can_delete_users'),

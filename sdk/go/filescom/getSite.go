@@ -70,6 +70,8 @@ type LookupSiteResult struct {
 	AllowUserLevel2faOverride bool `pulumi:"allowUserLevel2faOverride"`
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride bool `pulumi:"allowUserLevelAllowedIpOverride"`
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride bool `pulumi:"allowUserLevelFtpTlsSessionReuseOverride"`
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride bool `pulumi:"allowUserLevelSslOverride"`
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -204,6 +206,8 @@ type LookupSiteResult struct {
 	FolderPermissionsGroupsOnly bool `pulumi:"folderPermissionsGroupsOnly"`
 	// Is FTP enabled?
 	FtpEnabled bool `pulumi:"ftpEnabled"`
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired bool `pulumi:"ftpTlsSessionReuseRequired"`
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers bool `pulumi:"groupAdminsCanAddUsers"`
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -495,6 +499,11 @@ func (o LookupSiteResultOutput) AllowUserLevel2faOverride() pulumi.BoolOutput {
 // Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 func (o LookupSiteResultOutput) AllowUserLevelAllowedIpOverride() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.AllowUserLevelAllowedIpOverride }).(pulumi.BoolOutput)
+}
+
+// Allow per-user overrides of the FTP TLS session reuse requirement?
+func (o LookupSiteResultOutput) AllowUserLevelFtpTlsSessionReuseOverride() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.AllowUserLevelFtpTlsSessionReuseOverride }).(pulumi.BoolOutput)
 }
 
 // Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
@@ -830,6 +839,11 @@ func (o LookupSiteResultOutput) FolderPermissionsGroupsOnly() pulumi.BoolOutput 
 // Is FTP enabled?
 func (o LookupSiteResultOutput) FtpEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupSiteResult) bool { return v.FtpEnabled }).(pulumi.BoolOutput)
+}
+
+// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+func (o LookupSiteResultOutput) FtpTlsSessionReuseRequired() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSiteResult) bool { return v.FtpTlsSessionReuseRequired }).(pulumi.BoolOutput)
 }
 
 // Allow group admins to create users in their groups

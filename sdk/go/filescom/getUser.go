@@ -127,6 +127,8 @@ type LookupUserResult struct {
 	FirstLoginAt string `pulumi:"firstLoginAt"`
 	// Can the user access with FTP/FTPS?
 	FtpPermission bool `pulumi:"ftpPermission"`
+	// FTP TLS session reuse requirement: use*system*setting, always*require, or never*require
+	FtpTlsSessionReuseRequired string `pulumi:"ftpTlsSessionReuseRequired"`
 	// Comma-separated list of group IDs of which this user is a member
 	GroupIds string `pulumi:"groupIds"`
 	// Text to display to the user in the header of the UI
@@ -413,6 +415,11 @@ func (o LookupUserResultOutput) FirstLoginAt() pulumi.StringOutput {
 // Can the user access with FTP/FTPS?
 func (o LookupUserResultOutput) FtpPermission() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.FtpPermission }).(pulumi.BoolOutput)
+}
+
+// FTP TLS session reuse requirement: use*system*setting, always*require, or never*require
+func (o LookupUserResultOutput) FtpTlsSessionReuseRequired() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupUserResult) string { return v.FtpTlsSessionReuseRequired }).(pulumi.StringOutput)
 }
 
 // Comma-separated list of group IDs of which this user is a member

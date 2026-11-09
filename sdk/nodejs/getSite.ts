@@ -67,6 +67,10 @@ export interface GetSiteResult {
      */
     readonly allowUserLevelAllowedIpOverride: boolean;
     /**
+     * Allow per-user overrides of the FTP TLS session reuse requirement?
+     */
+    readonly allowUserLevelFtpTlsSessionReuseOverride: boolean;
+    /**
      * Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
      */
     readonly allowUserLevelSslOverride: boolean;
@@ -334,6 +338,10 @@ export interface GetSiteResult {
      * Is FTP enabled?
      */
     readonly ftpEnabled: boolean;
+    /**
+     * Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+     */
+    readonly ftpTlsSessionReuseRequired: boolean;
     /**
      * Allow group admins to create users in their groups
      */

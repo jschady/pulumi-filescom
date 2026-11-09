@@ -23,6 +23,7 @@ namespace Jschady.Filescom.Outputs
         /// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetAutomationDefinitionNodeTransformConfigOnErrorResult> OnErrors;
+        public readonly bool OverwriteFiles;
 
         [OutputConstructor]
         private GetAutomationDefinitionNodeTransformConfigResult(
@@ -30,11 +31,14 @@ namespace Jschady.Filescom.Outputs
 
             string fts,
 
-            ImmutableArray<Outputs.GetAutomationDefinitionNodeTransformConfigOnErrorResult> onErrors)
+            ImmutableArray<Outputs.GetAutomationDefinitionNodeTransformConfigOnErrorResult> onErrors,
+
+            bool overwriteFiles)
         {
             Destination = destination;
             Fts = fts;
             OnErrors = onErrors;
+            OverwriteFiles = overwriteFiles;
         }
     }
 }

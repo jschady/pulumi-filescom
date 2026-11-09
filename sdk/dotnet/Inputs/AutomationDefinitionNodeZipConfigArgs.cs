@@ -13,6 +13,9 @@ namespace Jschady.Filescom.Inputs
 
     public sealed class AutomationDefinitionNodeZipConfigArgs : global::Pulumi.ResourceArgs
     {
+        [Input("archiveFormat")]
+        public Input<string>? ArchiveFormat { get; set; }
+
         /// <summary>
         /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>

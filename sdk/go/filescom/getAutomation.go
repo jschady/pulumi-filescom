@@ -251,6 +251,8 @@ type LookupAutomationResult struct {
 	AlwaysSerializeJobs bool `pulumi:"alwaysSerializeJobs"`
 	// Automation type
 	Automation string `pulumi:"automation"`
+	// ID of this v1 Automation's converted v2 copy, when present.
+	ConvertedAutomationId int `pulumi:"convertedAutomationId"`
 	// Automation v2 graph definition.
 	Definition GetAutomationDefinition `pulumi:"definition"`
 	// Indicates if the automation has been deleted.
@@ -291,6 +293,8 @@ type LookupAutomationResult struct {
 	LegacyFolderMatching bool `pulumi:"legacyFolderMatching"`
 	// Name for this automation.
 	Name string `pulumi:"name"`
+	// ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+	OriginalAutomationId int `pulumi:"originalAutomationId"`
 	// If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
 	OverwriteFiles bool `pulumi:"overwriteFiles"`
 	// Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
@@ -380,6 +384,11 @@ func (o LookupAutomationResultOutput) AlwaysSerializeJobs() pulumi.BoolOutput {
 // Automation type
 func (o LookupAutomationResultOutput) Automation() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAutomationResult) string { return v.Automation }).(pulumi.StringOutput)
+}
+
+// ID of this v1 Automation's converted v2 copy, when present.
+func (o LookupAutomationResultOutput) ConvertedAutomationId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupAutomationResult) int { return v.ConvertedAutomationId }).(pulumi.IntOutput)
 }
 
 // Automation v2 graph definition.
@@ -480,6 +489,11 @@ func (o LookupAutomationResultOutput) LegacyFolderMatching() pulumi.BoolOutput {
 // Name for this automation.
 func (o LookupAutomationResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAutomationResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+func (o LookupAutomationResultOutput) OriginalAutomationId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupAutomationResult) int { return v.OriginalAutomationId }).(pulumi.IntOutput)
 }
 
 // If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.

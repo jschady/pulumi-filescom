@@ -858,6 +858,7 @@ export interface AutomationDefinitionNodeTransformConfig {
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
     onErrors?: outputs.AutomationDefinitionNodeTransformConfigOnError[];
+    overwriteFiles?: boolean;
 }
 
 export interface AutomationDefinitionNodeTransformConfigOnError {
@@ -1084,6 +1085,7 @@ export interface AutomationDefinitionNodeZip {
 }
 
 export interface AutomationDefinitionNodeZipConfig {
+    archiveFormat?: string;
     /**
      * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
@@ -1956,6 +1958,7 @@ export interface GetAutomationDefinitionNodeTransformConfig {
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
     onErrors: outputs.GetAutomationDefinitionNodeTransformConfigOnError[];
+    overwriteFiles: boolean;
 }
 
 export interface GetAutomationDefinitionNodeTransformConfigOnError {
@@ -2182,6 +2185,7 @@ export interface GetAutomationDefinitionNodeZip {
 }
 
 export interface GetAutomationDefinitionNodeZipConfig {
+    archiveFormat: string;
     /**
      * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */

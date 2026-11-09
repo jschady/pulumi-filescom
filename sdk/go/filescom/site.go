@@ -94,6 +94,7 @@ import (
 //				SessionExpiryMinutes:                               pulumi.Int(1),
 //				LegacyPairingEnabled:                               pulumi.Bool(false),
 //				SslRequired:                                        pulumi.Bool(false),
+//				FtpTlsSessionReuseRequired:                         pulumi.Bool(false),
 //				SftpInsecureCiphers:                                pulumi.Bool(false),
 //				SftpInsecureDiffieHellman:                          pulumi.Bool(false),
 //				DisableFilesCertificateGeneration:                  pulumi.Bool(false),
@@ -108,6 +109,7 @@ import (
 //				AllowUserLevel2faOverride:                          pulumi.Bool(false),
 //				AllowUserLevelAllowedIpOverride:                    pulumi.Bool(false),
 //				AllowUserLevelSslOverride:                          pulumi.Bool(false),
+//				AllowUserLevelFtpTlsSessionReuseOverride:           pulumi.Bool(false),
 //				EnforceParentSiteUserIpRestrictions:                pulumi.Bool(false),
 //				DisallowedCountries:                                pulumi.String("US,DE"),
 //				DaysToRetainBackups:                                pulumi.Int(1),
@@ -251,6 +253,8 @@ type Site struct {
 	AllowUserLevel2faOverride pulumi.BoolOutput `pulumi:"allowUserLevel2faOverride"`
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride pulumi.BoolOutput `pulumi:"allowUserLevelAllowedIpOverride"`
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride pulumi.BoolOutput `pulumi:"allowUserLevelFtpTlsSessionReuseOverride"`
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride pulumi.BoolOutput `pulumi:"allowUserLevelSslOverride"`
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -385,6 +389,8 @@ type Site struct {
 	FolderPermissionsGroupsOnly pulumi.BoolOutput `pulumi:"folderPermissionsGroupsOnly"`
 	// Is FTP enabled?
 	FtpEnabled pulumi.BoolOutput `pulumi:"ftpEnabled"`
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired pulumi.BoolOutput `pulumi:"ftpTlsSessionReuseRequired"`
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers pulumi.BoolOutput `pulumi:"groupAdminsCanAddUsers"`
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -659,6 +665,8 @@ type siteState struct {
 	AllowUserLevel2faOverride *bool `pulumi:"allowUserLevel2faOverride"`
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride *bool `pulumi:"allowUserLevelAllowedIpOverride"`
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride *bool `pulumi:"allowUserLevelFtpTlsSessionReuseOverride"`
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride *bool `pulumi:"allowUserLevelSslOverride"`
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -793,6 +801,8 @@ type siteState struct {
 	FolderPermissionsGroupsOnly *bool `pulumi:"folderPermissionsGroupsOnly"`
 	// Is FTP enabled?
 	FtpEnabled *bool `pulumi:"ftpEnabled"`
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired *bool `pulumi:"ftpTlsSessionReuseRequired"`
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers *bool `pulumi:"groupAdminsCanAddUsers"`
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -1038,6 +1048,8 @@ type SiteState struct {
 	AllowUserLevel2faOverride pulumi.BoolPtrInput
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride pulumi.BoolPtrInput
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride pulumi.BoolPtrInput
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride pulumi.BoolPtrInput
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -1172,6 +1184,8 @@ type SiteState struct {
 	FolderPermissionsGroupsOnly pulumi.BoolPtrInput
 	// Is FTP enabled?
 	FtpEnabled pulumi.BoolPtrInput
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired pulumi.BoolPtrInput
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers pulumi.BoolPtrInput
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -1425,6 +1439,8 @@ type siteArgs struct {
 	AllowUserLevel2faOverride *bool `pulumi:"allowUserLevel2faOverride"`
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride *bool `pulumi:"allowUserLevelAllowedIpOverride"`
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride *bool `pulumi:"allowUserLevelFtpTlsSessionReuseOverride"`
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride *bool `pulumi:"allowUserLevelSslOverride"`
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -1549,6 +1565,8 @@ type siteArgs struct {
 	FolderPermissionsGroupsOnly *bool `pulumi:"folderPermissionsGroupsOnly"`
 	// Is FTP enabled?
 	FtpEnabled *bool `pulumi:"ftpEnabled"`
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired *bool `pulumi:"ftpTlsSessionReuseRequired"`
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers *bool `pulumi:"groupAdminsCanAddUsers"`
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -1751,6 +1769,8 @@ type SiteArgs struct {
 	AllowUserLevel2faOverride pulumi.BoolPtrInput
 	// Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 	AllowUserLevelAllowedIpOverride pulumi.BoolPtrInput
+	// Allow per-user overrides of the FTP TLS session reuse requirement?
+	AllowUserLevelFtpTlsSessionReuseOverride pulumi.BoolPtrInput
 	// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
 	AllowUserLevelSslOverride pulumi.BoolPtrInput
 	// Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
@@ -1875,6 +1895,8 @@ type SiteArgs struct {
 	FolderPermissionsGroupsOnly pulumi.BoolPtrInput
 	// Is FTP enabled?
 	FtpEnabled pulumi.BoolPtrInput
+	// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+	FtpTlsSessionReuseRequired pulumi.BoolPtrInput
 	// Allow group admins to create users in their groups
 	GroupAdminsCanAddUsers pulumi.BoolPtrInput
 	// Allow group admins to exempt users in their groups from lifecycle rules
@@ -2189,6 +2211,11 @@ func (o SiteOutput) AllowUserLevel2faOverride() pulumi.BoolOutput {
 // Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
 func (o SiteOutput) AllowUserLevelAllowedIpOverride() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Site) pulumi.BoolOutput { return v.AllowUserLevelAllowedIpOverride }).(pulumi.BoolOutput)
+}
+
+// Allow per-user overrides of the FTP TLS session reuse requirement?
+func (o SiteOutput) AllowUserLevelFtpTlsSessionReuseOverride() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Site) pulumi.BoolOutput { return v.AllowUserLevelFtpTlsSessionReuseOverride }).(pulumi.BoolOutput)
 }
 
 // Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
@@ -2524,6 +2551,11 @@ func (o SiteOutput) FolderPermissionsGroupsOnly() pulumi.BoolOutput {
 // Is FTP enabled?
 func (o SiteOutput) FtpEnabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Site) pulumi.BoolOutput { return v.FtpEnabled }).(pulumi.BoolOutput)
+}
+
+// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+func (o SiteOutput) FtpTlsSessionReuseRequired() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Site) pulumi.BoolOutput { return v.FtpTlsSessionReuseRequired }).(pulumi.BoolOutput)
 }
 
 // Allow group admins to create users in their groups

@@ -27,7 +27,7 @@ class GetAutomationResult:
     """
     A collection of values returned by getAutomation.
     """
-    def __init__(__self__, always_overwrite_size_matching_files=None, always_serialize_jobs=None, automation=None, definition=None, deleted=None, description=None, destination_replace_from=None, destination_replace_to=None, destinations=None, disabled=None, exclude_pattern=None, flatten_destination_structure=None, group_ids=None, holiday_region=None, human_readable_schedule=None, id=None, ignore_locked_folders=None, import_urls=None, inbound_email_address=None, interval=None, last_modified_at=None, legacy_folder_matching=None, name=None, overwrite_files=None, path=None, path_time_zone=None, recurring_day=None, recurring_days=None, retry_on_failure_interval_in_minutes=None, retry_on_failure_number_of_attempts=None, schedule=None, schedule_days_of_weeks=None, schedule_id=None, schedule_time_zone=None, schedule_times_of_days=None, source=None, sync_ids=None, trigger=None, trigger_actions=None, user_id=None, user_ids=None, value=None, version=None, webhook_url=None, workspace_id=None):
+    def __init__(__self__, always_overwrite_size_matching_files=None, always_serialize_jobs=None, automation=None, converted_automation_id=None, definition=None, deleted=None, description=None, destination_replace_from=None, destination_replace_to=None, destinations=None, disabled=None, exclude_pattern=None, flatten_destination_structure=None, group_ids=None, holiday_region=None, human_readable_schedule=None, id=None, ignore_locked_folders=None, import_urls=None, inbound_email_address=None, interval=None, last_modified_at=None, legacy_folder_matching=None, name=None, original_automation_id=None, overwrite_files=None, path=None, path_time_zone=None, recurring_day=None, recurring_days=None, retry_on_failure_interval_in_minutes=None, retry_on_failure_number_of_attempts=None, schedule=None, schedule_days_of_weeks=None, schedule_id=None, schedule_time_zone=None, schedule_times_of_days=None, source=None, sync_ids=None, trigger=None, trigger_actions=None, user_id=None, user_ids=None, value=None, version=None, webhook_url=None, workspace_id=None):
         if always_overwrite_size_matching_files and not isinstance(always_overwrite_size_matching_files, bool):
             raise TypeError("Expected argument 'always_overwrite_size_matching_files' to be a bool")
         pulumi.set(__self__, "always_overwrite_size_matching_files", always_overwrite_size_matching_files)
@@ -37,6 +37,9 @@ class GetAutomationResult:
         if automation and not isinstance(automation, str):
             raise TypeError("Expected argument 'automation' to be a str")
         pulumi.set(__self__, "automation", automation)
+        if converted_automation_id and not isinstance(converted_automation_id, int):
+            raise TypeError("Expected argument 'converted_automation_id' to be a int")
+        pulumi.set(__self__, "converted_automation_id", converted_automation_id)
         if definition and not isinstance(definition, dict):
             raise TypeError("Expected argument 'definition' to be a dict")
         pulumi.set(__self__, "definition", definition)
@@ -97,6 +100,9 @@ class GetAutomationResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
+        if original_automation_id and not isinstance(original_automation_id, int):
+            raise TypeError("Expected argument 'original_automation_id' to be a int")
+        pulumi.set(__self__, "original_automation_id", original_automation_id)
         if overwrite_files and not isinstance(overwrite_files, bool):
             raise TypeError("Expected argument 'overwrite_files' to be a bool")
         pulumi.set(__self__, "overwrite_files", overwrite_files)
@@ -187,6 +193,14 @@ class GetAutomationResult:
         Automation type
         """
         return pulumi.get(self, "automation")
+
+    @_builtins.property
+    @pulumi.getter(name="convertedAutomationId")
+    def converted_automation_id(self) -> _builtins.int:
+        """
+        ID of this v1 Automation's converted v2 copy, when present.
+        """
+        return pulumi.get(self, "converted_automation_id")
 
     @_builtins.property
     @pulumi.getter
@@ -347,6 +361,14 @@ class GetAutomationResult:
         Name for this automation.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="originalAutomationId")
+    def original_automation_id(self) -> _builtins.int:
+        """
+        ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        """
+        return pulumi.get(self, "original_automation_id")
 
     @_builtins.property
     @pulumi.getter(name="overwriteFiles")
@@ -534,6 +556,7 @@ class AwaitableGetAutomationResult(GetAutomationResult):
             always_overwrite_size_matching_files=self.always_overwrite_size_matching_files,
             always_serialize_jobs=self.always_serialize_jobs,
             automation=self.automation,
+            converted_automation_id=self.converted_automation_id,
             definition=self.definition,
             deleted=self.deleted,
             description=self.description,
@@ -554,6 +577,7 @@ class AwaitableGetAutomationResult(GetAutomationResult):
             last_modified_at=self.last_modified_at,
             legacy_folder_matching=self.legacy_folder_matching,
             name=self.name,
+            original_automation_id=self.original_automation_id,
             overwrite_files=self.overwrite_files,
             path=self.path,
             path_time_zone=self.path_time_zone,
@@ -793,6 +817,7 @@ def get_automation(id: Optional[_builtins.int] = None,
         always_overwrite_size_matching_files=pulumi.get(__ret__, 'always_overwrite_size_matching_files'),
         always_serialize_jobs=pulumi.get(__ret__, 'always_serialize_jobs'),
         automation=pulumi.get(__ret__, 'automation'),
+        converted_automation_id=pulumi.get(__ret__, 'converted_automation_id'),
         definition=pulumi.get(__ret__, 'definition'),
         deleted=pulumi.get(__ret__, 'deleted'),
         description=pulumi.get(__ret__, 'description'),
@@ -813,6 +838,7 @@ def get_automation(id: Optional[_builtins.int] = None,
         last_modified_at=pulumi.get(__ret__, 'last_modified_at'),
         legacy_folder_matching=pulumi.get(__ret__, 'legacy_folder_matching'),
         name=pulumi.get(__ret__, 'name'),
+        original_automation_id=pulumi.get(__ret__, 'original_automation_id'),
         overwrite_files=pulumi.get(__ret__, 'overwrite_files'),
         path=pulumi.get(__ret__, 'path'),
         path_time_zone=pulumi.get(__ret__, 'path_time_zone'),
@@ -1049,6 +1075,7 @@ def get_automation_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         always_overwrite_size_matching_files=pulumi.get(__response__, 'always_overwrite_size_matching_files'),
         always_serialize_jobs=pulumi.get(__response__, 'always_serialize_jobs'),
         automation=pulumi.get(__response__, 'automation'),
+        converted_automation_id=pulumi.get(__response__, 'converted_automation_id'),
         definition=pulumi.get(__response__, 'definition'),
         deleted=pulumi.get(__response__, 'deleted'),
         description=pulumi.get(__response__, 'description'),
@@ -1069,6 +1096,7 @@ def get_automation_output(id: pulumi.Input[Optional[_builtins.int]] = None,
         last_modified_at=pulumi.get(__response__, 'last_modified_at'),
         legacy_folder_matching=pulumi.get(__response__, 'legacy_folder_matching'),
         name=pulumi.get(__response__, 'name'),
+        original_automation_id=pulumi.get(__response__, 'original_automation_id'),
         overwrite_files=pulumi.get(__response__, 'overwrite_files'),
         path=pulumi.get(__response__, 'path'),
         path_time_zone=pulumi.get(__response__, 'path_time_zone'),

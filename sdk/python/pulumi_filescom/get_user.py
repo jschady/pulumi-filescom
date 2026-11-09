@@ -26,7 +26,7 @@ class GetUserResult:
     """
     A collection of values returned by getUser.
     """
-    def __init__(__self__, active2fa=None, admin_group_ids=None, ai_assistant_personality_id=None, allowed_ips=None, api_keys_count=None, attachments_permission=None, authenticate_until=None, authentication_method=None, avatar_url=None, billable=None, billing_permission=None, bypass_site_allowed_ips=None, bypass_user_lifecycle_rules=None, company=None, created_at=None, dav_permission=None, days_remaining_until_password_expire=None, default_workspace_id=None, desktop_configuration_profile_id=None, disabled=None, disabled_expired_or_inactive=None, email=None, externally_managed=None, filesystem_layout=None, first_login_at=None, ftp_permission=None, group_ids=None, header_text=None, id=None, integration_centric_profile_id=None, language=None, last_active_at=None, last_api_use_at=None, last_dav_login_at=None, last_desktop_login_at=None, last_ftp_login_at=None, last_login_at=None, last_protocol_cipher=None, last_restapi_login_at=None, last_sftp_login_at=None, last_web_login_at=None, lockout_expires=None, name=None, notes=None, notification_daily_send_time=None, notify_on_all_automation_failures=None, notify_on_all_expectation_failures=None, notify_on_all_pending_work_failures=None, notify_on_all_siem_http_destination_failures=None, notify_on_all_site_warnings=None, notify_on_all_sso_failures=None, notify_on_all_sync_failures=None, notify_on_all_user_security_events=None, office_integration_enabled=None, partner_admin=None, partner_id=None, partner_name=None, password_expire_at=None, password_expired=None, password_set_at=None, password_validity_days=None, primary_group_id=None, public_keys_count=None, readonly_site_admin=None, receive_admin_alerts=None, require2fa=None, require_login_by=None, require_password_change=None, responsible_group_id=None, responsible_user_id=None, restapi_permission=None, s3_compatible_endpoint_permission=None, self_managed=None, sftp_permission=None, site_admin=None, site_id=None, skip_welcome_screen=None, ssl_required=None, sso_strategy_id=None, tags=None, time_zone=None, type_of2fa=None, type_of2fa_for_display=None, user_home=None, user_root=None, username=None, workspace_admin=None, workspace_id=None):
+    def __init__(__self__, active2fa=None, admin_group_ids=None, ai_assistant_personality_id=None, allowed_ips=None, api_keys_count=None, attachments_permission=None, authenticate_until=None, authentication_method=None, avatar_url=None, billable=None, billing_permission=None, bypass_site_allowed_ips=None, bypass_user_lifecycle_rules=None, company=None, created_at=None, dav_permission=None, days_remaining_until_password_expire=None, default_workspace_id=None, desktop_configuration_profile_id=None, disabled=None, disabled_expired_or_inactive=None, email=None, externally_managed=None, filesystem_layout=None, first_login_at=None, ftp_permission=None, ftp_tls_session_reuse_required=None, group_ids=None, header_text=None, id=None, integration_centric_profile_id=None, language=None, last_active_at=None, last_api_use_at=None, last_dav_login_at=None, last_desktop_login_at=None, last_ftp_login_at=None, last_login_at=None, last_protocol_cipher=None, last_restapi_login_at=None, last_sftp_login_at=None, last_web_login_at=None, lockout_expires=None, name=None, notes=None, notification_daily_send_time=None, notify_on_all_automation_failures=None, notify_on_all_expectation_failures=None, notify_on_all_pending_work_failures=None, notify_on_all_siem_http_destination_failures=None, notify_on_all_site_warnings=None, notify_on_all_sso_failures=None, notify_on_all_sync_failures=None, notify_on_all_user_security_events=None, office_integration_enabled=None, partner_admin=None, partner_id=None, partner_name=None, password_expire_at=None, password_expired=None, password_set_at=None, password_validity_days=None, primary_group_id=None, public_keys_count=None, readonly_site_admin=None, receive_admin_alerts=None, require2fa=None, require_login_by=None, require_password_change=None, responsible_group_id=None, responsible_user_id=None, restapi_permission=None, s3_compatible_endpoint_permission=None, self_managed=None, sftp_permission=None, site_admin=None, site_id=None, skip_welcome_screen=None, ssl_required=None, sso_strategy_id=None, tags=None, time_zone=None, type_of2fa=None, type_of2fa_for_display=None, user_home=None, user_root=None, username=None, workspace_admin=None, workspace_id=None):
         if active2fa and not isinstance(active2fa, bool):
             raise TypeError("Expected argument 'active2fa' to be a bool")
         pulumi.set(__self__, "active2fa", active2fa)
@@ -105,6 +105,9 @@ class GetUserResult:
         if ftp_permission and not isinstance(ftp_permission, bool):
             raise TypeError("Expected argument 'ftp_permission' to be a bool")
         pulumi.set(__self__, "ftp_permission", ftp_permission)
+        if ftp_tls_session_reuse_required and not isinstance(ftp_tls_session_reuse_required, str):
+            raise TypeError("Expected argument 'ftp_tls_session_reuse_required' to be a str")
+        pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if group_ids and not isinstance(group_ids, str):
             raise TypeError("Expected argument 'group_ids' to be a str")
         pulumi.set(__self__, "group_ids", group_ids)
@@ -499,6 +502,14 @@ class GetUserResult:
         Can the user access with FTP/FTPS?
         """
         return pulumi.get(self, "ftp_permission")
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> _builtins.str:
+        """
+        FTP TLS session reuse requirement: use*system*setting, always*require, or never*require
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
 
     @_builtins.property
     @pulumi.getter(name="groupIds")
@@ -1029,6 +1040,7 @@ class AwaitableGetUserResult(GetUserResult):
             filesystem_layout=self.filesystem_layout,
             first_login_at=self.first_login_at,
             ftp_permission=self.ftp_permission,
+            ftp_tls_session_reuse_required=self.ftp_tls_session_reuse_required,
             group_ids=self.group_ids,
             header_text=self.header_text,
             id=self.id,
@@ -1162,6 +1174,7 @@ def get_user(id: Optional[_builtins.int] = None,
         filesystem_layout=pulumi.get(__ret__, 'filesystem_layout'),
         first_login_at=pulumi.get(__ret__, 'first_login_at'),
         ftp_permission=pulumi.get(__ret__, 'ftp_permission'),
+        ftp_tls_session_reuse_required=pulumi.get(__ret__, 'ftp_tls_session_reuse_required'),
         group_ids=pulumi.get(__ret__, 'group_ids'),
         header_text=pulumi.get(__ret__, 'header_text'),
         id=pulumi.get(__ret__, 'id'),
@@ -1292,6 +1305,7 @@ def get_user_output(id: pulumi.Input[Optional[Optional[_builtins.int]]] = None,
         filesystem_layout=pulumi.get(__response__, 'filesystem_layout'),
         first_login_at=pulumi.get(__response__, 'first_login_at'),
         ftp_permission=pulumi.get(__response__, 'ftp_permission'),
+        ftp_tls_session_reuse_required=pulumi.get(__response__, 'ftp_tls_session_reuse_required'),
         group_ids=pulumi.get(__response__, 'group_ids'),
         header_text=pulumi.get(__response__, 'header_text'),
         id=pulumi.get(__response__, 'id'),

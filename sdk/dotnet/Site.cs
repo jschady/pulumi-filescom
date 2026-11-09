@@ -94,6 +94,7 @@ namespace Jschady.Filescom
     ///         SessionExpiryMinutes = 1,
     ///         LegacyPairingEnabled = false,
     ///         SslRequired = false,
+    ///         FtpTlsSessionReuseRequired = false,
     ///         SftpInsecureCiphers = false,
     ///         SftpInsecureDiffieHellman = false,
     ///         DisableFilesCertificateGeneration = false,
@@ -108,6 +109,7 @@ namespace Jschady.Filescom
     ///         AllowUserLevel2faOverride = false,
     ///         AllowUserLevelAllowedIpOverride = false,
     ///         AllowUserLevelSslOverride = false,
+    ///         AllowUserLevelFtpTlsSessionReuseOverride = false,
     ///         EnforceParentSiteUserIpRestrictions = false,
     ///         DisallowedCountries = "US,DE",
     ///         DaysToRetainBackups = 1,
@@ -285,6 +287,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("allowUserLevelAllowedIpOverride")]
         public Output<bool> AllowUserLevelAllowedIpOverride { get; private set; } = null!;
+
+        /// <summary>
+        /// Allow per-user overrides of the FTP TLS session reuse requirement?
+        /// </summary>
+        [Output("allowUserLevelFtpTlsSessionReuseOverride")]
+        public Output<bool> AllowUserLevelFtpTlsSessionReuseOverride { get; private set; } = null!;
 
         /// <summary>
         /// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
@@ -687,6 +695,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("ftpEnabled")]
         public Output<bool> FtpEnabled { get; private set; } = null!;
+
+        /// <summary>
+        /// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        /// </summary>
+        [Output("ftpTlsSessionReuseRequired")]
+        public Output<bool> FtpTlsSessionReuseRequired { get; private set; } = null!;
 
         /// <summary>
         /// Allow group admins to create users in their groups
@@ -1468,6 +1482,12 @@ namespace Jschady.Filescom
         public Input<bool>? AllowUserLevelAllowedIpOverride { get; set; }
 
         /// <summary>
+        /// Allow per-user overrides of the FTP TLS session reuse requirement?
+        /// </summary>
+        [Input("allowUserLevelFtpTlsSessionReuseOverride")]
+        public Input<bool>? AllowUserLevelFtpTlsSessionReuseOverride { get; set; }
+
+        /// <summary>
         /// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         /// </summary>
         [Input("allowUserLevelSslOverride")]
@@ -1844,6 +1864,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ftpEnabled")]
         public Input<bool>? FtpEnabled { get; set; }
+
+        /// <summary>
+        /// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        /// </summary>
+        [Input("ftpTlsSessionReuseRequired")]
+        public Input<bool>? FtpTlsSessionReuseRequired { get; set; }
 
         /// <summary>
         /// Allow group admins to create users in their groups
@@ -2466,6 +2492,12 @@ namespace Jschady.Filescom
         public Input<bool>? AllowUserLevelAllowedIpOverride { get; set; }
 
         /// <summary>
+        /// Allow per-user overrides of the FTP TLS session reuse requirement?
+        /// </summary>
+        [Input("allowUserLevelFtpTlsSessionReuseOverride")]
+        public Input<bool>? AllowUserLevelFtpTlsSessionReuseOverride { get; set; }
+
+        /// <summary>
         /// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         /// </summary>
         [Input("allowUserLevelSslOverride")]
@@ -2872,6 +2904,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ftpEnabled")]
         public Input<bool>? FtpEnabled { get; set; }
+
+        /// <summary>
+        /// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        /// </summary>
+        [Input("ftpTlsSessionReuseRequired")]
+        public Input<bool>? FtpTlsSessionReuseRequired { get; set; }
 
         /// <summary>
         /// Allow group admins to create users in their groups

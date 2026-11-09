@@ -10688,7 +10688,8 @@ type AutomationDefinitionNodeTransformConfig struct {
 	Destination *string `pulumi:"destination"`
 	Fts         string  `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-	OnErrors []AutomationDefinitionNodeTransformConfigOnError `pulumi:"onErrors"`
+	OnErrors       []AutomationDefinitionNodeTransformConfigOnError `pulumi:"onErrors"`
+	OverwriteFiles *bool                                            `pulumi:"overwriteFiles"`
 }
 
 // AutomationDefinitionNodeTransformConfigInput is an input type that accepts AutomationDefinitionNodeTransformConfigArgs and AutomationDefinitionNodeTransformConfigOutput values.
@@ -10707,7 +10708,8 @@ type AutomationDefinitionNodeTransformConfigArgs struct {
 	Destination pulumi.StringPtrInput `pulumi:"destination"`
 	Fts         pulumi.StringInput    `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-	OnErrors AutomationDefinitionNodeTransformConfigOnErrorArrayInput `pulumi:"onErrors"`
+	OnErrors       AutomationDefinitionNodeTransformConfigOnErrorArrayInput `pulumi:"onErrors"`
+	OverwriteFiles pulumi.BoolPtrInput                                      `pulumi:"overwriteFiles"`
 }
 
 func (AutomationDefinitionNodeTransformConfigArgs) ElementType() reflect.Type {
@@ -10803,6 +10805,10 @@ func (o AutomationDefinitionNodeTransformConfigOutput) OnErrors() AutomationDefi
 	}).(AutomationDefinitionNodeTransformConfigOnErrorArrayOutput)
 }
 
+func (o AutomationDefinitionNodeTransformConfigOutput) OverwriteFiles() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeTransformConfig) *bool { return v.OverwriteFiles }).(pulumi.BoolPtrOutput)
+}
+
 type AutomationDefinitionNodeTransformConfigPtrOutput struct{ *pulumi.OutputState }
 
 func (AutomationDefinitionNodeTransformConfigPtrOutput) ElementType() reflect.Type {
@@ -10854,6 +10860,15 @@ func (o AutomationDefinitionNodeTransformConfigPtrOutput) OnErrors() AutomationD
 		}
 		return v.OnErrors
 	}).(AutomationDefinitionNodeTransformConfigOnErrorArrayOutput)
+}
+
+func (o AutomationDefinitionNodeTransformConfigPtrOutput) OverwriteFiles() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeTransformConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OverwriteFiles
+	}).(pulumi.BoolPtrOutput)
 }
 
 type AutomationDefinitionNodeTransformConfigOnError struct {
@@ -14301,6 +14316,7 @@ func (o AutomationDefinitionNodeZipPtrOutput) Return() pulumi.BoolPtrOutput {
 }
 
 type AutomationDefinitionNodeZipConfig struct {
+	ArchiveFormat *string `pulumi:"archiveFormat"`
 	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -14320,6 +14336,7 @@ type AutomationDefinitionNodeZipConfigInput interface {
 }
 
 type AutomationDefinitionNodeZipConfigArgs struct {
+	ArchiveFormat pulumi.StringPtrInput `pulumi:"archiveFormat"`
 	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -14404,6 +14421,10 @@ func (o AutomationDefinitionNodeZipConfigOutput) ToAutomationDefinitionNodeZipCo
 	}).(AutomationDefinitionNodeZipConfigPtrOutput)
 }
 
+func (o AutomationDefinitionNodeZipConfigOutput) ArchiveFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AutomationDefinitionNodeZipConfig) *string { return v.ArchiveFormat }).(pulumi.StringPtrOutput)
+}
+
 // A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 func (o AutomationDefinitionNodeZipConfigOutput) Destination() pulumi.StringOutput {
 	return o.ApplyT(func(v AutomationDefinitionNodeZipConfig) string { return v.Destination }).(pulumi.StringOutput)
@@ -14442,6 +14463,15 @@ func (o AutomationDefinitionNodeZipConfigPtrOutput) Elem() AutomationDefinitionN
 		var ret AutomationDefinitionNodeZipConfig
 		return ret
 	}).(AutomationDefinitionNodeZipConfigOutput)
+}
+
+func (o AutomationDefinitionNodeZipConfigPtrOutput) ArchiveFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AutomationDefinitionNodeZipConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ArchiveFormat
+	}).(pulumi.StringPtrOutput)
 }
 
 // A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
@@ -22201,7 +22231,8 @@ type GetAutomationDefinitionNodeTransformConfig struct {
 	Destination string `pulumi:"destination"`
 	Fts         string `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-	OnErrors []GetAutomationDefinitionNodeTransformConfigOnError `pulumi:"onErrors"`
+	OnErrors       []GetAutomationDefinitionNodeTransformConfigOnError `pulumi:"onErrors"`
+	OverwriteFiles bool                                                `pulumi:"overwriteFiles"`
 }
 
 // GetAutomationDefinitionNodeTransformConfigInput is an input type that accepts GetAutomationDefinitionNodeTransformConfigArgs and GetAutomationDefinitionNodeTransformConfigOutput values.
@@ -22220,7 +22251,8 @@ type GetAutomationDefinitionNodeTransformConfigArgs struct {
 	Destination pulumi.StringInput `pulumi:"destination"`
 	Fts         pulumi.StringInput `pulumi:"fts"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
-	OnErrors GetAutomationDefinitionNodeTransformConfigOnErrorArrayInput `pulumi:"onErrors"`
+	OnErrors       GetAutomationDefinitionNodeTransformConfigOnErrorArrayInput `pulumi:"onErrors"`
+	OverwriteFiles pulumi.BoolInput                                            `pulumi:"overwriteFiles"`
 }
 
 func (GetAutomationDefinitionNodeTransformConfigArgs) ElementType() reflect.Type {
@@ -22263,6 +22295,10 @@ func (o GetAutomationDefinitionNodeTransformConfigOutput) OnErrors() GetAutomati
 	return o.ApplyT(func(v GetAutomationDefinitionNodeTransformConfig) []GetAutomationDefinitionNodeTransformConfigOnError {
 		return v.OnErrors
 	}).(GetAutomationDefinitionNodeTransformConfigOnErrorArrayOutput)
+}
+
+func (o GetAutomationDefinitionNodeTransformConfigOutput) OverwriteFiles() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeTransformConfig) bool { return v.OverwriteFiles }).(pulumi.BoolOutput)
 }
 
 type GetAutomationDefinitionNodeTransformConfigOnError struct {
@@ -23805,6 +23841,7 @@ func (o GetAutomationDefinitionNodeZipOutput) Return() pulumi.BoolOutput {
 }
 
 type GetAutomationDefinitionNodeZipConfig struct {
+	ArchiveFormat string `pulumi:"archiveFormat"`
 	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination string `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -23824,6 +23861,7 @@ type GetAutomationDefinitionNodeZipConfigInput interface {
 }
 
 type GetAutomationDefinitionNodeZipConfigArgs struct {
+	ArchiveFormat pulumi.StringInput `pulumi:"archiveFormat"`
 	// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
 	Destination pulumi.StringInput `pulumi:"destination"`
 	// Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -23855,6 +23893,10 @@ func (o GetAutomationDefinitionNodeZipConfigOutput) ToGetAutomationDefinitionNod
 
 func (o GetAutomationDefinitionNodeZipConfigOutput) ToGetAutomationDefinitionNodeZipConfigOutputWithContext(ctx context.Context) GetAutomationDefinitionNodeZipConfigOutput {
 	return o
+}
+
+func (o GetAutomationDefinitionNodeZipConfigOutput) ArchiveFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutomationDefinitionNodeZipConfig) string { return v.ArchiveFormat }).(pulumi.StringOutput)
 }
 
 // A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.

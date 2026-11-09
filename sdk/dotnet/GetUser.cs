@@ -535,6 +535,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool FtpPermission;
         /// <summary>
+        /// FTP TLS session reuse requirement: use*system*setting, always*require, or never*require
+        /// </summary>
+        public readonly string FtpTlsSessionReuseRequired;
+        /// <summary>
         /// Comma-separated list of group IDs of which this user is a member
         /// </summary>
         public readonly string GroupIds;
@@ -837,6 +841,8 @@ namespace Jschady.Filescom
 
             bool ftpPermission,
 
+            string ftpTlsSessionReuseRequired,
+
             string groupIds,
 
             string headerText,
@@ -987,6 +993,7 @@ namespace Jschady.Filescom
             FilesystemLayout = filesystemLayout;
             FirstLoginAt = firstLoginAt;
             FtpPermission = ftpPermission;
+            FtpTlsSessionReuseRequired = ftpTlsSessionReuseRequired;
             GroupIds = groupIds;
             HeaderText = headerText;
             Id = id;

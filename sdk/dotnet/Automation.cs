@@ -374,6 +374,12 @@ namespace Jschady.Filescom
         public Output<string> AutomationType { get; private set; } = null!;
 
         /// <summary>
+        /// ID of this v1 Automation's converted v2 copy, when present.
+        /// </summary>
+        [Output("convertedAutomationId")]
+        public Output<int> ConvertedAutomationId { get; private set; } = null!;
+
+        /// <summary>
         /// Automation v2 graph definition.
         /// </summary>
         [Output("definition")]
@@ -486,6 +492,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        /// </summary>
+        [Output("originalAutomationId")]
+        public Output<int> OriginalAutomationId { get; private set; } = null!;
 
         /// <summary>
         /// If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the &lt;span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`"&gt;`alwaysOverwriteSizeMatchingFiles`&lt;/span&gt; option in conjunction with &lt;span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`"&gt;`overwriteFiles`&lt;/span&gt; to override this behavior and overwrite files no matter what.
@@ -957,6 +969,12 @@ namespace Jschady.Filescom
         public Input<string>? AutomationType { get; set; }
 
         /// <summary>
+        /// ID of this v1 Automation's converted v2 copy, when present.
+        /// </summary>
+        [Input("convertedAutomationId")]
+        public Input<int>? ConvertedAutomationId { get; set; }
+
+        /// <summary>
         /// Automation v2 graph definition.
         /// </summary>
         [Input("definition")]
@@ -1081,6 +1099,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        /// </summary>
+        [Input("originalAutomationId")]
+        public Input<int>? OriginalAutomationId { get; set; }
 
         /// <summary>
         /// If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the &lt;span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`"&gt;`alwaysOverwriteSizeMatchingFiles`&lt;/span&gt; option in conjunction with &lt;span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`"&gt;`overwriteFiles`&lt;/span&gt; to override this behavior and overwrite files no matter what.

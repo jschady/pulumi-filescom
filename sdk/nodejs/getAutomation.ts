@@ -243,6 +243,10 @@ export interface GetAutomationResult {
      */
     readonly automation: string;
     /**
+     * ID of this v1 Automation's converted v2 copy, when present.
+     */
+    readonly convertedAutomationId: number;
+    /**
      * Automation v2 graph definition.
      */
     readonly definition: outputs.GetAutomationDefinition;
@@ -322,6 +326,10 @@ export interface GetAutomationResult {
      * Name for this automation.
      */
     readonly name: string;
+    /**
+     * ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+     */
+    readonly originalAutomationId: number;
     /**
      * If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
      */

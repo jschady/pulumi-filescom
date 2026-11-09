@@ -608,6 +608,7 @@ class _AutomationState:
                  always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
                  automation: pulumi.Input[Optional[_builtins.str]] = None,
+                 converted_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
                  definition: pulumi.Input[Optional['AutomationDefinitionArgs']] = None,
                  deleted: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -627,6 +628,7 @@ class _AutomationState:
                  last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
                  legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 original_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  path_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
@@ -655,6 +657,7 @@ class _AutomationState:
         :param pulumi.Input[_builtins.bool] always_overwrite_size_matching_files: Ordinarily, files with identical size in the source and destination will be skipped from copy operations to prevent wasted transfer.  If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will overwrite the destination file always.  Note that this may cause large amounts of wasted transfer usage.  This setting has no effect unless <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> is also set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
         :param pulumi.Input[_builtins.bool] always_serialize_jobs: Ordinarily, we will allow automation runs to run in parallel for non-scheduled automations. If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will force automation runs to be serialized (run one at a time, one after another). This can resolve some issues with race conditions on remote systems at the cost of some performance.
         :param pulumi.Input[_builtins.str] automation: Automation type
+        :param pulumi.Input[_builtins.int] converted_automation_id: ID of this v1 Automation's converted v2 copy, when present.
         :param pulumi.Input['AutomationDefinitionArgs'] definition: Automation v2 graph definition.
         :param pulumi.Input[_builtins.bool] deleted: Indicates if the automation has been deleted.
         :param pulumi.Input[_builtins.str] description: Description for the this Automation.
@@ -674,6 +677,7 @@ class _AutomationState:
         :param pulumi.Input[_builtins.str] last_modified_at: Time when automation was last modified. Does not change for name or description updates.
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
         :param pulumi.Input[_builtins.str] name: Name for this automation.
+        :param pulumi.Input[_builtins.int] original_automation_id: ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.str] path_time_zone: Timezone to use when rendering timestamps in paths.
@@ -703,6 +707,8 @@ class _AutomationState:
             pulumi.set(__self__, "always_serialize_jobs", always_serialize_jobs)
         if automation is not None:
             pulumi.set(__self__, "automation", automation)
+        if converted_automation_id is not None:
+            pulumi.set(__self__, "converted_automation_id", converted_automation_id)
         if definition is not None:
             pulumi.set(__self__, "definition", definition)
         if deleted is not None:
@@ -741,6 +747,8 @@ class _AutomationState:
             pulumi.set(__self__, "legacy_folder_matching", legacy_folder_matching)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if original_automation_id is not None:
+            pulumi.set(__self__, "original_automation_id", original_automation_id)
         if overwrite_files is not None:
             pulumi.set(__self__, "overwrite_files", overwrite_files)
         if path is not None:
@@ -821,6 +829,18 @@ class _AutomationState:
     @automation.setter
     def automation(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "automation", value)
+
+    @_builtins.property
+    @pulumi.getter(name="convertedAutomationId")
+    def converted_automation_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        ID of this v1 Automation's converted v2 copy, when present.
+        """
+        return pulumi.get(self, "converted_automation_id")
+
+    @converted_automation_id.setter
+    def converted_automation_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "converted_automation_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -1049,6 +1069,18 @@ class _AutomationState:
     @name.setter
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="originalAutomationId")
+    def original_automation_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        """
+        return pulumi.get(self, "original_automation_id")
+
+    @original_automation_id.setter
+    def original_automation_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "original_automation_id", value)
 
     @_builtins.property
     @pulumi.getter(name="overwriteFiles")
@@ -2109,10 +2141,12 @@ class Automation(pulumi.CustomResource):
             __props__.__dict__["user_ids"] = user_ids
             __props__.__dict__["value"] = value
             __props__.__dict__["workspace_id"] = workspace_id
+            __props__.__dict__["converted_automation_id"] = None
             __props__.__dict__["deleted"] = None
             __props__.__dict__["human_readable_schedule"] = None
             __props__.__dict__["inbound_email_address"] = None
             __props__.__dict__["last_modified_at"] = None
+            __props__.__dict__["original_automation_id"] = None
             __props__.__dict__["schedule"] = None
             __props__.__dict__["user_id"] = None
             __props__.__dict__["version"] = None
@@ -2130,6 +2164,7 @@ class Automation(pulumi.CustomResource):
             always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
             always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
             automation: pulumi.Input[Optional[_builtins.str]] = None,
+            converted_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
             definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
             deleted: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2149,6 +2184,7 @@ class Automation(pulumi.CustomResource):
             last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
             legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            original_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
             overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
             path: pulumi.Input[Optional[_builtins.str]] = None,
             path_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2181,6 +2217,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] always_overwrite_size_matching_files: Ordinarily, files with identical size in the source and destination will be skipped from copy operations to prevent wasted transfer.  If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will overwrite the destination file always.  Note that this may cause large amounts of wasted transfer usage.  This setting has no effect unless <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> is also set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>.
         :param pulumi.Input[_builtins.bool] always_serialize_jobs: Ordinarily, we will allow automation runs to run in parallel for non-scheduled automations. If this flag is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> we will force automation runs to be serialized (run one at a time, one after another). This can resolve some issues with race conditions on remote systems at the cost of some performance.
         :param pulumi.Input[_builtins.str] automation: Automation type
+        :param pulumi.Input[_builtins.int] converted_automation_id: ID of this v1 Automation's converted v2 copy, when present.
         :param pulumi.Input[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']] definition: Automation v2 graph definition.
         :param pulumi.Input[_builtins.bool] deleted: Indicates if the automation has been deleted.
         :param pulumi.Input[_builtins.str] description: Description for the this Automation.
@@ -2200,6 +2237,7 @@ class Automation(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] last_modified_at: Time when automation was last modified. Does not change for name or description updates.
         :param pulumi.Input[_builtins.bool] legacy_folder_matching: If <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span>, use the legacy behavior for this automation, where it can operate on folders in addition to just files.  This behavior no longer works and should not be used.
         :param pulumi.Input[_builtins.str] name: Name for this automation.
+        :param pulumi.Input[_builtins.int] original_automation_id: ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
         :param pulumi.Input[_builtins.bool] overwrite_files: If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
         :param pulumi.Input[_builtins.str] path: Path on which this Automation runs.  Supports globs, except on remote mounts. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
         :param pulumi.Input[_builtins.str] path_time_zone: Timezone to use when rendering timestamps in paths.
@@ -2230,6 +2268,7 @@ class Automation(pulumi.CustomResource):
         __props__.__dict__["always_overwrite_size_matching_files"] = always_overwrite_size_matching_files
         __props__.__dict__["always_serialize_jobs"] = always_serialize_jobs
         __props__.__dict__["automation"] = automation
+        __props__.__dict__["converted_automation_id"] = converted_automation_id
         __props__.__dict__["definition"] = definition
         __props__.__dict__["deleted"] = deleted
         __props__.__dict__["description"] = description
@@ -2249,6 +2288,7 @@ class Automation(pulumi.CustomResource):
         __props__.__dict__["last_modified_at"] = last_modified_at
         __props__.__dict__["legacy_folder_matching"] = legacy_folder_matching
         __props__.__dict__["name"] = name
+        __props__.__dict__["original_automation_id"] = original_automation_id
         __props__.__dict__["overwrite_files"] = overwrite_files
         __props__.__dict__["path"] = path
         __props__.__dict__["path_time_zone"] = path_time_zone
@@ -2279,6 +2319,7 @@ class Automation(pulumi.CustomResource):
             always_overwrite_size_matching_files: pulumi.Input[Optional[_builtins.bool]] = None,
             always_serialize_jobs: pulumi.Input[Optional[_builtins.bool]] = None,
             automation: pulumi.Input[Optional[_builtins.str]] = None,
+            converted_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
             definition: pulumi.Input[Optional[Union['AutomationDefinitionArgs', 'AutomationDefinitionArgsDict', 'outputs.AutomationDefinition']]] = None,
             deleted: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2298,6 +2339,7 @@ class Automation(pulumi.CustomResource):
             last_modified_at: pulumi.Input[Optional[_builtins.str]] = None,
             legacy_folder_matching: pulumi.Input[Optional[_builtins.bool]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            original_automation_id: pulumi.Input[Optional[_builtins.int]] = None,
             overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None,
             path: pulumi.Input[Optional[_builtins.str]] = None,
             path_time_zone: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2324,6 +2366,7 @@ class Automation(pulumi.CustomResource):
         __props__["alwaysOverwriteSizeMatchingFiles"] = always_overwrite_size_matching_files
         __props__["alwaysSerializeJobs"] = always_serialize_jobs
         __props__["automation"] = automation
+        __props__["convertedAutomationId"] = converted_automation_id
         __props__["definition"] = definition
         __props__["deleted"] = deleted
         __props__["description"] = description
@@ -2343,6 +2386,7 @@ class Automation(pulumi.CustomResource):
         __props__["lastModifiedAt"] = last_modified_at
         __props__["legacyFolderMatching"] = legacy_folder_matching
         __props__["name"] = name
+        __props__["originalAutomationId"] = original_automation_id
         __props__["overwriteFiles"] = overwrite_files
         __props__["path"] = path
         __props__["pathTimeZone"] = path_time_zone
@@ -2390,6 +2434,14 @@ class Automation(pulumi.CustomResource):
         Automation type
         """
         return pulumi.get(self, "automation")
+
+    @_builtins.property
+    @pulumi.getter(name="convertedAutomationId")
+    def converted_automation_id(self) -> pulumi.Output[_builtins.int]:
+        """
+        ID of this v1 Automation's converted v2 copy, when present.
+        """
+        return pulumi.get(self, "converted_automation_id")
 
     @_builtins.property
     @pulumi.getter
@@ -2542,6 +2594,14 @@ class Automation(pulumi.CustomResource):
         Name for this automation.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="originalAutomationId")
+    def original_automation_id(self) -> pulumi.Output[_builtins.int]:
+        """
+        ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        """
+        return pulumi.get(self, "original_automation_id")
 
     @_builtins.property
     @pulumi.getter(name="overwriteFiles")

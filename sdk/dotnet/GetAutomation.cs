@@ -989,6 +989,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly string Automation;
         /// <summary>
+        /// ID of this v1 Automation's converted v2 copy, when present.
+        /// </summary>
+        public readonly int ConvertedAutomationId;
+        /// <summary>
         /// Automation v2 graph definition.
         /// </summary>
         public readonly Outputs.GetAutomationDefinitionResult Definition;
@@ -1068,6 +1072,10 @@ namespace Jschady.Filescom
         /// Name for this automation.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+        /// </summary>
+        public readonly int OriginalAutomationId;
         /// <summary>
         /// If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the &lt;span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`"&gt;`alwaysOverwriteSizeMatchingFiles`&lt;/span&gt; option in conjunction with &lt;span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`"&gt;`overwriteFiles`&lt;/span&gt; to override this behavior and overwrite files no matter what.
         /// </summary>
@@ -1165,6 +1173,8 @@ namespace Jschady.Filescom
 
             string automation,
 
+            int convertedAutomationId,
+
             Outputs.GetAutomationDefinitionResult definition,
 
             bool deleted,
@@ -1204,6 +1214,8 @@ namespace Jschady.Filescom
             bool legacyFolderMatching,
 
             string name,
+
+            int originalAutomationId,
 
             bool overwriteFiles,
 
@@ -1252,6 +1264,7 @@ namespace Jschady.Filescom
             AlwaysOverwriteSizeMatchingFiles = alwaysOverwriteSizeMatchingFiles;
             AlwaysSerializeJobs = alwaysSerializeJobs;
             Automation = automation;
+            ConvertedAutomationId = convertedAutomationId;
             Definition = definition;
             Deleted = deleted;
             Description = description;
@@ -1272,6 +1285,7 @@ namespace Jschady.Filescom
             LastModifiedAt = lastModifiedAt;
             LegacyFolderMatching = legacyFolderMatching;
             Name = name;
+            OriginalAutomationId = originalAutomationId;
             OverwriteFiles = overwriteFiles;
             Path = path;
             PathTimeZone = pathTimeZone;

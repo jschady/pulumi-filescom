@@ -858,6 +858,7 @@ export interface AutomationDefinitionNodeTransformConfig {
      * Error handlers. Each item selects an error pattern and whether to continue or propagate it.
      */
     onErrors?: pulumi.Input<pulumi.Input<inputs.AutomationDefinitionNodeTransformConfigOnError>[] | undefined>;
+    overwriteFiles?: pulumi.Input<boolean | undefined>;
 }
 
 export interface AutomationDefinitionNodeTransformConfigOnError {
@@ -1084,6 +1085,7 @@ export interface AutomationDefinitionNodeZip {
 }
 
 export interface AutomationDefinitionNodeZipConfig {
+    archiveFormat?: pulumi.Input<string | undefined>;
     /**
      * A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
      */
