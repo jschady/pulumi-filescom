@@ -4720,13 +4720,15 @@ class AutomationDefinitionNodeTransformConfigArgsDict(TypedDict):
     """
     Error handlers. Each item selects an error pattern and whether to continue or propagate it.
     """
+    overwrite_files: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
 
 @pulumi.input_type
 class AutomationDefinitionNodeTransformConfigArgs:
     def __init__(__self__, *,
                  fts: pulumi.Input[_builtins.str],
                  destination: pulumi.Input[Optional[_builtins.str]] = None,
-                 on_errors: pulumi.Input[Optional[Sequence[pulumi.Input['AutomationDefinitionNodeTransformConfigOnErrorArgs']]]] = None):
+                 on_errors: pulumi.Input[Optional[Sequence[pulumi.Input['AutomationDefinitionNodeTransformConfigOnErrorArgs']]]] = None,
+                 overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.str] destination: A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         :param pulumi.Input[Sequence[pulumi.Input['AutomationDefinitionNodeTransformConfigOnErrorArgs']]] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -4736,6 +4738,8 @@ class AutomationDefinitionNodeTransformConfigArgs:
             pulumi.set(__self__, "destination", destination)
         if on_errors is not None:
             pulumi.set(__self__, "on_errors", on_errors)
+        if overwrite_files is not None:
+            pulumi.set(__self__, "overwrite_files", overwrite_files)
 
     @_builtins.property
     @pulumi.getter
@@ -4769,6 +4773,15 @@ class AutomationDefinitionNodeTransformConfigArgs:
     @on_errors.setter
     def on_errors(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AutomationDefinitionNodeTransformConfigOnErrorArgs']]]]):
         pulumi.set(self, "on_errors", value)
+
+    @_builtins.property
+    @pulumi.getter(name="overwriteFiles")
+    def overwrite_files(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        return pulumi.get(self, "overwrite_files")
+
+    @overwrite_files.setter
+    def overwrite_files(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "overwrite_files", value)
 
 
 class AutomationDefinitionNodeTransformConfigOnErrorArgsDict(TypedDict):
@@ -6091,6 +6104,7 @@ class AutomationDefinitionNodeZipConfigArgsDict(TypedDict):
     """
     A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
     """
+    archive_format: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     on_errors: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['AutomationDefinitionNodeZipConfigOnErrorArgsDict']]]]]
     """
     Error handlers. Each item selects an error pattern and whether to continue or propagate it.
@@ -6101,6 +6115,7 @@ class AutomationDefinitionNodeZipConfigArgsDict(TypedDict):
 class AutomationDefinitionNodeZipConfigArgs:
     def __init__(__self__, *,
                  destination: pulumi.Input[_builtins.str],
+                 archive_format: pulumi.Input[Optional[_builtins.str]] = None,
                  on_errors: pulumi.Input[Optional[Sequence[pulumi.Input['AutomationDefinitionNodeZipConfigOnErrorArgs']]]] = None,
                  overwrite_files: pulumi.Input[Optional[_builtins.bool]] = None):
         """
@@ -6108,6 +6123,8 @@ class AutomationDefinitionNodeZipConfigArgs:
         :param pulumi.Input[Sequence[pulumi.Input['AutomationDefinitionNodeZipConfigOnErrorArgs']]] on_errors: Error handlers. Each item selects an error pattern and whether to continue or propagate it.
         """
         pulumi.set(__self__, "destination", destination)
+        if archive_format is not None:
+            pulumi.set(__self__, "archive_format", archive_format)
         if on_errors is not None:
             pulumi.set(__self__, "on_errors", on_errors)
         if overwrite_files is not None:
@@ -6124,6 +6141,15 @@ class AutomationDefinitionNodeZipConfigArgs:
     @destination.setter
     def destination(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "destination", value)
+
+    @_builtins.property
+    @pulumi.getter(name="archiveFormat")
+    def archive_format(self) -> pulumi.Input[Optional[_builtins.str]]:
+        return pulumi.get(self, "archive_format")
+
+    @archive_format.setter
+    def archive_format(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "archive_format", value)
 
     @_builtins.property
     @pulumi.getter(name="onErrors")

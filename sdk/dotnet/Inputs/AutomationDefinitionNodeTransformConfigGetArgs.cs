@@ -34,6 +34,9 @@ namespace Jschady.Filescom.Inputs
             set => _onErrors = value;
         }
 
+        [Input("overwriteFiles")]
+        public Input<bool>? OverwriteFiles { get; set; }
+
         public AutomationDefinitionNodeTransformConfigGetArgs()
         {
         }

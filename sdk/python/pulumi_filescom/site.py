@@ -27,6 +27,7 @@ class SiteArgs:
                  allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+                 allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -89,6 +90,7 @@ class SiteArgs:
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -191,6 +193,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
+        :param pulumi.Input[_builtins.bool] allow_user_level_ftp_tls_session_reuse_override: Allow per-user overrides of the FTP TLS session reuse requirement?
         :param pulumi.Input[_builtins.bool] allow_user_level_ssl_override: Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_bypass_for_ftp_sftp_dav: Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_email: Is OTP via email two factor authentication allowed?
@@ -253,6 +256,7 @@ class SiteArgs:
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
+        :param pulumi.Input[_builtins.bool] ftp_tls_session_reuse_required: Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_bypass_user_lifecycle_rules: Allow group admins to exempt users in their groups from lifecycle rules
         :param pulumi.Input[_builtins.bool] group_admins_can_delete_users: Allow group admins to delete users in their groups
@@ -361,6 +365,8 @@ class SiteArgs:
             pulumi.set(__self__, "allow_user_level2fa_override", allow_user_level2fa_override)
         if allow_user_level_allowed_ip_override is not None:
             pulumi.set(__self__, "allow_user_level_allowed_ip_override", allow_user_level_allowed_ip_override)
+        if allow_user_level_ftp_tls_session_reuse_override is not None:
+            pulumi.set(__self__, "allow_user_level_ftp_tls_session_reuse_override", allow_user_level_ftp_tls_session_reuse_override)
         if allow_user_level_ssl_override is not None:
             pulumi.set(__self__, "allow_user_level_ssl_override", allow_user_level_ssl_override)
         if allowed2fa_method_bypass_for_ftp_sftp_dav is not None:
@@ -485,6 +491,8 @@ class SiteArgs:
             pulumi.set(__self__, "folder_permissions_groups_only", folder_permissions_groups_only)
         if ftp_enabled is not None:
             pulumi.set(__self__, "ftp_enabled", ftp_enabled)
+        if ftp_tls_session_reuse_required is not None:
+            pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if group_admins_can_add_users is not None:
             pulumi.set(__self__, "group_admins_can_add_users", group_admins_can_add_users)
         if group_admins_can_bypass_user_lifecycle_rules is not None:
@@ -763,6 +771,18 @@ class SiteArgs:
     @allow_user_level_allowed_ip_override.setter
     def allow_user_level_allowed_ip_override(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "allow_user_level_allowed_ip_override", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowUserLevelFtpTlsSessionReuseOverride")
+    def allow_user_level_ftp_tls_session_reuse_override(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow per-user overrides of the FTP TLS session reuse requirement?
+        """
+        return pulumi.get(self, "allow_user_level_ftp_tls_session_reuse_override")
+
+    @allow_user_level_ftp_tls_session_reuse_override.setter
+    def allow_user_level_ftp_tls_session_reuse_override(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "allow_user_level_ftp_tls_session_reuse_override", value)
 
     @_builtins.property
     @pulumi.getter(name="allowUserLevelSslOverride")
@@ -1507,6 +1527,18 @@ class SiteArgs:
     @ftp_enabled.setter
     def ftp_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ftp_enabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
+
+    @ftp_tls_session_reuse_required.setter
+    def ftp_tls_session_reuse_required(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "ftp_tls_session_reuse_required", value)
 
     @_builtins.property
     @pulumi.getter(name="groupAdminsCanAddUsers")
@@ -2613,6 +2645,7 @@ class _SiteState:
                  allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+                 allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2680,6 +2713,7 @@ class _SiteState:
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2804,6 +2838,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
+        :param pulumi.Input[_builtins.bool] allow_user_level_ftp_tls_session_reuse_override: Allow per-user overrides of the FTP TLS session reuse requirement?
         :param pulumi.Input[_builtins.bool] allow_user_level_ssl_override: Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_bypass_for_ftp_sftp_dav: Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_email: Is OTP via email two factor authentication allowed?
@@ -2871,6 +2906,7 @@ class _SiteState:
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
+        :param pulumi.Input[_builtins.bool] ftp_tls_session_reuse_required: Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_bypass_user_lifecycle_rules: Allow group admins to exempt users in their groups from lifecycle rules
         :param pulumi.Input[_builtins.bool] group_admins_can_delete_users: Allow group admins to delete users in their groups
@@ -3002,6 +3038,8 @@ class _SiteState:
             pulumi.set(__self__, "allow_user_level2fa_override", allow_user_level2fa_override)
         if allow_user_level_allowed_ip_override is not None:
             pulumi.set(__self__, "allow_user_level_allowed_ip_override", allow_user_level_allowed_ip_override)
+        if allow_user_level_ftp_tls_session_reuse_override is not None:
+            pulumi.set(__self__, "allow_user_level_ftp_tls_session_reuse_override", allow_user_level_ftp_tls_session_reuse_override)
         if allow_user_level_ssl_override is not None:
             pulumi.set(__self__, "allow_user_level_ssl_override", allow_user_level_ssl_override)
         if allowed2fa_method_bypass_for_ftp_sftp_dav is not None:
@@ -3136,6 +3174,8 @@ class _SiteState:
             pulumi.set(__self__, "folder_permissions_groups_only", folder_permissions_groups_only)
         if ftp_enabled is not None:
             pulumi.set(__self__, "ftp_enabled", ftp_enabled)
+        if ftp_tls_session_reuse_required is not None:
+            pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if group_admins_can_add_users is not None:
             pulumi.set(__self__, "group_admins_can_add_users", group_admins_can_add_users)
         if group_admins_can_bypass_user_lifecycle_rules is not None:
@@ -3468,6 +3508,18 @@ class _SiteState:
     @allow_user_level_allowed_ip_override.setter
     def allow_user_level_allowed_ip_override(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "allow_user_level_allowed_ip_override", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowUserLevelFtpTlsSessionReuseOverride")
+    def allow_user_level_ftp_tls_session_reuse_override(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allow per-user overrides of the FTP TLS session reuse requirement?
+        """
+        return pulumi.get(self, "allow_user_level_ftp_tls_session_reuse_override")
+
+    @allow_user_level_ftp_tls_session_reuse_override.setter
+    def allow_user_level_ftp_tls_session_reuse_override(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "allow_user_level_ftp_tls_session_reuse_override", value)
 
     @_builtins.property
     @pulumi.getter(name="allowUserLevelSslOverride")
@@ -4272,6 +4324,18 @@ class _SiteState:
     @ftp_enabled.setter
     def ftp_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ftp_enabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
+
+    @ftp_tls_session_reuse_required.setter
+    def ftp_tls_session_reuse_required(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "ftp_tls_session_reuse_required", value)
 
     @_builtins.property
     @pulumi.getter(name="groupAdminsCanAddUsers")
@@ -5632,6 +5696,7 @@ class Site(pulumi.CustomResource):
                  allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+                 allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -5694,6 +5759,7 @@ class Site(pulumi.CustomResource):
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -5860,6 +5926,7 @@ class Site(pulumi.CustomResource):
             session_expiry_minutes=1,
             legacy_pairing_enabled=False,
             ssl_required=False,
+            ftp_tls_session_reuse_required=False,
             sftp_insecure_ciphers=False,
             sftp_insecure_diffie_hellman=False,
             disable_files_certificate_generation=False,
@@ -5874,6 +5941,7 @@ class Site(pulumi.CustomResource):
             allow_user_level2fa_override=False,
             allow_user_level_allowed_ip_override=False,
             allow_user_level_ssl_override=False,
+            allow_user_level_ftp_tls_session_reuse_override=False,
             enforce_parent_site_user_ip_restrictions=False,
             disallowed_countries="US,DE",
             days_to_retain_backups=1,
@@ -5996,6 +6064,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
+        :param pulumi.Input[_builtins.bool] allow_user_level_ftp_tls_session_reuse_override: Allow per-user overrides of the FTP TLS session reuse requirement?
         :param pulumi.Input[_builtins.bool] allow_user_level_ssl_override: Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_bypass_for_ftp_sftp_dav: Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_email: Is OTP via email two factor authentication allowed?
@@ -6058,6 +6127,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
+        :param pulumi.Input[_builtins.bool] ftp_tls_session_reuse_required: Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_bypass_user_lifecycle_rules: Allow group admins to exempt users in their groups from lifecycle rules
         :param pulumi.Input[_builtins.bool] group_admins_can_delete_users: Allow group admins to delete users in their groups
@@ -6230,6 +6300,7 @@ class Site(pulumi.CustomResource):
             session_expiry_minutes=1,
             legacy_pairing_enabled=False,
             ssl_required=False,
+            ftp_tls_session_reuse_required=False,
             sftp_insecure_ciphers=False,
             sftp_insecure_diffie_hellman=False,
             disable_files_certificate_generation=False,
@@ -6244,6 +6315,7 @@ class Site(pulumi.CustomResource):
             allow_user_level2fa_override=False,
             allow_user_level_allowed_ip_override=False,
             allow_user_level_ssl_override=False,
+            allow_user_level_ftp_tls_session_reuse_override=False,
             enforce_parent_site_user_ip_restrictions=False,
             disallowed_countries="US,DE",
             days_to_retain_backups=1,
@@ -6379,6 +6451,7 @@ class Site(pulumi.CustomResource):
                  allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+                 allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
                  allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6441,6 +6514,7 @@ class Site(pulumi.CustomResource):
                  files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
                  ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
                  group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6549,6 +6623,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["allow_bundle_names"] = allow_bundle_names
             __props__.__dict__["allow_user_level2fa_override"] = allow_user_level2fa_override
             __props__.__dict__["allow_user_level_allowed_ip_override"] = allow_user_level_allowed_ip_override
+            __props__.__dict__["allow_user_level_ftp_tls_session_reuse_override"] = allow_user_level_ftp_tls_session_reuse_override
             __props__.__dict__["allow_user_level_ssl_override"] = allow_user_level_ssl_override
             __props__.__dict__["allowed2fa_method_bypass_for_ftp_sftp_dav"] = allowed2fa_method_bypass_for_ftp_sftp_dav
             __props__.__dict__["allowed2fa_method_email"] = allowed2fa_method_email
@@ -6611,6 +6686,7 @@ class Site(pulumi.CustomResource):
             __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
             __props__.__dict__["folder_permissions_groups_only"] = folder_permissions_groups_only
             __props__.__dict__["ftp_enabled"] = ftp_enabled
+            __props__.__dict__["ftp_tls_session_reuse_required"] = ftp_tls_session_reuse_required
             __props__.__dict__["group_admins_can_add_users"] = group_admins_can_add_users
             __props__.__dict__["group_admins_can_bypass_user_lifecycle_rules"] = group_admins_can_bypass_user_lifecycle_rules
             __props__.__dict__["group_admins_can_delete_users"] = group_admins_can_delete_users
@@ -6748,6 +6824,7 @@ class Site(pulumi.CustomResource):
             allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+            allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
             allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6815,6 +6892,7 @@ class Site(pulumi.CustomResource):
             files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
             ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -6943,6 +7021,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] allow_bundle_names: Are manual Bundle names allowed?
         :param pulumi.Input[_builtins.bool] allow_user_level2fa_override: Allow the site-wide two-factor authentication requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allow_user_level_allowed_ip_override: Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
+        :param pulumi.Input[_builtins.bool] allow_user_level_ftp_tls_session_reuse_override: Allow per-user overrides of the FTP TLS session reuse requirement?
         :param pulumi.Input[_builtins.bool] allow_user_level_ssl_override: Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_bypass_for_ftp_sftp_dav: Are users allowed to configure their two factor authentication to be bypassed for FTP/SFTP/WebDAV?
         :param pulumi.Input[_builtins.bool] allowed2fa_method_email: Is OTP via email two factor authentication allowed?
@@ -7010,6 +7089,7 @@ class Site(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] files_com_remote_server_enabled: Allow other Files.com sites to use this site's API keys for native Files.com Remote Server connections? Defaults to true and applies to all keys and workspaces on this site. When false, new pairings and access through existing connections are rejected without revoking keys or deleting connections. Re-enabling permits access again with usable keys. Does not disable this site's connections to other sites, ordinary API access, or Connected Sites.
         :param pulumi.Input[_builtins.bool] folder_permissions_groups_only: If true, permissions for this site must be bound to a group (not a user).
         :param pulumi.Input[_builtins.bool] ftp_enabled: Is FTP enabled?
+        :param pulumi.Input[_builtins.bool] ftp_tls_session_reuse_required: Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
         :param pulumi.Input[_builtins.bool] group_admins_can_add_users: Allow group admins to create users in their groups
         :param pulumi.Input[_builtins.bool] group_admins_can_bypass_user_lifecycle_rules: Allow group admins to exempt users in their groups from lifecycle rules
         :param pulumi.Input[_builtins.bool] group_admins_can_delete_users: Allow group admins to delete users in their groups
@@ -7136,6 +7216,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["allow_bundle_names"] = allow_bundle_names
         __props__.__dict__["allow_user_level2fa_override"] = allow_user_level2fa_override
         __props__.__dict__["allow_user_level_allowed_ip_override"] = allow_user_level_allowed_ip_override
+        __props__.__dict__["allow_user_level_ftp_tls_session_reuse_override"] = allow_user_level_ftp_tls_session_reuse_override
         __props__.__dict__["allow_user_level_ssl_override"] = allow_user_level_ssl_override
         __props__.__dict__["allowed2fa_method_bypass_for_ftp_sftp_dav"] = allowed2fa_method_bypass_for_ftp_sftp_dav
         __props__.__dict__["allowed2fa_method_email"] = allowed2fa_method_email
@@ -7203,6 +7284,7 @@ class Site(pulumi.CustomResource):
         __props__.__dict__["files_com_remote_server_enabled"] = files_com_remote_server_enabled
         __props__.__dict__["folder_permissions_groups_only"] = folder_permissions_groups_only
         __props__.__dict__["ftp_enabled"] = ftp_enabled
+        __props__.__dict__["ftp_tls_session_reuse_required"] = ftp_tls_session_reuse_required
         __props__.__dict__["group_admins_can_add_users"] = group_admins_can_add_users
         __props__.__dict__["group_admins_can_bypass_user_lifecycle_rules"] = group_admins_can_bypass_user_lifecycle_rules
         __props__.__dict__["group_admins_can_delete_users"] = group_admins_can_delete_users
@@ -7329,6 +7411,7 @@ class Site(pulumi.CustomResource):
             allow_bundle_names: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level2fa_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level_allowed_ip_override: pulumi.Input[Optional[_builtins.bool]] = None,
+            allow_user_level_ftp_tls_session_reuse_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allow_user_level_ssl_override: pulumi.Input[Optional[_builtins.bool]] = None,
             allowed2fa_method_bypass_for_ftp_sftp_dav: pulumi.Input[Optional[_builtins.bool]] = None,
             allowed2fa_method_email: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7396,6 +7479,7 @@ class Site(pulumi.CustomResource):
             files_com_remote_server_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             folder_permissions_groups_only: pulumi.Input[Optional[_builtins.bool]] = None,
             ftp_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_add_users: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_bypass_user_lifecycle_rules: pulumi.Input[Optional[_builtins.bool]] = None,
             group_admins_can_delete_users: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -7518,6 +7602,7 @@ class Site(pulumi.CustomResource):
         __props__["allowBundleNames"] = allow_bundle_names
         __props__["allowUserLevel2faOverride"] = allow_user_level2fa_override
         __props__["allowUserLevelAllowedIpOverride"] = allow_user_level_allowed_ip_override
+        __props__["allowUserLevelFtpTlsSessionReuseOverride"] = allow_user_level_ftp_tls_session_reuse_override
         __props__["allowUserLevelSslOverride"] = allow_user_level_ssl_override
         __props__["allowed2faMethodBypassForFtpSftpDav"] = allowed2fa_method_bypass_for_ftp_sftp_dav
         __props__["allowed2faMethodEmail"] = allowed2fa_method_email
@@ -7585,6 +7670,7 @@ class Site(pulumi.CustomResource):
         __props__["filesComRemoteServerEnabled"] = files_com_remote_server_enabled
         __props__["folderPermissionsGroupsOnly"] = folder_permissions_groups_only
         __props__["ftpEnabled"] = ftp_enabled
+        __props__["ftpTlsSessionReuseRequired"] = ftp_tls_session_reuse_required
         __props__["groupAdminsCanAddUsers"] = group_admins_can_add_users
         __props__["groupAdminsCanBypassUserLifecycleRules"] = group_admins_can_bypass_user_lifecycle_rules
         __props__["groupAdminsCanDeleteUsers"] = group_admins_can_delete_users
@@ -7770,6 +7856,14 @@ class Site(pulumi.CustomResource):
         Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
         """
         return pulumi.get(self, "allow_user_level_allowed_ip_override")
+
+    @_builtins.property
+    @pulumi.getter(name="allowUserLevelFtpTlsSessionReuseOverride")
+    def allow_user_level_ftp_tls_session_reuse_override(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Allow per-user overrides of the FTP TLS session reuse requirement?
+        """
+        return pulumi.get(self, "allow_user_level_ftp_tls_session_reuse_override")
 
     @_builtins.property
     @pulumi.getter(name="allowUserLevelSslOverride")
@@ -8306,6 +8400,14 @@ class Site(pulumi.CustomResource):
         Is FTP enabled?
         """
         return pulumi.get(self, "ftp_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
 
     @_builtins.property
     @pulumi.getter(name="groupAdminsCanAddUsers")

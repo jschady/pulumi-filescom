@@ -94,6 +94,7 @@ namespace Jschady.Filescom
     ///         SiteAdmin = true,
     ///         SkipWelcomeScreen = true,
     ///         SslRequired = "always_require",
+    ///         FtpTlsSessionReuseRequired = "use_system_setting",
     ///         SsoStrategyId = 1,
     ///         Require2fa = "always_require",
     ///         Tags = "example",
@@ -305,6 +306,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Output("ftpPermission")]
         public Output<bool> FtpPermission { get; private set; } = null!;
+
+        /// <summary>
+        /// FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        /// </summary>
+        [Output("ftpTlsSessionReuseRequired")]
+        public Output<string> FtpTlsSessionReuseRequired { get; private set; } = null!;
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -930,6 +937,12 @@ namespace Jschady.Filescom
         [Input("ftpPermission")]
         public Input<bool>? FtpPermission { get; set; }
 
+        /// <summary>
+        /// FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        /// </summary>
+        [Input("ftpTlsSessionReuseRequired")]
+        public Input<string>? FtpTlsSessionReuseRequired { get; set; }
+
         [Input("grantPermission")]
         private Input<string>? _grantPermission;
 
@@ -1504,6 +1517,12 @@ namespace Jschady.Filescom
         /// </summary>
         [Input("ftpPermission")]
         public Input<bool>? FtpPermission { get; set; }
+
+        /// <summary>
+        /// FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        /// </summary>
+        [Input("ftpTlsSessionReuseRequired")]
+        public Input<string>? FtpTlsSessionReuseRequired { get; set; }
 
         [Input("grantPermission")]
         private Input<string>? _grantPermission;

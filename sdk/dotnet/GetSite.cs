@@ -351,6 +351,10 @@ namespace Jschady.Filescom
         /// </summary>
         public readonly bool AllowUserLevelAllowedIpOverride;
         /// <summary>
+        /// Allow per-user overrides of the FTP TLS session reuse requirement?
+        /// </summary>
+        public readonly bool AllowUserLevelFtpTlsSessionReuseOverride;
+        /// <summary>
         /// Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
         /// </summary>
         public readonly bool AllowUserLevelSslOverride;
@@ -618,6 +622,10 @@ namespace Jschady.Filescom
         /// Is FTP enabled?
         /// </summary>
         public readonly bool FtpEnabled;
+        /// <summary>
+        /// Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+        /// </summary>
+        public readonly bool FtpTlsSessionReuseRequired;
         /// <summary>
         /// Allow group admins to create users in their groups
         /// </summary>
@@ -1091,6 +1099,8 @@ namespace Jschady.Filescom
 
             bool allowUserLevelAllowedIpOverride,
 
+            bool allowUserLevelFtpTlsSessionReuseOverride,
+
             bool allowUserLevelSslOverride,
 
             bool allowed2faMethodBypassForFtpSftpDav,
@@ -1224,6 +1234,8 @@ namespace Jschady.Filescom
             bool folderPermissionsGroupsOnly,
 
             bool ftpEnabled,
+
+            bool ftpTlsSessionReuseRequired,
 
             bool groupAdminsCanAddUsers,
 
@@ -1460,6 +1472,7 @@ namespace Jschady.Filescom
             AllowBundleNames = allowBundleNames;
             AllowUserLevel2faOverride = allowUserLevel2faOverride;
             AllowUserLevelAllowedIpOverride = allowUserLevelAllowedIpOverride;
+            AllowUserLevelFtpTlsSessionReuseOverride = allowUserLevelFtpTlsSessionReuseOverride;
             AllowUserLevelSslOverride = allowUserLevelSslOverride;
             Allowed2faMethodBypassForFtpSftpDav = allowed2faMethodBypassForFtpSftpDav;
             Allowed2faMethodEmail = allowed2faMethodEmail;
@@ -1527,6 +1540,7 @@ namespace Jschady.Filescom
             FilesComRemoteServerEnabled = filesComRemoteServerEnabled;
             FolderPermissionsGroupsOnly = folderPermissionsGroupsOnly;
             FtpEnabled = ftpEnabled;
+            FtpTlsSessionReuseRequired = ftpTlsSessionReuseRequired;
             GroupAdminsCanAddUsers = groupAdminsCanAddUsers;
             GroupAdminsCanBypassUserLifecycleRules = groupAdminsCanBypassUserLifecycleRules;
             GroupAdminsCanDeleteUsers = groupAdminsCanDeleteUsers;

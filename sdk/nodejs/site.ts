@@ -78,6 +78,7 @@ import * as utilities from "./utilities";
  *     sessionExpiryMinutes: 1,
  *     legacyPairingEnabled: false,
  *     sslRequired: false,
+ *     ftpTlsSessionReuseRequired: false,
  *     sftpInsecureCiphers: false,
  *     sftpInsecureDiffieHellman: false,
  *     disableFilesCertificateGeneration: false,
@@ -92,6 +93,7 @@ import * as utilities from "./utilities";
  *     allowUserLevel2faOverride: false,
  *     allowUserLevelAllowedIpOverride: false,
  *     allowUserLevelSslOverride: false,
+ *     allowUserLevelFtpTlsSessionReuseOverride: false,
  *     enforceParentSiteUserIpRestrictions: false,
  *     disallowedCountries: "US,DE",
  *     daysToRetainBackups: 1,
@@ -279,6 +281,10 @@ export class Site extends pulumi.CustomResource {
      * Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
      */
     declare public readonly allowUserLevelAllowedIpOverride: pulumi.Output<boolean>;
+    /**
+     * Allow per-user overrides of the FTP TLS session reuse requirement?
+     */
+    declare public readonly allowUserLevelFtpTlsSessionReuseOverride: pulumi.Output<boolean>;
     /**
      * Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
      */
@@ -547,6 +553,10 @@ export class Site extends pulumi.CustomResource {
      * Is FTP enabled?
      */
     declare public readonly ftpEnabled: pulumi.Output<boolean>;
+    /**
+     * Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+     */
+    declare public readonly ftpTlsSessionReuseRequired: pulumi.Output<boolean>;
     /**
      * Allow group admins to create users in their groups
      */
@@ -1018,6 +1028,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["allowBundleNames"] = state?.allowBundleNames;
             resourceInputs["allowUserLevel2faOverride"] = state?.allowUserLevel2faOverride;
             resourceInputs["allowUserLevelAllowedIpOverride"] = state?.allowUserLevelAllowedIpOverride;
+            resourceInputs["allowUserLevelFtpTlsSessionReuseOverride"] = state?.allowUserLevelFtpTlsSessionReuseOverride;
             resourceInputs["allowUserLevelSslOverride"] = state?.allowUserLevelSslOverride;
             resourceInputs["allowed2faMethodBypassForFtpSftpDav"] = state?.allowed2faMethodBypassForFtpSftpDav;
             resourceInputs["allowed2faMethodEmail"] = state?.allowed2faMethodEmail;
@@ -1085,6 +1096,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["filesComRemoteServerEnabled"] = state?.filesComRemoteServerEnabled;
             resourceInputs["folderPermissionsGroupsOnly"] = state?.folderPermissionsGroupsOnly;
             resourceInputs["ftpEnabled"] = state?.ftpEnabled;
+            resourceInputs["ftpTlsSessionReuseRequired"] = state?.ftpTlsSessionReuseRequired;
             resourceInputs["groupAdminsCanAddUsers"] = state?.groupAdminsCanAddUsers;
             resourceInputs["groupAdminsCanBypassUserLifecycleRules"] = state?.groupAdminsCanBypassUserLifecycleRules;
             resourceInputs["groupAdminsCanDeleteUsers"] = state?.groupAdminsCanDeleteUsers;
@@ -1207,6 +1219,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["allowBundleNames"] = args?.allowBundleNames;
             resourceInputs["allowUserLevel2faOverride"] = args?.allowUserLevel2faOverride;
             resourceInputs["allowUserLevelAllowedIpOverride"] = args?.allowUserLevelAllowedIpOverride;
+            resourceInputs["allowUserLevelFtpTlsSessionReuseOverride"] = args?.allowUserLevelFtpTlsSessionReuseOverride;
             resourceInputs["allowUserLevelSslOverride"] = args?.allowUserLevelSslOverride;
             resourceInputs["allowed2faMethodBypassForFtpSftpDav"] = args?.allowed2faMethodBypassForFtpSftpDav;
             resourceInputs["allowed2faMethodEmail"] = args?.allowed2faMethodEmail;
@@ -1269,6 +1282,7 @@ export class Site extends pulumi.CustomResource {
             resourceInputs["filesComRemoteServerEnabled"] = args?.filesComRemoteServerEnabled;
             resourceInputs["folderPermissionsGroupsOnly"] = args?.folderPermissionsGroupsOnly;
             resourceInputs["ftpEnabled"] = args?.ftpEnabled;
+            resourceInputs["ftpTlsSessionReuseRequired"] = args?.ftpTlsSessionReuseRequired;
             resourceInputs["groupAdminsCanAddUsers"] = args?.groupAdminsCanAddUsers;
             resourceInputs["groupAdminsCanBypassUserLifecycleRules"] = args?.groupAdminsCanBypassUserLifecycleRules;
             resourceInputs["groupAdminsCanDeleteUsers"] = args?.groupAdminsCanDeleteUsers;
@@ -1433,6 +1447,10 @@ export interface SiteState {
      * Allow the site-wide allowed IP restriction to be overriden on a per-user-basis?
      */
     allowUserLevelAllowedIpOverride?: pulumi.Input<boolean | undefined>;
+    /**
+     * Allow per-user overrides of the FTP TLS session reuse requirement?
+     */
+    allowUserLevelFtpTlsSessionReuseOverride?: pulumi.Input<boolean | undefined>;
     /**
      * Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
      */
@@ -1701,6 +1719,10 @@ export interface SiteState {
      * Is FTP enabled?
      */
     ftpEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+     */
+    ftpTlsSessionReuseRequired?: pulumi.Input<boolean | undefined>;
     /**
      * Allow group admins to create users in their groups
      */
@@ -2188,6 +2210,10 @@ export interface SiteArgs {
      */
     allowUserLevelAllowedIpOverride?: pulumi.Input<boolean | undefined>;
     /**
+     * Allow per-user overrides of the FTP TLS session reuse requirement?
+     */
+    allowUserLevelFtpTlsSessionReuseOverride?: pulumi.Input<boolean | undefined>;
+    /**
      * Allow the site-wide FTP SSL requirement to be overriden on a per-user-basis?
      */
     allowUserLevelSslOverride?: pulumi.Input<boolean | undefined>;
@@ -2435,6 +2461,10 @@ export interface SiteArgs {
      * Is FTP enabled?
      */
     ftpEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Require TLS-protected FTP data connections to reuse the control connection TLS session? Applies to all workspaces.
+     */
+    ftpTlsSessionReuseRequired?: pulumi.Input<boolean | undefined>;
     /**
      * Allow group admins to create users in their groups
      */

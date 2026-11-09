@@ -167,6 +167,10 @@ export interface GetUserResult {
      */
     readonly ftpPermission: boolean;
     /**
+     * FTP TLS session reuse requirement: use*system*setting, always*require, or never*require
+     */
+    readonly ftpTlsSessionReuseRequired: string;
+    /**
      * Comma-separated list of group IDs of which this user is a member
      */
     readonly groupIds: string;

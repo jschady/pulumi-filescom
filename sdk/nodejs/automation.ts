@@ -362,6 +362,10 @@ export class Automation extends pulumi.CustomResource {
      */
     declare public readonly automation: pulumi.Output<string>;
     /**
+     * ID of this v1 Automation's converted v2 copy, when present.
+     */
+    declare public /*out*/ readonly convertedAutomationId: pulumi.Output<number>;
+    /**
      * Automation v2 graph definition.
      */
     declare public readonly definition: pulumi.Output<outputs.AutomationDefinition>;
@@ -437,6 +441,10 @@ export class Automation extends pulumi.CustomResource {
      * Name for this automation.
      */
     declare public readonly name: pulumi.Output<string>;
+    /**
+     * ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+     */
+    declare public /*out*/ readonly originalAutomationId: pulumi.Output<number>;
     /**
      * If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
      */
@@ -542,6 +550,7 @@ export class Automation extends pulumi.CustomResource {
             resourceInputs["alwaysOverwriteSizeMatchingFiles"] = state?.alwaysOverwriteSizeMatchingFiles;
             resourceInputs["alwaysSerializeJobs"] = state?.alwaysSerializeJobs;
             resourceInputs["automation"] = state?.automation;
+            resourceInputs["convertedAutomationId"] = state?.convertedAutomationId;
             resourceInputs["definition"] = state?.definition;
             resourceInputs["deleted"] = state?.deleted;
             resourceInputs["description"] = state?.description;
@@ -561,6 +570,7 @@ export class Automation extends pulumi.CustomResource {
             resourceInputs["lastModifiedAt"] = state?.lastModifiedAt;
             resourceInputs["legacyFolderMatching"] = state?.legacyFolderMatching;
             resourceInputs["name"] = state?.name;
+            resourceInputs["originalAutomationId"] = state?.originalAutomationId;
             resourceInputs["overwriteFiles"] = state?.overwriteFiles;
             resourceInputs["path"] = state?.path;
             resourceInputs["pathTimeZone"] = state?.pathTimeZone;
@@ -624,10 +634,12 @@ export class Automation extends pulumi.CustomResource {
             resourceInputs["userIds"] = args?.userIds;
             resourceInputs["value"] = args?.value;
             resourceInputs["workspaceId"] = args?.workspaceId;
+            resourceInputs["convertedAutomationId"] = undefined /*out*/;
             resourceInputs["deleted"] = undefined /*out*/;
             resourceInputs["humanReadableSchedule"] = undefined /*out*/;
             resourceInputs["inboundEmailAddress"] = undefined /*out*/;
             resourceInputs["lastModifiedAt"] = undefined /*out*/;
+            resourceInputs["originalAutomationId"] = undefined /*out*/;
             resourceInputs["schedule"] = undefined /*out*/;
             resourceInputs["userId"] = undefined /*out*/;
             resourceInputs["version"] = undefined /*out*/;
@@ -654,6 +666,10 @@ export interface AutomationState {
      * Automation type
      */
     automation?: pulumi.Input<string | undefined>;
+    /**
+     * ID of this v1 Automation's converted v2 copy, when present.
+     */
+    convertedAutomationId?: pulumi.Input<number | undefined>;
     /**
      * Automation v2 graph definition.
      */
@@ -730,6 +746,10 @@ export interface AutomationState {
      * Name for this automation.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * ID of the retained v1 Automation for a converted Automation. Re-enable that v1 Automation to pause this copy and revert the conversion.
+     */
+    originalAutomationId?: pulumi.Input<number | undefined>;
     /**
      * If true, existing files will be overwritten with new files on Move/Copy automations.  Note: by default files will not be overwritten on Copy automations if they appear to be the same file size as the newly incoming file.  Use the <span pulumi-lang-nodejs="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-dotnet="`AlwaysOverwriteSizeMatchingFiles`" pulumi-lang-go="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-python="`always_overwrite_size_matching_files`" pulumi-lang-yaml="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-java="`alwaysOverwriteSizeMatchingFiles`" pulumi-lang-hcl="`always_overwrite_size_matching_files`">`alwaysOverwriteSizeMatchingFiles`</span> option in conjunction with <span pulumi-lang-nodejs="`overwriteFiles`" pulumi-lang-dotnet="`OverwriteFiles`" pulumi-lang-go="`overwriteFiles`" pulumi-lang-python="`overwrite_files`" pulumi-lang-yaml="`overwriteFiles`" pulumi-lang-java="`overwriteFiles`" pulumi-lang-hcl="`overwrite_files`">`overwriteFiles`</span> to override this behavior and overwrite files no matter what.
      */

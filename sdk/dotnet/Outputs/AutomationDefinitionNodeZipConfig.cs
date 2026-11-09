@@ -14,6 +14,7 @@ namespace Jschady.Filescom.Outputs
     [OutputType]
     public sealed class AutomationDefinitionNodeZipConfig
     {
+        public readonly string? ArchiveFormat;
         /// <summary>
         /// A string value. Supports {{ fts }} interpolation, evaluated per item at execution time. In path fields, {{ fts }} supplies one file or folder name; {{{ fts }}} supplies a path fragment.
         /// </summary>
@@ -26,12 +27,15 @@ namespace Jschady.Filescom.Outputs
 
         [OutputConstructor]
         private AutomationDefinitionNodeZipConfig(
+            string? archiveFormat,
+
             string destination,
 
             ImmutableArray<Outputs.AutomationDefinitionNodeZipConfigOnError> onErrors,
 
             bool? overwriteFiles)
         {
+            ArchiveFormat = archiveFormat;
             Destination = destination;
             OnErrors = onErrors;
             OverwriteFiles = overwriteFiles;

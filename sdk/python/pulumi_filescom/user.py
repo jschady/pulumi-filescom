@@ -40,6 +40,7 @@ class UserArgs:
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
                  ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
                  grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -114,6 +115,7 @@ class UserArgs:
         :param pulumi.Input[_builtins.str] email: User email address
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
+        :param pulumi.Input[_builtins.str] ftp_tls_session_reuse_required: FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -207,6 +209,8 @@ class UserArgs:
             pulumi.set(__self__, "filesystem_layout", filesystem_layout)
         if ftp_permission is not None:
             pulumi.set(__self__, "ftp_permission", ftp_permission)
+        if ftp_tls_session_reuse_required is not None:
+            pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if grant_permission is not None:
             pulumi.set(__self__, "grant_permission", grant_permission)
         if group_id is not None:
@@ -555,6 +559,18 @@ class UserArgs:
     @ftp_permission.setter
     def ftp_permission(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ftp_permission", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
+
+    @ftp_tls_session_reuse_required.setter
+    def ftp_tls_session_reuse_required(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ftp_tls_session_reuse_required", value)
 
     @_builtins.property
     @pulumi.getter(name="grantPermission")
@@ -1147,6 +1163,7 @@ class _UserState:
                  filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
                  first_login_at: pulumi.Input[Optional[_builtins.str]] = None,
                  ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
                  grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1250,6 +1267,7 @@ class _UserState:
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.str] first_login_at: User's first login time
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
+        :param pulumi.Input[_builtins.str] ftp_tls_session_reuse_required: FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -1382,6 +1400,8 @@ class _UserState:
             pulumi.set(__self__, "first_login_at", first_login_at)
         if ftp_permission is not None:
             pulumi.set(__self__, "ftp_permission", ftp_permission)
+        if ftp_tls_session_reuse_required is not None:
+            pulumi.set(__self__, "ftp_tls_session_reuse_required", ftp_tls_session_reuse_required)
         if grant_permission is not None:
             pulumi.set(__self__, "grant_permission", grant_permission)
         if group_id is not None:
@@ -1878,6 +1898,18 @@ class _UserState:
     @ftp_permission.setter
     def ftp_permission(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ftp_permission", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
+
+    @ftp_tls_session_reuse_required.setter
+    def ftp_tls_session_reuse_required(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ftp_tls_session_reuse_required", value)
 
     @_builtins.property
     @pulumi.getter(name="grantPermission")
@@ -2703,6 +2735,7 @@ class User(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
                  ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
                  grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2830,6 +2863,7 @@ class User(pulumi.CustomResource):
             site_admin=True,
             skip_welcome_screen=True,
             ssl_required="always_require",
+            ftp_tls_session_reuse_required="use_system_setting",
             sso_strategy_id=1,
             require2fa="always_require",
             tags="example",
@@ -2879,6 +2913,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email: User email address
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
+        :param pulumi.Input[_builtins.str] ftp_tls_session_reuse_required: FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -3017,6 +3052,7 @@ class User(pulumi.CustomResource):
             site_admin=True,
             skip_welcome_screen=True,
             ssl_required="always_require",
+            ftp_tls_session_reuse_required="use_system_setting",
             sso_strategy_id=1,
             require2fa="always_require",
             tags="example",
@@ -3075,6 +3111,7 @@ class User(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
                  ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
                  grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.int]] = None,
                  group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3151,6 +3188,7 @@ class User(pulumi.CustomResource):
             __props__.__dict__["email"] = email
             __props__.__dict__["filesystem_layout"] = filesystem_layout
             __props__.__dict__["ftp_permission"] = ftp_permission
+            __props__.__dict__["ftp_tls_session_reuse_required"] = ftp_tls_session_reuse_required
             __props__.__dict__["grant_permission"] = None if grant_permission is None else pulumi.Output.secret(grant_permission)
             __props__.__dict__["group_id"] = None if group_id is None else pulumi.Output.secret(group_id)
             __props__.__dict__["group_ids"] = group_ids
@@ -3271,6 +3309,7 @@ class User(pulumi.CustomResource):
             filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
             first_login_at: pulumi.Input[Optional[_builtins.str]] = None,
             ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
             grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
             group_id: pulumi.Input[Optional[_builtins.int]] = None,
             group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3378,6 +3417,7 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] filesystem_layout: File system layout
         :param pulumi.Input[_builtins.str] first_login_at: User's first login time
         :param pulumi.Input[_builtins.bool] ftp_permission: Can the user access with FTP/FTPS?
+        :param pulumi.Input[_builtins.str] ftp_tls_session_reuse_required: FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
         :param pulumi.Input[_builtins.str] grant_permission: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Permission to grant on the User Root upon creation, or on the Workspace root when the User Root is blank. For the Default Workspace, a blank User Root uses the site root. <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span> on a Custom Workspace's root grants Workspace Administrator access; on a subfolder it grants Folder Admin access. Can be blank or <span pulumi-lang-nodejs="`admin`" pulumi-lang-dotnet="`Admin`" pulumi-lang-go="`admin`" pulumi-lang-python="`admin`" pulumi-lang-yaml="`admin`" pulumi-lang-java="`admin`" pulumi-lang-hcl="`admin`">`admin`</span>, <span pulumi-lang-nodejs="`full`" pulumi-lang-dotnet="`Full`" pulumi-lang-go="`full`" pulumi-lang-python="`full`" pulumi-lang-yaml="`full`" pulumi-lang-java="`full`" pulumi-lang-hcl="`full`">`full`</span>, <span pulumi-lang-nodejs="`read`" pulumi-lang-dotnet="`Read`" pulumi-lang-go="`read`" pulumi-lang-python="`read`" pulumi-lang-yaml="`read`" pulumi-lang-java="`read`" pulumi-lang-hcl="`read`">`read`</span>, <span pulumi-lang-nodejs="`write`" pulumi-lang-dotnet="`Write`" pulumi-lang-go="`write`" pulumi-lang-python="`write`" pulumi-lang-yaml="`write`" pulumi-lang-java="`write`" pulumi-lang-hcl="`write`">`write`</span>, <span pulumi-lang-nodejs="`list`" pulumi-lang-dotnet="`List`" pulumi-lang-go="`list`" pulumi-lang-python="`list`" pulumi-lang-yaml="`list`" pulumi-lang-java="`list`" pulumi-lang-hcl="`list`">`list`</span>, `read+write`, `list+write`, or <span pulumi-lang-nodejs="`history`" pulumi-lang-dotnet="`History`" pulumi-lang-go="`history`" pulumi-lang-python="`history`" pulumi-lang-yaml="`history`" pulumi-lang-java="`history`" pulumi-lang-hcl="`history`">`history`</span>.
         :param pulumi.Input[_builtins.int] group_id: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
@@ -3484,6 +3524,7 @@ class User(pulumi.CustomResource):
         __props__.__dict__["filesystem_layout"] = filesystem_layout
         __props__.__dict__["first_login_at"] = first_login_at
         __props__.__dict__["ftp_permission"] = ftp_permission
+        __props__.__dict__["ftp_tls_session_reuse_required"] = ftp_tls_session_reuse_required
         __props__.__dict__["grant_permission"] = grant_permission
         __props__.__dict__["group_id"] = group_id
         __props__.__dict__["group_ids"] = group_ids
@@ -3585,6 +3626,7 @@ class User(pulumi.CustomResource):
             filesystem_layout: pulumi.Input[Optional[_builtins.str]] = None,
             first_login_at: pulumi.Input[Optional[_builtins.str]] = None,
             ftp_permission: pulumi.Input[Optional[_builtins.bool]] = None,
+            ftp_tls_session_reuse_required: pulumi.Input[Optional[_builtins.str]] = None,
             grant_permission: pulumi.Input[Optional[_builtins.str]] = None,
             group_id: pulumi.Input[Optional[_builtins.int]] = None,
             group_ids: pulumi.Input[Optional[_builtins.str]] = None,
@@ -3682,6 +3724,7 @@ class User(pulumi.CustomResource):
         __props__["filesystemLayout"] = filesystem_layout
         __props__["firstLoginAt"] = first_login_at
         __props__["ftpPermission"] = ftp_permission
+        __props__["ftpTlsSessionReuseRequired"] = ftp_tls_session_reuse_required
         __props__["grantPermission"] = grant_permission
         __props__["groupId"] = group_id
         __props__["groupIds"] = group_ids
@@ -3993,6 +4036,14 @@ class User(pulumi.CustomResource):
         Can the user access with FTP/FTPS?
         """
         return pulumi.get(self, "ftp_permission")
+
+    @_builtins.property
+    @pulumi.getter(name="ftpTlsSessionReuseRequired")
+    def ftp_tls_session_reuse_required(self) -> pulumi.Output[_builtins.str]:
+        """
+        FTP TLS session reuse requirement: use_system_setting, always_require, or never_require
+        """
+        return pulumi.get(self, "ftp_tls_session_reuse_required")
 
     @_builtins.property
     @pulumi.getter(name="grantPermission")

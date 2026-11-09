@@ -3,7 +3,7 @@ module github.com/jschady/pulumi-filescom/examples
 go 1.27.3
 
 require (
-	github.com/Files-com/files-sdk-go/v3 v3.3.341
+	github.com/Files-com/files-sdk-go/v3 v3.3.353
 	github.com/jschady/pulumi-filescom/provider v0.0.0
 	github.com/pulumi/providertest v0.7.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.143.0
@@ -24,7 +24,7 @@ require (
 	cloud.google.com/go/storage v1.64.0 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/Files-com/terraform-provider-files v0.1.1399 // indirect
+	github.com/Files-com/terraform-provider-files v0.1.1440 // indirect
 	github.com/Files-com/terraform-provider-files/shim v0.0.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.35.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.59.0 // indirect
@@ -195,7 +195,7 @@ require (
 	github.com/pulumi/pulumi-java v1.37.8 // indirect
 	github.com/pulumi/pulumi-yaml v1.38.14 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
-	github.com/quic-go/quic-go v0.64.1 // indirect
+	github.com/quic-go/quic-go v0.65.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
@@ -259,7 +259,7 @@ require (
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
-	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
 	golang.org/x/term v0.47.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
